@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{F31FBB19-5F93-7EC0-0D08-42D56326CE49}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Alignment.cs">
+    <Files>
+      <File FileName="Assets/Alignment.cs" Line="18" Column="9" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
