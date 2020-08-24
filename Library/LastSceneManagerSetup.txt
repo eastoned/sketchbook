@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/TreesLight.unity
+- path: Assets/imageonmesh.unity
   isLoaded: 1
   isActive: 1
