@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/peeling.unity
     guid: 2247a58564449446d97656e86c5066eb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TreesLight.unity
     guid: f0db3edf6779e402eba721739a5dd5be
+  - enabled: 1
+    path: Assets/imageonmesh.unity
+    guid: 896b5fd42fc6b4f2d957ee43c9684ea3
   m_configObjects: {}
