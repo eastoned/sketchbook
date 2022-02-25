@@ -11,7 +11,6 @@ public class IKControl : MonoBehaviour
 
     public bool ikActive = false;
     public Transform rightHandObj = null;
-    public Transform leftHandObj = null;
     public Transform lookObj = null;
 
     void Start()
@@ -32,7 +31,7 @@ public class IKControl : MonoBehaviour
                 // Set the look target position, if one has been assigned
                 if (lookObj != null)
                 {
-                    animator.SetLookAtWeight(.5f);
+                    animator.SetLookAtWeight(1);
                     animator.SetLookAtPosition(lookObj.position);
 
                 }
@@ -44,15 +43,6 @@ public class IKControl : MonoBehaviour
                     animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
                     animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandObj.position);
                     animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
-
-                }
-
-                if (leftHandObj != null)
-                {
-                    animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-                    animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
-                    animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandObj.position);
-                    animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandObj.rotation);
 
                 }
 

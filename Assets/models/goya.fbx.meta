@@ -1,71 +1,191 @@
 fileFormatVersion: 2
 guid: a635e921088614c53abe1b7c09f81a4a
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: body
-    100002: footL
-    100004: footR
-    100006: //RootNode
-    100008: handL
-    100010: handR
-    100012: head
-    100014: hips
-    100016: imagePlane1
-    100018: lowerarmL
-    100020: lowerarmR
-    100022: lowerlegL
-    100024: lowerlegR
-    100026: spine
-    100028: upperarmL
-    100030: upperarmR
-    100032: upperlegL
-    100034: upperlegR
-    100036: lowerArmL
-    100038: lowerArmR
-    100040: lowerLegL
-    100042: lowerLegR
-    100044: torso
-    100046: upperArmL
-    100048: upperArmR
-    100050: upperLegL
-    100052: upperLegR
-    400000: body
-    400002: footL
-    400004: footR
-    400006: //RootNode
-    400008: handL
-    400010: handR
-    400012: head
-    400014: hips
-    400016: imagePlane1
-    400018: lowerarmL
-    400020: lowerarmR
-    400022: lowerlegL
-    400024: lowerlegR
-    400026: spine
-    400028: upperarmL
-    400030: upperarmR
-    400032: upperlegL
-    400034: upperlegR
-    400036: lowerArmL
-    400038: lowerArmR
-    400040: lowerLegL
-    400042: lowerLegR
-    400044: torso
-    400046: upperArmL
-    400048: upperArmR
-    400050: upperLegL
-    400052: upperLegR
-    2100000: lambert1
-    4300000: body
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: body
-    2186277476908879412: ImportLogs
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: body
+  - first:
+      1: 100002
+    second: footL
+  - first:
+      1: 100004
+    second: footR
+  - first:
+      1: 100006
+    second: //RootNode
+  - first:
+      1: 100008
+    second: handL
+  - first:
+      1: 100010
+    second: handR
+  - first:
+      1: 100012
+    second: head
+  - first:
+      1: 100014
+    second: hips
+  - first:
+      1: 100016
+    second: imagePlane1
+  - first:
+      1: 100018
+    second: lowerarmL
+  - first:
+      1: 100020
+    second: lowerarmR
+  - first:
+      1: 100022
+    second: lowerlegL
+  - first:
+      1: 100024
+    second: lowerlegR
+  - first:
+      1: 100026
+    second: spine
+  - first:
+      1: 100028
+    second: upperarmL
+  - first:
+      1: 100030
+    second: upperarmR
+  - first:
+      1: 100032
+    second: upperlegL
+  - first:
+      1: 100034
+    second: upperlegR
+  - first:
+      1: 100036
+    second: lowerArmL
+  - first:
+      1: 100038
+    second: lowerArmR
+  - first:
+      1: 100040
+    second: lowerLegL
+  - first:
+      1: 100042
+    second: lowerLegR
+  - first:
+      1: 100044
+    second: torso
+  - first:
+      1: 100046
+    second: upperArmL
+  - first:
+      1: 100048
+    second: upperArmR
+  - first:
+      1: 100050
+    second: upperLegL
+  - first:
+      1: 100052
+    second: upperLegR
+  - first:
+      4: 400000
+    second: body
+  - first:
+      4: 400002
+    second: footL
+  - first:
+      4: 400004
+    second: footR
+  - first:
+      4: 400006
+    second: //RootNode
+  - first:
+      4: 400008
+    second: handL
+  - first:
+      4: 400010
+    second: handR
+  - first:
+      4: 400012
+    second: head
+  - first:
+      4: 400014
+    second: hips
+  - first:
+      4: 400016
+    second: imagePlane1
+  - first:
+      4: 400018
+    second: lowerarmL
+  - first:
+      4: 400020
+    second: lowerarmR
+  - first:
+      4: 400022
+    second: lowerlegL
+  - first:
+      4: 400024
+    second: lowerlegR
+  - first:
+      4: 400026
+    second: spine
+  - first:
+      4: 400028
+    second: upperarmL
+  - first:
+      4: 400030
+    second: upperarmR
+  - first:
+      4: 400032
+    second: upperlegL
+  - first:
+      4: 400034
+    second: upperlegR
+  - first:
+      4: 400036
+    second: lowerArmL
+  - first:
+      4: 400038
+    second: lowerArmR
+  - first:
+      4: 400040
+    second: lowerLegL
+  - first:
+      4: 400042
+    second: lowerLegR
+  - first:
+      4: 400044
+    second: torso
+  - first:
+      4: 400046
+    second: upperArmL
+  - first:
+      4: 400048
+    second: upperArmR
+  - first:
+      4: 400050
+    second: upperLegL
+  - first:
+      4: 400052
+    second: upperLegR
+  - first:
+      21: 2100000
+    second: lambert1
+  - first:
+      43: 4300000
+    second: body
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: body
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -94,6 +214,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
+      internalID: 0
       firstFrame: 1
       lastFrame: 1
       wrapMode: 0
@@ -126,25 +247,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 0
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: 1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.19999999
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -153,10 +281,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips:
+  - 082e6288f69874e708993464614c5df7
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: hips
       humanName: Hips
@@ -371,13 +500,17 @@ ModelImporter:
     armStretch: 0
     legStretch: 0
     feetSpacing: 0
+    globalScale: 20
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

@@ -71,9 +71,9 @@ Shader "Custom/PeelingShader" {
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 		    fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
             
-            float2 textureCoordinate = IN.screenPos.xy / IN.screenPos.w;
+            //float2 textureCoordinate = IN.screenPos.xy / IN.screenPos.w;
             float aspect = _ScreenParams.x / _ScreenParams.y;
-            textureCoordinate.x = textureCoordinate.x * aspect;
+            //textureCoordinate.x = textureCoordinate.x * aspect;
             //textureCoordinate = TRANSFORM_TEX(textureCoordinate, _MainTex_ST);
             
             //fixed4 fade = tex2D (_PerlinNoise, textureCoordinate);

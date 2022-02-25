@@ -1,4 +1,5 @@
 sceneSetups:
-- path: Assets/imageonmesh.unity
+- path: Assets/Scenes/TheBathroom.unity
   isLoaded: 1
   isActive: 1
+  isSubScene: 0
