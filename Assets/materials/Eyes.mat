@@ -63,10 +63,10 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LPosX: 0.2570416
-    - _LPosY: 0.49997696
-    - _LSizeX: 0.1
-    - _LSizeY: 0.15
+    - _LPosX: 0.228
+    - _LPosY: 0.524
+    - _LSizeX: 0.1601835
+    - _LSizeY: 0.22905591
     - _LeftEyeSize: 0.206
     - _LeftEyeSizeX: 0.152
     - _LeftEyeSizeY: 0.185
@@ -76,10 +76,10 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RPosX: 1
-    - _RPosY: 0.52
-    - _RSizeX: 0.1
-    - _RSizeY: 0.25
+    - _RPosX: 0.697
+    - _RPosY: 0.49700004
+    - _RSizeX: 0.037665717
+    - _RSizeY: 0.053860422
     - _RightEyeSize: 0.25
     - _RightEyeX: 1
     - _SmoothnessTextureChannel: 0
