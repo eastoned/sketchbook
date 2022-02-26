@@ -9,6 +9,8 @@ public class FollowPhoneTransform : MonoBehaviour
 
     private float _phoneOriginalDepth, _cameraOriginalDepth;
 
+
+
     private void Start()
     {
         _phoneOriginalDepth = _phonePos.position.x;
@@ -20,6 +22,6 @@ public class FollowPhoneTransform : MonoBehaviour
 
         float _depthDelta = _phonePos.position.x - _phoneOriginalDepth;
         transform.position = new Vector3(_cameraOriginalDepth - _depthDelta, _phonePos.position.y, _phonePos.position.z);
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, _phonePos.eulerAngles.z);
+        transform.localEulerAngles = new Vector3(_phonePos.eulerAngles.z, 90 - _phonePos.eulerAngles.y, _phonePos.eulerAngles.x);
     }
 }
