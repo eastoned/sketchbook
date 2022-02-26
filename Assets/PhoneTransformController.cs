@@ -16,10 +16,10 @@ public class PhoneTransformController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            _depthMovement = 1;
+            _depthMovement = -1;
         }else if (Input.GetKey(KeyCode.S))
         {
-            _depthMovement = -1;
+            _depthMovement = 1;
         }
         else
         {
