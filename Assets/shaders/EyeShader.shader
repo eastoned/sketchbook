@@ -68,7 +68,6 @@ Shader "Unlit/EyeShader"
 
                 float r = step(.5, i.uv.x) * step(_RSizeX, distance(_RPosX, i.uv.x)) + step(_RSizeY, distance(_RPosY, i.uv.y));
                 r += step(.5, 1 - i.uv.x);
-                //r = 1;
                 float eye = l * r;
 
                 fixed4 col = float4(eye.xxx, 0);

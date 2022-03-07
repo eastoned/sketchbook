@@ -33,7 +33,7 @@ public class PhoneTransformController : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log(Input.mousePosition);
+       // Debug.Log(Input.mousePosition);
         
     }
 }
