@@ -10,11 +10,16 @@ public class BoneController : MonoBehaviour
     private Transform _leftIcon, _rightIcon;
 
     [SerializeField]
+    private RotationController _xAxisControl, _yAxisControl;
+
+    [SerializeField]
     private Transform _updownIcon, _rightleftIcon;
 
     public Vector3 _iconOffset, _offset;
 
-    public Vector3 _axis;
+    public Vector3 _axis1, _axis2;
+
+    private bool _rotEnabled;
 
     private void OnMouseEnter()
     {
@@ -38,8 +43,13 @@ public class BoneController : MonoBehaviour
         //two buttons with a scrubbing effect
         _updownIcon.position = transform.position + _offset;
         _rightleftIcon.position = transform.position + _offset;
-        _updownIcon.localEulerAngles = transform.eulerAngles + new Vector3(0, 0,90);
+        _updownIcon.localEulerAngles = transform.eulerAngles + new Vector3(0, 0, 90);
         _rightleftIcon.localEulerAngles = transform.eulerAngles;
+
+        _xAxisControl._currentController = transform;
+        _xAxisControl._axis = _axis1;
+        _yAxisControl._currentController = transform;
+        _yAxisControl._axis = _axis2;
     }
 
     private void OnMouseOver()

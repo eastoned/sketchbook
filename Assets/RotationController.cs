@@ -5,8 +5,7 @@ using UnityEngine;
 public class RotationController : MonoBehaviour
 {
 
-    [SerializeField]
-    private Vector3 _axis;
+    public Vector3 _axis;
 
     [SerializeField]
     private float _rotSpeed;
@@ -14,14 +13,21 @@ public class RotationController : MonoBehaviour
     [SerializeField]
     private Vector3 _mouseCache;
 
-    private Quaternion rot;
+    private Quaternion rot, _boneRot;
 
     public LineRenderer _lr1, _lr2;
+
+    public Transform _currentController;
+
+    public float amount;
+
 
     private void OnMouseDown()
     {
         _mouseCache = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
         rot = transform.localRotation;
+        _boneRot = _currentController.localRotation;
+        amount = 0;
     }
 
 
@@ -42,11 +48,13 @@ public class RotationController : MonoBehaviour
         //Debug.Log(_mousePos - _mouseCache);
         //float amp = Mathf.Sqrt(Mathf.Pow(diff.x, 2) + Mathf.Pow(diff.y, 2));
         //Debug.Log(amp);
-        float amount = CrossProd(transform.up, _mouseCache - _worldSpaceMouse).z * _rotSpeed;
+        amount = CrossProd(transform.up, _mouseCache - _worldSpaceMouse).x * _rotSpeed;
 
         //transform.localEulerAngles += _axis * amount;
         //transform.Rotate(_axis, amount);
-        transform.localRotation = rot * Quaternion.Euler(0, -amount * _rotSpeed, 0);
+        transform.localRotation = rot * Quaternion.Euler(0, -amount, 0);
+
+        _currentController.localRotation = _boneRot * Quaternion.Euler(-amount * _axis);
         //transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, amount, transform.localEulerAngles.z);
         //transform.Rotate(_axis, amount);
         //rotation axis based on mouse drag input
@@ -61,12 +69,6 @@ public class RotationController : MonoBehaviour
         Vector3 cross = new Vector3(xMul, yMul, zMul);
 
         return cross;
-    }
-
-    private void OnDrawGizmos()
-    {
-       // Ray ray = new Ray(transform.position, transform.up);
-       // Gizmos.DrawRay(ray);
     }
 
 }
