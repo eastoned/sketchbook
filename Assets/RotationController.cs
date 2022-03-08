@@ -15,52 +15,81 @@ public class RotationController : MonoBehaviour
 
     private Quaternion rot, _boneRot;
 
-    public LineRenderer _lr1, _lr2;
+    public LineRenderer _lr1;//, _lr2;
 
-    public Transform _currentController;
+    //public Transform _currentController;
 
     public float amount;
+    public Vector3 _mousePos;
+    public Vector3 _cameraVector;
+    public Vector3 crossp;
+    public float dot;
 
-
+    Vector3 mPrevPos = Vector3.zero;
+    Vector3 mPosDelta = Vector3.zero;
+    
     private void OnMouseDown()
     {
+        //BathroomManager._activeRotator = this;
+        //Debug.Log(BathroomManager._activeRotator.name);
         _mouseCache = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
         rot = transform.localRotation;
-        _boneRot = _currentController.localRotation;
+        //_boneRot = _currentController.localRotation;
         amount = 0;
+        
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + transform.up);
+        Gizmos.DrawLine(transform.position, _mouseCache);
+        Gizmos.DrawLine(_mouseCache, _mousePos);
+    }
 
     private void OnMouseDrag()
     {
-        Vector3 _mousePos = Input.mousePosition;
+        mPosDelta = Input.mousePosition - mPrevPos;
 
-        Vector3 _worldSpaceMouse = Camera.main.ScreenToWorldPoint(new Vector3(_mousePos.x, _mousePos.y, 1));
-        _lr1.SetPosition(0, _mouseCache);
-        _lr1.SetPosition(1, _worldSpaceMouse);
+        if(Vector3.Dot(transform.up, Vector3.up) >= 0)
+        {
+            transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
 
-        _lr2.SetPosition(0, transform.position);
-        _lr2.SetPosition(1, transform.position + (transform.up * 5f));
+        }
+        else
+        {
+            transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+        }
+
+        //transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
+
+        mPrevPos = Input.mousePosition;
+        /*
+
+            _cameraVector = Camera.main.transform.up;
+            _mousePos = Input.mousePosition;
+            _mousePos = Camera.main.ScreenToWorldPoint(new Vector3(_mousePos.x, _mousePos.y, 1));
+             //_lr1.SetPosition(0, _mouseCache);
+             //_lr1.SetPosition(1, _worldSpaceMouse);
+
+            Vector3 diff = new Vector3(_mouseCache.x - transform.position.x, _mouseCache.y - transform.position.y, _mouseCache.z - transform.position.z);
+            //dot = DotProd(_mouseCache - _mousePos, transform.position);
+             //_lr1.SetPosition(0, transform.position);
+
+        //_lr2.SetPosition(0, transform.position);
+        //_lr2.SetPosition(1, transform.position + (transform.up * 5f));
 
 
-        Debug.Log(CrossProd(transform.up, _mouseCache - _worldSpaceMouse));
-        //Debug.Log(_mousePos - _mouseCache);
-        //float amp = Mathf.Sqrt(Mathf.Pow(diff.x, 2) + Mathf.Pow(diff.y, 2));
-        //Debug.Log(amp);
-        amount = CrossProd(transform.up, _mouseCache - _worldSpaceMouse).x * _rotSpeed;
+            crossp = CrossProd(transform.up, _mouseCache - _mousePos);
+            
+            dot = DotProd(crossp, transform.up);
+        Debug.Log(crossp);
+        amount = (crossp.x * crossp.y) + crossp.z;
+        //transform.localRotation = rot * Quaternion.Euler(0, -amount * _rotSpeed, 0);
 
-        //transform.localEulerAngles += _axis * amount;
-        //transform.Rotate(_axis, amount);
-        transform.localRotation = rot * Quaternion.Euler(0, -amount, 0);
-
-        _currentController.localRotation = _boneRot * Quaternion.Euler(-amount * _axis);
-        //transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, amount, transform.localEulerAngles.z);
-        //transform.Rotate(_axis, amount);
-        //rotation axis based on mouse drag input
-
+        //_currentController.localRotation = _boneRot * Quaternion.Euler(-amount * _axis);
+        */
     }
-
+    
     Vector3 CrossProd(Vector3 v, Vector3 w)
     {
         float xMul = v.y * w.z - v.z * w.y;
@@ -69,6 +98,12 @@ public class RotationController : MonoBehaviour
         Vector3 cross = new Vector3(xMul, yMul, zMul);
 
         return cross;
+    }
+
+    float DotProd(Vector3 v, Vector3 w)
+    {
+        float val = (v.x * w.x) + (v.y * w.y) + (v.z * w.z);
+        return val;
     }
 
 }

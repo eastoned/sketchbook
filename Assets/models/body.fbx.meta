@@ -2,7 +2,64 @@ fileFormatVersion: 2
 guid: 22859d135f55473439cbec14bae02f3e
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
+  - first:
+      74: 464729275189209187
+    second: Armature|Empty.002Action
+  - first:
+      74: -3449341377965191964
+    second: halo|Empty.002Action
+  - first:
+      74: 311165736962119389
+    second: wings|Empty.002Action
+  - first:
+      74: -4816202967589013090
+    second: wings|wingsAction.001
+  - first:
+      74: 8121166323949936186
+    second: wings|wingsAction.003
+  - first:
+      74: -7042117135717691717
+    second: Empty.002|Empty.002Action
+  - first:
+      74: 6605718146475901733
+    second: Armature.001|Armature.001Action.002
+  - first:
+      74: 5723738398597847488
+    second: Armature.001|Empty.002Action
+  - first:
+      74: 5960585408162695551
+    second: Armature.001|wingsAction.001
+  - first:
+      74: -2828732294330041762
+    second: Armature.001|wingsAction.003
+  - first:
+      74: 4563734997460843352
+    second: wings.003|Empty.002Action
+  - first:
+      74: -9010473418112298303
+    second: wings.003|wingsAction.001
+  - first:
+      74: 8114987674553567724
+    second: wings.003|wingsAction.003
+  - first:
+      74: 5195322362826547446
+    second: halo|ArmatureAction
+  - first:
+      74: -6370301801270213076
+    second: wings|ArmatureAction
+  - first:
+      74: -890992705792819856
+    second: Empty.002|ArmatureAction
+  - first:
+      74: -960898424075949690
+    second: Armature.001|ArmatureAction
+  - first:
+      74: 6221406635557047390
+    second: wings.003|ArmatureAction
   externalObjects: {}
   materials:
     materialImportMode: 2
