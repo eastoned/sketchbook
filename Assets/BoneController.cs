@@ -30,9 +30,6 @@ public class BoneController : MonoBehaviour
         _rightleftIcon.position = transform.position + _offset;
         _updownIcon.localEulerAngles = transform.eulerAngles + new Vector3(0, 0, 90);
         _rightleftIcon.localEulerAngles = transform.eulerAngles;
-
-
-        Debug.Log(transform.name);
         
 
         BathroomManager._activeBone = this;
@@ -49,8 +46,7 @@ public class BoneController : MonoBehaviour
         //transform.SetParent(_ogParent);
         ///BathroomManager._activeBone = null;
         //Debug.Log(BathroomManager._activeBone.name);
-        _updownIcon.position = Vector3.zero;
-        _rightleftIcon.position = Vector3.zero;
+        
     }
 
 }

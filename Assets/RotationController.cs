@@ -15,7 +15,7 @@ public class RotationController : MonoBehaviour
 
     private Quaternion rot, _boneRot;
 
-    public LineRenderer _lr1;//, _lr2;
+    public LineRenderer _lr1;
 
     //public Transform _currentController;
 
@@ -52,12 +52,12 @@ public class RotationController : MonoBehaviour
 
         if(Vector3.Dot(transform.up, Vector3.up) >= 0)
         {
-            transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+            transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
 
         }
         else
         {
-            transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+            transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
         }
 
         //transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
