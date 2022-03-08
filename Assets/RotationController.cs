@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour
 {
-
+    /*
     public Vector3 _axis;
 
     [SerializeField]
@@ -15,39 +15,48 @@ public class RotationController : MonoBehaviour
 
     private Quaternion rot, _boneRot;
 
-    public LineRenderer _lr1;
 
-    //public Transform _currentController;
+    public Transform _currentJoint;
 
     public float amount;
     public Vector3 _mousePos;
     public Vector3 _cameraVector;
     public Vector3 crossp;
-    public float dot;
+    public float dot;*/
 
     Vector3 mPrevPos = Vector3.zero;
     Vector3 mPosDelta = Vector3.zero;
+
+    public bool _spinning = false;
+
+
     
     private void OnMouseDown()
     {
         //BathroomManager._activeRotator = this;
         //Debug.Log(BathroomManager._activeRotator.name);
-        _mouseCache = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
-        rot = transform.localRotation;
+        //_mouseCache = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+        //rot = transform.localRotation;
         //_boneRot = _currentController.localRotation;
-        amount = 0;
+        //amount = 0;
         
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, transform.position + transform.up);
-        Gizmos.DrawLine(transform.position, _mouseCache);
-        Gizmos.DrawLine(_mouseCache, _mousePos);
+        //Gizmos.DrawLine(transform.position, transform.position + transform.up);
+       // Gizmos.DrawLine(transform.position, _mouseCache);
+        //Gizmos.DrawLine(_mouseCache, _mousePos);
+    }
+
+    private void OnMouseUp()
+    {
+        _spinning = false;
     }
 
     private void OnMouseDrag()
     {
+        _spinning = true;
         mPosDelta = Input.mousePosition - mPrevPos;
 
         if(Vector3.Dot(transform.up, Vector3.up) >= 0)

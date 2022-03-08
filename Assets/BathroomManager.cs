@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BathroomManager : MonoBehaviour
 {
-    public static RotationController _activeRotator;
+    public RotationController _activeRotator;
     public static BoneController _activeBone;
 
-    private void Update()
+    public static void ChangeCurrentBone(BoneController _bone)
     {
-        //Debug.Log(_activeBone.name);
+        if (_activeBone != null)
+        {
+            _activeBone._col.enabled = true;
+            _activeBone.ResetParent();
+        }
+        _activeBone = _bone;
+        _activeBone._col.enabled = false;
+        
     }
 
 }
