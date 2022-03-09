@@ -117,6 +117,7 @@
     <Compile Include="Assets\scripts\followMouse.cs" />
     <Compile Include="Assets\VideoController.cs" />
     <Compile Include="Assets\BathroomManager.cs" />
+    <Compile Include="Assets\EyeTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\georgia\sharefonts.net.txt" />

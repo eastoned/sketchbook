@@ -8,15 +8,18 @@ public class BoneController : MonoBehaviour
 
     private RotationController _xAxisControl, _yAxisControl;
 
-    [SerializeField]
-    private Transform _updownIcon, _rightleftIcon;
+    //[SerializeField]
+    //private Transform _updownIcon, _rightleftIcon, _fwdBackIcon;
 
     [SerializeField]
-    private RotationController _xAxis;
+    private GameObject _axis;
+
+    //[SerializeField]
+    //private RotationController _xAxis;
 
     public Vector3 _offset;
 
-    public Vector3 _axis1, _axis2;
+    public bool X, Y, Z = false;
 
     public Collider _col;
 
@@ -26,24 +29,34 @@ public class BoneController : MonoBehaviour
     {
         _ogParent = transform.parent;
         _col = GetComponent<Collider>();
-        _xAxis = _rightleftIcon.GetComponent<RotationController>();
-    }
+       // _xAxis = _rightleftIcon.GetComponent<RotationController>();
 
+        GameObject Y = Instantiate(_axis, transform.position, transform.rotation);
+        GameObject X = Instantiate(_axis, transform.position, transform.rotation * Quaternion.Euler(90, 0, 0));
+        GameObject Z = Instantiate(_axis, transform.position, transform.rotation * Quaternion.Euler(90, 90, 0));
+
+        Y.transform.SetParent(transform.parent);
+        X.transform.SetParent(Y.transform);
+        Z.transform.SetParent(X.transform);
+        transform.SetParent(Z.transform);
+    }
+    /*
     private void OnMouseEnter()
     {
         if (!_xAxis._spinning)
         {
             BathroomManager.ChangeCurrentBone(this);
-            //two buttons with a scrubbing effect
-            //_updownIcon.position = transform.position + _offset;
-            _rightleftIcon.position = transform.position;// + _offset;
+           // _rightleftIcon.position = transform.position;// + _offset;
+            //_updownIcon.position = transform.position;
+            //_fwdBackIcon.position = transform.position;
             //_updownIcon.localEulerAngles = transform.eulerAngles + new Vector3(0, 0, 90);
-            _rightleftIcon.localEulerAngles = transform.eulerAngles;
+            //_fwdBackIcon.localEulerAngles = transform.eulerAngles + new Vector3(90, 0, 90);
+           // _rightleftIcon.localEulerAngles = transform.eulerAngles;
 
-            _rightleftIcon.SetParent(transform.parent);
-            transform.SetParent(_rightleftIcon);
-
-            
+            //_rightleftIcon.SetParent(transform.parent);
+            //_fwdBackIcon.SetParent(_rightleftIcon);
+            //_updownIcon.SetParent(_fwdBackIcon);
+           // transform.SetParent(_rightleftIcon);
         }
 
         //_xAxisControl._currentController = transform;
@@ -57,12 +70,17 @@ public class BoneController : MonoBehaviour
         if (!_xAxis._spinning)
         {
             BathroomManager.ChangeCurrentBone(this);
-            _rightleftIcon.position = transform.position;// + _offset;
+            //_rightleftIcon.position = transform.position;// + _offset;
+            //_updownIcon.position = transform.position;
+            //_fwdBackIcon.position = transform.position;
             //_updownIcon.localEulerAngles = transform.eulerAngles + new Vector3(0, 0, 90);
-            _rightleftIcon.localEulerAngles = transform.eulerAngles;
+            //_fwdBackIcon.localEulerAngles = transform.eulerAngles + new Vector3(90, 0, 90);
+            //_rightleftIcon.localEulerAngles = transform.eulerAngles;
 
-            _rightleftIcon.SetParent(transform.parent);
-            transform.SetParent(_rightleftIcon);
+            //_rightleftIcon.SetParent(transform.parent);
+            //_fwdBackIcon.SetParent(_rightleftIcon);
+            //_updownIcon.SetParent(_fwdBackIcon);
+            //transform.SetParent(_rightleftIcon);
 
             
         }
@@ -76,10 +94,10 @@ public class BoneController : MonoBehaviour
         //Debug.Log(BathroomManager._activeBone.name);
         
     }
-
+    */
     public void ResetParent()
     {
-        transform.SetParent(_ogParent);
+        //transform.SetParent(_ogParent);
     }
 
 }

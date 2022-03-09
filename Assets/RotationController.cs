@@ -29,8 +29,25 @@ public class RotationController : MonoBehaviour
 
     public bool _spinning = false;
 
+    public enum Axis
+    {
+        X,Y,Z
+    }
 
-    
+    public Axis _axis;
+
+    public Vector3 _rotAxis;
+
+    private void OnMouseEnter()
+    {
+        GetComponent<Renderer>().material.color = Color.yellow;
+    }
+
+    private void OnMouseExit()
+    {
+        GetComponent<Renderer>().material.color = Color.white;
+    }
+
     private void OnMouseDown()
     {
         //BathroomManager._activeRotator = this;
@@ -59,15 +76,28 @@ public class RotationController : MonoBehaviour
         _spinning = true;
         mPosDelta = Input.mousePosition - mPrevPos;
 
-        if(Vector3.Dot(transform.up, Vector3.up) >= 0)
+        if (_axis == Axis.X)
         {
-            transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
+            _rotAxis = transform.right;
+        }else if(_axis == Axis.Y)
+        {
+            _rotAxis = transform.up;
+        }
+        else if(_axis == Axis.Z)
+        {
+            _rotAxis = transform.forward;
+        }
+
+        if (Vector3.Dot(transform.up, Vector3.up) >= 0)
+        {
+            transform.Rotate(_rotAxis, -Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
 
         }
         else
         {
-            transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
+            transform.Rotate(_rotAxis, Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
         }
+
 
         //transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
 
