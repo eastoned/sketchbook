@@ -19,7 +19,13 @@ public class BoneController : MonoBehaviour
 
     public Vector3 _offset;
 
+    Vector3 mPrevPos = Vector3.zero;
+    Vector3 mPosDelta = Vector3.zero;
+
     public bool X, Y, Z = false;
+
+    private float strength;
+    private Vector3 dir;
 
     public Collider _col;
 
@@ -27,18 +33,20 @@ public class BoneController : MonoBehaviour
 
     private void Start()
     {
+        strength = Random.Range(1f, 5f);
+        dir = Random.onUnitSphere;
         _ogParent = transform.parent;
         _col = GetComponent<Collider>();
        // _xAxis = _rightleftIcon.GetComponent<RotationController>();
 
-        GameObject Y = Instantiate(_axis, transform.position, transform.rotation);
-        GameObject X = Instantiate(_axis, transform.position, transform.rotation * Quaternion.Euler(90, 0, 0));
-        GameObject Z = Instantiate(_axis, transform.position, transform.rotation * Quaternion.Euler(90, 90, 0));
+        //GameObject Y = Instantiate(_axis, transform.position, transform.rotation);
+        //GameObject X = Instantiate(_axis, transform.position, transform.rotation * Quaternion.Euler(90, 0, 0));
+        //GameObject Z = Instantiate(_axis, transform.position, transform.rotation * Quaternion.Euler(90, 90, 0));
 
-        Y.transform.SetParent(transform.parent);
-        X.transform.SetParent(Y.transform);
-        Z.transform.SetParent(X.transform);
-        transform.SetParent(Z.transform);
+        //Y.transform.SetParent(transform.parent);
+        //X.transform.SetParent(Y.transform);
+        //Z.transform.SetParent(X.transform);
+        //transform.SetParent(Z.transform);
     }
     /*
     private void OnMouseEnter()
@@ -95,6 +103,34 @@ public class BoneController : MonoBehaviour
         
     }
     */
+
+    private void OnMouseDrag()
+    {
+        mPosDelta = Input.mousePosition - mPrevPos;
+
+        
+        /*
+        if (Vector3.Dot(transform.up, Vector3.up) >= 0)
+        {
+            transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
+
+        }
+        else
+        {
+            transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
+        }*/
+
+        transform.Rotate(Camera.main.transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.forward), Space.World);
+
+        transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
+
+        mPrevPos = Input.mousePosition;
+    }
+
+    private void Update()
+    {
+        transform.Rotate(Time.deltaTime * (strength * dir));
+    }
     public void ResetParent()
     {
         //transform.SetParent(_ogParent);
