@@ -36,4 +36,10 @@ public class PhoneTransformController : MonoBehaviour
        // Debug.Log(Input.mousePosition);
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.collider.name);
+        transform.SetParent(collision.collider.transform);
+    }
 }

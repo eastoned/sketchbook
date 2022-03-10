@@ -37,6 +37,9 @@ public class BoneController : MonoBehaviour
         dir = Random.onUnitSphere;
         _ogParent = transform.parent;
         _col = GetComponent<Collider>();
+
+        transform.localEulerAngles = new Vector3(Mathf.Round(transform.localEulerAngles.x/90) * 90, Mathf.Round(transform.localEulerAngles.y / 90) * 90, Mathf.Round(transform.localEulerAngles.z / 90) * 90);
+        
        // _xAxis = _rightleftIcon.GetComponent<RotationController>();
 
         //GameObject Y = Instantiate(_axis, transform.position, transform.rotation);
@@ -131,6 +134,8 @@ public class BoneController : MonoBehaviour
     {
         //strength = Random.Range(45f, 90f);
         //transform.Rotate((strength * dir));
+        transform.localEulerAngles = new Vector3(Mathf.Round(transform.localEulerAngles.x / 45) * 45, Mathf.Round(transform.localEulerAngles.y / 45) * 45, Mathf.Round(transform.localEulerAngles.z / 45) * 45);
+
     }
 
     private void Update()
