@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\MeshTriangle.cs" />
+    <Compile Include="Assets\BathroomManager.cs" />
     <Compile Include="Assets\scripts\fakeTextInput.cs" />
     <Compile Include="Assets\ControlSpriteStretch.cs" />
     <Compile Include="Assets\scripts\peelingOrder.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets\scripts\DatamoshEffect.cs" />
     <Compile Include="Assets\scripts\mouseFollow.cs" />
     <Compile Include="Assets\DollControls.cs" />
+    <Compile Include="Assets\EyeTarget.cs" />
     <Compile Include="Assets\ReadVertices.cs" />
     <Compile Include="Assets\scripts\Cutter.cs" />
     <Compile Include="Assets\scripts\pushSprite.cs" />
@@ -116,8 +118,6 @@
     <Compile Include="Assets\scripts\GeneratedMesh.cs" />
     <Compile Include="Assets\scripts\followMouse.cs" />
     <Compile Include="Assets\VideoController.cs" />
-    <Compile Include="Assets\BathroomManager.cs" />
-    <Compile Include="Assets\EyeTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\georgia\sharefonts.net.txt" />
@@ -155,6 +155,7 @@
     <None Include="Assets\Scratch.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\UVPeel.shader" />
+    <None Include="Assets\shaders\ToonLit.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\BillboardEffect.shader" />
   </ItemGroup>

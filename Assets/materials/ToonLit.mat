@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Eyes
-  m_Shader: {fileID: 4800000, guid: da657db0a892c4a4ea15dc636b1289d1, type: 3}
+  m_Name: ToonLit
+  m_Shader: {fileID: 4800000, guid: 7ffa0e5eb9f08684db8b59a9d0a25342, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bdb42c87b8801e94e886c5c0d60b3014, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -63,31 +63,20 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LPosX: 0.161
-    - _LPosY: 0.496
-    - _LSizeX: 0.2072
-    - _LSizeY: 0.1953
-    - _LeftEyeSize: 0.206
-    - _LeftEyeSizeX: 0.152
-    - _LeftEyeSizeY: 0.185
-    - _LeftEyeX: 0.24
-    - _LeftEyeY: 0.516
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RPosX: 0.864
-    - _RPosY: 0.75
-    - _RSizeX: 0.25
-    - _RSizeY: 0.2429
-    - _RightEyeSize: 0.25
-    - _RightEyeX: 1
+    - _RimAmount: 0.705
+    - _RimThreshold: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _AmbientColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

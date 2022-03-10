@@ -127,6 +127,12 @@ public class BoneController : MonoBehaviour
         mPrevPos = Input.mousePosition;
     }
 
+    private void OnMouseUp()
+    {
+        //strength = Random.Range(45f, 90f);
+        //transform.Rotate((strength * dir));
+    }
+
     private void Update()
     {
         transform.Rotate(Time.deltaTime * (strength * dir));
