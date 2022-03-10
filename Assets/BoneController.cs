@@ -128,6 +128,7 @@ public class BoneController : MonoBehaviour
         transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
 
         mPrevPos = Input.mousePosition;
+        
     }
 
     private void OnMouseUp()
