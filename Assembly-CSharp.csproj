@@ -141,6 +141,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\shaders\wobbleShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\shaders\Plant1Shader.shader" />
     <None Include="Assets\shaders\DatamoshEffect.shader" />
     <None Include="Assets\shaders\EyeShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
