@@ -33,8 +33,14 @@ public class PhoneTransformController : MonoBehaviour
 
     private void OnMouseDrag()
     {
-       // Debug.Log(Input.mousePosition);
+        //Debug.Log(Input.mousePosition);
         
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,-0.6f));
+        /*mousePos = new Vector3(-.6f, mousePos.y, 1f);
+        Debug.Log(mousePos);
+
+        transform.position = mousePos;*/
+
     }
 
     private void OnCollisionEnter(Collision collision)
