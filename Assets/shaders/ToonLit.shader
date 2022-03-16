@@ -95,7 +95,7 @@ Shader "Unlit/ToonLit"
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 col = lerp(col, _AmbientColor, 1-light);
-                col = lerp(col, rim, rimIntensity);
+                //col = lerp(col, rim, rimIntensity);
                 return col;
             }
             ENDCG

@@ -46,6 +46,6 @@ public class PhoneTransformController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.collider.name);
-        transform.SetParent(collision.collider.transform);
+        //transform.SetParent(collision.collider.transform);
     }
 }
