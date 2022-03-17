@@ -14,6 +14,12 @@ public class IKControl : MonoBehaviour
     public Transform leftHandObj = null;
     public Transform leftLegObj = null;
     public Transform rightLegObj = null;
+
+    public Transform rightElbowObj = null;
+    public Transform leftElbowObj = null;
+    public Transform rightKneeObj = null;
+    public Transform leftKneeObj = null;
+
     public Transform lookObj = null;
 
     void Start()
@@ -26,6 +32,7 @@ public class IKControl : MonoBehaviour
     {
         if (animator)
         {
+            
 
             //if the IK is active, set the position and rotation directly to the goal. 
             if (ikActive)
@@ -36,6 +43,7 @@ public class IKControl : MonoBehaviour
                 {
                     animator.SetLookAtWeight(1);
                     animator.SetLookAtPosition(lookObj.position);
+                    
 
                 }
 
@@ -76,6 +84,34 @@ public class IKControl : MonoBehaviour
 
                 }
 
+                if (rightElbowObj != null)
+                {
+                    animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1);
+                    animator.SetIKHintPosition(AvatarIKHint.RightElbow, rightElbowObj.position);
+
+                }
+
+                if (leftElbowObj != null)
+                {
+                    animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1);
+                    animator.SetIKHintPosition(AvatarIKHint.LeftElbow, leftElbowObj.position);
+
+                }
+
+                if (rightKneeObj != null)
+                {
+                    animator.SetIKHintPositionWeight(AvatarIKHint.RightKnee, 1);
+                    animator.SetIKHintPosition(AvatarIKHint.RightKnee, rightKneeObj.position);
+
+                }
+
+                if (leftKneeObj != null)
+                {
+                    animator.SetIKHintPositionWeight(AvatarIKHint.LeftKnee, 1);
+                    animator.SetIKHintPosition(AvatarIKHint.LeftKnee, leftKneeObj.position);
+
+                }
+
             }
 
             //if the IK is not active, set the position and rotation of the hand and head back to the original position
@@ -90,6 +126,12 @@ public class IKControl : MonoBehaviour
                 animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 0);
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 0);
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 0);
+
+                animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0);
+                animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0);
+                animator.SetIKHintPositionWeight(AvatarIKHint.LeftKnee, 0);
+                animator.SetIKHintPositionWeight(AvatarIKHint.RightKnee, 0);
+
                 animator.SetLookAtWeight(0);
             }
         }
