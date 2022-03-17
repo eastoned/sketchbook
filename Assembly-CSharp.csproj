@@ -66,7 +66,7 @@
     <Compile Include="Assets\MuscleDriver.cs" />
     <Compile Include="Assets\RotationController.cs" />
     <Compile Include="Assets\scripts\TextButton.cs" />
-    <Compile Include="Assets\MoveObject.cs" />
+    <Compile Include="Assets\MoveableObject.cs" />
     <Compile Include="Assets\scripts\mouseControl.cs" />
     <Compile Include="Assets\scripts\breakTile.cs" />
     <Compile Include="Assets\scripts\TextDisplay.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="Assets\scripts\followMouse.cs" />
     <Compile Include="Assets\VideoController.cs" />
     <Compile Include="Assets\ShaderParameterDriver.cs" />
+    <Compile Include="Assets\ObjectMover.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\georgia\sharefonts.net.txt" />
