@@ -3485,6 +3485,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: cd6c6b4abc3c1a249ae97d9bb1a8dec4,
         type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d581ec7349334d145ade4b0b0bcaa1b1, type: 2}
+    - target: {fileID: -3887185075125053422, guid: cd6c6b4abc3c1a249ae97d9bb1a8dec4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3240dd27e6789564fa706f3013776536, type: 2}
+    - target: {fileID: -3887185075125053422, guid: cd6c6b4abc3c1a249ae97d9bb1a8dec4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: d366bb5ae70c987448762f7f6c5e2bdd, type: 2}
+    - target: {fileID: -3887185075125053422, guid: cd6c6b4abc3c1a249ae97d9bb1a8dec4,
+        type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
       value: 6
       objectReference: {fileID: 0}

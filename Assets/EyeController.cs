@@ -15,6 +15,18 @@ public class EyeController : MonoBehaviour
     [SerializeField]
     private Material _eyeMaterial;
 
+    private float _eyeTimer;
+
+    float _leftEyePosX;
+    float _leftEyePosY;
+    float _leftEyeSizeX;
+    float _leftEyeSizeY;
+
+    float _rightEyePosX;
+    float _rightEyePosY;
+    float _rightEyeSizeX;
+    float _rightEyeSizeY;
+
     //mapping params
     /*
     left eye
@@ -45,6 +57,7 @@ public class EyeController : MonoBehaviour
 
     private void Start()
     {
+        _eyeTimer = Random.Range(.2f, 2f);
         _eyeMaterial.SetFloat("_LPosX", 0.25f);
         _eyeMaterial.SetFloat("_LPosY", 0.5f);
 
@@ -60,7 +73,7 @@ public class EyeController : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    {
+    {/*
         float _leftEyePosX = 0.25f - (_posXScale * (_leftEyePosCache.x - _leftEyeControl.localPosition.x));
         _leftEyePosX = Mathf.Clamp(_leftEyePosX, 0, 0.5f);
         float _leftEyePosY = 0.5f - (_posYScale * (_leftEyePosCache.y - _leftEyeControl.localPosition.y));
@@ -79,7 +92,35 @@ public class EyeController : MonoBehaviour
         float _rightEyeSizeX = .1f - (_sizeXScale * (_rightEyeSizeCache.x - _rightEyeControl.localScale.x));
         _rightEyeSizeX = Mathf.Clamp(_rightEyeSizeX, .01f, .25f);
         float _rightEyeSizeY = .15f - (_sizeYScale * (_rightEyeSizeCache.y - _rightEyeControl.localScale.y));
-        _rightEyeSizeY = Mathf.Clamp(_rightEyeSizeY, 0.02f, .25f);
+        _rightEyeSizeY = Mathf.Clamp(_rightEyeSizeY, 0.02f, .25f);*/
+
+
+        /*if(_eyeTimer < 0) {
+            _leftEyePosX = Random.Range(0f, .5f);
+            _leftEyePosY = Random.Range(.3f, .75f);
+            _leftEyeSizeX = Random.Range(.01f, .25f);
+            _leftEyeSizeY = Random.Range(.02f, .25f);
+            _eyeTimer = Random.Range(.2f, 2f);
+        }*/
+
+        _leftEyePosX = Mathf.PerlinNoise(Time.time, 0);
+        _leftEyePosY = Mathf.PerlinNoise(Time.time, 1);
+        _leftEyeSizeX = Mathf.PerlinNoise(Time.time, 2);
+        _leftEyeSizeY = Mathf.PerlinNoise(Time.time, 3);
+
+        
+        _leftEyePosY = Mathf.Lerp(.3f, .75f, _leftEyePosY);
+        _leftEyeSizeX = Mathf.Lerp(.01f, .25f, _leftEyeSizeX);
+        _leftEyeSizeY = Mathf.Lerp(.02f, .25f, _leftEyeSizeY);
+
+        _rightEyePosX = Mathf.Lerp(.5f, 1f, _leftEyePosX);
+        _rightEyePosY = _leftEyePosY;
+        _rightEyeSizeX = _leftEyeSizeX;
+        _rightEyeSizeY = _leftEyeSizeY;
+
+        _eyeTimer -= Time.deltaTime;
+
+        _leftEyePosX = Mathf.Lerp(0f, .5f, _leftEyePosX);
 
         _eyeMaterial.SetFloat("_LPosX", _leftEyePosX);
         _eyeMaterial.SetFloat("_LPosY", _leftEyePosY);
