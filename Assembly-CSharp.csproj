@@ -77,6 +77,7 @@
     <Compile Include="Assets\scripts\createParagraph.cs" />
     <Compile Include="Assets\PhoneController.cs" />
     <Compile Include="Assets\PhoneTransformController.cs" />
+    <Compile Include="Assets\ShaderParameterDriver.cs" />
     <Compile Include="Assets\NoseShape.cs" />
     <Compile Include="Assets\scripts\moveSprite.cs" />
     <Compile Include="Assets\PlayerController.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\scripts\IKControl.cs" />
     <Compile Include="Assets\CustomMesh.cs" />
     <Compile Include="Assets\scripts\tileGenerator.cs" />
+    <Compile Include="Assets\ObjectMover.cs" />
     <Compile Include="Assets\GetMousePosition.cs" />
     <Compile Include="Assets\MarksAssets\LaunchURLWebGL\Scripts\LaunchURLWebGL.cs" />
     <Compile Include="Assets\EyeShape.cs" />
@@ -122,8 +124,10 @@
     <Compile Include="Assets\scripts\GeneratedMesh.cs" />
     <Compile Include="Assets\scripts\followMouse.cs" />
     <Compile Include="Assets\VideoController.cs" />
-    <Compile Include="Assets\ShaderParameterDriver.cs" />
-    <Compile Include="Assets\ObjectMover.cs" />
+    <Compile Include="Assets\EyePointers.cs" />
+    <Compile Include="Assets\RotationRaycaster.cs" />
+    <Compile Include="Assets\LikeMyBody.cs" />
+    <Compile Include="Assets\scripts\Likable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\georgia\sharefonts.net.txt" />
