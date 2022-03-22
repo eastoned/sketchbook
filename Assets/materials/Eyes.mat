@@ -63,7 +63,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LPosX: 0.3233834
+    - _LPosX: 0.25
     - _LPosY: 0.572379
     - _LSizeX: 0.16522403
     - _LSizeY: 0.11747239
@@ -76,7 +76,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RPosX: 0.8233834
+    - _RPosX: 0.75
     - _RPosY: 0.572379
     - _RSizeX: 0.16522403
     - _RSizeY: 0.11747239

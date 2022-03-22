@@ -11,6 +11,9 @@ public class Likable : MonoBehaviour
     [SerializeField]
     private float _likeAmount = 5f;
 
+    [SerializeField]
+    public Transform _limbGoal;
+
     private void Update()
     {
         if(_likeScore > 0)
@@ -22,6 +25,7 @@ public class Likable : MonoBehaviour
     private void OnMouseDown()
     {
         _likeScore += _likeAmount;
+        
     }
 
 }
