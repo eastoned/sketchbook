@@ -22,8 +22,10 @@ public class FollowMouseRayCast : MonoBehaviour
         _ray3 = Camera.main.ScreenPointToRay(Input.mousePosition + (sampleDist * Vector3.right));
         _ray4 = Camera.main.ScreenPointToRay(Input.mousePosition + (sampleDist * Vector3.left));
         //_ray = new Ray(mousePos, Camera.main.transform.forward);
+
         if (Physics.Raycast(_ray, out _hit, 1000, layerMask))
         {
+            _hit.
             transform.position = _hit.point;
             RaycastHit[] samples = new RaycastHit[4];
             Vector3 norm = Vector3.zero;
@@ -36,6 +38,7 @@ public class FollowMouseRayCast : MonoBehaviour
             }
             if (Physics.Raycast(_ray3, out samples[2], 1000, layerMask)){
                 norm += samples[2].normal;
+                
             }
             if (Physics.Raycast(_ray4, out samples[3], 1000, layerMask)){
                 norm += samples[3].normal;

@@ -16,16 +16,16 @@ public class FollowPhoneTransform : MonoBehaviour
 
     private void Start()
     {
-        _phoneOriginalDepth = _phonePos.position.x;
-        _cameraOriginalDepth = transform.position.x;
+        _phoneOriginalDepth = _phonePos.position.z;
+        _cameraOriginalDepth = transform.position.z;
         _lookAtTarget = _gm.avg;
     }
 
     private void Update()
     {
 
-        float _depthDelta = _phonePos.position.x - _phoneOriginalDepth;
-        transform.position = new Vector3(_cameraOriginalDepth - _depthDelta, _phonePos.position.y, _phonePos.position.z);
+        float _depthDelta = _phonePos.position.z - _phoneOriginalDepth;
+        transform.position = new Vector3(_phonePos.position.x, _phonePos.position.y, _cameraOriginalDepth - _depthDelta);
 
         //_lookAtTarget = Vector3.Lerp(_lookAtTarget, _gm.avg, Time.deltaTime * 5f);
 

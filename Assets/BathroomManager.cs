@@ -8,6 +8,14 @@ public class BathroomManager : MonoBehaviour
     public static BoneController _activeBone;
     public Transform _body;
 
+    public enum EditBodyMode
+    {
+        Translate,
+        Rotate
+    }
+
+    public EditBodyMode _bodyMode;
+    /*
     public void Update()
     {
         if (Input.GetMouseButton(0))
@@ -27,6 +35,11 @@ public class BathroomManager : MonoBehaviour
         _activeBone = _bone;
         _activeBone._col.enabled = false;
         
+    }*/
+
+    public void SetMode(int _bodyButton)
+    {
+        _bodyMode = (EditBodyMode)_bodyButton;
     }
 
 }

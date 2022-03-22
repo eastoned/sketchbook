@@ -16,6 +16,8 @@ public class Likable : MonoBehaviour
 
     private void Update()
     {
+        _likeScore = Mathf.Clamp(_likeScore, 0, 10);
+
         if(_likeScore > 0)
         {
             _likeScore -= Time.deltaTime;

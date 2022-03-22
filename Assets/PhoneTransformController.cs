@@ -28,7 +28,7 @@ public class PhoneTransformController : MonoBehaviour
 
         _depthMovement *= (_fwdSpeed * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x + _depthMovement, transform.position.y, transform.position.z); 
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + _depthMovement); 
     }
 
     private void OnMouseDrag()

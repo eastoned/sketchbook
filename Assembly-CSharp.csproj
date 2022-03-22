@@ -129,6 +129,8 @@
     <Compile Include="Assets\scripts\followMouse.cs" />
     <Compile Include="Assets\VideoController.cs" />
     <Compile Include="Assets\FollowMouseRayCast.cs" />
+    <Compile Include="Assets\MoveLimb.cs" />
+    <Compile Include="Assets\LimbScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\georgia\sharefonts.net.txt" />
