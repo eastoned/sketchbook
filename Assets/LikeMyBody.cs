@@ -19,6 +19,14 @@ public class LikeMyBody : MonoBehaviour
 
     [SerializeField]
     private Transform _rightHand, _leftHand;
+
+    [SerializeField]
+    private Pose _pose;
+
+    [SerializeField]
+    private Transform[] _pieces = new Transform[6];
+
+    public bool _posed = false;
     
 
     // Update is called once per frame
@@ -38,11 +46,32 @@ public class LikeMyBody : MonoBehaviour
         {
             avg += (_likables[i].transform.position * (_likables[i]._likeScore/totalLikes));
         }
-        //avg /= _likables.Length;
 
-        //if right hand is z greater its -90, else 90
+        if (_posed)
+        {
+
+
+            _pieces[0].localPosition = Vector3.Lerp(_pieces[0].localPosition, _pose._lookAtPos, Time.deltaTime);
+
+            _pieces[1].localPosition = Vector3.Lerp(_pieces[1].localPosition, _pose._leftHandPos, Time.deltaTime);
+            _pieces[1].localRotation = Quaternion.Slerp(_pieces[1].localRotation, _pose._leftHandRot, Time.deltaTime);
+
+            _pieces[2].localPosition = Vector3.Lerp(_pieces[2].localPosition, _pose._rightHandPos, Time.deltaTime);
+            _pieces[2].localRotation = Quaternion.Slerp(_pieces[2].localRotation, _pose._rightHandRot, Time.deltaTime);
+
+            _pieces[3].localPosition = Vector3.Lerp(_pieces[3].localPosition, _pose._leftFootPos, Time.deltaTime);
+            _pieces[3].localRotation = Quaternion.Slerp(_pieces[3].localRotation, _pose._leftFootRot, Time.deltaTime);
+
+            _pieces[4].localPosition = Vector3.Lerp(_pieces[4].localPosition, _pose._rightFootPos, Time.deltaTime);
+            _pieces[4].localRotation = Quaternion.Slerp(_pieces[4].localRotation, _pose._rightFootRot, Time.deltaTime);
+
+            _pieces[5].localPosition = Vector3.Lerp(_pieces[5].localPosition, _pose._hipsPos, Time.deltaTime);
+            _pieces[5].localRotation = Quaternion.Slerp(_pieces[5].localRotation, _pose._hipsRot, Time.deltaTime);
+        }
         
     }
+
+
 
     private void OnDrawGizmos()
     {

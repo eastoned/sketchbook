@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e520924b2eccce04cb89284900823968, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  poseName: hands on counter
+  _lookAtPos: {x: 0.119, y: 1.569, z: -1.006}
+  _leftHandPos: {x: -0.948, y: -1.873, z: 1.51}
+  _rightHandPos: {x: 0.323, y: -1.89, z: 1.599}
+  _leftHandRot: {x: 0.6914391, y: -0.091689825, z: -0.094200656, w: 0.710374}
+  _rightHandRot: {x: 0.6914391, y: -0.091689825, z: -0.094200656, w: 0.710374}
+  _leftFootPos: {x: -0.809, y: -0.712, z: 0.3}
+  _rightFootPos: {x: 0.626, y: -0.6700001, z: 0.311}
+  _leftFootRot: {x: -0.0191334, y: 0.50924385, z: 0.8603606, w: -0.009176203}
+  _rightFootRot: {x: -0.2080732, y: 0.45119995, z: 0.8676433, w: -0.017868007}
+  _hipsPos: {x: 0, y: 1.341, z: 0.442}
+  _hipsRot: {x: 0, y: 0, z: 0, w: 1}

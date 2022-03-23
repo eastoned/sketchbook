@@ -10,6 +10,15 @@ public class MoveLimb : MonoBehaviour
 
     public bool _isCam = false;
 
+    private void Start()
+    {
+        if (!_isCam)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Random.Range(-2.5f, 2.5f));
+
+        }
+    }
+
     private void OnMouseDown()
     {
         _isMoving = !_isMoving;
