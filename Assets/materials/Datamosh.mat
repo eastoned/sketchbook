@@ -75,6 +75,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.2022554, g: 0.09641706, b: 0.06736358, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MouseDirection: {r: 0, g: 0, b: 0, a: 0}
-    - _MousePosition: {r: 0.50092196, g: 0.6407988, b: 0, a: 0}
+    - _MouseDirection: {r: 0, g: 0, b: 0, a: 1}
+    - _MousePosition: {r: 0.43318486, g: 0.70211583, b: 0, a: 0}
   m_BuildTextureStacks: []

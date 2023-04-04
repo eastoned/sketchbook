@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Eyes
-  m_Shader: {fileID: 4800000, guid: da657db0a892c4a4ea15dc636b1289d1, type: 3}
+  m_Name: Trash rush 1
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bdb42c87b8801e94e886c5c0d60b3014, type: 3}
+        m_Texture: {fileID: 2800000, guid: 821d81f660ecc5c4b9e718844ec5a4f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -63,25 +63,10 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LPosX: 0.25
-    - _LPosY: 0.5
-    - _LSizeX: 0.1
-    - _LSizeY: 0.15
-    - _LeftEyeSize: 0.206
-    - _LeftEyeSizeX: 0.152
-    - _LeftEyeSizeY: 0.185
-    - _LeftEyeX: 0.24
-    - _LeftEyeY: 0.516
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RPosX: 0.75
-    - _RPosY: 0.5
-    - _RSizeX: 0.1
-    - _RSizeY: 0.15
-    - _RightEyeSize: 0.25
-    - _RightEyeX: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
