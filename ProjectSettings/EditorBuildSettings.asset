@@ -27,6 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/tutorial.unity
     guid: 0443afb55c352ba41b932686253b7a75
   - enabled: 1
-    path: Assets/Scenes/TheBathroom.unity
+    path: Assets/Scene/TheBathroom.unity
     guid: 5f07601fb6a18004abb9ae2d9e12a5ca
   m_configObjects: {}
