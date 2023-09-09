@@ -77,3 +77,13 @@ The following packages were updated:
 The following packages were removed:
   com.unity.2d.ik@1.0.8-preview.1
   com.unity.package-manager-ui@2.0.8
+
+=== Fri Apr 14 16:34:14 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.2d.animation from version 5.0.6 to 5.0.9
+  com.unity.collab-proxy from version 1.9.0 to 1.15.1
+  com.unity.purchasing from version 3.2.2 to 4.0.3

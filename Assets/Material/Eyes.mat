@@ -63,8 +63,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LPosX: 0.25
-    - _LPosY: 0.5
+    - _LPosX: 0.4156927
+    - _LPosY: 0.44730648
     - _LSizeX: 0.1
     - _LSizeY: 0.15
     - _LeftEyeSize: 0.206
