@@ -31,11 +31,11 @@ Material:
     - _radiusPupil: 0.656
     - _xPupil: 1
     - _xScale: 1
-    - _xScaleLower: 0.748
+    - _xScaleLower: 0.444
     - _xScaleUpper: 1
     - _yPupil: 0.918
     - _yScale: 1
-    - _yScaleLower: 1
+    - _yScaleLower: 0.584
     - _yScaleUpper: 1
     m_Colors:
     - _ColorBottom: {r: 1, g: 1, b: 1, a: 1}

@@ -13,7 +13,7 @@ public class FaceController : MonoBehaviour
 
     [Range(-45f, 25f)] public float eyebrowAngle;
     [Range(0f, 1f)] public float eyebrowSpacing;
-    [Range(-.1f, 0.5f)] public float eyebrowHeight;
+    [Range(-1f, 0.5f)] public float eyebrowHeight;
     [Range(0.2f, 1.5f)] public float eyebrowLength;
     [Range(0.1f, 0.5f)] public float eyebrowWidth;
 
@@ -117,10 +117,10 @@ public class FaceController : MonoBehaviour
     void RandomNose(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
-        float xScale1 = Random.Range(0.1f, 5f);
-        float xScale2 = Random.Range(0.1f, 5f);
-        float yScale1 = Random.Range(1f, 10f);
-        float yScale2 = Random.Range(1f, 10f);
+        float xScale1 = Random.Range(0.1f, 2.5f);
+        float xScale2 = Random.Range(0.1f, 2.5f);
+        float yScale1 = Random.Range(1f, 5f);
+        float yScale2 = Random.Range(1f, 5f);
         float blend = Random.Range(0.1f, 2f);
         
         noseHeight = Random.Range(-0.25f, 0.5f);

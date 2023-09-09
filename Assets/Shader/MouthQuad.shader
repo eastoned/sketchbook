@@ -2,7 +2,17 @@ Shader "Unlit/MouthQuad"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+
+        _Radius ("Radius", Range(0.1, 1)) = 0.5
+        
+        _xScaleUpper ("x SCale", Range(0, 1)) = 0.5
+        
+        _yScaleUpper ("yScale", Range(-1, 1)) = 0.5
+        
+        _yScaleUpper2 ("yScale2", Range(-1, 1)) = 0.5
+
+        _TopTeeth ("Teeththop", Range(0,1)) = 0.5
+        _BotTeeth ("Teeth botoom", Range(0,1)) = 0.5
     }
     SubShader
     {
@@ -31,16 +41,16 @@ Shader "Unlit/MouthQuad"
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
-
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            float _Radius, _xScaleUpper, _yScaleUpper;
+            float _Radius2, _xScaleUpper2, _yScaleUpper2;
+            float _TopTeeth, _BotTeeth;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+2)/10, v.vertex.z, v.vertex.w);
+                //v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+2)/10, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -51,8 +61,20 @@ Shader "Unlit/MouthQuad"
 
                 float value = distance(i.uv, float2(0.5, 0.5));
                 value = step(0.5, value);
-                clip(1-value.x-0.5);
-                return value.xxxx;
+                float line1 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_yScaleUpper,2)) * step(0.5, uv.y);
+                float line2 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_yScaleUpper2,2)) * (1 - step(0.5, uv.y));
+                //min of two scale values absolute 
+                //clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1)
+                float line3 = 1-step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5)*_xScaleUpper, 2)) - pow((uv.y-0.5)/clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1),2));
+                line1 += line2;
+                line1 *= line3;
+
+                //-1 to 1 is 0 to 1
+                float line4 = step(_yScaleUpper/2 + 0.5 - _TopTeeth/2, uv.y);
+                float line5 = step(_BotTeeth, 1-uv.y);
+                clip(line1.r-0.5);
+                float4 res = float4(0,0,0,1) * line1 + line4+line5;
+                return res;
             }
             ENDCG
         }

@@ -2,10 +2,10 @@ Shader "Unlit/NoseQuad"
 {
     Properties
     {
-        _xScaleUpper ("X Scale Upper", Range(0.1,5)) = 1
-        _yScaleUpper ("Y Scale Upper", Range(1,10)) = 1
-        _xScaleUpper2 ("X Scale Upper2", Range(0.1,5)) = 1
-        _yScaleUpper2 ("Y Scale Upper2", Range(1,10)) = 1
+        _xScaleUpper ("X Scale Upper", Range(0.1,2.5)) = 1
+        _yScaleUpper ("Y Scale Upper", Range(1,5)) = 1
+        _xScaleUpper2 ("X Scale Upper2", Range(0.1,2.5)) = 1
+        _yScaleUpper2 ("Y Scale Upper2", Range(1,5)) = 1
         _Blend("Blend", Range(0.1, 2)) = 0
         _Radius("Nostril Radius", Range(0.1, 1)) = 0.5
         _NostrilSpacing("NostrilSpace", Range(1, 2)) = 0.5
@@ -47,7 +47,7 @@ Shader "Unlit/NoseQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+1)/10, v.vertex.z, v.vertex.w);
+                //v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+1)/10, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 o.uv = v.uv;
