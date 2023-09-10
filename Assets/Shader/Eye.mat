@@ -26,8 +26,8 @@ Material:
     m_Floats:
     - _Radius: 1
     - __dirty: 0
-    - _pupilOffsetX: 0.136
-    - _pupilOffsetY: 0.051
+    - _pupilOffsetX: 0
+    - _pupilOffsetY: 0
     - _radiusPupil: 0.656
     - _xPupil: 1
     - _xScale: 1

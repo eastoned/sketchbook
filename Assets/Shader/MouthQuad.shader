@@ -64,16 +64,16 @@ Shader "Unlit/MouthQuad"
                 float line1 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_yScaleUpper,2)) * step(0.5, uv.y);
                 float line2 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_yScaleUpper2,2)) * (1 - step(0.5, uv.y));
                 //min of two scale values absolute 
-                //clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1)
+                float mask = 1-clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1);
                 float line3 = 1-step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5)*_xScaleUpper, 2)) - pow((uv.y-0.5)/clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1),2));
                 line1 += line2;
                 line1 *= line3;
 
                 //-1 to 1 is 0 to 1
-                float line4 = step(_yScaleUpper/2 + 0.5 - _TopTeeth/2, uv.y);
-                float line5 = step(_BotTeeth, 1-uv.y);
+                float line4 = step(_yScaleUpper/2 + 0.5 - _TopTeeth*mask/2, uv.y) * step(0.25, uv.y);
+                float line5 = step(_yScaleUpper2/2 + 0.5 - _BotTeeth*mask/2, 1-uv.y) * (step(0.25, 1-uv.y));
                 clip(line1.r-0.5);
-                float4 res = float4(0,0,0,1) * line1 + line4+line5;
+                float4 res = float4(0,0,0,1) * line1 + saturate(line4 + line5);
                 return res;
             }
             ENDCG

@@ -3,6 +3,8 @@ Shader "Unlit/EyebrowQuad"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Strokes ("Strokes", Range(0, 300)) = 1
+        _Offset ("Offset", Range(0, 3.14)) = 0
     }
     SubShader
     {
@@ -34,6 +36,7 @@ Shader "Unlit/EyebrowQuad"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _Strokes, _Offset;
 
             v2f vert (appdata v)
             {
@@ -46,11 +49,12 @@ Shader "Unlit/EyebrowQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+                float2 uv = i.uv;
+                float result = sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + .75;
+                float result2 = -sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + 0.75;
+                //float result2 = sin(
+                
+                return step(0, max(result2.xxxx, result.xxxx)*1-step(0, min(result2.xxxx, result.xxxx)));
             }
             ENDCG
         }

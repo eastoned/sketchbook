@@ -50,7 +50,7 @@ Shader "Unlit/HeadQuad"
                 float2 uv = i.uv;
                 float value = distance(i.uv, float2(0.5, 0.5));
                 clip(1-value - 0.5);
-                return lerp(float4(1, 0, 0, 1), float4(1,1,1,1), 1-uv.y);
+                return float4(1,0,1,1);//lerp(float4(1, 0, 0, 1), float4(1,1,1,1), 1-uv.y);
             }
             ENDCG
         }
