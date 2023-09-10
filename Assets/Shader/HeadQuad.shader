@@ -3,6 +3,7 @@ Shader "Unlit/HeadQuad"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Radius("Radius", Range(1, 10)) = 4
     }
     SubShader
     {
@@ -34,6 +35,7 @@ Shader "Unlit/HeadQuad"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _Radius;
 
             v2f vert (appdata v)
             {
@@ -48,9 +50,9 @@ Shader "Unlit/HeadQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                float value = distance(i.uv, float2(0.5, 0.5));
+                float value = pow(abs(uv.x*2-1), _Radius) + pow(abs(uv.y*2-1), _Radius);
                 clip(1-value - 0.5);
-                return float4(1,0,1,1);//lerp(float4(1, 0, 0, 1), float4(1,1,1,1), 1-uv.y);
+                return float4(1,0,0.5,1);//lerp(float4(1, 0, 0, 1), float4(1,1,1,1), 1-uv.y);
             }
             ENDCG
         }

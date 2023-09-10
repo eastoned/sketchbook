@@ -29,10 +29,12 @@ Material:
     - _pupilOffsetX: 0
     - _pupilOffsetY: 0
     - _radiusPupil: 0.656
+    - _xLevel: 1.4
     - _xPupil: 1
     - _xScale: 1
     - _xScaleLower: 0.444
     - _xScaleUpper: 1
+    - _yLevel: 1
     - _yPupil: 0.918
     - _yScale: 1
     - _yScaleLower: 0.584

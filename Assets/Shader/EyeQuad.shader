@@ -14,6 +14,9 @@ Shader "Unlit/EyeQuad"
         _pupilOffsetY ("Translate pupil y", Range(-1, 1)) = 0
         _yPupil ("Y Scale Pupil", Range(0, 1)) = 1
         _radiusPupil ("Pupil Radius", Range(0,1)) = 1
+
+        _xLevel ("X Level", Range(-5, 5)) = 1
+        _yLevel ("Y Level", Range(0, 2)) = 1
     }
     SubShader
     {
@@ -45,6 +48,7 @@ Shader "Unlit/EyeQuad"
 
             float _Radius, _xScaleUpper, _yScaleUpper, _xScaleLower, _yScaleLower, _radiusPupil, _xPupil, _yPupil, _pupilOffsetX, _pupilOffsetY;
             float4 _ColorTop, _ColorBottom;
+            float _yLevel, _xLevel;
 
             float random (float2 st) {
                 return frac(sin(dot(st.xy,
