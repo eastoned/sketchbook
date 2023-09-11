@@ -24,8 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Radius: 9
+    - _Radius: 0.5
     - _Radius2: 0.465
-    - _Width: 2.15
+    - _Width: 0.57
     m_Colors: []
   m_BuildTextureStacks: []

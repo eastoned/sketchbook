@@ -50,12 +50,13 @@ Shader "Unlit/NeckQuad"
             //width is 15, radius has to be .5
                 float2 uv = i.uv;
                 float line1 = step(0, (pow(0.5, 2) - pow(uv.x/_Radius, 2*_Width*1/_Radius)) - pow(uv.y-0.5,2));
-                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1)/_Radius), 2*_Width*1/_Radius)) - pow(uv.y-0.5,2));
+                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1))/_Radius, 2*_Width*1/_Radius)) - pow(uv.y-0.5,2));
 
                 line2 += line1;
+                line2 = saturate(line2);
                 line2 = 1 - line2;
                 clip(line2 - 1);
-                return lerp(float4(1,0,0,1), float4(1,1,1,1), uv.y);
+                return lerp(float4(1,0,0,1), float4(1,0.5,1,1), 1-uv.y);;
             }
             ENDCG
         }

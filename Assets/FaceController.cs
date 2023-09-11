@@ -114,7 +114,7 @@ public class FaceController : MonoBehaviour
     void RandomMouth(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
-        float radius = Random.Range(0.1f, 1f);
+        float radius = Random.Range(0.2f, 1f);
         float xScale = Random.Range(0f, 1f);
         float yScaleUp = Random.Range(-1f, 1f);
         float yScaleDown = Random.Range(-1f, 1f);
@@ -246,6 +246,9 @@ public class FaceController : MonoBehaviour
         float i = Mathf.PerlinNoise(Time.time*0.71f,0.4f);
         float j = Mathf.PerlinNoise(Time.time*0.36f,0.5f);
 
+        float k = Mathf.PerlinNoise(Time.time*0.16f,0.7f);
+        float l = Mathf.PerlinNoise(Time.time*0.47f,0.8f);
+
         float radius = (x*0.9f) + 0.1f;
         float xUpper = y*2f;
         float yUpper = z;
@@ -255,12 +258,17 @@ public class FaceController : MonoBehaviour
         float xPupil = c;
         float yPupil = d;
         float pupil = e;
+        
+        
 
         eyeAngle = (f*70) - 45;
         eyeSpacing = g;
         eyePos = (h*0.2f) - 0.1f;
         eyeWidth = (i*0.5f) + 0.5f;
         eyeHeight = (j*0.5f) + 0.5f;
+
+        float lid1 = k*2;
+        float lid2 = l*2;
 
 
         prop.SetFloat("_xPupil", xPupil);
@@ -271,7 +279,8 @@ public class FaceController : MonoBehaviour
         prop.SetFloat("_yLevel", yUpper);
         prop.SetFloat("_xLevel3", xLower);
         prop.SetFloat("_yLevel3", yLower);
-        
+        prop.SetFloat("_Lid1", lid1);
+        prop.SetFloat("_Lid2", lid2);
 
         LeftEye.SetPropertyBlock(prop);
         RightEye.SetPropertyBlock(prop);

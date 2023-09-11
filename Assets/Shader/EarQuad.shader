@@ -3,6 +3,7 @@ Shader "Unlit/EarQuad"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Scale("Scale", Range(0, 0.5)) = 0
     }
     SubShader
     {
@@ -34,6 +35,7 @@ Shader "Unlit/EarQuad"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _Scale;
 
             v2f vert (appdata v)
             {
@@ -51,7 +53,7 @@ Shader "Unlit/EarQuad"
 
 
                 float value = distance(i.uv, float2(0.5, 0.5));
-                clip(1-value - 0.5);
+                clip(1-value - (0.5));
                 float ineer = step(0.35,distance(i.uv, float2(0.5, 0.5)));
                 ineer += 1-step(0.25, distance(i.uv,float2(0.25,0.25)));
                 ineer = saturate(ineer);
