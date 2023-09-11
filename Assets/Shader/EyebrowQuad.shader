@@ -2,9 +2,11 @@ Shader "Unlit/EyebrowQuad"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _Strokes ("Strokes", Range(0, 300)) = 1
-        _Offset ("Offset", Range(0, 3.14)) = 0
+        _Strokes ("Strokes", Range(1, 16)) = 1
+        _Offset ("Offset", Range(1, 8)) = 0
+        _Curve ("Curve", Range(0.3, 4)) = 1
+
+        _Curve2 ("Curve2", Range(-1, 1)) = 0
     }
     SubShader
     {
@@ -34,15 +36,17 @@ Shader "Unlit/EyebrowQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float _Strokes, _Offset;
+            int _Strokes;
+            float _Offset;
+            float _Curve;
+            float _Curve2;
 
             v2f vert (appdata v)
             {
                 v2f o;
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+2)/10, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -50,11 +54,22 @@ Shader "Unlit/EyebrowQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                float result = sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + .75;
-                float result2 = -sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + 0.75;
-                //float result2 = sin(
+                float stretchUV = sin(uv.x*3.14);
                 
-                return step(0, max(result2.xxxx, result.xxxx)*1-step(0, min(result2.xxxx, result.xxxx)));
+                uv *= float2(_Strokes, 1);
+                uv = frac(uv);
+                uv += float2(0, stretchUV * _Curve2 * (_Offset-1)/16);
+
+                float result = pow(abs(uv.x*2-1), _Curve) + pow(abs(uv.y*2-1)*_Offset, _Curve);
+                result = step(1, result);
+                //float result = sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + .5;
+                //float result2 = -sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + 0.5;
+                //float result2 = sin(
+                //float final = step(0, max(result2, result)*1-step(0, min(result2, result)));
+                //clip(final - 0.5);
+                //final *= 0;
+                clip(1-result-0.5);
+                return result.xxxx;
             }
             ENDCG
         }

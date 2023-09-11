@@ -9,7 +9,7 @@ Shader "Unlit/NoseQuad"
         _Blend("Blend", Range(0.1, 2)) = 0
         _Radius("Nostril Radius", Range(0.1, 1)) = 0.5
         _NostrilSpacing("NostrilSpace", Range(1, 2)) = 0.5
-        _NostrilHeight("Nostril Height", Range(-.5, 0)) = 0
+        _NostrilHeight("Nostril Height", Range(-.5, -0.25)) = 0
         _NostrilScale("Nostril Scale", Range(0, 2)) = 0.5
     }
     SubShader
@@ -47,7 +47,7 @@ Shader "Unlit/NoseQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                //v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+1)/10, v.vertex.z, v.vertex.w);
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+1)/10, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 o.uv = v.uv;
@@ -71,7 +71,7 @@ Shader "Unlit/NoseQuad"
                 result = step(0, result);
                 result *= circle1;
                 clip(result.r - 0.5);
-                float4 final = result * lerp(float4(1,0,0,1), float4(1,1,1,1), uv.y);
+                float4 final = result * lerp(float4(1,0,0,1), float4(1,.5,.5,1), uv.y);
                 return final;
             }
             ENDCG

@@ -2,7 +2,8 @@ Shader "Unlit/NeckQuad"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _Width ("Width", Range(0, 5)) = 0
+        _Radius("Radius", Range(0.5, 15)) = 1
     }
     SubShader
     {
@@ -32,25 +33,29 @@ Shader "Unlit/NeckQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            float _Width, _Radius, _Radius2;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+            //width is .2, radius can be 15
+            //width is 15, radius has to be .5
+                float2 uv = i.uv;
+                float line1 = step(0, (pow(0.5, 2) - pow(uv.x/_Radius, 2*_Width*1/_Radius)) - pow(uv.y-0.5,2));
+                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1)/_Radius), 2*_Width*1/_Radius)) - pow(uv.y-0.5,2));
+
+                line2 += line1;
+                line2 = 1 - line2;
+                clip(line2 - 1);
+                return lerp(float4(1,0,0,1), float4(1,1,1,1), uv.y);
             }
             ENDCG
         }

@@ -38,6 +38,7 @@ Shader "Unlit/EarQuad"
             v2f vert (appdata v)
             {
                 v2f o;
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z/5)/10, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -51,7 +52,10 @@ Shader "Unlit/EarQuad"
 
                 float value = distance(i.uv, float2(0.5, 0.5));
                 clip(1-value - 0.5);
-                return lerp(float4(1, 0, 0, 1), float4(1,1,1,1), 1-uv.y);
+                float ineer = step(0.35,distance(i.uv, float2(0.5, 0.5)));
+                ineer += 1-step(0.25, distance(i.uv,float2(0.25,0.25)));
+                ineer = saturate(ineer);
+                return lerp(float4(1, 0, 0, 1)*ineer, float4(1,1,1,1)*ineer, 1-uv.y);
             }
             ENDCG
         }

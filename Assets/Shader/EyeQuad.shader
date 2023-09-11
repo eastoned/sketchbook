@@ -15,8 +15,14 @@ Shader "Unlit/EyeQuad"
         _yPupil ("Y Scale Pupil", Range(0, 1)) = 1
         _radiusPupil ("Pupil Radius", Range(0,1)) = 1
 
-        _xLevel ("X Level", Range(-5, 5)) = 1
-        _yLevel ("Y Level", Range(0, 2)) = 1
+        _xLevel ("X Level", Range(0, 2)) = 1
+        _yLevel ("Y Level", Range(0, 1)) = 1
+
+        _xLevel3 ("X Level3", Range(0, 2)) = 1
+        _yLevel3 ("Y Level3", Range(0, 1)) = 1
+
+        _Lid1 ("Lid 1", Range(0, 1)) = 0.5
+        _Lid2 ("Lid 2", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -48,7 +54,9 @@ Shader "Unlit/EyeQuad"
 
             float _Radius, _xScaleUpper, _yScaleUpper, _xScaleLower, _yScaleLower, _radiusPupil, _xPupil, _yPupil, _pupilOffsetX, _pupilOffsetY;
             float4 _ColorTop, _ColorBottom;
-            float _yLevel, _xLevel;
+            float _yLevel, _xLevel, _yLevel3, _xLevel3;
+
+            float _Lid1, _Lid2;
 
             float random (float2 st) {
                 return frac(sin(dot(st.xy,
@@ -59,7 +67,7 @@ Shader "Unlit/EyeQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                //v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z*2)/8, v.vertex.z, v.vertex.w);
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/8, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -69,13 +77,30 @@ Shader "Unlit/EyeQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = float2(i.uv.x, i.uv.y);
-                float line1 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5)/_xScaleUpper, 2)) - pow((uv.y-0.5)/_yScaleUpper,2)) * step(0.5, i.uv.y);
-                float line2 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5)/_xScaleLower, 2)) - pow((uv.y-0.5)/_yScaleLower,2)) * (1 - step(0.5, i.uv.y));
+                float line1 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _xLevel*1.5*((_yLevel*uv.x)+((1-_yLevel)*(1-uv.x))))) 
+                * step(0.5, uv.y);
+
+                float line2 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _xLevel3*1.5*((_yLevel3*uv.x)+((1-_yLevel3)*(1-uv.x))))) 
+                * (1 - step(0.5, uv.y));
+
+                float mask1 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _xLevel*_Lid1*1.5*((_yLevel*uv.x)+((1-_yLevel)*(1-uv.x))))) 
+                * step(0.5, uv.y);
+
+                float mask2 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _xLevel3*_Lid2*1.5*((_yLevel3*uv.x)+((1-_yLevel3)*(1-uv.x))))) 
+                * (1 - step(0.5, uv.y));
+
+                mask1 += mask2;
+
                 float4 result = (line1 * _ColorTop) + (line2 * _ColorBottom);
                 clip(result.a - 0.5);
                 float pupil = 1 - step(0, (pow(_radiusPupil/2*_Radius, 2) - pow((uv.x-0.5 + _pupilOffsetX)/_xPupil, 2)) - pow((uv.y-0.5 +_pupilOffsetY)/_yPupil,2));
                 
                 result *= pupil;
+                result *= mask1;
                 return result;
             }
             ENDCG

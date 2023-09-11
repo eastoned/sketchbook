@@ -24,7 +24,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Offset: 0
-    - _Strokes: 29
+    - _Curve: 4
+    - _Curve2: 1
+    - _Offset: 8
+    - _Strokes: 9.9
     m_Colors: []
   m_BuildTextureStacks: []

@@ -24,22 +24,26 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Radius: 1
+    - _Lid1: 0.767
+    - _Lid2: 1
+    - _Radius: 0.97
     - __dirty: 0
-    - _pupilOffsetX: 0
+    - _pupilOffsetX: 0.153
     - _pupilOffsetY: 0
-    - _radiusPupil: 0.656
-    - _xLevel: 1.4
-    - _xPupil: 1
+    - _radiusPupil: 0.767
+    - _xLevel: 2
+    - _xLevel3: 1.38
+    - _xPupil: 0.298
     - _xScale: 1
-    - _xScaleLower: 0.444
+    - _xScaleLower: 1
     - _xScaleUpper: 1
-    - _yLevel: 1
-    - _yPupil: 0.918
+    - _yLevel: 0.462
+    - _yLevel3: 0.603
+    - _yPupil: 0.34
     - _yScale: 1
-    - _yScaleLower: 0.584
+    - _yScaleLower: 1
     - _yScaleUpper: 1
     m_Colors:
     - _ColorBottom: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorTop: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorTop: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
