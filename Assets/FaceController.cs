@@ -6,6 +6,10 @@ public class FaceController : MonoBehaviour
 {
     [SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck;
 
+    public Collider headtop, headbottom;
+
+    public MeshRenderer circle1, circle2, circle3;
+
     [Range(-45f, 25)] public float eyeAngle;
     [Range(0f, 1f)] public float eyeSpacing;
     [Range(-1f, .1f)] public float eyePos;
@@ -35,12 +39,15 @@ public class FaceController : MonoBehaviour
 
     void OnValidate(){
         SetTransformValues();
+        
     }
+
+
 
     void SetTransformValues(){
         float actualHeadWidth = Mathf.Lerp(2,4,headWidth);
         Head.transform.localScale = new Vector3(actualHeadWidth, Mathf.Lerp(2,4,headHeight), 0);
-
+        
         LeftEye.transform.localEulerAngles = new Vector3(0, 0, eyeAngle);
         RightEye.transform.localEulerAngles = new Vector3(0, 0, -eyeAngle);
         LeftEye.transform.localPosition = new Vector3(-0.5f - eyeSpacing, 1+eyePos, 0);
@@ -286,6 +293,13 @@ public class FaceController : MonoBehaviour
         RightEye.SetPropertyBlock(prop);
 
         SetTransformValues();
+
+        if(Input.GetMouseButton(0)){
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)){
+                Debug.Log(hit.collider.name);
+            }
+        }
         
     
     }
