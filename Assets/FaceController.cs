@@ -6,9 +6,9 @@ public class FaceController : MonoBehaviour
 {
     [SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck;
 
-    public Collider headtop, headbottom;
+    public HeadController headScalerTop, headScalerBottom, headScalerLeft, headScalerRight;
 
-    public MeshRenderer circle1, circle2, circle3;
+    public Collider headtop, headbottom;
 
     [Range(-45f, 25)] public float eyeAngle;
     [Range(0f, 1f)] public float eyeSpacing;
@@ -41,7 +41,6 @@ public class FaceController : MonoBehaviour
         SetTransformValues();
         
     }
-
 
 
     void SetTransformValues(){
@@ -292,16 +291,24 @@ public class FaceController : MonoBehaviour
         LeftEye.SetPropertyBlock(prop);
         RightEye.SetPropertyBlock(prop);
 
+        
+
         SetTransformValues();
 
-        if(Input.GetMouseButton(0)){
-            RaycastHit hit;
-            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)){
-                Debug.Log(hit.collider.name);
-            }
-        }
-        
-    
+    }
+
+    public void UpdateHeightFromTransformTool(float valueChange){
+        headHeight = valueChange;
+        headScalerTop.UpdatePosition(valueChange);
+        headScalerBottom.UpdatePosition(valueChange);
+        SetTransformValues();
+    }
+
+    public void UpdateWidthFromTransformTool(float valueChange){
+        headWidth = valueChange;
+        headScalerLeft.UpdatePosition(valueChange);
+        headScalerRight.UpdatePosition(valueChange);
+        SetTransformValues();
     }
     
 }
