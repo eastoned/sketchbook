@@ -34,7 +34,7 @@ public class FaceController : MonoBehaviour
     [Range(0f, 45f)] public float earAngle;
 
     void OnValidate(){
-        SetTransformValues();
+       // SetTransformValues();
     }
 
     void SetTransformValues(){
@@ -141,9 +141,9 @@ public class FaceController : MonoBehaviour
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
         float radius = Random.Range(0.1f, 1f);
-        float xUpper = Random.Range(0f, 2f);
+        float xUpper = Random.Range(0f, 2.75f);
         float yUpper = Random.Range(0f, 1f);
-        float xLower = Random.Range(0f, 2f);
+        float xLower = Random.Range(0f, 2.75f);
         float yLower = Random.Range(0f, 1f);
         float xPupil = Random.Range(0f, 1f);
         float yPupil = Random.Range(0f, 1f);

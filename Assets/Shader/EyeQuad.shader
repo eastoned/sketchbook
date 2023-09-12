@@ -15,10 +15,10 @@ Shader "Unlit/EyeQuad"
         _yPupil ("Y Scale Pupil", Range(0, 1)) = 1
         _radiusPupil ("Pupil Radius", Range(0,1)) = 1
 
-        _xLevel ("X Level", Range(0, 2)) = 1
+        _xLevel ("X Level", Range(0, 2.75)) = 1
         _yLevel ("Y Level", Range(0, 1)) = 1
 
-        _xLevel3 ("X Level3", Range(0, 2)) = 1
+        _xLevel3 ("X Level3", Range(0, 2.75)) = 1
         _yLevel3 ("Y Level3", Range(0, 1)) = 1
 
         _Lid1 ("Lid 1", Range(0, 1)) = 0.5
