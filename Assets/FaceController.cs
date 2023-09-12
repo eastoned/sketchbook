@@ -267,11 +267,11 @@ public class FaceController : MonoBehaviour
         
         
 
-        eyeAngle = (f*70) - 45;
-        eyeSpacing = g;
-        eyePos = (h*0.2f) - 0.1f;
-        eyeWidth = (i*0.5f) + 0.5f;
-        eyeHeight = (j*0.5f) + 0.5f;
+        //eyeAngle = (f*70) - 45;
+       // eyeSpacing = g;
+        //eyePos = (h*0.2f) - 0.1f;
+        //eyeWidth = (i*0.5f) + 0.5f;
+        //eyeHeight = (j*0.5f) + 0.5f;
 
         float lid1 = k*2;
         float lid2 = l*2;
