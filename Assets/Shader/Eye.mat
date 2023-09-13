@@ -24,22 +24,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Lid1: 1
-    - _Lid2: 0.546
+    - _Lid1: 0.74
+    - _Lid2: 0.85
     - _Radius: 1
     - __dirty: 0
-    - _pupilOffsetX: 0
+    - _pupilOffsetX: -0.06
     - _pupilOffsetY: 0
-    - _radiusPupil: 0.384
-    - _xLevel: 2.21
-    - _xLevel3: 2.26
+    - _radiusPupil: 0.56
+    - _xLevel: 1.12
+    - _xLevel3: 1.29
     - _xPupil: 1
     - _xScale: 1
     - _xScaleLower: 1
     - _xScaleUpper: 1
-    - _yLevel: 0.509
-    - _yLevel3: 0.563
-    - _yPupil: 1
+    - _yLevel: 0
+    - _yLevel3: 0.96
+    - _yPupil: 0.33
     - _yScale: 1
     - _yScaleLower: 1
     - _yScaleUpper: 1

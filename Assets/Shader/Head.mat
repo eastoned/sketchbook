@@ -26,8 +26,8 @@ Material:
     m_Floats:
     - _Radius: 0.73
     - _Radius2: 3.67
-    - _Radius3: 3.19
-    - _Radius4: 2.98
+    - _Radius3: 5
+    - _Radius4: 5
     - _Radius5: 4.65
     - _Radius6: 2.44
     m_Colors:

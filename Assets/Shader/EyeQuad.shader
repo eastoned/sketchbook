@@ -9,10 +9,10 @@ Shader "Unlit/EyeQuad"
         _yScaleUpper ("Y Scale Upper", Range(0,1)) = 1
         _xScaleLower ("X Scale Lower", Range(0,1)) = 1
         _yScaleLower ("Y Scale Lower", Range(0,1)) = 1
-        _xPupil ("X Scale Pupil", Range(0, 1)) = 1
+        _xPupil ("X Scale Pupil", Range(0.1, 1)) = 1
         _pupilOffsetX ("Translate pupil x", Range(-1, 1)) = 0
         _pupilOffsetY ("Translate pupil y", Range(-1, 1)) = 0
-        _yPupil ("Y Scale Pupil", Range(0, 1)) = 1
+        _yPupil ("Y Scale Pupil", Range(0.1, 1)) = 1
         _radiusPupil ("Pupil Radius", Range(0,1)) = 1
 
         _xLevel ("X Level", Range(0, 2.75)) = 1

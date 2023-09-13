@@ -24,13 +24,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BotTeeth: 0.79
+    - _BotTeeth: 0.51
     - _Radius: 1
     - _Radius2: 1
-    - _TopTeeth: 0.157
+    - _TopTeeth: 0.55
     - _xScaleUpper: 1
     - _xScaleUpper2: 1
-    - _yScaleUpper: 0.824
-    - _yScaleUpper2: 1
+    - _yScaleUpper: 1
+    - _yScaleUpper2: 0.31
     m_Colors: []
   m_BuildTextureStacks: []
