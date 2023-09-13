@@ -28,8 +28,8 @@ Material:
     - _Lid2: 0.761
     - _Radius: 0.898
     - __dirty: 0
-    - _pupilOffsetX: -0.054
-    - _pupilOffsetY: 0.028
+    - _pupilOffsetX: 0
+    - _pupilOffsetY: 0
     - _radiusPupil: 0.751
     - _xLevel: 2.37
     - _xLevel3: 1.77
@@ -44,6 +44,6 @@ Material:
     - _yScaleLower: 1
     - _yScaleUpper: 1
     m_Colors:
-    - _ColorBottom: {r: 0.2735849, g: 0, b: 0, a: 1}
-    - _ColorTop: {r: 0.509434, g: 0.21633455, b: 0, a: 1}
+    - _ColorBottom: {r: 0.31132078, g: 0, b: 0.12664345, a: 1}
+    - _ColorTop: {r: 0.0995183, g: 0, b: 1, a: 1}
   m_BuildTextureStacks: []
