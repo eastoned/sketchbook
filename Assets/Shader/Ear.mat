@@ -29,10 +29,10 @@ Material:
     - _Scale: 1
     - _Scale1: 1
     - _Scale10: 1
-    - _Scale2: 1
-    - _Scale3: 1
-    - _Scale4: 6
-    - _Scale5: 0
+    - _Scale2: -1
+    - _Scale3: 0.943
+    - _Scale4: 1
+    - _Scale5: 0.87
     - _Scale6: 0.6
     - _Scale7: -2
     - _Scale8: 1

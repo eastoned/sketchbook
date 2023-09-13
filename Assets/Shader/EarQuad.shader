@@ -12,7 +12,7 @@ Shader "Unlit/EarQuad"
         _Scale8("Scale8", Range(1, 1.5)) = 0
         _Scale9("Scale9", Range(1, 1.5)) = 0
 
-        _Scale3 ("Scale3", Range(0.5, 1)) = 0
+        _Scale3 ("Scale3", Range(0.5, 1.25)) = 0
         _Scale5("Scale5", Range(0, 1)) = 0.5
     }
     SubShader
@@ -66,7 +66,7 @@ Shader "Unlit/EarQuad"
                 res = step(0, res);
 
                 clip(res-0.5);
-                float line1 = step(0.5, distance(float2(0.5, -_Scale2/5 + lerp(0, 0.2, _Scale2*0.5+0.5)), i.uv*float2(1*_Scale3, 1)));
+                float line1 = step(0.5, distance(float2(0.5, -_Scale2/5 + lerp(0, 0.2, _Scale2*0.5+0.5)), i.uv*float2(1*_Scale3, 1*_Scale3)));
 
                 float line2 = 1-step(_Scale5*lerp(1, 0.5, _Scale2*0.5+0.5), distance(float2(0, -_Scale2*0.5+0.5), i.uv));
                 line1 = saturate(line1 + line2);
