@@ -661,9 +661,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610878716}
-  m_LocalRotation: {x: 0, y: 0, z: -0.08541693, w: 0.99634534}
-  m_LocalPosition: {x: 1.25, y: 0.115, z: 0.2}
-  m_LocalScale: {x: 0.731, y: 0.737, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268346, w: 0.9238795}
+  m_LocalPosition: {x: 1.25, y: -0.1, z: 0.2}
+  m_LocalScale: {x: 0.5, y: 1.39, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -871,9 +871,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838332023}
-  m_LocalRotation: {x: 0, y: 0, z: 0.08541693, w: 0.99634534}
-  m_LocalPosition: {x: -1.25, y: 0.115, z: 0.2}
-  m_LocalScale: {x: -0.731, y: 0.737, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268346, w: 0.9238795}
+  m_LocalPosition: {x: -1.25, y: -0.1, z: 0.2}
+  m_LocalScale: {x: -0.5, y: 1.39, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -942,10 +942,10 @@ MonoBehaviour:
   neckWidth: 1
   headWidth: 0
   headHeight: 0.15407717
-  earWidth: 0.731
-  earHeight: 0.737
-  earPos: 0.115
-  earAngle: 9.8
+  earWidth: 0.5
+  earHeight: 1.39
+  earPos: -0.1
+  earAngle: 45
 --- !u!4 &963588424
 Transform:
   m_ObjectHideFlags: 0

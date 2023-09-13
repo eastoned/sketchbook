@@ -30,11 +30,11 @@ Material:
     - _Scale1: 1
     - _Scale10: 1
     - _Scale2: 1
-    - _Scale3: 5
+    - _Scale3: 1
     - _Scale4: 6
     - _Scale5: 0
-    - _Scale6: 1.25
-    - _Scale7: 0.1
+    - _Scale6: 0.6
+    - _Scale7: -2
     - _Scale8: 1
     - _Scale9: 1
     m_Colors: []

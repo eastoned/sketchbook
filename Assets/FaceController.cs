@@ -35,7 +35,7 @@ public class FaceController : MonoBehaviour
     [Range(.5f, 2f)] public float earWidth, earHeight;
     [Range(-0.5f,1f)] public float earPos;
 
-    [Range(0f, 45f)] public float earAngle;
+    [Range(-30f, 45f)] public float earAngle;
 
     void OnValidate(){
         SetTransformValues();
