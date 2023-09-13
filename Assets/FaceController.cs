@@ -36,15 +36,17 @@ public class FaceController : MonoBehaviour
     [Range(-0.5f,1f)] public float earPos;
 
     [Range(-30f, 45f)] public float earAngle;
+    public float eyeRadius;
 
-     float leftPupilX;
-     float leftPupilY;
-    float rightPupilX;
-    float rightPupilY;
+    public float leftPupilX;
+    public float leftPupilY;
+    public float rightPupilX;
+    public float rightPupilY;
+
+    MaterialPropertyBlock leftProp, rightProp;
 
     void OnValidate(){
         SetTransformValues();
-        
     }
 
 
@@ -81,7 +83,14 @@ public class FaceController : MonoBehaviour
         Mouth.transform.localScale = new Vector3(mouthWidth, mouthHeight, 1);
         Mouth.transform.localPosition = new Vector3(0, -1 + mouthPos, 0);
 
-        Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2, 1);
+        Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2.5f, 1f);
+    }
+
+    IEnumerator Start(){
+        for(;;){
+            AllRandom();
+            yield return new WaitForSeconds(0.6f);
+        }
     }
     
     [ContextMenu("Random")]
@@ -186,9 +195,10 @@ public class FaceController : MonoBehaviour
     }
 
     void RandomEyeShape(){
-        MaterialPropertyBlock prop = new MaterialPropertyBlock();
+        leftProp = new MaterialPropertyBlock();
+        rightProp = new MaterialPropertyBlock();
 
-        float radius = Random.Range(0.1f, 1f);
+        eyeRadius = Random.Range(0.1f, 1f);
         float xPupil = Random.Range(0.1f, 1f);
         float yPupil = Random.Range(0.1f, 1f);
         float pupil = Random.Range(0f, 1f);
@@ -201,22 +211,35 @@ public class FaceController : MonoBehaviour
         float lid1 = Random.Range(0f, 1f);
         float lid2 = Random.Range(0f, 1f);
 
-        prop.SetFloat("_Radius", radius);
-        prop.SetFloat("_xPupil", xPupil);
-        prop.SetFloat("_yPupil", yPupil);
-        prop.SetFloat("_radiusPupil", pupil);
-        
-        prop.SetFloat("_xLevel", xUpper);
-        prop.SetFloat("_yLevel", yUpper);
-        prop.SetFloat("_xLevel3", xLower);
-        prop.SetFloat("_yLevel3", yLower);
-        prop.SetFloat("_Lid1", lid1);
-        prop.SetFloat("_Lid2", lid2);
+        float squash = Random.Range(0.25f, 1f);
 
-        LeftEye.SetPropertyBlock(prop);
-        RightEye.SetPropertyBlock(prop);
+        leftProp.SetFloat("_Radius", eyeRadius);
+        leftProp.SetFloat("_xPupil", xPupil);
+        leftProp.SetFloat("_yPupil", yPupil);
+        leftProp.SetFloat("_radiusPupil", pupil);
         
+        leftProp.SetFloat("_xLevel", xUpper);
+        leftProp.SetFloat("_yLevel", yUpper);
+        leftProp.SetFloat("_xLevel3", xLower);
+        leftProp.SetFloat("_yLevel3", yLower);
+        leftProp.SetFloat("_Lid1", lid1);
+        leftProp.SetFloat("_Lid2", lid2);
+        leftProp.SetFloat("_SquashPupil", squash);
+
+        rightProp.SetFloat("_Radius", eyeRadius);
+        rightProp.SetFloat("_xPupil", xPupil);
+        rightProp.SetFloat("_yPupil", yPupil);
+        rightProp.SetFloat("_radiusPupil", pupil);
         
+        rightProp.SetFloat("_xLevel", xUpper);
+        rightProp.SetFloat("_yLevel", yUpper);
+        rightProp.SetFloat("_xLevel3", xLower);
+        rightProp.SetFloat("_yLevel3", yLower);
+        rightProp.SetFloat("_Lid1", lid1);
+        rightProp.SetFloat("_Lid2", lid2);
+        rightProp.SetFloat("_SquashPupil", squash);
+
+
     }
 
     void RandomEyeTransform(){
@@ -296,14 +319,15 @@ public class FaceController : MonoBehaviour
 
     void Update(){
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        MaterialPropertyBlock leftProp = new MaterialPropertyBlock();
-
-        MaterialPropertyBlock rightProp = new MaterialPropertyBlock();
+        
+        if(Input.GetMouseButtonDown(0)){
+            AllRandom();
+        }
       
-        leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(LeftEye.transform.localPosition.x - mousePos.x, -0.35f, 0.35f), Time.deltaTime*5);
-        leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(LeftEye.transform.localPosition.y - mousePos.y, -0.25f, 0.35f), Time.deltaTime*5);
-        rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(RightEye.transform.localPosition.x - mousePos.x, -0.35f, 0.35f), Time.deltaTime*5);
-        rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(RightEye.transform.localPosition.y - mousePos.y, -0.25f, 0.25f), Time.deltaTime*5);
+        leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(LeftEye.transform.localPosition.x - mousePos.x, -0.3f*eyeRadius, 0.3f*eyeRadius), Time.deltaTime*5);
+        leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(LeftEye.transform.localPosition.y - mousePos.y, -0.2f*eyeRadius, 0.2f*eyeRadius), Time.deltaTime*5);
+        rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(RightEye.transform.localPosition.x - mousePos.x, -0.3f*eyeRadius, 0.3f*eyeRadius), Time.deltaTime*5);
+        rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(RightEye.transform.localPosition.y - mousePos.y, -0.2f*eyeRadius, 0.2f*eyeRadius), Time.deltaTime*5);
 
         leftProp.SetFloat("_pupilOffsetX", -leftPupilX);
         leftProp.SetFloat("_pupilOffsetY", leftPupilY);
@@ -313,6 +337,9 @@ public class FaceController : MonoBehaviour
 
         LeftEye.SetPropertyBlock(leftProp);
         RightEye.SetPropertyBlock(rightProp);
+        
+        
+        
         /*
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
         float x = Mathf.PerlinNoise(Time.time*0.2f,0.1f);

@@ -26,20 +26,21 @@ Material:
     m_Floats:
     - _Lid1: 0.489
     - _Lid2: 0.761
-    - _Radius: 0.898
+    - _Radius: 0.992
+    - _SquashPupil: 0.338
     - __dirty: 0
-    - _pupilOffsetX: 0
-    - _pupilOffsetY: 0
-    - _radiusPupil: 0.751
-    - _xLevel: 2.37
-    - _xLevel3: 1.77
-    - _xPupil: 1
+    - _pupilOffsetX: -0.041
+    - _pupilOffsetY: -0.041
+    - _radiusPupil: 1
+    - _xLevel: 1.49
+    - _xLevel3: 1.82
+    - _xPupil: 0.584
     - _xScale: 1
     - _xScaleLower: 1
     - _xScaleUpper: 1
-    - _yLevel: 0.633
-    - _yLevel3: 0.478
-    - _yPupil: 1
+    - _yLevel: 0.541
+    - _yLevel3: 0.546
+    - _yPupil: 0.434
     - _yScale: 1
     - _yScaleLower: 1
     - _yScaleUpper: 1

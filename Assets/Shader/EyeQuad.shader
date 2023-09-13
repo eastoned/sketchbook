@@ -19,6 +19,8 @@ Shader "Unlit/EyeQuad"
 
         _Lid1 ("Lid 1", Range(0, 1)) = 0.5
         _Lid2 ("Lid 2", Range(0, 1)) = 0.5
+
+        _SquashPupil ("Squash", Range(0.25, 1)) = 1
     }
     SubShader
     {
@@ -53,6 +55,7 @@ Shader "Unlit/EyeQuad"
             float _yLevel, _xLevel, _yLevel3, _xLevel3;
 
             float _Lid1, _Lid2;
+            float _SquashPupil;
 
             float random (float2 st) {
                 return frac(sin(dot(st.xy,
@@ -63,7 +66,8 @@ Shader "Unlit/EyeQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-               // v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/8, v.vertex.z, v.vertex.w);
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-1)/30, v.vertex.z, v.vertex.w);
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -93,7 +97,7 @@ Shader "Unlit/EyeQuad"
 
                 float4 result = line1 + line2;
                 clip(result.a - 0.5);
-                float pupil = 1 - step(0, (pow(_radiusPupil/2*_Radius, 2) - pow((uv.x-0.5 + _pupilOffsetX)/_xPupil, 2)) - pow((uv.y-0.5 +_pupilOffsetY)/_yPupil,2));
+                float pupil = 1 - step(0, (pow(_radiusPupil/2*_Radius, 2*_SquashPupil) - pow(abs((uv.x-0.5 + _pupilOffsetX)/_xPupil), 2*_SquashPupil)) - pow(abs((uv.y-0.5 +_pupilOffsetY)/_yPupil),2*_SquashPupil));
                 
                 result *= pupil;
                 result *= mask1;

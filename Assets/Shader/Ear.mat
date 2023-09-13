@@ -27,10 +27,10 @@ Material:
     - _InfluenceX: -1
     - _InfluenceY: 0
     - _Scale: 1
-    - _Scale1: 1
+    - _Scale1: 0.585
     - _Scale10: 1
-    - _Scale2: -1
-    - _Scale3: 0.886
+    - _Scale2: 1
+    - _Scale3: 0.85
     - _Scale4: 1
     - _Scale5: 0.912
     - _Scale6: 0.6

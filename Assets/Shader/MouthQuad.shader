@@ -48,7 +48,8 @@ Shader "Unlit/MouthQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-               /// v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+2)/10, v.vertex.z, v.vertex.w);
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-2)/60, v.vertex.z, v.vertex.w);
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -64,6 +65,7 @@ Shader "Unlit/MouthQuad"
                 float line1 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_yScaleUpper,2)) * step(0.5, uv.y);
                 float line2 = step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_yScaleUpper2,2)) * (1 - step(0.5, uv.y));
                 //min of two scale values absolute 
+                //if upper and upper 2 are <0 then mouth is gone, how do we address
                 float mask = 1-clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1);
                 float line3 = 1-step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5)*_xScaleUpper, 2)) - pow((uv.y-0.5)/clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1),2));
                 line1 += line2;
