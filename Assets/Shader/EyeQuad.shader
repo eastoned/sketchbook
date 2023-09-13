@@ -5,10 +5,6 @@ Shader "Unlit/EyeQuad"
         _Radius ("Radius", Range(0, 1)) = 0.5
         _ColorTop("Top Color", Color) = (0,0,0,0)
         _ColorBottom("Bottom Color", Color) = (0,0,0,0)
-        _xScaleUpper ("X Scale Upper", Range(0,1)) = 1
-        _yScaleUpper ("Y Scale Upper", Range(0,1)) = 1
-        _xScaleLower ("X Scale Lower", Range(0,1)) = 1
-        _yScaleLower ("Y Scale Lower", Range(0,1)) = 1
         _xPupil ("X Scale Pupil", Range(0.1, 1)) = 1
         _pupilOffsetX ("Translate pupil x", Range(-1, 1)) = 0
         _pupilOffsetY ("Translate pupil y", Range(-1, 1)) = 0
@@ -67,7 +63,7 @@ Shader "Unlit/EyeQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/8, v.vertex.z, v.vertex.w);
+               // v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/8, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -95,12 +91,16 @@ Shader "Unlit/EyeQuad"
 
                 mask1 += mask2;
 
-                float4 result = (line1 * _ColorTop) + (line2 * _ColorBottom);
+                float4 result = line1 + line2;
                 clip(result.a - 0.5);
                 float pupil = 1 - step(0, (pow(_radiusPupil/2*_Radius, 2) - pow((uv.x-0.5 + _pupilOffsetX)/_xPupil, 2)) - pow((uv.y-0.5 +_pupilOffsetY)/_yPupil,2));
                 
                 result *= pupil;
                 result *= mask1;
+                mask1 = 1 - mask1;
+                
+                float4 shades = lerp(_ColorTop, _ColorBottom, abs(uv.x*2-1)) * mask1;
+                result += shades;
                 return result;
             }
             ENDCG

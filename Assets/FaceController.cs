@@ -8,7 +8,7 @@ public class FaceController : MonoBehaviour
 
     public HeadController headScalerTop, headScalerBottom, headScalerLeft, headScalerRight;
 
-    public Collider headtop, headbottom;
+    public Vector2 mousePos;
 
     [Range(-45f, 25)] public float eyeAngle;
     [Range(0f, 1f)] public float eyeSpacing;
@@ -36,6 +36,11 @@ public class FaceController : MonoBehaviour
     [Range(-0.5f,1f)] public float earPos;
 
     [Range(-30f, 45f)] public float earAngle;
+
+     float leftPupilX;
+     float leftPupilY;
+    float rightPupilX;
+    float rightPupilY;
 
     void OnValidate(){
         SetTransformValues();
@@ -81,43 +86,77 @@ public class FaceController : MonoBehaviour
     
     [ContextMenu("Random")]
     public void AllRandom(){
-        RandomHead();
-        RandomNeck();
-        RandomEar();
-        RandomEye();
-        RandomNose();
-        RandomEyebrow();
-        RandomMouth();
+        RandomHeadShape();
+        RandomNeckShape();
+        RandomEarShape();
+        RandomEyeShape();
+        RandomNoseShape();
+        RandomEyebrowShape();
+        RandomMouthShape();
     }
 
-    void RandomHead(){
+    void RandomHeadShape(){
+
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
         float rad1 = Random.Range(0.1f, 5f);
         float rad2 = Random.Range(0.1f, 5f);
         float rad3 = Random.Range(0.1f, 5f);
         float rad4 = Random.Range(0.1f, 5f);
-
+        
         prop.SetFloat("_Radius3", rad1);
         prop.SetFloat("_Radius4", rad2);
         prop.SetFloat("_Radius5", rad3);
         prop.SetFloat("_Radius6", rad4);
 
         Head.SetPropertyBlock(prop);
+    }
 
+    void RandomHeadTransform(){
         headWidth = Random.Range(0f,1f);
         headHeight = Random.Range(0f,1f);
     }
 
-    void RandomNeck(){
+    void RandomNeckShape(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
+
+        float width = Random.Range(1f, 5f);
+        float radius = Random.Range(0f, 3f);
+        float scale = Random.Range(1f,5f);
+
+        prop.SetFloat("_Width", width);
+        prop.SetFloat("_Radius", radius);
+        prop.SetFloat("_NeckScale", scale);
+
+        Neck.SetPropertyBlock(prop);
     }
 
-    void RandomEar(){
+    void RandomEarShape(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
+
+        float scale1 = Random.Range(0f, 1f);
+        float scale2 = Random.Range(-1f, 1f);
+        float scale3 = Random.Range(0.5f, 1.25f);
+        float scale4 = Random.Range(1f, 6f);
+        float scale5 = Random.Range(0f, 1f);
+        float scale6 = Random.Range(0f, 1f);
+        float scale8 = Random.Range(1f, 1.5f);
+        float scale9 = Random.Range(1f, 1.5f);
+
+        prop.SetFloat("_Scale1", scale1);
+        prop.SetFloat("_Scale2", scale2);
+        prop.SetFloat("_Scale3", scale3);
+        prop.SetFloat("_Scale4", scale4);
+        prop.SetFloat("_Scale5", scale5);
+        prop.SetFloat("_Scale6", scale6);
+        prop.SetFloat("_Scale8", scale8);
+        prop.SetFloat("_Scale9", scale9);
+       
+        LeftEar.SetPropertyBlock(prop);
+        RightEar.SetPropertyBlock(prop);
     }
 
-    void RandomMouth(){
+    void RandomMouthShape(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
         float radius = Random.Range(0.2f, 1f);
@@ -137,47 +176,60 @@ public class FaceController : MonoBehaviour
 
         Mouth.SetPropertyBlock(prop);
 
-        mouthWidth = Random.Range(0.25f, 2.5f);
-        mouthHeight = Random.Range(0f, 1f);
 
 
     }
 
-    void RandomEye(){
+    void RandomMouthTransform(){
+        mouthWidth = Random.Range(0.25f, 2.5f);
+        mouthHeight = Random.Range(0f, 1f);
+    }
+
+    void RandomEyeShape(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
         float radius = Random.Range(0.1f, 1f);
-        float xUpper = Random.Range(0f, 2f);
-        float yUpper = Random.Range(0f, 1f);
-        float xLower = Random.Range(0f, 2f);
-        float yLower = Random.Range(0f, 1f);
-        float xPupil = Random.Range(0f, 1f);
-        float yPupil = Random.Range(0f, 1f);
+        float xPupil = Random.Range(0.1f, 1f);
+        float yPupil = Random.Range(0.1f, 1f);
         float pupil = Random.Range(0f, 1f);
+
+        float xUpper = Random.Range(0f, 2.75f);
+        float yUpper = Random.Range(0f, 1f);
+        float xLower = Random.Range(0f, 2.75f);
+        float yLower = Random.Range(0f, 1f);
+
+        float lid1 = Random.Range(0f, 1f);
+        float lid2 = Random.Range(0f, 1f);
+
+        prop.SetFloat("_Radius", radius);
+        prop.SetFloat("_xPupil", xPupil);
+        prop.SetFloat("_yPupil", yPupil);
+        prop.SetFloat("_radiusPupil", pupil);
+        
+        prop.SetFloat("_xLevel", xUpper);
+        prop.SetFloat("_yLevel", yUpper);
+        prop.SetFloat("_xLevel3", xLower);
+        prop.SetFloat("_yLevel3", yLower);
+        prop.SetFloat("_Lid1", lid1);
+        prop.SetFloat("_Lid2", lid2);
+
+        LeftEye.SetPropertyBlock(prop);
+        RightEye.SetPropertyBlock(prop);
+        
+        
+    }
+
+    void RandomEyeTransform(){
 
         eyeAngle = Random.Range(-45f, 25);
         eyeSpacing = Random.Range(0f, 1f);
         eyePos = Random.Range(-1f, .1f);
         eyeWidth = Random.Range(0.5f, 1f);
         eyeHeight = Random.Range(0.5f, 1f);
-
-        prop.SetFloat("_Radius", 1f);
-        prop.SetFloat("_xLevel", xUpper);
-        prop.SetFloat("_yLevel", yUpper);
-        prop.SetFloat("_xLevel3", xLower);
-        prop.SetFloat("_yLevel3", yLower);
-        prop.SetFloat("_xPupil", xPupil);
-        prop.SetFloat("_yPupil", yPupil);
-        prop.SetFloat("_radiusPupil", pupil);
-
-        LeftEye.SetPropertyBlock(prop);
-        RightEye.SetPropertyBlock(prop);
-
         SetTransformValues();
-        
     }
 
-    void RandomEyebrow(){
+    void RandomEyebrowShape(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
         float strands = Random.Range(1, 16);
@@ -193,7 +245,11 @@ public class FaceController : MonoBehaviour
         LeftEyebrow.SetPropertyBlock(prop);
         RightEyebrow.SetPropertyBlock(prop);
 
-        eyebrowAngle = Random.Range(-45f, 25f);
+
+    }
+
+    void RandomEyebrowTransform(){
+         eyebrowAngle = Random.Range(-45f, 25f);
         eyebrowSpacing = Random.Range(0f, 1f);
         eyebrowHeight = Random.Range(-.1f, 0.5f);
         eyebrowLength = Random.Range(0.2f, 1.5f);
@@ -202,7 +258,7 @@ public class FaceController : MonoBehaviour
         SetTransformValues();
     }
 
-    void RandomNose(){
+    void RandomNoseShape(){
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
 
         float xScale1 = Random.Range(0.1f, 2.5f);
@@ -215,9 +271,7 @@ public class FaceController : MonoBehaviour
         float nostrilSpace = Random.Range(1f, 2f);
         float nostrilHeight = Random.Range(-0.5f, -0.25f);
         float nostrilScale = Random.Range(0f, 2f);
-        noseHeight = Random.Range(-0.25f, 0.5f);
-        noseLength = Random.Range(0.5f, 2f);
-        noseWidth = Random.Range(0.5f, 2f);
+        
 
         prop.SetFloat("_xScaleUpper", xScale1);
         prop.SetFloat("_yScaleUpper", xScale2);
@@ -231,11 +285,35 @@ public class FaceController : MonoBehaviour
 
         Nose.SetPropertyBlock(prop);
 
-        SetTransformValues();
+    }
 
+    void RandomNoseTransform(){
+        noseHeight = Random.Range(-0.25f, 0.5f);
+        noseLength = Random.Range(0.5f, 2f);
+        noseWidth = Random.Range(0.5f, 2f);
+        SetTransformValues();
     }
 
     void Update(){
+        mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        MaterialPropertyBlock leftProp = new MaterialPropertyBlock();
+
+        MaterialPropertyBlock rightProp = new MaterialPropertyBlock();
+      
+        leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(LeftEye.transform.localPosition.x - mousePos.x, -0.35f, 0.35f), Time.deltaTime*5);
+        leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(LeftEye.transform.localPosition.y - mousePos.y, -0.25f, 0.35f), Time.deltaTime*5);
+        rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(RightEye.transform.localPosition.x - mousePos.x, -0.35f, 0.35f), Time.deltaTime*5);
+        rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(RightEye.transform.localPosition.y - mousePos.y, -0.25f, 0.25f), Time.deltaTime*5);
+
+        leftProp.SetFloat("_pupilOffsetX", -leftPupilX);
+        leftProp.SetFloat("_pupilOffsetY", leftPupilY);
+
+        rightProp.SetFloat("_pupilOffsetX", rightPupilX);
+        rightProp.SetFloat("_pupilOffsetY", rightPupilY);
+
+        LeftEye.SetPropertyBlock(leftProp);
+        RightEye.SetPropertyBlock(rightProp);
+        /*
         MaterialPropertyBlock prop = new MaterialPropertyBlock();
         float x = Mathf.PerlinNoise(Time.time*0.2f,0.1f);
         float y = Mathf.PerlinNoise(Time.time*.1f,0.2f);
@@ -287,13 +365,13 @@ public class FaceController : MonoBehaviour
         prop.SetFloat("_yLevel3", yLower);
         prop.SetFloat("_Lid1", lid1);
         prop.SetFloat("_Lid2", lid2);
-
-        LeftEye.SetPropertyBlock(prop);
-        RightEye.SetPropertyBlock(prop);
+*/
+        //LeftEye.SetPropertyBlock(prop);
+        //RightEye.SetPropertyBlock(prop);
 
         
 
-        SetTransformValues();
+        //SetTransformValues();
 
     }
 

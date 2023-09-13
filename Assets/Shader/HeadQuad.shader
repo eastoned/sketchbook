@@ -3,8 +3,7 @@ Shader "Unlit/HeadQuad"
     Properties
     {
 
-        [HideInInspector]_Radius("Radius", Range(.25, 10)) = 4
-        [HideInInspector]_Radius2("Radius 2", Range(1, 10)) = 4
+  
         _Radius3("Jaw WIdth", Range(.1, 5)) = 5
         _Radius4("Jaw Height", Range(.1, 5)) = 5
         _Radius5("Head Top Width", Range(.1, 5)) = 5

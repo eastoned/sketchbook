@@ -29,13 +29,13 @@ Material:
     - _Scale: 1
     - _Scale1: 1
     - _Scale10: 1
-    - _Scale2: 1
-    - _Scale3: 1.04
-    - _Scale4: 2.72
-    - _Scale5: 0.97
-    - _Scale6: 1.25
+    - _Scale2: -1
+    - _Scale3: 0.886
+    - _Scale4: 1
+    - _Scale5: 0.912
+    - _Scale6: 0.6
     - _Scale7: -2
-    - _Scale8: 1
-    - _Scale9: 1.251
+    - _Scale8: 1.006
+    - _Scale9: 1
     m_Colors: []
   m_BuildTextureStacks: []
