@@ -48,7 +48,7 @@ Shader "Unlit/MouthQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-2)/60, v.vertex.z, v.vertex.w);
+               //v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-2)/60, v.vertex.z, v.vertex.w);
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
@@ -70,13 +70,21 @@ Shader "Unlit/MouthQuad"
                 float line3 = 1-step(0, (pow(_Radius/2, 2) - pow((uv.x-0.5)*_xScaleUpper, 2)) - pow((uv.y-0.5)/clamp(-min(_yScaleUpper, _yScaleUpper2), 0, 1),2));
                 line1 += line2;
                 line1 *= line3;
-
+                float uvStrength = ((-_yScaleUpper + 3) * (-_yScaleUpper2 + 3));
+                float teethUV = (uv.y*(uvStrength)-(uvStrength/2) - _yScaleUpper + _yScaleUpper2);//* (_yScaleUpper*-1 + 2);// ;
+                //teethUV = uv.y + (((_yScaleUpper*0.5)+0.5)*-.25 -.25) * (((_yScaleUpper2*0.5)+0.5)*.25-.75);
+                //teethUV += (((_yScaleUpper2*0.5)+0.5)*.25-.75);
+                
+                float line4 = step((1-_TopTeeth)*2, teethUV);
+                line4 += step((1-_BotTeeth)*2, -teethUV);
                 //-1 to 1 is 0 to 1
-                float line4 = step(_yScaleUpper/2 + 0.5 - _TopTeeth*mask/2, uv.y);
+                //float line4 = step(_yScaleUpper/2 - _TopTeeth, abs(uv.y*2+0.5));
+                //line4 = step(0.5, abs(uv.y*2-1)+(step(0.5, uv.y)*_TopTeeth)+(step(0.5, 1-uv.y)*_BotTeeth));
+                //line4 = abs(uv.y*4-2);
                 float line5 = step(_yScaleUpper2/2 + 0.5 - _BotTeeth*mask/2, 1-uv.y) * (step(0.5, 1-uv.y));
                 clip(line1.r-0.5);
                 //line4 = saturate(line4+line5);
-                float4 res = float4(0,0,0,1) * line1 + saturate(line4 + line5);
+                float4 res = float4(0,0,0,1) * line1;
                 return line4.xxxx;
             }
             ENDCG
