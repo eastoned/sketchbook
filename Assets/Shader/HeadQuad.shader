@@ -2,8 +2,6 @@ Shader "Unlit/HeadQuad"
 {
     Properties
     {
-
-  
         _Radius3("Jaw WIdth", Range(.1, 5)) = 5
         _Radius4("Jaw Height", Range(.1, 5)) = 5
         _Radius5("Head Top Width", Range(.1, 5)) = 5

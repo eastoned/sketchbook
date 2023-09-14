@@ -10,6 +10,8 @@ public class FaceController : MonoBehaviour
 
     public Vector2 mousePos;
 
+    public CharacterData charData;
+
     [Range(-45f, 25)] public float eyeAngle;
     [Range(0f, 1f)] public float eyeSpacing;
     [Range(-1f, .1f)] public float eyePos;
@@ -26,7 +28,7 @@ public class FaceController : MonoBehaviour
 
     [Range(0.25f, 2.5f)] public float mouthWidth;
     [Range(0f, 1f)] public float mouthHeight;
-    [Range(-1f, 1f)] public float mouthPos;
+    [Range(-1f, 1.25f)] public float mouthPos;
     
     [Range(0f, 1f)] public float neckWidth;
 
@@ -38,18 +40,15 @@ public class FaceController : MonoBehaviour
     [Range(-45f, 45f)] public float earAngle;
 
     [Range(0f, 1f)] public float earSpacing;
-    public float eyeRadius;
 
+
+    public float eyeRadius;
     public float leftPupilX;
     public float leftPupilY;
     public float rightPupilX;
     public float rightPupilY;
 
     MaterialPropertyBlock leftProp, rightProp;
-
-    void OnValidate(){
-        SetTransformValues();
-    }
 
 
     void SetTransformValues(){
@@ -90,7 +89,6 @@ public class FaceController : MonoBehaviour
     }
 
     IEnumerator Start(){
-        
         for(;;){
             leftProp = new MaterialPropertyBlock();
             rightProp = new MaterialPropertyBlock();
@@ -118,11 +116,15 @@ public class FaceController : MonoBehaviour
         float rad2 = Random.Range(0.1f, 5f);
         float rad3 = Random.Range(0.1f, 5f);
         float rad4 = Random.Range(0.1f, 5f);
+        Color col1 = Random.ColorHSV();
+        Color col2 = Random.ColorHSV();
         
         prop.SetFloat("_Radius3", rad1);
         prop.SetFloat("_Radius4", rad2);
         prop.SetFloat("_Radius5", rad3);
         prop.SetFloat("_Radius6", rad4);
+        prop.SetColor("_Color", col1);
+        prop.SetColor("_Color2", col2);
 
         Head.SetPropertyBlock(prop);
     }

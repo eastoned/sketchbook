@@ -10,13 +10,13 @@ public class HeadDetector : MonoBehaviour
     void OnMouseOver(){
         Debug.Log("Hovering over head");
         foreach(MeshRenderer mr in headControls){
-            mr.enabled = true;
+            //mr.enabled = true;
         }
     }
 
     void OnMouseExit(){
         foreach(MeshRenderer mr in headControls){
-            mr.enabled = false;
+            //mr.enabled = false;
         }
     }
 }
