@@ -36,6 +36,8 @@ public class FaceController : MonoBehaviour
     [Range(-0.5f,1f)] public float earPos;
 
     [Range(-30f, 45f)] public float earAngle;
+
+    [Range(0f, 1f)] public float earSpacing;
     public float eyeRadius;
 
     public float leftPupilX;
@@ -71,8 +73,8 @@ public class FaceController : MonoBehaviour
         Nose.transform.localPosition = new Vector3(0, noseHeight, -0.1f);
         Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
-        LeftEar.transform.localPosition = new Vector3(Mathf.Lerp(-1.25f, -2.25f, headWidth), earPos, 0.2f);
-        RightEar.transform.localPosition = new Vector3(Mathf.Lerp(1.25f, 2.25f, headWidth), earPos, 0.2f);
+        LeftEar.transform.localPosition = new Vector3(Mathf.Lerp(-1.25f, -2.25f, headWidth) + earSpacing, earPos, 0.2f);
+        RightEar.transform.localPosition = new Vector3(Mathf.Lerp(1.25f, 2.25f, headWidth) - earSpacing, earPos, 0.2f);
 
         LeftEar.transform.localScale = new Vector3(-earWidth,earHeight,1);
         RightEar.transform.localScale = new Vector3(earWidth,earHeight,1);
