@@ -35,7 +35,7 @@ public class FaceController : MonoBehaviour
     [Range(.5f, 2f)] public float earWidth, earHeight;
     [Range(-0.5f,1f)] public float earPos;
 
-    [Range(-30f, 45f)] public float earAngle;
+    [Range(-45f, 45f)] public float earAngle;
 
     [Range(0f, 1f)] public float earSpacing;
     public float eyeRadius;
@@ -58,8 +58,9 @@ public class FaceController : MonoBehaviour
         
         LeftEye.transform.localEulerAngles = new Vector3(0, 0, eyeAngle);
         RightEye.transform.localEulerAngles = new Vector3(0, 0, -eyeAngle);
-        LeftEye.transform.localPosition = new Vector3(-0.5f - eyeSpacing, 1+eyePos, 0);
-        RightEye.transform.localPosition = new Vector3(0.5f + eyeSpacing, 1+eyePos, 0);
+        
+        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), 1+eyePos, 0);
+        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), 1+eyePos, 0);
         LeftEye.transform.localScale = new Vector3(-eyeWidth, eyeHeight, 1);
         RightEye.transform.localScale = new Vector3(eyeWidth, eyeHeight, 1);
 
@@ -73,8 +74,8 @@ public class FaceController : MonoBehaviour
         Nose.transform.localPosition = new Vector3(0, noseHeight, -0.1f);
         Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
-        LeftEar.transform.localPosition = new Vector3(Mathf.Lerp(-1.25f, -2.25f, headWidth) + earSpacing, earPos, 0.2f);
-        RightEar.transform.localPosition = new Vector3(Mathf.Lerp(1.25f, 2.25f, headWidth) - earSpacing, earPos, 0.2f);
+        LeftEar.transform.localPosition = new Vector3(((Mathf.Lerp(-1.25f, -2.25f, headWidth) - (earWidth/3f)) * earSpacing), earPos, 0.2f);
+        RightEar.transform.localPosition = new Vector3(((Mathf.Lerp(1.25f, 2.25f, headWidth) + (earWidth/3f)) * earSpacing), earPos, 0.2f);
 
         LeftEar.transform.localScale = new Vector3(-earWidth,earHeight,1);
         RightEar.transform.localScale = new Vector3(earWidth,earHeight,1);

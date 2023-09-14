@@ -27,7 +27,7 @@ Material:
     - _BotTeeth: 0
     - _Radius: 1
     - _Radius2: 1
-    - _TopTeeth: 0
+    - _TopTeeth: 1
     - _xScaleUpper: 1
     - _xScaleUpper2: 1
     - _yScaleUpper: 1

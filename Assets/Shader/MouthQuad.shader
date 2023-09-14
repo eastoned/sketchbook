@@ -72,11 +72,12 @@ Shader "Unlit/MouthQuad"
                 line1 *= line3;
 
                 //-1 to 1 is 0 to 1
-                float line4 = step(_yScaleUpper/2 + 0.5 - _TopTeeth*mask/2, uv.y) * step(0.25, uv.y);
-                float line5 = step(_yScaleUpper2/2 + 0.5 - _BotTeeth*mask/2, 1-uv.y) * (step(0.25, 1-uv.y));
+                float line4 = step(_yScaleUpper/2 + 0.5 - _TopTeeth*mask/2, uv.y);
+                float line5 = step(_yScaleUpper2/2 + 0.5 - _BotTeeth*mask/2, 1-uv.y) * (step(0.5, 1-uv.y));
                 clip(line1.r-0.5);
+                //line4 = saturate(line4+line5);
                 float4 res = float4(0,0,0,1) * line1 + saturate(line4 + line5);
-                return res;
+                return line4.xxxx;
             }
             ENDCG
         }
