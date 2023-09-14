@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Blend: 3
+    - _Blend: 1.44
     - _Blend2: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -68,7 +68,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _NostrilHeight: -0.5
-    - _NostrilScale: 0
+    - _NostrilScale: 1.21
     - _NostrilSpacing: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -78,13 +78,13 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _xScaleUpper: 0.351
-    - _xScaleUpper2: 0.1
+    - _xScaleUpper: 0.28
+    - _xScaleUpper2: 2.5
     - _yOffset: -1
-    - _yScaleUpper: 1.75
-    - _yScaleUpper2: 1
+    - _yScaleUpper: 2
+    - _yScaleUpper2: 2
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _Color2: {r: 0.14117648, g: 0.054901965, b: 0.03529412, a: 1}
+    - _Color: {r: 1, g: 0, b: 0.30221415, a: 1}
+    - _Color2: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
