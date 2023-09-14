@@ -6,11 +6,14 @@ Shader "Unlit/NoseQuad"
         _yScaleUpper ("Y Scale Upper", Range(1,5)) = 1
         _xScaleUpper2 ("X Scale Upper2", Range(0.1,2.5)) = 1
         _yScaleUpper2 ("Y Scale Upper2", Range(1,5)) = 1
-        _Blend("Blend", Range(0.1, 2)) = 0
+        _Blend("Blend", Range(0.1, 3)) = 0
         _Radius("Nostril Radius", Range(0.1, 1)) = 0.5
         _NostrilSpacing("NostrilSpace", Range(1, 2)) = 0.5
         _NostrilHeight("Nostril Height", Range(-.5, -0.25)) = 0
         _NostrilScale("Nostril Scale", Range(0, 2)) = 0.5
+
+        _Color("Color", Color) = (1,1,1,1)
+        _Color2("Color2", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -43,7 +46,7 @@ Shader "Unlit/NoseQuad"
             float _yScaleUpper, _xScaleUpper;
             float _yScaleUpper2, _xScaleUpper2;
             float _Blend, _yOffset, _Radius, _NostrilSpacing, _NostrilHeight, _NostrilScale;
-
+            float4 _Color, _Color2;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -71,7 +74,7 @@ Shader "Unlit/NoseQuad"
                 result = step(0, result);
                 result *= circle1;
                 clip(result.r - 0.5);
-                float4 final = result * lerp(float4(1,0,0,1), float4(1,.5,.5,1), uv.y);
+                float4 final = result * lerp(_Color, _Color2, uv.y);
                 return final;
             }
             ENDCG

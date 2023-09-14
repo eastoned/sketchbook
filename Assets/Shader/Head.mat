@@ -26,11 +26,11 @@ Material:
     m_Floats:
     - _Radius: 0.73
     - _Radius2: 3.67
-    - _Radius3: 0.45
-    - _Radius4: 0.58
-    - _Radius5: 2.89
-    - _Radius6: 1.86
+    - _Radius3: 3.58
+    - _Radius4: 0.1
+    - _Radius5: 5
+    - _Radius6: 5
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 1, a: 1}
-    - _Color2: {r: 1, g: 0, b: 0.17208767, a: 1}
+    - _Color: {r: 0.45882356, g: 0.23529413, b: 0.08235294, a: 1}
+    - _Color2: {r: 0.48627454, g: 0.36862746, b: 0.20392159, a: 1}
   m_BuildTextureStacks: []

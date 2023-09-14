@@ -27,15 +27,17 @@ Material:
     - _InfluenceX: -1
     - _InfluenceY: 0
     - _Scale: 1
-    - _Scale1: 0.585
+    - _Scale1: 1
     - _Scale10: 1
-    - _Scale2: 1
-    - _Scale3: 0.85
-    - _Scale4: 1
-    - _Scale5: 0.912
-    - _Scale6: 0.6
+    - _Scale2: -0.549
+    - _Scale3: 0.881
+    - _Scale4: 6
+    - _Scale5: 0.858
+    - _Scale6: 1.25
     - _Scale7: -2
-    - _Scale8: 1.006
+    - _Scale8: 1
     - _Scale9: 1
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 0.5647059, g: 0.34117648, b: 0.29411766, a: 1}
+    - _Color2: {r: 0.49411768, g: 0.29803923, b: 0.078431375, a: 1}
   m_BuildTextureStacks: []

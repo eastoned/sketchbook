@@ -14,6 +14,9 @@ Shader "Unlit/EarQuad"
 
         _Scale3 ("Scale3", Range(0.5, 1.25)) = 0
         _Scale5("Scale5", Range(0, 1)) = 0.5
+
+        _Color("Color", Color) = (1,1,1,1)
+        _Color2("Color2", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -45,7 +48,7 @@ Shader "Unlit/EarQuad"
 
       
             float _Scale1, _Scale2, _Scale4, _Scale6, _Scale8, _Scale9, _Scale3, _Scale5;
-
+            float4 _Color, _Color2;
 
             v2f vert (appdata v)
             {
@@ -71,7 +74,7 @@ Shader "Unlit/EarQuad"
 
                 float line2 = 1-step(_Scale5*lerp(1, 0.5, _Scale2*0.5+0.5), distance(float2(0, -_Scale2*0.5+0.5), i.uv));
                 line1 = saturate(line1 + line2);
-                float4 ear = line1 * lerp(float4(1,0,1,1), float4(1,0.5,1,1), i.uv.y);
+                float4 ear = line1 * lerp(_Color, _Color2, i.uv.y);
                 return ear;
             }
             ENDCG

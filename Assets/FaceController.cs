@@ -83,12 +83,15 @@ public class FaceController : MonoBehaviour
         Mouth.transform.localScale = new Vector3(mouthWidth, mouthHeight, 1);
         Mouth.transform.localPosition = new Vector3(0, -1 + mouthPos, 0);
 
-        Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2.5f, 1f);
+        Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
     }
 
     IEnumerator Start(){
+        
         for(;;){
-            AllRandom();
+            leftProp = new MaterialPropertyBlock();
+            rightProp = new MaterialPropertyBlock();
+            //AllRandom();
             yield return new WaitForSeconds(0.6f);
         }
     }
@@ -321,9 +324,9 @@ public class FaceController : MonoBehaviour
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         
         if(Input.GetMouseButtonDown(0)){
-            AllRandom();
+            //AllRandom();
         }
-      
+        eyeRadius = 1f;
         leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(LeftEye.transform.localPosition.x - mousePos.x, -0.3f*eyeRadius, 0.3f*eyeRadius), Time.deltaTime*5);
         leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(LeftEye.transform.localPosition.y - mousePos.y, -0.2f*eyeRadius, 0.2f*eyeRadius), Time.deltaTime*5);
         rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(RightEye.transform.localPosition.x - mousePos.x, -0.3f*eyeRadius, 0.3f*eyeRadius), Time.deltaTime*5);

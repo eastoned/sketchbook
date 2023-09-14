@@ -5,6 +5,9 @@ Shader "Unlit/NeckQuad"
         _Width ("Width", Range(1, 5)) = 0
         _Radius("Radius", Range(0, 3)) = 1
         _NeckScale("Scale", Range(1,5)) = 0.5
+
+        _Color("Color", Color) = (1,1,1,1)
+        _Color2("Color2", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -35,6 +38,7 @@ Shader "Unlit/NeckQuad"
             };
 
             float _Width, _Radius, _Radius2, _NeckScale;
+            float4 _Color, _Color2;
 
             v2f vert (appdata v)
             {
@@ -65,7 +69,7 @@ Shader "Unlit/NeckQuad"
                 //line2 = 1 - line2;
                 //clip(line2 - 1);s
                 //return lin4.xxxx;
-                return lerp(float4(1,0,0,1), float4(1,0.5,1,1), 1-uv.y);;
+                return lerp(_Color, _Color2, 1-uv.y);;
             }
             ENDCG
         }
