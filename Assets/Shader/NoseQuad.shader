@@ -2,18 +2,18 @@ Shader "Unlit/NoseQuad"
 {
     Properties
     {
-        _xScaleUpper ("X Scale Upper", Range(0.1,2.5)) = 1
-        _yScaleUpper ("Y Scale Upper", Range(1,5)) = 1
-        _xScaleUpper2 ("X Scale Upper2", Range(0.1,2.5)) = 1
-        _yScaleUpper2 ("Y Scale Upper2", Range(1,5)) = 1
-        _Blend("Blend", Range(0.1, 3)) = 0
-        _Radius("Nostril Radius", Range(0, 0.5)) = 0.25
-        _NostrilSpacing("NostrilSpace", Range(0, 1)) = 0.5
+        _NoseBaseWidth ("Nose Base Width", Range(0.1,2.5)) = 1
+        _NoseTotalWidth ("Nose Total Width", Range(1,5)) = 1
+        _NoseTopWidth ("Nose Top Width", Range(0.1,2.5)) = 1
+        _NoseCurve ("Nose Curve", Range(1,5)) = 1
+        _NoseTotalLength("Nose Total Length", Range(0.1, 3)) = 0
+        _NostrilRadius("Nostril Radius", Range(0, 0.5)) = 0.25
+        _NostrilSpacing("Nostril Spacing", Range(0, 1)) = 0.5
         _NostrilHeight("Nostril Height", Range(-.5, 0)) = 0
         _NostrilScale("Nostril Scale", Range(0.25, 2)) = 0.5
 
-        _Color("Color", Color) = (1,1,1,1)
-        _Color2("Color2", Color) = (1,1,1,1)
+        _Color1("Bottom", Color) = (1,1,1,1)
+        _Color2("Top", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -43,10 +43,10 @@ Shader "Unlit/NoseQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            float _yScaleUpper, _xScaleUpper;
-            float _yScaleUpper2, _xScaleUpper2;
-            float _Blend, _yOffset, _Radius, _NostrilSpacing, _NostrilHeight, _NostrilScale;
-            float4 _Color, _Color2;
+            float _NoseTotalWidth, _NoseBaseWidth;
+            float _NoseCurve, _NoseTopWidth;
+            float _NoseTotalLength, _yOffset, _NostrilRadius, _NostrilSpacing, _NostrilHeight, _NostrilScale;
+            float4 _Color1, _Color2;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -61,13 +61,13 @@ Shader "Unlit/NoseQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 
-                float2 uv = float2(abs(i.uv.x*2-1), i.uv.y * _Blend);
-                float line1 = pow(uv.y, _xScaleUpper) - uv.x * _yScaleUpper;
+                float2 uv = float2(abs(i.uv.x*2-1), i.uv.y * _NoseTotalLength);
+                float line1 = pow(uv.y, _NoseBaseWidth) - uv.x * _NoseTotalWidth;
 
-                float line2 = pow(1-uv.y, _xScaleUpper2) - uv.x * _yScaleUpper2;
-                //* _Radius
-                //float circle1 = step(_Radius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing*_Radius, 0.5+_NostrilHeight)));
-                float circle1 = step(_Radius, distance(uv*float2(_NostrilScale, 1), float2(_NostrilSpacing*_NostrilScale, _NostrilHeight+0.5)));
+                float line2 = pow(1-uv.y, _NoseTopWidth) - uv.x * _NoseCurve;
+                //* _NostrilRadius
+                //float circle1 = step(_NostrilRadius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing*_NostrilRadius, 0.5+_NostrilHeight)));
+                float circle1 = step(_NostrilRadius, distance(uv*float2(_NostrilScale, 1), float2(_NostrilSpacing*_NostrilScale, _NostrilHeight+0.5)));
                 
                 float result = step(0, line1*line2);
                 
@@ -75,7 +75,7 @@ Shader "Unlit/NoseQuad"
                 result = step(0, result);
                 result *= circle1;
                 clip(result.r - 0.5);
-                float4 final = result * lerp(_Color, _Color2, uv.y);
+                float4 final = result * lerp(_Color1, _Color2, uv.y);
                 return final;
             }
             ENDCG

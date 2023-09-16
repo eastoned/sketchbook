@@ -2,11 +2,11 @@ Shader "Unlit/EyebrowQuad"
 {
     Properties
     {
-        _Strokes ("Strokes", Range(1, 16)) = 1
-        _Offset ("Offset", Range(1, 8)) = 0
-        _Curve ("Curve", Range(0.3, 4)) = 1
+        _EyebrowCount ("Eyebrow Count", Range(1, 16)) = 1
+        _EyebrowThickness ("Eyebrow Thickness", Range(1, 8)) = 0
+        _EyebrowRoundness ("Eyebrow Roundness", Range(0.3, 4)) = 1
 
-        _Curve2 ("Curve2", Range(-1, 1)) = 0
+        _EyebrowCurve ("Eyebrow Curve", Range(-1, 1)) = 0
 
         _Color1 ("Inner", Color) = (1,1,1,1)
         _Color2 ("Outer", Color) = (1,1,1,1)
@@ -39,10 +39,11 @@ Shader "Unlit/EyebrowQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            int _Strokes;
-            float _Offset;
-            float _Curve;
-            float _Curve2;
+            int _EyebrowCount;
+            float _EyebrowThickness;
+            float _EyebrowRoundness;
+            float _EyebrowCurve;
+            float4 _Color1, _Color2;
 
             v2f vert (appdata v)
             {
@@ -61,20 +62,22 @@ Shader "Unlit/EyebrowQuad"
                 float2 uv = i.uv;
                 float stretchUV = sin(uv.x*3.14);
                 
-                uv *= float2(_Strokes, 1);
+                uv *= float2(_EyebrowCount, 1);
                 uv = frac(uv);
-                uv += float2(0, stretchUV * _Curve2 * (_Offset-1)/16);
+                uv += float2(0, stretchUV * _EyebrowCurve * (_EyebrowThickness-1)/16);
 
-                float result = pow(abs(uv.x*2-1), _Curve) + pow(abs(uv.y*2-1)*_Offset, _Curve);
-                result = step(1, result);
-                //float result = sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + .5;
-                //float result2 = -sin(uv.x * _Strokes * 3.14 + _Offset)/6 - uv.y + 0.5;
+                float result = pow(abs(uv.x*2-1), _EyebrowRoundness) + pow(abs(uv.y*2-1)*_EyebrowThickness, _EyebrowRoundness);
+                result = 1-step(1, result);
+                clip(result-0.5);
+                float4 eyebrowCol = result * lerp(_Color1, _Color2, i.uv.x);
+                //float result = sin(uv.x * _EyebrowCount * 3.14 + _EyebrowThickness)/6 - uv.y + .5;
+                //float result2 = -sin(uv.x * _EyebrowCount * 3.14 + _EyebrowThickness)/6 - uv.y + 0.5;
                 //float result2 = sin(
                 //float final = step(0, max(result2, result)*1-step(0, min(result2, result)));
                 //clip(final - 0.5);
                 //final *= 0;
-                clip(1-result-0.5);
-                return result.xxxx;
+                
+                return eyebrowCol;
             }
             ENDCG
         }

@@ -24,6 +24,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _EarConcha: 1.015
+    - _EarLengthSkew: 1
+    - _EarOpenLength: 1
+    - _EarOpenWidth: 1
+    - _EarRoundness: 1.25
+    - _EarShape: 6
+    - _EarTragus: 1
+    - _EarWidthSkew: 0.998
     - _InfluenceX: -1
     - _InfluenceY: 0
     - _Scale: 1
@@ -39,5 +47,6 @@ Material:
     - _Scale9: 1
     m_Colors:
     - _Color: {r: 0.90196085, g: 0.61960787, b: 0.5372549, a: 1}
+    - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 0.8313726, g: 0.34509805, b: 0.31764707, a: 1}
   m_BuildTextureStacks: []

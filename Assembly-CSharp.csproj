@@ -561,6 +561,7 @@
     <None Include="Assets\Shader\UnitySprites.cginc" />
     <None Include="Assets\Shader\ScrollU.shader" />
     <None Include="Assets\Shader\EyeQuad.shader" />
+    <None Include="Assets\ShaderlabVSCode\ScriptTemplates\HLSL Shader-New HLSL Shader.hlsl.txt" />
     <None Include="Assets\Shader\HairQuad.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Shader\PullSprite.shader" />

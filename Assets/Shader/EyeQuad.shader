@@ -2,27 +2,33 @@ Shader "Unlit/EyeQuad"
 {
     Properties
     {
-        _Radius ("Radius", Range(0, 1)) = 0.5
+        _EyeRadius ("Eye Radius", Range(0, 1)) = 0.5
+        _PupilRadius ("Pupil Radius", Range(0,1)) = 1
+
+        _PupilWidth ("Pupil Width", Range(0.1, 1)) = 1
+        _PupilLength ("Pupil Length", Range(0.1, 1)) = 1
+        _PupilOffsetX ("Pupil Offset X", Range(-1, 1)) = 0
+        _PupilOffsetY ("Pupil Offset Y", Range(-1, 1)) = 0
         
-        _xPupil ("X Scale Pupil", Range(0.1, 1)) = 1
-        _pupilOffsetX ("Translate pupil x", Range(-1, 1)) = 0
-        _pupilOffsetY ("Translate pupil y", Range(-1, 1)) = 0
-        _yPupil ("Y Scale Pupil", Range(0.1, 1)) = 1
-        _radiusPupil ("Pupil Radius", Range(0,1)) = 1
-
-        _xLevel ("X Level", Range(0, 2.75)) = 1
-        _yLevel ("Y Level", Range(0, 1)) = 1
-
-        _xLevel3 ("X Level3", Range(0, 2.75)) = 1
-        _yLevel3 ("Y Level3", Range(0, 1)) = 1
-
-        _Lid1 ("Lid 1", Range(0, 1)) = 0.5
-        _Lid2 ("Lid 2", Range(0, 1)) = 0.5
-
-        _SquashPupil ("Squash", Range(0.25, 1)) = 1
         
-        _Color1("Top Color", Color) = (0,0,0,0)
-        _Color2("Bottom Color", Color) = (0,0,0,0)
+
+        _EyelidTopLength ("Eyelid Top Length", Range(0, 2.75)) = 1
+        _EyelidTopSkew ("Eyelid Top Skew", Range(0, 1)) = 1
+
+        _EyelidBottomLength ("Eyelid Bottom Length", Range(0, 2.75)) = 1
+        _EyelidBottomSkew ("Eyelid Bottom Skew", Range(0, 1)) = 1
+
+        _EyelidTopOpen ("Eyelid Top Open", Range(0, 1)) = 0.5
+        _EyelidBottomOpen ("Eyelid Bottom Open", Range(0, 1)) = 0.5
+
+        _PupilRoundness ("Pupil Roundness", Range(0.25, 1)) = 1
+        
+        _Color1("Eyelid Center", Color) = (0,0,0,0)
+        _Color2("Eyelid Edge", Color) = (0,0,0,0)
+
+        _Color3("Pupil", Color) = (0,0,0,1)
+        _Color4("Iris", Color) = (0,0,0,1)
+
     }
     SubShader
     {
@@ -52,18 +58,12 @@ Shader "Unlit/EyeQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            float _Radius, _xScaleUpper, _yScaleUpper, _xScaleLower, _yScaleLower, _radiusPupil, _xPupil, _yPupil, _pupilOffsetX, _pupilOffsetY;
+            float _EyeRadius, _PupilRadius, _PupilWidth, _PupilLength, _PupilOffsetX, _PupilOffsetY;
             float4 _Color1, _Color2;
-            float _yLevel, _xLevel, _yLevel3, _xLevel3;
-
-            float _Lid1, _Lid2;
-            float _SquashPupil;
-
-            float random (float2 st) {
-                return frac(sin(dot(st.xy,
-                                    float2(12.9898,78.233)))*
-                    43758.5453123);
-            }
+            float _EyelidTopSkew, _EyelidTopLength, _EyelidBottomSkew, _EyelidBottomLength;
+            
+            float _EyelidTopOpen, _EyelidBottomOpen;
+            float _PupilRoundness;
 
             v2f vert (appdata v)
             {
@@ -79,27 +79,27 @@ Shader "Unlit/EyeQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = float2(i.uv.x, i.uv.y);
-                float line1 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                _xLevel*1.5*((_yLevel*uv.x)+((1-_yLevel)*(1-uv.x))))) 
+                float line1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _EyelidTopLength*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
 
-                float line2 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                _xLevel3*1.5*((_yLevel3*uv.x)+((1-_yLevel3)*(1-uv.x))))) 
+                float line2 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _EyelidBottomLength*1.5*((_EyelidBottomSkew*uv.x)+((1-_EyelidBottomSkew)*(1-uv.x))))) 
                 * (1 - step(0.5, uv.y));
 
-                float mask1 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                _xLevel*_Lid1*1.5*((_yLevel*uv.x)+((1-_yLevel)*(1-uv.x))))) 
+                float mask1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _EyelidTopLength*_EyelidTopOpen*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
 
-                float mask2 = step(0, (pow(abs(_Radius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                _xLevel3*_Lid2*1.5*((_yLevel3*uv.x)+((1-_yLevel3)*(1-uv.x))))) 
+                float mask2 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
+                _EyelidBottomLength*_EyelidBottomOpen*1.5*((_EyelidBottomSkew*uv.x)+((1-_EyelidBottomSkew)*(1-uv.x))))) 
                 * (1 - step(0.5, uv.y));
 
                 mask1 += mask2;
 
                 float4 result = line1 + line2;
                 clip(result.a - 0.5);
-                float pupil = 1 - step(0, (pow(_radiusPupil/2*_Radius, 2*_SquashPupil) - pow(abs((uv.x-0.5 + _pupilOffsetX)/_xPupil), 2*_SquashPupil)) - pow(abs((uv.y-0.5 +_pupilOffsetY)/_yPupil),2*_SquashPupil));
+                float pupil = 1 - step(0, (pow(_PupilRadius/2*_EyeRadius, 2*_PupilRoundness) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*_PupilRoundness)) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*_PupilRoundness));
                 
                 result *= pupil;
                 result *= mask1;

@@ -3,20 +3,20 @@ Shader "Unlit/EarQuad"
     Properties
     {
         
-        _Scale1("Scale1", Range(0, 1)) = 0
-        _Scale2("Scale2", Range(-1, 1)) = 0
-        _Scale4("Scale4", Range(1, 6)) = 0
-        _Scale6("Scale6", Range(0.6, 1.25)) = 0
+        _EarWidthSkew("Ear Width Skew", Range(0, 1)) = 0
+        _EarLengthSkew("Ear Length Skew", Range(-1, 1)) = 0
+        _EarShape("Ear Shape", Range(1, 6)) = 0
+        _EarRoundness("Ear Roundness", Range(0.6, 1.25)) = 0
 
 
-        _Scale8("Scale8", Range(1, 1.5)) = 0
-        _Scale9("Scale9", Range(1, 1.5)) = 0
+        _EarOpenWidth("Ear Open Width", Range(1, 1.5)) = 0
+        _EarOpenLength("Ear Open Length", Range(1, 1.5)) = 0
 
-        _Scale3 ("Scale3", Range(0.5, 1.25)) = 0
-        _Scale5("Scale5", Range(0, 1)) = 0.5
+        _EarConcha ("Ear Concha", Range(0.5, 1.25)) = 0
+        _EarTragus("Ear Tragus", Range(0, 1)) = 0.5
 
-        _Color("Color", Color) = (1,1,1,1)
-        _Color2("Color2", Color) = (1,1,1,1)
+        _Color1("Bottom", Color) = (1,1,1,1)
+        _Color2("Top", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -47,8 +47,8 @@ Shader "Unlit/EarQuad"
             };
 
       
-            float _Scale1, _Scale2, _Scale4, _Scale6, _Scale8, _Scale9, _Scale3, _Scale5;
-            float4 _Color, _Color2;
+            float _EarWidthSkew, _EarLengthSkew, _EarShape, _EarRoundness, _EarOpenWidth, _EarOpenLength, _EarConcha, _EarTragus;
+            float4 _Color1, _Color2;
 
             v2f vert (appdata v)
             {
@@ -66,15 +66,15 @@ Shader "Unlit/EarQuad"
                 float2 uv = i.uv*2*float2(0.5, 1) + float2(0, -1);
             
                 float2 warp = uv;
-                float res = pow(uv.x*_Scale1, 3*_Scale6) - pow(uv.y*_Scale2, 3) - pow(pow(uv.x*_Scale8, 2) + pow(uv.y*_Scale9, 2), 2*_Scale4);
+                float res = pow(uv.x*_EarWidthSkew, 3*_EarRoundness) - pow(uv.y*_EarLengthSkew, 3) - pow(pow(uv.x*_EarOpenWidth, 2) + pow(uv.y*_EarOpenLength, 2), 2*_EarShape);
                 res = step(0, res);
 
                 clip(res-0.5);
-                float line1 = step(0.5, distance(float2(0.5, -_Scale2/5 + lerp(0, 0.2, _Scale2*0.5+0.5)), i.uv*float2(_Scale3, _Scale3)));
+                float line1 = step(0.5, distance(float2(0.5, -_EarLengthSkew/5 + lerp(0, 0.2, _EarLengthSkew*0.5+0.5)), i.uv*float2(_EarConcha, _EarConcha)));
 
-                float line2 = 1-step(_Scale5*lerp(1, 0.5, _Scale2*0.5+0.5), distance(float2(0, -_Scale2*0.5+0.5), i.uv));
+                float line2 = 1-step(_EarTragus*lerp(1, 0.5, _EarLengthSkew*0.5+0.5), distance(float2(0, -_EarLengthSkew*0.5+0.5), i.uv));
                 line1 = saturate(line1 + line2);
-                float4 ear = line1 * lerp(_Color, _Color2, i.uv.y);
+                float4 ear = line1 * lerp(_Color1, _Color2, i.uv.y);
                 return ear;
             }
             ENDCG

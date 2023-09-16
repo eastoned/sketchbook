@@ -25,13 +25,13 @@ public class HeadController : MonoBehaviour
         
             transform.localPosition = new Vector3(0, Mathf.Clamp(mouseDelta, lowEnd, highEnd), 0.1f);
             interval = Mathf.InverseLerp(lowEnd, highEnd, mouseDelta);
-            fc.UpdateHeightFromTransformTool(interval);
+           // fc.UpdateHeightFromTransformTool(interval);
         }else if (axis == DirAxis.LeftRight){
             mouseDelta = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
         
             transform.localPosition = new Vector3(Mathf.Clamp(mouseDelta, lowEnd, highEnd), 0, 0.1f);
             interval = Mathf.InverseLerp(lowEnd, highEnd, mouseDelta);
-            fc.UpdateWidthFromTransformTool(interval);
+            //fc.UpdateWidthFromTransformTool(interval);
         }
         
     }

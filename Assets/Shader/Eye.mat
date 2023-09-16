@@ -24,8 +24,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _EyeRadius: 1
+    - _EyelidBottomLength: 1.82
+    - _EyelidBottomOpen: 0.751
+    - _EyelidBottomSkew: 0.486
+    - _EyelidTopLength: 1.93
+    - _EyelidTopOpen: 0.696
+    - _EyelidTopSkew: 0.506
     - _Lid1: 0.632
     - _Lid2: 0.753
+    - _PupilLength: 1
+    - _PupilOffsetX: 0
+    - _PupilOffsetY: 0
+    - _PupilRadius: 0.216
+    - _PupilRoundness: 1
+    - _PupilWidth: 0.941
     - _Radius: 1
     - _SquashPupil: 1
     - __dirty: 0
@@ -45,8 +58,10 @@ Material:
     - _yScaleLower: 1
     - _yScaleUpper: 1
     m_Colors:
-    - _Color1: {r: 0, g: 0, b: 0, a: 0}
+    - _Color1: {r: 1, g: 0.10062885, b: 0.10062885, a: 0}
     - _Color2: {r: 0, g: 0, b: 0, a: 0}
+    - _Color3: {r: 0, g: 0, b: 0, a: 1}
+    - _Color4: {r: 0, g: 0, b: 0, a: 1}
     - _ColorBottom: {r: 0, g: 0, b: 0, a: 1}
     - _ColorTop: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

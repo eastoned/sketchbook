@@ -216,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 95416233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 2, y: 2.46, z: 0}
+  m_LocalScale: {x: 3.2307777, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -340,9 +340,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99618904}
-  m_LocalRotation: {x: 0, y: 0, z: 0.06975647, w: 0.9975641}
-  m_LocalPosition: {x: 0.46, y: 0.029999971, z: 0}
-  m_LocalScale: {x: 1, y: 0.735, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0606238, w: 0.9981607}
+  m_LocalPosition: {x: 1.2619383, y: 0.484, z: 0}
+  m_LocalScale: {x: 0.64331555, y: 0.644822, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -901,9 +901,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524532353}
-  m_LocalRotation: {x: 0, y: 0, z: 0.05233596, w: 0.9986295}
-  m_LocalPosition: {x: 0.5, y: 0.25, z: -0.2}
-  m_LocalScale: {x: 0.79, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.3506823, w: 0.93649447}
+  m_LocalPosition: {x: 0.9415905, y: 0.81632507, z: -0.1}
+  m_LocalScale: {x: 1.3360423, y: 0.2595701, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -997,9 +997,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610878716}
-  m_LocalRotation: {x: 0, y: 0, z: -0.13052624, w: 0.9914449}
-  m_LocalPosition: {x: 1.048333, y: 0, z: 0.2}
-  m_LocalScale: {x: 0.5, y: 1.39, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.27034238, w: 0.96276426}
+  m_LocalPosition: {x: 1.624018, y: 0.10920985, z: 0.2}
+  m_LocalScale: {x: 0.7892498, y: 1.894617, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -1207,9 +1207,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838332023}
-  m_LocalRotation: {x: 0, y: 0, z: 0.1305262, w: 0.9914449}
-  m_LocalPosition: {x: -1.0483334, y: 0, z: 0.2}
-  m_LocalScale: {x: -0.5, y: 1.39, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.27034238, w: 0.96276426}
+  m_LocalPosition: {x: -1.624018, y: 0.10920985, z: 0.2}
+  m_LocalScale: {x: -0.7892498, y: 1.894617, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1257,37 +1257,104 @@ MonoBehaviour:
   headScalerBottom: {fileID: 437113631}
   headScalerLeft: {fileID: 1901880332}
   headScalerRight: {fileID: 834628291}
-  mousePos: {x: 0, y: 0}
   currentChar: {fileID: 11400000, guid: df53655eb27dd614aa0d1b55ead3c8e3, type: 2}
-  eyeAngle: 4
-  eyeSpacing: 0.46
-  eyePos: -0.97
-  eyeWidth: 1
-  eyeHeight: 0.735
-  eyebrowAngle: -6
-  eyebrowSpacing: 0
-  eyebrowHeight: -1
-  eyebrowLength: 0.79
-  eyebrowWidth: 0.5
-  noseHeight: -0.01
-  noseLength: 0.9
-  noseWidth: 0.87
-  mouthWidth: 0.93
-  mouthHeight: 0.55
-  mouthPos: 0.4
-  neckWidth: 0.5
-  headWidth: 0
-  headHeight: 0.23
-  earWidth: 0.5
-  earHeight: 1.39
-  earPos: 0
-  earAngle: 15
-  earSpacing: 0.74
-  eyeRadius: 0.65491337
+  headWidth: 0.6153888
+  headLength: 1
+  neckWidth: 0.30453497
+  eyeAngle: 6.9512377
+  eyeSpacing: 0.8781471
+  eyeHeight: 0.242
+  eyeLength: 0.644822
+  eyeWidth: 0.64331555
+  eyebrowAngle: -41.058105
+  eyebrowSpacing: 0.571528
+  eyebrowHeight: 0.3323251
+  eyebrowLength: 1.3360423
+  eyebrowWidth: 0.2595701
+  noseHeight: 0.115
+  noseLength: 1.1471336
+  noseWidth: 0.8462049
+  mouthWidth: 0.45669264
+  mouthLength: 0.35346663
+  mouthHeight: 1.1379797
+  earWidth: 0.7892498
+  earLength: 1.894617
+  earHeight: -0.23933774
+  earAngle: -31.369284
+  earSpacing: 0.76299703
+  chinWidth: 1.891727
+  chinLength: 2.225161
+  foreheadWidth: 0.7809332
+  foreheadLength: 4.208501
+  chinScale: 3.4905
+  foreheadScale: 2.0670104
+  headTop: {r: 0.7713147, g: 0.8869388, b: 0.72568816, a: 1}
+  headBottom: {r: 0.4225542, g: 0.17194621, b: 0.36746484, a: 1}
+  neckTopWidth: 2.766649
+  neckCurveScale: 4.0957055
+  neckCurveRoundness: 1.6807556
+  neckTop: {r: 0.012968585, g: 0.0150455255, b: 0.006150716, a: 1}
+  neckBottom: {r: 0.046973933, g: 0.2385526, b: 0.003704691, a: 1}
+  eyeRadius: 0.9393941
+  pupilRadius: 0.9426401
+  pupilWidth: 0.44109905
+  pupilLength: 0.59682715
+  eyelidTopLength: 2.396383
+  eyelidBottomLength: 1.6592977
+  eyelidTopSkew: 0.6003564
+  eyelidBottomSkew: 0.04309845
+  eyelidTopOpen: 0.8542129
+  eyelidBottomOpen: 0.65851974
+  pupilRoundness: 0.7502142
+  eyelidCenter: {r: 0.47249383, g: 0.2386453, b: 0.22012243, a: 1}
+  eyelidEdge: {r: 0.07547033, g: 0.1705588, b: 0.3611987, a: 1}
+  eyebrowCount: 14
+  eyebrowThickness: 4.4041896
+  eyebrowRoundness: 3.3427773
+  eyebrowCurve: -0.47860444
+  eyebrowInner: {r: 0.64514977, g: 0.73827845, b: 0.671573, a: 1}
+  eyebrowOuter: {r: 0.046831086, g: 0.11483392, b: 0.15115823, a: 1}
+  noseBaseWidth: 1.5839152
+  noseTopWidth: 1.1019979
+  noseTotalWidth: 3.309397
+  noseCurve: 2.3594773
+  noseTotalLength: 0.8989023
+  nostrilRadius: 0.25190857
+  nostrilHeight: -0.47553104
+  nostrilSpacing: 0.33875376
+  nostrilScale: 0.94718105
+  noseTop: {r: 0.43487793, g: 0.27730432, b: 0.03407484, a: 1}
+  noseBottom: {r: 0.54149157, g: 0.51160884, b: 0.462258, a: 1}
+  mouthRadius: 0.13085914
+  mouthLipTop: -0.19862187
+  mouthLipBottom: -0.43334067
+  mouthLipMaskRoundness: 0.81380606
+  teethTop: 0.0443151
+  teethBottom: 0.20029819
+  teethCount: 30
+  teethRoundness: 3.5763426
+  tongueRadius: 0.2016393
+  tongueScale: 0.34372878
+  tongueHeight: 0.38835698
+  mouthTop: {r: 0.17882738, g: 0.06034648, b: 0.50899035, a: 1}
+  mouthBottom: {r: 0.45264882, g: 0.08509052, b: 0.24607465, a: 1}
+  tongueTop: {r: 0.4984583, g: 0.51591253, b: 0.56656796, a: 1}
+  tongueBottom: {r: 0.5293967, g: 0.26980594, b: 0.40087256, a: 1}
+  earWidthSkew: 0.423127
+  earLengthSkew: 0.21816647
+  earShape: 3.864904
+  earOpenWidth: 1.4250332
+  earOpenLength: 1.0457516
+  earRoundness: 0.82920617
+  earConcha: 0.7103894
+  earTragus: 0.7765478
+  earTop: {r: 0.047808252, g: 0.011879314, b: 0.112755075, a: 1}
+  earBottom: {r: 0.90816694, g: 0.9377544, b: 0.67032313, a: 1}
   leftPupilX: 0
   leftPupilY: 0
   rightPupilX: 0
   rightPupilY: 0
+  mousePos: {x: 0, y: 0}
 --- !u!4 &963588424
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,7 +1460,7 @@ Transform:
   m_GameObject: {fileID: 1269006686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0.2}
-  m_LocalScale: {x: 1.25, y: 2, z: 1}
+  m_LocalScale: {x: 1.3316174, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -1488,8 +1555,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272764998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.01, z: -0.1}
-  m_LocalScale: {x: 0.87, y: 0.9, z: 1}
+  m_LocalPosition: {x: 0, y: 0.115, z: -0.1}
+  m_LocalScale: {x: 0.8462049, y: 1.1471336, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1697,9 +1764,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451965497}
-  m_LocalRotation: {x: 0, y: 0, z: -0.06975647, w: 0.9975641}
-  m_LocalPosition: {x: -0.46, y: 0.029999971, z: 0}
-  m_LocalScale: {x: -1, y: 0.735, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0606238, w: 0.9981607}
+  m_LocalPosition: {x: -1.2619383, y: 0.484, z: 0}
+  m_LocalScale: {x: -0.64331555, y: 0.644822, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1740,7 +1807,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.16203795, g: 0.0997241, b: 0.254717, a: 0}
+  m_BackGroundColor: {r: 0.7791207, g: 0.72620744, b: 0.8584906, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1877,8 +1944,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470558954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.84, z: 0}
-  m_LocalScale: {x: 0.93, y: 0.55, z: 1}
+  m_LocalPosition: {x: 0, y: 0.13797975, z: 0}
+  m_LocalScale: {x: 0.45669264, y: 0.35346663, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1972,9 +2039,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792980029}
-  m_LocalRotation: {x: 0, y: 0, z: -0.05233596, w: 0.9986295}
-  m_LocalPosition: {x: -0.5, y: 0.25, z: -0.2}
-  m_LocalScale: {x: 0.79, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.3506823, w: 0.93649447}
+  m_LocalPosition: {x: -0.9415905, y: 0.81632507, z: -0.1}
+  m_LocalScale: {x: -1.3360423, y: 0.2595701, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6

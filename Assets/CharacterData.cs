@@ -18,7 +18,7 @@ public class CharacterData : ScriptableObject
 
         [Range(-45f, 25f)] public float eyebrowAngle;
         [Range(0f, 1f)] public float eyebrowSpacing;
-        [Range(-1f, 0.5f)] public float eyebrowHeight;
+        [Range(-0.25f, 0.5f)] public float eyebrowHeight;
         [Range(0.2f, 1.5f)] public float eyebrowLength;
         [Range(0.1f, 0.5f)] public float eyebrowWidth;
 
@@ -26,7 +26,7 @@ public class CharacterData : ScriptableObject
         [Range(0.5f, 2f)] public float noseLength, noseWidth;
 
         [Range(0.25f, 2.5f)] public float mouthWidth;
-        [Range(0f, 1f)] public float mouthLength;
+        [Range(0.2f, 1f)] public float mouthLength;
         [Range(-1f, 1.25f)] public float mouthHeight;
         
         [Range(.5f, 2f)] public float earWidth, earLength;
@@ -39,6 +39,7 @@ public class CharacterData : ScriptableObject
     #region ShaderData
 
         [Range(0.1f, 5f)] public float chinWidth, chinLength, foreheadWidth, foreheadLength;
+        [Range(2f, 4f)] public float chinScale, foreheadScale;
         public Color headTop, headBottom;
 
         [Range(1f, 5f)] public float neckTopWidth, neckCurveScale;
@@ -57,15 +58,15 @@ public class CharacterData : ScriptableObject
         [Range(1f, 8f)] public float eyebrowThickness;
         [Range(0.3f, 4f)] public float eyebrowRoundness;
         [Range(-1f, 1f)] public float eyebrowCurve;
-        public Color eyebrowInner, eyebrowOutter;
+        public Color eyebrowInner, eyebrowOuter;
 
         //nose
         [Range(0.1f, 2.5f)]public float noseBaseWidth, noseTopWidth;
         [Range(1f, 5f)] public float noseTotalWidth, noseCurve;
         [Range(0.1f, 3f)] public float noseTotalLength;
         [Range(0f, 0.5f)] public float nostrilRadius;
-        [Range(0, 1f)] public float nostrilHeight;
-        [Range(-0.5f, 0)] public float nostrilSpacing;
+        [Range(-0.5f, 0f)] public float nostrilHeight;
+        [Range(0f, 1)] public float nostrilSpacing;
         [Range(0.25f, 2f)] public float nostrilScale;
         public Color noseTop, noseBottom;
 

@@ -24,16 +24,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ChinLength: 2.46
+    - _ChinLength: 0.11
+    - _ChinScale: 4
     - _ChinWidth: 0.76
-    - _ForeheadLength: 5
-    - _ForeheadWidth: 0.95
+    - _ForeheadLength: 3.15
+    - _ForeheadScale: 2
+    - _ForeheadWidth: 1.52
     - _Radius: 0.73
     - _Radius2: 3.67
     - _Radius3: 1.33
     - _Radius4: 1.32
     - _Radius5: 3.49
     - _Radius6: 3.49
+    - _Threshold: 2
     m_Colors:
     - _Color: {r: 0.8018868, g: 0.2912513, b: 0.45554373, a: 1}
     - _Color1: {r: 1, g: 1, b: 1, a: 1}

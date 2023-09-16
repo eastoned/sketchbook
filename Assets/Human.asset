@@ -40,65 +40,65 @@ MonoBehaviour:
   chinLength: 3.06
   foreheadWidth: 4.33
   foreheadLength: 3.02
-  headTop: {r: 1, g: 1, b: 1, a: 0}
+  headTop: {r: 1, g: 0.14779866, b: 0.14779866, a: 0}
   headBottom: {r: 0, g: 0, b: 0, a: 0}
   neckTopWidth: 3.381
   neckCurveScale: 3.381
   neckCurveRoundness: 1.786
   neckTop: {r: 0, g: 0, b: 0, a: 0}
   neckBottom: {r: 0, g: 0, b: 0, a: 0}
-  eyeRadius: 0
-  pupilRadius: 0
-  pupilWidth: 0
-  pupilLength: 0
-  eyelidTopLength: 0
-  eyelidBottomLength: 0
-  eyelidTopSkew: 0
-  eyelidBottomSkew: 0
-  eyelidTopOpen: 0
-  eyelidBottomOpen: 0
-  pupilRoundness: 0
+  eyeRadius: 0.461
+  pupilRadius: 0.448
+  pupilWidth: 0.511
+  pupilLength: 0.511
+  eyelidTopLength: 1.28
+  eyelidBottomLength: 1.3
+  eyelidTopSkew: 0.465
+  eyelidBottomSkew: 0.469
+  eyelidTopOpen: 0.461
+  eyelidBottomOpen: 0.465
+  pupilRoundness: 0.599
   eyelidCenter: {r: 0, g: 0, b: 0, a: 0}
   eyelidEdge: {r: 0, g: 0, b: 0, a: 0}
-  eyebrowCount: 0
-  eyebrowThickness: 0
-  eyebrowRoundness: 0
+  eyebrowCount: 7.72
+  eyebrowThickness: 4.44
+  eyebrowRoundness: 2.12
   eyebrowCurve: 0
   eyebrowInner: {r: 0, g: 0, b: 0, a: 0}
-  eyebrowOutter: {r: 0, g: 0, b: 0, a: 0}
-  noseBaseWidth: 0
-  noseTopWidth: 0
-  noseTotalWidth: 0
-  noseCurve: 0
-  noseTotalLength: 0
-  nostrilRadius: 0
-  nostrilHeight: 0
+  eyebrowOuter: {r: 0, g: 0, b: 0, a: 0}
+  noseBaseWidth: 1.26
+  noseTopWidth: 1.29
+  noseTotalWidth: 2.98
+  noseCurve: 2.98
+  noseTotalLength: 1.55
+  nostrilRadius: 0.25
+  nostrilHeight: -0.5
   nostrilSpacing: 0
-  nostrilScale: 0
+  nostrilScale: 1.109
   noseTop: {r: 0, g: 0, b: 0, a: 0}
   noseBottom: {r: 0, g: 0, b: 0, a: 0}
-  mouthRadius: 0
-  mouthLipTop: 0
-  mouthLipBottom: 0
-  mouthLipMaskRoundness: 0
-  teethTop: 0
-  teethBottom: 0
-  teethCount: 0
-  teethRoundness: 0
-  tongueRadius: 0
-  tongueScale: 0
-  tongueHeight: 0
+  mouthRadius: 0.553
+  mouthLipTop: 1
+  mouthLipBottom: 1
+  mouthLipMaskRoundness: 0.457
+  teethTop: 0.93
+  teethBottom: 0.693
+  teethCount: 13.8
+  teethRoundness: 2.17
+  tongueRadius: 0.12
+  tongueScale: 0.491
+  tongueHeight: 0.5
   mouthTop: {r: 0, g: 0, b: 0, a: 0}
   mouthBottom: {r: 0, g: 0, b: 0, a: 0}
   tongueTop: {r: 0, g: 0, b: 0, a: 0}
   tongueBottom: {r: 0, g: 0, b: 0, a: 0}
-  earWidthSkew: 0
-  earLengthSkew: 0
-  earShape: 0
-  earOpenWidth: 0
-  earOpenLength: 0
-  earRoundness: 0
-  earConcha: 0
-  earTragus: 0
+  earWidthSkew: 1
+  earLengthSkew: -0.052
+  earShape: 5.82
+  earOpenWidth: 1.243
+  earOpenLength: 1.245
+  earRoundness: 0.922
+  earConcha: 0.875
+  earTragus: 0.5
   earTop: {r: 0, g: 0, b: 0, a: 0}
   earBottom: {r: 0, g: 0, b: 0, a: 0}
