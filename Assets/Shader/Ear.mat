@@ -30,13 +30,13 @@ Material:
     - _Scale1: 1
     - _Scale10: 1
     - _Scale2: 1
-    - _Scale3: 0.8
-    - _Scale4: 6
-    - _Scale5: 1
+    - _Scale3: 0.96
+    - _Scale4: 3.6
+    - _Scale5: 0.87
     - _Scale6: 1.25
     - _Scale7: -2
     - _Scale8: 1
-    - _Scale9: 1.394
+    - _Scale9: 1
     m_Colors:
     - _Color: {r: 0.90196085, g: 0.61960787, b: 0.5372549, a: 1}
     - _Color2: {r: 0.8313726, g: 0.34509805, b: 0.31764707, a: 1}

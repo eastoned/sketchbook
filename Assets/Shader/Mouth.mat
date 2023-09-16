@@ -24,22 +24,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BotTeeth: 0.61
+    - _BotTeeth: 0.23
     - _Radius: 1
     - _Radius2: 1
-    - _TeethAmount: 8
+    - _TeethAmount: 13.2
     - _TeethRoundness: 4
     - _TongueHeight: 0
-    - _TongueRadius: 0.162
-    - _TongueScale: 0.25
+    - _TongueRadius: 0.5
+    - _TongueScale: 0.471
     - _TopTeeth: 1
     - _xScaleUpper: 1
     - _xScaleUpper2: 1
-    - _yScaleUpper: 0.23
-    - _yScaleUpper2: 0.54
+    - _yScaleUpper: 1
+    - _yScaleUpper2: 0.97
     m_Colors:
     - _Color: {r: 0.254717, g: 0, b: 0, a: 1}
     - _Color2: {r: 0.764151, g: 0.12615699, b: 0.12615699, a: 1}
-    - _Color3: {r: 0.6313726, g: 0.11442087, b: 0, a: 1}
-    - _Color4: {r: 1, g: 0, b: 0, a: 1}
+    - _Color3: {r: 1, g: 0.16509432, b: 0.16509432, a: 1}
+    - _Color4: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

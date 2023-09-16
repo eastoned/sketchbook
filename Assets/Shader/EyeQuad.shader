@@ -3,8 +3,7 @@ Shader "Unlit/EyeQuad"
     Properties
     {
         _Radius ("Radius", Range(0, 1)) = 0.5
-        _ColorTop("Top Color", Color) = (0,0,0,0)
-        _ColorBottom("Bottom Color", Color) = (0,0,0,0)
+        
         _xPupil ("X Scale Pupil", Range(0.1, 1)) = 1
         _pupilOffsetX ("Translate pupil x", Range(-1, 1)) = 0
         _pupilOffsetY ("Translate pupil y", Range(-1, 1)) = 0
@@ -21,6 +20,9 @@ Shader "Unlit/EyeQuad"
         _Lid2 ("Lid 2", Range(0, 1)) = 0.5
 
         _SquashPupil ("Squash", Range(0.25, 1)) = 1
+        
+        _Color1("Top Color", Color) = (0,0,0,0)
+        _Color2("Bottom Color", Color) = (0,0,0,0)
     }
     SubShader
     {
@@ -51,7 +53,7 @@ Shader "Unlit/EyeQuad"
             };
 
             float _Radius, _xScaleUpper, _yScaleUpper, _xScaleLower, _yScaleLower, _radiusPupil, _xPupil, _yPupil, _pupilOffsetX, _pupilOffsetY;
-            float4 _ColorTop, _ColorBottom;
+            float4 _Color1, _Color2;
             float _yLevel, _xLevel, _yLevel3, _xLevel3;
 
             float _Lid1, _Lid2;
@@ -103,7 +105,7 @@ Shader "Unlit/EyeQuad"
                 result *= mask1;
                 mask1 = 1 - mask1;
                 
-                float4 shades = lerp(_ColorTop, _ColorBottom, abs(uv.x*2-1)) * mask1;
+                float4 shades = lerp(_Color1, _Color2, abs(uv.x*2-1)) * mask1;
                 result += shades;
                 return result;
             }

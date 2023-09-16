@@ -12,28 +12,93 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
   m_Name: Human
   m_EditorClassIdentifier: 
-  eyeAngle: -5
+  headWidth: 0.52
+  headLength: 0.524
+  neckWidth: 0.526
+  eyeAngle: -8.2
   eyeSpacing: 0.52
-  eyePos: 0
-  eyeWidth: 0
-  eyeHeight: 0
-  eyebrowAngle: 0
-  eyebrowSpacing: 0
-  eyebrowHeight: 0
-  eyebrowLength: 0
-  eyebrowWidth: 0
-  noseHeight: 0
-  noseLength: 0
-  noseWidth: 0
-  mouthWidth: 0
-  mouthHeight: 0
-  mouthPos: 0
-  neckWidth: 0
-  headWidth: 0
-  headHeight: 0
-  earWidth: 0
-  earHeight: 0
-  earPos: 0
-  earAngle: 0
-  earSpacing: 0
+  eyeHeight: -0.433
+  eyeLength: 0.759
+  eyeWidth: 0.76
+  eyebrowAngle: -8.5
+  eyebrowSpacing: 0.531
+  eyebrowHeight: -0.201
+  eyebrowLength: 0.896
+  eyebrowWidth: 0.3141
+  noseHeight: 0.161
+  noseLength: 1.333
+  noseWidth: 1.326
+  mouthWidth: 1.519
+  mouthLength: 0.571
+  mouthHeight: 0.294
+  earWidth: 1.363
+  earLength: 1.363
+  earHeight: 0.363
+  earAngle: 7.6
+  earSpacing: 0.589
+  chinWidth: 3.02
+  chinLength: 3.06
+  foreheadWidth: 3.02
+  foreheadLength: 3.02
+  headTop: {r: 0, g: 0, b: 0, a: 0}
+  headBottom: {r: 0, g: 0, b: 0, a: 0}
+  neckTopWidth: 3.381
+  neckCurveScale: 3.381
+  neckCurveRoundness: 1.786
+  neckTop: {r: 0, g: 0, b: 0, a: 0}
+  neckBottom: {r: 0, g: 0, b: 0, a: 0}
   eyeRadius: 0
+  pupilRadius: 0
+  pupilWidth: 0
+  pupilLength: 0
+  eyelidTopLength: 0
+  eyelidBottomLength: 0
+  eyelidTopSkew: 0
+  eyelidBottomSkew: 0
+  eyelidTopOpen: 0
+  eyelidBottomOpen: 0
+  pupilRoundness: 0
+  eyelidCenter: {r: 0, g: 0, b: 0, a: 0}
+  eyelidEdge: {r: 0, g: 0, b: 0, a: 0}
+  eyebrowCount: 0
+  eyebrowThickness: 0
+  eyebrowRoundness: 0
+  eyebrowCurve: 0
+  eyebrowInner: {r: 0, g: 0, b: 0, a: 0}
+  eyebrowOutter: {r: 0, g: 0, b: 0, a: 0}
+  noseBaseWidth: 0
+  noseTotalWidth: 0
+  noseTopWidth: 0
+  noseCurve: 0
+  noseTotalLength: 0
+  nostrilRadius: 0
+  nostrilHeight: 0
+  nostrilSpacing: 0
+  nostrilScale: 0
+  noseTop: {r: 0, g: 0, b: 0, a: 0}
+  noseBottom: {r: 0, g: 0, b: 0, a: 0}
+  mouthRadius: 0
+  mouthLipTop: 0
+  mouthLipBottom: 0
+  mouthLipMaskRoundness: 0
+  teethTop: 0
+  teethBottom: 0
+  teethCount: 0
+  teethRoundness: 0
+  tongueRadius: 0
+  tongueScale: 0
+  tongueHeight: 0
+  mouthTop: {r: 0, g: 0, b: 0, a: 0}
+  mouthBottom: {r: 0, g: 0, b: 0, a: 0}
+  tongueTop: {r: 0, g: 0, b: 0, a: 0}
+  tongueBottom: {r: 0, g: 0, b: 0, a: 0}
+  earWidthSkew: 0
+  earLengthSkew: 0
+  earShape: 0
+  earOpenWidth: 0
+  earOpenLength: 0
+  earRoundness: 0
+  earConcha: 0
+  earTragus: 0
+  earTop: {r: 0, g: 0, b: 0, a: 0}
+  earBottom: {r: 0, g: 0, b: 0, a: 0}

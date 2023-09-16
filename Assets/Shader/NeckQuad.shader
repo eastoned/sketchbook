@@ -2,12 +2,12 @@ Shader "Unlit/NeckQuad"
 {
     Properties
     {
-        _Width ("Width", Range(1, 5)) = 0
-        _Radius("Radius", Range(0, 3)) = 1
-        _NeckScale("Scale", Range(1,5)) = 0.5
+        _NeckTopWidth ("Width", Range(1, 5)) = 0
+        _NeckCurveRoundness("Radius", Range(0, 3)) = 1
+        _NeckCurveScale("Scale", Range(1, 5)) = 0.5
 
-        _Color("Color", Color) = (1,1,1,1)
-        _Color2("Color2", Color) = (1,1,1,1)
+        _Color1("Top", Color) = (1,1,1,1)
+        _Color2("Bottom", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -37,8 +37,8 @@ Shader "Unlit/NeckQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            float _Width, _Radius, _Radius2, _NeckScale;
-            float4 _Color, _Color2;
+            float _NeckTopWidth, _NeckCurveRoundness, _NeckCurveScale;
+            float4 _Color1, _Color2;
 
             v2f vert (appdata v)
             {
@@ -51,25 +51,20 @@ Shader "Unlit/NeckQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
-            //width is .2, radius can be 15
-            //width is 15, radius has to be .5
+
                 float2 uv = i.uv;//*float2(2, 2) - float2(0.5, 0.5);
                 //
-                float line1 = step(0, pow(0.5, 2) - pow(abs(uv.x), _Width*2) - pow(abs(uv.y-0.5),2));
-                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1))-(uv.y*_NeckScale), _Width*2)) - pow(abs(uv.y-0.5),2));
-                float lin3 = pow((uv.x * _Width*2) , _Radius) + pow(1-abs(uv.y), _NeckScale);
-                float lin4 = pow(((1-uv.x) * _Width*2) , _Radius) + pow(1-abs(uv.y), _NeckScale);
+                float line1 = step(0, pow(0.5, 2) - pow(abs(uv.x), _NeckTopWidth*2) - pow(abs(uv.y-0.5),2));
+                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1))-(uv.y*_NeckCurveScale), _NeckTopWidth*2)) - pow(abs(uv.y-0.5),2));
+                float lin3 = pow((uv.x * _NeckTopWidth*2) , _NeckCurveRoundness) + pow(1-abs(uv.y), _NeckCurveScale);
+                float lin4 = pow(((1-uv.x) * _NeckTopWidth*2) , _NeckCurveRoundness) + pow(1-abs(uv.y), _NeckCurveScale);
                 
                 lin3 = step(1, lin3) * 1 - step(0.5, i.uv.x);
                 lin4 = step(1, lin4) * step(0.5, i.uv.x);
                 lin4 += lin3;
                 clip(lin4 - 0.5);
-                //line2 += line1;
-                //line2 = saturate(line2);
-                //line2 = 1 - line2;
-                //clip(line2 - 1);s
-                //return lin4.xxxx;
-                return lerp(_Color, _Color2, 1-uv.y);;
+
+                return lerp(_Color1, _Color2, 1-uv.y);;
             }
             ENDCG
         }

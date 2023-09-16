@@ -24,11 +24,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _NeckScale: 4.62
-    - _Radius: 1.67
+    - _NeckCurveRoundness: 1.074
+    - _NeckCurveScale: 1
+    - _NeckScale: 1
+    - _NeckTopWidth: 2.931
+    - _Radius: 3
     - _Radius2: 0.465
-    - _Width: 5
+    - _Width: 1
     m_Colors:
     - _Color: {r: 0.95294124, g: 0.60784316, b: 0.43529415, a: 1}
-    - _Color2: {r: 0.8352942, g: 0.38823533, b: 0.45098042, a: 1}
+    - _Color1: {r: 0, g: 0, b: 0, a: 1}
+    - _Color2: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

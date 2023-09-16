@@ -88,13 +88,8 @@ public class FaceController : MonoBehaviour
         Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
     }
 
-    IEnumerator Start(){
-        for(;;){
-            leftProp = new MaterialPropertyBlock();
-            rightProp = new MaterialPropertyBlock();
-            //AllRandom();
-            yield return new WaitForSeconds(0.6f);
-        }
+    void Start(){
+        
     }
     
     [ContextMenu("Random")]
