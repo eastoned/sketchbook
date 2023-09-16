@@ -7,10 +7,10 @@ Shader "Unlit/NoseQuad"
         _xScaleUpper2 ("X Scale Upper2", Range(0.1,2.5)) = 1
         _yScaleUpper2 ("Y Scale Upper2", Range(1,5)) = 1
         _Blend("Blend", Range(0.1, 3)) = 0
-        _Radius("Nostril Radius", Range(0.1, 1)) = 0.5
-        _NostrilSpacing("NostrilSpace", Range(1, 2)) = 0.5
-        _NostrilHeight("Nostril Height", Range(-.5, -0.25)) = 0
-        _NostrilScale("Nostril Scale", Range(0, 2)) = 0.5
+        _Radius("Nostril Radius", Range(0, 0.5)) = 0.25
+        _NostrilSpacing("NostrilSpace", Range(0, 1)) = 0.5
+        _NostrilHeight("Nostril Height", Range(-.5, 0)) = 0
+        _NostrilScale("Nostril Scale", Range(0.25, 2)) = 0.5
 
         _Color("Color", Color) = (1,1,1,1)
         _Color2("Color2", Color) = (1,1,1,1)
@@ -65,8 +65,9 @@ Shader "Unlit/NoseQuad"
                 float line1 = pow(uv.y, _xScaleUpper) - uv.x * _yScaleUpper;
 
                 float line2 = pow(1-uv.y, _xScaleUpper2) - uv.x * _yScaleUpper2;
-
-                float circle1 = step(_Radius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing * _Radius, 0.5+_NostrilHeight)));
+                //* _Radius
+                //float circle1 = step(_Radius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing*_Radius, 0.5+_NostrilHeight)));
+                float circle1 = step(_Radius, distance(uv*float2(_NostrilScale, 1), float2(_NostrilSpacing*_NostrilScale, _NostrilHeight+0.5)));
                 
                 float result = step(0, line1*line2);
                 

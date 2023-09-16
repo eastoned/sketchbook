@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
   m_Name: Human
   m_EditorClassIdentifier: 
-  headWidth: 0.52
-  headLength: 0.524
-  neckWidth: 0.526
+  headWidth: 0.457
+  headLength: 0.604
+  neckWidth: 0.487
   eyeAngle: -8.2
   eyeSpacing: 0.52
   eyeHeight: -0.433
@@ -36,11 +36,11 @@ MonoBehaviour:
   earHeight: 0.363
   earAngle: 7.6
   earSpacing: 0.589
-  chinWidth: 3.02
+  chinWidth: 1.92
   chinLength: 3.06
-  foreheadWidth: 3.02
+  foreheadWidth: 4.33
   foreheadLength: 3.02
-  headTop: {r: 0, g: 0, b: 0, a: 0}
+  headTop: {r: 1, g: 1, b: 1, a: 0}
   headBottom: {r: 0, g: 0, b: 0, a: 0}
   neckTopWidth: 3.381
   neckCurveScale: 3.381
@@ -67,8 +67,8 @@ MonoBehaviour:
   eyebrowInner: {r: 0, g: 0, b: 0, a: 0}
   eyebrowOutter: {r: 0, g: 0, b: 0, a: 0}
   noseBaseWidth: 0
-  noseTotalWidth: 0
   noseTopWidth: 0
+  noseTotalWidth: 0
   noseCurve: 0
   noseTotalLength: 0
   nostrilRadius: 0

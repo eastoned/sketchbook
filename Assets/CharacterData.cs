@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CustomCharacter", menuName = "ScriptableObjects/CustomCharacterProfile", order = 2)]
@@ -29,7 +30,7 @@ public class CharacterData : ScriptableObject
         [Range(-1f, 1.25f)] public float mouthHeight;
         
         [Range(.5f, 2f)] public float earWidth, earLength;
-        [Range(-0.5f,1f)] public float earHeight;
+        [Range(-0.5f, 1f)] public float earHeight;
         [Range(-45f, 45f)] public float earAngle;
         [Range(0f, 1f)] public float earSpacing;
 
@@ -52,30 +53,43 @@ public class CharacterData : ScriptableObject
         [Range(0.25f, 1f)] public float pupilRoundness;
         public Color eyelidCenter, eyelidEdge;
 
-        public float eyebrowCount, eyebrowThickness, eyebrowRoundness, eyebrowCurve;
+        [Range(0, 16)] public float eyebrowCount;
+        [Range(1f, 8f)] public float eyebrowThickness;
+        [Range(0.3f, 4f)] public float eyebrowRoundness;
+        [Range(-1f, 1f)] public float eyebrowCurve;
         public Color eyebrowInner, eyebrowOutter;
 
         //nose
-        public float noseBaseWidth, noseTotalWidth, noseTopWidth, noseCurve;
-        public float noseTotalLength;
-        public float nostrilRadius, nostrilHeight, nostrilSpacing, nostrilScale;
+        [Range(0.1f, 2.5f)]public float noseBaseWidth, noseTopWidth;
+        [Range(1f, 5f)] public float noseTotalWidth, noseCurve;
+        [Range(0.1f, 3f)] public float noseTotalLength;
+        [Range(0f, 0.5f)] public float nostrilRadius;
+        [Range(0, 1f)] public float nostrilHeight;
+        [Range(-0.5f, 0)] public float nostrilSpacing;
+        [Range(0.25f, 2f)] public float nostrilScale;
         public Color noseTop, noseBottom;
 
         //mouth
-        public float mouthRadius, mouthLipTop, mouthLipBottom;
-        public float mouthLipMaskRoundness;
-        public float teethTop, teethBottom;
-        public float teethCount, teethRoundness;
-        public float tongueRadius, tongueScale, tongueHeight;
+        [Range(0.1f, 1f)] public float mouthRadius;
+        [Range(-1f, 1f)] public float mouthLipTop, mouthLipBottom;
+        [Range(0f, 1f)] public float mouthLipMaskRoundness;
+        [Range(0f, 1f)] public float teethTop, teethBottom;
+        [Range(0, 30)] public float teethCount;
+        [Range(0.5f, 4f)] public float teethRoundness;
+        [Range(0f, .25f)] public float tongueRadius;
+        [Range(0.25f, .75f)] public float tongueScale;
+        [Range(0f, 1f)] public float tongueHeight;
         public Color mouthTop, mouthBottom;
         public Color tongueTop, tongueBottom;
 
         //ear
-        public float earWidthSkew, earLengthSkew;
-        public float earShape;
-        public float earOpenWidth, earOpenLength;
-        public float earRoundness;
-        public float earConcha, earTragus;
+        [Range(0f, 1f)] public float earWidthSkew;
+        [Range(-1f, 1f)] public float earLengthSkew;
+        [Range(1f, 6f)] public float earShape;
+        [Range(1f, 1.5f)]public float earOpenWidth, earOpenLength;
+        [Range(0.6f, 1.25f)] public float earRoundness;
+        [Range(0.5f, 1.25f)] public float earConcha;
+        [Range(0f, 1f)] public float earTragus;
         public Color earTop, earBottom;
         
     #endregion

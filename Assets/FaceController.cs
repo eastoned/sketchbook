@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using OpenCvSharp;
 using UnityEngine;
 
 public class FaceController : MonoBehaviour
@@ -10,7 +11,7 @@ public class FaceController : MonoBehaviour
 
     public Vector2 mousePos;
 
-    public CharacterData charData;
+    public CharacterData currentChar;
 
     [Range(-45f, 25)] public float eyeAngle;
     [Range(0f, 1f)] public float eyeSpacing;
@@ -52,44 +53,77 @@ public class FaceController : MonoBehaviour
 
 
     void SetTransformValues(){
-        float actualHeadWidth = Mathf.Lerp(2,4,headWidth);
-        Head.transform.localScale = new Vector3(actualHeadWidth, Mathf.Lerp(2,4,headHeight), 0);
+        float actualHeadWidth = Mathf.Lerp(2,4, currentChar.headWidth);
+        Head.transform.localScale = new Vector3(actualHeadWidth, Mathf.Lerp(2,4, currentChar.headLength), 0);
         
-        LeftEye.transform.localEulerAngles = new Vector3(0, 0, eyeAngle);
-        RightEye.transform.localEulerAngles = new Vector3(0, 0, -eyeAngle);
+        LeftEye.transform.localEulerAngles = new Vector3(0, 0, currentChar.eyeAngle);
+        RightEye.transform.localEulerAngles = new Vector3(0, 0, -currentChar.eyeAngle);
         
-        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), 1+eyePos, 0);
-        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), 1+eyePos, 0);
-        LeftEye.transform.localScale = new Vector3(-eyeWidth, eyeHeight, 1);
-        RightEye.transform.localScale = new Vector3(eyeWidth, eyeHeight, 1);
+        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, currentChar.headWidth) - (currentChar.eyeWidth/2f)) * eyeSpacing), 1+currentChar.eyeHeight, 0);
+        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, currentChar.headWidth) + (currentChar.eyeWidth/2f)) * eyeSpacing), 1+currentChar.eyeHeight, 0);
+        LeftEye.transform.localScale = new Vector3(-currentChar.eyeWidth, currentChar.eyeLength, 1);
+        RightEye.transform.localScale = new Vector3(currentChar.eyeWidth, currentChar.eyeLength, 1);
 
-        LeftEyebrow.transform.localEulerAngles = new Vector3(0, 0, eyebrowAngle);
-        RightEyebrow.transform.localEulerAngles = new Vector3(0, 0, -eyebrowAngle);
-        LeftEyebrow.transform.localPosition = new Vector3(-0.5f - eyebrowSpacing, 1.25f + eyebrowHeight, -0.1f);
-        RightEyebrow.transform.localPosition = new Vector3(0.5f + eyebrowSpacing, 1.25f + eyebrowHeight, -0.1f);
-        LeftEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
-        RightEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
+        LeftEyebrow.transform.localEulerAngles = new Vector3(0, 0, currentChar.eyebrowAngle);
+        RightEyebrow.transform.localEulerAngles = new Vector3(0, 0, -currentChar.eyebrowAngle);
+        LeftEyebrow.transform.localPosition = new Vector3(-0.5f - currentChar.eyebrowSpacing, 1.25f + currentChar.eyebrowHeight, -0.1f);
+        RightEyebrow.transform.localPosition = new Vector3(0.5f + currentChar.eyebrowSpacing, 1.25f + currentChar.eyebrowHeight, -0.1f);
+        LeftEyebrow.transform.localScale = new Vector3(currentChar.eyebrowLength, currentChar.eyebrowWidth, 1);
+        RightEyebrow.transform.localScale = new Vector3(currentChar.eyebrowLength, currentChar.eyebrowWidth, 1);
     
-        Nose.transform.localPosition = new Vector3(0, noseHeight, -0.1f);
-        Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
+        Nose.transform.localPosition = new Vector3(0, currentChar.noseHeight, -0.1f);
+        Nose.transform.localScale = new Vector3(currentChar.noseWidth, currentChar.noseLength, 1);
 
-        LeftEar.transform.localPosition = new Vector3(((Mathf.Lerp(-1.25f, -2.25f, headWidth) - (earWidth/3f)) * earSpacing), earPos, 0.2f);
-        RightEar.transform.localPosition = new Vector3(((Mathf.Lerp(1.25f, 2.25f, headWidth) + (earWidth/3f)) * earSpacing), earPos, 0.2f);
+        LeftEar.transform.localPosition = new Vector3(((Mathf.Lerp(-1.25f, -2.25f, currentChar.headWidth) - (currentChar.earWidth/3f)) * currentChar.earSpacing), currentChar.earHeight, 0.2f);
+        RightEar.transform.localPosition = new Vector3(((Mathf.Lerp(1.25f, 2.25f, currentChar.headWidth) + (currentChar.earWidth/3f)) * currentChar.earSpacing), currentChar.earHeight, 0.2f);
 
-        LeftEar.transform.localScale = new Vector3(-earWidth,earHeight,1);
-        RightEar.transform.localScale = new Vector3(earWidth,earHeight,1);
+        LeftEar.transform.localScale = new Vector3(-currentChar.earWidth,currentChar.earLength,1);
+        RightEar.transform.localScale = new Vector3(currentChar.earWidth,currentChar.earLength,1);
 
-        LeftEar.transform.localEulerAngles = new Vector3(0, 0, earAngle);
-        RightEar.transform.localEulerAngles = new Vector3(0, 0, -earAngle);
+        LeftEar.transform.localEulerAngles = new Vector3(0, 0, currentChar.earAngle);
+        RightEar.transform.localEulerAngles = new Vector3(0, 0, -currentChar.earAngle);
 
-        Mouth.transform.localScale = new Vector3(mouthWidth, mouthHeight, 1);
-        Mouth.transform.localPosition = new Vector3(0, -1 + mouthPos, 0);
+        Mouth.transform.localScale = new Vector3(currentChar.mouthWidth, currentChar.mouthLength, 1);
+        Mouth.transform.localPosition = new Vector3(0, -1 + currentChar.mouthHeight, 0);
 
-        Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
+        Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, currentChar.neckWidth), 2f, 1f);
+    }
+
+    void SetShaderValues(){
+        MaterialPropertyBlock EyeProp, EyebrowProp, EarProp, NoseProp, MouthProp, HeadProp, NeckProp;
+        EyeProp = new MaterialPropertyBlock();
+        EyebrowProp = new MaterialPropertyBlock();
+        EarProp = new MaterialPropertyBlock();
+        NoseProp = new MaterialPropertyBlock();
+        MouthProp = new MaterialPropertyBlock();
+        HeadProp = new MaterialPropertyBlock();
+        NeckProp = new MaterialPropertyBlock();
+
+        HeadProp.SetFloat("_ChinWidth", currentChar.chinWidth);
+        HeadProp.SetFloat("_ChinLength", currentChar.chinLength);
+        HeadProp.SetFloat("_ForeheadWidth", currentChar.foreheadWidth);
+        HeadProp.SetFloat("_ForeheadLength", currentChar.foreheadLength);
+        HeadProp.SetColor("_Color1", currentChar.headBottom);
+        HeadProp.SetColor("_Color2", currentChar.headTop);
+
+        Head.SetPropertyBlock(HeadProp);
+        NeckProp.SetFloat("_NeckTopWidth", currentChar.neckTopWidth);
+        NeckProp.SetFloat("_NeckCurveRoundness", currentChar.neckCurveRoundness);
+        NeckProp.SetFloat("_NeckCurveScale", currentChar.neckCurveScale);
+        NeckProp.SetColor("_Color1", currentChar.neckBottom);
+        NeckProp.SetColor("_Color2", currentChar.neckTop);
+
+        Neck.SetPropertyBlock(NeckProp);
+
     }
 
     void Start(){
-        
+        LoadCharacterData();
+    }
+
+    void LoadCharacterData(){
+        SetTransformValues();
+        SetShaderValues();
     }
     
     [ContextMenu("Random")]

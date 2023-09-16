@@ -1258,8 +1258,8 @@ MonoBehaviour:
   headScalerLeft: {fileID: 1901880332}
   headScalerRight: {fileID: 834628291}
   mousePos: {x: 0, y: 0}
-  charData: {fileID: 0}
-  eyeAngle: -8
+  currentChar: {fileID: 11400000, guid: df53655eb27dd614aa0d1b55ead3c8e3, type: 2}
+  eyeAngle: 4
   eyeSpacing: 0.46
   eyePos: -0.97
   eyeWidth: 1
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   earPos: 0
   earAngle: 15
   earSpacing: 0.74
-  eyeRadius: 0
+  eyeRadius: 0.65491337
   leftPupilX: 0
   leftPupilY: 0
   rightPupilX: 0
@@ -1877,7 +1877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470558954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: -0.84, z: 0}
   m_LocalScale: {x: 0.93, y: 0.55, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

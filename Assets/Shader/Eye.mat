@@ -25,9 +25,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Lid1: 0.632
-    - _Lid2: 0.69
-    - _Radius: 0.61
-    - _SquashPupil: 0.78
+    - _Lid2: 0.753
+    - _Radius: 1
+    - _SquashPupil: 1
     - __dirty: 0
     - _pupilOffsetX: 0
     - _pupilOffsetY: 0

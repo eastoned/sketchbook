@@ -7,6 +7,9 @@ Shader "Unlit/EyebrowQuad"
         _Curve ("Curve", Range(0.3, 4)) = 1
 
         _Curve2 ("Curve2", Range(-1, 1)) = 0
+
+        _Color1 ("Inner", Color) = (1,1,1,1)
+        _Color2 ("Outer", Color) = (1,1,1,1)
     }
     SubShader
     {

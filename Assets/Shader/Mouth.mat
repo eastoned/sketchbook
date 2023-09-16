@@ -29,14 +29,14 @@ Material:
     - _Radius2: 1
     - _TeethAmount: 13.2
     - _TeethRoundness: 4
-    - _TongueHeight: 0
-    - _TongueRadius: 0.5
-    - _TongueScale: 0.471
-    - _TopTeeth: 1
+    - _TongueHeight: 0.52
+    - _TongueRadius: 0.12
+    - _TongueScale: 0.25
+    - _TopTeeth: 0.39
     - _xScaleUpper: 1
     - _xScaleUpper2: 1
-    - _yScaleUpper: -0.03
-    - _yScaleUpper2: 0.55
+    - _yScaleUpper: 1
+    - _yScaleUpper2: 1
     m_Colors:
     - _Color: {r: 0.254717, g: 0, b: 0, a: 1}
     - _Color2: {r: 0.764151, g: 0.12615699, b: 0.12615699, a: 1}

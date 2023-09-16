@@ -2,9 +2,9 @@ Shader "Unlit/NeckQuad"
 {
     Properties
     {
-        _NeckTopWidth ("Width", Range(1, 5)) = 0
-        _NeckCurveRoundness("Radius", Range(0, 3)) = 1
-        _NeckCurveScale("Scale", Range(1, 5)) = 0.5
+        _NeckTopWidth ("Neck Width", Range(1, 5)) = 0
+        _NeckCurveRoundness("Neck Radius", Range(0, 3)) = 1
+        _NeckCurveScale("Neck Scale", Range(1, 5)) = 0.5
 
         _Color1("Top", Color) = (1,1,1,1)
         _Color2("Bottom", Color) = (1,1,1,1)
