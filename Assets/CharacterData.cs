@@ -13,7 +13,7 @@ public class CharacterData : ScriptableObject
 
         [Range(-45f, 25)] public float eyeAngle;
         [Range(0f, 1f)] public float eyeSpacing;
-        [Range(-1f, .1f)] public float eyeHeight;
+        [Range(-0.75f, .1f)] public float eyeHeight;
         [Range(0.5f, 1f)] public float eyeLength, eyeWidth;
 
         [Range(-45f, 25f)] public float eyebrowAngle;

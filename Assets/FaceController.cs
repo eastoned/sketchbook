@@ -19,7 +19,7 @@ public class FaceController : MonoBehaviour
 
     [Range(-45f, 25)] public float eyeAngle;
     [Range(0f, 1f)] public float eyeSpacing;
-    [Range(-1f, 1f)] public float eyeHeight;
+    [Range(-0.75f, 1f)] public float eyeHeight;
     [Range(0.5f, 1f)] public float eyeLength, eyeWidth;
 
     [Range(-45f, 25f)] public float eyebrowAngle;
@@ -110,8 +110,8 @@ public class FaceController : MonoBehaviour
         LeftEye.transform.localEulerAngles = new Vector3(0, 0, eyeAngle);
         RightEye.transform.localEulerAngles = new Vector3(0, 0, -eyeAngle);
         
-        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength), 0);
-        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength), 0);
+        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/foreheadScale,2/chinScale,eyeHeight*.5f+0.5f), 0);
+        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/foreheadScale,2/chinScale,eyeHeight*.5f+0.5f), 0);
         LeftEye.transform.localScale = new Vector3(-eyeWidth, eyeLength, 1);
         RightEye.transform.localScale = new Vector3(eyeWidth, eyeLength, 1);
 
@@ -536,7 +536,7 @@ public class FaceController : MonoBehaviour
     public void RandomEye(){
         eyeAngle = Random.Range(-45f, 25f);
         eyeSpacing = Random.Range(0f, 1f);
-        eyeHeight = Random.Range(-1f, 1f);
+        eyeHeight = Random.Range(-0.75f, 1f);
         eyeLength = Random.Range(0.5f, 1f);
         eyeWidth = Random.Range(0.5f, 1f);
 

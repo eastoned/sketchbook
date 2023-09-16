@@ -55,9 +55,9 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\FaceEditor.cs" />
     <Compile Include="Assets\Script\Editor\TexButtonHandler.cs" />
-    <Compile Include="Assets\Script\Editor\TextClassHandler.cs" />
-    <Compile Include="Assets\ShaderlabVSCode\Editor\VSCodeBridge.cs" />
     <Compile Include="Assets\ShaderlabVSCode\Editor\ShaderlabVSCodeEditor.cs" />
+    <Compile Include="Assets\ShaderlabVSCode\Editor\VSCodeBridge.cs" />
+    <Compile Include="Assets\Script\Editor\TextClassHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
