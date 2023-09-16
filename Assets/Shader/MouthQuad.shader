@@ -15,8 +15,8 @@ Shader "Unlit/MouthQuad"
         _BotTeeth ("Teeth botoom", Range(0,1)) = 0.5
 
         _TongueScale("TongueScale", Range(0.25, 0.75)) = 0.5
-        _TongueRadius("Tongue Size", Range(0.1, 0.5)) = 0.5
-        _TongueHeight("Tongue Height", Range(0, 0.5)) = 0
+        _TongueRadius("Tongue Size", Range(0, 0.25)) = 0.25
+        _TongueHeight("Tongue Height", Range(0, 1)) = 0
 
         _TeethAmount("AmountTeeth", Range(0, 30)) = 4
         _TeethRoundness("Roundness", Range(0.5, 4)) = 1
@@ -53,6 +53,7 @@ Shader "Unlit/MouthQuad"
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
+
             float _Radius, _xScaleUpper, _yScaleUpper;
             float _Radius2, _xScaleUpper2, _yScaleUpper2;
             float _TopTeeth, _BotTeeth;
@@ -102,8 +103,8 @@ Shader "Unlit/MouthQuad"
                 toof += toof2;
                 
                 line4 += toof;
-                float tongue = step(0, pow(_TongueRadius, 2) - pow((uv.x-.5)*(_TongueScale)*2, 2) - pow((uv.y-_TongueHeight)*(1-_TongueScale)*2,2));
-                float4 tonColor = tongue * lerp(_Color3, _Color4, ((uv.y-_TongueHeight)*_TongueScale));
+                float tongue = step(0, pow(_TongueRadius, 2) - pow((uv.x-.5) *(1-_TongueScale), 2) - pow((uv.y-_TongueHeight)*(_TongueScale),2));
+                float4 tonColor = tongue * lerp(_Color3, _Color4,((_TongueScale*uv.y*4)-_TongueHeight/2 + .25));//lerp(_Color3, _Color4, ((uv.y-_TongueHeight)*_TongueScale));
                 float4 mouthColor = (1-tongue) * lerp(_Color, _Color2, uv.y);
                 
                 clip(line1.r-0.5);

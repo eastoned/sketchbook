@@ -69,7 +69,7 @@ public class FaceController : MonoBehaviour
         RightEyebrow.transform.localPosition = new Vector3(0.5f + eyebrowSpacing, 1.25f + eyebrowHeight, -0.1f);
         LeftEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
         RightEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
-
+    
         Nose.transform.localPosition = new Vector3(0, noseHeight, -0.1f);
         Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
