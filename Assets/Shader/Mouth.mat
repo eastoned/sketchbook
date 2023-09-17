@@ -26,9 +26,9 @@ Material:
     m_Floats:
     - _BotTeeth: 0
     - _MouthLipBottom: 0.775
-    - _MouthLipMaskRoundness: 1
+    - _MouthLipMaskRoundness: 0.93
     - _MouthLipTop: 0.905
-    - _MouthRadius: 0.904
+    - _MouthRadius: 1
     - _Radius: 1
     - _Radius2: 1
     - _TeethAmount: 13.2

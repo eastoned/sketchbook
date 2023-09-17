@@ -7,7 +7,7 @@ using UnityEngine.XR;
 
 public class FaceController : MonoBehaviour
 {
-    [SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck;
+    [SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck, HairFront, HairBack;
 
     public HeadController headScalerTop, headScalerBottom, headScalerLeft, headScalerRight;
 
@@ -28,17 +28,23 @@ public class FaceController : MonoBehaviour
     [Range(0.2f, 1.5f)] public float eyebrowLength;
     [Range(0.1f, 0.5f)] public float eyebrowWidth;
 
-    [Range(-0.25f, 0.5f)] public float noseHeight;
+    [Range(0f, 1f)] public float noseHeight;
     [Range(0.5f, 2f)] public float noseLength, noseWidth;
 
     [Range(0.25f, 2.5f)] public float mouthWidth;
     [Range(0.2f, 1f)] public float mouthLength;
-    [Range(-1f, 1.25f)] public float mouthHeight;
+    [Range(0f, 1f)] public float mouthHeight;
         
     [Range(.5f, 2f)] public float earWidth, earLength;
     [Range(-0.5f, 1f)] public float earHeight;
     [Range(-45f, 45f)] public float earAngle;
     [Range(0f, 1f)] public float earSpacing;
+
+    [Range(0f, 1f)] public float bangWidth, bangHeight;
+    [Range(0.25f, 1f)] public float bangLength;
+    [Range(0.25f, 1f)] public float hairWidth;
+    [Range(0f, 1f)] public float hairHeight;
+    [Range(0.5f, 4f)] public float hairLength;
 
     [Range(0.1f, 5f)] public float chinWidth, chinLength, foreheadWidth, foreheadLength;
     [Range(2f, 4f)] public float chinScale, foreheadScale;
@@ -105,26 +111,29 @@ public class FaceController : MonoBehaviour
 
     public void SetTransformValues(){
         float actualHeadWidth = Mathf.Lerp(2,4, headWidth);
-        Head.transform.localScale = new Vector3(actualHeadWidth, Mathf.Lerp(2,4, headLength), 0);
+        float actualHeadLength = Mathf.Lerp(2,4, headLength);
+        Head.transform.localScale = new Vector3(actualHeadWidth, actualHeadLength, 0);
         
         LeftEye.transform.localEulerAngles = new Vector3(0, 0, eyeAngle);
         RightEye.transform.localEulerAngles = new Vector3(0, 0, -eyeAngle);
+
+        float actualEyeHeight = eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/chinScale, 2/foreheadScale, eyeHeight*.5f+0.5f);
         
-        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/foreheadScale,2/chinScale,eyeHeight*.5f+0.5f), 0);
-        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/foreheadScale,2/chinScale,eyeHeight*.5f+0.5f), 0);
+        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), actualEyeHeight, 0);
+        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), actualEyeHeight, 0);
         LeftEye.transform.localScale = new Vector3(-eyeWidth, eyeLength, 1);
         RightEye.transform.localScale = new Vector3(eyeWidth, eyeLength, 1);
 
         LeftEyebrow.transform.localEulerAngles = new Vector3(0, 0, eyebrowAngle);
         RightEyebrow.transform.localEulerAngles = new Vector3(0, 0, -eyebrowAngle);
         
-        
-        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) + eyebrowHeight, -0.1f);
-        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) + eyebrowHeight, -0.1f);
+        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) + eyebrowHeight, -0.2f);
+        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) + eyebrowHeight, -0.2f);
         LeftEyebrow.transform.localScale = new Vector3(-eyebrowLength, eyebrowWidth, 1);
         RightEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
     
-        Nose.transform.localPosition = new Vector3(0, noseHeight, -0.1f);
+        float actualNoseHeight = Mathf.Lerp(actualEyeHeight, -actualHeadLength/2 * (Mathf.Lerp(1, 1/chinScale, noseHeight)), noseHeight);
+        Nose.transform.localPosition = new Vector3(0, actualNoseHeight, -0.1f);
         Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
         LeftEar.transform.localPosition = new Vector3(((Mathf.Lerp(-1.25f, -2.25f, headWidth) - (earWidth/3f)) * earSpacing), earHeight * headLength - earAngle/90f, 0.2f);
@@ -137,9 +146,15 @@ public class FaceController : MonoBehaviour
         RightEar.transform.localEulerAngles = new Vector3(0, 0, -earAngle);
 
         Mouth.transform.localScale = new Vector3(mouthWidth, mouthLength, 1);
-        Mouth.transform.localPosition = new Vector3(0, -1 + mouthHeight, 0);
+        Mouth.transform.localPosition = new Vector3(0, Mathf.Lerp(actualNoseHeight, -actualHeadLength/2 * 2/chinScale, mouthHeight), 0);
 
         Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
+
+        HairFront.transform.localPosition = new Vector3(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - (bangLength * bangHeight), 0);
+        HairFront.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth, bangWidth), bangLength*2, 1);
+
+        HairBack.transform.localPosition = new Vector3(0, Mathf.Lerp(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - hairLength/2, hairHeight), 0.3f);
+        HairBack.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth * 1.25f, hairWidth), hairLength, 1);
     }
 
     public void SetShaderValues(){
@@ -513,7 +528,7 @@ public class FaceController : MonoBehaviour
     public void RandomMouth(){
         mouthWidth = Random.Range(0.25f, 2.5f);
         mouthLength = Random.Range(0.2f, 1f);
-        mouthHeight = Random.Range(-1f, 1.25f);
+        mouthHeight = Random.Range(0f, 1f);
 
         mouthRadius = Random.Range(0.1f, 1f);
         mouthLipTop = Random.Range(-1f, 1f);
@@ -574,7 +589,7 @@ public class FaceController : MonoBehaviour
     }
 
     public void RandomNose(){
-        noseHeight = Random.Range(-0.25f, 0.5f);
+        noseHeight = Random.Range(0f, 1f);
         noseLength = Random.Range(0.5f, 2f);
         noseWidth = Random.Range(0.5f, 2f);
 

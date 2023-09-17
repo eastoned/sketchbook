@@ -23,6 +23,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - _BangCount: 2.5
+    - _BangOffset: 1
+    - _BangRoundness: 4
+    - _TopRoundness: 4
+    - _yOffset: 1.364
     m_Colors: []
   m_BuildTextureStacks: []

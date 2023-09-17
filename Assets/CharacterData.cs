@@ -13,7 +13,7 @@ public class CharacterData : ScriptableObject
 
         [Range(-45f, 25)] public float eyeAngle;
         [Range(0f, 1f)] public float eyeSpacing;
-        [Range(-0.75f, .1f)] public float eyeHeight;
+        [Range(-0.75f, 1f)] public float eyeHeight;
         [Range(0.5f, 1f)] public float eyeLength, eyeWidth;
 
         [Range(-45f, 25f)] public float eyebrowAngle;
@@ -22,12 +22,12 @@ public class CharacterData : ScriptableObject
         [Range(0.2f, 1.5f)] public float eyebrowLength;
         [Range(0.1f, 0.5f)] public float eyebrowWidth;
 
-        [Range(-0.25f, 0.5f)] public float noseHeight;
+        [Range(0f, 1f)] public float noseHeight;
         [Range(0.5f, 2f)] public float noseLength, noseWidth;
 
         [Range(0.25f, 2.5f)] public float mouthWidth;
         [Range(0.2f, 1f)] public float mouthLength;
-        [Range(-1f, 1.25f)] public float mouthHeight;
+        [Range(0f, 1f)] public float mouthHeight;
         
         [Range(.5f, 2f)] public float earWidth, earLength;
         [Range(-0.5f, 1f)] public float earHeight;
