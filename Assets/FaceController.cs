@@ -13,6 +13,8 @@ public class FaceController : MonoBehaviour
 
     public CharacterData currentChar;
 
+    public CharacterData blendChar1, blendChar2;
+
     #region Transform Variables
 
     [Range(0f, 1f)] public float headWidth, headLength;
@@ -123,6 +125,8 @@ public class FaceController : MonoBehaviour
     public float rightPupilY;
 
     public Vector2 mousePos;
+
+    [Range(0f, 1f)] public float blendCharacterValue;
 
     MaterialPropertyBlock LeftEyeProp, RightEyeProp;
 
@@ -448,6 +452,126 @@ public class FaceController : MonoBehaviour
         SetShaderValues();
     }
 
+    void BlendTwoCharacters(CharacterData character1, CharacterData character2, float interval){
+        headWidth = Mathf.Lerp(character1.headWidth, character2.headWidth, interval);
+        headLength = Mathf.Lerp(character1.headLength, character2.headLength, interval);
+        neckWidth = Mathf.Lerp(character1.neckWidth, character2.neckWidth, interval);
+        eyeAngle = Mathf.Lerp(character1.eyeAngle, character2.eyeAngle, interval);
+        eyeSpacing = Mathf.Lerp(character1.eyeSpacing, character2.eyeSpacing, interval);
+        eyeHeight = Mathf.Lerp(character1.eyeHeight, character2.eyeHeight, interval);
+        eyeLength = Mathf.Lerp(character1.eyeLength, character2.eyeLength, interval);
+        eyeWidth = Mathf.Lerp(character1.eyeWidth, character2.eyeWidth, interval);
+        eyebrowAngle = Mathf.Lerp(character1.eyebrowAngle, character2.eyebrowAngle, interval);
+        eyebrowSpacing = Mathf.Lerp(character1.eyebrowSpacing, character2.eyebrowSpacing, interval);
+        eyebrowHeight = Mathf.Lerp(character1.eyebrowHeight, character2.eyebrowHeight, interval);
+        eyebrowLength = Mathf.Lerp(character1.eyebrowLength, character2.eyebrowLength, interval);
+        eyebrowWidth = Mathf.Lerp(character1.eyebrowWidth, character2.eyebrowWidth, interval);
+        noseHeight = Mathf.Lerp(character1.noseHeight, character2.noseHeight, interval);
+        noseLength = Mathf.Lerp(character1.noseLength, character2.noseLength, interval);
+        noseWidth = Mathf.Lerp(character1.noseWidth, character2.noseWidth, interval);
+        mouthWidth = Mathf.Lerp(character1.mouthWidth, character2.mouthWidth, interval);
+        mouthLength = Mathf.Lerp(character1.mouthLength, character2.mouthLength, interval);
+        mouthHeight = Mathf.Lerp(character1.mouthHeight, character2.mouthHeight, interval);
+        earWidth = Mathf.Lerp(character1.earWidth, character2.earWidth, interval);
+        earLength = Mathf.Lerp(character1.earLength, character2.earLength, interval);
+        earHeight = Mathf.Lerp(character1.earHeight, character2.earHeight, interval);
+        earAngle = Mathf.Lerp(character1.earAngle, character2.earAngle, interval);
+        earSpacing = Mathf.Lerp(character1.earSpacing, character2.earSpacing, interval);
+        chinWidth = Mathf.Lerp(character1.chinWidth, character2.chinWidth, interval);
+        chinLength = Mathf.Lerp(character1.chinLength, character2.chinLength, interval);
+        foreheadWidth = Mathf.Lerp(character1.foreheadWidth, character2.foreheadWidth, interval);
+        foreheadLength = Mathf.Lerp(character1.foreheadLength, character2.foreheadLength, interval);
+        chinScale = Mathf.Lerp(character1.chinScale, character2.chinScale, interval);
+        foreheadScale = Mathf.Lerp(character1.foreheadScale, character2.foreheadScale, interval);
+        headTop = Color.Lerp(character1.headTop, character2.headTop, interval);
+        headBottom = Color.Lerp(character1.headBottom, character2.headBottom, interval);
+        neckTopWidth = Mathf.Lerp(character1.neckTopWidth, character2.neckTopWidth, interval);
+        neckCurveScale = Mathf.Lerp(character1.neckCurveScale, character2.neckCurveScale, interval);
+        neckCurveRoundness = Mathf.Lerp(character1.neckCurveRoundness, character2.neckCurveRoundness, interval);
+        neckTop = Color.Lerp(character1.neckTop, character2.neckTop, interval);
+        neckBottom = Color.Lerp(character1.neckBottom, character2.neckBottom, interval);
+        eyeRadius = Mathf.Lerp(character1.eyeRadius, character2.eyeRadius, interval);
+        pupilRadius = Mathf.Lerp(character1.pupilRadius, character2.pupilRadius, interval);
+        pupilWidth = Mathf.Lerp(character1.pupilWidth, character2.pupilWidth, interval);
+        pupilLength = Mathf.Lerp(character1.pupilLength, character2.pupilLength, interval);
+        eyelidTopLength = Mathf.Lerp(character1.eyelidTopLength, character2.eyelidTopLength, interval);
+        eyelidBottomLength = Mathf.Lerp(character1.eyelidBottomLength, character2.eyelidBottomLength, interval);
+        eyelidTopSkew = Mathf.Lerp(character1.eyelidTopSkew, character2.eyelidTopSkew, interval);
+        eyelidBottomSkew = Mathf.Lerp(character1.eyelidBottomSkew, character2.eyelidBottomSkew, interval);
+        eyelidTopOpen = Mathf.Lerp(character1.eyelidTopOpen, character2.eyelidTopOpen, interval);
+        eyelidBottomOpen = Mathf.Lerp(character1.eyelidBottomOpen, character2.eyelidBottomOpen, interval);
+        pupilRoundness = Mathf.Lerp(character1.pupilRoundness, character2.pupilRoundness, interval);
+        eyelidCenter = Color.Lerp(character1.eyelidCenter, character2.eyelidCenter, interval);
+        eyelidEdge = Color.Lerp(character1.eyelidEdge, character2.eyelidEdge, interval);
+        eyebrowCount = Mathf.Lerp(character1.eyebrowCount, character2.eyebrowCount, interval);
+        eyebrowThickness = Mathf.Lerp(character1.eyebrowThickness, character2.eyebrowThickness, interval);
+        eyebrowRoundness = Mathf.Lerp(character1.eyebrowRoundness, character2.eyebrowRoundness, interval);
+        eyebrowCurve = Mathf.Lerp(character1.eyebrowCurve, character2.eyebrowCurve, interval);
+        eyebrowInner = Color.Lerp(character1.eyebrowInner, character2.eyebrowInner, interval);
+        eyebrowOuter = Color.Lerp(character1.eyebrowOuter, character2.eyebrowOuter, interval);
+        noseBaseWidth = Mathf.Lerp(character1.noseBaseWidth, character2.noseBaseWidth, interval);
+        noseTopWidth = Mathf.Lerp(character1.noseTopWidth, character2.noseTopWidth, interval);
+        noseTotalWidth = Mathf.Lerp(character1.noseTotalWidth, character2.noseTotalWidth, interval);
+        noseCurve = Mathf.Lerp(character1.noseCurve, character2.noseCurve, interval);
+        noseTotalLength = Mathf.Lerp(character1.noseTotalLength, character2.noseTotalLength, interval);
+        nostrilRadius = Mathf.Lerp(character1.nostrilRadius, character2.nostrilRadius, interval);
+        nostrilHeight = Mathf.Lerp(character1.nostrilHeight, character2.nostrilHeight, interval);
+        nostrilSpacing = Mathf.Lerp(character1.nostrilSpacing, character2.nostrilSpacing, interval);
+        nostrilScale = Mathf.Lerp(character1.nostrilScale, character2.nostrilScale, interval);
+        noseTop = Color.Lerp(character1.noseTop, character2.noseTop, interval);
+        noseBottom = Color.Lerp(character1.noseBottom, character2.noseBottom, interval);
+        mouthRadius = Mathf.Lerp(character1.mouthRadius, character2.mouthRadius, interval);
+        mouthLipTop = Mathf.Lerp(character1.mouthLipTop, character2.mouthLipTop, interval);
+        mouthLipBottom = Mathf.Lerp(character1.mouthLipBottom, character2.mouthLipBottom, interval);
+        mouthLipMaskRoundness = Mathf.Lerp(character1.mouthLipMaskRoundness, character2.mouthLipMaskRoundness, interval);
+        teethTop = Mathf.Lerp(character1.teethTop, character2.teethTop, interval);
+        teethBottom = Mathf.Lerp(character1.teethBottom, character2.teethBottom, interval);
+        teethCount = Mathf.Lerp(character1.teethCount, character2.teethCount, interval);
+        teethRoundness = Mathf.Lerp(character1.teethRoundness, character2.teethRoundness, interval);
+        tongueRadius = Mathf.Lerp(character1.tongueRadius, character2.tongueRadius, interval);
+        tongueScale = Mathf.Lerp(character1.tongueScale, character2.tongueScale, interval);
+        tongueHeight = Mathf.Lerp(character1.tongueHeight, character2.tongueHeight, interval);
+        mouthTop = Color.Lerp(character1.mouthTop, character2.mouthTop, interval);
+        mouthBottom = Color.Lerp(character1.mouthBottom, character2.mouthBottom, interval);
+        tongueTop = Color.Lerp(character1.tongueTop, character2.tongueTop, interval);
+        tongueBottom = Color.Lerp(character1.tongueBottom, character2.tongueBottom, interval);
+        earWidthSkew = Mathf.Lerp(character1.earWidthSkew, character2.earWidthSkew, interval);
+        earLengthSkew = Mathf.Lerp(character1.earLengthSkew, character2.earLengthSkew, interval);
+        earShape = Mathf.Lerp(character1.earShape, character2.earShape, interval);
+        earOpenWidth = Mathf.Lerp(character1.earOpenWidth, character2.earOpenWidth, interval);
+        earOpenLength = Mathf.Lerp(character1.earOpenLength, character2.earOpenLength, interval);
+        earRoundness = Mathf.Lerp(character1.earRoundness, character2.earRoundness, interval);
+        earConcha = Mathf.Lerp(character1.earConcha, character2.earConcha, interval);
+        earTragus = Mathf.Lerp(character1.earTragus, character2.earTragus, interval);
+        earTop = Color.Lerp(character1.earTop, character2.earTop, interval);
+        earBottom = Color.Lerp(character1.earBottom, character2.earBottom, interval);
+        bangWidth = Mathf.Lerp(character1.bangWidth, character2.bangWidth, interval);
+        bangHeight = Mathf.Lerp(character1.bangHeight, character2.bangHeight, interval);
+        bangLength = Mathf.Lerp(character1.bangLength, character2.bangLength, interval);
+        hairWidth = Mathf.Lerp(character1.hairWidth, character2.hairWidth, interval);
+        hairHeight = Mathf.Lerp(character1.hairHeight, character2.hairHeight, interval);
+        hairLength = Mathf.Lerp(character1.hairLength, character2.hairLength, interval);
+        bangRoundnessFront = Mathf.Lerp(character1.bangRoundnessFront, character2.bangRoundnessFront, interval);
+        strandCountFront = Mathf.Lerp(character1.strandCountFront, character2.strandCountFront, interval);
+        strandOffsetFront = Mathf.Lerp(character1.strandOffsetFront, character2.strandOffsetFront, interval);
+        hairBangScaleFront = Mathf.Lerp(character1.hairBangScaleFront, character2.hairBangScaleFront, interval);
+        hairRoundnessFront = Mathf.Lerp(character1.hairRoundnessFront, character2.hairRoundnessFront, interval);
+        hairBaseFront = Color.Lerp(character1.hairBaseFront, character2.hairBaseFront, interval);
+        hairAccentFront = Color.Lerp(character1.hairAccentFront, character2.hairAccentFront, interval);
+        bangRoundnessBack = Mathf.Lerp(character1.bangRoundnessBack, character2.bangRoundnessBack, interval);
+        strandCountBack = Mathf.Lerp(character1.strandCountBack, character2.strandCountBack, interval);
+        strandOffsetBack = Mathf.Lerp(character1.strandOffsetBack, character2.strandOffsetBack, interval);
+        hairBangScaleBack = Mathf.Lerp(character1.hairBangScaleBack, character2.hairBangScaleBack, interval);
+        hairRoundnessBack = Mathf.Lerp(character1.hairRoundnessBack, character2.hairRoundnessBack, interval);
+        hairBaseBack = Color.Lerp(character1.hairBaseBack, character2.hairBaseBack, interval);
+        hairAccentBack = Color.Lerp(character1.hairAccentBack, character2.hairAccentBack, interval);
+
+        SetTransformValues();
+        SetShaderValues();
+    }
+
+
+
     void OnValidate(){
         SetTransformValues();
         SetShaderValues();
@@ -743,7 +867,7 @@ public class FaceController : MonoBehaviour
     }
 
     void Update(){
-/*
+
         if(Input.GetMouseButtonDown(0)){
             AllRandom();
             SetTransformValues();
@@ -751,7 +875,9 @@ public class FaceController : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(1)){
             LoadCharacterData();
-        }*/
+        }
+
+        BlendTwoCharacters(blendChar1, blendChar2, blendCharacterValue);
 
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
        
@@ -771,6 +897,11 @@ public class FaceController : MonoBehaviour
 
         leftPupilX = rotatedLeft.x - rotatedLeft2.x;
         leftPupilY = rotatedLeft2.y - rotatedLeft.y;
+
+        rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(rightPupilX, -eyeRadius/2f, eyeRadius/2f), Time.deltaTime * 3f);
+        rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(rightPupilY, -eyeRadius/10f, eyeRadius/10f), Time.deltaTime * 3f);
+        leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(leftPupilX, -eyeRadius/2f, eyeRadius/2f), Time.deltaTime * 3f);
+        leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(leftPupilY, -eyeRadius/10f, eyeRadius/10f), Time.deltaTime * 3f);
 
         LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
