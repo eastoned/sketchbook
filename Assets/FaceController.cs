@@ -734,6 +734,14 @@ public class FaceController : MonoBehaviour
 
     #endregion
 
+
+    public Vector2 Rotate2D(Vector2 v, float delta) {
+        return new Vector2(
+            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
+            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
+        );
+    }
+
     void Update(){
 /*
         if(Input.GetMouseButtonDown(0)){
@@ -746,27 +754,23 @@ public class FaceController : MonoBehaviour
         }*/
 
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-    
-        //leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(LeftEye.transform.localPosition.x - mousePos.x + Mathf.Cos(eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
-        //leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(LeftEye.transform.localPosition.y - mousePos.y + Mathf.Sin(eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
-        //rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(RightEye.transform.localPosition.x - mousePos.x + Mathf.Cos(-eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
-        ///rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(RightEye.transform.localPosition.y - mousePos.y + Mathf.Sin(-eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
-        Vector2 leftOffset = new Vector2(LeftEye.transform.localPosition.x - mousePos.x, LeftEye.transform.localPosition.y - mousePos.y);
-        leftPupilX = leftOffset.magnitude * Mathf.Cos(-eyeAngle * Mathf.Deg2Rad);
-        leftPupilY = leftOffset.magnitude * Mathf.Sin(-eyeAngle * Mathf.Deg2Rad);
+       
+        //position of mouse relative to right eye position
+        Vector2 rightX = new Vector2(RightEye.transform.localPosition.x - mousePos.x, 0);
+        Vector2 rightY = new Vector2(0, RightEye.transform.localPosition.y - mousePos.y);
+        Vector2 rotatedRight = Rotate2D(rightX, -eyeAngle * Mathf.Deg2Rad);
+        Vector2 rotatedRight2 = Rotate2D(rightY, -eyeAngle * Mathf.Deg2Rad);
 
-        //vector of mouse to eye distance
-        Vector2 rightOffset = new Vector2(RightEye.transform.localPosition.x - mousePos.x, RightEye.transform.localPosition.y - mousePos.y);
-        //need to transform this counter to the eye rotation angle
-        Vector2 xVector = new Vector2(Mathf.Cos(eyeAngle * Mathf.Rad2Deg), Mathf.Sin(eyeAngle * Mathf.Rad2Deg));
-        Vector2 yVector = new Vector2(-Mathf.Sin(eyeAngle * Mathf.Rad2Deg), Mathf.Cos(eyeAngle * Mathf.Rad2Deg));
-        Vector2 xVector2 = new Vector2(Mathf.Sin(eyeAngle * Mathf.Rad2Deg), -Mathf.Cos(eyeAngle * Mathf.Rad2Deg));
+        Vector2 leftX = new Vector2(LeftEye.transform.localPosition.x - mousePos.x, 0);
+        Vector2 leftY = new Vector2(0, RightEye.transform.localPosition.y - mousePos.y);
+        Vector2 rotatedLeft = Rotate2D(leftX, eyeAngle * Mathf.Deg2Rad);
+        Vector2 rotatedLeft2 = Rotate2D(leftY, eyeAngle * Mathf.Deg2Rad);
 
-        Vector2 rotatedOffset = (xVector * rightOffset.x) + (yVector * rightOffset.y);
-        Vector2 rotatedOffset2 = (xVector * rightOffset.x) + (xVector2 * rightOffset.y);
+        rightPupilX = rotatedRight.x - rotatedRight2.x;
+        rightPupilY = rotatedRight2.y - rotatedRight.y;
 
-        rightPupilX = rotatedOffset.x;
-        rightPupilY = rotatedOffset.y;
+        leftPupilX = rotatedLeft.x - rotatedLeft2.x;
+        leftPupilY = rotatedLeft2.y - rotatedLeft.y;
 
         LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
