@@ -60,6 +60,18 @@ public class FaceEditor : Editor
             faceControl.SetShaderValues();
         }
 
+        if(GUILayout.Button("Randomize Bangs")){
+            faceControl.RandomBangs();
+            faceControl.SetTransformValues();
+            faceControl.SetShaderValues();
+        }
+
+        if(GUILayout.Button("Randomize Hair Back")){
+            faceControl.RandomHair();
+            faceControl.SetTransformValues();
+            faceControl.SetShaderValues();
+        }
+
         if(GUILayout.Button("Load Character")){
             faceControl.LoadCharacterData();
         }
@@ -67,5 +79,7 @@ public class FaceEditor : Editor
         if(GUILayout.Button("Save Character")){
             faceControl.SaveCharacterData();
         }
+
+        
     }
 }

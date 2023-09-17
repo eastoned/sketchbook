@@ -34,6 +34,14 @@ public class CharacterData : ScriptableObject
         [Range(-45f, 45f)] public float earAngle;
         [Range(0f, 1f)] public float earSpacing;
 
+        [Range(0f, 1f)] public float bangWidth, bangHeight;
+        [Range(0.25f, 1f)] public float bangLength;
+        [Range(0.25f, 1f)] public float hairWidth;
+        [Range(0f, 1f)] public float hairHeight;
+        [Range(0.5f, 4f)] public float hairLength;
+
+        
+
     #endregion
 
     #region ShaderData
@@ -92,6 +100,14 @@ public class CharacterData : ScriptableObject
         [Range(0.5f, 1.25f)] public float earConcha;
         [Range(0f, 1f)] public float earTragus;
         public Color earTop, earBottom;
+
+        [Range(0.25f, 4f)] public float bangRoundnessFront, bangRoundnessBack;
+        [Range(0, 20)] public float strandCountFront, strandCountBack;
+        [Range(0, 1)] public float strandOffsetFront, strandOffsetBack;
+        [Range(0.5f, 2f)] public float hairBangScaleFront, hairBangScaleBack;
+
+        [Range(1f, 5f)] public float hairRoundnessFront, hairRoundnessBack;
+        public Color hairBaseFront, hairBaseBack, hairAccentFront, hairAccentBack;
         
     #endregion
 

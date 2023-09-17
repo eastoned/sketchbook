@@ -469,8 +469,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244385090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.2175527, z: 0.3}
-  m_LocalScale: {x: 3.8512797, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalScale: {x: 3.8512797, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -597,8 +597,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311225757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.78244734, z: 0}
-  m_LocalScale: {x: 0.5052879, y: 0.532, z: 1}
+  m_LocalPosition: {x: 0, y: 0.15144737, z: 0}
+  m_LocalScale: {x: 3.0810237, y: 1.262, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -1284,12 +1284,12 @@ MonoBehaviour:
   earHeight: -0.20599788
   earAngle: -34.78869
   earSpacing: 0.095021844
-  bangWidth: 0.164
-  bangHeight: 0
-  bangLength: 0.266
+  bangWidth: 1
+  bangHeight: 1
+  bangLength: 0.631
   hairWidth: 1
-  hairHeight: 1
-  hairLength: 4
+  hairHeight: 0
+  hairLength: 1
   chinWidth: 4.61
   chinLength: 3.8425505
   foreheadWidth: 4.98924

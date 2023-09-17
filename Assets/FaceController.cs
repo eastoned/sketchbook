@@ -101,6 +101,13 @@ public class FaceController : MonoBehaviour
     [Range(0f, 1f)] public float earTragus;
     public Color earTop, earBottom;
 
+    [Range(0.25f, 4f)] public float bangRoundnessFront, bangRoundnessBack;
+    [Range(0, 20)] public float strandCountFront, strandCountBack;
+    [Range(0, 1)] public float strandOffsetFront, strandOffsetBack;
+    [Range(0.5f, 2f)] public float hairBangScaleFront, hairBangScaleBack;
+
+    [Range(1f, 5f)] public float hairRoundnessFront, hairRoundnessBack;
+    public Color hairBaseFront, hairBaseBack, hairAccentFront, hairAccentBack;
 
     public float leftPupilX;
     public float leftPupilY;
@@ -158,7 +165,7 @@ public class FaceController : MonoBehaviour
     }
 
     public void SetShaderValues(){
-        MaterialPropertyBlock EyeProp, EyebrowProp, EarProp, NoseProp, MouthProp, HeadProp, NeckProp;
+        MaterialPropertyBlock EyeProp, EyebrowProp, EarProp, NoseProp, MouthProp, HeadProp, NeckProp, HairFrontProp, HairBackProp;
         EyeProp = new MaterialPropertyBlock();
         EyebrowProp = new MaterialPropertyBlock();
         EarProp = new MaterialPropertyBlock();
@@ -166,6 +173,8 @@ public class FaceController : MonoBehaviour
         MouthProp = new MaterialPropertyBlock();
         HeadProp = new MaterialPropertyBlock();
         NeckProp = new MaterialPropertyBlock();
+        HairFrontProp = new MaterialPropertyBlock();
+        HairBackProp = new MaterialPropertyBlock();
 
         HeadProp.SetFloat("_ChinWidth", chinWidth);
         HeadProp.SetFloat("_ChinLength", chinLength);
@@ -266,6 +275,27 @@ public class FaceController : MonoBehaviour
         LeftEar.SetPropertyBlock(EarProp);
         RightEar.SetPropertyBlock(EarProp);
 
+        HairFrontProp.SetFloat("_BangRoundness", bangRoundnessFront);
+        HairFrontProp.SetFloat("_StrandCount", strandCountFront);
+        HairFrontProp.SetFloat("_StrandOffset", strandOffsetFront);
+        HairFrontProp.SetFloat("_HairBangScale", hairBangScaleFront);
+        HairFrontProp.SetFloat("_HairRoundness", hairRoundnessFront);
+
+        HairFrontProp.SetColor("_Color1", hairBaseFront);
+        HairFrontProp.SetColor("_Color2", hairAccentFront);
+
+        HairBackProp.SetFloat("_BangRoundness", bangRoundnessBack);
+        HairBackProp.SetFloat("_StrandCount", strandCountBack);
+        HairBackProp.SetFloat("_StrandOffset", strandOffsetBack);
+        HairBackProp.SetFloat("_HairBangScale", hairBangScaleBack);
+        HairBackProp.SetFloat("_HairRoundness", hairRoundnessBack);
+
+        HairBackProp.SetColor("_Color1", hairBaseBack);
+        HairBackProp.SetColor("_Color2", hairAccentBack);
+
+        HairFront.SetPropertyBlock(HairFrontProp);
+        HairBack.SetPropertyBlock(HairBackProp);
+
     }
 
     void Start(){
@@ -365,6 +395,26 @@ public class FaceController : MonoBehaviour
         earTragus = currentChar.earTragus;
         earTop = currentChar.earTop;
         earBottom = currentChar.earBottom;
+        bangWidth = currentChar.bangWidth;
+        bangHeight = currentChar.bangHeight;
+        bangLength = currentChar.bangLength;
+        hairWidth = currentChar.hairWidth;
+        hairHeight = currentChar.hairHeight;
+        hairLength = currentChar.hairLength;
+        bangRoundnessFront = currentChar.bangRoundnessFront;
+        strandCountFront = currentChar.strandCountFront;
+        strandOffsetFront = currentChar.strandOffsetFront;
+        hairBangScaleFront = currentChar.hairBangScaleFront;
+        hairRoundnessFront = currentChar.hairRoundnessFront;
+        hairBaseFront = currentChar.hairBaseFront;
+        hairAccentFront = currentChar.hairAccentFront;
+        bangRoundnessBack = currentChar.bangRoundnessBack;
+        strandCountBack = currentChar.strandCountBack;
+        strandOffsetBack = currentChar.strandOffsetBack;
+        hairBangScaleBack = currentChar.hairBangScaleBack;
+        hairRoundnessBack = currentChar.hairRoundnessBack;
+        hairBaseBack = currentChar.hairBaseBack;
+        hairAccentBack = currentChar.hairAccentBack;
 
         SetTransformValues();
         SetShaderValues();
@@ -469,6 +519,26 @@ public class FaceController : MonoBehaviour
         currentChar.earTragus = earTragus;
         currentChar.earTop = earTop;
         currentChar.earBottom = earBottom;
+        currentChar.bangWidth = bangWidth;
+        currentChar.bangHeight = bangHeight;
+        currentChar.bangLength = bangLength;
+        currentChar.hairWidth = hairWidth;
+        currentChar.hairHeight = hairHeight;
+        currentChar.hairLength = hairLength;
+        currentChar.bangRoundnessFront = bangRoundnessFront;
+        currentChar.strandCountFront = strandCountFront;
+        currentChar.strandOffsetFront = strandOffsetFront;
+        currentChar.hairBangScaleFront = hairBangScaleFront;
+        currentChar.hairRoundnessFront = hairRoundnessFront;
+        currentChar.hairBaseFront = hairBaseFront;
+        currentChar.hairAccentFront = hairAccentFront;
+        currentChar.bangRoundnessBack = bangRoundnessBack;
+        currentChar.strandCountBack = strandCountBack;
+        currentChar.strandOffsetBack = strandOffsetBack;
+        currentChar.hairBangScaleBack = hairBangScaleBack;
+        currentChar.hairRoundnessBack = hairRoundnessBack;
+        currentChar.hairBaseBack = hairBaseBack;
+        currentChar.hairAccentBack = hairAccentBack;
 
     }
     
@@ -482,6 +552,8 @@ public class FaceController : MonoBehaviour
         RandomNose();
         RandomMouth();
         RandomEar();
+        RandomBangs();
+        RandomHair();
     }
 
     public void RandomHead(){
@@ -529,7 +601,6 @@ public class FaceController : MonoBehaviour
         mouthWidth = Random.Range(0.25f, 2.5f);
         mouthLength = Random.Range(0.2f, 1f);
         mouthHeight = Random.Range(0f, 1f);
-
         mouthRadius = Random.Range(0.1f, 1f);
         mouthLipTop = Random.Range(-1f, 1f);
         mouthLipBottom = Random.Range(-1f, 1f);
@@ -566,7 +637,6 @@ public class FaceController : MonoBehaviour
         eyelidTopOpen = Random.Range(0f, 1f);
         eyelidBottomOpen = Random.Range(0f, 1f);
         pupilRoundness = Random.Range(0.25f, 1f);
-
         eyelidCenter = Random.ColorHSV();
         eyelidEdge = Random.ColorHSV();
     }
@@ -605,6 +675,33 @@ public class FaceController : MonoBehaviour
         noseTop = Random.ColorHSV();
         noseBottom = Random.ColorHSV();
     
+    }
+
+    public void RandomBangs(){
+        bangWidth = Random.Range(0f, 1f);
+        bangHeight = Random.Range(0f, 1f);
+        bangLength = Random.Range(0.25f, 1f); 
+        bangRoundnessFront = Random.Range(0.25f, 4f);
+        strandCountFront = Random.Range(0f, 20f);
+        strandOffsetFront = Random.Range(0, 2);
+        hairBangScaleFront = Random.Range(0.5f, 2f);
+        hairRoundnessFront = Random.Range(1f, 5f);
+        hairBaseFront = Random.ColorHSV();
+        hairAccentFront = Random.ColorHSV();
+        
+    }
+
+    public void RandomHair(){
+        hairWidth = Random.Range(0.25f, 1f);
+        hairHeight = Random.Range(0f, 1f);
+        hairLength = Random.Range(0.5f, 4f);
+        bangRoundnessBack = Random.Range(0.25f, 4f);
+        strandCountBack = Random.Range(0f, 20f);
+        strandOffsetBack = Random.Range(0, 2);
+        hairBangScaleBack = Random.Range(0.5f, 2f);
+        hairRoundnessBack = Random.Range(1f, 5f);
+        hairBaseBack = Random.ColorHSV();
+        hairAccentBack = Random.ColorHSV();
     }
 
     #endregion
