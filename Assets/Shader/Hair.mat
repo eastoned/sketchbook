@@ -27,10 +27,10 @@ Material:
     - _BangCount: 6.1
     - _BangOffset: 1
     - _BangRoundness: 4
-    - _HairBangScale: 0.5
+    - _HairBangScale: 1.373
     - _HairRoundness: 5
     - _StrandCount: 6.6
-    - _StrandOffset: 0
+    - _StrandOffset: 0.638
     - _TopRoundness: 5
     - _yOffset: 2
     m_Colors:

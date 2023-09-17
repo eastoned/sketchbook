@@ -7,11 +7,13 @@ using UnityEngine.XR;
 
 public class FaceController : MonoBehaviour
 {
-    [SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck, HairFront, HairBack;
+    [HideInInspector][SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck, HairFront, HairBack;
 
     public HeadController headScalerTop, headScalerBottom, headScalerLeft, headScalerRight;
 
     public CharacterData currentChar;
+
+    #region Transform Variables
 
     [Range(0f, 1f)] public float headWidth, headLength;
         
@@ -45,6 +47,10 @@ public class FaceController : MonoBehaviour
     [Range(0.25f, 1f)] public float hairWidth;
     [Range(0f, 1f)] public float hairHeight;
     [Range(0.5f, 4f)] public float hairLength;
+
+    #endregion
+
+    #region Shader Variables
 
     [Range(0.1f, 5f)] public float chinWidth, chinLength, foreheadWidth, foreheadLength;
     [Range(2f, 4f)] public float chinScale, foreheadScale;
@@ -109,12 +115,16 @@ public class FaceController : MonoBehaviour
     [Range(1f, 5f)] public float hairRoundnessFront, hairRoundnessBack;
     public Color hairBaseFront, hairBaseBack, hairAccentFront, hairAccentBack;
 
+    #endregion
+
     public float leftPupilX;
     public float leftPupilY;
     public float rightPupilX;
     public float rightPupilY;
 
     public Vector2 mousePos;
+
+    MaterialPropertyBlock LeftEyeProp, RightEyeProp;
 
     public void SetTransformValues(){
         float actualHeadWidth = Mathf.Lerp(2,4, headWidth);
@@ -165,8 +175,9 @@ public class FaceController : MonoBehaviour
     }
 
     public void SetShaderValues(){
-        MaterialPropertyBlock EyeProp, EyebrowProp, EarProp, NoseProp, MouthProp, HeadProp, NeckProp, HairFrontProp, HairBackProp;
-        EyeProp = new MaterialPropertyBlock();
+        MaterialPropertyBlock EyebrowProp, EarProp, NoseProp, MouthProp, HeadProp, NeckProp, HairFrontProp, HairBackProp;
+        LeftEyeProp = new MaterialPropertyBlock();
+        RightEyeProp = new MaterialPropertyBlock();
         EyebrowProp = new MaterialPropertyBlock();
         EarProp = new MaterialPropertyBlock();
         NoseProp = new MaterialPropertyBlock();
@@ -195,25 +206,42 @@ public class FaceController : MonoBehaviour
 
         Neck.SetPropertyBlock(NeckProp);
 
-        EyeProp.SetFloat("_EyeRadius", eyeRadius);
-        EyeProp.SetFloat("_PupilRadius", pupilRadius);
-        EyeProp.SetFloat("_PupilWidth", pupilWidth);
-        EyeProp.SetFloat("_PupilLength", pupilLength);
-        EyeProp.SetFloat("_EyelidTopLength", eyelidTopLength);
-        EyeProp.SetFloat("_EyelidTopSkew", eyelidTopSkew);
-        EyeProp.SetFloat("_EyelidBottomLength", eyelidBottomLength);
-        EyeProp.SetFloat("_EyelidBottomSkew", eyelidBottomSkew);
-        EyeProp.SetFloat("_EyelidTopOpen", eyelidTopOpen);
-        EyeProp.SetFloat("_EyelidBottomOpen", eyelidBottomOpen);
-        EyeProp.SetFloat("_PupilRoundness", pupilRoundness);
+        LeftEyeProp.SetFloat("_EyeRadius", eyeRadius);
+        LeftEyeProp.SetFloat("_PupilRadius", pupilRadius);
+        LeftEyeProp.SetFloat("_PupilWidth", pupilWidth);
+        LeftEyeProp.SetFloat("_PupilLength", pupilLength);
+        LeftEyeProp.SetFloat("_EyelidTopLength", eyelidTopLength);
+        LeftEyeProp.SetFloat("_EyelidTopSkew", eyelidTopSkew);
+        LeftEyeProp.SetFloat("_EyelidBottomLength", eyelidBottomLength);
+        LeftEyeProp.SetFloat("_EyelidBottomSkew", eyelidBottomSkew);
+        LeftEyeProp.SetFloat("_EyelidTopOpen", eyelidTopOpen);
+        LeftEyeProp.SetFloat("_EyelidBottomOpen", eyelidBottomOpen);
+        LeftEyeProp.SetFloat("_PupilRoundness", pupilRoundness);
 
-        EyeProp.SetColor("_Color1", eyelidCenter);
-        EyeProp.SetColor("_Color2", eyelidEdge);
-        EyeProp.SetColor("_Color3", Color.black);
-        EyeProp.SetColor("_Color4", Color.black);
+        LeftEyeProp.SetColor("_Color1", eyelidCenter);
+        LeftEyeProp.SetColor("_Color2", eyelidEdge);
+        LeftEyeProp.SetColor("_Color3", Color.black);
+        LeftEyeProp.SetColor("_Color4", Color.black);
 
-        LeftEye.SetPropertyBlock(EyeProp);
-        RightEye.SetPropertyBlock(EyeProp);
+        RightEyeProp.SetFloat("_EyeRadius", eyeRadius);
+        RightEyeProp.SetFloat("_PupilRadius", pupilRadius);
+        RightEyeProp.SetFloat("_PupilWidth", pupilWidth);
+        RightEyeProp.SetFloat("_PupilLength", pupilLength);
+        RightEyeProp.SetFloat("_EyelidTopLength", eyelidTopLength);
+        RightEyeProp.SetFloat("_EyelidTopSkew", eyelidTopSkew);
+        RightEyeProp.SetFloat("_EyelidBottomLength", eyelidBottomLength);
+        RightEyeProp.SetFloat("_EyelidBottomSkew", eyelidBottomSkew);
+        RightEyeProp.SetFloat("_EyelidTopOpen", eyelidTopOpen);
+        RightEyeProp.SetFloat("_EyelidBottomOpen", eyelidBottomOpen);
+        RightEyeProp.SetFloat("_PupilRoundness", pupilRoundness);
+
+        RightEyeProp.SetColor("_Color1", eyelidCenter);
+        RightEyeProp.SetColor("_Color2", eyelidEdge);
+        RightEyeProp.SetColor("_Color3", Color.black);
+        RightEyeProp.SetColor("_Color4", Color.black);
+
+        LeftEye.SetPropertyBlock(LeftEyeProp);
+        RightEye.SetPropertyBlock(RightEyeProp);
 
         EyebrowProp.SetFloat("_EyebrowCount", eyebrowCount);
         EyebrowProp.SetFloat("_EyebrowThickness", eyebrowThickness);
@@ -299,7 +327,7 @@ public class FaceController : MonoBehaviour
     }
 
     void Start(){
-        LoadCharacterData();
+        //LoadCharacterData();
     }
 
     public void LoadCharacterData(){
@@ -705,4 +733,50 @@ public class FaceController : MonoBehaviour
     }
 
     #endregion
+
+    void Update(){
+/*
+        if(Input.GetMouseButtonDown(0)){
+            AllRandom();
+            SetTransformValues();
+            SetShaderValues();
+        }
+        if(Input.GetMouseButtonDown(1)){
+            LoadCharacterData();
+        }*/
+
+        mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+    
+        //leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(LeftEye.transform.localPosition.x - mousePos.x + Mathf.Cos(eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
+        //leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(LeftEye.transform.localPosition.y - mousePos.y + Mathf.Sin(eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
+        //rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(RightEye.transform.localPosition.x - mousePos.x + Mathf.Cos(-eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
+        ///rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(RightEye.transform.localPosition.y - mousePos.y + Mathf.Sin(-eyeAngle), -eyeRadius*.1f, eyeRadius*.1f), Time.deltaTime*5);
+        Vector2 leftOffset = new Vector2(LeftEye.transform.localPosition.x - mousePos.x, LeftEye.transform.localPosition.y - mousePos.y);
+        leftPupilX = leftOffset.magnitude * Mathf.Cos(-eyeAngle * Mathf.Deg2Rad);
+        leftPupilY = leftOffset.magnitude * Mathf.Sin(-eyeAngle * Mathf.Deg2Rad);
+
+        //vector of mouse to eye distance
+        Vector2 rightOffset = new Vector2(RightEye.transform.localPosition.x - mousePos.x, RightEye.transform.localPosition.y - mousePos.y);
+        //need to transform this counter to the eye rotation angle
+        Vector2 xVector = new Vector2(Mathf.Cos(eyeAngle * Mathf.Rad2Deg), Mathf.Sin(eyeAngle * Mathf.Rad2Deg));
+        Vector2 yVector = new Vector2(-Mathf.Sin(eyeAngle * Mathf.Rad2Deg), Mathf.Cos(eyeAngle * Mathf.Rad2Deg));
+        Vector2 xVector2 = new Vector2(Mathf.Sin(eyeAngle * Mathf.Rad2Deg), -Mathf.Cos(eyeAngle * Mathf.Rad2Deg));
+
+        Vector2 rotatedOffset = (xVector * rightOffset.x) + (yVector * rightOffset.y);
+        Vector2 rotatedOffset2 = (xVector * rightOffset.x) + (xVector2 * rightOffset.y);
+
+        rightPupilX = rotatedOffset.x;
+        rightPupilY = rotatedOffset.y;
+
+        LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
+        LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
+
+        RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
+        RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
+
+        LeftEye.SetPropertyBlock(LeftEyeProp);
+        RightEye.SetPropertyBlock(RightEyeProp);
+
+
+    }
 }

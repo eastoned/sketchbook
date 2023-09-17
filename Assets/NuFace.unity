@@ -216,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 95416233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 3.0810237, y: 2.8580294, z: 0}
+  m_LocalScale: {x: 2.914, y: 3.208, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -340,9 +340,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99618904}
-  m_LocalRotation: {x: 0, y: 0, z: 0.17912102, w: 0.98382705}
-  m_LocalPosition: {x: 0.9727449, y: -0.103297114, z: 0}
-  m_LocalScale: {x: 0.5493898, y: 0.91497964, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268346, w: 0.9238795}
+  m_LocalPosition: {x: 0.69523996, y: -0.57247126, z: 0}
+  m_LocalScale: {x: 0.76, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -469,8 +469,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244385090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.3}
-  m_LocalScale: {x: 3.8512797, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0.3}
+  m_LocalScale: {x: 3.6425, y: 2.948, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -597,8 +597,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311225757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15144737, z: 0}
-  m_LocalScale: {x: 3.0810237, y: 1.262, z: 1}
+  m_LocalPosition: {x: 0, y: 1.05574, z: 0}
+  m_LocalScale: {x: 2.914, y: 1.388, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -901,9 +901,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524532353}
-  m_LocalRotation: {x: 0, y: 0, z: -0.23798573, w: 0.97126865}
-  m_LocalPosition: {x: 0.6201914, y: -0.1824768, z: -0.2}
-  m_LocalScale: {x: 0.35966527, y: 0.13182148, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.07410849, w: 0.9972502}
+  m_LocalPosition: {x: 0.50213486, y: -0.19453199, z: -0.2}
+  m_LocalScale: {x: 0.896, y: 0.3141, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -997,9 +997,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610878716}
-  m_LocalRotation: {x: 0, y: 0, z: 0.29894662, w: 0.9542699}
-  m_LocalPosition: {x: 0.22208916, y: 0.29816484, z: 0.2}
-  m_LocalScale: {x: 1.6401942, y: 0.5411322, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.23004974, w: 0.97317886}
+  m_LocalPosition: {x: 1.7722933, y: 0.44715956, z: 0.2}
+  m_LocalScale: {x: 1.363, y: 1.363, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -1207,9 +1207,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838332023}
-  m_LocalRotation: {x: 0, y: 0, z: -0.29894662, w: 0.9542699}
-  m_LocalPosition: {x: -0.22208916, y: 0.29816484, z: 0.2}
-  m_LocalScale: {x: -1.6401942, y: 0.5411322, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.23004974, w: 0.97317886}
+  m_LocalPosition: {x: -1.7722933, y: 0.44715956, z: 0.2}
+  m_LocalScale: {x: -1.363, y: 1.363, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1260,104 +1260,118 @@ MonoBehaviour:
   headScalerLeft: {fileID: 1901880332}
   headScalerRight: {fileID: 834628291}
   currentChar: {fileID: 11400000, guid: df53655eb27dd614aa0d1b55ead3c8e3, type: 2}
-  headWidth: 0.5405118
-  headLength: 0.42901474
-  neckWidth: 0.13266289
-  eyeAngle: -20.63713
-  eyeSpacing: 0.73961365
-  eyeHeight: -0.1219179
-  eyeLength: 0.91497964
-  eyeWidth: 0.5493898
-  eyebrowAngle: 27.535374
-  eyebrowSpacing: 0.65323913
-  eyebrowHeight: -0.008254334
-  eyebrowLength: 0.35966527
-  eyebrowWidth: 0.13182148
-  noseHeight: 0.9605466
-  noseLength: 1.3436347
-  noseWidth: 1.3840141
-  mouthWidth: 0.92834663
-  mouthLength: 0.7733002
-  mouthHeight: 0.91481304
-  earWidth: 1.6401942
-  earLength: 0.5411322
-  earHeight: -0.20599788
-  earAngle: -34.78869
-  earSpacing: 0.095021844
+  headWidth: 0.457
+  headLength: 0.604
+  neckWidth: 0.487
+  eyeAngle: -45
+  eyeSpacing: 0.52
+  eyeHeight: -0.433
+  eyeLength: 1
+  eyeWidth: 0.76
+  eyebrowAngle: -8.5
+  eyebrowSpacing: 0.531
+  eyebrowHeight: 0.5
+  eyebrowLength: 0.896
+  eyebrowWidth: 0.3141
+  noseHeight: 0.161
+  noseLength: 1.333
+  noseWidth: 1.326
+  mouthWidth: 1.519
+  mouthLength: 0.571
+  mouthHeight: 0.294
+  earWidth: 1.363
+  earLength: 1.363
+  earHeight: 0.251
+  earAngle: -26.6
+  earSpacing: 0.82
   bangWidth: 1
-  bangHeight: 1
-  bangLength: 0.631
+  bangHeight: 0.79
+  bangLength: 0.694
   hairWidth: 1
-  hairHeight: 0
-  hairLength: 1
-  chinWidth: 4.61
-  chinLength: 3.8425505
-  foreheadWidth: 4.98924
-  foreheadLength: 2.6885824
-  chinScale: 3.1826596
-  foreheadScale: 3.6526794
-  headTop: {r: 0.6517646, g: 0.9675212, b: 0.5202518, a: 1}
-  headBottom: {r: 0.14058264, g: 0.37764293, b: 0.045658845, a: 1}
-  neckTopWidth: 1.9122095
-  neckCurveScale: 3.6786668
-  neckCurveRoundness: 2.8918424
-  neckTop: {r: 0.02507281, g: 0.050267886, b: 0.31684664, a: 1}
-  neckBottom: {r: 0.47167334, g: 0.42122582, b: 0.73956865, a: 1}
-  eyeRadius: 0.4646734
-  pupilRadius: 0.5507401
-  pupilWidth: 0.9714643
-  pupilLength: 0.9621007
-  eyelidTopLength: 1.7045039
-  eyelidBottomLength: 2.4123378
-  eyelidTopSkew: 0.5431178
-  eyelidBottomSkew: 0.4418108
-  eyelidTopOpen: 0.77194226
-  eyelidBottomOpen: 0.27337104
-  pupilRoundness: 0.79243636
-  eyelidCenter: {r: 0.46570435, g: 0.3899088, b: 0.50662035, a: 1}
-  eyelidEdge: {r: 0.9104172, g: 0.059495598, b: 0.5207388, a: 1}
-  eyebrowCount: 4
-  eyebrowThickness: 2.227594
-  eyebrowRoundness: 3.7079926
-  eyebrowCurve: -0.41121185
-  eyebrowInner: {r: 0.17235623, g: 0.7286412, b: 0.35152537, a: 1}
-  eyebrowOuter: {r: 0.09839308, g: 0.20889485, b: 0.24472168, a: 1}
-  noseBaseWidth: 1.6165233
-  noseTopWidth: 0.54029715
-  noseTotalWidth: 3.38819
-  noseCurve: 4.1108866
-  noseTotalLength: 1.0603143
-  nostrilRadius: 0.42364007
-  nostrilHeight: -0.1138363
-  nostrilSpacing: 0.31137294
-  nostrilScale: 0.3260688
-  noseTop: {r: 0.012869729, g: 0.044356707, b: 0.010216077, a: 1}
-  noseBottom: {r: 0.07517374, g: 0.041398805, b: 0.035487916, a: 1}
-  mouthRadius: 0.5846039
-  mouthLipTop: -0.8213043
-  mouthLipBottom: -0.71616864
-  mouthLipMaskRoundness: 0.21606362
-  teethTop: 0.52552766
-  teethBottom: 0.70206237
-  teethCount: 5
-  teethRoundness: 2.5014596
-  tongueRadius: 0.21190226
-  tongueScale: 0.38628873
-  tongueHeight: 0.7886214
-  mouthTop: {r: 0.48251978, g: 0.58446276, b: 0.80655885, a: 1}
-  mouthBottom: {r: 0.059183426, g: 0.06948019, b: 0.020987215, a: 1}
-  tongueTop: {r: 0.13861527, g: 0.036342505, b: 0.011731573, a: 1}
-  tongueBottom: {r: 0.5947282, g: 0.5930059, b: 0.5960191, a: 1}
-  earWidthSkew: 0.99056315
-  earLengthSkew: 0.600796
-  earShape: 5.934496
-  earOpenWidth: 1.1810493
-  earOpenLength: 1.3968862
-  earRoundness: 0.6584304
-  earConcha: 0.5587745
-  earTragus: 0.16529882
-  earTop: {r: 0.53949046, g: 0.6183954, b: 0.33961558, a: 1}
-  earBottom: {r: 0.28045806, g: 0.3401536, b: 0.31581175, a: 1}
+  hairHeight: 1
+  hairLength: 2.948
+  chinWidth: 1.91
+  chinLength: 3.06
+  foreheadWidth: 4.33
+  foreheadLength: 3.02
+  chinScale: 2.65
+  foreheadScale: 2
+  headTop: {r: 1, g: 0.14779866, b: 0.14779866, a: 0}
+  headBottom: {r: 0, g: 0, b: 0, a: 0}
+  neckTopWidth: 1.72
+  neckCurveScale: 3.381
+  neckCurveRoundness: 1.786
+  neckTop: {r: 0, g: 0, b: 0, a: 0}
+  neckBottom: {r: 1, g: 0, b: 0, a: 0}
+  eyeRadius: 0.715
+  pupilRadius: 0.448
+  pupilWidth: 0.511
+  pupilLength: 0.511
+  eyelidTopLength: 1.28
+  eyelidBottomLength: 1.3
+  eyelidTopSkew: 0.465
+  eyelidBottomSkew: 0.469
+  eyelidTopOpen: 0.812
+  eyelidBottomOpen: 0.919
+  pupilRoundness: 0.599
+  eyelidCenter: {r: 0, g: 0, b: 0, a: 0}
+  eyelidEdge: {r: 0, g: 0, b: 0, a: 0}
+  eyebrowCount: 7.72
+  eyebrowThickness: 4.44
+  eyebrowRoundness: 2.12
+  eyebrowCurve: 0
+  eyebrowInner: {r: 0, g: 0, b: 0, a: 0}
+  eyebrowOuter: {r: 0, g: 0, b: 0, a: 0}
+  noseBaseWidth: 1.657
+  noseTopWidth: 0.1
+  noseTotalWidth: 5
+  noseCurve: 2.98
+  noseTotalLength: 1.55
+  nostrilRadius: 0.063
+  nostrilHeight: -0.166
+  nostrilSpacing: 0.108
+  nostrilScale: 1.109
+  noseTop: {r: 0, g: 0, b: 0, a: 0}
+  noseBottom: {r: 0, g: 0, b: 0, a: 0}
+  mouthRadius: 0.527
+  mouthLipTop: 0.731
+  mouthLipBottom: 1
+  mouthLipMaskRoundness: 0.457
+  teethTop: 1
+  teethBottom: 0.693
+  teethCount: 13.8
+  teethRoundness: 1.065
+  tongueRadius: 0.12
+  tongueScale: 0.491
+  tongueHeight: 0.5
+  mouthTop: {r: 0, g: 0, b: 0, a: 0}
+  mouthBottom: {r: 0, g: 0, b: 0, a: 0}
+  tongueTop: {r: 0, g: 0, b: 0, a: 0}
+  tongueBottom: {r: 0, g: 0, b: 0, a: 0}
+  earWidthSkew: 0.4
+  earLengthSkew: 1
+  earShape: 3.83
+  earOpenWidth: 1
+  earOpenLength: 1.5
+  earRoundness: 0.6
+  earConcha: 0.888
+  earTragus: 1
+  earTop: {r: 1, g: 0, b: 0, a: 0}
+  earBottom: {r: 0, g: 0, b: 0, a: 0}
+  bangRoundnessFront: 2.01
+  bangRoundnessBack: 1.81
+  strandCountFront: 8.26
+  strandCountBack: 8.32
+  strandOffsetFront: 0.41
+  strandOffsetBack: 0.41
+  hairBangScaleFront: 1.116
+  hairBangScaleBack: 1.116
+  hairRoundnessFront: 2.64
+  hairRoundnessBack: 2.64
+  hairBaseFront: {r: 0, g: 0, b: 0, a: 0}
+  hairBaseBack: {r: 0, g: 0, b: 0, a: 0}
+  hairAccentFront: {r: 0.9056604, g: 0, b: 0, a: 0}
+  hairAccentBack: {r: 0.5568628, g: 0, b: 0, a: 1}
   leftPupilX: 0
   leftPupilY: 0
   rightPupilX: 0
@@ -1468,7 +1482,7 @@ Transform:
   m_GameObject: {fileID: 1269006686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0.2}
-  m_LocalScale: {x: 0.8424061, y: 2, z: 1}
+  m_LocalScale: {x: 1.6756179, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -1563,8 +1577,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272764998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.47250044, z: -0.1}
-  m_LocalScale: {x: 1.3840141, y: 1.3436347, z: 1}
+  m_LocalPosition: {x: 0, y: -0.71265966, z: -0.1}
+  m_LocalScale: {x: 1.326, y: 1.333, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1772,9 +1786,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451965497}
-  m_LocalRotation: {x: 0, y: 0, z: -0.17912102, w: 0.98382705}
-  m_LocalPosition: {x: -0.9727449, y: -0.103297114, z: 0}
-  m_LocalScale: {x: -0.5493898, y: 0.91497964, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268346, w: 0.9238795}
+  m_LocalPosition: {x: -0.69523996, y: -0.57247126, z: 0}
+  m_LocalScale: {x: -0.76, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1952,8 +1966,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470558954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8617533, z: 0}
-  m_LocalScale: {x: 0.92834663, y: 0.7733002, z: 1}
+  m_LocalPosition: {x: 0, y: -0.8590441, z: 0}
+  m_LocalScale: {x: 1.519, y: 0.571, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -2047,9 +2061,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792980029}
-  m_LocalRotation: {x: 0, y: 0, z: 0.23798573, w: 0.97126865}
-  m_LocalPosition: {x: -0.6201914, y: -0.1824768, z: -0.2}
-  m_LocalScale: {x: -0.35966527, y: 0.13182148, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.07410849, w: 0.9972502}
+  m_LocalPosition: {x: -0.50213486, y: -0.19453199, z: -0.2}
+  m_LocalScale: {x: -0.896, y: 0.3141, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
