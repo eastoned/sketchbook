@@ -28,7 +28,7 @@ public class FaceController : MonoBehaviour
 
     [Range(-45f, 25f)] public float eyebrowAngle;
     [Range(0f, 1f)] public float eyebrowSpacing;
-    [Range(-0.25f, 0.5f)] public float eyebrowHeight;
+    [Range(0f, 1f)] public float eyebrowHeight;
     [Range(0.2f, 1.5f)] public float eyebrowLength;
     [Range(0.1f, 0.5f)] public float eyebrowWidth;
 
@@ -131,7 +131,7 @@ public class FaceController : MonoBehaviour
     MaterialPropertyBlock LeftEyeProp, RightEyeProp;
 
     public void SetTransformValues(){
-        float actualHeadWidth = Mathf.Lerp(2,4, headWidth);
+        float actualHeadWidth = Mathf.Lerp(1,4, headWidth);
         float actualHeadLength = Mathf.Lerp(2,4, headLength);
         Head.transform.localScale = new Vector3(actualHeadWidth, actualHeadLength, 0);
         
@@ -147,9 +147,11 @@ public class FaceController : MonoBehaviour
 
         LeftEyebrow.transform.localEulerAngles = new Vector3(0, 0, eyebrowAngle);
         RightEyebrow.transform.localEulerAngles = new Vector3(0, 0, -eyebrowAngle);
+
+        float actualEyebrowHeight = Mathf.Lerp(actualEyeHeight, Mathf.Lerp(1, 2, headLength) * 2/foreheadScale, eyebrowHeight);
         
-        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) + eyebrowHeight, -0.2f);
-        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), eyeHeight * Mathf.Lerp(1, 2, headLength) + eyebrowHeight, -0.2f);
+        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.2f);
+        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.2f);
         LeftEyebrow.transform.localScale = new Vector3(-eyebrowLength, eyebrowWidth, 1);
         RightEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
     
