@@ -359,7 +359,6 @@ GameObject:
   - component: {fileID: 244385095}
   - component: {fileID: 244385094}
   - component: {fileID: 244385093}
-  - component: {fileID: 244385092}
   - component: {fileID: 244385091}
   m_Layer: 0
   m_Name: HairBack
@@ -381,23 +380,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &244385092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244385090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be54ecf14d8557449b7b5934aaede7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headControls:
-  - {fileID: 1401635625}
-  - {fileID: 437113633}
-  - {fileID: 1901880334}
-  - {fileID: 834628293}
 --- !u!64 &244385093
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -487,7 +469,6 @@ GameObject:
   - component: {fileID: 311225762}
   - component: {fileID: 311225761}
   - component: {fileID: 311225760}
-  - component: {fileID: 311225759}
   - component: {fileID: 311225758}
   m_Layer: 0
   m_Name: HairFront
@@ -509,23 +490,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &311225759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311225757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be54ecf14d8557449b7b5934aaede7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headControls:
-  - {fileID: 1401635625}
-  - {fileID: 437113633}
-  - {fileID: 1901880334}
-  - {fileID: 834628293}
 --- !u!64 &311225760
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -902,7 +866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524532353}
   m_LocalRotation: {x: 0, y: 0, z: -0.041003734, w: 0.999159}
-  m_LocalPosition: {x: 0.4222958, y: 0.444371, z: -0.2}
+  m_LocalPosition: {x: 0.4222958, y: 0.444371, z: -0.15}
   m_LocalScale: {x: 0.614, y: 0.2953, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1259,9 +1223,7 @@ MonoBehaviour:
   headScalerBottom: {fileID: 437113631}
   headScalerLeft: {fileID: 1901880332}
   headScalerRight: {fileID: 834628291}
-  currentChar: {fileID: 11400000, guid: 92bd3646a18efe04a88523c732c75441, type: 2}
-  blendChar1: {fileID: 11400000, guid: df53655eb27dd614aa0d1b55ead3c8e3, type: 2}
-  blendChar2: {fileID: 11400000, guid: 25cef2d480cdf6d4480885399c3e473a, type: 2}
+  currentChar: {fileID: 11400000, guid: fcdf071b2e5e6904e9fa68941481dbf3, type: 2}
   headWidth: 0.2
   headLength: 0.687
   neckWidth: 0.725
@@ -1360,13 +1322,13 @@ MonoBehaviour:
   earTragus: 0.66
   earTop: {r: 0.5803922, g: 0.41176474, b: 0.3372549, a: 1}
   earBottom: {r: 0.7075472, g: 0.3626556, b: 0.21026166, a: 1}
-  bangRoundnessFront: 1.857
+  bangRoundnessFront: 4
   bangRoundnessBack: 4
   strandCountFront: 7.55
-  strandCountBack: 8.8
+  strandCountBack: 12.06
   strandOffsetFront: 1
   strandOffsetBack: 1
-  hairBangScaleFront: 2
+  hairBangScaleFront: 1
   hairBangScaleBack: 2
   hairRoundnessFront: 5
   hairRoundnessBack: 5
@@ -1379,7 +1341,6 @@ MonoBehaviour:
   rightPupilX: 0
   rightPupilY: 0
   mousePos: {x: 0.5, y: 0.5}
-  blendCharacterValue: 0
 --- !u!4 &963588424
 Transform:
   m_ObjectHideFlags: 0
@@ -1847,7 +1808,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 57.3
   orthographic: 1
   orthographic size: 2
   m_Depth: -1
@@ -1873,7 +1834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465951083}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -3.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2065,7 +2026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792980029}
   m_LocalRotation: {x: 0, y: 0, z: 0.041003734, w: 0.999159}
-  m_LocalPosition: {x: -0.4222958, y: 0.444371, z: -0.2}
+  m_LocalPosition: {x: -0.4222958, y: 0.444371, z: -0.15}
   m_LocalScale: {x: -0.614, y: 0.2953, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

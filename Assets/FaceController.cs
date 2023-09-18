@@ -883,16 +883,24 @@ public class FaceController : MonoBehaviour
         Vector2 rotatedLeft = Rotate2D(leftX, eyeAngle * Mathf.Deg2Rad);
         Vector2 rotatedLeft2 = Rotate2D(leftY, eyeAngle * Mathf.Deg2Rad);
 
-        rightPupilX = rotatedRight.x - rotatedRight2.x;
-        rightPupilY = rotatedRight2.y - rotatedRight.y;
+        float clampVal = eyeRadius/4f;
+        //rightPupilX = rotatedRight.x - rotatedRight2.x;
+        //rightPupilY = rotatedRight2.y - rotatedRight.y;
 
+        Vector2 rightPupilTarget = new Vector2(rotatedRight.x - rotatedRight2.x, rotatedRight2.y - rotatedRight.y);
+        Vector2 leftPupilTarget = new Vector2(rotatedLeft.x - rotatedLeft2.x, rotatedLeft2.y - rotatedLeft.y);
+
+        rightPupilX = Mathf.Clamp(rightPupilTarget.x, -clampVal, clampVal);
+        rightPupilY = Mathf.Clamp(rightPupilTarget.y, -clampVal, clampVal);
+        
         leftPupilX = rotatedLeft.x - rotatedLeft2.x;
         leftPupilY = rotatedLeft2.y - rotatedLeft.y;
-
-        rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(rightPupilX, -eyeRadius/2f, eyeRadius/2f), Time.deltaTime * 3f);
-        rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(rightPupilY, -eyeRadius/10f, eyeRadius/10f), Time.deltaTime * 3f);
-        leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(leftPupilX, -eyeRadius/2f, eyeRadius/2f), Time.deltaTime * 3f);
-        leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(leftPupilY, -eyeRadius/10f, eyeRadius/10f), Time.deltaTime * 3f);
+        
+//
+        //rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(rightPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
+        //rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(rightPupilTarget.y, -clampVal, clampVal), Time.deltaTime * 3f);
+        //leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(leftPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
+        //leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(leftPupilTarget.y, -clampVal, clampVal), Time.deltaTime * 3f);
 
         LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
