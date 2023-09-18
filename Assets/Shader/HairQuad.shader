@@ -61,7 +61,7 @@ Shader "Unlit/HairQuad"
                 
                 uv.x *= _StrandCount;
                 uv.x += (0.5*_StrandOffset);
-                uv = frac(uv);
+                uv.x = frac(uv.x);
                 uv.y = pow(uv.y, _HairBangScale);
                 
                 float bang = pow(abs(i.uv.x*2-1), _HairRoundness) + pow(abs(uv.y*2-1), _HairRoundness);
@@ -69,6 +69,8 @@ Shader "Unlit/HairQuad"
                 float bangs = pow(abs(uv.x*2-1), _BangRoundness) + pow(abs(uv.y*2-1), _BangRoundness);
                 bangs = (1-step(1, bangs)) * step(0.5, 1-uv.y);
                 bang+=bangs;
+                bang = saturate(bang);
+                bang *= step(0.0001,1-abs(uv.y*2 - 1));
                 clip(bang-0.5);
                 float uvCol = i.uv.y;
                 uvCol = cos(uvCol*(3.14*2)*pow(uvCol,2));

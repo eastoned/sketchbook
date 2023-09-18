@@ -13,8 +13,6 @@ public class FaceController : MonoBehaviour
 
     public CharacterData currentChar;
 
-    public CharacterData blendChar1, blendChar2;
-
     #region Transform Variables
 
     [Range(0f, 1f)] public float headWidth, headLength;
@@ -126,8 +124,6 @@ public class FaceController : MonoBehaviour
 
     public Vector2 mousePos;
 
-    [Range(0f, 1f)] public float blendCharacterValue;
-
     MaterialPropertyBlock LeftEyeProp, RightEyeProp;
 
     public void SetTransformValues(){
@@ -150,8 +146,8 @@ public class FaceController : MonoBehaviour
 
         float actualEyebrowHeight = Mathf.Lerp(actualEyeHeight, Mathf.Lerp(1, 2, headLength) * 2/foreheadScale, eyebrowHeight);
         
-        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.2f);
-        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.2f);
+        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.15f);
+        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.15f);
         LeftEyebrow.transform.localScale = new Vector3(-eyebrowLength, eyebrowWidth, 1);
         RightEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
     
@@ -330,10 +326,6 @@ public class FaceController : MonoBehaviour
         HairFront.SetPropertyBlock(HairFrontProp);
         HairBack.SetPropertyBlock(HairBackProp);
 
-    }
-
-    void Start(){
-        //LoadCharacterData();
     }
 
     public void LoadCharacterData(){
@@ -571,9 +563,6 @@ public class FaceController : MonoBehaviour
         SetTransformValues();
         SetShaderValues();
     }
-
-
-
     void OnValidate(){
         SetTransformValues();
         SetShaderValues();
@@ -879,7 +868,7 @@ public class FaceController : MonoBehaviour
             LoadCharacterData();
         }
 
-        BlendTwoCharacters(blendChar1, blendChar2, blendCharacterValue);
+        //BlendTwoCharacters(blendChar1, blendChar2, blendCharacterValue);
 
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
        
