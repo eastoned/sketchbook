@@ -136,8 +136,8 @@ public class FaceController : MonoBehaviour
 
         float actualEyeHeight = eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/chinScale, 2/foreheadScale, eyeHeight*.5f+0.5f);
         
-        LeftEye.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth) - (eyeWidth/2f)) * eyeSpacing), actualEyeHeight, 0);
-        RightEye.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth) + (eyeWidth/2f)) * eyeSpacing), actualEyeHeight, 0);
+        LeftEye.transform.localPosition = new Vector3(Mathf.Lerp(-eyeWidth/2f, -actualHeadLength/2f, headWidth * eyeSpacing), actualEyeHeight, 0);
+        RightEye.transform.localPosition = new Vector3(Mathf.Lerp(eyeWidth/2f, actualHeadLength/2f, headWidth * eyeSpacing), actualEyeHeight, 0);
         LeftEye.transform.localScale = new Vector3(-eyeWidth, eyeLength, 1);
         RightEye.transform.localScale = new Vector3(eyeWidth, eyeLength, 1);
 
@@ -146,8 +146,8 @@ public class FaceController : MonoBehaviour
 
         float actualEyebrowHeight = Mathf.Lerp(actualEyeHeight, Mathf.Lerp(1, 2, headLength) * 2/foreheadScale, eyebrowHeight);
         
-        LeftEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(-0.5f, -1.5f, headWidth)*eyeSpacing - (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.15f);
-        RightEyebrow.transform.localPosition = new Vector3(((Mathf.Lerp(0.5f, 1.5f, headWidth)*eyeSpacing + (eyebrowLength/2f)) * eyebrowSpacing), actualEyebrowHeight, -0.15f);
+        LeftEyebrow.transform.localPosition = new Vector3(Mathf.Lerp(-eyebrowLength/2, -actualHeadWidth/2f, headWidth* eyebrowSpacing), actualEyebrowHeight, -0.15f);
+        RightEyebrow.transform.localPosition = new Vector3(Mathf.Lerp(eyebrowLength/2, actualHeadWidth/2f, headWidth* eyebrowSpacing), actualEyebrowHeight, -0.15f);
         LeftEyebrow.transform.localScale = new Vector3(-eyebrowLength, eyebrowWidth, 1);
         RightEyebrow.transform.localScale = new Vector3(eyebrowLength, eyebrowWidth, 1);
     
@@ -155,26 +155,37 @@ public class FaceController : MonoBehaviour
         Nose.transform.localPosition = new Vector3(0, actualNoseHeight, -0.1f);
         Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
-        LeftEar.transform.localPosition = new Vector3(((Mathf.Lerp(-1.25f, -2.25f, headWidth) - (earWidth/3f)) * earSpacing), earHeight * headLength - earAngle/90f, 0.2f);
-        RightEar.transform.localPosition = new Vector3(((Mathf.Lerp(1.25f, 2.25f, headWidth) + (earWidth/3f)) * earSpacing), earHeight * headLength - earAngle/90f, 0.2f);
+        
 
         LeftEar.transform.localScale = new Vector3(-earWidth,earLength,1);
         RightEar.transform.localScale = new Vector3(earWidth,earLength,1);
 
+
+        float distance = (LeftEar.transform.localPosition - new Vector3(0,0,0)).magnitude;
+        LeftEar.transform.localPosition = new Vector3(0, 0, 0) + Vector3.forward * distance;
+
+
+        //RotateAround(LeftEar.transform, new Vector3(0, 0, 0), Quaternion.Euler(0,0,earAngle));
+
+
         LeftEar.transform.localEulerAngles = new Vector3(0, 0, earAngle);
         RightEar.transform.localEulerAngles = new Vector3(0, 0, -earAngle);
+        float actualEarHeight = earHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/chinScale, 2/foreheadScale, earHeight*.5f+0.5f);
+        LeftEar.transform.localPosition = new Vector3(Mathf.Lerp(-earWidth/2f, -actualHeadWidth/2f - earWidth/2f, headWidth * earSpacing) + Mathf.Abs(earAngle)/90f, earHeight * headLength - earAngle/90f, 0.2f);
+        RightEar.transform.localPosition = new Vector3(Mathf.Lerp(earWidth/2f, actualHeadWidth/2f + earWidth/2f, headWidth * earSpacing) - Mathf.Abs(earAngle)/90f, earHeight * headLength - earAngle/90f, 0.2f);
 
         Mouth.transform.localScale = new Vector3(mouthWidth, mouthLength, 1);
         Mouth.transform.localPosition = new Vector3(0, Mathf.Lerp(actualNoseHeight, -actualHeadLength/2 * 2/chinScale, mouthHeight), 0);
 
         Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
 
-        HairFront.transform.localPosition = new Vector3(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - (bangLength * bangHeight), 0);
+        HairFront.transform.localPosition = new Vector3(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - (bangLength * bangHeight), -0.05f);
         HairFront.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth, bangWidth), bangLength*2, 1);
 
         HairBack.transform.localPosition = new Vector3(0, Mathf.Lerp(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - hairLength/2, hairHeight), 0.3f);
         HairBack.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth * 1.25f, hairWidth), hairLength, 1);
     }
+
 
     public void SetShaderValues(){
         MaterialPropertyBlock EyebrowProp, EarProp, NoseProp, MouthProp, HeadProp, NeckProp, HairFrontProp, HairBackProp;
@@ -883,18 +894,17 @@ public class FaceController : MonoBehaviour
         Vector2 rotatedLeft = Rotate2D(leftX, eyeAngle * Mathf.Deg2Rad);
         Vector2 rotatedLeft2 = Rotate2D(leftY, eyeAngle * Mathf.Deg2Rad);
 
-        float clampVal = eyeRadius/4f;
+        float clampVal = eyeRadius/6f;
         //rightPupilX = rotatedRight.x - rotatedRight2.x;
         //rightPupilY = rotatedRight2.y - rotatedRight.y;
 
         Vector2 rightPupilTarget = new Vector2(rotatedRight.x - rotatedRight2.x, rotatedRight2.y - rotatedRight.y);
         Vector2 leftPupilTarget = new Vector2(rotatedLeft.x - rotatedLeft2.x, rotatedLeft2.y - rotatedLeft.y);
 
-        rightPupilX = Mathf.Clamp(rightPupilTarget.x, -clampVal, clampVal);
-        rightPupilY = Mathf.Clamp(rightPupilTarget.y, -clampVal, clampVal);
-        
-        leftPupilX = rotatedLeft.x - rotatedLeft2.x;
-        leftPupilY = rotatedLeft2.y - rotatedLeft.y;
+        rightPupilX = Mathf.Lerp(rightPupilX, rightPupilTarget.x*clampVal, 4f* Time.deltaTime);
+        rightPupilY = Mathf.Lerp(rightPupilY, rightPupilTarget.y*clampVal, 4f* Time.deltaTime);
+        leftPupilX = Mathf.Lerp(leftPupilX, leftPupilTarget.x*clampVal, 4f* Time.deltaTime);
+        leftPupilY = Mathf.Lerp(leftPupilY, leftPupilTarget.y*clampVal, 4f* Time.deltaTime);
         
 //
         //rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(rightPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
@@ -907,6 +917,12 @@ public class FaceController : MonoBehaviour
 
         RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
         RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
+
+        LeftEyeProp.SetFloat("_EyelidTopOpen", Mathf.Sin(Time.time)+1);
+        LeftEyeProp.SetFloat("_EyelidBottomOpen", Mathf.Sin(Time.time)+1);
+
+        RightEyeProp.SetFloat("_EyelidTopOpen", Mathf.Sin(Time.time)+1);
+        RightEyeProp.SetFloat("_EyelidBottomOpen", Mathf.Sin(Time.time)+1);
 
         LeftEye.SetPropertyBlock(LeftEyeProp);
         RightEye.SetPropertyBlock(RightEyeProp);
