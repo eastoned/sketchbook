@@ -61,7 +61,7 @@ Shader "Unlit/NoseQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 
-                float2 uv = float2(abs(i.uv.x*2-1), i.uv.y * _NoseTotalLength);
+                float2 uv = float2(abs(i.uv.x*2-1), lerp(i.uv.y, i.uv.y - 0.35, _NoseTotalLength/3) * _NoseTotalLength);
                 float line1 = pow(uv.y, _NoseBaseWidth) - uv.x * _NoseTotalWidth;
 
                 float line2 = pow(1-uv.y, _NoseTopWidth) - uv.x * _NoseCurve;
@@ -75,7 +75,7 @@ Shader "Unlit/NoseQuad"
                 result = step(0, result);
                 result *= circle1;
                 clip(result.r - 0.5);
-                float4 final = result * lerp(_Color1, _Color2, uv.y);
+                float4 final = result * lerp(_Color1, _Color2, saturate(max(i.uv.y, uv.y)));
                 return final;
             }
             ENDCG

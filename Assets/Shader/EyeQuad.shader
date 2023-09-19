@@ -102,10 +102,13 @@ Shader "Unlit/EyeQuad"
                 float pupil = 1 - step(0, (pow(_PupilRadius/2*_EyeRadius, 2*_PupilRoundness) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*_PupilRoundness)) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*_PupilRoundness));
                 
                 result *= pupil;
+                
                 result *= mask1;
+
                 mask1 = 1 - mask1;
                 
-                float4 shades = lerp(_Color1, _Color2, abs(uv.x*2-1)) * mask1;
+                float4 shades = lerp(_Color1, _Color2, cos(uv.x*(3.14*2)) * 0.5 + 0.5) * mask1;
+                result *= pow(_EyelidBottomOpen + _EyelidTopOpen, 0.75);
                 result += shades;
                 return result;
             }
