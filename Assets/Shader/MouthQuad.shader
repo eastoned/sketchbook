@@ -95,10 +95,10 @@ Shader "Unlit/MouthQuad"
                 float mask = 1-clamp(-min(_MouthLipTop, _MouthLipBottom), 0, 1);
                 float line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow((uv.y-0.5)/clamp(-min(_MouthLipTop, _MouthLipBottom), 0, 1),2);
                 float line3 = 1-step(0, line3a);
-                line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow(abs(0.5*(uv.y-0.5)/clamp(-min(_MouthLipTop, _MouthLipBottom), 0, 1)),2);
-                //line3a = 1 - step(0, line3a);
+                line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow(abs(0.5*(uv.y-0.5)/clamp(-min(_MouthLipTop, _MouthLipBottom), -1, 1)),3);
+                line3a = 1 - step(0, line3a);
                 line1 += line2;
-                line1 *= line3;
+                line1 *= (line3);
 
                
 
@@ -120,17 +120,25 @@ Shader "Unlit/MouthQuad"
                 toof += toof2;
                 
                 line4 += toof;
-                float tongue = step(0, pow(_TongueRadius, 2) - pow((uv.x-.5) *(1-_TongueScale), 2) - pow((uv.y-_TongueHeight)*(_TongueScale),2));
-                float4 tonColor = tongue * lerp(_Color3, _Color4,((_TongueScale*uv.y*4)-_TongueHeight/2 + .25));//lerp(_Color3, _Color4, ((uv.y-_TongueHeight)*_TongueScale));
-                float4 mouthColor = (1-tongue) * lerp(_Color1, _Color2, uv.y);
+                float tongue = pow(_TongueRadius, 2) - pow((uv.x-.5) *(1-_TongueScale), 2) - pow((uv.y-_TongueHeight)*(_TongueScale),2);
+                float tongueY = pow(_TongueRadius, 2) - pow((uv.y-_TongueHeight/2)*(_TongueScale),2);
+                //tongueY *= 10;
+                tongueY = saturate(tongueY);
+                tongue = step(0, tongue);
+                //tongueY *= tongue;
                 
+                float4 tonColor = tongue * lerp(_Color3, _Color4, uv.y);//lerp(_Color3, _Color4, ((uv.y-_TongueHeight)*_TongueScale));
+                float4 mouthColor = (1-tongue) * lerp(_Color1, _Color2, uv.y);
+                //tongue *=10;
                 //float lipOutline;
                 //line1 += _Lips;
 
                 clip(line1.r-0.5);
                 //line4 = saturate(line4+line5);
                 float4 res = saturate(saturate(tonColor + mouthColor) + line4);
-                
+                float newLine = line3a;
+                newLine = line2a;
+                //return res;
                 return res * pow(_MouthLipTop + _MouthLipBottom, 0.5);
             }
             ENDCG

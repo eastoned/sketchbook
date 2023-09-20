@@ -7,8 +7,7 @@ Shader "Unlit/EyeQuad"
 
         _PupilWidth ("Pupil Width", Range(0.1, 1)) = 1
         _PupilLength ("Pupil Length", Range(0.1, 1)) = 1
-        _PupilOffsetX ("Pupil Offset X", Range(-1, 1)) = 0
-        _PupilOffsetY ("Pupil Offset Y", Range(-1, 1)) = 0
+        
         
         
 
@@ -28,6 +27,9 @@ Shader "Unlit/EyeQuad"
 
         _Color3("Pupil", Color) = (0,0,0,1)
         _Color4("Iris", Color) = (0,0,0,1)
+        
+        _PupilOffsetX ("Pupil Offset X", Range(-1, 1)) = 0
+        _PupilOffsetY ("Pupil Offset Y", Range(-1, 1)) = 0
 
     }
     SubShader

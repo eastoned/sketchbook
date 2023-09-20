@@ -8,6 +8,7 @@ public class HeadController : MonoBehaviour
 
     public float lowEnd, highEnd;
     public float mouseDelta;
+    public Vector3 mouseDelta2;
     public float interval;
 
     public enum DirAxis{
@@ -19,7 +20,14 @@ public class HeadController : MonoBehaviour
     public FaceController fc;
 
     void OnMouseDrag(){
+        mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+        transform.localPosition = new Vector3(mouseDelta2.x, mouseDelta2.y, 0f);
 
+        
+
+
+/*
         if(axis == DirAxis.UpDown){
             mouseDelta = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
         
@@ -32,7 +40,7 @@ public class HeadController : MonoBehaviour
             transform.localPosition = new Vector3(Mathf.Clamp(mouseDelta, lowEnd, highEnd), 0, 0.1f);
             interval = Mathf.InverseLerp(lowEnd, highEnd, mouseDelta);
             //fc.UpdateWidthFromTransformTool(interval);
-        }
+        }*/
         
     }
 

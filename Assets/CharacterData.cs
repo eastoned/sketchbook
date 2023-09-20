@@ -34,7 +34,7 @@ public class CharacterData : ScriptableObject
         [Range(-45f, 45f)] public float earAngle;
         [Range(0f, 1f)] public float earSpacing;
 
-        [Range(0f, 1f)] public float bangWidth, bangHeight;
+        [Range(0f, 1f)] public float bangWidth;
         [Range(0.25f, 1f)] public float bangLength;
         [Range(0.25f, 1f)] public float hairWidth;
         [Range(0f, 1f)] public float hairHeight;

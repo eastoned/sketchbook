@@ -19,7 +19,7 @@
     <UnityBuildTarget>WebGL:20</UnityBuildTarget>
     <UnityVersion>2018.4.9f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>6</LangVersion>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>

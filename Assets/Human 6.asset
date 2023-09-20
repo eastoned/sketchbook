@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
+  m_Name: Human 6
+  m_EditorClassIdentifier: 
+  headWidth: 0.457
+  headLength: 0.604
+  neckWidth: 0.487
+  eyeAngle: -8.2
+  eyeSpacing: 0.52
+  eyeHeight: -0.433
+  eyeLength: 0.759
+  eyeWidth: 0.76
+  eyebrowAngle: -8.5
+  eyebrowSpacing: 0.531
+  eyebrowHeight: -0.201
+  eyebrowLength: 0.896
+  eyebrowWidth: 0.3141
+  noseHeight: 0.161
+  noseLength: 1.333
+  noseWidth: 1.326
+  mouthWidth: 1.519
+  mouthLength: 0.571
+  mouthHeight: 0.294
+  earWidth: 1.363
+  earLength: 1.363
+  earHeight: 0.363
+  earAngle: 7.6
+  earSpacing: 0.589
+  chinWidth: 1.92
+  chinLength: 3.06
+  foreheadWidth: 4.33
+  foreheadLength: 3.02
+  headTop: {r: 1, g: 0.14779866, b: 0.14779866, a: 0}
+  headBottom: {r: 0, g: 0, b: 0, a: 0}
+  neckTopWidth: 3.381
+  neckCurveScale: 3.381
+  neckCurveRoundness: 1.786
+  neckTop: {r: 0, g: 0, b: 0, a: 0}
+  neckBottom: {r: 0, g: 0, b: 0, a: 0}
+  eyeRadius: 0.461
+  pupilRadius: 0.448
+  pupilWidth: 0.511
+  pupilLength: 0.511
+  eyelidTopLength: 1.28
+  eyelidBottomLength: 1.3
+  eyelidTopSkew: 0.465
+  eyelidBottomSkew: 0.469
+  eyelidTopOpen: 0.461
+  eyelidBottomOpen: 0.465
+  pupilRoundness: 0.599
+  eyelidCenter: {r: 0, g: 0, b: 0, a: 0}
+  eyelidEdge: {r: 0, g: 0, b: 0, a: 0}
+  eyebrowCount: 7.72
+  eyebrowThickness: 4.44
+  eyebrowRoundness: 2.12
+  eyebrowCurve: 0
+  eyebrowInner: {r: 0, g: 0, b: 0, a: 0}
+  eyebrowOuter: {r: 0, g: 0, b: 0, a: 0}
+  noseBaseWidth: 1.26
+  noseTopWidth: 1.29
+  noseTotalWidth: 2.98
+  noseCurve: 2.98
+  noseTotalLength: 1.55
+  nostrilRadius: 0.25
+  nostrilHeight: -0.5
+  nostrilSpacing: 0
+  nostrilScale: 1.109
+  noseTop: {r: 0, g: 0, b: 0, a: 0}
+  noseBottom: {r: 0, g: 0, b: 0, a: 0}
+  mouthRadius: 0.553
+  mouthLipTop: 1
+  mouthLipBottom: 1
+  mouthLipMaskRoundness: 0.457
+  teethTop: 0.93
+  teethBottom: 0.693
+  teethCount: 13.8
+  teethRoundness: 2.17
+  tongueRadius: 0.12
+  tongueScale: 0.491
+  tongueHeight: 0.5
+  mouthTop: {r: 0, g: 0, b: 0, a: 0}
+  mouthBottom: {r: 0, g: 0, b: 0, a: 0}
+  tongueTop: {r: 0, g: 0, b: 0, a: 0}
+  tongueBottom: {r: 0, g: 0, b: 0, a: 0}
+  earWidthSkew: 1
+  earLengthSkew: -0.052
+  earShape: 5.82
+  earOpenWidth: 1.243
+  earOpenLength: 1.245
+  earRoundness: 0.922
+  earConcha: 0.875
+  earTragus: 0.5
+  earTop: {r: 0, g: 0, b: 0, a: 0}
+  earBottom: {r: 0, g: 0, b: 0, a: 0}
