@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine.Utility;
 using OpenCvSharp;
 using UnityEngine;
 using UnityEngine.Video;
@@ -138,25 +139,62 @@ public class FaceController : MonoBehaviour
 	{
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnTranslatePartController.Instance.AddListener(SetPartTransform);
+        OnRotatePartController.Instance.AddListener(SetPartRotation);
+        OnScalePartController.Instance.AddListener(SetPartScale);
     }
 
     protected virtual void OnDisable(){
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartTransform);
+        OnRotatePartController.Instance.RemoveListener(SetPartRotation);
+        OnScalePartController.Instance.RemoveListener(SetPartScale);
     }
 
     private void SetTransformControllers(Transform selectedTarget){
         currentPC = selectedTarget.GetComponent<PartController>();
         currentTransform = selectedTarget;
-        widthLeft.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0f, 0, 0));
-        //widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0, 0));
-       // heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, 0.5f, 0));
+        if(currentPC.pd.translatable)
+            widthLeft.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, 0, 0));
+
+        if(currentPC.pd.rotatable)
+            widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0, 0));
+
+        if(currentPC.pd.scalable)
+            heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0.5f, 0));
        // heightBottom.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, -0.5f, 0));
     }
 
     private void SetPartTransform(Vector3 pos){
         currentTransform.localPosition = pos;
-        ClampTransforms();
+        //ClampTransforms();
+        SetTransformControllers(currentTransform);
+        ClampPos();
+    }
+
+    private void SetPartScale(Vector3 pos){
+        Vector3 diff = currentTransform.TransformDirection(currentTransform.localPosition - pos);
+        currentTransform.localScale = diff.Abs()*2f;
+        SetTransformControllers(currentTransform);
+        ClampScale();
+    }
+
+    private void SetPartRotation(Vector3 pos){
+        float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
+        currentTransform.localEulerAngles = new Vector3(0, 0, angle);
+        SetTransformControllers(currentTransform);
+        ClampRot();
+    }
+
+    public void ClampPos(){
+        LeftEye.transform.localPosition = new Vector3(-RightEye.transform.localPosition.x, RightEye.transform.localPosition.y, RightEye.transform.localPosition.z);
+    }
+
+    public void ClampRot(){
+        LeftEye.transform.localEulerAngles = new Vector3(0, 0, -RightEye.transform.localEulerAngles.z);
+        //RightEye.transform.localEulerAngles = new Vector3(0, 0, -LeftEye.transform.localEulerAngles.z);
+    }
+    public void ClampScale(){
+        LeftEye.transform.localScale = new Vector3(-RightEye.transform.localScale.x, RightEye.transform.localScale.y, 1f);
     }
 
     public void ClampTransforms(){
@@ -257,6 +295,10 @@ public class FaceController : MonoBehaviour
 
         HairBack.transform.localPosition = new Vector3(0, Mathf.Lerp(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - hairLength/2, hairHeight), 0.3f);
         HairBack.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth * 1.25f, hairWidth), hairLength, 1);
+    }
+
+    public void SliderShader(float value){
+        
     }
 
 
