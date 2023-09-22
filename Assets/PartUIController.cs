@@ -11,6 +11,7 @@ public class PartUIController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI titleText;
 
+    [SerializeField] private List<TextMeshProUGUI> sliderNames;
     [SerializeField] private List<Slider> sliders;
 
     public PartController partData;
@@ -40,6 +41,7 @@ public class PartUIController : MonoBehaviour
             //if(i <= partData.pd.shaderProperties.Count){
             //sliders[i].gameObject.SetActive(true);
             sliders[i].value = partData.pd.shaderProperties[i].propertyValue;
+            sliderNames[i].text = partData.pd.shaderProperties[i].propertyName;
             
             if(partData.pd.shaderProperties[i].significant){
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SignificantPiece);

@@ -8,7 +8,7 @@ public class PartData : ScriptableObject
     #region TransformData
         public bool translatable, rotatable, scalable;
         public Vector3 position;
-        public Vector3 rotation;
+        public float rotation;
         public Vector3 scale;
     
     #endregion

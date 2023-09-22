@@ -527,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 95416235}
   pd: {fileID: 0}
+  colid: {fileID: 95416234}
 --- !u!1 &99618904
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,13 +618,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99618904}
-  m_LocalRotation: {x: 0, y: 0, z: 0.030440371, w: 0.9995366}
-  m_LocalPosition: {x: 1.886, y: 0.87242794, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
+  m_LocalPosition: {x: 1, y: 0.87242794, z: 0}
   m_LocalScale: {x: 0.8355546, y: 0.77367413, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
 --- !u!114 &99618909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 99618906}
   pd: {fileID: 11400000, guid: de1b4ffa27c8304459db9dab1e694c4e, type: 2}
+  colid: {fileID: 99618905}
 --- !u!1 &125538563
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 244385094}
   pd: {fileID: 0}
+  colid: {fileID: 244385093}
 --- !u!64 &244385093
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1249,6 +1252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 311225761}
   pd: {fileID: 0}
+  colid: {fileID: 311225760}
 --- !u!64 &311225760
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1350,7 +1354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397872629}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d95592687839cf44cb072e2269def193, type: 3}
   m_Name: 
@@ -1929,6 +1933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 524532355}
   pd: {fileID: 0}
+  colid: {fileID: 524532354}
 --- !u!1 &550254389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,6 +2120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 610878718}
   pd: {fileID: 0}
+  colid: {fileID: 610878717}
 --- !u!1 &674027481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,6 +2519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 838332025}
   pd: {fileID: 0}
+  colid: {fileID: 838332024}
 --- !u!1 &963588422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3659,6 +3666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 1269006688}
   pd: {fileID: 0}
+  colid: {fileID: 1269006687}
 --- !u!1 &1272764998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3770,6 +3778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 1272765000}
   pd: {fileID: 11400000, guid: a0a9e6d06e1c86946b8eaed92ab5e8c0, type: 2}
+  colid: {fileID: 1272764999}
 --- !u!224 &1312392027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
@@ -4306,13 +4315,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451965497}
-  m_LocalRotation: {x: -0, y: -0, z: -0.20967689, w: 0.97777075}
-  m_LocalPosition: {x: -0.4435115, y: 0.87242794, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.17364825, w: 0.9848078}
+  m_LocalPosition: {x: -1, y: 0.87242794, z: 0}
   m_LocalScale: {x: -0.8355546, y: 0.77367413, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -24.207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20}
 --- !u!114 &1451965502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4327,6 +4336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 1451965499}
   pd: {fileID: 11400000, guid: de1b4ffa27c8304459db9dab1e694c4e, type: 2}
+  colid: {fileID: 1451965498}
 --- !u!1 &1465951083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,6 +4531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 1470558956}
   pd: {fileID: 11400000, guid: 47760b2b6f709e64cb380e146292d6f6, type: 2}
+  colid: {fileID: 1470558955}
 --- !u!1 &1479473652
 GameObject:
   m_ObjectHideFlags: 0
@@ -4647,6 +4658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 1117457127}
+  sliderNames: []
   sliders:
   - {fileID: 1133054761}
   - {fileID: 125538565}
@@ -5432,6 +5444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 1792980031}
   pd: {fileID: 0}
+  colid: {fileID: 1792980030}
 --- !u!1 &1808583951
 GameObject:
   m_ObjectHideFlags: 0
