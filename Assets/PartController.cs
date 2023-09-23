@@ -19,6 +19,9 @@ public class PartController : MonoBehaviour
     MaterialPropertyBlock propBlock;
 
     void Start(){
+        for(int i = 0; i < pd.shaderProperties.Count; i++){
+            pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
+        }
         propBlock = new MaterialPropertyBlock();
         //shaderIDs = new int[shaderParams.Count];
         //for(int i = 0; i < shaderParams.Count; i++){
@@ -47,22 +50,30 @@ public class PartController : MonoBehaviour
     }
 
     void Update(){
+        UpdateAllTransformValues();
         UpdateAllShadersValue();
     }
 
-    void OnMouseOver(){
+    void OnMouseEnter(){
+        Debug.Log("Entered object");
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
     }
 
     void OnMouseExit(){
-        OnDeselectedFacePartEvent.Instance.Invoke();
+        //OnDeselectedFacePartEvent.Instance.Invoke();
     }
 
     void OnValidate(){
         propBlock = new MaterialPropertyBlock();
         rend = GetComponent<Renderer>();
         colid = GetComponent<Collider>();
-        Debug.Log("Does unity recognize updating a scriptable object the same as the inspector");
+        //Debug.Log("Does unity recognize updating a scriptable object the same as the inspector");
+    }
+
+    void UpdateAllTransformValues(){
+        //transform.localPosition = pd.position;
+        //transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
+        transform.localScale = pd.scale;
     }
 
 

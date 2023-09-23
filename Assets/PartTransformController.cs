@@ -15,6 +15,16 @@ public class PartTransformController : MonoBehaviour
     public TransformController controls;
 
     public Vector3 mouseDelta2;
+
+    void OnMouseEnter(){
+
+    }
+
+    void OnMouseExit(){
+        
+    }
+
+
     void OnMouseDrag(){
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         

@@ -10,50 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Head
+  m_Name: Eyebrow
   m_EditorClassIdentifier: 
-  translatable: 0
-  rotatable: 0
+  translatable: 1
+  rotatable: 1
   scalable: 1
-  position: {x: 0.7601079, y: -0.13004734, z: 0}
+  position: {x: 0.59211206, y: 0.28091574, z: -0.15}
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 1.5202157, y: 0.96108127, z: 1}
+  scale: {x: 1, y: 1, z: 1}
   shaderProperties:
-  - propertyName: _ChinWidth
-    propertyValue: 0.62
-    significant: 1
-    active: 1
-    pos: 
-    neg: 
-  - propertyName: _ChinLength
+  - propertyName: _EyebrowCount
     propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _ChinScale
-    propertyValue: 0.96826595
-    significant: 1
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _ForeheadWidth
-    propertyValue: 0.535
+  - propertyName: _EyebrowThickness
+    propertyValue: 0.45531484
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _ForeheadLength
+  - propertyName: _EyebrowRoundness
     propertyValue: 1
-    significant: 1
+    significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _ForeheadScale
-    propertyValue: 0.09747663
-    significant: 1
+  - propertyName: _EyebrowCurve
+    propertyValue: 0.8367851
+    significant: 0
     active: 0
     pos: 
     neg: 

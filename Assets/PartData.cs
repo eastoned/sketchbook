@@ -9,12 +9,14 @@ public class PartData : ScriptableObject
         public bool translatable, rotatable, scalable;
         public Vector3 position;
         public float minAngle, maxAngle;
+        public float currentAngle;
         public Vector3 scale;
     
     #endregion
 
     #region ShaderData
         public List<ShaderProperty> shaderProperties = new List<ShaderProperty>();
+        public Dictionary<string, ShaderProperty> shadePropertyDict = new Dictionary<string, ShaderProperty>();
         public List<ShaderColor> shaderColors = new List<ShaderColor>();
     #endregion
 

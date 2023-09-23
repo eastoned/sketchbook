@@ -15,28 +15,66 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  scale: {x: 0, y: 0, z: 0}
+  position: {x: 0.7601079, y: 0.4020396, z: 0}
+  minAngle: -45
+  maxAngle: 45
+  currentAngle: 45.000004
+  scale: {x: 1.649296, y: 1.339231, z: 1}
   shaderProperties:
   - propertyName: _EyeRadius
     propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _PupilRadius
     propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _PupilWidth
     propertyValue: 0.333
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _PupilLength
     propertyValue: 0.535
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _EyelidTopLength
     propertyValue: 0.949
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _EyelidTopSkew
     propertyValue: 0.66
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _EyelidBottomLength
     propertyValue: 0.523
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _EyelidBottomSkew
     propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _PupilRoundness
     propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 0}

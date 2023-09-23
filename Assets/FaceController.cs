@@ -8,8 +8,11 @@ using UnityEngine.XR;
 
 public class FaceController : MonoBehaviour
 {
-    [HideInInspector][SerializeField] public Renderer LeftEye, RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar, Nose, Mouth, Head, Neck, HairFront, HairBack;
+    [HideInInspector][SerializeField] public Renderer LeftEye,
+    RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar,
+    Mouth, Neck, HairFront, HairBack;
 
+    public PartData head, eye, nose;
 
     public CharacterData currentChar;
 
@@ -135,22 +138,31 @@ public class FaceController : MonoBehaviour
     public PartTransformController widthLeft, widthRight, heightTop, heightBottom;
 
 
-     protected virtual void OnEnable()
+     void OnEnable()
 	{
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
+        OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartTransform);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
     }
 
-    protected virtual void OnDisable(){
+    void OnDisable(){
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartTransform);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
     }
 
+    private void DisappearControllers(){
+        widthLeft.transform.localPosition = new Vector3(100, 100, 100);
+        widthRight.transform.localPosition = new Vector3(100, 100, 100);
+        heightTop.transform.localPosition = new Vector3(100, 100, 100);
+    }
+
     private void SetTransformControllers(Transform selectedTarget){
+        
         currentPC = selectedTarget.GetComponent<PartController>();
         currentTransform = selectedTarget;
         if(currentPC.pd.translatable)
@@ -165,28 +177,58 @@ public class FaceController : MonoBehaviour
     }
 
     private void SetPartTransform(Vector3 pos){
-        currentTransform.localPosition = pos;
+        //each part has a relative position to other objects
+        currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+       // currentTransform.localPosition = ClampEyePosition(pos);
+        currentPC.pd.position = currentTransform.localPosition;
         //ClampTransforms();
         SetTransformControllers(currentTransform);
-        ClampPos();
+        //ClampPos();
     }
 
+    Vector3 ClampEyePosition(Vector3 pos){ 
+        
+        return new Vector3(
+            Mathf.Clamp(pos.x, currentTransform.localScale.x/2f, head.scale.x/2f),
+            Mathf.Clamp(pos.y, -head.scale.y/2f * Mathf.Lerp(0.9f, 0.25f, head.shadePropertyDict["_ChinScale"].propertyValue), head.scale.y/2f * Mathf.Lerp(0.9f, 0.25f, head.shadePropertyDict["_ForeheadScale"].propertyValue)),
+            pos.z
+        );
+    }
+
+    //need to get the relative position
+    //eye is half of width to half of head in x position
+    //and half of head in y position
+
     private void SetPartScale(Vector3 pos){
-        Vector3 diff = currentTransform.TransformDirection(currentTransform.localPosition - pos);
-        currentTransform.localScale = diff.Abs()*2f;
-        SetTransformControllers(currentTransform);
-        ClampScale();
+
+        //Mathf.Cos(currentPC.pd.currentAngle)
+        Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
+        //Vector3 diff = new Vector3((currentTransform.TransformDirection(currentTransform.localPosition - pos) * 2f). * Mathf.Cos(currentPC.pd.currentAngle), (currentTransform.TransformDirection(currentTransform.localPosition - pos) * 2f).magnitude * Mathf.Sin(currentPC.pd.currentAngle), 1);//new Vector3(1, 1, 1);
+        //currentTransform.TransformDirection(currentTransform.localPosition - pos);
+        //currentTransform.localScale = diff;
+        //diff.Abs()*2f;
+        currentPC.pd.scale = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);//currentTransform.localScale;
+        //SetTransformControllers(currentTransform);
+        //ClampScale();
     }
 
     private void SetPartRotation(Vector3 pos){
         float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
-        currentTransform.localEulerAngles = new Vector3(0, 0, angle);
+        //currentTransform.up
+        currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
+        currentPC.pd.currentAngle = currentTransform.localEulerAngles.z;
         SetTransformControllers(currentTransform);
-        ClampRot();
+        //ClampRot();
+    }
+
+
+    public float ClampPartRotation(PartController pc, float angle){
+        return pc.pd.ClampedAngle(angle);
     }
 
     public void ClampPos(){
         LeftEye.transform.localPosition = new Vector3(-RightEye.transform.localPosition.x, RightEye.transform.localPosition.y, RightEye.transform.localPosition.z);
+        RightEye.transform.localPosition = new Vector3(RightEye.transform.localPosition.x, RightEye.transform.localPosition.y, RightEye.transform.localPosition.z);
     }
 
     public void ClampRot(){
@@ -197,11 +239,13 @@ public class FaceController : MonoBehaviour
         LeftEye.transform.localScale = new Vector3(-RightEye.transform.localScale.x, RightEye.transform.localScale.y, 1f);
     }
 
+
+
     public void ClampTransforms(){
         float actualHeadWidth = Mathf.Lerp(1,4, headWidth);
         float actualHeadLength = Mathf.Lerp(2,4, headLength);
-        Head.transform.localScale = new Vector3(actualHeadWidth, actualHeadLength, 0);
-        Head.transform.localPosition = new Vector3(0, 0, 0.1f);
+        //Head.transform.localScale = new Vector3(actualHeadWidth, actualHeadLength, 0);
+        //Head.transform.localPosition = new Vector3(0, 0, 0.1f);
 
         float actualEyeHeight = eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/chinScale, 2/foreheadScale, eyeHeight*.5f+0.5f);
         
@@ -222,8 +266,8 @@ public class FaceController : MonoBehaviour
         RightEyebrow.transform.localEulerAngles = new Vector3(0, 0, -eyebrowAngle);
     
         float actualNoseHeight = Mathf.Lerp(actualEyeHeight, -actualHeadLength/2f * (2f/chinScale), noseHeight);
-        Nose.transform.localPosition = new Vector3(0, Nose.transform.localPosition.y, -0.05f);
-        Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
+       // Nose.transform.localPosition = new Vector3(0, Nose.transform.localPosition.y, -0.05f);
+        //Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
         LeftEar.transform.localScale = new Vector3(-earWidth,earLength,1);
         RightEar.transform.localScale = new Vector3(earWidth,earLength,1);
@@ -248,11 +292,10 @@ public class FaceController : MonoBehaviour
     }
 
     public void SetTransformValues(){
+
         float actualHeadWidth = Mathf.Lerp(1,4, headWidth);
         float actualHeadLength = Mathf.Lerp(2,4, headLength);
-        Head.transform.localScale = new Vector3(actualHeadWidth, actualHeadLength, 0);
-        
-        
+        //Head.transform.localScale = new Vector3(actualHeadWidth, actualHeadLength, 0);
 
         float actualEyeHeight = eyeHeight * Mathf.Lerp(1, 2, headLength) * Mathf.Lerp(2/chinScale, 2/foreheadScale, eyeHeight*.5f+0.5f);
         
@@ -273,8 +316,8 @@ public class FaceController : MonoBehaviour
         RightEyebrow.transform.localEulerAngles = new Vector3(0, 0, -eyebrowAngle);
     
         float actualNoseHeight = Mathf.Lerp(actualEyeHeight, -actualHeadLength/2f * (2f/chinScale), noseHeight);
-        Nose.transform.localPosition = new Vector3(0, actualNoseHeight, -0.05f);
-        Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
+       // Nose.transform.localPosition = new Vector3(0, actualNoseHeight, -0.05f);
+       // Nose.transform.localScale = new Vector3(noseWidth, noseLength, 1);
 
         LeftEar.transform.localScale = new Vector3(-earWidth,earLength,1);
         RightEar.transform.localScale = new Vector3(earWidth,earLength,1);
@@ -324,7 +367,7 @@ public class FaceController : MonoBehaviour
         HeadProp.SetColor("_Color1", headBottom);
         HeadProp.SetColor("_Color2", headTop);
 
-        Head.SetPropertyBlock(HeadProp);
+        //Head.SetPropertyBlock(HeadProp);
 
         NeckProp.SetFloat("_NeckTopWidth", neckTopWidth);
         NeckProp.SetFloat("_NeckCurveRoundness", neckCurveRoundness);
@@ -395,7 +438,7 @@ public class FaceController : MonoBehaviour
         NoseProp.SetColor("_Color1", noseBottom);
         NoseProp.SetColor("_Color2", noseTop);
 
-        Nose.SetPropertyBlock(NoseProp);
+        //Nose.SetPropertyBlock(NoseProp);
 
         MouthProp.SetFloat("_MouthRadius", mouthRadius);
         MouthProp.SetFloat("_MouthLipMaskRoundness", mouthLipMaskRoundness);
@@ -992,6 +1035,7 @@ public class FaceController : MonoBehaviour
         );
     }
 
+/*
     void Update(){
 
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
@@ -1051,5 +1095,5 @@ public class FaceController : MonoBehaviour
         RightEye.SetPropertyBlock(RightEyeProp);
         Mouth.SetPropertyBlock(MouthProp);
 
-    }
+    }*/
 }

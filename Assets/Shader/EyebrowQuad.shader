@@ -2,11 +2,11 @@ Shader "Unlit/EyebrowQuad"
 {
     Properties
     {
-        _EyebrowCount ("Eyebrow Count", Range(1, 16)) = 1
-        _EyebrowThickness ("Eyebrow Thickness", Range(1, 8)) = 0
-        _EyebrowRoundness ("Eyebrow Roundness", Range(0.3, 4)) = 1
+        _EyebrowCount ("Eyebrow Count", Range(0, 1)) = 1
+        _EyebrowThickness ("Eyebrow Thickness", Range(0, 1)) = 0
+        _EyebrowRoundness ("Eyebrow Roundness", Range(0, 1)) = 1
 
-        _EyebrowCurve ("Eyebrow Curve", Range(-1, 1)) = 0
+        _EyebrowCurve ("Eyebrow Curve", Range(0, 1)) = 0
 
         _Color1 ("Inner", Color) = (1,1,1,1)
         _Color2 ("Outer", Color) = (1,1,1,1)
@@ -39,7 +39,7 @@ Shader "Unlit/EyebrowQuad"
                 float4 vertex : SV_POSITION;
             };
 
-            int _EyebrowCount;
+            float _EyebrowCount;
             float _EyebrowThickness;
             float _EyebrowRoundness;
             float _EyebrowCurve;
@@ -62,11 +62,11 @@ Shader "Unlit/EyebrowQuad"
                 float2 uv = i.uv;
                 float stretchUV = sin(uv.x*3.14);
                 
-                uv *= float2(_EyebrowCount, 1);
+                uv *= float2((int)(_EyebrowCount*15)+1, 1);
                 uv = frac(uv);
-                uv += float2(0, stretchUV * _EyebrowCurve * (_EyebrowThickness-1)/16);
+                uv += float2(0, stretchUV * (_EyebrowCurve*2 -1) * ((_EyebrowThickness*7 + 1)-1)/16);
 
-                float result = pow(abs(uv.x*2-1), _EyebrowRoundness) + pow(abs(uv.y*2-1)*_EyebrowThickness, _EyebrowRoundness);
+                float result = pow(abs(uv.x*2-1), (_EyebrowRoundness*3.5+0.5)) + pow(abs(uv.y*2-1)*(_EyebrowThickness*7+1), (_EyebrowRoundness*3.5+0.5));
                 result = 1-step(1, result);
                 clip(result-0.5);
                 float4 eyebrowCol = result * lerp(_Color1, _Color2, i.uv.x);
