@@ -16,8 +16,6 @@ public class PartUIController : MonoBehaviour
 
     public PartController partData;
 
-    delegate void MyDelegate(string propName, float val);
-    MyDelegate meDel;
 
     protected virtual void OnEnable()
 	{
@@ -37,20 +35,24 @@ public class PartUIController : MonoBehaviour
         partData = transform.GetComponent<PartController>(); 
 
         for(int i = 0; i < sliders.Count; i++){
-            sliders[i].onValueChanged.RemoveAllListeners();
-            //if(i <= partData.pd.shaderProperties.Count){
-            //sliders[i].gameObject.SetActive(true);
-            sliders[i].value = partData.pd.shaderProperties[i].propertyValue;
-            sliderNames[i].text = partData.pd.shaderProperties[i].propertyName;
-            
-            if(partData.pd.shaderProperties[i].significant){
-                sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SignificantPiece);
+            if(i < partData.pd.shaderProperties.Count){
+                sliders[i].gameObject.SetActive(true);
+                sliders[i].onValueChanged.RemoveAllListeners();
+                //if(i <= partData.pd.shaderProperties.Count){
+                //sliders[i].gameObject.SetActive(true);
+                sliders[i].value = partData.pd.shaderProperties[i].propertyValue;
+                //sliderNames[i].text = partData.pd.shaderProperties[i].propertyName;
+                
+                if(partData.pd.shaderProperties[i].significant){
+                    sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SignificantPiece);
+                }
+                
+                sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
+            }else{
+                sliders[i].gameObject.SetActive(false);
             }
-            
-            sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
-            
             //}else{
-            //    sliders[i].gameObject.SetActive(false);
+            //    
             //}
         }
         //transform.GetComponent<PartController>()

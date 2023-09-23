@@ -24,12 +24,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ChinLength: 0.11
-    - _ChinScale: 4
-    - _ChinWidth: 0.76
-    - _ForeheadLength: 3.15
-    - _ForeheadScale: 2
-    - _ForeheadWidth: 1.52
+    - _ChinLength: 0.825
+    - _ChinScale: 0
+    - _ChinWidth: 1
+    - _ForeheadLength: 0.845
+    - _ForeheadScale: 0
+    - _ForeheadWidth: 0.845
     - _Radius: 0.73
     - _Radius2: 3.67
     - _Radius3: 1.33
@@ -39,6 +39,6 @@ Material:
     - _Threshold: 2
     m_Colors:
     - _Color: {r: 0.8018868, g: 0.2912513, b: 0.45554373, a: 1}
-    - _Color1: {r: 1, g: 1, b: 1, a: 1}
-    - _Color2: {r: 0.8867924, g: 0.57325673, b: 0.43921322, a: 1}
+    - _Color1: {r: 0, g: 0, b: 0, a: 1}
+    - _Color2: {r: 1, g: 0.49952504, b: 0, a: 1}
   m_BuildTextureStacks: []

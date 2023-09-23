@@ -8,7 +8,7 @@ public class PartData : ScriptableObject
     #region TransformData
         public bool translatable, rotatable, scalable;
         public Vector3 position;
-        public float rotation;
+        public float minAngle, maxAngle;
         public Vector3 scale;
     
     #endregion
@@ -17,7 +17,10 @@ public class PartData : ScriptableObject
         public List<ShaderProperty> shaderProperties = new List<ShaderProperty>();
         public List<ShaderColor> shaderColors = new List<ShaderColor>();
     #endregion
-    
+
+    public float ClampedAngle(float angle){
+        return Mathf.Clamp(angle, minAngle, maxAngle);
+    }
 }
 
 [System.Serializable]

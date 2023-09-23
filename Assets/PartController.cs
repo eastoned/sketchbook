@@ -13,6 +13,8 @@ public class PartController : MonoBehaviour
     public PartData pd;
 
     public Collider colid;
+    
+    public bool flippedXAxis = false;
 
     MaterialPropertyBlock propBlock;
 
@@ -36,12 +38,12 @@ public class PartController : MonoBehaviour
     }
 
     void ToggleColliderOff(Transform other){
-        if(other != transform)
-            colid.enabled = false;
+       // if(other != transform)
+           // colid.enabled = false;
     }
 
     void ToggleColliderOn(){
-        colid.enabled = true;
+        //colid.enabled = true;
     }
 
     void Update(){

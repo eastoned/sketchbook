@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Name: Head
+  m_EditorClassIdentifier: 
+  translatable: 0
+  rotatable: 0
+  scalable: 1
+  position: {x: 0, y: 0, z: 0}
+  minAngle: 0
+  maxAngle: 0
+  scale: {x: 0, y: 0, z: 0}
+  shaderProperties:
+  - propertyName: _ChinWidth
+    propertyValue: 0.8256623
+    significant: 1
+    active: 1
+    pos: 
+    neg: 
+  - propertyName: _ChinLength
+    propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _ChinScale
+    propertyValue: 0.9507416
+    significant: 1
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _ForeheadWidth
+    propertyValue: 0.535
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _ForeheadLength
+    propertyValue: 0.949
+    significant: 1
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _ForeheadScale
+    propertyValue: 0.949
+    significant: 1
+    active: 0
+    pos: 
+    neg: 
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 1, g: 0, b: 0, a: 0}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 0}

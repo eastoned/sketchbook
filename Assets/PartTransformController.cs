@@ -10,6 +10,7 @@ public class PartTransformController : MonoBehaviour
         ROTATION,
         SCALE
     }
+
     
     public TransformController controls;
 
