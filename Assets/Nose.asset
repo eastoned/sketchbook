@@ -15,11 +15,11 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: 0, z: 0}
+  position: {x: 0, y: -0.63664126, z: 0}
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 0.64148206, y: 1.2758831, z: 1}
+  scale: {x: 0.45801544, y: 0.8610687, z: 1}
   shaderProperties:
   - propertyName: _NoseBaseWidth
     propertyValue: 1
@@ -28,49 +28,49 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _NoseTotalWidth
-    propertyValue: 1
+    propertyValue: 0.29307786
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseTopWidth
-    propertyValue: 0.333
+    propertyValue: 0.5434461
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseCurve
-    propertyValue: 0.535
+    propertyValue: 0.17417516
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseTotalLength
-    propertyValue: 0.949
+    propertyValue: 0.0800754
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilRadius
-    propertyValue: 0.66
+    propertyValue: 0.19608267
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilSpacing
-    propertyValue: 0.523
+    propertyValue: 0.4051797
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilHeight
-    propertyValue: 1
+    propertyValue: 0.88954335
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilScale
-    propertyValue: 1
+    propertyValue: 0.85272455
     significant: 0
     active: 0
     pos: 

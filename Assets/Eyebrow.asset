@@ -15,32 +15,32 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 0.59211206, y: 0.28091574, z: -0.15}
+  position: {x: 0.77862614, y: 0.96641207, z: -0.15}
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 1, y: 1, z: 1}
+  scale: {x: 1.3190839, y: 1.2274814, z: 1}
   shaderProperties:
   - propertyName: _EyebrowCount
-    propertyValue: 1
+    propertyValue: 0.1988218
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyebrowThickness
-    propertyValue: 0.45531484
+    propertyValue: 0.31148767
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyebrowRoundness
-    propertyValue: 1
+    propertyValue: 0.024300493
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyebrowCurve
-    propertyValue: 0.8367851
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 

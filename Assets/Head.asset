@@ -15,44 +15,44 @@ MonoBehaviour:
   translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0.7601079, y: -0.13004734, z: 0}
+  position: {x: 0, y: -0.9114504, z: 0.1}
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 2.3223846, y: 3.955748, z: 1}
+  scale: {x: 3.3160307, y: 3.032061, z: 1}
   shaderProperties:
   - propertyName: _ChinWidth
-    propertyValue: 0.62
+    propertyValue: 0
     significant: 1
     active: 1
     pos: 
     neg: 
   - propertyName: _ChinLength
-    propertyValue: 1
+    propertyValue: 0.35198832
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _ChinScale
-    propertyValue: 0.96826595
+    propertyValue: 0
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _ForeheadWidth
-    propertyValue: 0.535
+    propertyValue: 0.9915536
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _ForeheadLength
-    propertyValue: 1
+    propertyValue: 0
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _ForeheadScale
-    propertyValue: 0.09747663
+    propertyValue: 0.073637605
     significant: 1
     active: 0
     pos: 

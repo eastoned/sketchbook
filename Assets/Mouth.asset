@@ -15,74 +15,74 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: -1, z: 0.05}
+  position: {x: 0, y: -0.80152667, z: 0.05}
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 1, y: 1, z: 1}
+  scale: {x: 4.9832063, y: 2.5648854, z: 1}
   shaderProperties:
   - propertyName: _MouthRadius
-    propertyValue: 0.8256623
+    propertyValue: 0.13991198
     significant: 1
     active: 1
     pos: 
     neg: 
   - propertyName: _MouthLipMaskRoundness
-    propertyValue: 1
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _MouthLipTop
-    propertyValue: 0.9507416
+    propertyValue: 0
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _MouthLipBottom
-    propertyValue: 0.535
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethTop
-    propertyValue: 0.949
+    propertyValue: 0
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethBottom
-    propertyValue: 0.66
+    propertyValue: 0.35072157
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethCount
-    propertyValue: 0.523
+    propertyValue: 0.8836524
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethRoundness
-    propertyValue: 0.286
+    propertyValue: 0.8530105
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TongueRadius
-    propertyValue: 1
+    propertyValue: 0.6907217
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TongueScale
-    propertyValue: 1
+    propertyValue: 0.88954335
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TongueHeight
-    propertyValue: 1
+    propertyValue: 0.19145791
     significant: 0
     active: 0
     pos: 
