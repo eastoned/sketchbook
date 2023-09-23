@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 
@@ -19,8 +20,10 @@ public class PartController : MonoBehaviour
     MaterialPropertyBlock propBlock;
 
     void Start(){
-        for(int i = 0; i < pd.shaderProperties.Count; i++){
-            pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
+        if(!flippedXAxis){
+            for(int i = 0; i < pd.shaderProperties.Count; i++){
+                pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
+            }
         }
         propBlock = new MaterialPropertyBlock();
         //shaderIDs = new int[shaderParams.Count];
@@ -71,9 +74,17 @@ public class PartController : MonoBehaviour
     }
 
     void UpdateAllTransformValues(){
-        //transform.localPosition = pd.position;
-        //transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
+        transform.localPosition = pd.position;
+        if(flippedXAxis)
+            transform.localPosition = new Vector3(-pd.position.x, pd.position.y, pd.position.z);
+
+        transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
+        if(flippedXAxis)
+            transform.localEulerAngles = new Vector3(0, 0, -pd.currentAngle);
+
         transform.localScale = pd.scale;
+        if(flippedXAxis)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
 

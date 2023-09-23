@@ -19,7 +19,7 @@ MonoBehaviour:
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 1.5202157, y: 0.96108127, z: 1}
+  scale: {x: 2.3223846, y: 3.955748, z: 1}
   shaderProperties:
   - propertyName: _ChinWidth
     propertyValue: 0.62

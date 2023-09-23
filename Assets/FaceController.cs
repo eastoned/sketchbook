@@ -178,7 +178,14 @@ public class FaceController : MonoBehaviour
 
     private void SetPartTransform(Vector3 pos){
         //each part has a relative position to other objects
-        currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+        float flip = 1;
+
+        if(currentPC.flippedXAxis)
+            flip = -1;
+
+        currentTransform.localPosition = new Vector3(pos.x * flip, pos.y, currentTransform.localPosition.z);
+       // if(currentPC.flippedXAxis)
+           // currentTransform.localPosition *= new Vector3(-1, 1, 1);
        // currentTransform.localPosition = ClampEyePosition(pos);
         currentPC.pd.position = currentTransform.localPosition;
         //ClampTransforms();
@@ -201,6 +208,7 @@ public class FaceController : MonoBehaviour
 
     private void SetPartScale(Vector3 pos){
 
+        
         //Mathf.Cos(currentPC.pd.currentAngle)
         Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
         //Vector3 diff = new Vector3((currentTransform.TransformDirection(currentTransform.localPosition - pos) * 2f). * Mathf.Cos(currentPC.pd.currentAngle), (currentTransform.TransformDirection(currentTransform.localPosition - pos) * 2f).magnitude * Mathf.Sin(currentPC.pd.currentAngle), 1);//new Vector3(1, 1, 1);
@@ -213,6 +221,7 @@ public class FaceController : MonoBehaviour
     }
 
     private void SetPartRotation(Vector3 pos){
+
         float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
         //currentTransform.up
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));

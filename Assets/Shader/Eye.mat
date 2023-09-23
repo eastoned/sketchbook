@@ -29,13 +29,13 @@ Material:
     - _EyelidBottomOpen: 0.476
     - _EyelidBottomSkew: 0.575
     - _EyelidTopLength: 1
-    - _EyelidTopOpen: 0.672
+    - _EyelidTopOpen: 0.741
     - _EyelidTopSkew: 0.479
     - _Lid1: 0.632
     - _Lid2: 0.753
     - _PupilLength: 1
-    - _PupilOffsetX: 0
-    - _PupilOffsetY: 0
+    - _PupilOffsetX: 0.104
+    - _PupilOffsetY: -0.065
     - _PupilRadius: 1
     - _PupilRoundness: 0.457
     - _PupilWidth: 0.521

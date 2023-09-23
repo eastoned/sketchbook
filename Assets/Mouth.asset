@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: Mouth
   m_EditorClassIdentifier: 
-  translatable: 0
+  translatable: 1
   rotatable: 0
   scalable: 1
   position: {x: 0, y: -1, z: 0.05}

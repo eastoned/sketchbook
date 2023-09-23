@@ -15,11 +15,11 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 0.7601079, y: 0.4020396, z: 0}
+  position: {x: 1.6946566, y: -0.34351146, z: 0}
   minAngle: -45
   maxAngle: 45
-  currentAngle: 45.000004
-  scale: {x: 1.649296, y: 1.339231, z: 1}
+  currentAngle: 353.08878
+  scale: {x: 1.2047832, y: 1.7178903, z: 1}
   shaderProperties:
   - propertyName: _EyeRadius
     propertyValue: 1
