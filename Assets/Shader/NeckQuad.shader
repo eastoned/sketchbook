@@ -2,8 +2,8 @@ Shader "Unlit/NeckQuad"
 {
     Properties
     {
-        _NeckTopWidth ("Neck Width", Range(1, 5)) = 0
-        _NeckCurveRoundness("Neck Radius", Range(0, 3)) = 1
+        _NeckTopWidth ("Neck Width", Range(0, 1)) = 0
+        _NeckCurveRoundness("Neck Radius", Range(0, 1)) = 1
         _NeckCurveScale("Neck Scale", Range(1, 5)) = 0.5
 
         _Color1("Top", Color) = (1,1,1,1)
@@ -43,6 +43,7 @@ Shader "Unlit/NeckQuad"
             v2f vert (appdata v)
             {
                 v2f o;
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/60, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
@@ -54,10 +55,11 @@ Shader "Unlit/NeckQuad"
 
                 float2 uv = i.uv;//*float2(2, 2) - float2(0.5, 0.5);
                 //
-                float line1 = step(0, pow(0.5, 2) - pow(abs(uv.x), _NeckTopWidth*2) - pow(abs(uv.y-0.5),2));
-                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1))-(uv.y*_NeckCurveScale), _NeckTopWidth*2)) - pow(abs(uv.y-0.5),2));
-                float lin3 = pow((uv.x * _NeckTopWidth*2) , _NeckCurveRoundness) + pow(1-abs(uv.y), _NeckCurveScale);
-                float lin4 = pow(((1-uv.x) * _NeckTopWidth*2) , _NeckCurveRoundness) + pow(1-abs(uv.y), _NeckCurveScale);
+                
+                float line1 = step(0, pow(0.5, 2) - pow(abs(uv.x), (4*_NeckTopWidth + 1)*2) - pow(abs(uv.y-0.5),2));
+                float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1))-(uv.y*(4*_NeckCurveScale+1)), (4*_NeckTopWidth + 1)*2)) - pow(abs(uv.y-0.5),2));
+                float lin3 = pow((uv.x * (4*_NeckTopWidth + 1)*2) , _NeckCurveRoundness*3) + pow(1-abs(uv.y), (4*_NeckCurveScale+1));
+                float lin4 = pow(((1-uv.x) * (4*_NeckTopWidth + 1)*2) , _NeckCurveRoundness*3) + pow(1-abs(uv.y), (4*_NeckCurveScale+1));
                 
                 lin3 = step(1, lin3) * 1 - step(0.5, i.uv.x);
                 lin4 = step(1, lin4) * step(0.5, i.uv.x);

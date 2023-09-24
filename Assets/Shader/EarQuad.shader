@@ -4,15 +4,15 @@ Shader "Unlit/EarQuad"
     {
         
         _EarWidthSkew("Ear Width Skew", Range(0, 1)) = 0
-        _EarLengthSkew("Ear Length Skew", Range(-1, 1)) = 0
-        _EarShape("Ear Shape", Range(1, 6)) = 0
-        _EarRoundness("Ear Roundness", Range(0.6, 1.25)) = 0
+        _EarLengthSkew("Ear Length Skew", Range(0, 1)) = 0
+        _EarShape("Ear Shape", Range(0, 1)) = 0
+        _EarRoundness("Ear Roundness", Range(0, 1)) = 0
 
 
-        _EarOpenWidth("Ear Open Width", Range(1, 1.5)) = 0
-        _EarOpenLength("Ear Open Length", Range(1, 1.5)) = 0
+        _EarOpenWidth("Ear Open Width", Range(0, 1)) = 0
+        _EarOpenLength("Ear Open Length", Range(0, 1)) = 0
 
-        _EarConcha ("Ear Concha", Range(0.5, 1.25)) = 0
+        _EarConcha ("Ear Concha", Range(0, 1)) = 0
         _EarTragus("Ear Tragus", Range(0, 1)) = 0.5
 
         _Color1("Bottom", Color) = (1,1,1,1)
@@ -64,15 +64,16 @@ Shader "Unlit/EarQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv*2*float2(0.5, 1) + float2(0, -1);
-            
+                
                 float2 warp = uv;
-                float res = pow(uv.x*_EarWidthSkew, 3*_EarRoundness) - pow(uv.y*_EarLengthSkew, 3) - pow(pow(uv.x*_EarOpenWidth, 2) + pow(uv.y*_EarOpenLength, 2), 2*_EarShape);
+                float res = pow(uv.x*_EarWidthSkew, 3*(.65*_EarRoundness+.6)) - pow(uv.y*(2*_EarLengthSkew-1), 3) - pow(pow(uv.x*(.5*_EarOpenWidth+1), 2) + pow(uv.y*(.5*_EarOpenLength+1), 2), 2*(5*_EarShape+1));
                 res = step(0, res);
 
                 clip(res-0.5);
-                float line1 = step(0.5, distance(float2(0.5, -_EarLengthSkew/5 + lerp(0, 0.2, _EarLengthSkew*0.5+0.5)), i.uv*float2(_EarConcha, _EarConcha)));
+                float line1 = step(0.5, distance(float2(0.5, -(2*_EarLengthSkew-1)/5 + lerp(0, 0.2, _EarLengthSkew)), i.uv*float2((.75*_EarConcha+.5), (.75*_EarConcha+.5))));
 
-                float line2 = 1-step(_EarTragus*lerp(1, 0.5, _EarLengthSkew*0.5+0.5), distance(float2(0, -_EarLengthSkew*0.5+0.5), i.uv));
+                //float line2 = 1-step(_EarTragus*lerp(2, 1, _EarLengthSkew), distance(float2(0, -_EarLengthSkew), i.uv));
+                float line2 = 1-step(_EarTragus, distance(float2(0, lerp(0.5, 0,_EarLengthSkew)), i.uv));
                 line1 = saturate(line1 + line2);
                 float4 ear = line1 * lerp(_Color1, _Color2, i.uv.y);
                 return ear;

@@ -15,62 +15,70 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 0.8335877, y: -0.10534346, z: 0}
+  position: {x: 0.5129771, y: 0.0961833, z: 0}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: 0
+  maxPosY: 0
   minAngle: -45
   maxAngle: 45
-  currentAngle: 11.113035
-  scale: {x: 1.2940292, y: 1.2063906, z: 1}
+  currentAngle: 9.019318
+  scale: {x: 0.677523, y: 0.7567924, z: 1}
+  minScaleX: 0
+  maxScaleX: 1
+  minScaleY: 0
+  maxScaleY: 1
   shaderProperties:
   - propertyName: _EyeRadius
-    propertyValue: 0.8895439
+    propertyValue: 0.84536123
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilRadius
-    propertyValue: 0.26362282
+    propertyValue: 0.3961709
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilWidth
-    propertyValue: 0.54654956
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilLength
-    propertyValue: 0.91791624
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidTopLength
-    propertyValue: 1
+    propertyValue: 0.7349043
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidTopSkew
-    propertyValue: 0.7189103
+    propertyValue: 0.41699573
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidBottomLength
-    propertyValue: 1
+    propertyValue: 0.7385862
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidBottomSkew
-    propertyValue: 0
+    propertyValue: 0.486009
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilRoundness
-    propertyValue: 0.21207646
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 

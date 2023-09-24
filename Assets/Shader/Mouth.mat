@@ -25,21 +25,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BotTeeth: 0
-    - _Lips: 0
+    - _Lips: 0.95
     - _MouthLipBottom: 1
     - _MouthLipMaskRoundness: 1
-    - _MouthLipTop: 0.878
+    - _MouthLipTop: 1
     - _MouthRadius: 1
     - _Radius: 1
     - _Radius2: 1
     - _TeethAmount: 13.2
-    - _TeethBottom: 0.335
-    - _TeethCount: 10.81
-    - _TeethRoundness: 1.86
-    - _TeethTop: 0.448
-    - _TongueHeight: 0.088
-    - _TongueRadius: 0.127
-    - _TongueScale: 0.25
+    - _TeethBottom: 0.38
+    - _TeethCount: 0.213
+    - _TeethRoundness: 0.826
+    - _TeethTop: 0.702
+    - _TongueHeight: 0.093
+    - _TongueRadius: 0.826
+    - _TongueScale: 0.808
     - _TopTeeth: 0.39
     - _xScaleUpper: 1
     - _xScaleUpper2: 1

@@ -67,15 +67,15 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NoseBaseWidth: 0.1
-    - _NoseCurve: 5
-    - _NoseTopWidth: 1.32
-    - _NoseTotalLength: 1.55
-    - _NoseTotalWidth: 1.57
-    - _NostrilHeight: -0.239
-    - _NostrilRadius: 0.096
-    - _NostrilScale: 0.892
-    - _NostrilSpacing: 0.12
+    - _NoseBaseWidth: 0
+    - _NoseCurve: 0
+    - _NoseTopWidth: 0
+    - _NoseTotalLength: 0.5
+    - _NoseTotalWidth: 0
+    - _NostrilHeight: 0
+    - _NostrilRadius: 0.354
+    - _NostrilScale: 0.293
+    - _NostrilSpacing: 0.436
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Radius: 0.09

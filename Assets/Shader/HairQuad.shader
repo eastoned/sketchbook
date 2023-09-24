@@ -2,11 +2,11 @@ Shader "Unlit/HairQuad"
 {
     Properties
     {
-        _BangRoundness ("Band Roundness", Range(0.25, 4)) = 1
-        _StrandCount ("Strand Count", Range(0, 20)) = 2
+        _BangRoundness ("Band Roundness", Range(0, 1)) = 1
+        _StrandCount ("Strand Count", Range(0, 1)) = 0
         _StrandOffset ("Strand Offset", Range(0, 1)) = 0
-        _HairBangScale ("Hair Bang Scale", Range(0.5, 2)) = 0
-        _HairRoundness ("Hair Roundness", Range(1, 5)) = 2
+        _HairBangScale ("Hair Bang Scale", Range(0, 1)) = 0
+        _HairRoundness ("Hair Roundness", Range(0, 1)) = 1
 
         _Color1("Base", Color) = (1,1,1,1)
         _Color2("Accent", Color) = (0.5,0.5,0.5, 1)
@@ -40,8 +40,8 @@ Shader "Unlit/HairQuad"
             };
 
             float _BangRoundness, _HairBangScale;
-            int _StrandCount;
-            int _StrandOffset;
+            float _StrandCount;
+            float _StrandOffset;
             float _HairRoundness;
             float4 _Color1, _Color2;
 
@@ -59,14 +59,14 @@ Shader "Unlit/HairQuad"
             {
                 float2 uv = i.uv;
                 
-                uv.x *= _StrandCount;
+                uv.x *= (int)(19*_StrandCount+1);
                 uv.x += (0.5*_StrandOffset);
                 uv.x = frac(uv.x);
-                uv.y = pow(uv.y, _HairBangScale);
+                uv.y = pow(uv.y, (1.5*_HairBangScale+0.5));
                 
-                float bang = pow(abs(i.uv.x*2-1), _HairRoundness) + pow(abs(uv.y*2-1), _HairRoundness);
+                float bang = pow(abs(i.uv.x*2-1), (4*_HairRoundness+1)) + pow(abs(uv.y*2-1), (4*_HairRoundness+1));
                 bang = (1-step(1, bang)) * step(0.5, uv.y);
-                float bangs = pow(abs(uv.x*2-1), _BangRoundness) + pow(abs(uv.y*2-1), _BangRoundness);
+                float bangs = pow(abs(uv.x*2-1), (3.75*_BangRoundness+.25)) + pow(abs(uv.y*2-1), (3.75*_BangRoundness+.25));
                 bangs = (1-step(1, bangs)) * step(0.5, 1-uv.y);
                 bang+=bangs;
                 bang = saturate(bang);

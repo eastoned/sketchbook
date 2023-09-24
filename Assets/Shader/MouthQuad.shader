@@ -3,24 +3,23 @@ Shader "Unlit/MouthQuad"
     Properties
     {
 
-        _MouthRadius ("Mouth Radius", Range(0.1, 1)) = 0.5
+        _MouthRadius ("Mouth Radius", Range(0, 1)) = 0.5
         
         _MouthLipMaskRoundness ("Lip Mask Roundness", Range(0, 1)) = 0.5
         
-        _MouthLipTop ("Top Lip", Range(-1, 1)) = 0.5
+        _MouthLipTop ("Top Lip", Range(0, 1)) = 0.5
         
-        _MouthLipBottom ("Bottom Lip", Range(-1, 1)) = 0.5
+        _MouthLipBottom ("Bottom Lip", Range(0, 1)) = 0.5
 
         _TeethTop ("Top Teeth", Range(0,1)) = 0.5
         _TeethBottom ("Bottom Teeth", Range(0,1)) = 0.5
-        _TeethCount("Teeth Count", Range(0, 30)) = 4
-        _TeethRoundness("Teeth Roundness", Range(0.5, 4)) = 1
 
-        _TongueRadius("Tongue Radius", Range(0, 0.25)) = 0.25
-        _TongueScale("Tongue Scale", Range(0.25, 0.75)) = 0.5
+        _TeethCount("Teeth Count", Range(0, 1)) = .5
+        _TeethRoundness("Teeth Roundness", Range(0, 1)) = 1
+
+        _TongueRadius("Tongue Radius", Range(0, 1)) = 0.5
+        _TongueScale("Tongue Scale", Range(0, 1)) = 0.5
         _TongueHeight("Tongue Height", Range(0, 1)) = 0
-
-        _Lips("Lips", Range(0, 4)) = 0.5
 
         _Color1("Mouth Bottom", Color) = (1,1,1,1)
         _Color2("Mouth Top", Color) = (1,1,1,1)
@@ -60,7 +59,7 @@ Shader "Unlit/MouthQuad"
             float _TeethTop, _TeethBottom;
             float _TongueRadius, _TongueScale, _TongueHeight;
             float4 _Color1, _Color2, _Color3, _Color4;
-            int _TeethCount;
+            float _TeethCount;
             float _TeethRoundness;
             float _Lips;
 
@@ -78,24 +77,24 @@ Shader "Unlit/MouthQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-
+                
                 float value = distance(i.uv, float2(0.5, 0.5));
                 value = step(0.5, value);
-                float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_MouthLipTop,2);
+                float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/(2*_MouthLipTop-1),2);
                 float line1 = step(0, line0) * step(0.5, uv.y);
-                line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow(abs((uv.y-0.5)/_MouthLipTop), 2);
+                line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow(abs((uv.y-0.5)/(2*_MouthLipTop-1)), 2);
                 line0 *= step(0.5, uv.y);
 
-                float line2a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_MouthLipBottom,2);
+                float line2a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/(2*_MouthLipBottom-1),2);
                 float line2 = step(0, line2a) * (1 - step(0.5, uv.y));
-                line2a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow(abs((uv.y-0.5)/_MouthLipBottom),2);
+                line2a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow(abs((uv.y-0.5)/(2*_MouthLipBottom-1)),2);
                 line2a *= (1 - step(0.5, uv.y));
                 //min of two scale values absolute 
                 //if upper and upper 2 are <0 then mouth is gone, how do we address
-                float mask = 1-clamp(-min(_MouthLipTop, _MouthLipBottom), 0, 1);
-                float line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow((uv.y-0.5)/clamp(-min(_MouthLipTop, _MouthLipBottom), 0, 1),2);
+                float mask = 1-clamp(-min((2*_MouthLipTop-1), (2*_MouthLipBottom-1)), 0, 1);
+                float line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow((uv.y-0.5)/clamp(-min((2*_MouthLipTop-1), (2*_MouthLipBottom-1)), 0, 1),2);
                 float line3 = 1-step(0, line3a);
-                line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow(abs(0.5*(uv.y-0.5)/clamp(-min(_MouthLipTop, _MouthLipBottom), -1, 1)),3);
+                line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow(abs(0.5*(uv.y-0.5)/clamp(-min((2*_MouthLipTop-1), (2*_MouthLipBottom-1)), -1, 1)),3);
                 line3a = 1 - step(0, line3a);
                 line1 += line2;
                 line1 *= (line3);
@@ -104,24 +103,23 @@ Shader "Unlit/MouthQuad"
 
                 //line0 += line2a;
                 //line0 *= line3a;
-                float uvStrength = ((-_MouthLipTop + 3) * (-_MouthLipBottom + 3));
-                float2 teethUV = float2(frac(uv.x*_TeethCount), (uv.y*(uvStrength)-(uvStrength/2) - _MouthLipTop + _MouthLipBottom));//* (_MouthLipTop*-1 + 2);// ;
-                //teethUV = uv.y + (((_MouthLipTop*0.5)+0.5)*-.25 -.25) * (((_MouthLipBottom*0.5)+0.5)*.25-.75);
-                //teethUV += (((_MouthLipBottom*0.5)+0.5)*.25-.75);
+                float uvStrength = ((-(2*_MouthLipTop-1) + 3) * (-(2*_MouthLipBottom-1) + 3));
+                float2 teethUV = float2(frac(uv.x*(int)(_TeethCount*30)), (uv.y*(uvStrength)-(uvStrength/2) - (2*_MouthLipTop-1) + (2*_MouthLipBottom-1)));
+
                 float topComp = teethUV.y -(1-_TeethTop)*2 - 0.5;
                 float line4 = step(0, topComp);
                 float botComp = -teethUV.y - (1-_TeethBottom)*2 - 0.5;
                 line4 += step(0, botComp);
                 
-                float toof = pow(abs(teethUV.x*2-1), _TeethRoundness) + pow(abs(topComp*2), _TeethRoundness);
-                float toof2 = pow(abs(teethUV.x*2-1), _TeethRoundness) + pow(abs(botComp*2), _TeethRoundness);
+                float toof = pow(abs(teethUV.x*2-1), (3.5*_TeethRoundness+.5)) + pow(abs(topComp*2), (3.5*_TeethRoundness+.5));
+                float toof2 = pow(abs(teethUV.x*2-1), (3.5*_TeethRoundness+.5)) + pow(abs(botComp*2), (3.5*_TeethRoundness+.5));
                 toof = 1-step(1, toof);
                 toof2 = 1 - step(1, toof2);
                 toof += toof2;
                 
                 line4 += toof;
-                float tongue = pow(_TongueRadius, 2) - pow((uv.x-.5) *(1-_TongueScale), 2) - pow((uv.y-_TongueHeight)*(_TongueScale),2);
-                float tongueY = pow(_TongueRadius, 2) - pow((uv.y-_TongueHeight/2)*(_TongueScale),2);
+                float tongue = pow((.25*_TongueRadius), 2) - pow((uv.x-.5) *(1-(.5*_TongueScale+.25)), 2) - pow((uv.y-_TongueHeight)*(.5*_TongueScale+.25),2);
+                float tongueY = pow((.25*_TongueRadius), 2) - pow((uv.y-_TongueHeight/2)*(.5*_TongueScale+.25),2);
                 //tongueY *= 10;
                 tongueY = saturate(tongueY);
                 tongue = step(0, tongue);
@@ -139,7 +137,7 @@ Shader "Unlit/MouthQuad"
                 float newLine = line3a;
                 newLine = line2a;
                 //return res;
-                return res * pow(_MouthLipTop + _MouthLipBottom, 0.5);
+                return res * pow((2*_MouthLipTop-1) + (2*_MouthLipBottom-1), 0.5);
             }
             ENDCG
         }

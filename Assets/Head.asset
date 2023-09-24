@@ -12,23 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: Head
   m_EditorClassIdentifier: 
+  affectedParts:
+  - {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
   translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: -0.9114504, z: 0.1}
+  position: {x: 0, y: 0, z: 0.1}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: 0
+  maxPosY: 0
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 3.3160307, y: 3.032061, z: 1}
+  scale: {x: 3.5175574, y: 3.0870223, z: 1}
+  minScaleX: 1.5
+  maxScaleX: 4
+  minScaleY: 1.5
+  maxScaleY: 4
   shaderProperties:
   - propertyName: _ChinWidth
-    propertyValue: 0
+    propertyValue: 0.36818847
     significant: 1
     active: 1
     pos: 
     neg: 
   - propertyName: _ChinLength
-    propertyValue: 0.35198832
+    propertyValue: 0.29307806
     significant: 0
     active: 0
     pos: 
@@ -40,19 +50,19 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _ForeheadWidth
-    propertyValue: 0.9915536
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _ForeheadLength
-    propertyValue: 0
+    propertyValue: 0.16200279
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _ForeheadScale
-    propertyValue: 0.073637605
+    propertyValue: 0
     significant: 1
     active: 0
     pos: 

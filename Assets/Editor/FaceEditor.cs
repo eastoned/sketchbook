@@ -15,61 +15,53 @@ public class FaceEditor : Editor
         if(GUILayout.Button("Randomize All")){
             faceControl.AllRandom();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
+            
         }
 
         if(GUILayout.Button("Randomize Head")){
             faceControl.RandomHead();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
+            
         }
 
         if(GUILayout.Button("Randomize Neck")){
             faceControl.RandomNeck();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Eyes")){
             faceControl.RandomEye();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Eyebrows")){
             faceControl.RandomEyebrow();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Nose")){
             faceControl.RandomNose();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Mouth")){
             faceControl.RandomMouth();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Ear")){
             faceControl.RandomEar();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Bangs")){
             faceControl.RandomBangs();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Randomize Hair Back")){
             faceControl.RandomHair();
             faceControl.SetTransformValues();
-            faceControl.SetShaderValues();
         }
 
         if(GUILayout.Button("Load Character")){

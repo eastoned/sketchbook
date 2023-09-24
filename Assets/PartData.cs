@@ -5,13 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PartData", menuName = "ScriptableObjects/PartData", order = 3)]
 public class PartData : ScriptableObject
 {
+
+    public List<PartData> affectedParts = new List<PartData>();
     #region TransformData
         public bool translatable, rotatable, scalable;
+        
         public Vector3 position;
+        public float minPosX, maxPosX, minPosY, maxPosY;
         public float minAngle, maxAngle;
         public float currentAngle;
         public Vector3 scale;
-    
+        public float minScaleX, maxScaleX, minScaleY, maxScaleY;
     #endregion
 
     #region ShaderData
@@ -20,8 +24,21 @@ public class PartData : ScriptableObject
         public List<ShaderColor> shaderColors = new List<ShaderColor>();
     #endregion
 
+    public Vector3 ClampedScale(Vector3 scaleIn){
+        Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
+        return clampedSize;
+    }
+
     public float ClampedAngle(float angle){
         return Mathf.Clamp(angle, minAngle, maxAngle);
+    }
+
+    public virtual void ClampedPosition(Vector3 posIn){
+        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), 1);
+    }
+
+    public virtual void RelativeScale(Vector3 parentScale){
+        scale = ClampedScale(scale);
     }
 }
 
@@ -47,6 +64,8 @@ public class ShaderProperty{
 
     public string pos, neg;
 }
+
+
 
 [System.Serializable]
 public class ShaderColor{

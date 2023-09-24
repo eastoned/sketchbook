@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
-
 public class PartController : MonoBehaviour
 {
 
@@ -58,7 +57,11 @@ public class PartController : MonoBehaviour
     }
 
     void OnMouseEnter(){
-        Debug.Log("Entered object");
+       // Debug.Log("Entered object");
+        
+       //OnHoveredFacePartEvent.Instance.Invoke();
+    }
+    void OnMouseDown(){
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
     }
 

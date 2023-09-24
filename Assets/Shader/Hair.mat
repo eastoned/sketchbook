@@ -26,11 +26,11 @@ Material:
     m_Floats:
     - _BangCount: 6.1
     - _BangOffset: 1
-    - _BangRoundness: 4
-    - _HairBangScale: 1.373
-    - _HairRoundness: 5
-    - _StrandCount: 6.6
-    - _StrandOffset: 0.638
+    - _BangRoundness: 1
+    - _HairBangScale: 0.573
+    - _HairRoundness: 1
+    - _StrandCount: 0.39
+    - _StrandOffset: 0
     - _TopRoundness: 5
     - _yOffset: 2
     m_Colors:

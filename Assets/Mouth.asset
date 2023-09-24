@@ -12,59 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: Mouth
   m_EditorClassIdentifier: 
-  translatable: 1
+  translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: -0.80152667, z: 0.05}
+  position: {x: 0, y: -0.5, z: 0.05}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: 0
+  maxPosY: 0
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 4.9832063, y: 2.5648854, z: 1}
+  scale: {x: 1.0014982, y: 0.8213744, z: 1}
+  minScaleX: 0
+  maxScaleX: 1
+  minScaleY: 0
+  maxScaleY: 1
   shaderProperties:
   - propertyName: _MouthRadius
-    propertyValue: 0.13991198
+    propertyValue: 1
     significant: 1
     active: 1
     pos: 
     neg: 
   - propertyName: _MouthLipMaskRoundness
-    propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _MouthLipTop
-    propertyValue: 0
-    significant: 1
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _MouthLipBottom
     propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
+  - propertyName: _MouthLipTop
+    propertyValue: 0.6918372
+    significant: 1
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _MouthLipBottom
+    propertyValue: 0.88275754
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
   - propertyName: _TeethTop
-    propertyValue: 0
+    propertyValue: 0.46391755
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethBottom
-    propertyValue: 0.35072157
+    propertyValue: 0.26972008
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethCount
-    propertyValue: 0.8836524
+    propertyValue: 0.25625914
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethRoundness
-    propertyValue: 0.8530105
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 

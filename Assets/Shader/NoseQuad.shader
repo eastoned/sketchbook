@@ -2,15 +2,16 @@ Shader "Unlit/NoseQuad"
 {
     Properties
     {
-        _NoseBaseWidth ("Nose Base Width", Range(0.1,2.5)) = 1
-        _NoseTotalWidth ("Nose Total Width", Range(1,5)) = 1
-        _NoseTopWidth ("Nose Top Width", Range(0.1,2.5)) = 1
-        _NoseCurve ("Nose Curve", Range(1,5)) = 1
-        _NoseTotalLength("Nose Total Length", Range(0.1, 3)) = 0
-        _NostrilRadius("Nostril Radius", Range(0, 0.5)) = 0.25
+        _NoseBaseWidth ("Nose Base Width", Range(0,1)) = 1
+        _NoseTotalWidth ("Nose Total Width", Range(0,1)) = 1
+        _NoseTopWidth ("Nose Top Width", Range(0,1)) = 1
+        _NoseCurve ("Nose Curve", Range(0,1)) = 1
+        _NoseTotalLength("Nose Total Length", Range(0, 1)) = 0
+
+        _NostrilRadius("Nostril Radius", Range(0, 1)) = 0.25
         _NostrilSpacing("Nostril Spacing", Range(0, 1)) = 0.5
-        _NostrilHeight("Nostril Height", Range(-.5, 0)) = 0
-        _NostrilScale("Nostril Scale", Range(0.25, 2)) = 0.5
+        _NostrilHeight("Nostril Height", Range(0, 1)) = 0
+        _NostrilScale("Nostril Scale", Range(0, 1)) = 0.5
 
         _Color1("Bottom", Color) = (1,1,1,1)
         _Color2("Top", Color) = (1,1,1,1)
@@ -61,13 +62,13 @@ Shader "Unlit/NoseQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 
-                float2 uv = float2(abs(i.uv.x*2-1), lerp(i.uv.y, i.uv.y - 0.35, _NoseTotalLength/3) * _NoseTotalLength);
-                float line1 = pow(uv.y, _NoseBaseWidth) - uv.x * _NoseTotalWidth;
+                float2 uv = float2(abs(i.uv.x*2-1), lerp(i.uv.y, i.uv.y - 0.35, (2.2*_NoseTotalLength+.8)/3) * (2.2*_NoseTotalLength+.8));
+                float line1 = pow(uv.y, (.6*_NoseBaseWidth+.1)) - uv.x * (4*_NoseTotalWidth+1);
 
-                float line2 = pow(1-uv.y, _NoseTopWidth) - uv.x * _NoseCurve;
+                float line2 = pow(1-uv.y, (.6*_NoseTopWidth+.1)) - uv.x * (4*_NoseCurve+1);
                 //* _NostrilRadius
                 //float circle1 = step(_NostrilRadius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing*_NostrilRadius, 0.5+_NostrilHeight)));
-                float circle1 = step(_NostrilRadius, distance(uv*float2(_NostrilScale, 1), float2(_NostrilSpacing*_NostrilScale, _NostrilHeight+0.5)));
+                float circle1 = step(_NostrilRadius*.5, distance(uv*float2((1.75*_NostrilScale+.25), 1), float2(_NostrilSpacing*(1.75*_NostrilScale+.25), _NostrilHeight*.5)));
                 
                 float result = step(0, line1*line2);
                 

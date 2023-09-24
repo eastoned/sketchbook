@@ -9,45 +9,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Eyebrow
+  m_Script: {fileID: 11500000, guid: 794ef52737c212f45b21f4b64c293fc5, type: 3}
+  m_Name: NeckDataRel
   m_EditorClassIdentifier: 
-  translatable: 1
-  rotatable: 1
+  affectedParts: []
+  translatable: 0
+  rotatable: 0
   scalable: 1
-  position: {x: 0.5679391, y: 0.4259541, z: -0.15}
+  position: {x: 0, y: -1, z: 0.2}
   minPosX: 0
   maxPosX: 0
-  minPosY: 0
-  maxPosY: 0
-  minAngle: -45
-  maxAngle: 45
+  minPosY: -1
+  maxPosY: -1
+  minAngle: 0
+  maxAngle: 0
   currentAngle: 0
-  scale: {x: 0.6412211, y: 0.58625984, z: 1}
+  scale: {x: 3.5, y: 2, z: 1}
   minScaleX: 0
-  maxScaleX: 1
-  minScaleY: 0
-  maxScaleY: 1
+  maxScaleX: 3.7923663
+  minScaleY: 2
+  maxScaleY: 2
   shaderProperties:
-  - propertyName: _EyebrowCount
-    propertyValue: 0.053755622
+  - propertyName: _NeckTopWidth
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _EyebrowThickness
-    propertyValue: 0.20107858
+  - propertyName: _NeckCurveRoundness
+    propertyValue: 0.35198832
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _EyebrowRoundness
-    propertyValue: 0.50274
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _EyebrowCurve
+  - propertyName: _NeckCurveScale
     propertyValue: 0
     significant: 0
     active: 0

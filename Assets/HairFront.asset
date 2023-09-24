@@ -10,75 +10,57 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Nose
+  m_Name: HairFront
   m_EditorClassIdentifier: 
   translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: 0, z: -0.05}
+  position: {x: 0, y: 1, z: -0.1}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
   maxPosY: 0
-  minAngle: 0
-  maxAngle: 0
+  minAngle: -45
+  maxAngle: 45
   currentAngle: 0
-  scale: {x: 0.751145, y: 0.8519082, z: 1}
+  scale: {x: 0.8977099, y: 0.53740454, z: 1}
   minScaleX: 0
   maxScaleX: 1
   minScaleY: 0
   maxScaleY: 1
   shaderProperties:
-  - propertyName: _NoseBaseWidth
-    propertyValue: 0.112665884
+  - propertyName: _BangRoundness
+    propertyValue: 0.4258256
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _NoseTotalWidth
+  - propertyName: _StrandCount
+    propertyValue: 0.4402773
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _StrandOffset
     propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _NoseTopWidth
-    propertyValue: 0.7017674
+  - propertyName: _HairBangScale
+    propertyValue: 0.45508096
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _NoseCurve
-    propertyValue: 0.8468336
+  - propertyName: _HairRoundness
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _NoseTotalLength
-    propertyValue: 0.2494423
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _NostrilRadius
-    propertyValue: 0.21817388
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _NostrilSpacing
-    propertyValue: 0.27999577
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _NostrilHeight
-    propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _NostrilScale
-    propertyValue: 0.3041238
+  - propertyName: _EarOpenLength
+    propertyValue: 0.7189103
     significant: 0
     active: 0
     pos: 

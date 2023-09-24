@@ -10,9 +10,9 @@ public class FaceController : MonoBehaviour
 {
     [HideInInspector][SerializeField] public Renderer LeftEye,
     RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar,
-    Mouth, Neck, HairFront, HairBack;
+    MouthR, Neck, HairFront, HairBack;
 
-    public PartData head, eye, nose;
+    public PartData head, eye, nose, ear, mouth;
 
     public CharacterData currentChar;
 
@@ -130,8 +130,6 @@ public class FaceController : MonoBehaviour
     public PartController currentPC;
     public Transform currentTransform;
 
-    MaterialPropertyBlock LeftEyeProp, RightEyeProp, MouthProp;
-
     [Range(0f, 1f)]
     public float blendCharacterValue;
 
@@ -165,6 +163,8 @@ public class FaceController : MonoBehaviour
         
         currentPC = selectedTarget.GetComponent<PartController>();
         currentTransform = selectedTarget;
+        DisappearControllers();
+
         if(currentPC.pd.translatable)
             widthLeft.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, 0, 0));
 
@@ -184,10 +184,16 @@ public class FaceController : MonoBehaviour
             flip = -1;
 
         currentTransform.localPosition = new Vector3(pos.x * flip, pos.y, currentTransform.localPosition.z);
-       // if(currentPC.flippedXAxis)
-           // currentTransform.localPosition *= new Vector3(-1, 1, 1);
-       // currentTransform.localPosition = ClampEyePosition(pos);
+
         currentPC.pd.position = currentTransform.localPosition;
+        
+        //have to update the rest of the face pieces if necessary
+        if(currentPC.pd.Equals("Head")){
+           // ClampEyePosition();
+            //ClampNosePosition();
+            //ClampMouthPosition();
+            ///ClampEarPosition();
+        }
         //ClampTransforms();
         SetTransformControllers(currentTransform);
         //ClampPos();
@@ -207,15 +213,26 @@ public class FaceController : MonoBehaviour
     //and half of head in y position
 
     private void SetPartScale(Vector3 pos){
-
         
         //Mathf.Cos(currentPC.pd.currentAngle)
         Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
+        diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
+        diff = currentPC.pd.ClampedScale(diff);
+
+        if(currentPC.pd.affectedParts.Count > 0){
+            Debug.Log("Time to sacle the affected pieces");
+            for(int i = 0; i < currentPC.pd.affectedParts.Count; i++){
+                currentPC.pd.affectedParts[i].RelativeScale(diff);
+            }
+        }
+
+        //Debug.Log(currentPC.pd.name);
         //Vector3 diff = new Vector3((currentTransform.TransformDirection(currentTransform.localPosition - pos) * 2f). * Mathf.Cos(currentPC.pd.currentAngle), (currentTransform.TransformDirection(currentTransform.localPosition - pos) * 2f).magnitude * Mathf.Sin(currentPC.pd.currentAngle), 1);//new Vector3(1, 1, 1);
         //currentTransform.TransformDirection(currentTransform.localPosition - pos);
         //currentTransform.localScale = diff;
         //diff.Abs()*2f;
-        currentPC.pd.scale = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);//currentTransform.localScale;
+        currentPC.pd.scale = diff;//currentTransform.localScale;
+        //currentPC.pd.affectedParts
         //SetTransformControllers(currentTransform);
         //ClampScale();
     }
@@ -228,6 +245,10 @@ public class FaceController : MonoBehaviour
         currentPC.pd.currentAngle = currentTransform.localEulerAngles.z;
         SetTransformControllers(currentTransform);
         //ClampRot();
+    }
+
+    public Vector3 ClampedPartPosition(PartController pc, Vector3 pos){
+        return Vector3.one;
     }
 
 
@@ -247,8 +268,6 @@ public class FaceController : MonoBehaviour
     public void ClampScale(){
         LeftEye.transform.localScale = new Vector3(-RightEye.transform.localScale.x, RightEye.transform.localScale.y, 1f);
     }
-
-
 
     public void ClampTransforms(){
         float actualHeadWidth = Mathf.Lerp(1,4, headWidth);
@@ -287,8 +306,8 @@ public class FaceController : MonoBehaviour
         LeftEar.transform.localPosition = new Vector3(LeftEar.transform.localPosition.x, LeftEar.transform.localPosition.y, 0.15f);
         RightEar.transform.localPosition = new Vector3(-LeftEar.transform.localPosition.x, LeftEar.transform.localPosition.y, 0.15f);
 
-        Mouth.transform.localScale = new Vector3(mouthWidth, mouthLength, 1);
-        Mouth.transform.localPosition = new Vector3(0, Mouth.transform.localPosition.y, 0.05f);
+        MouthR.transform.localScale = new Vector3(mouthWidth, mouthLength, 1);
+        MouthR.transform.localPosition = new Vector3(0, MouthR.transform.localPosition.y, 0.05f);
 
         Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
         Neck.transform.localPosition = new Vector3(0, -1f, 0.2f);
@@ -337,8 +356,8 @@ public class FaceController : MonoBehaviour
         LeftEar.transform.localPosition = new Vector3(Mathf.Lerp(-earWidth/2f, -actualHeadWidth/2f - earWidth/2f, headWidth * earSpacing) + Mathf.Abs(earAngle)/90f, earHeight * headLength - earAngle/90f, 0.15f);
         RightEar.transform.localPosition = new Vector3(Mathf.Lerp(earWidth/2f, actualHeadWidth/2f + earWidth/2f, headWidth * earSpacing) - Mathf.Abs(earAngle)/90f, earHeight * headLength - earAngle/90f, 0.15f);
 
-        Mouth.transform.localScale = new Vector3(mouthWidth, mouthLength, 1);
-        Mouth.transform.localPosition = new Vector3(0, Mathf.Lerp(actualNoseHeight - (mouthLength/4f), (-actualHeadLength/2 * (2f/chinScale)) + (mouthLength/4f), mouthHeight), 0.05f);
+        MouthR.transform.localScale = new Vector3(mouthWidth, mouthLength, 1);
+        MouthR.transform.localPosition = new Vector3(0, Mathf.Lerp(actualNoseHeight - (mouthLength/4f), (-actualHeadLength/2 * (2f/chinScale)) + (mouthLength/4f), mouthHeight), 0.05f);
 
         Neck.transform.localScale = new Vector3(Mathf.Lerp(0.5f, actualHeadWidth, neckWidth), 2f, 1f);
 
@@ -347,163 +366,6 @@ public class FaceController : MonoBehaviour
 
         HairBack.transform.localPosition = new Vector3(0, Mathf.Lerp(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - hairLength/2, hairHeight), 0.3f);
         HairBack.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth * 1.25f, hairWidth), hairLength, 1);
-    }
-
-    public void SliderShader(float value){
-        
-    }
-
-
-    public void SetShaderValues(){
-        MaterialPropertyBlock EyebrowProp, EarProp, NoseProp, HeadProp, NeckProp, HairFrontProp, HairBackProp;
-        LeftEyeProp = new MaterialPropertyBlock();
-        RightEyeProp = new MaterialPropertyBlock();
-        EyebrowProp = new MaterialPropertyBlock();
-        EarProp = new MaterialPropertyBlock();
-        NoseProp = new MaterialPropertyBlock();
-        MouthProp = new MaterialPropertyBlock();
-        HeadProp = new MaterialPropertyBlock();
-        NeckProp = new MaterialPropertyBlock();
-        HairFrontProp = new MaterialPropertyBlock();
-        HairBackProp = new MaterialPropertyBlock();
-
-        HeadProp.SetFloat("_ChinWidth", chinWidth);
-        HeadProp.SetFloat("_ChinLength", chinLength);
-        HeadProp.SetFloat("_ChinScale", chinScale);
-        HeadProp.SetFloat("_ForeheadWidth", foreheadWidth);
-        HeadProp.SetFloat("_ForeheadLength", foreheadLength);
-        HeadProp.SetFloat("_ForeheadScale", foreheadScale);
-        HeadProp.SetColor("_Color1", headBottom);
-        HeadProp.SetColor("_Color2", headTop);
-
-        //Head.SetPropertyBlock(HeadProp);
-
-        NeckProp.SetFloat("_NeckTopWidth", neckTopWidth);
-        NeckProp.SetFloat("_NeckCurveRoundness", neckCurveRoundness);
-        NeckProp.SetFloat("_NeckCurveScale", neckCurveScale);
-        NeckProp.SetColor("_Color1", neckBottom);
-        NeckProp.SetColor("_Color2", neckTop);
-
-        Neck.SetPropertyBlock(NeckProp);
-
-        LeftEyeProp.SetFloat("_EyeRadius", eyeRadius);
-        LeftEyeProp.SetFloat("_PupilRadius", pupilRadius);
-        LeftEyeProp.SetFloat("_PupilWidth", pupilWidth);
-        LeftEyeProp.SetFloat("_PupilLength", pupilLength);
-        LeftEyeProp.SetFloat("_EyelidTopLength", eyelidTopLength);
-        LeftEyeProp.SetFloat("_EyelidTopSkew", eyelidTopSkew);
-        LeftEyeProp.SetFloat("_EyelidBottomLength", eyelidBottomLength);
-        LeftEyeProp.SetFloat("_EyelidBottomSkew", eyelidBottomSkew);
-        LeftEyeProp.SetFloat("_EyelidTopOpen", eyelidTopOpen);
-        LeftEyeProp.SetFloat("_EyelidBottomOpen", eyelidBottomOpen);
-        LeftEyeProp.SetFloat("_PupilRoundness", pupilRoundness);
-
-        LeftEyeProp.SetColor("_Color1", eyelidCenter);
-        LeftEyeProp.SetColor("_Color2", eyelidEdge);
-        LeftEyeProp.SetColor("_Color3", Color.black);
-        LeftEyeProp.SetColor("_Color4", Color.black);
-
-        RightEyeProp.SetFloat("_EyeRadius", eyeRadius);
-        RightEyeProp.SetFloat("_PupilRadius", pupilRadius);
-        RightEyeProp.SetFloat("_PupilWidth", pupilWidth);
-        RightEyeProp.SetFloat("_PupilLength", pupilLength);
-        RightEyeProp.SetFloat("_EyelidTopLength", eyelidTopLength);
-        RightEyeProp.SetFloat("_EyelidTopSkew", eyelidTopSkew);
-        RightEyeProp.SetFloat("_EyelidBottomLength", eyelidBottomLength);
-        RightEyeProp.SetFloat("_EyelidBottomSkew", eyelidBottomSkew);
-        RightEyeProp.SetFloat("_EyelidTopOpen", eyelidTopOpen);
-        RightEyeProp.SetFloat("_EyelidBottomOpen", eyelidBottomOpen);
-        RightEyeProp.SetFloat("_PupilRoundness", pupilRoundness);
-
-        RightEyeProp.SetColor("_Color1", eyelidCenter);
-        RightEyeProp.SetColor("_Color2", eyelidEdge);
-        RightEyeProp.SetColor("_Color3", Color.black);
-        RightEyeProp.SetColor("_Color4", Color.black);
-
-        LeftEye.SetPropertyBlock(LeftEyeProp);
-        RightEye.SetPropertyBlock(RightEyeProp);
-
-        EyebrowProp.SetFloat("_EyebrowCount", eyebrowCount);
-        EyebrowProp.SetFloat("_EyebrowThickness", eyebrowThickness);
-        EyebrowProp.SetFloat("_EyebrowRoundness", eyebrowRoundness);
-        EyebrowProp.SetFloat("_EyebrowCurve", eyebrowCurve);
-
-        EyebrowProp.SetColor("_Color1", eyebrowInner);
-        EyebrowProp.SetColor("_Color2", eyebrowOuter);
-
-        LeftEyebrow.SetPropertyBlock(EyebrowProp);
-        RightEyebrow.SetPropertyBlock(EyebrowProp);
-
-        NoseProp.SetFloat("_NoseBaseWidth", noseBaseWidth);
-        NoseProp.SetFloat("_NoseTotalWidth", noseTotalWidth);
-        NoseProp.SetFloat("_NoseTopWidth", noseTopWidth);
-        NoseProp.SetFloat("_NoseCurve", noseCurve);
-        NoseProp.SetFloat("_NoseTotalLength", noseTotalLength);
-        NoseProp.SetFloat("_NostrilRadius", nostrilRadius);
-        NoseProp.SetFloat("_NostrilSpacing", nostrilSpacing);
-        NoseProp.SetFloat("_NostrilHeight", nostrilHeight);
-        NoseProp.SetFloat("_NostrilScale", nostrilScale);
-
-        NoseProp.SetColor("_Color1", noseBottom);
-        NoseProp.SetColor("_Color2", noseTop);
-
-        //Nose.SetPropertyBlock(NoseProp);
-
-        MouthProp.SetFloat("_MouthRadius", mouthRadius);
-        MouthProp.SetFloat("_MouthLipMaskRoundness", mouthLipMaskRoundness);
-        MouthProp.SetFloat("_MouthLipTop", mouthLipTop);
-        MouthProp.SetFloat("_MouthLipBottom", mouthLipBottom);
-        MouthProp.SetFloat("_TeethTop", teethTop);
-        MouthProp.SetFloat("_TeethBottom", teethBottom);
-        MouthProp.SetFloat("_TeethCount", teethCount);
-        MouthProp.SetFloat("_TeethRoundness", teethRoundness);
-        MouthProp.SetFloat("_TongueRadius", tongueRadius);
-        MouthProp.SetFloat("_TongueScale", tongueScale);
-        MouthProp.SetFloat("_TongueHeight", tongueHeight);
-
-        MouthProp.SetColor("_Color1", mouthBottom);
-        MouthProp.SetColor("_Color2", mouthTop);
-        MouthProp.SetColor("_Color3", tongueBottom);
-        MouthProp.SetColor("_Color4", tongueTop);
-
-        Mouth.SetPropertyBlock(MouthProp);
-
-        EarProp.SetFloat("_EarWidthSkew", earWidthSkew);
-        EarProp.SetFloat("_EarLengthSkew", earLengthSkew);
-        EarProp.SetFloat("_EarShape", earShape);
-        EarProp.SetFloat("_EarRoundness", earRoundness);
-        EarProp.SetFloat("_EarOpenWidth", earOpenWidth);
-        EarProp.SetFloat("_EarOpenLength", earOpenLength);
-        EarProp.SetFloat("_EarConcha", earConcha);
-        EarProp.SetFloat("_EarTragus", earTragus);
-
-        EarProp.SetColor("_Color1", earBottom);
-        EarProp.SetColor("_Color2", earTop);
-
-        LeftEar.SetPropertyBlock(EarProp);
-        RightEar.SetPropertyBlock(EarProp);
-
-        HairFrontProp.SetFloat("_BangRoundness", bangRoundnessFront);
-        HairFrontProp.SetFloat("_StrandCount", strandCountFront);
-        HairFrontProp.SetFloat("_StrandOffset", strandOffsetFront);
-        HairFrontProp.SetFloat("_HairBangScale", hairBangScaleFront);
-        HairFrontProp.SetFloat("_HairRoundness", hairRoundnessFront);
-
-        HairFrontProp.SetColor("_Color1", hairBaseFront);
-        HairFrontProp.SetColor("_Color2", hairAccentFront);
-
-        HairBackProp.SetFloat("_BangRoundness", bangRoundnessBack);
-        HairBackProp.SetFloat("_StrandCount", strandCountBack);
-        HairBackProp.SetFloat("_StrandOffset", strandOffsetBack);
-        HairBackProp.SetFloat("_HairBangScale", hairBangScaleBack);
-        HairBackProp.SetFloat("_HairRoundness", hairRoundnessBack);
-
-        HairBackProp.SetColor("_Color1", hairBaseBack);
-        HairBackProp.SetColor("_Color2", hairAccentBack);
-
-        HairFront.SetPropertyBlock(HairFrontProp);
-        HairBack.SetPropertyBlock(HairBackProp);
-
     }
 
     public void LoadCharacterData(){
@@ -620,7 +482,7 @@ public class FaceController : MonoBehaviour
         hairAccentBack = currentChar.hairAccentBack;
 
         SetTransformValues();
-        SetShaderValues();
+        //SetShaderValues();
     }
 
     void BlendTwoCharacters(CharacterData character1, CharacterData character2, float interval){
@@ -737,24 +599,8 @@ public class FaceController : MonoBehaviour
         hairAccentBack = Color.Lerp(character1.hairAccentBack, character2.hairAccentBack, interval);
 
         SetTransformValues();
-        SetShaderValues();
     }
     void OnValidate(){
-        //SetTransformValues();
-        //SetShaderValues();
-
-        //BlendTwoCharacters(char1, char2, blendCharacterValue);
-
-        if(blendCharacterValue >= 1){
-            //swap character 1
-            ///char1 = charList[Random.Range(0, charList.Count)];
-        }
-        if (blendCharacterValue <= 0){  
-            //swap character 2
-            //char2 = charList[Random.Range(0, charList.Count)];
-        }
-
-
     }
 
     public void SaveCharacterData(){
@@ -1096,13 +942,9 @@ public class FaceController : MonoBehaviour
         RightEyeProp.SetFloat("_EyelidTopOpen", Mathf.Sin(Time.time)+1);
         RightEyeProp.SetFloat("_EyelidBottomOpen", Mathf.Sin(Time.time)+1);
 
-        MouthProp.SetFloat("_MouthLipTop", mouthLipTop + Mathf.Sin(Time.time*2f)/4f);
-        MouthProp.SetFloat("_MouthLipBottom", mouthLipBottom + Mathf.Sin(Time.time*2f)/4f);
-
-
         LeftEye.SetPropertyBlock(LeftEyeProp);
         RightEye.SetPropertyBlock(RightEyeProp);
-        Mouth.SetPropertyBlock(MouthProp);
+
 
     }*/
 }
