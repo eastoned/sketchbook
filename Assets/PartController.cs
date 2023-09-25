@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using OpenCvSharp;
 using UnityEngine;
+using UnityEngine.XR.WSA;
 
 public class PartController : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class PartController : MonoBehaviour
     private int[] shaderIDs;
 
     [SerializeField] private Renderer rend;
+    private Material currentMat;
+    [SerializeField] private Material colliderMaterial;
 
     public PartData pd;
 
@@ -20,6 +24,7 @@ public class PartController : MonoBehaviour
     MaterialPropertyBlock propBlock;
 
     void Start(){
+        currentMat = rend.sharedMaterial;
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
                 pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
@@ -39,6 +44,14 @@ public class PartController : MonoBehaviour
         propBlock = new MaterialPropertyBlock();
         UpdateAllShadersValue(0f);
        
+    }
+
+    void OnMouseEnter(){
+        rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
+    }
+
+    void OnMouseExit(){
+        rend.sharedMaterials = new Material[1]{currentMat};
     }
 
     void OnMouseDown(){

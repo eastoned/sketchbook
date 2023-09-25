@@ -74,8 +74,8 @@
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\PostProcessBundle.cs" />
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Utils\Spline.cs" />
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\PostProcessEffectSettings.cs" />
-    <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Utils\TargetPool.cs" />
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Monitors\Monitor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Utils\TargetPool.cs" />
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Effects\FastApproximateAntialiasing.cs" />
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Effects\MultiScaleVO.cs" />
     <Compile Include="Library\PackageCache\com.unity.postprocessing@3.1.1\PostProcessing\Runtime\Effects\Dithering.cs" />

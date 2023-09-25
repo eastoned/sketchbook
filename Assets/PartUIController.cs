@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.UIElements.Experimental;
 
 public class PartUIController : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class PartUIController : MonoBehaviour
 
     [SerializeField] private List<TextMeshProUGUI> sliderNames;
     [SerializeField] private List<Slider> sliders;
+    [SerializeField] private List<Button> buttons;
 
     public PartController partData;
 
@@ -29,9 +29,11 @@ public class PartUIController : MonoBehaviour
         //UpdateTitleText();
     }
 
-    private void UpdateTitleText(Transform transform){
-        titleText.text = transform.name;
-        partData = transform.GetComponent<PartController>(); 
+    private void UpdateTitleText(Transform partTransform){
+        
+        titleText.text = partTransform.name;
+        partData = partTransform.GetComponent<PartController>(); 
+        transform.position = Camera.main.WorldToScreenPoint(partTransform.position) + Camera.main.WorldToScreenPoint(new Vector3(partData.pd.absoluteScale.x, 0, 0))/4f;
 
         for(int i = 0; i < sliders.Count; i++){
             if(i < partData.pd.shaderProperties.Count){
@@ -54,6 +56,14 @@ public class PartUIController : MonoBehaviour
             //}else{
             //    
             //}
+        }
+
+        for(int j = 0; j < buttons.Count; j++){
+            if(j < partData.pd.shaderColors.Count){
+                buttons[j].gameObject.SetActive(true);
+            }else{
+                buttons[j].gameObject.SetActive(false);
+            }
         }
         //transform.GetComponent<PartController>()
     }
