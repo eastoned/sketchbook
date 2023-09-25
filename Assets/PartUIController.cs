@@ -48,6 +48,7 @@ public class PartUIController : MonoBehaviour
                 }
                 
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
+                sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
             }else{
                 sliders[i].gameObject.SetActive(false);
             }

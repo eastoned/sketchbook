@@ -496,6 +496,9 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: 9e8eaa4b3482aa4469a5e1984be5fb08, type: 2}
   colid: {fileID: 95416234}
   flippedXAxis: 0
+  affectedParts:
+  - {fileID: 99618909}
+  - {fileID: 1269006691}
 --- !u!1 &99618904
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,9 +608,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 99618906}
-  pd: {fileID: 11400000, guid: de1b4ffa27c8304459db9dab1e694c4e, type: 2}
+  pd: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
   colid: {fileID: 99618905}
   flippedXAxis: 0
+  affectedParts:
+  - {fileID: 524532358}
+  - {fileID: 1272765003}
 --- !u!1 &125538563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,7 +1350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &244385091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1374,6 +1380,7 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: ec8781bdf2e0ec3498967bbb399afee9, type: 2}
   colid: {fileID: 244385091}
   flippedXAxis: 0
+  affectedParts: []
 --- !u!23 &244385094
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1678,7 +1685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &311225758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1708,6 +1715,7 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: 4a997971be7587841b0a6f383c047313, type: 2}
   colid: {fileID: 311225758}
   flippedXAxis: 0
+  affectedParts: []
 --- !u!23 &311225761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2439,9 +2447,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 524532355}
-  pd: {fileID: 11400000, guid: 4bd3688bad10d3a43950a1dbd53ea8eb, type: 2}
+  pd: {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
   colid: {fileID: 524532354}
   flippedXAxis: 0
+  affectedParts: []
 --- !u!1 &532610324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,7 +2620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &610878717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2704,6 +2713,7 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: c83293a2de14f3b4f9a25cc2264dec32, type: 2}
   colid: {fileID: 610878717}
   flippedXAxis: 0
+  affectedParts: []
 --- !u!1 &631744430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,7 +3497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &838332024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3580,6 +3590,7 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: c83293a2de14f3b4f9a25cc2264dec32, type: 2}
   colid: {fileID: 838332024}
   flippedXAxis: 1
+  affectedParts: []
 --- !u!1 &840484590
 GameObject:
   m_ObjectHideFlags: 0
@@ -5622,6 +5633,7 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
   colid: {fileID: 1269006687}
   flippedXAxis: 0
+  affectedParts: []
 --- !u!1 &1272764998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5731,9 +5743,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 1272765000}
-  pd: {fileID: 11400000, guid: a0a9e6d06e1c86946b8eaed92ab5e8c0, type: 2}
+  pd: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
   colid: {fileID: 1272764999}
   flippedXAxis: 0
+  affectedParts:
+  - {fileID: 1470558959}
 --- !u!224 &1312392027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
@@ -6349,7 +6363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1451965498
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6439,9 +6453,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 1451965499}
-  pd: {fileID: 11400000, guid: de1b4ffa27c8304459db9dab1e694c4e, type: 2}
+  pd: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
   colid: {fileID: 1451965498}
   flippedXAxis: 1
+  affectedParts: []
 --- !u!1 &1465951083
 GameObject:
   m_ObjectHideFlags: 0
@@ -6634,9 +6649,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 1470558956}
-  pd: {fileID: 11400000, guid: 47760b2b6f709e64cb380e146292d6f6, type: 2}
+  pd: {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
   colid: {fileID: 1470558955}
   flippedXAxis: 0
+  affectedParts: []
 --- !u!1 &1479473652
 GameObject:
   m_ObjectHideFlags: 0
@@ -7725,7 +7741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1792980030
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7818,6 +7834,7 @@ MonoBehaviour:
   pd: {fileID: 11400000, guid: 4bd3688bad10d3a43950a1dbd53ea8eb, type: 2}
   colid: {fileID: 1792980030}
   flippedXAxis: 1
+  affectedParts: []
 --- !u!1 &1808583951
 GameObject:
   m_ObjectHideFlags: 0

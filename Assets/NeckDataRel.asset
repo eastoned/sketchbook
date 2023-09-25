@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794ef52737c212f45b21f4b64c293fc5, type: 3}
   m_Name: NeckDataRel
   m_EditorClassIdentifier: 
-  affectedParts: []
   translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: -1, z: 0.2}
+  absolutePosition: {x: 0, y: -1, z: 0.2}
+  relativePosition: {x: 0, y: 0, z: 0.2}
   minPosX: 0
   maxPosX: 0
   minPosY: -1
@@ -24,9 +24,10 @@ MonoBehaviour:
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 3.5, y: 2, z: 1}
-  minScaleX: 0
-  maxScaleX: 3.7923663
+  absoluteScale: {x: 0.1, y: 2, z: 1}
+  relativeScale: {x: 1, y: 0, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 4
   minScaleY: 2
   maxScaleY: 2
   shaderProperties:

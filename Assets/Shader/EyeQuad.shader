@@ -59,7 +59,7 @@ Shader "Unlit/EyeQuad"
             };
 
             float _EyeRadius, _PupilRadius, _PupilWidth, _PupilLength, _PupilOffsetX, _PupilOffsetY;
-            float4 _Color1, _Color2;
+            float4 _Color1, _Color2, _Color3, _Color4;
             float _EyelidTopSkew, _EyelidTopLength, _EyelidBottomSkew, _EyelidBottomLength;
             
             float _EyelidTopOpen, _EyelidBottomOpen;
@@ -99,10 +99,18 @@ Shader "Unlit/EyeQuad"
 
                 float4 result = line1 + line2;
                 clip(result.a - 0.5);
-                float pupil = 1 - step(0, (pow(_PupilRadius/2*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*(.75*_PupilRoundness + .25)));
+
+                float pupil = (pow(_PupilRadius/2*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*(.75*_PupilRoundness + .25));
                 
-                result *= pupil;
+
                 
+                float pupilMask = step(0, pupil);
+                //pupil *= pow(5,_PupilRoundness);
+                float4 pupilColor = lerp(_Color3, _Color4, i.uv.y + _PupilOffsetY);
+                pupilColor *= pupilMask;
+                
+                result *= 1-pupilMask;
+                result += pupilColor;
                 result *= mask1;
 
                 mask1 = 1 - mask1;
@@ -111,6 +119,7 @@ Shader "Unlit/EyeQuad"
                 result *= pow(_EyelidBottomOpen + _EyelidTopOpen, 0.75);
                 result += shades;
                 return result;
+                //return pupil;
             }
             ENDCG
         }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "NeckData", menuName = "ScriptableObjects/Neck", order = 4)]
 public class NeckData : PartData{
-    public override void RelativeScale(Vector3 parentScale)
+
+    public override void SetScaleBounds(PartData parentData)
     {
-        Debug.Log("Scaling neck relative to: " + parentScale);
-        maxScaleX = parentScale.x;
-        base.RelativeScale(parentScale);
+        maxScaleX = parentData.GetAbsoluteScale().x;
     }
+
 }

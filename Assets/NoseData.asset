@@ -9,30 +9,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Nose
+  m_Script: {fileID: 11500000, guid: 55c1abad70c8c834dafcea312a1844d9, type: 3}
+  m_Name: NoseData
   m_EditorClassIdentifier: 
-  translatable: 0
+  translatable: 1
   rotatable: 0
   scalable: 1
-  absolutePosition: {x: 0, y: 0, z: 0}
-  relativePosition: {x: 0, y: 0, z: 0}
+  absolutePosition: {x: 0, y: -0.061910987, z: -0.05}
+  relativePosition: {x: 0, y: 0.70843995, z: -0.05}
   minPosX: 0
   maxPosX: 0
-  minPosY: 0
-  maxPosY: 0
+  minPosY: -1.270525
+  maxPosY: 0.34185746
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0, y: 0, z: 1}
-  minScaleX: 0
-  maxScaleX: 2
-  minScaleY: 0
-  maxScaleY: 2
+  relativeScale: {x: 0.21615058, y: 0.40304667, z: 1}
+  minScaleX: 0.5
+  maxScaleX: 3.6702127
+  minScaleY: 0.5
+  maxScaleY: 2.54105
   shaderProperties:
   - propertyName: _NoseBaseWidth
-    propertyValue: 0.112665884
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
@@ -44,31 +44,31 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _NoseTopWidth
-    propertyValue: 0.7017674
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseCurve
-    propertyValue: 0.8468336
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseTotalLength
-    propertyValue: 0.2494423
+    propertyValue: 0.22998385
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilRadius
-    propertyValue: 0.21817388
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilSpacing
-    propertyValue: 0.27999577
+    propertyValue: 0.35134327
     significant: 0
     active: 0
     pos: 
@@ -80,13 +80,13 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _NostrilScale
-    propertyValue: 0.3041238
+    propertyValue: 0.29763773
     significant: 0
     active: 0
     pos: 
     neg: 
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 0}
+    colorValue: {r: 0.8113208, g: 0.40310898, b: 0.40310898, a: 0}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0.4716981, g: 0.11866616, b: 0.11866616, a: 0}

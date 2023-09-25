@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: HairFront
   m_EditorClassIdentifier: 
+  affectedParts: []
   translatable: 0
   rotatable: 0
   scalable: 1
@@ -23,9 +24,9 @@ MonoBehaviour:
   minAngle: -45
   maxAngle: 45
   currentAngle: 0
-  scale: {x: 0.8977099, y: 0.53740454, z: 1}
+  scale: {x: 1, y: 0.96923065, z: 1}
   minScaleX: 0
-  maxScaleX: 1
+  maxScaleX: 4
   minScaleY: 0
   maxScaleY: 1
   shaderProperties:

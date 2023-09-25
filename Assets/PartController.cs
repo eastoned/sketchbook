@@ -16,6 +16,8 @@ public class PartController : MonoBehaviour
     
     public bool flippedXAxis = false;
 
+    public List<PartController> affectedParts = new List<PartController>();
+
     MaterialPropertyBlock propBlock;
 
     void Start(){
@@ -24,50 +26,26 @@ public class PartController : MonoBehaviour
                 pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
             }
         }
-        propBlock = new MaterialPropertyBlock();
-        //shaderIDs = new int[shaderParams.Count];
-        //for(int i = 0; i < shaderParams.Count; i++){
-        //    shaderIDs[i] = Shader.PropertyToID(shaderParams[i]);
-       // }
-    }
 
-    void OnEnable()
-	{
-        OnDeselectedFacePartEvent.Instance.AddListener(ToggleColliderOn);
-        OnSelectedNewFacePartEvent.Instance.AddListener(ToggleColliderOff);
-    }
-
-    void OnDisable(){
-        OnDeselectedFacePartEvent.Instance.RemoveListener(ToggleColliderOn);
-        OnSelectedNewFacePartEvent.Instance.AddListener(ToggleColliderOff);
-    }
-
-    void ToggleColliderOff(Transform other){
-       // if(other != transform)
-           // colid.enabled = false;
-    }
-
-    void ToggleColliderOn(){
-        //colid.enabled = true;
-    }
-
-    void Update(){
         UpdateAllTransformValues();
-        UpdateAllShadersValue();
+
+        if(affectedParts.Count > 0){
+            for(int j = 0; j < affectedParts.Count; j++){
+                affectedParts[j].pd.SetPositionBounds(pd);
+                affectedParts[j].pd.SetScaleBounds(pd);
+                affectedParts[j].UpdateAllTransformValues();
+            }
+        }
+
+        propBlock = new MaterialPropertyBlock();
+        UpdateAllShadersValue(0f);
+       
     }
 
-    void OnMouseEnter(){
-       // Debug.Log("Entered object");
-        
-       //OnHoveredFacePartEvent.Instance.Invoke();
-    }
     void OnMouseDown(){
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
     }
 
-    void OnMouseExit(){
-        //OnDeselectedFacePartEvent.Instance.Invoke();
-    }
 
     void OnValidate(){
         propBlock = new MaterialPropertyBlock();
@@ -76,22 +54,31 @@ public class PartController : MonoBehaviour
         //Debug.Log("Does unity recognize updating a scriptable object the same as the inspector");
     }
 
-    void UpdateAllTransformValues(){
-        transform.localPosition = pd.position;
+    public void UpdateAllTransformValues(){
+        
+        transform.localPosition = pd.GetAbsolutePosition();
         if(flippedXAxis)
-            transform.localPosition = new Vector3(-pd.position.x, pd.position.y, pd.position.z);
+            transform.localPosition = new Vector3(-pd.absolutePosition.x, pd.absolutePosition.y, pd.absolutePosition.z);
 
         transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
         if(flippedXAxis)
             transform.localEulerAngles = new Vector3(0, 0, -pd.currentAngle);
 
-        transform.localScale = pd.scale;
+        transform.localScale = pd.GetAbsoluteScale();
         if(flippedXAxis)
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+        if(affectedParts.Count > 0){
+            for(int j = 0; j < affectedParts.Count; j++){
+                affectedParts[j].pd.SetPositionBounds(pd);
+                affectedParts[j].pd.SetScaleBounds(pd);
+                affectedParts[j].UpdateAllTransformValues();
+            }
+        }
     }
 
 
-    void UpdateAllShadersValue(){
+    public void UpdateAllShadersValue(float ignore){
         //MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             UpdateSingleShaderValue(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);

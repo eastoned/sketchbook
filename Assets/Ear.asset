@@ -12,22 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: Ear
   m_EditorClassIdentifier: 
+  affectedParts: []
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 1.3374046, y: -0.25190842, z: 0.15}
+  position: {x: 1.9012821, y: -0.20000005, z: 0.15}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
   maxPosY: 0
   minAngle: -45
   maxAngle: 45
-  currentAngle: 335.69547
-  scale: {x: 0.8736233, y: 1.133232, z: 1}
+  currentAngle: 342.18112
+  scale: {x: 1, y: 1, z: 1}
   minScaleX: 0
-  maxScaleX: 1
+  maxScaleX: 2
   minScaleY: 0
-  maxScaleY: 1
+  maxScaleY: 2
   shaderProperties:
   - propertyName: _EarWidthSkew
     propertyValue: 0.8895439

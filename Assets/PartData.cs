@@ -5,16 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PartData", menuName = "ScriptableObjects/PartData", order = 3)]
 public class PartData : ScriptableObject
 {
-
-    public List<PartData> affectedParts = new List<PartData>();
     #region TransformData
         public bool translatable, rotatable, scalable;
         
-        public Vector3 position;
+        public Vector3 absolutePosition;
+        public Vector3 relativePosition;
+
         public float minPosX, maxPosX, minPosY, maxPosY;
         public float minAngle, maxAngle;
         public float currentAngle;
-        public Vector3 scale;
+        public Vector3 absoluteScale;
+        public Vector3 relativeScale;
         public float minScaleX, maxScaleX, minScaleY, maxScaleY;
     #endregion
 
@@ -24,9 +25,42 @@ public class PartData : ScriptableObject
         public List<ShaderColor> shaderColors = new List<ShaderColor>();
     #endregion
 
-    public Vector3 ClampedScale(Vector3 scaleIn){
+    //return normalized values to store part relation to parent object
+    public void SetRelativePos(Vector3 pos){
+        relativePosition = new Vector3(Mathf.InverseLerp(minPosX, maxPosX, pos.x), Mathf.InverseLerp(minPosY, maxPosY, pos.y), pos.z);
+        absolutePosition = pos;
+    }
+
+    //return absolute alues to render object in space
+    public Vector3 GetAbsolutePosition(){
+        return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
+    }
+
+    public void SetRelativeScale(Vector3 scl){
+        relativeScale = new Vector3(Mathf.InverseLerp(minScaleX, maxScaleX, scl.x), Mathf.InverseLerp(minScaleY, maxScaleY, scl.y), scl.z);
+    }
+
+    public Vector3 GetAbsoluteScale(){
+        return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeScale.y), relativeScale.z);
+    }
+
+
+    public virtual void SetScaleBounds(PartData pd){
+
+    }
+
+    public virtual void SetPositionBounds(PartData pd){
+
+    }
+
+    public virtual void SetPositionBounds(){
+
+    }
+
+    
+    public virtual void ClampedScale(Vector3 scaleIn){
         Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
-        return clampedSize;
+        SetRelativeScale(clampedSize);
     }
 
     public float ClampedAngle(float angle){
@@ -34,11 +68,8 @@ public class PartData : ScriptableObject
     }
 
     public virtual void ClampedPosition(Vector3 posIn){
-        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), 1);
-    }
-
-    public virtual void RelativeScale(Vector3 parentScale){
-        scale = ClampedScale(scale);
+        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
+        SetRelativePos(clampedPos);
     }
 }
 
@@ -64,8 +95,6 @@ public class ShaderProperty{
 
     public string pos, neg;
 }
-
-
 
 [System.Serializable]
 public class ShaderColor{

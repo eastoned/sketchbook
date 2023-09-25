@@ -9,43 +9,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Eye
+  m_Script: {fileID: 11500000, guid: 832921ba22668d7499079a9547de0203, type: 3}
+  m_Name: EyeData
   m_EditorClassIdentifier: 
-  affectedParts: []
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 0, y: 0, z: 0}
-  relativePosition: {x: 0, y: 0}
-  minPosX: 0
-  maxPosX: 2
-  minPosY: 0
-  maxPosY: 2
+  absolutePosition: {x: 0.97136843, y: 0.18034983, z: 0}
+  relativePosition: {x: 0.23352265, y: 0.56964654, z: 0}
+  minPosX: 0.7795358
+  maxPosX: 1.6010092
+  minPosY: -1.2947509
+  maxPosY: 1.2947509
   minAngle: -45
   maxAngle: 45
-  currentAngle: 21.80142
-  scale: {x: 0.93418986, y: 0.93704736, z: 1}
-  relativeScale: {x: 0, y: 0}
-  minScaleX: 0.5
-  maxScaleX: 2
-  minScaleY: 0.5
-  maxScaleY: 2
+  currentAngle: 7.9101095
+  absoluteScale: {x: 0.97099227, y: 0.9232773, z: 1}
+  relativeScale: {x: 0.96895826, y: 0.27131018, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 1.6010092
+  minScaleY: 0.25
+  maxScaleY: 1.2947509
   shaderProperties:
   - propertyName: _EyeRadius
-    propertyValue: 0.84536123
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilRadius
-    propertyValue: 0.3961709
+    propertyValue: 0.6491302
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilWidth
-    propertyValue: 1
+    propertyValue: 0.18274678
     significant: 0
     active: 0
     pos: 
@@ -57,25 +56,25 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _EyelidTopLength
-    propertyValue: 0.7349043
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidTopSkew
-    propertyValue: 0.41699573
+    propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidBottomLength
-    propertyValue: 0.7385862
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _EyelidBottomSkew
-    propertyValue: 0.486009
+    propertyValue: 0.72109604
     significant: 0
     active: 0
     pos: 
@@ -92,6 +91,6 @@ MonoBehaviour:
   - colorName: _Color2
     colorValue: {r: 0, g: 0, b: 0, a: 0}
   - colorName: _Color3
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 1, g: 0.22327036, b: 0.22327036, a: 0}
   - colorName: _Color4
     colorValue: {r: 0, g: 0, b: 0, a: 0}

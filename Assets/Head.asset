@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   affectedParts:
   - {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
+  - {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
   translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: 0, z: 0.1}
+  absolutePosition: {x: 0, y: 0, z: 0.1}
+  relativePosition: {x: 0, y: 0, z: 0.1}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
@@ -25,7 +27,8 @@ MonoBehaviour:
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 3.5175574, y: 3.0870223, z: 1}
+  absoluteScale: {x: 1.5051275, y: 3.0923076, z: 1}
+  relativeScale: {x: 1, y: 1, z: 1}
   minScaleX: 1.5
   maxScaleX: 4
   minScaleY: 1.5

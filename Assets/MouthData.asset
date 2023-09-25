@@ -9,26 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Mouth
+  m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
+  m_Name: MouthData
   m_EditorClassIdentifier: 
-  affectedParts: []
   translatable: 1
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: -1, z: 0.05}
+  absolutePosition: {x: 0, y: -0.6837145, z: 0.05}
+  relativePosition: {x: 0, y: 0.47704566, z: 0.05}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1
-  maxPosY: -0.5
+  minPosY: -1.2947509
+  maxPosY: -0.055639856
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  scale: {x: 1, y: 0.7846153, z: 1}
-  minScaleX: 0
-  maxScaleX: 1
-  minScaleY: 0
-  maxScaleY: 1
+  absoluteScale: {x: 0, y: 0, z: 1}
+  relativeScale: {x: 0.24013485, y: 0.9779758, z: 1}
+  minScaleX: 0.1
+  maxScaleX: 3.2020185
+  minScaleY: 0.1
+  maxScaleY: 1.2947509
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
@@ -79,7 +80,7 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _TongueRadius
-    propertyValue: 0.6907217
+    propertyValue: 0.6518048
     significant: 0
     active: 0
     pos: 
