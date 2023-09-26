@@ -9,65 +9,66 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: HairFront
+  m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
+  m_Name: HeadData
   m_EditorClassIdentifier: 
-  affectedParts: []
   translatable: 0
   rotatable: 0
   scalable: 1
-  position: {x: 0, y: 1, z: -0.1}
+  absolutePosition: {x: 0, y: 0, z: 0.1}
+  relativePosition: {x: 0, y: 0, z: 0.1}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
   maxPosY: 0
-  minAngle: -45
-  maxAngle: 45
+  minAngle: 0
+  maxAngle: 0
   currentAngle: 0
-  scale: {x: 1, y: 0.96923065, z: 1}
-  minScaleX: 0
+  absoluteScale: {x: 0, y: 0, z: 1}
+  relativeScale: {x: 0.112871364, y: 0.29768983, z: 1}
+  minScaleX: 1.5
   maxScaleX: 4
-  minScaleY: 0
-  maxScaleY: 1
+  minScaleY: 1.5
+  maxScaleY: 4
   shaderProperties:
-  - propertyName: _BangRoundness
-    propertyValue: 0.4258256
+  - propertyName: _ForeheadScale
+    propertyValue: 0.06585759
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _StrandCount
-    propertyValue: 0.4402773
+  - propertyName: _ForeheadWidth
+    propertyValue: 0.949264
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _StrandOffset
+  - propertyName: _ForeheadLength
+    propertyValue: 0.98905706
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _ChinScale
     propertyValue: 0
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _HairBangScale
-    propertyValue: 0.45508096
+  - propertyName: _ChinWidth
+    propertyValue: 0.7799443
     significant: 0
     active: 0
     pos: 
     neg: 
-  - propertyName: _HairRoundness
-    propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _EarOpenLength
-    propertyValue: 0.7189103
+  - propertyName: _ChinLength
+    propertyValue: 0.6844409
     significant: 0
     active: 0
     pos: 
     neg: 
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 0}
+    colorValue: {r: 1, g: 0.34151396, b: 0, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

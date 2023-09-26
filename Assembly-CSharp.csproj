@@ -561,6 +561,8 @@
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\Util\PlatformUtil.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\HairFrontData.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\HairBackData.cs" />
+    <Compile Include="Assets\NewFace\PartData\DataScripts\EarData.cs" />
+    <Compile Include="Assets\NewFace\PartData\DataScripts\HeadData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\OpenCV+Unity\Plugins\Windows\x86\OpenCvSharpExtern.dll" />

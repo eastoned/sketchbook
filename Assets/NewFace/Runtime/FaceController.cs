@@ -14,8 +14,6 @@ public class FaceController : MonoBehaviour
 
     public PartData head, eye, nose, ear, mouth;
 
-    public CharacterData currentChar;
-
     #region Transform Variables
 
     [Range(0f, 1f)] public float headWidth, headLength;
@@ -294,123 +292,6 @@ public class FaceController : MonoBehaviour
 
         HairBack.transform.localPosition = new Vector3(0, Mathf.Lerp(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - hairLength/2, hairHeight), 0.3f);
         HairBack.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth * 1.25f, hairWidth), hairLength, 1);
-    }
-
-
-    public void SaveCharacterData(){
-
-        currentChar.headWidth = headWidth;
-        currentChar.headLength = headLength;
-        currentChar.neckWidth = neckWidth;
-        currentChar.eyeAngle = eyeAngle;
-        currentChar.eyeSpacing = eyeSpacing;
-        currentChar.eyeHeight = eyeHeight;
-        currentChar.eyeLength = eyeLength;
-        currentChar.eyeWidth = eyeWidth;
-        currentChar.eyebrowAngle = eyebrowAngle;
-        currentChar.eyebrowSpacing = eyebrowSpacing;
-        currentChar.eyebrowHeight = eyebrowHeight;
-        currentChar.eyebrowLength = eyebrowLength;
-        currentChar.eyebrowWidth = eyebrowWidth;
-        currentChar.noseHeight = noseHeight;
-        currentChar.noseLength = noseLength;
-        currentChar.noseWidth = noseWidth;
-        currentChar.mouthWidth = mouthWidth;
-        currentChar.mouthLength = mouthLength;
-        currentChar.mouthHeight = mouthHeight;
-        currentChar.earWidth = earWidth;
-        currentChar.earLength = earLength;
-        currentChar.earHeight = earHeight;
-        currentChar.earAngle = earAngle;
-        currentChar.earSpacing = earSpacing;
-        currentChar.chinWidth = chinWidth;
-        currentChar.chinLength = chinLength;
-        currentChar.foreheadWidth = foreheadWidth;
-        currentChar.foreheadLength = foreheadLength;
-        currentChar.chinScale = chinScale;
-        currentChar.foreheadScale = foreheadScale;
-        currentChar.headTop = headTop;
-        currentChar.headBottom = headBottom;
-        currentChar.neckTopWidth = neckTopWidth;
-        currentChar.neckCurveScale = neckCurveScale;
-        currentChar.neckCurveRoundness = neckCurveRoundness;
-        currentChar.neckTop = neckTop;
-        currentChar.neckBottom = neckBottom;
-        currentChar.eyeRadius = eyeRadius;
-        currentChar.pupilRadius = pupilRadius;
-        currentChar.pupilWidth = pupilWidth;
-        currentChar.pupilLength = pupilLength;
-        currentChar.eyelidTopLength = eyelidTopLength;
-        currentChar.eyelidBottomLength = eyelidBottomLength;
-        currentChar.eyelidTopSkew = eyelidTopSkew;
-        currentChar.eyelidBottomSkew = eyelidBottomSkew;
-        currentChar.eyelidTopOpen = eyelidTopOpen;
-        currentChar.eyelidBottomOpen = eyelidBottomOpen;
-        currentChar.pupilRoundness = pupilRoundness;
-        currentChar.eyelidCenter = eyelidCenter;
-        currentChar.eyelidEdge = eyelidEdge;
-        currentChar.eyebrowCount = eyebrowCount;
-        currentChar.eyebrowThickness = eyebrowThickness;
-        currentChar.eyebrowRoundness = eyebrowRoundness;
-        currentChar.eyebrowCurve = eyebrowCurve;
-        currentChar.eyebrowInner = eyebrowInner;
-        currentChar.eyebrowOuter = eyebrowOuter;
-        currentChar.noseBaseWidth = noseBaseWidth;
-        currentChar.noseTopWidth = noseTopWidth;
-        currentChar.noseTotalWidth = noseTotalWidth;
-        currentChar.noseCurve = noseCurve;
-        currentChar.noseTotalLength = noseTotalLength;
-        currentChar.nostrilRadius = nostrilRadius;
-        currentChar.nostrilHeight = nostrilHeight;
-        currentChar.nostrilSpacing = nostrilSpacing;
-        currentChar.nostrilScale = nostrilScale;
-        currentChar.noseTop = noseTop;
-        currentChar.noseBottom = noseBottom;
-        currentChar.mouthRadius = mouthRadius;
-        currentChar.mouthLipTop = mouthLipTop;
-        currentChar.mouthLipBottom = mouthLipBottom;
-        currentChar.mouthLipMaskRoundness = mouthLipMaskRoundness;
-        currentChar.teethTop = teethTop;
-        currentChar.teethBottom = teethBottom;
-        currentChar.teethCount = teethCount;
-        currentChar.teethRoundness = teethRoundness;
-        currentChar.tongueRadius = tongueRadius;
-        currentChar.tongueScale = tongueScale;
-        currentChar.tongueHeight = tongueHeight;
-        currentChar.mouthTop = mouthTop;
-        currentChar.mouthBottom = mouthBottom;
-        currentChar.tongueTop = tongueTop;
-        currentChar.tongueBottom = tongueBottom;
-        currentChar.earWidthSkew = earWidthSkew;
-        currentChar.earLengthSkew = earLengthSkew;
-        currentChar.earShape = earShape;
-        currentChar.earOpenWidth = earOpenWidth;
-        currentChar.earOpenLength = earOpenLength;
-        currentChar.earRoundness = earRoundness;
-        currentChar.earConcha = earConcha;
-        currentChar.earTragus = earTragus;
-        currentChar.earTop = earTop;
-        currentChar.earBottom = earBottom;
-        currentChar.bangWidth = bangWidth;
-        currentChar.bangLength = bangLength;
-        currentChar.hairWidth = hairWidth;
-        currentChar.hairHeight = hairHeight;
-        currentChar.hairLength = hairLength;
-        currentChar.bangRoundnessFront = bangRoundnessFront;
-        currentChar.strandCountFront = strandCountFront;
-        currentChar.strandOffsetFront = strandOffsetFront;
-        currentChar.hairBangScaleFront = hairBangScaleFront;
-        currentChar.hairRoundnessFront = hairRoundnessFront;
-        currentChar.hairBaseFront = hairBaseFront;
-        currentChar.hairAccentFront = hairAccentFront;
-        currentChar.bangRoundnessBack = bangRoundnessBack;
-        currentChar.strandCountBack = strandCountBack;
-        currentChar.strandOffsetBack = strandOffsetBack;
-        currentChar.hairBangScaleBack = hairBangScaleBack;
-        currentChar.hairRoundnessBack = hairRoundnessBack;
-        currentChar.hairBaseBack = hairBaseBack;
-        currentChar.hairAccentBack = hairAccentBack;
-
     }
     
 

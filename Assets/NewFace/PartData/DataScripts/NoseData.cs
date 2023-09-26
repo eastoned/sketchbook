@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NoseData", menuName = "ScriptableObjects/Nose", order = 6)]
+[CreateAssetMenu(fileName = "NoseData", menuName = "ScriptableObjects/Nose", order = 4)]
 public class NoseData : PartData
 {
     public override void SetScaleBounds(PartData parentData)
     {
-        maxScaleX = parentData.maxPosX*2f;
-        maxScaleY = parentData.maxPosY*2f;
+        maxScaleX = parentData.GetAbsoluteScale().x;
+        maxScaleY = parentData.GetAbsoluteScale().y;
     }
 
     public override void SetPositionBounds(PartData parentData)
     {
-        minPosY = parentData.minPosY;
-        maxPosY = parentData.GetAbsolutePosition().y;
+        minPosY = -parentData.GetAbsoluteScale().y/2f;
+        maxPosY = parentData.GetAbsoluteScale().y/2f;
     }
 }

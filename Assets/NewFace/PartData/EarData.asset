@@ -9,26 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
-  m_Name: Ear
+  m_Script: {fileID: 11500000, guid: 7b793ebbedc9495498fa2646b6b84ba5, type: 3}
+  m_Name: EarData
   m_EditorClassIdentifier: 
-  affectedParts: []
   translatable: 1
   rotatable: 1
   scalable: 1
-  position: {x: 1.9012821, y: -0.20000005, z: 0.15}
-  minPosX: 0
-  maxPosX: 0
-  minPosY: 0
-  maxPosY: 0
+  absolutePosition: {x: 1.9902194, y: 0.014669895, z: 0.15}
+  relativePosition: {x: 0.91811794, y: 0.50602406, z: 0.15}
+  minPosX: 0.7017115
+  maxPosX: 2.1051345
+  minPosY: -1.2176039
+  maxPosY: 1.2176039
   minAngle: -45
   maxAngle: 45
-  currentAngle: 342.18112
-  scale: {x: 1, y: 1, z: 1}
-  minScaleX: 0
-  maxScaleX: 2
-  minScaleY: 0
-  maxScaleY: 2
+  currentAngle: 2.2830055
+  absoluteScale: {x: 1, y: 1, z: 1}
+  relativeScale: {x: 1, y: 1, z: 1}
+  minScaleX: 1
+  maxScaleX: 1.403423
+  minScaleY: 1
+  maxScaleY: 1.2176039
   shaderProperties:
   - propertyName: _EarWidthSkew
     propertyValue: 0.8895439
@@ -80,6 +81,6 @@ MonoBehaviour:
     neg: 
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 0}
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

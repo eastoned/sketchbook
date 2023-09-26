@@ -1,8 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PartData", menuName = "ScriptableObjects/PartData", order = 3)]
 public class PartData : ScriptableObject
 {
     #region TransformData
@@ -100,4 +100,40 @@ public class ShaderProperty{
 public class ShaderColor{
     public string colorName;
     public Color colorValue;
+
+    float h,s,v;
+
+    public void SetHue(float value){
+        Debug.Log("Changing Hue");
+        Color.RGBToHSV(colorValue, out h, out s, out v);
+        colorValue = Color.HSVToRGB(value, s, v);
+    }
+
+    public float GetHue(){
+        Color.RGBToHSV(colorValue, out h, out s, out v);
+        return h;
+    }
+
+    public void SetSaturation(float value){
+        Debug.Log("Changing Saturation");
+        Color.RGBToHSV(colorValue, out h, out s, out v);
+        colorValue = Color.HSVToRGB(h, value, v);
+    }
+    public float GetSaturation(){
+        Color.RGBToHSV(colorValue, out h, out s, out v);
+        return s;
+    }
+
+    public void SetValue(float value){
+        Debug.Log("Changing Value");
+        Color.RGBToHSV(colorValue, out h, out s, out v);
+        colorValue = Color.HSVToRGB(h, s, value);
+    }
+
+    public float GetValue(){
+        Color.RGBToHSV(colorValue, out h, out s, out v);
+        return v;
+    }
+
+
 }

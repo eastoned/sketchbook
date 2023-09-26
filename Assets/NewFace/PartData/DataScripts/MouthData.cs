@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MouthData", menuName = "ScriptableObjects/Mouth", order = 8)]
+[CreateAssetMenu(fileName = "MouthData", menuName = "ScriptableObjects/Mouth", order = 5)]
 public class MouthData : PartData
 {
    public override void SetScaleBounds(PartData parentData)
     {
-        maxScaleX = parentData.maxScaleX;
+        maxScaleX = parentData.maxScaleX/1.5f;
         maxScaleY = parentData.maxScaleY/2f;
     }
 
     public override void SetPositionBounds(PartData parentData)
     {
-        minPosY = parentData.minPosY;
-        maxPosY = parentData.GetAbsolutePosition().y;
+        minPosY = -parentData.GetAbsoluteScale().y/2f;
+        maxPosY = parentData.GetAbsoluteScale().y/2f;
     }
 }

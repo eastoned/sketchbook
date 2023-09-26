@@ -15,21 +15,21 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  absolutePosition: {x: 0, y: -0.6837145, z: 0.05}
-  relativePosition: {x: 0, y: 0.47704566, z: 0.05}
+  absolutePosition: {x: 0, y: -0.8068459, z: 0.05}
+  relativePosition: {x: 0, y: 0.17261907, z: 0.05}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.2947509
-  maxPosY: -0.055639856
+  minPosY: -1.2322738
+  maxPosY: 1.2322738
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.24013485, y: 0.9779758, z: 1}
-  minScaleX: 0.1
-  maxScaleX: 3.2020185
+  relativeScale: {x: 0.6088018, y: 0.22532482, z: 1}
+  minScaleX: 0.05
+  maxScaleX: 2.6666667
   minScaleY: 0.1
-  maxScaleY: 1.2947509
+  maxScaleY: 2
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
@@ -44,19 +44,19 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _MouthLipTop
-    propertyValue: 0.6918372
+    propertyValue: 1
     significant: 1
     active: 0
     pos: 
     neg: 
   - propertyName: _MouthLipBottom
-    propertyValue: 0.88275754
+    propertyValue: 1
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TeethTop
-    propertyValue: 0.46391755
+    propertyValue: 0.57002866
     significant: 1
     active: 0
     pos: 
@@ -86,23 +86,23 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _TongueScale
-    propertyValue: 0.88954335
+    propertyValue: 0.5122591
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _TongueHeight
-    propertyValue: 0.19145791
+    propertyValue: 0.17966788
     significant: 0
     active: 0
     pos: 
     neg: 
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 0}
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color3
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color4
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

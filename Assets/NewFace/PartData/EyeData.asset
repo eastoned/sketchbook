@@ -17,19 +17,19 @@ MonoBehaviour:
   scalable: 1
   absolutePosition: {x: 0.97136843, y: 0.18034983, z: 0}
   relativePosition: {x: 0.23352265, y: 0.56964654, z: 0}
-  minPosX: 0.7795358
-  maxPosX: 1.6010092
-  minPosY: -1.2947509
-  maxPosY: 1.2947509
+  minPosX: 0.43559435
+  maxPosX: 0.8910892
+  minPosY: -1.1221123
+  maxPosY: 1.1221123
   minAngle: -45
   maxAngle: 45
   currentAngle: 7.9101095
   absoluteScale: {x: 0.97099227, y: 0.9232773, z: 1}
   relativeScale: {x: 0.96895826, y: 0.27131018, z: 1}
   minScaleX: 0.25
-  maxScaleX: 1.6010092
+  maxScaleX: 0.8910892
   minScaleY: 0.25
-  maxScaleY: 1.2947509
+  maxScaleY: 1.1221123
   shaderProperties:
   - propertyName: _EyeRadius
     propertyValue: 1
@@ -87,10 +87,10 @@ MonoBehaviour:
     neg: 
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 0}
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color3
-    colorValue: {r: 1, g: 0.22327036, b: 0.22327036, a: 0}
+    colorValue: {r: 1, g: 0.22327036, b: 0.22327036, a: 1}
   - colorName: _Color4
-    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

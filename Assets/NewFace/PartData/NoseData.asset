@@ -15,54 +15,54 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  absolutePosition: {x: 0, y: -0.061910987, z: -0.05}
-  relativePosition: {x: 0, y: 0.70843995, z: -0.05}
+  absolutePosition: {x: 0, y: 0.29339862, z: -0.05}
+  relativePosition: {x: 0, y: 0.61904764, z: -0.05}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.270525
-  maxPosY: 0.34185746
+  minPosY: -1.2322738
+  maxPosY: 1.2322738
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.21615058, y: 0.40304667, z: 1}
+  relativeScale: {x: 0.6279068, y: 0.44381255, z: 1}
   minScaleX: 0.5
-  maxScaleX: 3.6702127
+  maxScaleX: 2.8655257
   minScaleY: 0.5
-  maxScaleY: 2.54105
+  maxScaleY: 2.4645476
   shaderProperties:
   - propertyName: _NoseBaseWidth
-    propertyValue: 1
+    propertyValue: 0.7612416
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseTotalWidth
-    propertyValue: 0
+    propertyValue: 0.71050555
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseTopWidth
-    propertyValue: 0
+    propertyValue: 0.63091934
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseCurve
-    propertyValue: 0
+    propertyValue: 0.08177496
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NoseTotalLength
-    propertyValue: 0.22998385
+    propertyValue: 0.29365277
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilRadius
-    propertyValue: 0
+    propertyValue: 0.44802508
     significant: 0
     active: 0
     pos: 
@@ -74,19 +74,19 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _NostrilHeight
-    propertyValue: 0
+    propertyValue: 0.4833954
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _NostrilScale
-    propertyValue: 0.29763773
+    propertyValue: 0.2622674
     significant: 0
     active: 0
     pos: 
     neg: 
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.8113208, g: 0.40310898, b: 0.40310898, a: 0}
+    colorValue: {r: 1, g: 0.6183199, b: 0.27987415, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.4716981, g: 0.11866616, b: 0.11866616, a: 0}
+    colorValue: {r: 0.8018868, g: 0, b: 0, a: 1}

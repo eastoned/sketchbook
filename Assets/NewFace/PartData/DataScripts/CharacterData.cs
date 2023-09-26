@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CustomCharacter", menuName = "ScriptableObjects/CustomCharacterProfile", order = 2)]
 public class CharacterData : ScriptableObject
 {
 

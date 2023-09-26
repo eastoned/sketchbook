@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1418b0b6d0b41d34bbd242f21d17b411, type: 3}
+  m_Name: HairBackData
+  m_EditorClassIdentifier: 
+  translatable: 1
+  rotatable: 0
+  scalable: 1
+  absolutePosition: {x: 0, y: 0, z: 0.3}
+  relativePosition: {x: 0, y: 0, z: 0.3}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: 0
+  maxPosY: 0
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 0, y: 0, z: 1}
+  relativeScale: {x: 0, y: 0, z: 1}
+  minScaleX: 1
+  maxScaleX: 4
+  minScaleY: 1
+  maxScaleY: 4
+  shaderProperties:
+  - propertyName: _BangRoundness
+    propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _StrandCount
+    propertyValue: 0.32245702
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _StrandOffset
+    propertyValue: 0
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _HairBangScale
+    propertyValue: 0
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _HairRoundness
+    propertyValue: 0.5508099
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _EarOpenLength
+    propertyValue: 0.7189103
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
