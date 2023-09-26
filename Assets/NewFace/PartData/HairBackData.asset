@@ -15,17 +15,17 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  absolutePosition: {x: 0, y: 0, z: 0.3}
-  relativePosition: {x: 0, y: 0, z: 0.3}
+  absolutePosition: {x: 0, y: -0.22363639, z: 0.3}
+  relativePosition: {x: 0, y: 0.4440909, z: 0.3}
   minPosX: 0
   maxPosX: 0
-  minPosY: 0
-  maxPosY: 0
+  minPosY: -2
+  maxPosY: 2
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0, y: 0, z: 1}
+  relativeScale: {x: 0.51030284, y: 0.4884847, z: 1}
   minScaleX: 1
   maxScaleX: 4
   minScaleY: 1
@@ -57,12 +57,6 @@ MonoBehaviour:
     neg: 
   - propertyName: _HairRoundness
     propertyValue: 0.5508099
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _EarOpenLength
-    propertyValue: 0.7189103
     significant: 0
     active: 0
     pos: 
