@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scene/TheBathroom.unity
     guid: 5f07601fb6a18004abb9ae2d9e12a5ca
   - enabled: 1
-    path: Assets/NuFace.unity
+    path: Assets/NewFace/NuFace.unity
     guid: 3a02a0edd3e9fee4bbb5400a5acf883d
   m_configObjects: {}
