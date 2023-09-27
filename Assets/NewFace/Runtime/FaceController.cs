@@ -8,115 +8,8 @@ using UnityEngine.XR;
 
 public class FaceController : MonoBehaviour
 {
-    [HideInInspector][SerializeField] public Renderer LeftEye,
-    RightEye, LeftEyebrow, RightEyebrow, LeftEar, RightEar,
-    MouthR, Neck, HairFront, HairBack;
 
-    public PartData head, eye, nose, ear, mouth;
-
-    #region Transform Variables
-
-    [Range(0f, 1f)] public float headWidth, headLength;
-        
-    [Range(0f, 1f)] public float neckWidth;
-
-    [Range(-45f, 25)] public float eyeAngle;
-    [Range(0f, 1f)] public float eyeSpacing;
-    [Range(-0.75f, 1f)] public float eyeHeight;
-    [Range(0.5f, 1f)] public float eyeLength, eyeWidth;
-
-    [Range(-45f, 25f)] public float eyebrowAngle;
-    [Range(0f, 1f)] public float eyebrowSpacing;
-    [Range(0f, 1f)] public float eyebrowHeight;
-    [Range(0.2f, 1.5f)] public float eyebrowLength;
-    [Range(0.1f, 0.5f)] public float eyebrowWidth;
-
-    [Range(0f, 1f)] public float noseHeight;
-    [Range(0.5f, 2f)] public float noseLength, noseWidth;
-
-    [Range(0.25f, 2.5f)] public float mouthWidth;
-    [Range(0.2f, 1f)] public float mouthLength;
-    [Range(0f, 1f)] public float mouthHeight;
-        
-    [Range(.5f, 2f)] public float earWidth, earLength;
-    [Range(-0.5f, 1f)] public float earHeight;
-    [Range(-45f, 45f)] public float earAngle;
-    [Range(0f, 1f)] public float earSpacing;
-
-    [Range(0f, 1f)] public float bangWidth;
-    [Range(0.25f, 1f)] public float bangLength;
-    [Range(0.25f, 1f)] public float hairWidth;
-    [Range(0f, 1f)] public float hairHeight;
-    [Range(0.5f, 4f)] public float hairLength;
-
-    #endregion
-
-    #region Shader Variables
-
-    [Range(0.1f, 5f)] public float chinWidth, chinLength, foreheadWidth, foreheadLength;
-    [Range(2f, 4f)] public float chinScale, foreheadScale;
-    public Color headTop, headBottom;
-
-    [Range(1f, 5f)] public float neckTopWidth, neckCurveScale;
-    [Range(0f, 3f)] public float neckCurveRoundness;
-    public Color neckTop, neckBottom;
-
-    [Range(0f, 1f)] public float eyeRadius, pupilRadius;
-    [Range(0.1f, 1f)] public float pupilWidth, pupilLength;
-    [Range(0f, 2.75f)] public float eyelidTopLength, eyelidBottomLength;
-    [Range(0f, 1f)] public float eyelidTopSkew, eyelidBottomSkew;
-    [Range(0f, 1f)] public float eyelidTopOpen, eyelidBottomOpen;
-    [Range(0.25f, 1f)] public float pupilRoundness;
-    public Color eyelidCenter, eyelidEdge;
-
-    [Range(0, 16)] public float eyebrowCount;
-    [Range(1f, 8f)] public float eyebrowThickness;
-    [Range(0.3f, 4f)] public float eyebrowRoundness;
-    [Range(-1f, 1f)] public float eyebrowCurve;
-    public Color eyebrowInner, eyebrowOuter;
-
-        //nose
-    [Range(0.1f, 2.5f)]public float noseBaseWidth, noseTopWidth;
-    [Range(1f, 5f)] public float noseTotalWidth, noseCurve;
-    [Range(0.5f, 3f)] public float noseTotalLength;
-    [Range(0f, 0.5f)] public float nostrilRadius;
-    [Range(-0.5f, 0f)] public float nostrilHeight;
-    [Range(0f, 1)] public float nostrilSpacing;
-    [Range(0.25f, 2f)] public float nostrilScale;
-    public Color noseTop, noseBottom;
-
-        //mout
-    [Range(0.1f, 1f)] public float mouthRadius;
-    [Range(-1f, 1f)] public float mouthLipTop, mouthLipBottom;
-    [Range(0f, 1f)] public float mouthLipMaskRoundness;
-    [Range(0f, 1f)] public float teethTop, teethBottom;
-    [Range(0, 30)] public float teethCount;
-    [Range(0.5f, 4f)] public float teethRoundness;
-    [Range(0f, .25f)] public float tongueRadius;
-    [Range(0.25f, .75f)] public float tongueScale;
-    [Range(0f, 1f)] public float tongueHeight;
-    public Color mouthTop, mouthBottom;
-    public Color tongueTop, tongueBottom;
-
-        //ear
-    [Range(0f, 1f)] public float earWidthSkew;
-    [Range(-1f, 1f)] public float earLengthSkew;
-    [Range(1f, 6f)] public float earShape;
-    [Range(1f, 1.5f)]public float earOpenWidth, earOpenLength;
-    [Range(0.6f, 1.25f)] public float earRoundness;
-    [Range(0.5f, 1.25f)] public float earConcha;
-    [Range(0f, 1f)] public float earTragus;
-    public Color earTop, earBottom;
-
-    [Range(0.25f, 4f)] public float bangRoundnessFront, bangRoundnessBack;
-    [Range(0, 20)] public float strandCountFront, strandCountBack;
-    [Range(0, 1)] public float strandOffsetFront, strandOffsetBack;
-    [Range(0.5f, 2f)] public float hairBangScaleFront, hairBangScaleBack;
-
-    [Range(1f, 5f)] public float hairRoundnessFront, hairRoundnessBack;
-    public Color hairBaseFront, hairBaseBack, hairAccentFront, hairAccentBack;
-
-    #endregion
+    public PartController leftEye, rightEye;
 
     public float leftPupilX;
     public float leftPupilY;
@@ -124,7 +17,7 @@ public class FaceController : MonoBehaviour
     public float rightPupilY;
 
     public Vector2 mousePos;
-
+    public float clampVal;
     public PartController currentPC;
     public Transform currentTransform;
 
@@ -167,13 +60,13 @@ public class FaceController : MonoBehaviour
             widthLeft.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, 0, 0));
 
         widthLeft.transform.localPosition = new Vector3(widthLeft.transform.localPosition.x, widthLeft.transform.localPosition.y, -1f);
-    
 
         if(currentPC.pd.rotatable)
             widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0, 0));
 
         if(currentPC.pd.scalable)
             heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
+        
         heightTop.transform.localPosition = new Vector3(heightTop.transform.localPosition.x, heightTop.transform.localPosition.y, -1f);
     
     }
@@ -185,19 +78,26 @@ public class FaceController : MonoBehaviour
         if(currentPC.flippedXAxis)
             flip = -1;
 
-        currentTransform.localPosition = new Vector3(pos.x * flip, pos.y, currentTransform.localPosition.z);
+        currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+        Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
 
-        currentPC.pd.ClampedPosition(currentTransform.localPosition);
+        currentPC.pd.ClampedPosition(absPos);
 
         if(currentPC.affectedParts.Count > 0){
             for(int i = 0; i < currentPC.affectedParts.Count; i++){
                 currentPC.affectedParts[i].pd.SetPositionBounds(currentPC.pd);
                 currentPC.affectedParts[i].pd.SetScaleBounds(currentPC.pd);
+
+
                 currentPC.affectedParts[i].UpdateAllTransformValues();
             }
         }
 
         currentPC.UpdateAllTransformValues();
+
+        if(currentPC.mirroredPart != null){
+            currentPC.mirroredPart.UpdateAllTransformValues();
+        }
         
         SetTransformControllers(currentTransform);
 
@@ -224,6 +124,9 @@ public class FaceController : MonoBehaviour
         }
 
         currentPC.UpdateAllTransformValues();
+         if(currentPC.mirroredPart != null){
+            currentPC.mirroredPart.UpdateAllTransformValues();
+        }
         //currentPC.pd.SetPositionBounds();
 
         SetTransformControllers(currentTransform);
@@ -236,6 +139,10 @@ public class FaceController : MonoBehaviour
         
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         currentPC.pd.currentAngle = currentTransform.localEulerAngles.z;
+        
+        if(currentPC.mirroredPart != null){
+            currentPC.mirroredPart.UpdateAllTransformValues();
+        }
         SetTransformControllers(currentTransform);
         
     }
@@ -244,7 +151,7 @@ public class FaceController : MonoBehaviour
     public float ClampPartRotation(PartController pc, float angle){
         return pc.pd.ClampedAngle(angle);
     }
-
+/*
     public void SetTransformValues(){
 
         float actualHeadWidth = Mathf.Lerp(1,4, headWidth);
@@ -292,26 +199,31 @@ public class FaceController : MonoBehaviour
 
         HairBack.transform.localPosition = new Vector3(0, Mathf.Lerp(0, Mathf.Lerp(1, 2, headLength) * (2/foreheadScale) - hairLength/2, hairHeight), 0.3f);
         HairBack.transform.localScale = new Vector3(Mathf.Lerp(0, actualHeadWidth * 1.25f, hairWidth), hairLength, 1);
-    }
+    }*/
     
+    public Vector2 Rotate2D(Vector2 v, float delta) {
+        return new Vector2(
+            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
+            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
+        );
+    }
 
-/*
     void Update(){
 
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
        
         //position of mouse relative to right eye position
-        Vector2 rightX = new Vector2(RightEye.transform.localPosition.x - mousePos.x, 0);
-        Vector2 rightY = new Vector2(0, RightEye.transform.localPosition.y - mousePos.y);
-        Vector2 rotatedRight = Rotate2D(rightX, -eyeAngle * Mathf.Deg2Rad);
-        Vector2 rotatedRight2 = Rotate2D(rightY, -eyeAngle * Mathf.Deg2Rad);
+        Vector2 rightX = new Vector2(rightEye.pd.absolutePosition.x - mousePos.x, 0);
+        Vector2 rightY = new Vector2(0, rightEye.pd.absolutePosition.y - mousePos.y);
+        Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
+        Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
-        Vector2 leftX = new Vector2(LeftEye.transform.localPosition.x - mousePos.x, 0);
-        Vector2 leftY = new Vector2(0, RightEye.transform.localPosition.y - mousePos.y);
-        Vector2 rotatedLeft = Rotate2D(leftX, eyeAngle * Mathf.Deg2Rad);
-        Vector2 rotatedLeft2 = Rotate2D(leftY, eyeAngle * Mathf.Deg2Rad);
+        Vector2 leftX = new Vector2(-rightEye.pd.absolutePosition.x - mousePos.x, 0);
+        Vector2 leftY = new Vector2(0, rightEye.pd.absolutePosition.y - mousePos.y);
+        Vector2 rotatedLeft = Rotate2D(leftX, rightEye.pd.currentAngle * Mathf.Deg2Rad);
+        Vector2 rotatedLeft2 = Rotate2D(leftY, rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
-        float clampVal = eyeRadius/6f;
+        clampVal = rightEye.pd.shadePropertyDict["_EyeRadius"].propertyValue/6f;
         //rightPupilX = rotatedRight.x - rotatedRight2.x;
         //rightPupilY = rotatedRight2.y - rotatedRight.y;
 
@@ -328,28 +240,15 @@ public class FaceController : MonoBehaviour
         //rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(rightPupilTarget.y, -clampVal, clampVal), Time.deltaTime * 3f);
         //leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(leftPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
         //leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(leftPupilTarget.y, -clampVal, clampVal), Time.deltaTime * 3f);
-
-        LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
-        LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-
-        RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
-        RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
-
-        LeftEyeProp.SetFloat("_PupilOffsetX", 0f);
-        LeftEyeProp.SetFloat("_PupilOffsetY", 0f);
-
-        RightEyeProp.SetFloat("_PupilOffsetX", 0f);
-        RightEyeProp.SetFloat("_PupilOffsetY", 0f);
-
-        LeftEyeProp.SetFloat("_EyelidTopOpen", Mathf.Sin(Time.time)+1);
-        LeftEyeProp.SetFloat("_EyelidBottomOpen", Mathf.Sin(Time.time)+1);
-
-        RightEyeProp.SetFloat("_EyelidTopOpen", Mathf.Sin(Time.time)+1);
-        RightEyeProp.SetFloat("_EyelidBottomOpen", Mathf.Sin(Time.time)+1);
-
-        LeftEye.SetPropertyBlock(LeftEyeProp);
-        RightEye.SetPropertyBlock(RightEyeProp);
-
-
-    }*/
+       // leftEye.UpdateSingleShaderValue("_PupilOffsetX", -leftPupilX);
+       // leftEye.UpdateSingleShaderValue("_PupilOffsetY", leftPupilY);
+       // leftEye.UpdateAllShadersValue(0f);
+        //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
+        //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
+       // rightEye.UpdateSingleShaderValue("_PupilOffsetX", rightPupilX);
+       // rightEye.UpdateSingleShaderValue("_PupilOffsetY", rightPupilY);
+        //rightEye.UpdateAllShadersValue(0f);
+        //RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
+       // RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
+    }
 }

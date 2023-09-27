@@ -15,42 +15,42 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  absolutePosition: {x: 0.97136843, y: 0.18034983, z: 0}
-  relativePosition: {x: 0.23352265, y: 0.56964654, z: 0}
-  minPosX: 0.43559435
-  maxPosX: 0.8910892
-  minPosY: -1.1221123
-  maxPosY: 1.1221123
+  absolutePosition: {x: 0.26443273, y: 0.14836788, z: 0}
+  relativePosition: {x: 0, y: 0.31549639, z: 0}
+  minPosX: 0.26443273
+  maxPosX: 1.4925815
+  minPosY: -0.8664631
+  maxPosY: 2.350154
   minAngle: -45
   maxAngle: 45
-  currentAngle: 7.9101095
+  currentAngle: 351.0274
   absoluteScale: {x: 0.97099227, y: 0.9232773, z: 1}
-  relativeScale: {x: 0.96895826, y: 0.27131018, z: 1}
+  relativeScale: {x: 0.22442427, y: 0.9082552, z: 1}
   minScaleX: 0.25
-  maxScaleX: 0.8910892
+  maxScaleX: 1.4925815
   minScaleY: 0.25
-  maxScaleY: 1.1221123
+  maxScaleY: 1.6083086
   shaderProperties:
   - propertyName: _EyeRadius
-    propertyValue: 1
+    propertyValue: 0.81397575
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilRadius
-    propertyValue: 0.6491302
+    propertyValue: 0.40079203
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilWidth
-    propertyValue: 0.18274678
+    propertyValue: 0.97615063
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilLength
-    propertyValue: 1
+    propertyValue: 0.9284522
     significant: 0
     active: 0
     pos: 
@@ -62,7 +62,7 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _EyelidTopSkew
-    propertyValue: 0
+    propertyValue: 0.50083464
     significant: 0
     active: 0
     pos: 
@@ -74,12 +74,24 @@ MonoBehaviour:
     pos: 
     neg: 
   - propertyName: _EyelidBottomSkew
-    propertyValue: 0.72109604
+    propertyValue: 0.5277844
     significant: 0
     active: 0
     pos: 
     neg: 
   - propertyName: _PupilRoundness
+    propertyValue: 1
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _EyelidTopOpen
+    propertyValue: 0.9236824
+    significant: 0
+    active: 0
+    pos: 
+    neg: 
+  - propertyName: _EyelidBottomOpen
     propertyValue: 1
     significant: 0
     active: 0
@@ -91,6 +103,7 @@ MonoBehaviour:
   - colorName: _Color2
     colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color3
-    colorValue: {r: 1, g: 0.22327036, b: 0.22327036, a: 1}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color4
     colorValue: {r: 0, g: 0, b: 0, a: 1}
+  reactiveProperties: []

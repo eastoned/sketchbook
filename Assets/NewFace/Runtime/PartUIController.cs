@@ -21,25 +21,24 @@ public class PartUIController : MonoBehaviour
 
     public PartController partData;
 
-
-    protected virtual void OnEnable()
+    void OnEnable()
 	{
         OnSelectedNewFacePartEvent.Instance.AddListener(UpdateTitleText);
+        OnDeselectedFacePartEvent.Instance.AddListener(TurnOffUI);
     }
 
-    protected virtual void OnDisable(){
+    void OnDisable()
+    {
         OnSelectedNewFacePartEvent.Instance.RemoveListener(UpdateTitleText);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(TurnOffUI);
     }
 
-    private void UpdateUISliders(){
-        //UpdateTitleText();
-    }
-
-    private void UpdateTitleText(Transform partTransform){
-        
+    private void UpdateTitleText(Transform partTransform)
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
         titleText.text = partTransform.name;
-        partData = partTransform.GetComponent<PartController>(); 
-        //transform.position = Camera.main.WorldToScreenPoint(partTransform.position) + Camera.main.WorldToScreenPoint(new Vector3(partData.pd.absoluteScale.x, 0, 0))/4f;
+        partData = partTransform.GetComponent<PartController>();
+        colorSliderContainer.SetActive(false); 
 
         for(int i = 0; i < sliders.Count; i++){
             if(i < partData.pd.shaderProperties.Count){
@@ -56,12 +55,13 @@ public class PartUIController : MonoBehaviour
                 
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
+                
+                if(partData.mirroredPart != null){
+                    sliders[i].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);
+                }
             }else{
                 sliders[i].gameObject.SetActive(false);
             }
-            //}else{
-            //    
-            //}
         }
 
         for(int j = 0; j < buttons.Count; j++){
@@ -81,11 +81,18 @@ public class PartUIController : MonoBehaviour
 
     }
 
-    void ToggleColorSliders(){
+    void ToggleColorSliders()
+    {
         colorSliderContainer.SetActive(!colorSliderContainer.activeInHierarchy);
     }
 
-    void SetSlidersForCurrentColor(int currentColor){
+    void TurnOffUI(){
+        transform.GetChild(0).gameObject.SetActive(false);
+        colorSliderContainer.SetActive(false);
+    }
+
+    void SetSlidersForCurrentColor(int currentColor)
+    {
         Debug.Log("Sliders set from buttons");
         for(int i = 0; i < colorSliders.Count; i++){
             colorSliders[i].onValueChanged.RemoveAllListeners();
@@ -102,17 +109,5 @@ public class PartUIController : MonoBehaviour
         colorSliders[2].onValueChanged.AddListener(partData.UpdateAllShadersValue);
 
     }
-
-    void UpdateShaderParams(float value){
-        
-    }
-
-    void SendSliderValue(float value){
-        //if(partData){
-        //Debug.Log("Trying to set data for slider: " + id);
-        //partData.UpdateSingleShaderValue("_Radius", partData.pd.shaderProperties[0].propertyValue);
-        //}
-    }
-
 
 }

@@ -17,17 +17,17 @@ MonoBehaviour:
   scalable: 1
   absolutePosition: {x: 0.5758253, y: 1.2395694, z: -0.15}
   relativePosition: {x: 0.055452324, y: 0, z: -0.15}
-  minPosX: 0.43634507
-  maxPosX: 0.8910892
-  minPosY: 0.39960894
-  maxPosY: 1.3654188
+  minPosX: 0
+  maxPosX: 1
+  minPosY: 0
+  maxPosY: 1.2221123
   minAngle: -45
   maxAngle: 45
   currentAngle: 17.936302
   absoluteScale: {x: 0, y: 0, z: 1}
   relativeScale: {x: 0.97337675, y: 0, z: 1}
   minScaleX: 0.2
-  maxScaleX: 0.8910892
+  maxScaleX: 1
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:

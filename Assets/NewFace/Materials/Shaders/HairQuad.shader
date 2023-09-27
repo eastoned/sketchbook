@@ -70,7 +70,7 @@ Shader "Unlit/HairQuad"
                 bangs = (1-step(1, bangs)) * step(0.5, 1-uv.y);
                 bang+=bangs;
                 bang = saturate(bang);
-                bang *= step(0.0001,1-abs(uv.y*2 - 1));
+                //bang *= step(0.00001,1-abs(uv.y*2 - 1));
                 clip(bang-0.5);
                 float uvCol = i.uv.y;
                 uvCol = cos(uvCol*(3.14*2)*pow(uvCol,2));

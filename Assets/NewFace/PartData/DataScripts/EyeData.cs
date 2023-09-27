@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EyeData", menuName = "ScriptableObjects/Eye", order = 3)]
@@ -20,5 +22,7 @@ public class EyeData : PartData{
         maxScaleX = parentData.GetAbsoluteScale().x/2f;
         maxScaleY = parentData.GetAbsoluteScale().y/2f;
     }
+
+    public List<ShaderProperty> reactiveProperties = new List<ShaderProperty>();
     
 }

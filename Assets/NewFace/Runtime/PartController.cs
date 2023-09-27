@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using OpenCvSharp;
 using UnityEngine;
-using UnityEngine.XR.WSA;
+using UnityEngine.EventSystems;
 
 public class PartController : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class PartController : MonoBehaviour
     public bool flippedXAxis = false;
 
     public List<PartController> affectedParts = new List<PartController>();
+    public PartController mirroredPart; 
 
     MaterialPropertyBlock propBlock;
 
@@ -47,6 +47,9 @@ public class PartController : MonoBehaviour
     }
 
     void OnMouseEnter(){
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+
         rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
     }
 
@@ -55,30 +58,44 @@ public class PartController : MonoBehaviour
     }
 
     void OnMouseDown(){
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
     }
 
 
     void OnValidate(){
-        propBlock = new MaterialPropertyBlock();
-        rend = GetComponent<Renderer>();
-        colid = GetComponent<Collider>();
-        //Debug.Log("Does unity recognize updating a scriptable object the same as the inspector");
+        if(propBlock == null)
+            propBlock = new MaterialPropertyBlock();
+
+        if(rend == null)
+            rend = GetComponent<Renderer>();
+
+        if(colid == null)
+            colid = GetComponent<Collider>();
     }
 
     public void UpdateAllTransformValues(){
         
-        transform.localPosition = pd.GetAbsolutePosition();
-        if(flippedXAxis)
-            transform.localPosition = new Vector3(-pd.absolutePosition.x, pd.absolutePosition.y, pd.absolutePosition.z);
+        if(flippedXAxis){
+            transform.localPosition = pd.GetFlippedAbsolutePosition();
+        }else{
+            transform.localPosition = pd.GetAbsolutePosition();
+        }
 
-        transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
-        if(flippedXAxis)
+
+        if(flippedXAxis){
             transform.localEulerAngles = new Vector3(0, 0, -pd.currentAngle);
+        }else{
+            transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
+        }
 
-        transform.localScale = pd.GetAbsoluteScale();
-        if(flippedXAxis)
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        if(flippedXAxis){
+            transform.localScale = pd.GetFlippedAbsoluteScale();
+        }else{
+            transform.localScale = pd.GetAbsoluteScale();
+        }
 
         if(affectedParts.Count > 0){
             for(int j = 0; j < affectedParts.Count; j++){
@@ -87,11 +104,12 @@ public class PartController : MonoBehaviour
                 affectedParts[j].UpdateAllTransformValues();
             }
         }
+
     }
 
 
     public void UpdateAllShadersValue(float ignore){
-        //MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
+
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             UpdateSingleShaderValue(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }

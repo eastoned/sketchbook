@@ -7,12 +7,12 @@ public class EarData : PartData{
         minPosX = GetAbsoluteScale().x/2f;
         maxPosX = parentData.GetAbsoluteScale().x/2f + GetAbsoluteScale().x/2f;
         minPosY = -parentData.GetAbsoluteScale().y/2f;
-        maxPosY = parentData.GetAbsoluteScale().y/2f;
+        maxPosY = parentData.GetAbsoluteScale().y/2f + GetAbsoluteScale().x/2f;
     }
 
     public override void SetScaleBounds(PartData parentData)
     {
-        maxScaleX = parentData.GetAbsoluteScale().x/2f;
-        maxScaleY = parentData.GetAbsoluteScale().y/2f;
+        maxScaleX = parentData.GetAbsoluteScale().x;
+        maxScaleY = parentData.GetAbsoluteScale().y;
     }
 }

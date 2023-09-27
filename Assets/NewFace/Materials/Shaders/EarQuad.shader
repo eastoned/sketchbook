@@ -53,7 +53,7 @@ Shader "Unlit/EarQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-0.5)/40, v.vertex.z, v.vertex.w);
+                v.vertex = lerp(v.vertex, float4(v.vertex.x, v.vertex.y + sin(_Time.z-0.5)/40, v.vertex.z, v.vertex.w), v.uv.x);
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;

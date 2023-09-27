@@ -36,8 +36,16 @@ public class PartData : ScriptableObject
         return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
     }
 
+    public Vector3 GetFlippedAbsolutePosition(){
+        return new Vector3(Mathf.Lerp(-minPosX, -maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
+    }
+
     public void SetRelativeScale(Vector3 scl){
         relativeScale = new Vector3(Mathf.InverseLerp(minScaleX, maxScaleX, scl.x), Mathf.InverseLerp(minScaleY, maxScaleY, scl.y), scl.z);
+    }
+
+    public Vector3 GetFlippedAbsoluteScale(){
+        return new Vector3(Mathf.Lerp(-minScaleX, -maxScaleX, relativeScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeScale.y), relativeScale.z);
     }
 
     public Vector3 GetAbsoluteScale(){
