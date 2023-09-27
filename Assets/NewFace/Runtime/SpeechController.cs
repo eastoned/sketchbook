@@ -12,42 +12,97 @@ public class SpeechController : MonoBehaviour
 
     public AnimationCurve scaleCurve, translateCurve;
 
+    public PartController mouth;
+
+
+    public int currentSpeak;
+    public string[] sppeech;
+
+    public float upperLip, lowerLip, mouthRadius;
+
+    private Coroutine SpeakingRoutine;
+
     void OnEnable()
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
-        
+        OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void OnDisable(){
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
+        OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+    }
+
+    void PartMention(Transform part){
+        if(SpeakingRoutine != null){
+            //StopCoroutine(SpeakingRoutine);
+        }
+        string plural = "it";
+        if(part.name[part.name.Length-1].Equals(char.Parse("s"))){
+            plural = "them";
+        }
+
+        SpeakingRoutine = StartCoroutine(Speak("You have selected my " + part.name + ".<br>Please make " + plural + " beautiful.", 2f));
     }
 
     void MouthSpeech(float value){
         
-        if(value > 0){
-            StartCoroutine(Speak("I can be quieter if you want.", 8f));
-        }else{
-            StartCoroutine(Speak("Do you want me to speak up?", 6f));
+        if(SpeakingRoutine != null){
+            //StopCoroutine(SpeakingRoutine);
         }
 
+        if(value > 0){
+            SpeakingRoutine = StartCoroutine(Speak("I can be quieter if you want.", 8f));
+        }else{
+            SpeakingRoutine = StartCoroutine(Speak("Do you want me to speak up?", 6f));
+        }
         
     }
 
     IEnumerator Speak(string text, float value){
-        GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
-        bubble.transform.localScale = Vector3.zero;
-        bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;
-        float journey = 0;
-        while(journey < value){
-            journey = journey + Time.deltaTime;
+        mouthRadius = mouth.pd.shadePropertyDict["_MouthRadius"].propertyValue;
+        
+        if(mouthRadius>0.05f){
+            GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
+            bubble.transform.localScale = Vector3.zero;
+            bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;
+            int spaceCounter = 0;
+            for(int i = 0; i < text.Length; i++){
+                
+                if(char.IsWhiteSpace(text[i])){
+                    spaceCounter++;
+                    
+                }
+            }
             
-            float percent = Mathf.Clamp01(journey/value);
-            float scalePercent = scaleCurve.Evaluate(percent);
-            float translatePercent = translateCurve.Evaluate(percent);
-            bubble.transform.position = Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(0, 100f, 0), translatePercent);
-            bubble.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, scalePercent);
-            yield return null;
+            upperLip = mouth.pd.shadePropertyDict["_MouthLipTop"].propertyValue;
+            lowerLip = mouth.pd.shadePropertyDict["_MouthLipBottom"].propertyValue;
+            
+            float randomOffset = Random.Range(-150, 150);
+            float journey = 0;
+            while(journey < value){
+                journey = journey + Time.deltaTime;
+
+                
+                    float percent = Mathf.Clamp01(journey/value);
+                    float scalePercent = scaleCurve.Evaluate(percent);
+                    float translatePercent = translateCurve.Evaluate(percent);
+                    
+                    bubble.transform.position = Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(50f, randomOffset, 0), translatePercent);
+                    bubble.transform.localScale = Vector3.Lerp(new Vector3(0f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
+                
+                // mouth.pd.shadePropertyDict["_MouthLipTop"].SetValue(upperLip + (.5f * Mathf.Sin(percent * Mathf.PI * 5f)));
+                // mouth.pd.shadePropertyDict["_MouthLipTop"].SetValue(lowerLip + (.5f * Mathf.Sin(percent * Mathf.PI * 5f)));
+                    mouth.UpdateSingleShaderValue("_MouthLipTop", upperLip + (.25f * Mathf.Sin(percent * Mathf.PI * spaceCounter*2)));
+                    mouth.UpdateSingleShaderValue("_MouthLipBottom", lowerLip + (.25f * Mathf.Sin(percent * Mathf.PI * spaceCounter*2)));
+                    mouth.UpdateAllShadersValue();
+                
+                yield return null;
+            }
+            mouth.UpdateSingleShaderValue("_MouthLipTop", upperLip);
+            mouth.UpdateSingleShaderValue("_MouthLipBottom", lowerLip);
+            mouth.UpdateAllShadersValue();
+            Destroy(bubble);
         }
-        Destroy(bubble);
     }
 }

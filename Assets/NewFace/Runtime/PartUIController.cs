@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
-using AmplifyShaderEditor;
 
 public class PartUIController : MonoBehaviour
 {
@@ -48,10 +47,12 @@ public class PartUIController : MonoBehaviour
                 //sliders[i].gameObject.SetActive(true);
                 sliders[i].value = partData.pd.shaderProperties[i].propertyValue;
                 //sliderNames[i].text = partData.pd.shaderProperties[i].propertyName;
-                
-                if(partData.pd.shaderProperties[i].significant){
-                    sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SignificantPiece);
-                }
+                //can know a part was changed but we need to send more information?
+                // do we send a key that the speech controller reads from?
+                //at minimum we need to send the part that was changed/what shader property it was, and what direction it went
+                ///if(partData.pd.shaderProperties[i].propertyChange != null){
+                 //   sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].propertyChange);
+                //}
                 
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
@@ -107,6 +108,12 @@ public class PartUIController : MonoBehaviour
         colorSliders[1].onValueChanged.AddListener(partData.UpdateAllShadersValue);
         colorSliders[2].onValueChanged.AddListener(partData.pd.shaderColors[currentColor].SetValue);
         colorSliders[2].onValueChanged.AddListener(partData.UpdateAllShadersValue);
+
+        if(partData.mirroredPart != null){
+            colorSliders[0].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);
+            colorSliders[1].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);
+            colorSliders[2].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);
+        }
 
     }
 

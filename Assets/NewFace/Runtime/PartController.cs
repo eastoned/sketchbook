@@ -113,11 +113,18 @@ public class PartController : MonoBehaviour
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             UpdateSingleShaderValue(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }
+
         for(int j = 0; j < pd.shaderColors.Count; j++){
             UpdateSingleShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
         }
+
         rend.SetPropertyBlock(propBlock);
     }
+
+    public void UpdateAllShadersValue(){
+        rend.SetPropertyBlock(propBlock);
+    }
+
 
     public void UpdateSingleShaderValue(string param, float value){
         propBlock.SetFloat(param, value);

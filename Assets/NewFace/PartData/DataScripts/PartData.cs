@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PartData : ScriptableObject
 {
@@ -65,7 +66,6 @@ public class PartData : ScriptableObject
 
     }
 
-    
     public virtual void ClampedScale(Vector3 scaleIn){
         Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
         SetRelativeScale(clampedSize);
@@ -92,16 +92,7 @@ public class ShaderProperty{
         propertyValue = value;
     }
 
-    public bool significant = false;
-    public bool active = false;
-    public void SignificantPiece(float value){
-        //if(!active)
-            OnChangedMouthScaleEvent.Instance.Invoke(propertyValue - value);
-            
-       ///active = true;
-    }
 
-    public string pos, neg;
 }
 
 [System.Serializable]
