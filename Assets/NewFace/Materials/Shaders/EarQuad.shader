@@ -17,6 +17,8 @@ Shader "Unlit/EarQuad"
 
         _Color1("Bottom", Color) = (1,1,1,1)
         _Color2("Top", Color) = (1,1,1,1)
+
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -44,8 +46,11 @@ Shader "Unlit/EarQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
 
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
       
             float _EarWidthSkew, _EarLengthSkew, _EarShape, _EarRoundness, _EarOpenWidth, _EarOpenLength, _EarConcha, _EarTragus;
             float4 _Color1, _Color2;
@@ -56,7 +61,8 @@ Shader "Unlit/EarQuad"
                 v.vertex = lerp(v.vertex, float4(v.vertex.x, v.vertex.y + sin(_Time.z-0.5)/40, v.vertex.z, v.vertex.w), v.uv.x);
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -76,7 +82,14 @@ Shader "Unlit/EarQuad"
                 float line2 = 1-step(_EarTragus, distance(float2(0, lerp(0.5, 0,_EarLengthSkew)), i.uv));
                 line1 = saturate(line1 + line2);
                 float4 ear = line1 * lerp(_Color1, _Color2, i.uv.y);
-                return ear;
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
+
+                return ear * col;
             }
             ENDCG
         }

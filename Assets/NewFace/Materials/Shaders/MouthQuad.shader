@@ -25,6 +25,8 @@ Shader "Unlit/MouthQuad"
         _Color2("Mouth Top", Color) = (1,1,1,1)
         _Color3("Tongue Bottom", Color) = (1,1,1,1)
         _Color4("Tongue Top", Color) = (1,1,1,1)
+
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -52,7 +54,11 @@ Shader "Unlit/MouthQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _MouthRadius, _MouthLipMaskRoundness, _MouthLipTop;
             float _MouthRadius2, _MouthLipMaskRoundness2, _MouthLipBottom;
@@ -69,7 +75,8 @@ Shader "Unlit/MouthQuad"
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-2)/60, v.vertex.z, v.vertex.w);
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -136,8 +143,14 @@ Shader "Unlit/MouthQuad"
                 float4 res = saturate(saturate(tonColor + mouthColor) + line4);
                 float newLine = line3a;
                 newLine = line2a;
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
                 //return res;
-                return res * pow((2*_MouthLipTop-1) + (2*_MouthLipBottom-1), 0.5);
+                return res * pow((2*_MouthLipTop-1) + (2*_MouthLipBottom-1), 0.5) * col;
             }
             ENDCG
         }

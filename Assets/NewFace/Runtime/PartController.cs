@@ -23,7 +23,11 @@ public class PartController : MonoBehaviour
 
     MaterialPropertyBlock propBlock;
 
-    void Start(){
+    private void Start(){
+        Initialize();
+    }
+
+    private void Initialize(){
         currentMat = rend.sharedMaterial;
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
@@ -43,7 +47,6 @@ public class PartController : MonoBehaviour
 
         propBlock = new MaterialPropertyBlock();
         UpdateAllShadersValue(0f);
-       
     }
 
     void OnMouseEnter(){
@@ -66,6 +69,8 @@ public class PartController : MonoBehaviour
 
 
     void OnValidate(){
+        //Initialize();
+
         if(propBlock == null)
             propBlock = new MaterialPropertyBlock();
 

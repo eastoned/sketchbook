@@ -8,6 +8,8 @@ Shader "Unlit/NeckQuad"
 
         _Color1("Top", Color) = (1,1,1,1)
         _Color2("Bottom", Color) = (1,1,1,1)
+
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -35,7 +37,11 @@ Shader "Unlit/NeckQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _NeckTopWidth, _NeckCurveRoundness, _NeckCurveScale;
             float4 _Color1, _Color2;
@@ -45,7 +51,8 @@ Shader "Unlit/NeckQuad"
                 v2f o;
                 v.vertex = lerp(v.vertex, float4(v.vertex.x, v.vertex.y + sin(_Time.z)/60, v.vertex.z, v.vertex.w), v.uv.y);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -65,8 +72,13 @@ Shader "Unlit/NeckQuad"
                 lin4 = step(1, lin4) * step(0.5, i.uv.x);
                 lin4 += lin3;
                 clip(lin4 - 0.5);
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
 
-                return lerp(_Color1, _Color2, 1-uv.y);;
+                return lerp(_Color1, _Color2, 1-uv.y) * col;
             }
             ENDCG
         }

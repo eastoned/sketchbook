@@ -15,6 +15,8 @@ Shader "Unlit/NoseQuad"
 
         _Color1("Bottom", Color) = (1,1,1,1)
         _Color2("Top", Color) = (1,1,1,1)
+
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -42,7 +44,11 @@ Shader "Unlit/NoseQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _NoseTotalWidth, _NoseBaseWidth;
             float _NoseCurve, _NoseTopWidth;
@@ -54,7 +60,8 @@ Shader "Unlit/NoseQuad"
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-1.5)/60, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -65,7 +72,7 @@ Shader "Unlit/NoseQuad"
                 float2 uv = float2(abs(i.uv.x*2-1), lerp(i.uv.y, i.uv.y - 0.35, (2.2*_NoseTotalLength+.8)/3) * (2.2*_NoseTotalLength+.8));
                 float line1 = pow(uv.y, (.6*_NoseBaseWidth+.1)) - uv.x * (4*_NoseTotalWidth+1);
 
-                float line2 = pow(1-uv.y, (.6*_NoseTopWidth+.1)) - uv.x * (4*_NoseCurve+1);
+                float line2 = pow(1-uv.y, (1.2*_NoseTopWidth+.1)) - uv.x * (8*_NoseCurve+1);
                 //* _NostrilRadius
                 //float circle1 = step(_NostrilRadius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing*_NostrilRadius, 0.5+_NostrilHeight)));
                 float circle1 = step(_NostrilRadius*.5, distance(uv*float2((1.75*_NostrilScale+.25), 1), float2(_NostrilSpacing*(1.75*_NostrilScale+.25), _NostrilHeight*.5)));
@@ -77,7 +84,13 @@ Shader "Unlit/NoseQuad"
                 result *= circle1;
                 clip(result.r - 0.5);
                 float4 final = result * lerp(_Color1, _Color2, saturate(max(i.uv.y, uv.y)));
-                return final;
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
+                return final * col;
             }
             ENDCG
         }

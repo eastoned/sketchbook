@@ -12,7 +12,7 @@ Shader "Unlit/HeadQuad"
         _Color1("Top", Color) = (1,1,1,1)
         _Color2("Bottom", Color) = (1,1,1,1)
 
-        
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -40,7 +40,11 @@ Shader "Unlit/HeadQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _ChinWidth, _ChinLength, _ForeheadWidth, _ForeheadLength;
             float _ForeheadScale, _ChinScale;
@@ -51,7 +55,8 @@ Shader "Unlit/HeadQuad"
                 v2f o;
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/60, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -69,9 +74,15 @@ Shader "Unlit/HeadQuad"
                 value += value2;
                 value = 1 - value;
                 clip(value - 0.5);
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
                 
                 float4 result = value * lerp(_Color1, _Color2, uv.y);
-                return result;
+                return result * col;
             }
             ENDCG
         }

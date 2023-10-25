@@ -10,6 +10,8 @@ Shader "Unlit/EyebrowQuad"
 
         _Color1 ("Inner", Color) = (1,1,1,1)
         _Color2 ("Outer", Color) = (1,1,1,1)
+
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -37,7 +39,10 @@ Shader "Unlit/EyebrowQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _EyebrowCount;
             float _EyebrowThickness;
@@ -52,7 +57,8 @@ Shader "Unlit/EyebrowQuad"
 
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z+2)/10, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -70,6 +76,12 @@ Shader "Unlit/EyebrowQuad"
                 result = 1-step(1, result);
                 clip(result-0.5);
                 float4 eyebrowCol = result * lerp(_Color1, _Color2, i.uv.x);
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
                 //float result = sin(uv.x * _EyebrowCount * 3.14 + _EyebrowThickness)/6 - uv.y + .5;
                 //float result2 = -sin(uv.x * _EyebrowCount * 3.14 + _EyebrowThickness)/6 - uv.y + 0.5;
                 //float result2 = sin(
@@ -77,7 +89,7 @@ Shader "Unlit/EyebrowQuad"
                 //clip(final - 0.5);
                 //final *= 0;
                 
-                return eyebrowCol;
+                return eyebrowCol * col;
             }
             ENDCG
         }

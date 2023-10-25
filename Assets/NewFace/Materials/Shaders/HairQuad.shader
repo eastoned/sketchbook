@@ -10,6 +10,8 @@ Shader "Unlit/HairQuad"
 
         _Color1("Base", Color) = (1,1,1,1)
         _Color2("Accent", Color) = (0.5,0.5,0.5, 1)
+
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -37,7 +39,11 @@ Shader "Unlit/HairQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _BangRoundness, _HairBangScale;
             float _StrandCount;
@@ -50,7 +56,8 @@ Shader "Unlit/HairQuad"
                 v2f o;
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/60, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -78,7 +85,13 @@ Shader "Unlit/HairQuad"
                 uvCol += 0.5;
                 
                 float4 col = lerp(_Color1, _Color2, 1-uvCol);
-                return col;
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col2 = tex2D(_MainTex, texCoord);
+                return col * col2;
             }
             ENDCG
         }

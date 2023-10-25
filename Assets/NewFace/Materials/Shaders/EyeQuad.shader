@@ -29,6 +29,8 @@ Shader "Unlit/EyeQuad"
         _PupilOffsetX ("Pupil Offset X", Range(-1, 1)) = 0
         _PupilOffsetY ("Pupil Offset Y", Range(-1, 1)) = 0
 
+        _MainTex("Tex", 2D) = "white" {}
+
     }
     SubShader
     {
@@ -56,7 +58,10 @@ Shader "Unlit/EyeQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             float _EyeRadius, _PupilRadius, _PupilWidth, _PupilLength, _PupilOffsetX, _PupilOffsetY;
             float4 _Color1, _Color2, _Color3, _Color4;
@@ -71,7 +76,8 @@ Shader "Unlit/EyeQuad"
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-1)/30, v.vertex.z, v.vertex.w);
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -118,7 +124,14 @@ Shader "Unlit/EyeQuad"
                 float4 shades = lerp(_Color1, _Color2, cos(uv.x*(3.14*2)) * 0.5 + 0.5) * mask1;
                 result *= pow(_EyelidBottomOpen + _EyelidTopOpen, 0.75);
                 result += shades;
-                return result;
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
+
+                return result * col;
                 //return pupil;
             }
             ENDCG

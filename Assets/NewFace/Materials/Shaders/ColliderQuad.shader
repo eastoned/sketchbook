@@ -2,7 +2,7 @@ Shader "Unlit/ColliderQuad"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
     {
@@ -30,6 +30,7 @@ Shader "Unlit/ColliderQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float4 screenPosition : TEXCOORD1;
             };
 
             sampler2D _MainTex;
@@ -38,8 +39,9 @@ Shader "Unlit/ColliderQuad"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.vertex = UnityObjectToClipPos(v.vertex + float4(0,0,-0.1,0));
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.screenPosition = ComputeScreenPos(o.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -48,7 +50,14 @@ Shader "Unlit/ColliderQuad"
             {
                 float value =  pow(abs(i.uv.x*2-1), 25) + pow(abs(i.uv.y*2-1), 25);
                 clip(value - .1);
-                return 1;
+
+                float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
+                float aspect = _ScreenParams.x/_ScreenParams.y;
+                texCoord.x *= aspect;
+                texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                float4 col = tex2D(_MainTex, texCoord);
+
+                return 1 * col;
             }
             ENDCG
         }
