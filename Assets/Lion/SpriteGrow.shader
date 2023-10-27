@@ -1,9 +1,10 @@
-Shader "Sprites/Animated"
+Shader "Sprites/Growth"
 {
 	Properties
 	{
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
+		_Growth("Growth", Range(0, 1)) = 0.5
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 	}
 
@@ -46,6 +47,7 @@ Shader "Sprites/Animated"
 			};
 			
 			fixed4 _Color;
+			float _Growth;
 
 			v2f vert(appdata_t IN)
 			{
@@ -81,6 +83,7 @@ Shader "Sprites/Animated"
 
 				fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
 				c.rgb *= c.a;
+				clip(c.rgb + ((_Growth*.4 + .2) - IN.texcoord.x));
 				return c;
 			}
 		ENDCG
