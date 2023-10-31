@@ -7,7 +7,7 @@ public class LionController : MonoBehaviour
 
     public Animator Tail,head;
     public float age;
-    public AnimationCurve ageToResponsiveness, ageToSpeed;
+    public AnimationCurve ageToResponsiveness, ageToSpeed, ageToRespond;
 
     private void OnEnable(){
         SnapEvent.Instance.AddListener(Wave);
@@ -37,7 +37,7 @@ public class LionController : MonoBehaviour
         Tail.SetTrigger("Wave");
         yield return new WaitForSeconds(ageToResponsiveness.Evaluate(age));
         if(head){
-            if(Random.Range(0f, 1f) < 0.5f){
+            if(Random.Range(0f, 1f) < ageToRespond.Evaluate(age)){
                 head.speed = ageToSpeed.Evaluate(age);
                 head.SetBool("Up", true);
             }
