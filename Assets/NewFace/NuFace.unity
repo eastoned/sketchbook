@@ -606,6 +606,9 @@ MonoBehaviour:
   rend: {fileID: 95416235}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 4a4fc646c04034f42826ed5037daf22a, type: 2}
+  translatable: 0
+  rotatable: 0
+  scalable: 1
   colid: {fileID: 95416234}
   flippedXAxis: 0
   affectedParts:
@@ -713,7 +716,7 @@ Transform:
   m_LocalScale: {x: 1.2325579, y: 1.1165656, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.63}
 --- !u!114 &99618909
 MonoBehaviour:
@@ -730,6 +733,9 @@ MonoBehaviour:
   rend: {fileID: 99618906}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 99618905}
   flippedXAxis: 0
   affectedParts: []
@@ -1499,6 +1505,9 @@ MonoBehaviour:
   rend: {fileID: 244385094}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 088f17da964ed4b49ac4bc1566ce15cb, type: 2}
+  translatable: 1
+  rotatable: 0
+  scalable: 1
   colid: {fileID: 244385091}
   flippedXAxis: 0
   affectedParts: []
@@ -1836,6 +1845,9 @@ MonoBehaviour:
   rend: {fileID: 311225761}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 684fb974399e64049b4045c0ce09853a, type: 2}
+  translatable: 1
+  rotatable: 0
+  scalable: 1
   colid: {fileID: 311225758}
   flippedXAxis: 0
   affectedParts: []
@@ -2073,6 +2085,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315327788}
   m_CullTransparentMesh: 1
+--- !u!1 &328473527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328473529}
+  - component: {fileID: 328473528}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &328473528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328473527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d673121355d626e48b2343ff99746090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fc: {fileID: 963588423}
+  sc: {fileID: 397872630}
+  currentChar: {fileID: 11400000, guid: 66a62e6cd6f80014385a664dd4d7bc95, type: 2}
+  convo:
+  - 
+  - 
+  - 
+--- !u!4 &328473529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328473527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &375119875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,7 +2481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &397872630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2986,7 +3048,7 @@ Transform:
   m_LocalScale: {x: 0.93743914, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &524532358
 MonoBehaviour:
@@ -3003,6 +3065,9 @@ MonoBehaviour:
   rend: {fileID: 524532355}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 524532354}
   flippedXAxis: 0
   affectedParts: []
@@ -3522,7 +3587,7 @@ Transform:
   m_LocalScale: {x: 1.0595884, y: 2.0120168, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15}
 --- !u!114 &610878721
 MonoBehaviour:
@@ -3539,6 +3604,9 @@ MonoBehaviour:
   rend: {fileID: 610878718}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 610878717}
   flippedXAxis: 0
   affectedParts: []
@@ -4821,7 +4889,7 @@ Transform:
   m_LocalScale: {x: -1.0595884, y: 2.0120168, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &838332028
 MonoBehaviour:
@@ -4838,6 +4906,9 @@ MonoBehaviour:
   rend: {fileID: 838332025}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 838332024}
   flippedXAxis: 1
   affectedParts: []
@@ -5028,7 +5099,9 @@ MonoBehaviour:
   clampVal: 0
   currentPC: {fileID: 0}
   currentTransform: {fileID: 0}
-  blendCharacterValue: 1
+  blendCharacterValue: 0
+  blendTo: 
+  scp: {fileID: 1457880870}
   widthLeft: {fileID: 1901880332}
   widthRight: {fileID: 834628291}
   heightTop: {fileID: 1401635628}
@@ -7277,6 +7350,9 @@ MonoBehaviour:
   rend: {fileID: 1269006688}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
+  translatable: 0
+  rotatable: 0
+  scalable: 1
   colid: {fileID: 1269006687}
   flippedXAxis: 0
   affectedParts: []
@@ -7392,6 +7468,9 @@ MonoBehaviour:
   rend: {fileID: 1272765000}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+  translatable: 1
+  rotatable: 0
+  scalable: 1
   colid: {fileID: 1272764999}
   flippedXAxis: 0
   affectedParts: []
@@ -8086,7 +8165,7 @@ Transform:
   m_LocalScale: {x: -1.0887468, y: 0.8623607, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20}
 --- !u!114 &1451965502
 MonoBehaviour:
@@ -8103,10 +8182,67 @@ MonoBehaviour:
   rend: {fileID: 1451965499}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 1451965498}
   flippedXAxis: 1
   affectedParts: []
   mirroredPart: {fileID: 99618909}
+--- !u!1 &1457880869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457880871}
+  - component: {fileID: 1457880870}
+  m_Layer: 0
+  m_Name: CharacterCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1457880870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457880869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c7dd18fa2b9b745a25b0484de90b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: DefaultCharaTest
+  ear: {fileID: 610878721}
+  eyebrow: {fileID: 524532358}
+  eye: {fileID: 99618909}
+  hairBack: {fileID: 244385092}
+  hairFront: {fileID: 311225759}
+  head: {fileID: 95416240}
+  mouth: {fileID: 1470558959}
+  neck: {fileID: 1269006691}
+  nose: {fileID: 1272765003}
+  currentChar: {fileID: 0}
+--- !u!4 &1457880871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457880869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1465951083
 GameObject:
   m_ObjectHideFlags: 0
@@ -8316,6 +8452,9 @@ MonoBehaviour:
   rend: {fileID: 1470558956}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
+  translatable: 1
+  rotatable: 0
+  scalable: 1
   colid: {fileID: 1470558955}
   flippedXAxis: 0
   affectedParts: []
@@ -9863,7 +10002,7 @@ Transform:
   m_LocalScale: {x: -0.93743914, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1792980034
 MonoBehaviour:
@@ -9880,6 +10019,9 @@ MonoBehaviour:
   rend: {fileID: 1792980031}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   pd: {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 1792980030}
   flippedXAxis: 1
   affectedParts: []

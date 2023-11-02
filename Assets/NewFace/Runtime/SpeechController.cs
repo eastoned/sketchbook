@@ -59,6 +59,10 @@ public class SpeechController : MonoBehaviour
         
     }
 
+    public void SpeakText(string text, float animLength){
+        SpeakingRoutine = StartCoroutine(Speak(text, animLength));
+    }
+
     IEnumerator Speak(string text, float value){
         mouthRadius = mouth.pd.shadePropertyDict["_MouthRadius"].propertyValue;
         

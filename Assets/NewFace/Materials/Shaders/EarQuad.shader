@@ -81,7 +81,7 @@ Shader "Unlit/EarQuad"
                 //float line2 = 1-step(_EarTragus*lerp(2, 1, _EarLengthSkew), distance(float2(0, -_EarLengthSkew), i.uv));
                 float line2 = 1-step(_EarTragus, distance(float2(0, lerp(0.5, 0,_EarLengthSkew)), i.uv));
                 line1 = saturate(line1 + line2);
-                float4 ear = line1 * lerp(_Color1, _Color2, i.uv.y);
+                float4 ear = lerp(_Color2, lerp(_Color1, _Color2, i.uv.y), line1);
 
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;

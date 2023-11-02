@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
+  m_Name: Gre
+  m_EditorClassIdentifier: 
+  name: Gre
+  earData: {fileID: 11400000, guid: 8a00f6653fe4988488c305b082f1636c, type: 2}
+  eyebrowData: {fileID: 11400000, guid: e1719886b4b2cf04aa3f86a997bd02c4, type: 2}
+  eyeData: {fileID: 11400000, guid: d4fb9c61c5da67f41bb251b27cb4b030, type: 2}
+  hairBackData: {fileID: 11400000, guid: 9bbdb4d2ae5b2dd40b790de22191b8c6, type: 2}
+  hairFrontData: {fileID: 11400000, guid: 11709a37bd0134e498256fa4f38ef56c, type: 2}
+  headData: {fileID: 11400000, guid: cca2284789349bf44b14f5d7d6ef1c1a, type: 2}
+  mouthData: {fileID: 11400000, guid: 9e6a08892425a874c9437990df5e1949, type: 2}
+  neckData: {fileID: 11400000, guid: 98db76d593670424b83fc4df99060988, type: 2}
+  noseData: {fileID: 11400000, guid: 9c27b57c55efd59479bddb07c38fc363, type: 2}

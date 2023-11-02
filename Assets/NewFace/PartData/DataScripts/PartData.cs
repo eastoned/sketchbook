@@ -6,9 +6,30 @@ using UnityEngine.Events;
 
 public class PartData : ScriptableObject
 {
+
+    public void CopyData(PartData pd){
+        absolutePosition = pd.absolutePosition;
+        relativePosition = pd.relativePosition;
+        minPosX = pd.minPosX;
+        maxPosX = pd.maxPosX;
+        minPosY = pd.minPosY;
+        maxPosY = pd.maxPosY;
+        minAngle = pd.minAngle;
+        maxAngle = pd.maxAngle;
+        currentAngle = pd.currentAngle;
+        absoluteScale = pd.absoluteScale;
+        relativeScale = pd.relativeScale;
+        minScaleX = pd.minScaleX;
+        maxScaleX = pd.maxScaleX;
+        minScaleY = pd.minScaleY;
+        maxScaleY = pd.maxScaleY;
+
+        shaderProperties = pd.shaderProperties;
+        shadePropertyDict = pd.shadePropertyDict;
+        shaderColors = pd.shaderColors;
+    }
+
     #region TransformData
-        public bool translatable, rotatable, scalable;
-        
         public Vector3 absolutePosition;
         public Vector3 relativePosition;
 
@@ -32,7 +53,7 @@ public class PartData : ScriptableObject
         absolutePosition = pos;
     }
 
-    //return absolute alues to render object in space
+    //return absolute values to render object in space
     public Vector3 GetAbsolutePosition(){
         return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
     }
@@ -91,7 +112,6 @@ public class ShaderProperty{
     public void SetValue(float value){
         propertyValue = value;
     }
-
 
 }
 

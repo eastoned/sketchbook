@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PoseScriptableObject", order = 100)]
 public class Pose : ScriptableObject
 {
     public string poseName;

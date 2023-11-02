@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d04ea043f047634fac17772442c9c30, type: 3}
   m_Name: HairFrontData
   m_EditorClassIdentifier: 
-  translatable: 1
-  rotatable: 0
-  scalable: 1
-  absolutePosition: {x: 0, y: 0.72545457, z: -0.1}
-  relativePosition: {x: 0, y: 0.18136364, z: -0.1}
+  absolutePosition: {x: 0, y: 0.820416, z: -0.1}
+  relativePosition: {x: 0, y: 0.205104, z: -0.1}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
@@ -25,42 +22,22 @@ MonoBehaviour:
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.39296964, y: 0.12533315, z: 1}
+  relativeScale: {x: 0.5301827, y: 0.122873306, z: 1}
   minScaleX: 0.25
   maxScaleX: 4
   minScaleY: 0.25
   maxScaleY: 4
   shaderProperties:
   - propertyName: _BangRoundness
-    propertyValue: 0.87730056
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.545
   - propertyName: _StrandCount
     propertyValue: 0.18492551
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
   - propertyName: _StrandOffset
-    propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.386
   - propertyName: _HairBangScale
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
   - propertyName: _HairRoundness
     propertyValue: 0.36897454
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}

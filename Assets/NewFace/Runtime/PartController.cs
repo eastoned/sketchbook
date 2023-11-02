@@ -14,6 +14,8 @@ public class PartController : MonoBehaviour
 
     public PartData pd;
 
+    public bool translatable, rotatable, scalable;
+
     public Collider colid;
     
     public bool flippedXAxis = false;
@@ -138,7 +140,5 @@ public class PartController : MonoBehaviour
     void UpdateSingleShaderColor(string param, Color col){
         propBlock.SetColor(param, col);
     }
-
-
 
 }
