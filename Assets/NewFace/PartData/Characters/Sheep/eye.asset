@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Name: eye
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0.43214285, y: 0.20714283, z: 0}
+  relativePosition: {x: 0.16346814, y: 0.45966378, z: 0}
+  minPosX: 0.37002984
+  maxPosX: 0.75
+  minPosY: -0.48235285
+  maxPosY: 1.0176471
+  minAngle: -45
+  maxAngle: 45
+  currentAngle: 45.000004
+  absoluteScale: {x: 0.97099227, y: 0.9232773, z: 1}
+  relativeScale: {x: 1, y: 1, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 0.75
+  minScaleY: 0.25
+  maxScaleY: 0.75
+  shaderProperties:
+  - propertyName: _EyeRadius
+    propertyValue: 0.44558564
+  - propertyName: _PupilRadius
+    propertyValue: 1
+  - propertyName: _PupilWidth
+    propertyValue: 1
+  - propertyName: _PupilLength
+    propertyValue: 0.6213426
+  - propertyName: _EyelidTopLength
+    propertyValue: 0.83362037
+  - propertyName: _EyelidTopSkew
+    propertyValue: 0.54810554
+  - propertyName: _EyelidBottomLength
+    propertyValue: 0.804934
+  - propertyName: _EyelidBottomSkew
+    propertyValue: 0.48332292
+  - propertyName: _PupilRoundness
+    propertyValue: 0.063109696
+  - propertyName: _EyelidTopOpen
+    propertyValue: 1
+  - propertyName: _EyelidBottomOpen
+    propertyValue: 1
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0, g: 0.8989825, b: 1, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

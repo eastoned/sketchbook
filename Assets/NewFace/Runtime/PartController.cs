@@ -93,9 +93,9 @@ public class PartController : MonoBehaviour
 
 
         if(flippedXAxis){
-            transform.localEulerAngles = new Vector3(0, 0, -pd.currentAngle);
+            transform.localRotation = Quaternion.Euler(0, 0, -pd.currentAngle);
         }else{
-            transform.localEulerAngles = new Vector3(0, 0, pd.currentAngle);
+            transform.localRotation = Quaternion.Euler(0, 0, pd.currentAngle);
         }
 
         if(flippedXAxis){
@@ -114,7 +114,6 @@ public class PartController : MonoBehaviour
 
     }
 
-
     public void UpdateAllShadersValue(float ignore){
 
         for(int i = 0; i < pd.shaderProperties.Count; i++){
@@ -131,7 +130,6 @@ public class PartController : MonoBehaviour
     public void UpdateAllShadersValue(){
         rend.SetPropertyBlock(propBlock);
     }
-
 
     public void UpdateSingleShaderValue(string param, float value){
         propBlock.SetFloat(param, value);

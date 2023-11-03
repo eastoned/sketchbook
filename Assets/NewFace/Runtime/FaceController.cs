@@ -21,12 +21,9 @@ public class FaceController : MonoBehaviour
     public PartController currentPC;
     public Transform currentTransform;
 
-    [Range(0f, 1f)]
-    public float blendCharacterValue;
-
-    public string blendTo;
-
     public SaveCharacterProfile scp;
+    public CharacterData currentChar;
+    public AnimationCurve blendCurve;
 
     public PartTransformController widthLeft, widthRight, heightTop, heightBottom;
 
@@ -105,10 +102,6 @@ public class FaceController : MonoBehaviour
         SetTransformControllers(currentTransform);
     }
 
-    private void OnValidate(){
-        Interpolate(blendCharacterValue, blendTo);
-    }
-
     private void SetPartScale(Vector3 pos){
 
         float flip = 1;
@@ -143,12 +136,18 @@ public class FaceController : MonoBehaviour
     private void SetPartRotation(Vector3 pos){
 
         float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
+
         if(!currentPC.flippedXAxis){
             currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         }else{
             currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         }
-        currentPC.pd.currentAngle = currentTransform.localEulerAngles.z;
+
+        if(currentTransform.localEulerAngles.z > 180f){
+            currentPC.pd.currentAngle = currentTransform.localEulerAngles.z-360f;
+        }else{
+            currentPC.pd.currentAngle = currentTransform.localEulerAngles.z;
+        }
         
         if(currentPC.mirroredPart != null){
             currentPC.mirroredPart.UpdateAllTransformValues();
@@ -168,12 +167,63 @@ public class FaceController : MonoBehaviour
         );
     }
 
-    public void Interpolate(float val, string blend){
-        
+    public void Interpolate(float val, CharacterData gameData, CharacterData blendFrom, CharacterData blendTo){
+        Debug.Log("Blending between: " + blendFrom.name + " and " + blendTo.name +". All changes are stored on: " + gameData.name);
+        gameData.headData = BlendProfile(val, gameData.headData, blendFrom.headData, blendTo.headData);
+        gameData.neckData = BlendProfile(val, gameData.neckData, blendFrom.neckData, blendTo.neckData);
+        gameData.eyeData = BlendProfile(val, gameData.eyeData, blendFrom.eyeData, blendTo.eyeData);
+        gameData.eyebrowData = BlendProfile(val, gameData.eyebrowData, blendFrom.eyebrowData, blendTo.eyebrowData);
+        gameData.noseData = BlendProfile(val, gameData.noseData, blendFrom.noseData, blendTo.noseData);
+        gameData.mouthData = BlendProfile(val, gameData.mouthData, blendFrom.mouthData, blendTo.mouthData);
+        gameData.earData = BlendProfile(val, gameData.earData, blendFrom.earData, blendTo.earData);
+        gameData.hairFrontData = BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
+        gameData.hairBackData = BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
+
+        scp.UpdateAllControllers();
     }
 
-    public IEnumerator BlendIntoNewCharacter(CharacterData cd){
-        yield return null;
+    PartData BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){
+        
+        partData.absolutePosition = Vector3.Lerp(blendFrom.absolutePosition, blendTo.absolutePosition, val);
+        partData.relativePosition = Vector3.Lerp(blendFrom.relativePosition, blendTo.relativePosition, val);
+        partData.minPosX = Mathf.Lerp(blendFrom.minPosX, blendTo.minPosX, val);
+        partData.maxPosX = Mathf.Lerp(blendFrom.maxPosX, blendTo.maxPosX, val);
+        partData.minPosY = Mathf.Lerp(blendFrom.minPosY, blendTo.minPosY, val);
+        partData.maxPosY = Mathf.Lerp(blendFrom.maxPosY, blendTo.maxPosY, val);
+        partData.minAngle = Mathf.Lerp(blendFrom.minAngle, blendTo.minAngle, val);
+        partData.maxAngle = Mathf.Lerp(blendFrom.maxAngle, blendTo.maxAngle, val);
+        partData.currentAngle = Mathf.Lerp(blendFrom.currentAngle, blendTo.currentAngle, val);
+        partData.absoluteScale = Vector3.Lerp(blendFrom.absoluteScale, blendTo.absoluteScale, val);
+        partData.relativeScale = Vector3.Lerp(blendFrom.relativeScale, blendTo.relativeScale, val);
+        partData.minScaleX = Mathf.Lerp(blendFrom.minScaleX, blendTo.minScaleX, val);
+        partData.maxScaleX = Mathf.Lerp(blendFrom.maxScaleX, blendTo.maxScaleX, val);
+        partData.minScaleY = Mathf.Lerp(blendFrom.minScaleY, blendTo.minScaleY, val);
+        partData.maxScaleY = Mathf.Lerp(blendFrom.maxScaleY, blendTo.maxScaleY, val);
+
+        for(int i = 0; i < partData.shaderProperties.Count; i++){
+            partData.shaderProperties[i].SetValue(Mathf.Lerp(blendFrom.shaderProperties[i].propertyValue, blendTo.shaderProperties[i].propertyValue, val));
+        }
+
+        for(int j = 0; j < partData.shaderColors.Count; j++){
+            partData.shaderColors[j].colorValue = Color.Lerp(blendFrom.shaderColors[j].colorValue, blendTo.shaderColors[j].colorValue, val);
+        }
+
+        return partData;
+    }
+
+    public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength){
+        StartCoroutine(Blend(char1, char2, animLength));
+    }
+
+    public IEnumerator Blend(CharacterData cd1, CharacterData cd2, float value){
+        float journey = 0;
+        while(journey < value){
+            journey = journey + Time.deltaTime;
+            float percent = Mathf.Clamp01(journey/value);
+            float blendPercent = blendCurve.Evaluate(percent);
+            Interpolate(blendPercent, currentChar, cd1, cd2);
+            yield return null;
+        }
     }
 
     void Update(){
