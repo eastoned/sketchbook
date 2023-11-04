@@ -76,6 +76,7 @@ Shader "Unlit/EarQuad"
                 res = step(0, res);
 
                 clip(res-0.5);
+                clip(i.uv.x-.001);
                 float line1 = step(0.5, distance(float2(0.5, -(2*_EarLengthSkew-1)/5 + lerp(0, 0.2, _EarLengthSkew)), i.uv*float2((.75*_EarConcha+.5), (.75*_EarConcha+.5))));
 
                 //float line2 = 1-step(_EarTragus*lerp(2, 1, _EarLengthSkew), distance(float2(0, -_EarLengthSkew), i.uv));

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Name: eyebrow
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0.476378, y: 0.52755904, z: -0.15}
+  relativePosition: {x: 0.08803395, y: 0.6905153, z: -0.15}
+  minPosX: 0.43634507
+  maxPosX: 0.8910892
+  minPosY: -1.0221123
+  maxPosY: 1.2221123
+  minAngle: -45
+  maxAngle: 45
+  currentAngle: -19.29
+  absoluteScale: {x: 0, y: 0, z: 1}
+  relativeScale: {x: 0.60425776, y: 0.58330846, z: 1}
+  minScaleX: 0.2
+  maxScaleX: 0.8910892
+  minScaleY: 0.2
+  maxScaleY: 1
+  shaderProperties:
+  - propertyName: _EyebrowCount
+    propertyValue: 0.053755622
+  - propertyName: _EyebrowThickness
+    propertyValue: 0.20107858
+  - propertyName: _EyebrowRoundness
+    propertyValue: 0.50274
+  - propertyName: _EyebrowCurve
+    propertyValue: 0
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

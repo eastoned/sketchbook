@@ -69,7 +69,7 @@ public class SpeechController : MonoBehaviour
         if(mouthRadius>0.05f){
             GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
             bubble.transform.localScale = Vector3.zero;
-            bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;
+            
             int spaceCounter = 0;
             for(int i = 0; i < text.Length; i++){
                 
@@ -78,6 +78,8 @@ public class SpeechController : MonoBehaviour
                     
                 }
             }
+            spaceCounter *= 2;
+            spaceCounter += 1;
             
             upperLip = mouth.pd.shadePropertyDict["_MouthLipTop"].propertyValue;
             lowerLip = mouth.pd.shadePropertyDict["_MouthLipBottom"].propertyValue;
@@ -87,11 +89,13 @@ public class SpeechController : MonoBehaviour
             while(journey < value){
                 journey = journey + Time.deltaTime;
 
+                    
+                
                 
                     float percent = Mathf.Clamp01(journey/value);
                     float scalePercent = scaleCurve.Evaluate(percent);
                     float translatePercent = translateCurve.Evaluate(percent);
-                    
+                    bubble.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(0, Mathf.CeilToInt(text.Length*translatePercent));
                     bubble.transform.position = Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(50f, randomOffset, 0), translatePercent);
                     bubble.transform.localScale = Vector3.Lerp(new Vector3(0f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 

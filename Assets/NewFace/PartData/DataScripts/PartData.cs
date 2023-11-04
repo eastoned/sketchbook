@@ -24,9 +24,16 @@ public class PartData : ScriptableObject
         minScaleY = pd.minScaleY;
         maxScaleY = pd.maxScaleY;
 
-        shaderProperties = pd.shaderProperties;
-        shadePropertyDict = pd.shadePropertyDict;
-        shaderColors = pd.shaderColors;
+        shaderProperties = new List<ShaderProperty>();
+        for(int i = 0; i < pd.shaderProperties.Count; i++){
+            shaderProperties.Add(new ShaderProperty(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue));
+        }
+
+        shaderColors = new List<ShaderColor>();
+        for(int j = 0; j < pd.shaderColors.Count; j++){
+            shaderColors.Add(new ShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue));
+        }
+
     }
 
     #region TransformData
@@ -113,6 +120,11 @@ public class ShaderProperty{
         propertyValue = value;
     }
 
+    public ShaderProperty(string name, float value){
+        propertyName = name;
+        propertyValue = value;
+    }
+
 }
 
 [System.Serializable]
@@ -152,6 +164,12 @@ public class ShaderColor{
     public float GetValue(){
         Color.RGBToHSV(colorValue, out h, out s, out v);
         return v;
+    }
+
+
+    public ShaderColor(string name, Color value){
+        colorName = name;
+        colorValue = value;
     }
 
 

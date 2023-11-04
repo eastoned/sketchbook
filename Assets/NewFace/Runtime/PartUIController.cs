@@ -71,6 +71,8 @@ public class PartUIController : MonoBehaviour
                 buttons[j].onClick.RemoveAllListeners();
                 ColorBlock cb = ColorBlock.defaultColorBlock;
                 cb.normalColor = partData.pd.shaderColors[j].colorValue;
+                cb.pressedColor = partData.pd.shaderColors[j].colorValue;
+                cb.highlightedColor = Color.white - partData.pd.shaderColors[j].colorValue;
                 buttons[j].colors = cb;
                 int l = j;
                 buttons[j].onClick.AddListener(ToggleColorSliders);
@@ -82,9 +84,19 @@ public class PartUIController : MonoBehaviour
 
     }
 
+    void UpdateButtonColor(float ignore){
+        for(int j = 0; j < partData.pd.shaderColors.Count; j++){
+            ColorBlock cb = ColorBlock.defaultColorBlock;
+            cb.normalColor = partData.pd.shaderColors[j].colorValue;
+            cb.pressedColor = partData.pd.shaderColors[j].colorValue;
+            cb.highlightedColor = Color.white - partData.pd.shaderColors[j].colorValue;
+            buttons[j].colors = cb;
+        }
+    }
+
     void ToggleColorSliders()
     {
-        colorSliderContainer.SetActive(!colorSliderContainer.activeInHierarchy);
+        colorSliderContainer.SetActive(true);
     }
 
     void TurnOffUI(){
@@ -98,16 +110,22 @@ public class PartUIController : MonoBehaviour
         for(int i = 0; i < colorSliders.Count; i++){
             colorSliders[i].onValueChanged.RemoveAllListeners();
         }
+
         colorSliders[0].value = partData.pd.shaderColors[currentColor].GetHue();
         colorSliders[1].value = partData.pd.shaderColors[currentColor].GetSaturation();
         colorSliders[2].value = partData.pd.shaderColors[currentColor].GetValue();
 
         colorSliders[0].onValueChanged.AddListener(partData.pd.shaderColors[currentColor].SetHue);
         colorSliders[0].onValueChanged.AddListener(partData.UpdateAllShadersValue);
+        colorSliders[0].onValueChanged.AddListener(UpdateButtonColor);
+
         colorSliders[1].onValueChanged.AddListener(partData.pd.shaderColors[currentColor].SetSaturation);
         colorSliders[1].onValueChanged.AddListener(partData.UpdateAllShadersValue);
+        colorSliders[1].onValueChanged.AddListener(UpdateButtonColor);
+
         colorSliders[2].onValueChanged.AddListener(partData.pd.shaderColors[currentColor].SetValue);
         colorSliders[2].onValueChanged.AddListener(partData.UpdateAllShadersValue);
+        colorSliders[2].onValueChanged.AddListener(UpdateButtonColor);
 
         if(partData.mirroredPart != null){
             colorSliders[0].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);

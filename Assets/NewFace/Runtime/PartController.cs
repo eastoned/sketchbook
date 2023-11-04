@@ -25,6 +25,8 @@ public class PartController : MonoBehaviour
 
     MaterialPropertyBlock propBlock;
 
+    public Vector3 cachePosition;
+
     private void Start(){
         Initialize();
     }
@@ -87,10 +89,11 @@ public class PartController : MonoBehaviour
         
         if(flippedXAxis){
             transform.localPosition = pd.GetFlippedAbsolutePosition();
+            cachePosition = pd.GetFlippedAbsolutePosition();
         }else{
             transform.localPosition = pd.GetAbsolutePosition();
+            cachePosition = pd.GetAbsolutePosition();
         }
-
 
         if(flippedXAxis){
             transform.localRotation = Quaternion.Euler(0, 0, -pd.currentAngle);
@@ -125,6 +128,25 @@ public class PartController : MonoBehaviour
         }
 
         rend.SetPropertyBlock(propBlock);
+    }
+
+    [ContextMenu("Shake Test")]
+    public void ShakeTest(){
+        ShakePieces(new Vector3(.1f, 0.01f, 0f), 5f);
+    }
+
+    public void ShakePieces(Vector3 strength, float time){
+        StartCoroutine(ShakeRoutine(strength, time));
+    }
+
+    public IEnumerator ShakeRoutine(Vector3 strength, float length){
+        float time = length;
+        while(time > 0){
+            time -= Time.deltaTime;
+            transform.localPosition = cachePosition + Vector3.Scale(Random.insideUnitSphere, strength);
+            yield return null;
+        }
+        transform.localPosition = cachePosition;
     }
 
     public void UpdateAllShadersValue(){

@@ -20,7 +20,7 @@ MonoBehaviour:
   maxPosY: 1.2221123
   minAngle: -45
   maxAngle: 45
-  currentAngle: 340.70996
+  currentAngle: -19.29
   absoluteScale: {x: 0, y: 0, z: 1}
   relativeScale: {x: 0.60425776, y: 0.58330846, z: 1}
   minScaleX: 0.2

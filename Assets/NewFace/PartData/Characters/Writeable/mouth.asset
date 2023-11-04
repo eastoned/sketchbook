@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Name: mouth
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -0.8068459, z: 0.05}
+  relativePosition: {x: 0, y: 0.17261907, z: 0.05}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -1.1221123
+  maxPosY: 1.1221123
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 0, y: 0, z: 1}
+  relativeScale: {x: 0.6088018, y: 0.22532482, z: 1}
+  minScaleX: 0.05
+  maxScaleX: 2.6666667
+  minScaleY: 0.1
+  maxScaleY: 2
+  shaderProperties:
+  - propertyName: _MouthRadius
+    propertyValue: 1
+  - propertyName: _MouthLipMaskRoundness
+    propertyValue: 1
+  - propertyName: _MouthLipTop
+    propertyValue: 1
+  - propertyName: _MouthLipBottom
+    propertyValue: 1
+  - propertyName: _TeethTop
+    propertyValue: 0.57002866
+  - propertyName: _TeethBottom
+    propertyValue: 0.26972008
+  - propertyName: _TeethCount
+    propertyValue: 0.25625914
+  - propertyName: _TeethRoundness
+    propertyValue: 1
+  - propertyName: _TongueRadius
+    propertyValue: 0.6518048
+  - propertyName: _TongueScale
+    propertyValue: 0.5122591
+  - propertyName: _TongueHeight
+    propertyValue: 0.17966788
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

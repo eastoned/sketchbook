@@ -20,8 +20,11 @@ public class FaceController : MonoBehaviour
     public float clampVal;
     public PartController currentPC;
     public Transform currentTransform;
-
+    
+    #if UNITY_EDITOR
     public SaveCharacterProfile scp;
+    #endif
+
     public CharacterData currentChar;
     public AnimationCurve blendCurve;
 
@@ -63,6 +66,8 @@ public class FaceController : MonoBehaviour
 
         if(currentPC.rotatable)
             widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0, 0));
+        
+        widthRight.transform.localPosition = new Vector3(widthRight.transform.localPosition.x, widthRight.transform.localPosition.y, -1f);
 
         if(currentPC.scalable)
             heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
@@ -140,7 +145,7 @@ public class FaceController : MonoBehaviour
         if(!currentPC.flippedXAxis){
             currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         }else{
-            currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
+            //currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         }
 
         if(currentTransform.localEulerAngles.z > 180f){
@@ -169,20 +174,22 @@ public class FaceController : MonoBehaviour
 
     public void Interpolate(float val, CharacterData gameData, CharacterData blendFrom, CharacterData blendTo){
         Debug.Log("Blending between: " + blendFrom.name + " and " + blendTo.name +". All changes are stored on: " + gameData.name);
-        gameData.headData = BlendProfile(val, gameData.headData, blendFrom.headData, blendTo.headData);
-        gameData.neckData = BlendProfile(val, gameData.neckData, blendFrom.neckData, blendTo.neckData);
-        gameData.eyeData = BlendProfile(val, gameData.eyeData, blendFrom.eyeData, blendTo.eyeData);
-        gameData.eyebrowData = BlendProfile(val, gameData.eyebrowData, blendFrom.eyebrowData, blendTo.eyebrowData);
-        gameData.noseData = BlendProfile(val, gameData.noseData, blendFrom.noseData, blendTo.noseData);
-        gameData.mouthData = BlendProfile(val, gameData.mouthData, blendFrom.mouthData, blendTo.mouthData);
-        gameData.earData = BlendProfile(val, gameData.earData, blendFrom.earData, blendTo.earData);
-        gameData.hairFrontData = BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
-        gameData.hairBackData = BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
+        BlendProfile(val, gameData.headData, blendFrom.headData, blendTo.headData);
+        BlendProfile(val, gameData.neckData, blendFrom.neckData, blendTo.neckData);
+        BlendProfile(val, gameData.eyeData, blendFrom.eyeData, blendTo.eyeData);
+        BlendProfile(val, gameData.eyebrowData, blendFrom.eyebrowData, blendTo.eyebrowData);
+        BlendProfile(val, gameData.noseData, blendFrom.noseData, blendTo.noseData);
+        BlendProfile(val, gameData.mouthData, blendFrom.mouthData, blendTo.mouthData);
+        BlendProfile(val, gameData.earData, blendFrom.earData, blendTo.earData);
+        BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
+        BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
 
+        #if UNITY_EDITOR
         scp.UpdateAllControllers();
+        #endif
     }
 
-    PartData BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){
+    public void BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){
         
         partData.absolutePosition = Vector3.Lerp(blendFrom.absolutePosition, blendTo.absolutePosition, val);
         partData.relativePosition = Vector3.Lerp(blendFrom.relativePosition, blendTo.relativePosition, val);
@@ -208,7 +215,6 @@ public class FaceController : MonoBehaviour
             partData.shaderColors[j].colorValue = Color.Lerp(blendFrom.shaderColors[j].colorValue, blendTo.shaderColors[j].colorValue, val);
         }
 
-        return partData;
     }
 
     public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength){

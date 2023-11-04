@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class SaveCharacterProfile : MonoBehaviour
 {
     public string characterName;
@@ -126,3 +127,4 @@ public class SaveCharacterProfile : MonoBehaviour
     }
 
 }
+#endif
