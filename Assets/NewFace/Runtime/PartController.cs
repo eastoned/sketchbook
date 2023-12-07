@@ -69,6 +69,7 @@ public class PartController : MonoBehaviour
             return;
 
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
+        //colid.enabled = false;
     }
 
 
@@ -132,7 +133,7 @@ public class PartController : MonoBehaviour
 
     [ContextMenu("Shake Test")]
     public void ShakeTest(){
-        ShakePieces(new Vector3(.1f, 0.01f, 0f), 5f);
+        ShakePieces(new Vector3(.1f, 0.01f, 0f), .5f);
     }
 
     public void ShakePieces(Vector3 strength, float time){
@@ -153,8 +154,16 @@ public class PartController : MonoBehaviour
         rend.SetPropertyBlock(propBlock);
     }
 
+    public void UpdateRenderPropBlock(){
+        rend.SetPropertyBlock(propBlock);
+    }
+
     public void UpdateSingleShaderValue(string param, float value){
         propBlock.SetFloat(param, value);
+    }
+
+    public void UpdateSingleShaderVector(string param, Vector3 vec){
+        propBlock.SetVector(param, vec);
     }
 
     void UpdateSingleShaderColor(string param, Color col){

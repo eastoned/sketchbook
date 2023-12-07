@@ -28,7 +28,7 @@ Material:
     - _Lips: 0.95
     - _MouthLipBottom: 1
     - _MouthLipMaskRoundness: 1
-    - _MouthLipTop: 1
+    - _MouthLipTop: 0.2
     - _MouthRadius: 1
     - _Radius: 1
     - _Radius2: 1

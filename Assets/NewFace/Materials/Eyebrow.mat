@@ -31,6 +31,7 @@ Material:
     - _EyebrowRoundness: 0.978
     - _EyebrowThickness: 0.414
     - _Offset: 6.3
+    - _Rounded: 48
     - _Strokes: 1
     m_Colors:
     - _Color1: {r: 1, g: 1, b: 1, a: 1}

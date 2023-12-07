@@ -29,7 +29,7 @@ Material:
     - _NumSteps: 64
     - _StepSize: 0.01
     - _Thresh: 0.12
-    - __dirty: 1
+    - __dirty: 0
     m_Colors:
     - _Sphere: {r: 0.5, g: 0, b: 0, a: 0.6}
     - _Sphere2: {r: -0.5, g: 0, b: 0, a: 0.6}

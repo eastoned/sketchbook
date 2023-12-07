@@ -13,10 +13,10 @@ public class NuFaceManager : MonoBehaviour
     public string[] convo;
 
     public CharacterData[] characterSet;
-
+/*
     public IEnumerator Start(){
         for(;;){
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
             writeableData.CopyData(currentChar);
             if(Random.Range(0f, 1f) < 0.5f){
                 yield return new WaitForSeconds(1f);
@@ -49,9 +49,21 @@ public class NuFaceManager : MonoBehaviour
             }
         }
        // StartCoroutine(BlendRoutine());
+    }*/
+
+    [ContextMenu("Sheep Score")]
+    public void CheckSheepAmount(){
+        //float sheepScore = 0;
+        //Debug.Log("Sheep score: " + sheepScore);
+        fc.GetCharacterDifference(currentChar, characterSet[1]);
     }
 
-    public IEnumerator ResponseRoutine(){
-        yield return null;
+    [ContextMenu("Wolf Score")]
+    public void CheckWolfAmount(){
+        fc.GetCharacterDifference(currentChar, characterSet[2]);
     }
+
+    //public IEnumerator ResponseRoutine(){
+      //  yield return null;
+    //}
 }

@@ -5,11 +5,14 @@ Shader "Unlit/EyebrowQuad"
         _EyebrowCount ("Eyebrow Count", Range(0, 1)) = 1
         _EyebrowThickness ("Eyebrow Thickness", Range(0, 1)) = 0
         _EyebrowRoundness ("Eyebrow Roundness", Range(0, 1)) = 1
+        _Rounded ("Rounded", Range(1, 256)) = 40
 
         _EyebrowCurve ("Eyebrow Curve", Range(0, 1)) = 0
 
         _Color1 ("Inner", Color) = (1,1,1,1)
         _Color2 ("Outer", Color) = (1,1,1,1)
+
+        _PositionMomentum ("Position Momementum", Vector) = (0,0,0)
 
         _MainTex("Tex", 2D) = "white" {}
     }
@@ -49,6 +52,9 @@ Shader "Unlit/EyebrowQuad"
             float _EyebrowRoundness;
             float _EyebrowCurve;
             float4 _Color1, _Color2;
+            float _Rounded;
+
+            float4 _PositionMomentum;
 
             v2f vert (appdata v)
             {
@@ -65,7 +71,8 @@ Shader "Unlit/EyebrowQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 uv = i.uv;
+                float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
+                float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength), i.uv.y + (_PositionMomentum.y * pullStrength));
                 float stretchUV = sin(uv.x*3.14);
                 
                 uv *= float2((int)(_EyebrowCount*15)+1, 1);

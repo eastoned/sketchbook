@@ -46,6 +46,7 @@ Shader "Unlit/EarQuad"
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float3 worldPos : TEXCOORD2;
                 float4 screenPosition : TEXCOORD1;
             };
 
@@ -54,6 +55,7 @@ Shader "Unlit/EarQuad"
       
             float _EarWidthSkew, _EarLengthSkew, _EarShape, _EarRoundness, _EarOpenWidth, _EarOpenLength, _EarConcha, _EarTragus;
             float4 _Color1, _Color2;
+            uniform float4 _MousePos;
 
             v2f vert (appdata v)
             {
@@ -63,6 +65,7 @@ Shader "Unlit/EarQuad"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPosition = ComputeScreenPos(o.vertex);
+                o.worldPos = mul(unity_ObjectToWorld, v.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -89,7 +92,7 @@ Shader "Unlit/EarQuad"
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 float4 col = tex2D(_MainTex, texCoord);
-
+                //return step(0.5, 1-(distance(i.worldPos.xy, _MousePos.xy)/2));
                 return ear * col;
             }
             ENDCG

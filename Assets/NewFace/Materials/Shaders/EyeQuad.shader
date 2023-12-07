@@ -31,6 +31,8 @@ Shader "Unlit/EyeQuad"
 
         _MainTex("Tex", 2D) = "white" {}
 
+        _PositionMomentum ("Position Momementum", Vector) = (0,0,0)
+
     }
     SubShader
     {
@@ -63,6 +65,8 @@ Shader "Unlit/EyeQuad"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
+            float4 _PositionMomentum;
+
             float _EyeRadius, _PupilRadius, _PupilWidth, _PupilLength, _PupilOffsetX, _PupilOffsetY;
             float4 _Color1, _Color2, _Color3, _Color4;
             float _EyelidTopSkew, _EyelidTopLength, _EyelidBottomSkew, _EyelidBottomLength;
@@ -84,7 +88,9 @@ Shader "Unlit/EyeQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 uv = float2(i.uv.x, i.uv.y);
+                float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
+                //return pullStrength.xxxx;
+                float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
                 float line1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
                 ((_EyelidTopLength - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
@@ -130,7 +136,7 @@ Shader "Unlit/EyeQuad"
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 float4 col = tex2D(_MainTex, texCoord);
-
+                //return distance(float2(0.5,0.5), i.uv);
                 return result * col;
                 //return pupil;
             }

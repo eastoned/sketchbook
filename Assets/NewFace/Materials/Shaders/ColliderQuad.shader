@@ -57,7 +57,7 @@ Shader "Unlit/ColliderQuad"
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 float4 col = tex2D(_MainTex, texCoord);
 
-                return 1 * col;
+                return 1;// * col;
             }
             ENDCG
         }

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
+using JetBrains.Annotations;
 using OpenCvSharp;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.XR;
@@ -9,7 +11,7 @@ using UnityEngine.XR;
 public class FaceController : MonoBehaviour
 {
 
-    public PartController leftEye, rightEye;
+    public PartController leftEye, rightEye, mouth;
 
     public float leftPupilX;
     public float leftPupilY;
@@ -26,9 +28,19 @@ public class FaceController : MonoBehaviour
     #endif
 
     public CharacterData currentChar;
-    public AnimationCurve blendCurve;
+    public AnimationCurve blendCurve; 
 
-    public PartTransformController widthLeft, widthRight, heightTop, heightBottom;
+    [Range(0f, 1f)]
+    public float blinkAmount;
+    private float eyelidTop, eyelidBottom;
+    [Range(0f, 1f)]
+    public float mouthClosedAmount;
+    private float mouthTop, mouthBottom;
+
+    public Transform cube;
+    public Vector3 positionDifference;
+
+    public PartTransformController widthLeft, widthRight, heightTop;
 
      void OnEnable()
 	{
@@ -37,6 +49,7 @@ public class FaceController : MonoBehaviour
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
+        OnSetKeyFrameData.Instance.AddListener(SetDefaultBlinkAndMouthPos);
     }
 
     void OnDisable(){
@@ -45,6 +58,15 @@ public class FaceController : MonoBehaviour
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
+        OnSetKeyFrameData.Instance.RemoveListener(SetDefaultBlinkAndMouthPos);
+    }
+
+    public void SetDefaultBlinkAndMouthPos(){
+        Debug.Log("Set new eye and mouth vars");
+        eyelidTop = rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue;
+        eyelidBottom = rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue;
+        mouthTop = mouth.pd.shadePropertyDict["_MouthLipTop"].propertyValue;
+        mouthBottom = mouth.pd.shadePropertyDict["_MouthLipBottom"].propertyValue;
     }
 
     private void DisappearControllers(){
@@ -56,7 +78,13 @@ public class FaceController : MonoBehaviour
     private void SetTransformControllers(Transform selectedTarget){
         
         currentPC = selectedTarget.GetComponent<PartController>();
-        currentTransform = selectedTarget;
+        
+        if(currentTransform != selectedTarget){
+            currentTransform = selectedTarget;
+        
+            cube.position = currentTransform.position;
+        }
+        
         DisappearControllers();
 
         if(currentPC.translatable)
@@ -78,10 +106,7 @@ public class FaceController : MonoBehaviour
 
     private void SetPartPosition(Vector3 pos){
         //each part has a relative position to other objects
-        float flip = 1;
-
-        if(currentPC.flippedXAxis)
-            flip = -1;
+        float flip = currentPC.flippedXAxis? -1f : 1f;
 
         currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
         Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
@@ -92,7 +117,6 @@ public class FaceController : MonoBehaviour
             for(int i = 0; i < currentPC.affectedParts.Count; i++){
                 currentPC.affectedParts[i].pd.SetPositionBounds(currentPC.pd);
                 currentPC.affectedParts[i].pd.SetScaleBounds(currentPC.pd);
-
 
                 currentPC.affectedParts[i].UpdateAllTransformValues();
             }
@@ -157,6 +181,7 @@ public class FaceController : MonoBehaviour
         if(currentPC.mirroredPart != null){
             currentPC.mirroredPart.UpdateAllTransformValues();
         }
+        
         SetTransformControllers(currentTransform);
         
     }
@@ -187,6 +212,44 @@ public class FaceController : MonoBehaviour
         #if UNITY_EDITOR
         scp.UpdateAllControllers();
         #endif
+    }
+
+    public void GetCharacterDifference(CharacterData gameData, CharacterData targetData){
+       // GetPartDifference(gameData.headData, targetData.headData);
+       // GetPartDifference(gameData.neckData, targetData.neckData);
+       // GetPartDifference(gameData.eyeData, targetData.eyeData);
+        GetPartDifference(gameData.eyebrowData, targetData.eyebrowData);
+       // GetPartDifference(gameData.noseData, targetData.noseData);
+       // GetPartDifference(gameData.mouthData, targetData.mouthData);
+       // GetPartDifference(gameData.earData, targetData.earData);
+       // GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
+       // GetPartDifference(gameData.hairBackData, targetData.hairBackData);
+    }
+
+    public void GetPartDifference(PartData gamePart, PartData characterPart)
+    {
+        string diffDebug = "";
+        
+        diffDebug += "The absolutePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absolutePosition, characterPart.absolutePosition) + ".\n";
+        diffDebug += "The relativePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativePosition, characterPart.relativePosition) + ".\n";
+        diffDebug += "The currentAngle difference of the: " + gamePart.name + " is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle) + ".\n";
+        diffDebug += "The absoluteScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absoluteScale, characterPart.absoluteScale) + ".\n";
+        diffDebug += "The relativeScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativeScale, characterPart.relativeScale) + ".\n";
+            
+            for(int i = 0; i < gamePart.shaderProperties.Count; i++){
+                diffDebug += "The " + gamePart.shaderProperties[i].propertyName + " difference of the " + gamePart.name + " is: " +
+                 Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue) + ".\n";
+            }
+
+            for(int j = 0; j < gamePart.shaderColors.Count; j++){
+                diffDebug += "The " + gamePart.shaderColors[j].colorName + " difference of the " + gamePart.name + " is: " +
+                Vector3.Dot(
+                    new Vector3(gamePart.shaderColors[j].colorValue.r, gamePart.shaderColors[j].colorValue.g, gamePart.shaderColors[j].colorValue.b),
+                    new Vector3(characterPart.shaderColors[j].colorValue.r, characterPart.shaderColors[j].colorValue.g, characterPart.shaderColors[j].colorValue.b)) +
+                    ".\n";
+            }
+
+            Debug.Log(diffDebug);
     }
 
     public void BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){
@@ -232,10 +295,39 @@ public class FaceController : MonoBehaviour
         }
     }
 
-    void Update(){
 
+    void OnValidate(){
+        rightEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTop, 0, blinkAmount));
+        leftEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTop, 0, blinkAmount));
+        rightEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottom, 0, blinkAmount));
+        leftEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottom, 0, blinkAmount));
+        rightEye.UpdateRenderPropBlock();
+        leftEye.UpdateRenderPropBlock();
+
+        mouth.UpdateSingleShaderValue("_MouthLipTop", Mathf.Lerp(mouthTop, 1-mouthBottom, mouthClosedAmount/2f));
+        mouth.UpdateSingleShaderValue("_MouthLipBottom", Mathf.Lerp(mouthBottom, 1-mouthTop, mouthClosedAmount/2f));
+        mouth.UpdateRenderPropBlock();
+    }
+
+    void Update(){
+        if(currentTransform){
+            cube.position = Vector3.MoveTowards(cube.position, currentTransform.position, 2f*Time.deltaTime);
+            positionDifference = currentTransform.position - cube.position;
+            
+            currentPC.UpdateSingleShaderVector("_PositionMomentum", positionDifference);
+            currentPC.UpdateRenderPropBlock();
+            if(currentPC.mirroredPart){
+                currentPC.mirroredPart.UpdateSingleShaderVector("_PositionMomentum", positionDifference);
+                currentPC.mirroredPart.UpdateRenderPropBlock();
+            }
+        }
+
+        
+
+        //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+         
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-       
+        Shader.SetGlobalVector("_MousePos", mousePos);
         //position of mouse relative to right eye position
         Vector2 rightX = new Vector2(rightEye.pd.absolutePosition.x - mousePos.x, 0);
         Vector2 rightY = new Vector2(0, rightEye.pd.absolutePosition.y - mousePos.y);
@@ -258,6 +350,7 @@ public class FaceController : MonoBehaviour
         rightPupilY = Mathf.Lerp(rightPupilY, rightPupilTarget.y*clampVal, 4f* Time.deltaTime);
         leftPupilX = Mathf.Lerp(leftPupilX, leftPupilTarget.x*clampVal, 4f* Time.deltaTime);
         leftPupilY = Mathf.Lerp(leftPupilY, leftPupilTarget.y*clampVal, 4f* Time.deltaTime);
+        
         
 //
         //rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(rightPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
