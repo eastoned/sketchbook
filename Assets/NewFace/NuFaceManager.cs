@@ -12,7 +12,45 @@ public class NuFaceManager : MonoBehaviour
 
     public string[] convo;
 
+    public PartController[] parts;
+
     public CharacterData[] characterSet;
+    private Coroutine skippableWait;
+
+    public IEnumerator Start(){
+        foreach(PartController pc in parts){
+            pc.colid.enabled = false;
+        }
+        
+        yield return WaitForMouseOrTime(2f);
+        sc.SpeakText("Touch me.", 2f);
+        yield return new WaitForSeconds(0.5f);
+        yield return WaitForMouseOrTime(2f);
+        sc.SpeakText("Change me.", 2f);
+        yield return new WaitForSeconds(0.5f);
+        yield return WaitForMouseOrTime(2f);
+        sc.SpeakText("Rearrange me.", 2f);
+        yield return new WaitForSeconds(0.5f);
+        yield return WaitForMouseOrTime(2f);
+        sc.SpeakText("Let's start with my hair.", 3f);
+        yield return new WaitForSeconds(2f);
+        parts[10].colid.enabled = true;
+        parts[11].colid.enabled = true;
+    }
+
+    IEnumerator WaitForMouse(){
+        while(!Input.GetMouseButtonDown(0)){
+            yield return null;
+        }
+    }
+
+    IEnumerator WaitForMouseOrTime(float length){
+        length -= Time.deltaTime; 
+        while(!Input.GetMouseButtonDown(0)){
+            yield return null;
+        }
+           
+    }
 /*
     public IEnumerator Start(){
         for(;;){
@@ -50,6 +88,8 @@ public class NuFaceManager : MonoBehaviour
         }
        // StartCoroutine(BlendRoutine());
     }*/
+
+
 
     [ContextMenu("Sheep Score")]
     public void CheckSheepAmount(){

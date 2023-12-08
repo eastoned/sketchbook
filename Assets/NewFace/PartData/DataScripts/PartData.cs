@@ -125,6 +125,29 @@ public class ShaderProperty{
         propertyValue = value;
     }
 
+    public void ReadRandomRemark(float value){
+        if(value > 0){
+            //
+            if(IncreaseValueRemarks.Length > 0){
+                
+            }
+        }else{
+            //
+            if(DecreaseValueRemarks.Length > 0){
+
+            }
+        }
+    }
+
+    public Remark[] IncreaseValueRemarks;
+    public Remark[] DecreaseValueRemarks;
+
+}
+
+[System.Serializable]
+public class Remark{
+    public string message;
+    public bool wasSaid = false;
 }
 
 [System.Serializable]

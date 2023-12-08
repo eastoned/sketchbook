@@ -30,12 +30,20 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _EyebrowCount
     propertyValue: 0.20654035
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyebrowThickness
     propertyValue: 0.04589778
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyebrowRoundness
     propertyValue: 0.2527252
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyebrowCurve
     propertyValue: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 0, g: 0, b: 0, a: 1}

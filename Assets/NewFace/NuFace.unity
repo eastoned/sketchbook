@@ -622,7 +622,7 @@ MonoBehaviour:
   translatable: 0
   rotatable: 0
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 95416234}
   flippedXAxis: 0
   affectedParts:
   - {fileID: 99618909}
@@ -763,7 +763,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 99618905}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 1451965502}
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 244385091}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 311225758}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
@@ -2165,7 +2165,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328473527}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d673121355d626e48b2343ff99746090, type: 3}
   m_Name: 
@@ -2178,6 +2178,19 @@ MonoBehaviour:
   - Hi.
   - I am your worst nightmare.
   - Hear me roar.
+  parts:
+  - {fileID: 99618909}
+  - {fileID: 1451965502}
+  - {fileID: 1272765003}
+  - {fileID: 1470558959}
+  - {fileID: 95416240}
+  - {fileID: 524532358}
+  - {fileID: 1792980034}
+  - {fileID: 610878721}
+  - {fileID: 838332028}
+  - {fileID: 1269006691}
+  - {fileID: 244385092}
+  - {fileID: 311225759}
   characterSet:
   - {fileID: 11400000, guid: 18a2fe4c4f7a57d4d846cdf8ce742f4f, type: 2}
   - {fileID: 11400000, guid: 9f76634ca4a1ee54781e5a3960cda8e2, type: 2}
@@ -2550,7 +2563,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397872629}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d95592687839cf44cb072e2269def193, type: 3}
   m_Name: 
@@ -3142,7 +3155,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 524532354}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 1792980034}
@@ -3695,7 +3708,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 610878717}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 838332028}
@@ -5092,7 +5105,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 838332024}
   flippedXAxis: 1
   affectedParts: []
   mirroredPart: {fileID: 610878721}
@@ -7639,7 +7652,7 @@ MonoBehaviour:
   translatable: 0
   rotatable: 0
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 1269006687}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
@@ -7771,7 +7784,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 1272764999}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
@@ -8499,7 +8512,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 1451965498}
   flippedXAxis: 1
   affectedParts: []
   mirroredPart: {fileID: 99618909}
@@ -8844,7 +8857,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 0
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 1470558955}
   flippedXAxis: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
@@ -10395,7 +10408,7 @@ MonoBehaviour:
   translatable: 1
   rotatable: 1
   scalable: 1
-  colid: {fileID: 0}
+  colid: {fileID: 1792980030}
   flippedXAxis: 1
   affectedParts: []
   mirroredPart: {fileID: 524532358}

@@ -16,7 +16,7 @@ public class PartController : MonoBehaviour
 
     public bool translatable, rotatable, scalable;
 
-    public Collider colid;
+    public BoxCollider2D colid;
     
     public bool flippedXAxis = false;
 
@@ -33,6 +33,7 @@ public class PartController : MonoBehaviour
 
     private void Initialize(){
         currentMat = rend.sharedMaterial;
+        colid = GetComponent<BoxCollider2D>();
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
                 pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
@@ -65,6 +66,8 @@ public class PartController : MonoBehaviour
     }
 
     void OnMouseDown(){
+        OnMouseClickEvent.Instance.Invoke();
+        
         if(EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -83,7 +86,7 @@ public class PartController : MonoBehaviour
             rend = GetComponent<Renderer>();
 
         if(colid == null)
-            colid = GetComponent<Collider>();
+            colid = GetComponent<BoxCollider2D>();
     }
 
     public void UpdateAllTransformValues(){
