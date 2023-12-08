@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: EyebrowData
   m_EditorClassIdentifier: 
-  translatable: 1
-  rotatable: 1
-  scalable: 1
   absolutePosition: {x: 0.5758253, y: 1.2395694, z: -0.15}
   relativePosition: {x: 0.055452324, y: 0, z: -0.15}
   minPosX: 0
@@ -33,28 +30,48 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _EyebrowCount
     propertyValue: 0.053755622
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks:
+    - message: I always wanted more hairs.
+      wasSaid: 0
+    DecreaseValueRemarks:
+    - message: I didn't like that amount anyway...
+      wasSaid: 0
   - propertyName: _EyebrowThickness
     propertyValue: 0.20107858
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks:
+    - message: Ok!! Let's go Rock Lee!!
+      wasSaid: 0
+    DecreaseValueRemarks:
+    - message: Gigi Hadid who?
+      wasSaid: 0
   - propertyName: _EyebrowRoundness
     propertyValue: 0.50274
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks:
+    - message: The softening of the face...
+      wasSaid: 0
+    - message: The grande madam fem...
+      wasSaid: 0
+    - message: ::-)
+      wasSaid: 0
+    DecreaseValueRemarks:
+    - message: Something a little sharper image.
+      wasSaid: 0
+    - message: Magnifique pour moiiii
+      wasSaid: 0
   - propertyName: _EyebrowCurve
     propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks:
+    - message: You talking to me?
+      wasSaid: 0
+    - message: Talking to me?
+      wasSaid: 0
+    - message: You talking me?
+      wasSaid: 0
+    - message: You?
+      wasSaid: 0
+    DecreaseValueRemarks:
+    - message: Bye.
+      wasSaid: 0
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}

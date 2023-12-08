@@ -126,15 +126,18 @@ public class ShaderProperty{
     }
 
     public void ReadRandomRemark(float value){
-        if(value > 0){
-            //
-            if(IncreaseValueRemarks.Length > 0){
-                
-            }
-        }else{
-            //
-            if(DecreaseValueRemarks.Length > 0){
-
+        //Debug.Log("Getting value as: " + value + ". And the current property value is: " + propertyValue + ".");
+        if(SpeechController.timeSinceLastRemark > 5f){
+            if(value > propertyValue){
+                //
+                if(IncreaseValueRemarks.Length > 0){
+                    OnSendRemarkToSpeech.Instance.Invoke(IncreaseValueRemarks[Random.Range(0, IncreaseValueRemarks.Length)].message);
+                }
+            }else{
+                //
+                if(DecreaseValueRemarks.Length > 0){
+                    OnSendRemarkToSpeech.Instance.Invoke(DecreaseValueRemarks[Random.Range(0, DecreaseValueRemarks.Length)].message);
+                }
             }
         }
     }

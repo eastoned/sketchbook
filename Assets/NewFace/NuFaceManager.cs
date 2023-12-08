@@ -32,10 +32,12 @@ public class NuFaceManager : MonoBehaviour
         sc.SpeakText("Rearrange me.", 2f);
         yield return new WaitForSeconds(0.5f);
         yield return WaitForMouseOrTime(2f);
-        sc.SpeakText("Let's start with my hair.", 3f);
+        sc.SpeakText("Let's start with my eyebrows.", 3f);
         yield return new WaitForSeconds(2f);
-        parts[10].colid.enabled = true;
-        parts[11].colid.enabled = true;
+        parts[5].colid.enabled = true;
+        parts[6].colid.enabled = true;
+        //parts[10].colid.enabled = true;
+        //parts[11].colid.enabled = true;
     }
 
     IEnumerator WaitForMouse(){

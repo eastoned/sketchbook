@@ -54,8 +54,8 @@ public class PartUIController : MonoBehaviour
                  //   sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].propertyChange);
                 //}
                 sliders[i].name = partData.pd.shaderProperties[i].propertyName;
-                sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].ReadRandomRemark);
+                sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
 
                 if(sliders[i].name.Equals("_EyelidTopOpen") || sliders[i].name.Equals("_EyelidBottomOpen") || sliders[i].name.Equals("_MouthLipTop") || sliders[i].name.Equals("_MouthLipBottom"))

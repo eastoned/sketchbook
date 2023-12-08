@@ -14,7 +14,6 @@ public class SpeechController : MonoBehaviour
 
     public PartController mouth;
 
-
     public int currentSpeak;
     public string[] sppeech;
 
@@ -22,17 +21,26 @@ public class SpeechController : MonoBehaviour
 
     private Coroutine SpeakingRoutine;
 
-    public float timeSinceLastRemark;
+    public static float timeSinceLastRemark;
 
     void OnEnable()
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
+        OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
         //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void OnDisable(){
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
+        OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
         //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+    }
+
+    private IEnumerator Start(){
+        for(;;){
+            timeSinceLastRemark += 0.5f;
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     void PartMention(Transform part){
@@ -59,6 +67,20 @@ public class SpeechController : MonoBehaviour
             SpeakingRoutine = StartCoroutine(Speak("Do you want me to speak up?", 6f));
         }
         
+    }
+
+    public void SpeakEvent(string text){
+        int spaceCounter = 0;
+            for(int i = 0; i < text.Length; i++){
+                
+                if(char.IsWhiteSpace(text[i])){
+                    spaceCounter++;
+                    
+                }
+            }
+        spaceCounter += 1;
+        timeSinceLastRemark = Random.Range(0f, 2f);
+        SpeakText(text, spaceCounter);
     }
 
     public void SpeakText(string text, float animLength){
