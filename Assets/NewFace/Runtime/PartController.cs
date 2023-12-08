@@ -8,7 +8,7 @@ public class PartController : MonoBehaviour
 
     private int[] shaderIDs;
 
-    [SerializeField] private Renderer rend;
+    public Renderer rend;
     private Material currentMat;
     [SerializeField] private Material colliderMaterial;
 

@@ -80,7 +80,7 @@ public class SpeechController : MonoBehaviour
             }
         spaceCounter += 1;
         timeSinceLastRemark = Random.Range(0f, 2f);
-        SpeakText(text, spaceCounter);
+        SpeakText(text, spaceCounter/2f);
     }
 
     public void SpeakText(string text, float animLength){

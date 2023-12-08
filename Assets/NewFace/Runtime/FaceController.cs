@@ -209,6 +209,8 @@ public class FaceController : MonoBehaviour
         BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
         BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
 
+        
+
         #if UNITY_EDITOR
         scp.UpdateAllControllers();
         #endif
@@ -280,6 +282,10 @@ public class FaceController : MonoBehaviour
 
     }
 
+    public void CopyRemarks(){
+
+    }
+
     public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength){
         StartCoroutine(Blend(char1, char2, animLength));
     }
@@ -293,6 +299,7 @@ public class FaceController : MonoBehaviour
             Interpolate(blendPercent, currentChar, cd1, cd2);
             yield return null;
         }
+
     }
 
 

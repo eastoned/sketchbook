@@ -30,26 +30,52 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _MouthLipMaskRoundness
     propertyValue: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _MouthLipTop
     propertyValue: 0.32300633
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _MouthLipBottom
     propertyValue: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethTop
     propertyValue: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethBottom
     propertyValue: 0.43036264
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethCount
     propertyValue: 0.30789423
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethRoundness
     propertyValue: 0.24842213
+    IncreaseValueRemarks:
+    - message: Sharper
+      wasSaid: 0
+    DecreaseValueRemarks:
+    - message: Sharper!!
+      wasSaid: 0
   - propertyName: _TongueRadius
     propertyValue: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TongueScale
     propertyValue: 0.5122591
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TongueHeight
     propertyValue: 0.17966788
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 0, g: 0, b: 0, a: 1}
