@@ -2157,7 +2157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &328473528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5743,7 +5743,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: c0aa9760f47f3204da7bb0e440362f8e, type: 2}
   isGlobal: 1
   blendDistance: 0
-  weight: 0.15
+  weight: 0.507
   priority: 0
 --- !u!65 &1082434492
 BoxCollider:
