@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
-using JetBrains.Annotations;
 using OpenCvSharp;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Video;
-using UnityEngine.XR;
 
 public class FaceController : MonoBehaviour
 {
@@ -167,6 +164,12 @@ public class FaceController : MonoBehaviour
     private void SetPartRotation(Vector3 pos){
 
         float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
+
+        if(angle < currentPC.pd.currentAngle){
+            Debug.Log("The new angle is less than the current angle");
+        }else if (angle > currentPC.pd.currentAngle){
+            Debug.Log("The new angle is greater than the current angle");
+        }
 
         if(!currentPC.flippedXAxis){
             currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
