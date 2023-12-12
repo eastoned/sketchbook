@@ -58,10 +58,16 @@ public class PartController : MonoBehaviour
         if(EventSystem.current.IsPointerOverGameObject())
             return;
 
+        if(Input.GetMouseButton(0))
+            return;
+
         rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
     }
 
     void OnMouseExit(){
+        if(Input.GetMouseButton(0))
+            return;
+            
         rend.sharedMaterials = new Material[1]{currentMat};
     }
 

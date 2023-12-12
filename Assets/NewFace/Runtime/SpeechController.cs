@@ -83,8 +83,8 @@ public class SpeechController : MonoBehaviour
         SpeakText(text, spaceCounter/2f);
     }
 
-    public void SpeakText(string text, float animLength){
-        SpeakingRoutine = StartCoroutine(Speak(text, animLength));
+    public Coroutine SpeakText(string text, float animLength){
+        return StartCoroutine(Speak(text, animLength));
     }
 
     IEnumerator Speak(string text, float value){

@@ -42,6 +42,8 @@ public class FaceController : MonoBehaviour
 
     public PartTransformController widthLeft, widthRight, heightTop;
 
+    
+
      void OnEnable()
 	{
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
@@ -93,12 +95,12 @@ public class FaceController : MonoBehaviour
         widthLeft.transform.localPosition = new Vector3(widthLeft.transform.localPosition.x, widthLeft.transform.localPosition.y, -1f);
 
         if(currentPC.rotatable)
-            widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0, 0));
+            widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.4f, 0, 0));
         
         widthRight.transform.localPosition = new Vector3(widthRight.transform.localPosition.x, widthRight.transform.localPosition.y, -1f);
 
         if(currentPC.scalable)
-            heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
+            heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.4f, 0.4f, 0));
         
         heightTop.transform.localPosition = new Vector3(heightTop.transform.localPosition.x, heightTop.transform.localPosition.y, -1f);
     
@@ -169,7 +171,7 @@ public class FaceController : MonoBehaviour
         if(!currentPC.flippedXAxis){
             currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         }else{
-            //currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
+            currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
         }
 
         if(currentTransform.localEulerAngles.z > 180f){
