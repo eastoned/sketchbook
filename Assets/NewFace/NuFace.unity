@@ -2212,7 +2212,7 @@ MonoBehaviour:
     shaderRequests: []
   - requestMessage: now can you bring \nmy ears in a \nbit :D
     partToChange: {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
-    positionDelta: {x: -0.3, y: 0}
+    positionDelta: {x: -0.7, y: 0}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
