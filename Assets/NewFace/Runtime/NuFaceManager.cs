@@ -184,6 +184,16 @@ public class NuFaceManager : MonoBehaviour
         fc.GetCharacterDifference(currentChar, characterSet[2]);
     }
 
+    void OnValidate(){
+        foreach(RequestChange rc in requestList){
+            if(rc.shaderRequests.Count > 0){
+                for(int i = 0; i < rc.shaderRequests.Count; i++){ 
+                    rc.shaderRequests[i].valueName = rc.partToChange.pd.shaderProperties[Mathf.Clamp(rc.shaderRequests[i].shaderVariable, 0, rc.partToChange.pd.shaderProperties.Count)].propertyName;
+                }
+            }
+        }
+    }
+
     //public IEnumerator ResponseRoutine(){
       //  yield return null;
     //}

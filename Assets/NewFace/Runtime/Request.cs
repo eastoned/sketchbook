@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml.Schema;
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
@@ -16,6 +15,7 @@ public class RequestChange{
     public float angleDelta;
 
     public List<ShaderRequest> shaderRequests;
+    private ShaderCache[] shaderPropertyCache;
 
     private Vector2 initialPosition, initialScale;
     private float initialAngle;
@@ -29,11 +29,10 @@ public class RequestChange{
         initialPosition = new Vector2(pd.absolutePosition.x, pd.absolutePosition.y);
         initialScale = new Vector2(pd.absoluteScale.x, pd.absoluteScale.y);
         initialAngle = pd.currentAngle;
-
-    }
-
-    public void SetShaderCache(PartData pd){
-
+        shaderPropertyCache = new ShaderCache[shaderRequests.Count];
+        for(int i = 0; i < shaderRequests.Count; i++){
+            shaderPropertyCache[i] = new ShaderCache(shaderRequests[i].shaderVariable, pd.shaderProperties[shaderRequests[i].shaderVariable].propertyValue);
+        }
     }
 
     public void SetListenersForCorrectEvent(){
@@ -67,9 +66,27 @@ public class RequestChange{
         }
     }
 
-    public void CheckShaderChange(float ignore){
-        bool shaderConditionFulfilled = false;
-        
+    public void CheckShaderChange(float val){
+        int shaderConditionFulfilled = 0;
+        for(int i = 0; i < shaderRequests.Count; i++){
+            if(shaderRequests[i].valueDelta > 0f){
+                if(partToChange.pd.shaderProperties[shaderRequests[i].shaderVariable].propertyValue - shaderPropertyCache[i].shaderValue >= shaderRequests[i].valueDelta){
+                    Debug.Log("Shader positive change fulfilled");
+                    shaderConditionFulfilled++;
+                }
+            }else if(shaderRequests[i].valueDelta < 0f){
+                if(partToChange.pd.shaderProperties[shaderRequests[i].shaderVariable].propertyValue - shaderPropertyCache[i].shaderValue <= shaderRequests[i].valueDelta){
+                    Debug.Log("Shader negative change fulfilled");
+                    shaderConditionFulfilled++;
+                }
+            }
+        }
+
+        if(shaderConditionFulfilled == shaderRequests.Count){
+            shadersFulfilled = true;
+        }else{
+            shadersFulfilled = false;
+        }
     }
  
     public void CheckPositionChange(Vector3 partPos){
@@ -118,10 +135,20 @@ public class RequestChange{
     public bool CheckTotalRequestFulfilled(){
         if(positionFulfilled && scaleFulfilled && rotationFulfilled && shadersFulfilled){
             OnTranslatePartController.Instance.RemoveListener(CheckPositionChange);
+            OnChangedShaderProperty.Instance.RemoveListener(CheckShaderChange);
             return true;
         }
 
         return false;
+    }
+}
+
+public class ShaderCache{
+    public int shaderID;
+    public float shaderValue;
+    public ShaderCache(int id, float val){
+        shaderID = id;
+        shaderValue = val;
     }
 }
 
@@ -140,12 +167,15 @@ public class RequestTarget{
 }
 
 [System.Serializable]
-public class ShaderRequest : MonoBehaviour{
+public class ShaderRequest{
     public int shaderVariable;
+    public string valueName;
+    [Range(-1f, 1f)]
     public float valueDelta;
 
-    public ShaderRequest(int shaderVar, float value){
+    public ShaderRequest(int shaderVar, string shaderName, float value){
         shaderVariable = shaderVar;
+        valueName = shaderName;
         valueDelta = value;
     }
 }

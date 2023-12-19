@@ -54,7 +54,9 @@ public class PartUIController : MonoBehaviour
                  //   sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].propertyChange);
                 //}
                 sliders[i].name = partData.pd.shaderProperties[i].propertyName;
-                sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].ReadRandomRemark);
+                if(partData.pd.shaderProperties[i].IncreaseValueRemarks.Length > 0 || partData.pd.shaderProperties[i].DecreaseValueRemarks.Length > 0){
+                    sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].ReadRandomRemark);
+                }
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
                  sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);

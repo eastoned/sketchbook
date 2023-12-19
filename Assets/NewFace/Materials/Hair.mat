@@ -26,7 +26,7 @@ Material:
     m_Floats:
     - _BangCount: 6.1
     - _BangOffset: 1
-    - _BangRoundness: 0.89
+    - _BangRoundness: 0.904
     - _HairBangScale: 0.573
     - _HairRoundness: 0.861
     - _StrandCount: 0.39

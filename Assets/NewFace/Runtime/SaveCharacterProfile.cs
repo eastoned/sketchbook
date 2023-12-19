@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
-#if UNITY_EDITOR
+
 public class SaveCharacterProfile : MonoBehaviour
 {
     public string characterName;
     public PartController ear, eyebrow, eye, hairBack, hairFront, head, mouth, neck, nose;
     
+    #if UNITY_EDITOR
     [ContextMenu("SaveCharacter")]
     public void SaveChara(){
         CharacterData cd = (CharacterData)AssetDatabase.LoadAssetAtPath("Assets/NewFace/PartData/Characters/" + characterName + "/" + characterName + ".asset", typeof(CharacterData));
@@ -82,12 +85,14 @@ public class SaveCharacterProfile : MonoBehaviour
             UnityEditor.AssetDatabase.CreateAsset(newScriptableObject, newPath + "/" + characterName + ".asset");
         }
     }
+    
 
     [ContextMenu("LoadCharacter")]
     public void LoadChara(){
         CharacterData cd = (CharacterData)AssetDatabase.LoadAssetAtPath("Assets/NewFace/PartData/Characters/" + characterName + "/" + characterName + ".asset", typeof(CharacterData));
         Morph(cd);
     }
+    #endif
 
     public void Morph(CharacterData cd){
         ear.pd.CopyData(cd.earData);
@@ -127,4 +132,3 @@ public class SaveCharacterProfile : MonoBehaviour
     }
 
 }
-#endif
