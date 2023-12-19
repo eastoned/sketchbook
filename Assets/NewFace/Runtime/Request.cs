@@ -7,7 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class RequestChange{
     public string requestMessage;
-    public PartData partToChange;
+    public string successMessage;
+    public PartController partToChange;
     public Vector2 positionDelta;
     public Vector2 scaleDelta;
 
@@ -19,18 +20,27 @@ public class RequestChange{
     private Vector2 initialPosition, initialScale;
     private float initialAngle;
 
-    private bool positionFulfilled, scaleFulfilled, rotationFulfilled;
 
-    public void SetTransformCache(PartData pd){
+    private bool positionFulfilled, scaleFulfilled, rotationFulfilled, shadersFulfilled;
+
+    public bool successIfAnyConditionMet = false;
+
+    public void SetCache(PartData pd){
         initialPosition = new Vector2(pd.absolutePosition.x, pd.absolutePosition.y);
         initialScale = new Vector2(pd.absoluteScale.x, pd.absoluteScale.y);
-        initialAngle = pd.currentAngle;  
+        initialAngle = pd.currentAngle;
+
+    }
+
+    public void SetShaderCache(PartData pd){
+
     }
 
     public void SetListenersForCorrectEvent(){
         positionFulfilled = true;
         scaleFulfilled = true;
         rotationFulfilled = true;
+        shadersFulfilled = true;
 
         if(!positionDelta.magnitude.Equals(0f)){
             Debug.Log("Request needs a position change");
@@ -49,6 +59,17 @@ public class RequestChange{
             //OnRotatePartController.Instance.AddListener();
             rotationFulfilled = false;
         }
+
+        if(shaderRequests.Count > 0){
+            Debug.Log("Request needs a shader change");
+            OnChangedShaderProperty.Instance.AddListener(CheckShaderChange);
+            shadersFulfilled = false;
+        }
+    }
+
+    public void CheckShaderChange(float ignore){
+        bool shaderConditionFulfilled = false;
+        
     }
  
     public void CheckPositionChange(Vector3 partPos){
@@ -56,12 +77,12 @@ public class RequestChange{
         bool yConditionFulfilled = false;
         if(!positionDelta.x.Equals(0f)){
             if(positionDelta.x > 0f){
-                if(partToChange.absolutePosition.x - initialPosition.x >= positionDelta.x){
+                if(partToChange.pd.absolutePosition.x - initialPosition.x >= positionDelta.x){
                     Debug.Log("X Condition is fulfilled");
                     xConditionFulfilled = true;
                 }
             }else{
-                if(partToChange.absolutePosition.x - initialPosition.x <= positionDelta.x){
+                if(partToChange.pd.absolutePosition.x - initialPosition.x <= positionDelta.x){
                     Debug.Log("X Condition is fulfilled");
                     xConditionFulfilled = true;
                 }
@@ -72,12 +93,12 @@ public class RequestChange{
 
         if(!positionDelta.y.Equals(0f)){
             if(positionDelta.y > 0f){
-                if(partToChange.absolutePosition.y - initialPosition.y >= positionDelta.y){
+                if(partToChange.pd.absolutePosition.y - initialPosition.y >= positionDelta.y){
                     Debug.Log("Y Condition is fulfilled");
                     yConditionFulfilled = true;
                 }
             }else{
-                if(partToChange.absolutePosition.y - initialPosition.y <= positionDelta.y){
+                if(partToChange.pd.absolutePosition.y - initialPosition.y <= positionDelta.y){
                     Debug.Log("Y Condition is fulfilled");
                     yConditionFulfilled = true;
                 }
@@ -95,14 +116,13 @@ public class RequestChange{
     }
 
     public bool CheckTotalRequestFulfilled(){
-        if(positionFulfilled && scaleFulfilled && rotationFulfilled){
+        if(positionFulfilled && scaleFulfilled && rotationFulfilled && shadersFulfilled){
             OnTranslatePartController.Instance.RemoveListener(CheckPositionChange);
             return true;
         }
 
         return false;
     }
-
 }
 
 public class RequestTarget{
@@ -120,12 +140,12 @@ public class RequestTarget{
 }
 
 [System.Serializable]
-public class ShaderRequest{
-    public string variableName;
+public class ShaderRequest : MonoBehaviour{
+    public int shaderVariable;
     public float valueDelta;
 
-    public ShaderRequest(string name, float value){
-        variableName = name;
+    public ShaderRequest(int shaderVar, float value){
+        shaderVariable = shaderVar;
         valueDelta = value;
     }
 }

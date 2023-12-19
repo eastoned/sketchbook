@@ -171,28 +171,17 @@ public class FaceController : MonoBehaviour
             Debug.Log("The new angle is greater than the current angle");
         }
 
-        if(!currentPC.flippedXAxis){
-            currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
-        }else{
-            currentTransform.localRotation = Quaternion.Euler(0f, 0f, ClampPartRotation(currentPC, angle));
-        }
+        currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
 
-        if(currentTransform.localEulerAngles.z > 180f){
-            currentPC.pd.currentAngle = currentTransform.localEulerAngles.z-360f;
-        }else{
-            currentPC.pd.currentAngle = currentTransform.localEulerAngles.z;
-        }
+        
         
         if(currentPC.mirroredPart != null){
+            Debug.Log("Setting the transform of the mirror");
             currentPC.mirroredPart.UpdateAllTransformValues();
         }
         
         SetTransformControllers(currentTransform);
         
-    }
-
-    public float ClampPartRotation(PartController pc, float angle){
-        return pc.pd.ClampedAngle(angle);
     }
     
     public Vector2 Rotate2D(Vector2 v, float delta) {
@@ -308,7 +297,7 @@ public class FaceController : MonoBehaviour
     }
 
 
-    void OnValidate(){
+    /*void OnValidate(){
         rightEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTop, 0, blinkAmount));
         leftEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTop, 0, blinkAmount));
         rightEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottom, 0, blinkAmount));
@@ -319,7 +308,7 @@ public class FaceController : MonoBehaviour
         mouth.UpdateSingleShaderValue("_MouthLipTop", Mathf.Lerp(mouthTop, 1-mouthBottom, mouthClosedAmount/2f));
         mouth.UpdateSingleShaderValue("_MouthLipBottom", Mathf.Lerp(mouthBottom, 1-mouthTop, mouthClosedAmount/2f));
         mouth.UpdateRenderPropBlock();
-    }
+    }*/
 
     void Update(){
         if(currentTransform){

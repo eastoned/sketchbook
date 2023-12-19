@@ -2199,23 +2199,44 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e98cad7a8c489448a233e4e16a6ab83, type: 2}
   requestList:
   - requestMessage: Bring the nose up.
-    partToChange: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+    successMessage: Tahnks for the nose.
+    partToChange: {fileID: 1272765003}
     positionDelta: {x: 0, y: 0.3}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
   - requestMessage: Actually bring the nose down.
-    partToChange: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+    successMessage: Tahnks for the nose again.
+    partToChange: {fileID: 1272765003}
     positionDelta: {x: 0, y: -0.5}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
-  - requestMessage: now can you bring \nmy ears in a \nbit :D
-    partToChange: {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
-    positionDelta: {x: -0.7, y: 0}
+  - requestMessage: Now bring in the ears :D
+    successMessage: Yippee!
+    partToChange: {fileID: 610878721}
+    positionDelta: {x: -0.3, y: 0}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
+  - requestMessage: Make my hair softer.
+    successMessage: Yes...
+    partToChange: {fileID: 311225759}
+    positionDelta: {x: 0, y: 0}
+    scaleDelta: {x: 0, y: 0}
+    angleDelta: 0
+    shaderRequests:
+    - variableName: 
+      valueDelta: 0
+  - requestMessage: My teeth sharper
+    successMessage: he he
+    partToChange: {fileID: 1470558959}
+    positionDelta: {x: 0, y: 0}
+    scaleDelta: {x: 0, y: 0}
+    angleDelta: 0
+    shaderRequests:
+    - variableName: 
+      valueDelta: 0
 --- !u!4 &328473529
 Transform:
   m_ObjectHideFlags: 0

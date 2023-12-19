@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnChangedShaderProperty
+public class OnChangedShaderProperty : UnityEvent<float>
 {
-   
+    public static OnChangedShaderProperty Instance = new OnChangedShaderProperty();
 }
+

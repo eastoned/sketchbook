@@ -34,6 +34,7 @@ public class PartController : MonoBehaviour
     private void Initialize(){
         currentMat = rend.sharedMaterial;
         colid = GetComponent<BoxCollider2D>();
+        
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
                 pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);

@@ -12,91 +12,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832921ba22668d7499079a9547de0203, type: 3}
   m_Name: EyeData
   m_EditorClassIdentifier: 
-  translatable: 1
-  rotatable: 1
-  scalable: 1
-  absolutePosition: {x: 0.26443273, y: 0.14836788, z: 0}
-  relativePosition: {x: 0, y: 0.31549639, z: 0}
-  minPosX: 0.26443273
-  maxPosX: 1.4925815
-  minPosY: -0.8664631
-  maxPosY: 2.350154
-  minAngle: -45
-  maxAngle: 45
-  currentAngle: 351.0274
+  absolutePosition: {x: 0.7084063, y: 0.30769235, z: 0}
+  relativePosition: {x: 0.27610072, y: 0.49707174, z: 0}
+  minPosX: 0.4791627
+  maxPosX: 1.3094525
+  minPosY: -1.4280446
+  maxPosY: 2.0638797
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: 11.831403
   absoluteScale: {x: 0.97099227, y: 0.9232773, z: 1}
-  relativeScale: {x: 0.22442427, y: 0.9082552, z: 1}
+  relativeScale: {x: 0.97618926, y: 0.6040403, z: 1}
   minScaleX: 0.25
-  maxScaleX: 1.4925815
+  maxScaleX: 1.3094525
   minScaleY: 0.25
-  maxScaleY: 1.6083086
+  maxScaleY: 1.7459621
   shaderProperties:
   - propertyName: _EyeRadius
-    propertyValue: 0.81397575
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.5552806
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _PupilRadius
-    propertyValue: 0.40079203
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.4640286
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _PupilWidth
-    propertyValue: 0.97615063
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.25755343
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _PupilLength
-    propertyValue: 0.9284522
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
-  - propertyName: _EyelidTopLength
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopLength
+    propertyValue: 0.80454135
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyelidTopSkew
-    propertyValue: 0.50083464
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.81603914
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyelidBottomLength
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyelidBottomSkew
-    propertyValue: 0.5277844
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.36681858
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _PupilRoundness
-    propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.919517
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyelidTopOpen
-    propertyValue: 0.9236824
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.61324847
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyelidBottomOpen
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}

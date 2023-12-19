@@ -99,8 +99,19 @@ public class PartData : ScriptableObject
         SetRelativeScale(clampedSize);
     }
 
-    public float ClampedAngle(float angle){
-        return Mathf.Clamp(angle, minAngle, maxAngle);
+    public float ClampedAngle(float angle, bool flippedXAxis){
+        if(flippedXAxis){
+            if(angle < 0){
+                currentAngle = -Mathf.Clamp(angle + 180, minAngle, maxAngle);
+            }else{
+                currentAngle = -Mathf.Clamp(angle - 180, minAngle, maxAngle);
+            }
+            return -currentAngle;
+        }else{
+            currentAngle = Mathf.Clamp(angle, minAngle, maxAngle);
+            return currentAngle;
+        }
+        
     }
 
     public virtual void ClampedPosition(Vector3 posIn){
