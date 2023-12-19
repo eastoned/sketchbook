@@ -2234,7 +2234,7 @@ MonoBehaviour:
       valueDelta: 0.3
     successIfAnyConditionMet: 0
   - requestMessage: My teeth sharper
-    successMessage: he he
+    successMessage: he he themk u :*
     partToChange: {fileID: 1470558959}
     positionDelta: {x: 0, y: 0}
     scaleDelta: {x: 0, y: 0}

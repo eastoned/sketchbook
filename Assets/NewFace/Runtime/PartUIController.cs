@@ -43,27 +43,14 @@ public class PartUIController : MonoBehaviour
             if(i < partData.pd.shaderProperties.Count){
                 sliders[i].gameObject.SetActive(true);
                 sliders[i].onValueChanged.RemoveAllListeners();
-                //if(i <= partData.pd.shaderProperties.Count){
-                //sliders[i].gameObject.SetActive(true);
                 sliders[i].value = partData.pd.shaderProperties[i].propertyValue;
-                //sliderNames[i].text = partData.pd.shaderProperties[i].propertyName;
-                //can know a part was changed but we need to send more information?
-                // do we send a key that the speech controller reads from?
-                //at minimum we need to send the part that was changed/what shader property it was, and what direction it went
-                ///if(partData.pd.shaderProperties[i].propertyChange != null){
-                 //   sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].propertyChange);
-                //}
                 sliders[i].name = partData.pd.shaderProperties[i].propertyName;
-                if(partData.pd.shaderProperties[i].IncreaseValueRemarks.Length > 0 || partData.pd.shaderProperties[i].DecreaseValueRemarks.Length > 0){
-                    sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].ReadRandomRemark);
-                }
+                //if(partData.pd.shaderProperties[i].IncreaseValueRemarks.Length > 0 || partData.pd.shaderProperties[i].DecreaseValueRemarks.Length > 0){
+                    //sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].ReadRandomRemark);
+                //}
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
-                 sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
-                if(sliders[i].name.Equals("_EyelidTopOpen") || sliders[i].name.Equals("_EyelidBottomOpen") || sliders[i].name.Equals("_MouthLipTop") || sliders[i].name.Equals("_MouthLipBottom"))
-                {
-                    sliders[i].onValueChanged.AddListener(UpdateEyeMouth);
-                }
+                sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
                 
                 if(partData.mirroredPart != null){
                     sliders[i].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);

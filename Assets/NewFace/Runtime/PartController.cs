@@ -43,6 +43,13 @@ public class PartController : MonoBehaviour
 
         UpdateAllTransformValues();
 
+        UpdateDependencies();
+
+        propBlock = new MaterialPropertyBlock();
+        UpdateAllShadersValue(0f);
+    }
+
+    public void UpdateDependencies(){
         if(affectedParts.Count > 0){
             for(int j = 0; j < affectedParts.Count; j++){
                 affectedParts[j].pd.SetPositionBounds(pd);
@@ -50,9 +57,6 @@ public class PartController : MonoBehaviour
                 affectedParts[j].UpdateAllTransformValues();
             }
         }
-
-        propBlock = new MaterialPropertyBlock();
-        UpdateAllShadersValue(0f);
     }
 
     void OnMouseEnter(){
@@ -118,13 +122,8 @@ public class PartController : MonoBehaviour
             transform.localScale = pd.GetAbsoluteScale();
         }
 
-        if(affectedParts.Count > 0){
-            for(int j = 0; j < affectedParts.Count; j++){
-                affectedParts[j].pd.SetPositionBounds(pd);
-                affectedParts[j].pd.SetScaleBounds(pd);
-                affectedParts[j].UpdateAllTransformValues();
-            }
-        }
+        UpdateDependencies();
+
 
     }
 

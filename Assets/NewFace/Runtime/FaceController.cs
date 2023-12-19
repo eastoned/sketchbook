@@ -20,9 +20,7 @@ public class FaceController : MonoBehaviour
     public PartController currentPC;
     public Transform currentTransform;
     
-    #if UNITY_EDITOR
     public SaveCharacterProfile scp;
-    #endif
 
     public CharacterData currentChar;
     public AnimationCurve blendCurve; 
@@ -203,11 +201,7 @@ public class FaceController : MonoBehaviour
         BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
         BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
 
-        
-
-        #if UNITY_EDITOR
         scp.UpdateAllControllers();
-        #endif
     }
 
     public void GetCharacterDifference(CharacterData gameData, CharacterData targetData){
@@ -293,7 +287,7 @@ public class FaceController : MonoBehaviour
             Interpolate(blendPercent, currentChar, cd1, cd2);
             yield return null;
         }
-
+        scp.Morph(cd2);
     }
 
 
