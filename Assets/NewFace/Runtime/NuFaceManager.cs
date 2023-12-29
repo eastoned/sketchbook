@@ -69,14 +69,14 @@ public class NuFaceManager : MonoBehaviour
 
     IEnumerator BirthRoutine(){
         parts[9].rend.enabled = true;
-        yield return TransformAnimation(parts[9].transform, new Vector3(0f,-2f,0.2f), new Vector3(0f,-1f,0.2f), new Vector3(0f, 0f, 1f), new Vector3(2f, 2f, 1f), 5f);
+        yield return TransformAnimation(parts[9].transform, new Vector3(0f,-2f,0.2f), new Vector3(0f,-1f,0.2f), new Vector3(0f, 0f, 1f), new Vector3(2f, 2f, 1f), 1f);
         parts[9].colid.enabled = true;
         yield return null;
     }
 
     IEnumerator BloomRoutine(){
         parts[4].rend.enabled = true;
-        yield return TransformAnimation(parts[4].transform, new Vector3(0f, 0f, 0.1f), parts[4].pd.GetAbsolutePosition(), new Vector3(0f, 0f, 1f), parts[4].pd.GetAbsoluteScale(), 3f);
+        yield return TransformAnimation(parts[4].transform, new Vector3(0f, 0f, 0.1f), parts[4].pd.GetAbsolutePosition(), new Vector3(0f, 0f, 1f), parts[4].pd.GetAbsoluteScale(), 1f);
         parts[4].UpdateDependencies();
         parts[4].colid.enabled = true;
         yield return null;
@@ -85,14 +85,14 @@ public class NuFaceManager : MonoBehaviour
     IEnumerator EarRoutine(){
         parts[7].rend.enabled = true;
         parts[8].rend.enabled = true;
-        StartCoroutine(TransformAnimation(parts[7].transform, new Vector3(0, 0, 0.15f), parts[7].pd.GetAbsolutePosition(), new Vector3(0, 0, 1f), parts[7].pd.GetAbsoluteScale(), 2f));
+        StartCoroutine(TransformAnimation(parts[7].transform, new Vector3(0, 0, 0.15f), parts[7].pd.GetAbsolutePosition(), new Vector3(0, 0, 1f), parts[7].pd.GetAbsoluteScale(), 1f));
         yield return TransformAnimation(
             parts[8].transform,
             new Vector3(0, 0, 0.15f),
             new Vector3(-parts[7].pd.GetAbsolutePosition().x,parts[7].pd.GetAbsolutePosition().y,parts[7].pd.GetAbsolutePosition().z),
             new Vector3(0, 0, 1f),
             new Vector3(-parts[7].pd.GetAbsoluteScale().x,parts[7].pd.GetAbsoluteScale().y,parts[7].pd.GetAbsoluteScale().z),
-            2f);
+            1f);
         parts[7].colid.enabled = true;
         parts[8].colid.enabled = true;
         yield return null;

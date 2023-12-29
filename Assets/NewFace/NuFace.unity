@@ -2201,7 +2201,7 @@ MonoBehaviour:
   - requestMessage: Bring the nose up.
     successMessage: Tahnks for the nose.
     partToChange: {fileID: 1272765003}
-    positionDelta: {x: 0, y: 0.3}
+    positionDelta: {x: 0, y: 0.1}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
@@ -2209,7 +2209,7 @@ MonoBehaviour:
   - requestMessage: Actually bring the nose down.
     successMessage: Tahnks for the nose again.
     partToChange: {fileID: 1272765003}
-    positionDelta: {x: 0, y: -0.5}
+    positionDelta: {x: 0, y: -0.1}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   - requestMessage: Now bring in the ears :D
     successMessage: Yippee!
     partToChange: {fileID: 610878721}
-    positionDelta: {x: -0.3, y: 0}
+    positionDelta: {x: -0.1, y: 0}
     scaleDelta: {x: 0, y: 0}
     angleDelta: 0
     shaderRequests: []
@@ -2231,7 +2231,7 @@ MonoBehaviour:
     shaderRequests:
     - shaderVariable: 0
       valueName: _BangRoundness
-      valueDelta: 0.3
+      valueDelta: 0.2
     successIfAnyConditionMet: 0
   - requestMessage: My teeth sharper
     successMessage: he he themk u :*
@@ -2242,7 +2242,7 @@ MonoBehaviour:
     shaderRequests:
     - shaderVariable: 7
       valueName: _TeethRoundness
-      valueDelta: -0.5
+      valueDelta: -0.2
     successIfAnyConditionMet: 0
 --- !u!4 &328473529
 Transform:
