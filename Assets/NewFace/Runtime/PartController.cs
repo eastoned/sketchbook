@@ -60,7 +60,7 @@ public class PartController : MonoBehaviour
     }
 
     void OnMouseEnter(){
-        if(EventSystem.current.IsPointerOverGameObject() || EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+        if(EventSystem.current.IsPointerOverGameObject())
             return;
 
         if(Input.GetMouseButton(0))
@@ -79,7 +79,7 @@ public class PartController : MonoBehaviour
     void OnMouseDown(){
         OnMouseClickEvent.Instance.Invoke();
         
-        if(EventSystem.current.IsPointerOverGameObject() || EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+        if(EventSystem.current.IsPointerOverGameObject())
             return;
 
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);

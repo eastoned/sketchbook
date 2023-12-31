@@ -37,7 +37,8 @@ public class FaceController : MonoBehaviour
 
     public PartTransformController widthLeft, widthRight, heightTop;
 
-    
+    public PartController currentHovered;
+    public AudioSource sourceaud;
 
      void OnEnable()
 	{
@@ -308,7 +309,7 @@ public class FaceController : MonoBehaviour
         if(currentTransform){
             cube.position = Vector3.MoveTowards(cube.position, currentTransform.position, 2f*Time.deltaTime);
             positionDifference = currentTransform.position - cube.position;
-            
+            sourceaud.pitch = positionDifference.magnitude*2f;
             currentPC.UpdateSingleShaderVector("_PositionMomentum", positionDifference);
             currentPC.UpdateRenderPropBlock();
             if(currentPC.mirroredPart){
@@ -341,10 +342,10 @@ public class FaceController : MonoBehaviour
         Vector2 rightPupilTarget = new Vector2(rotatedRight.x - rotatedRight2.x, rotatedRight2.y - rotatedRight.y);
         Vector2 leftPupilTarget = new Vector2(rotatedLeft.x - rotatedLeft2.x, rotatedLeft2.y - rotatedLeft.y);
 
-        rightPupilX = Mathf.Lerp(rightPupilX, rightPupilTarget.x*clampVal, 4f* Time.deltaTime);
-        rightPupilY = Mathf.Lerp(rightPupilY, rightPupilTarget.y*clampVal, 4f* Time.deltaTime);
-        leftPupilX = Mathf.Lerp(leftPupilX, leftPupilTarget.x*clampVal, 4f* Time.deltaTime);
-        leftPupilY = Mathf.Lerp(leftPupilY, leftPupilTarget.y*clampVal, 4f* Time.deltaTime);
+        //rightPupilX = Mathf.Lerp(rightPupilX, rightPupilTarget.x*clampVal, 4f* Time.deltaTime);
+        //rightPupilY = Mathf.Lerp(rightPupilY, rightPupilTarget.y*clampVal, 4f* Time.deltaTime);
+        //leftPupilX = Mathf.Lerp(leftPupilX, leftPupilTarget.x*clampVal, 4f* Time.deltaTime);
+        //leftPupilY = Mathf.Lerp(leftPupilY, leftPupilTarget.y*clampVal, 4f* Time.deltaTime);
         
         
 //
@@ -357,10 +358,11 @@ public class FaceController : MonoBehaviour
        // leftEye.UpdateAllShadersValue(0f);
         //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-       // rightEye.UpdateSingleShaderValue("_PupilOffsetX", rightPupilX);
-       // rightEye.UpdateSingleShaderValue("_PupilOffsetY", rightPupilY);
+        rightEye.UpdateSingleShaderValue("_PupilOffsetX", rightPupilX);
+        rightEye.UpdateSingleShaderValue("_PupilOffsetY", rightPupilY);
+        rightEye.UpdateRenderPropBlock();
         //rightEye.UpdateAllShadersValue(0f);
         //RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
-       // RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
+        //RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
     }
 }

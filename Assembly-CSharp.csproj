@@ -58,6 +58,7 @@
     <Compile Include="Assets\LongWalks\BooController.cs" />
     <Compile Include="Assets\Script\MeshTriangle.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\ml\LogisticRegression.cs" />
+    <Compile Include="Assets\PuppetController.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\PInvoke\features2d\NativeMethods_features2d_MSER.cs" />
     <Compile Include="Assets\Script\fakeTextInput.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\photo\SeamlessCloneMethods.cs" />
@@ -579,7 +580,7 @@
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\core\Struct\KeyPoint.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\features2d\GFTTDetector.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\Util\PlatformUtil.cs" />
-    <Compile Include="Assets\PuppetController.cs" />
+    <Compile Include="Assets\AudioController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\OpenCV+Unity\Plugins\Windows\x86\OpenCvSharpExtern.dll" />
@@ -648,6 +649,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\LongWalks\Boo\Readme.txt" />
     <None Include="Assets\Shader\ToonLit.shader" />
+    <None Include="Assets\NewFace\Audio\NAVO Nu-Jersey Kit\Follow if you liked.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Shader\BillboardEffect.shader" />
     <None Include="Assets\NewFace\Materials\Shaders\HeadQuad.shader" />

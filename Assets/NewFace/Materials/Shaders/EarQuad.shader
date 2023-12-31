@@ -19,6 +19,8 @@ Shader "Unlit/EarQuad"
         _Color2("Top", Color) = (1,1,1,1)
 
         _MainTex("Tex", 2D) = "white" {}
+
+        _PositionMomentum ("Position Momementum", Vector) = (0,0,0)
     }
     SubShader
     {
@@ -56,6 +58,7 @@ Shader "Unlit/EarQuad"
             float _EarWidthSkew, _EarLengthSkew, _EarShape, _EarRoundness, _EarOpenWidth, _EarOpenLength, _EarConcha, _EarTragus;
             float4 _Color1, _Color2;
             uniform float4 _MousePos;
+            float4 _PositionMomentum;
 
             v2f vert (appdata v)
             {
@@ -72,9 +75,10 @@ Shader "Unlit/EarQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
                 float2 uv = i.uv*2*float2(0.5, 1) + float2(0, -1);
                 
-                float2 warp = uv;
+                uv = float2(uv.x + (_PositionMomentum.x * pullStrength), uv.y + (_PositionMomentum.y * pullStrength));
                 float res = pow(uv.x*_EarWidthSkew, 3*(.65*_EarRoundness+.6)) - pow(uv.y*(2*_EarLengthSkew-1), 3) - pow(pow(uv.x*(.5*_EarOpenWidth+1), 2) + pow(uv.y*(.5*_EarOpenLength+1), 2), 2*(5*_EarShape+1));
                 res = step(0, res);
 

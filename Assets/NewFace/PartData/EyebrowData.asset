@@ -12,66 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: EyebrowData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.53101695, y: 0.3374691, z: -0.15}
-  relativePosition: {x: 0.35567906, y: 0.46586293, z: -0.15}
-  minPosX: 0.33224928
-  maxPosX: 0.8910892
-  minPosY: -0.7080319
-  maxPosY: 1.5361927
-  minAngle: -45
-  maxAngle: 45
-  currentAngle: 1.5693574
+  absolutePosition: {x: 0.5202085, y: 0.76625514, z: -0.15}
+  relativePosition: {x: 0.2502867, y: 0.67117447, z: -0.15}
+  minPosX: 0.41607136
+  maxPosX: 0.8321427
+  minPosY: -0.7438875
+  maxPosY: 1.5061126
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: -11.861374
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.67212534, y: 0.7852009, z: 1}
+  relativeScale: {x: 1, y: 0.70278126, z: 1}
   minScaleX: 0.2
-  maxScaleX: 0.8910892
+  maxScaleX: 0.8321427
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:
   - propertyName: _EyebrowCount
-    propertyValue: 0.20927341
-    IncreaseValueRemarks:
-    - message: I always wanted more hairs.
-      wasSaid: 0
-    DecreaseValueRemarks:
-    - message: I didn't like that amount anyway...
-      wasSaid: 0
+    propertyValue: 0.053755622
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyebrowThickness
-    propertyValue: 0.4084357
-    IncreaseValueRemarks:
-    - message: Gigi Hadid who?
-      wasSaid: 0
-    DecreaseValueRemarks:
-    - message: Ok!! Let's go Rock Lee!!
-      wasSaid: 0
+    propertyValue: 0.20107858
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyebrowRoundness
     propertyValue: 0.50274
-    IncreaseValueRemarks:
-    - message: The softening of the face...
-      wasSaid: 0
-    - message: The grande madam fem...
-      wasSaid: 0
-    - message: ::-)
-      wasSaid: 0
-    DecreaseValueRemarks:
-    - message: Something a little sharper image.
-      wasSaid: 0
-    - message: Magnifique pour moiiii
-      wasSaid: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EyebrowCurve
     propertyValue: 0
-    IncreaseValueRemarks:
-    - message: You talking to me?
-      wasSaid: 0
-    - message: Talking to me?
-      wasSaid: 0
-    - message: You talking me?
-      wasSaid: 0
-    - message: You?
-      wasSaid: 0
-    DecreaseValueRemarks:
-    - message: Bye.
-      wasSaid: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}

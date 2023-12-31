@@ -9,6 +9,7 @@ using UnityEngine;
 public class SaveCharacterProfile : MonoBehaviour
 {
     public string characterName;
+    public CharacterData charData;
     public PartController ear, eyebrow, eye, hairBack, hairFront, head, mouth, neck, nose;
     
     #if UNITY_EDITOR
@@ -85,14 +86,21 @@ public class SaveCharacterProfile : MonoBehaviour
             UnityEditor.AssetDatabase.CreateAsset(newScriptableObject, newPath + "/" + characterName + ".asset");
         }
     }
-    
+    #endif
 
     [ContextMenu("LoadCharacter")]
     public void LoadChara(){
-        CharacterData cd = (CharacterData)AssetDatabase.LoadAssetAtPath("Assets/NewFace/PartData/Characters/" + characterName + "/" + characterName + ".asset", typeof(CharacterData));
-        Morph(cd);
+        if(charData != null){
+            Morph(charData);
+        }else{
+            //cannot load asset outside of editor
+            #if UNITY_EDITOR
+                CharacterData cd = (CharacterData)AssetDatabase.LoadAssetAtPath("Assets/NewFace/PartData/Characters/" + characterName + "/" + characterName + ".asset", typeof(CharacterData));
+                Morph(cd);
+            #endif
+        }
     }
-    #endif
+    
 
     public void Morph(CharacterData cd){
         ear.pd.CopyData(cd.earData);

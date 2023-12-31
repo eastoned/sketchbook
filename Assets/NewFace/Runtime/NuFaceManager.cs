@@ -19,7 +19,7 @@ public class NuFaceManager : MonoBehaviour
     public CharacterData[] characterSet;
     private Coroutine skippableWait;
     public List<RequestChange> requestList;
-
+/*
     public IEnumerator Start(){
         writeableData.CopyData(characterSet[0]);
         foreach(PartController pc in parts){
@@ -65,6 +65,18 @@ public class NuFaceManager : MonoBehaviour
         fc.BlendCharacter(writeableData, characterSet[0], 2f);
         //parts[10].colid.enabled = true;
         //parts[11].colid.enabled = true;
+    }*/
+
+    [ContextMenu("Random A Piece")]
+    public void RandomizeRandomPiece(){
+        RandomPiece(parts[Random.Range(0, parts.Length)]);
+    }
+
+    void RandomPiece(PartController part){
+        foreach(ShaderProperty sp in part.pd.shaderProperties){
+            part.UpdateSingleShaderValue(sp.propertyName, Random.Range(0f, 1f));
+        }
+        part.UpdateRenderPropBlock();
     }
 
     IEnumerator BirthRoutine(){
@@ -136,6 +148,15 @@ public class NuFaceManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         yield return sc.SpeakText(rc.successMessage, 2f);
+    }
+
+    [ContextMenu("Debug Animation")]
+    void CharacterExit(){
+        foreach(PartController part in parts){
+            part.transform.SetParent(transform);
+        }
+        
+        //yield return null;
     }
 
     IEnumerator WaitForMouse(){

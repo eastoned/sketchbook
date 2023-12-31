@@ -106,9 +106,15 @@ public class PartData : ScriptableObject
             }else{
                 currentAngle = -Mathf.Clamp(angle - 180, minAngle, maxAngle);
             }
+            currentAngle = currentAngle/15f;
+            currentAngle = Mathf.Round(currentAngle);
+            currentAngle *= 15f;
             return -currentAngle;
         }else{
             currentAngle = Mathf.Clamp(angle, minAngle, maxAngle);
+            currentAngle = currentAngle/15f;
+            currentAngle = Mathf.Round(currentAngle);
+            currentAngle *= 15f;
             return currentAngle;
         }
         

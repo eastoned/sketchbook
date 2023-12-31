@@ -17,6 +17,8 @@ Shader "Unlit/NoseQuad"
         _Color2("Top", Color) = (1,1,1,1)
 
         _MainTex("Tex", 2D) = "white" {}
+
+        _PositionMomentum ("Position Momementum", Vector) = (0,0,0)
     }
     SubShader
     {
@@ -54,6 +56,7 @@ Shader "Unlit/NoseQuad"
             float _NoseCurve, _NoseTopWidth;
             float _NoseTotalLength, _yOffset, _NostrilRadius, _NostrilSpacing, _NostrilHeight, _NostrilScale;
             float4 _Color1, _Color2;
+            float4 _PositionMomentum;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -68,8 +71,8 @@ Shader "Unlit/NoseQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                
-                float2 uv = float2(abs(i.uv.x*2-1), lerp(i.uv.y, i.uv.y - 0.35, (2.2*_NoseTotalLength+.8)/3) * (2.2*_NoseTotalLength+.8));
+                float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
+                float2 uv = float2(abs(i.uv.x*2-1) + (_PositionMomentum.x * pullStrength), lerp(i.uv.y, i.uv.y - 0.35, (2.2*_NoseTotalLength+.8)/3) * (2.2*_NoseTotalLength+.8) + (_PositionMomentum.y * pullStrength));
                 float line1 = pow(uv.y, (.6*_NoseBaseWidth+.1)) - uv.x * (4*_NoseTotalWidth+1);
 
                 float line2 = pow(1-uv.y, (1.2*_NoseTopWidth+.1)) - uv.x * (8*_NoseCurve+1);
