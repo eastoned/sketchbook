@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class NuFaceManager : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class NuFaceManager : MonoBehaviour
     public CharacterData[] characterSet;
     private Coroutine skippableWait;
     public List<RequestChange> requestList;
+    public int count = 0;
+    void Start(){
+        RandomizeFace();
+        count = 0;
+    }
 /*
     public IEnumerator Start(){
         writeableData.CopyData(characterSet[0]);
@@ -67,6 +74,46 @@ public class NuFaceManager : MonoBehaviour
         //parts[11].colid.enabled = true;
     }*/
 
+    [ContextMenu("Randomize Face")]
+    public void RandomizeFace(){
+        if(count < 10){
+            for(int i = 0; i < parts.Length; i++){
+                if(parts[i].mirroredPart == null){
+                    RandomPiece(parts[i]);
+                }else{
+                    if(parts[i].flippedXAxis){
+                        RandomPiece(parts[i]);
+                        parts[i].mirroredPart.UpdateAllShadersValue(0f);
+                    }
+                }
+                
+            }
+        }else if(count < 11){
+            sc.SpeakEvent("Enough.");
+        }else if (count < 12){
+            sc.SpeakEvent("Please don't\nmake me into\nsomething\nI'm not.");
+        }else if (count < 13){
+            writeableData.CopyData(currentChar);
+            fc.BlendCharacter(writeableData, characterSet[2], 1f);
+        }else if (count < 30){
+            sc.SpeakEvent("DIE");
+            foreach(PartController pc in parts){
+                pc.ShakePieces(new Vector3(.05f, 0.03f, 0f), .5f);
+            }
+        }else if (count < 31){
+            StartCoroutine(Consume());
+        }else{
+            SceneManager.LoadScene("NuFace");
+        }
+        count++;
+    }
+
+    IEnumerator CountIncreaser(){
+        yield return new WaitForSeconds(5f);
+        RandomizeFace();
+    }
+
+
     [ContextMenu("Random A Piece")]
     public void RandomizeRandomPiece(){
         RandomPiece(parts[Random.Range(0, parts.Length)]);
@@ -74,9 +121,14 @@ public class NuFaceManager : MonoBehaviour
 
     void RandomPiece(PartController part){
         foreach(ShaderProperty sp in part.pd.shaderProperties){
-            part.UpdateSingleShaderValue(sp.propertyName, Random.Range(0f, 1f));
+            sp.SetValue(Random.Range(0f, 1f));
         }
-        part.UpdateRenderPropBlock();
+        foreach(ShaderColor sc in part.pd.shaderColors){
+            sc.SetValue(Random.Range(0f, 1f));
+            sc.SetHue(Random.Range(0f, 1f));
+            sc.SetSaturation(Random.Range(0f, 1f));
+        }
+        part.UpdateAllShadersValue(0f);
     }
 
     IEnumerator BirthRoutine(){
@@ -155,7 +207,7 @@ public class NuFaceManager : MonoBehaviour
         foreach(PartController part in parts){
             part.transform.SetParent(transform);
         }
-        
+           
         //yield return null;
     }
 
@@ -201,7 +253,7 @@ public class NuFaceManager : MonoBehaviour
                 yield return new WaitForSeconds(4f);
                 sc.SpeakText("You're looking gooooooood. :D", 3f);
                 yield return new WaitForSeconds(4f);
-                sc.SpeakText("See U Around. <3", 2f);
+                sc.SpeakText("See U Around. <3r", 2f);
                 yield return new WaitForSeconds(1f);
                 fc.BlendCharacter(characterSet[2], writeableData, 4f);
             }
@@ -221,6 +273,16 @@ public class NuFaceManager : MonoBehaviour
         fc.GetCharacterDifference(currentChar, characterSet[2]);
     }
 
+    public IEnumerator Consume(){
+        foreach(PartController part in parts){
+            part.StopAllCoroutines();
+            part.transform.SetParent(transform);
+        }
+        yield return TransformAnimation(transform, new Vector3(0, -2.5f, 0), new Vector3(0, -85, 0), new Vector3(1, 1, 1), new Vector3(40f, 40f, 1f), .5f);
+        //transform.position = new Vector3(0, -2.5f, 0);
+        yield return null;
+    }
+
     void OnValidate(){
         foreach(RequestChange rc in requestList){
             if(rc.shaderRequests.Count > 0){
@@ -231,7 +293,4 @@ public class NuFaceManager : MonoBehaviour
         }
     }
 
-    //public IEnumerator ResponseRoutine(){
-      //  yield return null;
-    //}
 }

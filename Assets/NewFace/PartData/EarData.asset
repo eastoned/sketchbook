@@ -12,73 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b793ebbedc9495498fa2646b6b84ba5, type: 3}
   m_Name: EarData
   m_EditorClassIdentifier: 
-  translatable: 1
-  rotatable: 1
-  scalable: 1
-  absolutePosition: {x: 1.9902194, y: 0.014669895, z: 0.15}
-  relativePosition: {x: 0.91811794, y: 0.50602406, z: 0.15}
-  minPosX: 0.7017115
-  maxPosX: 2.1051345
-  minPosY: -1.2176039
-  maxPosY: 1.2176039
-  minAngle: -45
-  maxAngle: 45
-  currentAngle: 2.2830055
+  absolutePosition: {x: 0.6893606, y: 1.7116435, z: 0.15}
+  relativePosition: {x: 0, y: 0.9543864, z: 0.15}
+  minPosX: 0.6893606
+  maxPosX: 1.8641939
+  minPosY: -1.1595054
+  maxPosY: 1.848866
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: 90
   absoluteScale: {x: 1, y: 1, z: 1}
-  relativeScale: {x: 1, y: 1, z: 1}
+  relativeScale: {x: 0.2806036, y: 0.1440271, z: 1}
   minScaleX: 1
-  maxScaleX: 1.403423
+  maxScaleX: 2.3496666
   minScaleY: 1
-  maxScaleY: 1.2176039
+  maxScaleY: 2.3190107
   shaderProperties:
   - propertyName: _EarWidthSkew
-    propertyValue: 0.8895439
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.46747524
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarLengthSkew
-    propertyValue: 0.9926361
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.90984714
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarShape
-    propertyValue: 0.54654956
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.30219716
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarRoundness
-    propertyValue: 0.09425637
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.61566895
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarOpenWidth
-    propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.6669235
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarOpenLength
-    propertyValue: 0.7189103
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.7660973
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarConcha
-    propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.6395476
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _EarTragus
-    propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    propertyValue: 0.2912988
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}

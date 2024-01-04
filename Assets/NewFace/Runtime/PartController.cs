@@ -37,7 +37,9 @@ public class PartController : MonoBehaviour
         
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
-                pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
+                if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName)){
+                    pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
+                }
             }
         }
 
@@ -123,7 +125,6 @@ public class PartController : MonoBehaviour
         }
 
         UpdateDependencies();
-
 
     }
 

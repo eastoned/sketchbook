@@ -309,7 +309,7 @@ public class FaceController : MonoBehaviour
         if(currentTransform){
             cube.position = Vector3.MoveTowards(cube.position, currentTransform.position, 2f*Time.deltaTime);
             positionDifference = currentTransform.position - cube.position;
-            sourceaud.pitch = positionDifference.magnitude*2f;
+            //sourceaud.pitch = positionDifference.magnitude*2f;
             currentPC.UpdateSingleShaderVector("_PositionMomentum", positionDifference);
             currentPC.UpdateRenderPropBlock();
             if(currentPC.mirroredPart){

@@ -78,7 +78,7 @@ Shader "Unlit/NoseQuad"
                 float line2 = pow(1-uv.y, (1.2*_NoseTopWidth+.1)) - uv.x * (8*_NoseCurve+1);
                 //* _NostrilRadius
                 //float circle1 = step(_NostrilRadius, distance(uv*float2(_NostrilScale,1), float2(_NostrilSpacing*_NostrilRadius, 0.5+_NostrilHeight)));
-                float circle1 = step(_NostrilRadius*.5, distance(uv*float2((1.75*_NostrilScale+.25), 1), float2(_NostrilSpacing*(1.75*_NostrilScale+.25), _NostrilHeight*.5)));
+                float circle1 = step(_NostrilRadius*.5, distance(uv*float2((1.75*(_NostrilScale+.5)+.25), 1), float2((_NostrilSpacing*0.8)*(1.75*(_NostrilScale+.5)+.25), _NostrilHeight*.5)));
                 
                 float result = step(0, line1*line2);
                 

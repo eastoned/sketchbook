@@ -470,8 +470,8 @@
     <Compile Include="Assets\NewFace\Runtime\Events\OnDeselectedFacePartEvent.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\core\Struct\Size.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\xfeatures2d\SIFT.cs" />
-    <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\Vector\VectorOfVectorERStat.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\core\Mat\MatOfPoint3i.cs" />
+    <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\Vector\VectorOfVectorERStat.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\features2d\FastFeatureDetector.cs" />
     <Compile Include="Assets\Script\EyeShape.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\Unity\Unity.cs" />
@@ -542,8 +542,8 @@
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\photo\EdgePreservingMethods.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\Vector\VectorOfVectorVec2i.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\core\SVD.cs" />
-    <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\PInvoke\NativeMethods_tracking.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnMouseClickEvent.cs" />
+    <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\PInvoke\NativeMethods_tracking.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\features2d\Enum\FASTType.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\core\MatRowColIndexer.cs" />
     <Compile Include="Assets\OpenCV+Unity\Assets\Scripts\OpenCvSharp\modules\core\Enum\InOutArrayKind.cs" />
@@ -868,9 +868,6 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.23f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics@3.6.11\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
@@ -882,6 +879,9 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>Library\PackageCache\com.unity.analytics@3.6.11\Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.23f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -1237,6 +1237,7 @@
     <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.csproj" />
     <ProjectReference Include="UnityEngine.Advertisements.csproj" />
     <ProjectReference Include="Unity.2D.IK.Editor.csproj" />
+    <ProjectReference Include="FMODUnityResonanceEditor.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="Unity.Rider.Editor.csproj" />
     <ProjectReference Include="Analytics.csproj" />
@@ -1271,15 +1272,14 @@
     <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj" />
     <ProjectReference Include="Unity.2D.Animation.Runtime.csproj" />
     <ProjectReference Include="Unity.Timeline.Editor.csproj" />
+    <ProjectReference Include="FMODUnity.csproj" />
     <ProjectReference Include="UnityEngine.Purchasing.Stores.csproj" />
     <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj" />
     <ProjectReference Include="Unity.2D.Common.Runtime.csproj" />
+    <ProjectReference Include="FMODUnityEditor.csproj" />
+    <ProjectReference Include="FMODUnityResonance.csproj" />
     <ProjectReference Include="UnityEditor.Purchasing.csproj" />
     <ProjectReference Include="UnityEditor.SpatialTracking.csproj" />
     <ProjectReference Include="UnityEngine.Advertisements.Editor.csproj" />
-    <ProjectReference Include="FMODUnityResonanceEditor.csproj" />
-    <ProjectReference Include="FMODUnity.csproj" />
-    <ProjectReference Include="FMODUnityEditor.csproj" />
-    <ProjectReference Include="FMODUnityResonance.csproj" />
   </ItemGroup>
 </Project>
