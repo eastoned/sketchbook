@@ -10,7 +10,7 @@ public class PartController : MonoBehaviour
 
     public Renderer rend;
     private Material currentMat;
-    [SerializeField] private Material colliderMaterial;
+
 
     public PartData pd;
 
@@ -34,7 +34,7 @@ public class PartController : MonoBehaviour
     private void Initialize(){
         currentMat = rend.sharedMaterial;
         colid = GetComponent<BoxCollider2D>();
-        
+        propBlock = new MaterialPropertyBlock();
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
                 if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName)){
@@ -47,8 +47,9 @@ public class PartController : MonoBehaviour
 
         UpdateDependencies();
 
-        propBlock = new MaterialPropertyBlock();
+        
         UpdateAllShadersValue(0f);
+        
     }
 
     public void UpdateDependencies(){
@@ -68,14 +69,15 @@ public class PartController : MonoBehaviour
         if(Input.GetMouseButton(0))
             return;
 
-        rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
+        //rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
+        OnHoveredNewFacePartEvent.Instance.Invoke(transform);
     }
 
     void OnMouseExit(){
         if(Input.GetMouseButton(0))
             return;
             
-        rend.sharedMaterials = new Material[1]{currentMat};
+        //rend.sharedMaterials = new Material[1]{currentMat};
     }
 
     void OnMouseDown(){
@@ -85,6 +87,8 @@ public class PartController : MonoBehaviour
             return;
 
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
+        PartTransformController ptc = transform.gameObject.AddComponent<PartTransformController>();
+        ptc.controls = PartTransformController.TransformController.TRANSLATE;
         //colid.enabled = false;
     }
 

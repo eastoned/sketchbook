@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Writeable
   m_EditorClassIdentifier: 
   name: Writeable
+  writeable: 1
   earData: {fileID: 11400000, guid: 4917f26a21e023d4eb1dae364d5218f5, type: 2}
   eyebrowData: {fileID: 11400000, guid: 2198b86816190fa44861bc3a03a9e636, type: 2}
   eyeData: {fileID: 11400000, guid: 0e2990ae40bfd644ea510b9024c68dfd, type: 2}

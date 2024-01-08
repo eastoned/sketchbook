@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SceneCharacter
   m_EditorClassIdentifier: 
   name: SceneCharacter
+  writeable: 1
   earData: {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
   eyebrowData: {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
   eyeData: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}

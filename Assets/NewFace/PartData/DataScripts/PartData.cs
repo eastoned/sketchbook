@@ -178,7 +178,7 @@ public class ShaderColor{
     float h,s,v;
 
     public void SetHue(float value){
-        Debug.Log("Changing Hue");
+        //Debug.Log("Changing Hue");
         Color.RGBToHSV(colorValue, out h, out s, out v);
         colorValue = Color.HSVToRGB(value, s, v);
     }
@@ -189,7 +189,7 @@ public class ShaderColor{
     }
 
     public void SetSaturation(float value){
-        Debug.Log("Changing Saturation");
+        //Debug.Log("Changing Saturation");
         Color.RGBToHSV(colorValue, out h, out s, out v);
         colorValue = Color.HSVToRGB(h, value, v);
     }
@@ -199,7 +199,7 @@ public class ShaderColor{
     }
 
     public void SetValue(float value){
-        Debug.Log("Changing Value");
+        //Debug.Log("Changing Value");
         Color.RGBToHSV(colorValue, out h, out s, out v);
         colorValue = Color.HSVToRGB(h, s, value);
     }

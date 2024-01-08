@@ -12,6 +12,7 @@ public class NuFaceManager : MonoBehaviour
 
     public CharacterData currentChar;
     public CharacterData writeableData;
+    public CharacterData targetData;
 
     public string[] convo;
 
@@ -75,6 +76,11 @@ public class NuFaceManager : MonoBehaviour
 
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
+        writeableData.CopyData(currentChar);
+        targetData.RandomizeData();
+        fc.BlendCharacter(writeableData, targetData, 1f);
+        
+        /*
         if(count < 10){
             for(int i = 0; i < parts.Length; i++){
                 if(parts[i].mirroredPart == null){
@@ -88,9 +94,9 @@ public class NuFaceManager : MonoBehaviour
                 
             }
         }else if(count < 11){
-            sc.SpeakEvent("Enough.");
+            sc.SpeakText("Enough.", 1f);
         }else if (count < 12){
-            sc.SpeakEvent("Please don't\nmake me into\nsomething\nI'm not.");
+            sc.SpeakText("Please don't\nmake me into\nsomething\nI'm not.", 2f);
         }else if (count < 13){
             writeableData.CopyData(currentChar);
             fc.BlendCharacter(writeableData, characterSet[2], 1f);
@@ -104,7 +110,7 @@ public class NuFaceManager : MonoBehaviour
         }else{
             SceneManager.LoadScene("NuFace");
         }
-        count++;
+        count++;*/
     }
 
     IEnumerator CountIncreaser(){

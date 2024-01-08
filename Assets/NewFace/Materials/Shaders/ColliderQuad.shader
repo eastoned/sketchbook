@@ -3,6 +3,7 @@ Shader "Unlit/ColliderQuad"
     Properties
     {
         _MainTex("Tex", 2D) = "white" {}
+        _IconTex("Icon", 2D) = "white" {}
     }
     SubShader
     {
@@ -33,7 +34,7 @@ Shader "Unlit/ColliderQuad"
                 float4 screenPosition : TEXCOORD1;
             };
 
-            sampler2D _MainTex;
+            sampler2D _MainTex, _IconTex;
             float4 _MainTex_ST;
 
             v2f vert (appdata v)

@@ -17,6 +17,7 @@ public class FaceController : MonoBehaviour
 
     public Vector2 mousePos;
     public float clampVal;
+    public Transform hoveredTransform;
     public PartController currentPC;
     public Transform currentTransform;
     
@@ -39,9 +40,11 @@ public class FaceController : MonoBehaviour
 
     public PartController currentHovered;
     public AudioSource sourceaud;
+    [SerializeField] private Material colliderMaterial;
 
      void OnEnable()
 	{
+        OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
@@ -51,12 +54,24 @@ public class FaceController : MonoBehaviour
     }
 
     void OnDisable(){
+        OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
         OnSetKeyFrameData.Instance.RemoveListener(SetDefaultBlinkAndMouthPos);
+    }
+    public void SetMaterialOutline(Transform hoveredTarget){
+        //rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
+        DisappearControllers();
+        if(hoveredTransform != null){
+            Debug.Log(hoveredTransform.name);
+            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
+            
+        }
+        hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
+        hoveredTransform = hoveredTarget;
     }
 
     public void SetDefaultBlinkAndMouthPos(){
@@ -68,7 +83,7 @@ public class FaceController : MonoBehaviour
     }
 
     private void DisappearControllers(){
-        widthLeft.transform.localPosition = new Vector3(100, 100, 100);
+        //widthLeft.transform.localPosition = new Vector3(100, 100, 100);
         widthRight.transform.localPosition = new Vector3(100, 100, 100);
         heightTop.transform.localPosition = new Vector3(100, 100, 100);
     }
@@ -85,10 +100,10 @@ public class FaceController : MonoBehaviour
         
         DisappearControllers();
 
-        if(currentPC.translatable)
-            widthLeft.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, 0, 0));
+        //if(currentPC.translatable)
+            //widthLeft.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0, 0, 0));
 
-        widthLeft.transform.localPosition = new Vector3(widthLeft.transform.localPosition.x, widthLeft.transform.localPosition.y, -1f);
+        //widthLeft.transform.localPosition = new Vector3(widthLeft.transform.localPosition.x, widthLeft.transform.localPosition.y, -1f);
 
         if(currentPC.rotatable)
             widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.4f, 0, 0));
@@ -171,8 +186,6 @@ public class FaceController : MonoBehaviour
         }
 
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
-
-        
         
         if(currentPC.mirroredPart != null){
             Debug.Log("Setting the transform of the mirror");
@@ -289,6 +302,12 @@ public class FaceController : MonoBehaviour
             yield return null;
         }
         scp.Morph(cd2);
+        currentChar.CopyData(cd2);
+        if(cd1.writeable){
+            cd1.CopyData(cd2);
+        }
+        
+        Debug.Log("copied data from blend target to writeable character");
     }
 
 

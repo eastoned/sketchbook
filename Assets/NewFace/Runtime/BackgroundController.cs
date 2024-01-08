@@ -13,4 +13,8 @@ public class BackgroundController : MonoBehaviour
             
         OnDeselectedFacePartEvent.Instance.Invoke();
     }
+
+    void OnMouseEnter(){
+        
+    }
 }

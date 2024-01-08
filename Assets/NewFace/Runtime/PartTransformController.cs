@@ -16,6 +16,10 @@ public class PartTransformController : MonoBehaviour
 
     public Vector3 mouseDelta2;
 
+    void Start(){
+        
+    }
+
     void OnMouseEnter(){
 
     }
@@ -28,7 +32,7 @@ public class PartTransformController : MonoBehaviour
     void OnMouseDrag(){
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-        transform.localPosition = new Vector3(mouseDelta2.x, mouseDelta2.y, -1f);
+        transform.localPosition = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.localPosition.z);
 
         switch(controls){
             case TransformController.TRANSLATE:
