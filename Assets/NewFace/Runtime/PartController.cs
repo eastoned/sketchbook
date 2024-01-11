@@ -53,6 +53,13 @@ public class PartController : MonoBehaviour
     }
 
     public void UpdateDependencies(){
+        if(pd.affectedPartData.Count > 0){
+            for(int i = 0; i < pd.affectedPartData.Count; i++){
+                pd.affectedPartData[i].SetPositionBounds(pd);
+                pd.affectedPartData[i].SetScaleBounds(pd);
+            }
+        }
+
         if(affectedParts.Count > 0){
             for(int j = 0; j < affectedParts.Count; j++){
                 affectedParts[j].pd.SetPositionBounds(pd);
@@ -87,8 +94,12 @@ public class PartController : MonoBehaviour
             return;
 
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
-        PartTransformController ptc = transform.gameObject.AddComponent<PartTransformController>();
-        ptc.controls = PartTransformController.TransformController.TRANSLATE;
+        
+        if(!transform.gameObject.GetComponent<PartTransformController>()){
+            PartTransformController ptc = transform.gameObject.AddComponent<PartTransformController>();
+            ptc.controls = PartTransformController.TransformController.TRANSLATE;
+        }
+        
         //colid.enabled = false;
     }
 

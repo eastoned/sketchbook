@@ -54,6 +54,8 @@ public class PartData : ScriptableObject
         public List<ShaderColor> shaderColors = new List<ShaderColor>();
     #endregion
 
+    public List<PartData> affectedPartData = new List<PartData>();
+
     //return normalized values to store part relation to parent object
     public void SetRelativePos(Vector3 pos){
         relativePosition = new Vector3(Mathf.InverseLerp(minPosX, maxPosX, pos.x), Mathf.InverseLerp(minPosY, maxPosY, pos.y), pos.z);

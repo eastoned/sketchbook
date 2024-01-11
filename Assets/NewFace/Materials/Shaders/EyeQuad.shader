@@ -92,6 +92,7 @@ Shader "Unlit/EyeQuad"
                 float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
                 //return pullStrength.xxxx;
                 float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
+                uv.y += .01*sin(uv.x*8-_Time.w*3);
                 float line1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
                 ((_EyelidTopLength - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
@@ -115,13 +116,15 @@ Shader "Unlit/EyeQuad"
 
                 float pupil = (pow(_PupilRadius/2*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*(.75*_PupilRoundness + .25));
                 
-
-                
+                float dotMask = (pow((_PupilRadius*_DotRadius)/2*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*(.75*_PupilRoundness + .25));
+                dotMask = 1-step(0, dotMask);
                 float pupilMask = step(0, pupil);
+
                 //float dotMask = 1 - step(0, pow(_DotRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilLength), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilWidth),2*(.75*_PupilRoundness + .25));
                 //pupil *= pow(5,_PupilRoundness);
                 float4 pupilColor = lerp(_Color3, _Color4, i.uv.y + _PupilOffsetY);
                 pupilColor *= pupilMask;
+                pupilColor *= dotMask;
                 
                 result *= 1-pupilMask;
                 result += pupilColor;

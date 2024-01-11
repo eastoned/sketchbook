@@ -74,7 +74,6 @@ Shader "Unlit/MouthQuad"
             {
                 v2f o;
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-2)/60, v.vertex.z, v.vertex.w);
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPosition = ComputeScreenPos(o.vertex);
@@ -85,8 +84,11 @@ Shader "Unlit/MouthQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
+                //uv.y += .05*sin(uv.x*16+_Time.w*3);
+                float2 uv2 = i.uv;
+                //uv2.y += sin(uv2.x);
                 float mouthLipAdjusted = lerp(1 - _MouthLipTop, 1, _MouthLipBottom);
-                float value = distance(i.uv, float2(0.5, 0.5));
+                float value = distance(uv2, float2(0.5, 0.5));
                 value = step(0.5, value);
                 float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/(2*_MouthLipTop-1),2);
                 float line1 = step(0, line0) * step(0.5, uv.y);

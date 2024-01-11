@@ -10,6 +10,25 @@ public class CharacterData : ScriptableObject
 
     [ContextMenu("Random A Piece")]
     void RandomPiece(PartData part){
+        part.currentAngle = Random.Range(part.minAngle, part.maxAngle);
+        if(part == hairBackData || part == hairFrontData){
+            part.currentAngle = Random.Range(0f, 1f) < 0.5f? 0 : part.maxAngle;
+        }
+        part.absolutePosition = new Vector3(
+            Random.Range(part.minPosX, part.maxPosX),
+            Random.Range(part.minPosY, part.maxPosY),
+            part.absolutePosition.z);
+        
+        part.SetRelativePos(part.absolutePosition);
+
+        part.absoluteScale = new Vector3(
+            Random.Range(part.minScaleX, part.maxScaleX),
+            Random.Range(part.minScaleY, part.maxScaleY),
+            part.absoluteScale.z);
+
+        part.SetRelativeScale(part.absoluteScale);
+
+
         foreach(ShaderProperty sp in part.shaderProperties){
             sp.SetValue(Random.Range(0f, 1f));
         }

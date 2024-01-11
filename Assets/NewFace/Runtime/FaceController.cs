@@ -8,7 +8,10 @@ using UnityEngine;
 public class FaceController : MonoBehaviour
 {
 
-    public PartController leftEye, rightEye, mouth;
+    public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs;
+    
+    [Range(-90, 90)]
+    public float rotation;
 
     public float leftPupilX;
     public float leftPupilY;
@@ -46,7 +49,7 @@ public class FaceController : MonoBehaviour
 	{
         OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
-        OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
+        OnDeselectedFacePartEvent.Instance.AddListener(ClearCurrentHover);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
@@ -56,7 +59,7 @@ public class FaceController : MonoBehaviour
     void OnDisable(){
         OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(ClearCurrentHover);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
@@ -64,12 +67,7 @@ public class FaceController : MonoBehaviour
     }
     public void SetMaterialOutline(Transform hoveredTarget){
         //rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
-        DisappearControllers();
-        if(hoveredTransform != null){
-            Debug.Log(hoveredTransform.name);
-            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
-            
-        }
+        ClearCurrentHover();
         hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
         hoveredTransform = hoveredTarget;
     }
@@ -82,8 +80,16 @@ public class FaceController : MonoBehaviour
         mouthBottom = mouth.pd.shadePropertyDict["_MouthLipBottom"].propertyValue;
     }
 
+    private void ClearCurrentHover(){
+        if(hoveredTransform != null){
+            Debug.Log(hoveredTransform.name);
+            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
+        }
+    }
+
     private void DisappearControllers(){
         //widthLeft.transform.localPosition = new Vector3(100, 100, 100);
+
         widthRight.transform.localPosition = new Vector3(100, 100, 100);
         heightTop.transform.localPosition = new Vector3(100, 100, 100);
     }
@@ -308,6 +314,16 @@ public class FaceController : MonoBehaviour
         }
         
         Debug.Log("copied data from blend target to writeable character");
+    }
+
+    void OnValidate(){
+        nose.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/2f, head.pd.GetAbsoluteScale().x/2f, rotation/180f + 0.5f), nose.transform.position.y, nose.transform.position.z);
+        mouth.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), mouth.transform.position.y, mouth.transform.position.z);
+        leftEye.transform.position = new Vector3(Mathf.Lerp(leftEye.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEye.transform.position.y, leftEye.transform.position.z);
+        rightEye.transform.position = new Vector3(Mathf.Lerp(0, rightEye.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEye.transform.position.y, rightEye.transform.position.z);
+        leftEyebrow.transform.position = new Vector3(Mathf.Lerp(leftEyebrow.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEyebrow.transform.position.y, leftEyebrow.transform.position.z);
+        rightEyebrow.transform.position = new Vector3(Mathf.Lerp(0, rightEyebrow.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEyebrow.transform.position.y, rightEyebrow.transform.position.z);
+        bangs.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), bangs.transform.position.y, bangs.transform.position.z);
     }
 
 

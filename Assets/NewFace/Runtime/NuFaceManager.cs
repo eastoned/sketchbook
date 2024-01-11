@@ -23,7 +23,7 @@ public class NuFaceManager : MonoBehaviour
     public List<RequestChange> requestList;
     public int count = 0;
     void Start(){
-        RandomizeFace();
+        //RandomizeFace();
         count = 0;
     }
 /*
@@ -125,6 +125,7 @@ public class NuFaceManager : MonoBehaviour
     }
 
     void RandomPiece(PartController part){
+        
         foreach(ShaderProperty sp in part.pd.shaderProperties){
             sp.SetValue(Random.Range(0f, 1f));
         }
