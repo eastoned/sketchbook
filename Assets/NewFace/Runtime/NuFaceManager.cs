@@ -28,9 +28,19 @@ public class NuFaceManager : MonoBehaviour
         for(;;){
             yield return new WaitForSeconds(Random.Range(0.5f, 5f));
             writeableData.CopyData(currentChar);
-            targetData.RandomizeRandomPart();
-            int randomChar = Random.Range(1, 3);
-            yield return fc.BlendPartSequence(writeableData, characterSet[randomChar], Random.Range(0, characterSet[randomChar].allParts.Length), Random.Range(.2f, 4f));
+            if(Random.Range(0f, 1f) < 0.5f){
+                int randomChar = Random.Range(1, 3);
+                yield return fc.BlendPartSequence(writeableData, characterSet[randomChar], Random.Range(0, characterSet[randomChar].allParts.Length), Random.Range(.2f, 4f));
+            }else{
+                if(Random.Range(0f, 1f) < 0.5f){
+                    targetData.RandomizeRandomPart();
+                }else{
+                   targetData.RandomizeData(); 
+                }
+                
+                yield return fc.BlendCharacterSequence(writeableData, targetData, Random.Range(.2f, 4f));
+            }
+            
         }
         /*
         writeableData.CopyData(characterSet[0]);
