@@ -183,7 +183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I can be quieter if you want.
+  m_text: Fight me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f6104a988b0ced04296bfa2a5f5b5d50, type: 2}
   m_sharedMaterial: {fileID: 1826697919671455151, guid: f6104a988b0ced04296bfa2a5f5b5d50,

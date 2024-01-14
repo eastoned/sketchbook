@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Name: eye
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0.6132667, y: 0.025031328, z: 0}
+  relativePosition: {x: 0.2022771, y: 0.34180993, z: 0}
+  minPosX: 0.48188096
+  maxPosX: 1.1314144
+  minPosY: -0.91612244
+  maxPosY: 1.8373194
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: 15
+  absoluteScale: {x: 0.5496096, y: 0.27100402, z: 1}
+  relativeScale: {x: 0.8097915, y: 0.59570825, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 1.1314144
+  minScaleY: 0.25
+  maxScaleY: 1.3767209
+  shaderProperties:
+  - propertyName: _EyeRadius
+    propertyValue: 0.9769348
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _PupilRadius
+    propertyValue: 0.78241026
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _PupilWidth
+    propertyValue: 0.25198704
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _PupilLength
+    propertyValue: 0.12080765
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopLength
+    propertyValue: 0.8314067
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopSkew
+    propertyValue: 0.0838356
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomLength
+    propertyValue: 0.41182464
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomSkew
+    propertyValue: 0.6991154
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _PupilRoundness
+    propertyValue: 0.8236432
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopOpen
+    propertyValue: 0.4435013
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomOpen
+    propertyValue: 0.7342646
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.07858532, g: 0.040638987, b: 0.08878863, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.007922912, g: 0.47674868, b: 0.658185, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.9992478, g: 0.086779, b: 0.15771276, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.5270937, g: 0.0009479733, b: 0.72443986, a: 1}
+  affectedPartData: []

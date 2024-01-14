@@ -22,12 +22,17 @@ public class NuFaceManager : MonoBehaviour
     private Coroutine skippableWait;
     public List<RequestChange> requestList;
     public int count = 0;
-    void Start(){
-        //RandomizeFace();
-        count = 0;
-    }
-/*
+
+    
     public IEnumerator Start(){
+        for(;;){
+            yield return new WaitForSeconds(Random.Range(0.5f, 5f));
+            writeableData.CopyData(currentChar);
+            targetData.RandomizeRandomPart();
+            int randomChar = Random.Range(1, 3);
+            yield return fc.BlendPartSequence(writeableData, characterSet[randomChar], Random.Range(0, characterSet[randomChar].allParts.Length), Random.Range(.2f, 4f));
+        }
+        /*
         writeableData.CopyData(characterSet[0]);
         foreach(PartController pc in parts){
             pc.rend.enabled = false;
@@ -70,15 +75,17 @@ public class NuFaceManager : MonoBehaviour
         writeableData.CopyData(characterSet[2]);
 
         fc.BlendCharacter(writeableData, characterSet[0], 2f);
+        */
         //parts[10].colid.enabled = true;
         //parts[11].colid.enabled = true;
-    }*/
+    }
 
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
         writeableData.CopyData(currentChar);
         targetData.RandomizeData();
         fc.BlendCharacter(writeableData, targetData, 1f);
+        
         
         /*
         if(count < 10){
@@ -116,25 +123,6 @@ public class NuFaceManager : MonoBehaviour
     IEnumerator CountIncreaser(){
         yield return new WaitForSeconds(5f);
         RandomizeFace();
-    }
-
-
-    [ContextMenu("Random A Piece")]
-    public void RandomizeRandomPiece(){
-        RandomPiece(parts[Random.Range(0, parts.Length)]);
-    }
-
-    void RandomPiece(PartController part){
-        
-        foreach(ShaderProperty sp in part.pd.shaderProperties){
-            sp.SetValue(Random.Range(0f, 1f));
-        }
-        foreach(ShaderColor sc in part.pd.shaderColors){
-            sc.SetValue(Random.Range(0f, 1f));
-            sc.SetHue(Random.Range(0f, 1f));
-            sc.SetSaturation(Random.Range(0f, 1f));
-        }
-        part.UpdateAllShadersValue(0f);
     }
 
     IEnumerator BirthRoutine(){

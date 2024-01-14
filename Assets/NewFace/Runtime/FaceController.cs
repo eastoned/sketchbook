@@ -4,12 +4,13 @@ using Cinemachine.Utility;
 using OpenCvSharp;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D.IK;
 
 public class FaceController : MonoBehaviour
 {
 
     public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs;
-    
+    public Transform[] bodyParts;
     [Range(-90, 90)]
     public float rotation;
 
@@ -82,7 +83,7 @@ public class FaceController : MonoBehaviour
 
     private void ClearCurrentHover(){
         if(hoveredTransform != null){
-            Debug.Log(hoveredTransform.name);
+            //Debug.Log(hoveredTransform.name);
             hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
         }
     }
@@ -298,6 +299,14 @@ public class FaceController : MonoBehaviour
         StartCoroutine(Blend(char1, char2, animLength));
     }
 
+    public Coroutine BlendCharacterSequence(CharacterData char1, CharacterData char2, float animLength){
+        return StartCoroutine(Blend(char1, char2, animLength));
+    }
+
+    public Coroutine BlendPartSequence(CharacterData char1, CharacterData char2, int partID, float animLength){
+        return StartCoroutine(BlendPart(char1, char2, partID, animLength));
+    }
+
     public IEnumerator Blend(CharacterData cd1, CharacterData cd2, float value){
         float journey = 0;
         while(journey < value){
@@ -316,7 +325,25 @@ public class FaceController : MonoBehaviour
         Debug.Log("copied data from blend target to writeable character");
     }
 
-    void OnValidate(){
+    public IEnumerator BlendPart(CharacterData char1, CharacterData char2, int partID, float animLength){
+        float journey = 0;
+        while(journey < animLength){
+            journey = journey + Time.deltaTime;
+            float percent = Mathf.Clamp01(journey/animLength);
+            float blendPercent = blendCurve.Evaluate(percent);
+            BlendProfile(blendPercent, currentChar.allParts[partID], char1.allParts[partID], char2.allParts[partID]);
+            scp.UpdateAllControllers();
+            yield return null;
+        }
+        
+        if(char1.writeable){
+            char1.allParts[partID].CopyData(char2.allParts[partID]);
+        }
+        Debug.Log("copied " + currentChar.allParts[partID].name + " data from blend target to writeable character");
+    }
+
+    void Rotation(){
+        /*
         nose.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/2f, head.pd.GetAbsoluteScale().x/2f, rotation/180f + 0.5f), nose.transform.position.y, nose.transform.position.z);
         mouth.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), mouth.transform.position.y, mouth.transform.position.z);
         leftEye.transform.position = new Vector3(Mathf.Lerp(leftEye.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEye.transform.position.y, leftEye.transform.position.z);
@@ -324,6 +351,17 @@ public class FaceController : MonoBehaviour
         leftEyebrow.transform.position = new Vector3(Mathf.Lerp(leftEyebrow.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEyebrow.transform.position.y, leftEyebrow.transform.position.z);
         rightEyebrow.transform.position = new Vector3(Mathf.Lerp(0, rightEyebrow.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEyebrow.transform.position.y, rightEyebrow.transform.position.z);
         bangs.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), bangs.transform.position.y, bangs.transform.position.z);
+        */
+        foreach(Transform part in bodyParts){
+            part.parent = this.transform;
+        }
+        
+        transform.localEulerAngles = new Vector3(0, 0, rotation);
+
+        foreach(Transform part in bodyParts){
+            part.parent = null;
+        }
+
     }
 
 
@@ -341,6 +379,7 @@ public class FaceController : MonoBehaviour
     }*/
 
     void Update(){
+        Rotation();
         if(currentTransform){
             cube.position = Vector3.MoveTowards(cube.position, currentTransform.position, 2f*Time.deltaTime);
             positionDifference = currentTransform.position - cube.position;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Sheep
   m_EditorClassIdentifier: 
   name: Sheep
+  writeable: 0
   earData: {fileID: 11400000, guid: ceb445e72e104d941962afe4fb04bb9b, type: 2}
   eyebrowData: {fileID: 11400000, guid: 09381333fb8265c4c97acc73bb448dbe, type: 2}
   eyeData: {fileID: 11400000, guid: b4ded64b279e7a94c9279888dd465acd, type: 2}
@@ -22,3 +23,13 @@ MonoBehaviour:
   mouthData: {fileID: 11400000, guid: c8847047103978a47a6240faf13efb59, type: 2}
   neckData: {fileID: 11400000, guid: aebcc57f96dca274f84827f53a600abc, type: 2}
   noseData: {fileID: 11400000, guid: ad2f2d4b888fcf44d890a4518362d97f, type: 2}
+  allParts:
+  - {fileID: 11400000, guid: ceb445e72e104d941962afe4fb04bb9b, type: 2}
+  - {fileID: 11400000, guid: b4ded64b279e7a94c9279888dd465acd, type: 2}
+  - {fileID: 11400000, guid: 09381333fb8265c4c97acc73bb448dbe, type: 2}
+  - {fileID: 11400000, guid: f18699d63938682499518d3e214c5eeb, type: 2}
+  - {fileID: 11400000, guid: 320e7653930d5a940bda0a03fdd679c9, type: 2}
+  - {fileID: 11400000, guid: 40847c8b629d0c8498d8408043321a98, type: 2}
+  - {fileID: 11400000, guid: c8847047103978a47a6240faf13efb59, type: 2}
+  - {fileID: 11400000, guid: aebcc57f96dca274f84827f53a600abc, type: 2}
+  - {fileID: 11400000, guid: ad2f2d4b888fcf44d890a4518362d97f, type: 2}

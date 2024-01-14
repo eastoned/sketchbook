@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Name: mouth
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -0.4413265, z: 0.05}
+  relativePosition: {x: 0, y: 0.33971825, z: 0.05}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -1.3767209
+  maxPosY: 1.3767209
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 0.72466505, y: 1.0797273, z: 1}
+  relativeScale: {x: 0.25783378, y: 0.5156459, z: 1}
+  minScaleX: 0.05
+  maxScaleX: 2.6666667
+  minScaleY: 0.1
+  maxScaleY: 2
+  shaderProperties:
+  - propertyName: _MouthRadius
+    propertyValue: 0.33343095
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthLipMaskRoundness
+    propertyValue: 0.21518469
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthLipTop
+    propertyValue: 0.66903245
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthLipBottom
+    propertyValue: 0.95012105
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethTop
+    propertyValue: 0.5859948
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethBottom
+    propertyValue: 0.96274114
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethCount
+    propertyValue: 0.63695645
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethRoundness
+    propertyValue: 0.3051464
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueRadius
+    propertyValue: 0.7721801
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueScale
+    propertyValue: 0.39923793
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueHeight
+    propertyValue: 0.14576495
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.5019355, g: 0.6614903, b: 0.58977556, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.55301744, g: 0.46804768, b: 0.534546, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.7596224, g: 0.9765574, b: 0.875885, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.0014863933, g: 0.18181086, b: 0.021730797, a: 1}
+  affectedPartData: []

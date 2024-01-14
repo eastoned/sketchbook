@@ -11,21 +11,17 @@ public class PartTransformController : MonoBehaviour
         SCALE
     }
 
+    public Texture2D icon;
+
     
     public TransformController controls;
 
     public Vector3 mouseDelta2;
 
     void Start(){
-        
-    }
-
-    void OnMouseEnter(){
-
-    }
-
-    void OnMouseExit(){
-        
+        if(icon != null){
+            GetComponent<Renderer>().material.SetTexture("_IconTex", icon);
+        }
     }
 
 

@@ -3,7 +3,7 @@ Shader "Unlit/ColliderQuad"
     Properties
     {
         _MainTex("Tex", 2D) = "white" {}
-        _IconTex("Icon", 2D) = "white" {}
+        _IconTex("Icon", 2D) = "black" {}
     }
     SubShader
     {
@@ -49,13 +49,17 @@ Shader "Unlit/ColliderQuad"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float value =  pow(abs(i.uv.x*2-1), 25) + pow(abs(i.uv.y*2-1), 25);
+                float value =  pow(abs(i.uv.x*2-1), 50) + pow(abs(i.uv.y*2-1), 50);
+                float icon = 1;
+                icon *= tex2D(_IconTex, i.uv).a;
+                value += icon;
                 clip(value - .1);
 
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
+                
                 float4 col = tex2D(_MainTex, texCoord);
 
                 return 1;// * col;

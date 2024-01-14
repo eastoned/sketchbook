@@ -23,3 +23,13 @@ MonoBehaviour:
   mouthData: {fileID: 11400000, guid: 74c29c9617552214ca6f649c18660bd8, type: 2}
   neckData: {fileID: 11400000, guid: ca208512ef1b8ef47af677f9f405cbc0, type: 2}
   noseData: {fileID: 11400000, guid: fb98e44a76e716e42bc1f658b07d6f48, type: 2}
+  allParts:
+  - {fileID: 11400000, guid: a2c7effaa0c0f704396e9b19a8bcfc6d, type: 2}
+  - {fileID: 11400000, guid: a6de2fd2dec00e345a48f28afdd7d30b, type: 2}
+  - {fileID: 11400000, guid: 8a377b60beee8c947a591021c9742650, type: 2}
+  - {fileID: 11400000, guid: 3995a331f10f73743993704f41bc75fe, type: 2}
+  - {fileID: 11400000, guid: aba4f37c7dc0c324b9ab6d4b9f34c27d, type: 2}
+  - {fileID: 11400000, guid: 61aac9153126f6243ab79ea29a9dfa82, type: 2}
+  - {fileID: 11400000, guid: 74c29c9617552214ca6f649c18660bd8, type: 2}
+  - {fileID: 11400000, guid: ca208512ef1b8ef47af677f9f405cbc0, type: 2}
+  - {fileID: 11400000, guid: fb98e44a76e716e42bc1f658b07d6f48, type: 2}

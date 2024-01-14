@@ -153,7 +153,7 @@ Shader "Unlit/MouthQuad"
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 float4 col = tex2D(_MainTex, texCoord);
                 //return res;
-                return res * pow((2*_MouthLipTop-1) + (2*_MouthLipBottom-1), 0.5) * col;
+                return res * pow((2*_MouthLipTop-1) + (2*mouthLipAdjusted-1), 0.5) * col;
             }
             ENDCG
         }
