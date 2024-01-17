@@ -23,25 +23,30 @@ public class NuFaceManager : MonoBehaviour
     public List<RequestChange> requestList;
     public int count = 0;
 
+    public static float money = 500f;
     
-    public IEnumerator Start(){
-        for(;;){
-            yield return new WaitForSeconds(Random.Range(0.5f, 5f));
-            writeableData.CopyData(currentChar);
-            if(Random.Range(0f, 1f) < 0.5f){
-                int randomChar = Random.Range(1, 3);
-                yield return fc.BlendPartSequence(writeableData, characterSet[randomChar], Random.Range(0, characterSet[randomChar].allParts.Length), Random.Range(.2f, 4f));
-            }else{
-                if(Random.Range(0f, 1f) < 0.5f){
-                    targetData.RandomizeRandomPart();
-                }else{
-                   targetData.RandomizeData(); 
-                }
-                
-                yield return fc.BlendCharacterSequence(writeableData, targetData, Random.Range(.2f, 4f));
-            }
+    public void Start(){
+        
+            //yield return new WaitForSeconds(Random.Range(0.5f, 5f));
+            //writeableData.CopyData(currentChar);
+            //targetData.RandomizeData();
+                //yield return fc.BlendPartSequence(writeableData, targetData, Random.Range(0, targetData.allParts.Length), Random.Range(.2f, 4f));
             
-        }
+            
+           // if(Random.Range(0f, 1f) < 0.5f){
+            //    int randomChar = Random.Range(1, 3);
+           //     yield return fc.BlendPartSequence(writeableData, characterSet[randomChar], Random.Range(0, characterSet[randomChar].allParts.Length), Random.Range(.2f, 4f));
+           // }else{
+                //if(Random.Range(0f, 1f) < 0.5f){
+                    
+                //}else{
+                   //targetData.RandomizeData(); 
+                //}
+                
+                //yield return fc.BlendCharacterSequence(writeableData, targetData, Random.Range(.2f, 4f));
+            //}
+            
+        
         /*
         writeableData.CopyData(characterSet[0]);
         foreach(PartController pc in parts){
@@ -94,7 +99,7 @@ public class NuFaceManager : MonoBehaviour
     public void RandomizeFace(){
         writeableData.CopyData(currentChar);
         targetData.RandomizeData();
-        fc.BlendCharacter(writeableData, targetData, 1f);
+        fc.BlendCharacter(writeableData, targetData, Random.Range(.4f, 5f));
         
         
         /*

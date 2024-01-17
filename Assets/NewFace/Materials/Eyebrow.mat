@@ -26,14 +26,15 @@ Material:
     m_Floats:
     - _Curve: 2.15
     - _Curve2: -0
-    - _EyebrowCount: 0.336
-    - _EyebrowCurve: 0.484
-    - _EyebrowRoundness: 0.978
-    - _EyebrowThickness: 0.414
+    - _EyebrowCount: 0
+    - _EyebrowCurve: 0
+    - _EyebrowRoundness: 1
+    - _EyebrowThickness: 0.475
     - _Offset: 6.3
-    - _Rounded: 48
+    - _Rounded: 1
     - _Strokes: 1
     m_Colors:
     - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _PositionMomentum: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

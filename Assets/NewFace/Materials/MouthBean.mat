@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mouth
-  m_Shader: {fileID: 4800000, guid: f7f406615fee9c24eb0f38d06d2cc22b, type: 3}
+  m_Name: MouthBean
+  m_Shader: {fileID: 4800000, guid: e270809f9a3b3ef4197577b304d9bf8e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,19 +27,19 @@ Material:
     - _BotTeeth: 0
     - _Lips: 0.95
     - _MouthLipBottom: 1
-    - _MouthLipMaskRoundness: 1
+    - _MouthLipMaskRoundness: 0
     - _MouthLipTop: 1
-    - _MouthRadius: 0.418
+    - _MouthRadius: 0.973
     - _Radius: 1
     - _Radius2: 1
     - _TeethAmount: 13.2
-    - _TeethBottom: 0
-    - _TeethCount: 0.213
-    - _TeethRoundness: 0.328
-    - _TeethTop: 1
-    - _TongueHeight: 0.093
-    - _TongueRadius: 0.826
-    - _TongueScale: 0.808
+    - _TeethBottom: 0.926
+    - _TeethCount: 0.159
+    - _TeethRoundness: 0.629
+    - _TeethTop: 0.936
+    - _TongueHeight: 0
+    - _TongueRadius: 1
+    - _TongueScale: 1
     - _TopTeeth: 0.39
     - _xScaleUpper: 1
     - _xScaleUpper2: 1

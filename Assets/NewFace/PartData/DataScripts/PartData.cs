@@ -126,6 +126,11 @@ public class PartData : ScriptableObject
         Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
         SetRelativePos(clampedPos);
     }
+
+    public virtual Vector3 ReturnClampedPosition(Vector3 posIn){
+        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
+        return clampedPos;
+    }
 }
 
 [System.Serializable]

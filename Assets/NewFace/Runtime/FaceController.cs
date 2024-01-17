@@ -4,6 +4,7 @@ using Cinemachine.Utility;
 using OpenCvSharp;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 using UnityEngine.U2D.IK;
 
 public class FaceController : MonoBehaviour
@@ -29,6 +30,9 @@ public class FaceController : MonoBehaviour
 
     public CharacterData currentChar;
     public AnimationCurve blendCurve; 
+    public AnimationCurve blinkCurve;
+
+    public bool currentlyBlending = false;
 
     [Range(0f, 1f)]
     public float blinkAmount;
@@ -46,6 +50,8 @@ public class FaceController : MonoBehaviour
     public AudioSource sourceaud;
     [SerializeField] private Material colliderMaterial;
 
+    public float currentChange = 0f;
+
      void OnEnable()
 	{
         OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
@@ -55,6 +61,7 @@ public class FaceController : MonoBehaviour
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
         OnSetKeyFrameData.Instance.AddListener(SetDefaultBlinkAndMouthPos);
+        OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
     }
 
     void OnDisable(){
@@ -65,7 +72,23 @@ public class FaceController : MonoBehaviour
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
         OnSetKeyFrameData.Instance.RemoveListener(SetDefaultBlinkAndMouthPos);
+        OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
     }
+
+    IEnumerator Start(){
+        for(;;){
+            yield return new WaitForSeconds(3f);
+            if(!currentlyBlending){
+                yield return Blink(2f, rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue);
+            }
+        }
+    }
+
+    private void UpdateMoneyAmount(){
+        NuFaceManager.money -= currentChange;
+        currentChange = 0f;
+    }
+
     public void SetMaterialOutline(Transform hoveredTarget){
         //rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
         ClearCurrentHover();
@@ -127,9 +150,13 @@ public class FaceController : MonoBehaviour
     private void SetPartPosition(Vector3 pos){
         //each part has a relative position to other objects
         float flip = currentPC.flippedXAxis? -1f : 1f;
-
+        //Debug.Log(currentPC.pd.GetAbsolutePosition() - pos);
+        
         currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
         Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
+
+        currentChange = Vector3.Distance(currentPC.pd.ReturnClampedPosition(pos), currentPC.pd.GetAbsolutePosition());
+        
 
         currentPC.pd.ClampedPosition(absPos);
 
@@ -155,11 +182,14 @@ public class FaceController : MonoBehaviour
 
         float flip = 1;
 
-        if(currentPC.flippedXAxis)
+        if(currentPC.flippedXAxis){
             flip = -1;
+        }
         
         Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
         diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
+
+        currentChange = Vector3.Distance(diff, currentPC.pd.GetAbsoluteScale());
 
         currentPC.pd.ClampedScale(diff);
 
@@ -192,10 +222,12 @@ public class FaceController : MonoBehaviour
             Debug.Log("The new angle is greater than the current angle");
         }
 
+        currentChange = Mathf.Abs(angle - currentPC.pd.currentAngle);
+        Debug.Log("The current angle diff: " + currentChange);
+
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
         
         if(currentPC.mirroredPart != null){
-            Debug.Log("Setting the transform of the mirror");
             currentPC.mirroredPart.UpdateAllTransformValues();
         }
         
@@ -309,11 +341,13 @@ public class FaceController : MonoBehaviour
 
     public IEnumerator Blend(CharacterData cd1, CharacterData cd2, float value){
         float journey = 0;
+        currentlyBlending = true;
         while(journey < value){
             journey = journey + Time.deltaTime;
             float percent = Mathf.Clamp01(journey/value);
             float blendPercent = blendCurve.Evaluate(percent);
             Interpolate(blendPercent, currentChar, cd1, cd2);
+            
             yield return null;
         }
         scp.Morph(cd2);
@@ -321,12 +355,13 @@ public class FaceController : MonoBehaviour
         if(cd1.writeable){
             cd1.CopyData(cd2);
         }
-        
+        currentlyBlending = false;
         Debug.Log("copied data from blend target to writeable character");
     }
 
     public IEnumerator BlendPart(CharacterData char1, CharacterData char2, int partID, float animLength){
         float journey = 0;
+        currentlyBlending = true;
         while(journey < animLength){
             journey = journey + Time.deltaTime;
             float percent = Mathf.Clamp01(journey/animLength);
@@ -339,6 +374,7 @@ public class FaceController : MonoBehaviour
         if(char1.writeable){
             char1.allParts[partID].CopyData(char2.allParts[partID]);
         }
+        currentlyBlending = false;
         Debug.Log("copied " + currentChar.allParts[partID].name + " data from blend target to writeable character");
     }
 
@@ -363,6 +399,26 @@ public class FaceController : MonoBehaviour
         }
 
     }
+
+    private IEnumerator Blink(float blinkLength, float eyelidTopOpen, float eyelidBottomOpen){
+        float animationTime = 0;
+        currentlyBlending = true;
+        while(animationTime < blinkLength){
+            float interval = Mathf.Clamp01(animationTime/blinkLength);
+            interval = blinkCurve.Evaluate(interval);
+            rightEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
+            leftEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
+            rightEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
+            leftEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
+            rightEye.UpdateRenderPropBlock();
+            leftEye.UpdateRenderPropBlock();
+            animationTime += Time.deltaTime;
+            yield return null;
+        }
+        currentlyBlending = false;
+    }
+
+
 
 
     /*void OnValidate(){
@@ -391,8 +447,6 @@ public class FaceController : MonoBehaviour
                 currentPC.mirroredPart.UpdateRenderPropBlock();
             }
         }
-
-        
 
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
          

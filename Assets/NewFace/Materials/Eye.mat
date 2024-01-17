@@ -25,19 +25,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _DotRadius: 0.545
-    - _EyeRadius: 0.614
-    - _EyelidBottomLength: 0
+    - _EyeRadius: 1
+    - _EyelidBottomLength: 0.194
     - _EyelidBottomOpen: 0.849
-    - _EyelidBottomSkew: 0
-    - _EyelidTopLength: 0.93
-    - _EyelidTopOpen: 0.904
-    - _EyelidTopSkew: 0.513
+    - _EyelidBottomSkew: 0.5
+    - _EyelidTopLength: 1
+    - _EyelidTopOpen: 0.928
+    - _EyelidTopSkew: 0.5
     - _Lid1: 0.632
     - _Lid2: 0.753
     - _PupilLength: 1
     - _PupilOffsetX: 0
     - _PupilOffsetY: 0
-    - _PupilRadius: 0.674
+    - _PupilRadius: 0.693
     - _PupilRoundness: 0.917
     - _PupilWidth: 1
     - _Radius: 1
