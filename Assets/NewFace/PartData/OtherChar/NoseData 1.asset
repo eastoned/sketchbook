@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c1abad70c8c834dafcea312a1844d9, type: 3}
+  m_Name: NoseData 1
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: 0.46973842, z: -0.1}
+  relativePosition: {x: 0, y: 0.69059825, z: -0.1}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -1.2322738
+  maxPosY: 1.2322738
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 1.4693629, y: 2.3831818, z: 1}
+  relativeScale: {x: 0.4097875, y: 0.95858294, z: 1}
+  minScaleX: 0.5
+  maxScaleX: 2.8655257
+  minScaleY: 0.5
+  maxScaleY: 2.4645476
+  shaderProperties:
+  - propertyName: _NoseBaseWidth
+    propertyValue: 0.38571876
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseTotalWidth
+    propertyValue: 0.5268367
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseTopWidth
+    propertyValue: 0.94088614
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseCurve
+    propertyValue: 0.9224665
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseTotalLength
+    propertyValue: 0.44420677
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilRadius
+    propertyValue: 0.13363755
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilSpacing
+    propertyValue: 0.5610283
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilHeight
+    propertyValue: 0.77122355
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilScale
+    propertyValue: 0.47013944
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.12931196, g: 0.14230692, b: 0.123309374, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.79894185, g: 0.78923523, b: 0.7907658, a: 1}
+  affectedPartData: []

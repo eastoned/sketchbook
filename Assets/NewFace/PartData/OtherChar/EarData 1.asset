@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b793ebbedc9495498fa2646b6b84ba5, type: 3}
+  m_Name: EarData 1
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0.6893606, y: 1.7116435, z: 0.15}
+  relativePosition: {x: 0, y: 0.9543864, z: 0.15}
+  minPosX: 0.6893606
+  maxPosX: 1.8641939
+  minPosY: -1.1595054
+  maxPosY: 1.848866
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: 90
+  absoluteScale: {x: 1, y: 1, z: 1}
+  relativeScale: {x: 0.2806036, y: 0.1440271, z: 1}
+  minScaleX: 1
+  maxScaleX: 2.3496666
+  minScaleY: 1
+  maxScaleY: 2.3190107
+  shaderProperties:
+  - propertyName: _EarWidthSkew
+    propertyValue: 0.46747524
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarLengthSkew
+    propertyValue: 0.90984714
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarShape
+    propertyValue: 0.30219716
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarRoundness
+    propertyValue: 0.61566895
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarOpenWidth
+    propertyValue: 0.6669235
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarOpenLength
+    propertyValue: 0.7660973
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarConcha
+    propertyValue: 0.6395476
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EarTragus
+    propertyValue: 0.2912988
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 1}

@@ -28,6 +28,10 @@ public class PartController : MonoBehaviour
 
     public Vector3 cachePosition;
 
+    void Awake(){
+        propBlock = new MaterialPropertyBlock();
+    }
+
     private void Start(){
         Initialize();
     }
@@ -35,7 +39,12 @@ public class PartController : MonoBehaviour
     private void Initialize(){
         currentMat = rend.sharedMaterial;
         colid = GetComponent<BoxCollider2D>();
-        propBlock = new MaterialPropertyBlock();
+
+        UpdateDependencies();
+    }
+
+    public void InitializePartDataDictionary(){
+        pd.shadePropertyDict.Clear();
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
                 if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName)){
@@ -43,23 +52,9 @@ public class PartController : MonoBehaviour
                 }
             }
         }
-
-        UpdateAllTransformValues();
-
-        UpdateDependencies();
-
-        UpdateAllShadersValue(0f);
-        
     }
 
     public void UpdateDependencies(){
-        if(pd.affectedPartData.Count > 0){
-            for(int i = 0; i < pd.affectedPartData.Count; i++){
-                pd.affectedPartData[i].SetPositionBounds(pd);
-                pd.affectedPartData[i].SetScaleBounds(pd);
-            }
-        }
-
         if(affectedParts.Count > 0){
             for(int j = 0; j < affectedParts.Count; j++){
                 affectedParts[j].pd.SetPositionBounds(pd);
@@ -98,19 +93,6 @@ public class PartController : MonoBehaviour
             ptc.controls = PartTransformController.TransformController.TRANSLATE;
         }
         
-    }
-
-
-    void OnValidate(){
-
-        if(propBlock == null)
-            propBlock = new MaterialPropertyBlock();
-
-        if(rend == null)
-            rend = GetComponent<Renderer>();
-
-        if(colid == null)
-            colid = GetComponent<BoxCollider2D>();
     }
 
     public void UpdateAllTransformValues(){

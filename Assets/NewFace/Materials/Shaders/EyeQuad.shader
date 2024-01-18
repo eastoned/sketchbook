@@ -6,8 +6,6 @@ Shader "Unlit/EyeQuad"
         _PupilRadius ("Pupil Radius", Range(0,1)) = 1
         _DotRadius ("Dot Radius", Range(0, 1)) = .25
 
-        _PupilWidth ("Pupil Width", Range(0.1, 1)) = 1
-        _PupilLength ("Pupil Length", Range(0.1, 1)) = 1
         _PupilRatio ("Pupil Ratio", Range(0, 1)) = .5
         
         _EyelidTopLength ("Eyelid Top Length", Range(0, 1)) = 1
@@ -68,7 +66,7 @@ Shader "Unlit/EyeQuad"
 
             float4 _PositionMomentum;
 
-            float _EyeRadius, _PupilRadius, _DotRadius, _PupilWidth, _PupilLength, _PupilOffsetX, _PupilOffsetY;
+            float _EyeRadius, _PupilRadius, _DotRadius, _PupilRatio, _PupilOffsetX, _PupilOffsetY;
             float4 _Color1, _Color2, _Color3, _Color4;
             float _EyelidTopSkew, _EyelidTopLength, _EyelidBottomSkew, _EyelidBottomLength;
             
@@ -113,10 +111,12 @@ Shader "Unlit/EyeQuad"
 
                 float4 result = line1 + line2;
                 clip(result.a - 0.5);
+                float remappedRatioX = lerp(1, .1, _PupilRatio);
+                float remappedRatioY = lerp(.1, 1, _PupilRatio);
 
-                float pupil = (pow(_PupilRadius/2*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*(.75*_PupilRoundness + .25));
+                float pupil = (pow(_PupilRadius*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/remappedRatioX), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/remappedRatioY),2*(.75*_PupilRoundness + .25));
                 
-                float dotMask = (pow((_PupilRadius*_DotRadius)/2*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/_PupilWidth), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/_PupilLength),2*(.75*_PupilRoundness + .25));
+                float dotMask = (pow((_PupilRadius*_DotRadius)*_EyeRadius, 2*(.75*_PupilRoundness + .25)) - pow(abs((uv.x-0.5 + _PupilOffsetX)/remappedRatioX), 2*(.75*_PupilRoundness + .25))) - pow(abs((uv.y-0.5 +_PupilOffsetY)/remappedRatioY),2*(.75*_PupilRoundness + .25));
                 dotMask = 1-step(0, dotMask);
                 float pupilMask = step(0, pupil);
 

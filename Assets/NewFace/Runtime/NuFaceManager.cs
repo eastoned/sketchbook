@@ -23,12 +23,6 @@ public class NuFaceManager : MonoBehaviour
     public int count = 0;
 
     public static float money = 500f;
-    public Vector3 dir1, dir2;
-    public float res;
-
-    void OnValidate(){
-        res = Vector3.Dot(dir1.normalized, dir2.normalized);
-    }
 
     public void Start(){
         
@@ -105,53 +99,6 @@ public class NuFaceManager : MonoBehaviour
         writeableData.CopyData(currentChar);
         targetData.RandomizeData();
         fc.BlendCharacter(writeableData, targetData, Random.Range(.4f, 5f));
-        
-        
-        Story();
-    }
-
-    public void MakeSheep(){
-        fc.BlendCharacter(writeableData, characterSet[1], Random.Range(.4f, 5f));
-    }
-    public void MakeWolf(){
-        fc.BlendCharacter(writeableData, characterSet[2], Random.Range(.4f, 5f));
-    }
-    public void MakeBaby(){
-        fc.BlendCharacter(writeableData, characterSet[3], Random.Range(.4f, 5f));
-    }
-
-    void Story(){
-        /*
-        if(count < 10){
-            for(int i = 0; i < parts.Length; i++){
-                if(parts[i].mirroredPart == null){
-                    RandomPiece(parts[i]);
-                }else{
-                    if(parts[i].flippedXAxis){
-                        RandomPiece(parts[i]);
-                        parts[i].mirroredPart.UpdateAllShadersValue(0f);
-                    }
-                }
-                
-            }
-        }else if(count < 11){
-            sc.SpeakText("Enough.", 1f);
-        }else if (count < 12){
-            sc.SpeakText("Please don't\nmake me into\nsomething\nI'm not.", 2f);
-        }else if (count < 13){
-            writeableData.CopyData(currentChar);
-            fc.BlendCharacter(writeableData, characterSet[2], 1f);
-        }else if (count < 30){
-            sc.SpeakEvent("DIE");
-            foreach(PartController pc in parts){
-                pc.ShakePieces(new Vector3(.05f, 0.03f, 0f), .5f);
-            }
-        }else if (count < 31){
-            StartCoroutine(Consume());
-        }else{
-            SceneManager.LoadScene("NuFace");
-        }
-        count++;*/
     }
 
     IEnumerator CountIncreaser(){
@@ -252,25 +199,6 @@ public class NuFaceManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("Sheep Score")]
-    public void CheckSheepAmount(){
-        //float sheepScore = 0;
-        //Debug.Log("Sheep score: " + sheepScore);
-        fc.GetCharacterDifference(currentChar, characterSet[1]);
-    }
-
-    [ContextMenu("Current Score")]
-    public void CheckCurrentScore(){
-        //float sheepScore = 0;
-        //Debug.Log("Sheep score: " + sheepScore);
-        fc.GetCharacterDifference(currentChar, characterSet[3]);
-    }
-
-    [ContextMenu("Wolf Score")]
-    public void CheckWolfAmount(){
-        fc.GetCharacterDifference(currentChar, characterSet[2]);
-    }
-
     public IEnumerator Consume(){
         foreach(PartController part in parts){
             part.StopAllCoroutines();
@@ -280,15 +208,5 @@ public class NuFaceManager : MonoBehaviour
         //transform.position = new Vector3(0, -2.5f, 0);
         yield return null;
     }
-
-    //void OnValidate(){
-    //    foreach(RequestChange rc in requestList){
-    //        if(rc.shaderRequests.Count > 0){
-    //            for(int i = 0; i < rc.shaderRequests.Count; i++){ 
-    //                rc.shaderRequests[i].valueName = rc.partToChange.pd.shaderProperties[Mathf.Clamp(rc.shaderRequests[i].shaderVariable, 0, rc.partToChange.pd.shaderProperties.Count)].propertyName;
-    //            }
-    //        }
-    //    }
-    //}
 
 }

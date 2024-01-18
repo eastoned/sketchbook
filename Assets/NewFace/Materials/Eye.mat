@@ -24,22 +24,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DotRadius: 0.545
+    - _DotRadius: 0.456
     - _EyeRadius: 1
-    - _EyelidBottomLength: 0.194
-    - _EyelidBottomOpen: 0.849
-    - _EyelidBottomSkew: 0.5
+    - _EyelidBottomLength: 0.698
+    - _EyelidBottomOpen: 0.648
+    - _EyelidBottomSkew: 0.81
     - _EyelidTopLength: 1
-    - _EyelidTopOpen: 0.928
-    - _EyelidTopSkew: 0.5
+    - _EyelidTopOpen: 0.795
+    - _EyelidTopSkew: 0.091
     - _Lid1: 0.632
     - _Lid2: 0.753
-    - _PupilLength: 1
+    - _PupilLength: 0.1
     - _PupilOffsetX: 0
     - _PupilOffsetY: 0
-    - _PupilRadius: 0.693
-    - _PupilRoundness: 0.917
-    - _PupilWidth: 1
+    - _PupilRadius: 0.431
+    - _PupilRatio: 0.5
+    - _PupilRoundness: 1
+    - _PupilWidth: 0.1
     - _Radius: 1
     - _SquashPupil: 1
     - __dirty: 0

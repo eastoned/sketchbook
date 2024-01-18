@@ -27,7 +27,7 @@ public class CharacterData : ScriptableObject
             part.absolutePosition.z);
 
         if(part == eyebrowData){
-            part.absolutePosition = eyeData.absolutePosition + new Vector3(0, UnityEngine.Random.Range(.1f, 1f), 0);
+            part.absolutePosition = new Vector3(eyeData.absolutePosition.x, eyeData.absolutePosition.y + UnityEngine.Random.Range(.1f, 1f), part.absolutePosition.z);
         }
 
         part.SetRelativePos(part.absolutePosition);

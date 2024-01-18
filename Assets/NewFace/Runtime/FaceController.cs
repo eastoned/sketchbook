@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
-using OpenCvSharp;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
-using UnityEngine.U2D.IK;
 
 public class FaceController : MonoBehaviour
 {
 
-    public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs;
+    public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar;
     public Transform[] bodyParts;
 
     [Range(-90, 90)]
@@ -23,11 +20,6 @@ public class FaceController : MonoBehaviour
 
     public Vector2 mousePos;
     public float clampVal;
-    public Transform hoveredTransform;
-    public PartController currentPC;
-    public Transform currentTransform;
-    
-    public SaveCharacterProfile scp;
 
     public CharacterData currentChar;
     public AnimationCurve blendCurve; 
@@ -44,48 +36,29 @@ public class FaceController : MonoBehaviour
     public float mouthClosedAmount;
     private float mouthTop, mouthBottom;
 
-    public Transform cube;
-    public Vector3 positionDifference;
-
-    public PartTransformController widthRight, heightTop;
-
-    public PartController currentHovered;
-    [SerializeField] private Material colliderMaterial;
-
-    public float currentChange = 0f;
-
-     void OnEnable()
-	{
-        OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
-        OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
-        OnDeselectedFacePartEvent.Instance.AddListener(ClearCurrentHover);
-        OnTranslatePartController.Instance.AddListener(SetPartPosition);
-        OnRotatePartController.Instance.AddListener(SetPartRotation);
-        OnScalePartController.Instance.AddListener(SetPartScale);
-        OnSetKeyFrameData.Instance.AddListener(SetDefaultBlinkAndMouthPos);
-        OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
+    private void Start(){
+        InitializeControllers();
     }
 
-    void OnDisable(){
-        OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
-        OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(ClearCurrentHover);
-        OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
-        OnRotatePartController.Instance.RemoveListener(SetPartRotation);
-        OnScalePartController.Instance.RemoveListener(SetPartScale);
-        OnSetKeyFrameData.Instance.RemoveListener(SetDefaultBlinkAndMouthPos);
-        OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
+    private void InitializeControllers(){
+        InitializeDictionaries();
+        UpdateAllControllers();
     }
 
-    private void UpdateMoneyAmount(){
-        NuFaceManager.money -= currentChange;
-        currentChange = 0f;
-    }
-
-    public void SetMaterialOutline(Transform hoveredTarget){
-        ClearCurrentHover();
-        hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
-        hoveredTransform = hoveredTarget;
+    [ContextMenu("Refresh Connected Data")]
+    public void RefreshDataConnection(){
+        leftEye.pd = currentChar.eyeData;
+        rightEye.pd = currentChar.eyeData;
+        leftEyebrow.pd = currentChar.eyebrowData;
+        rightEyebrow.pd = currentChar.eyebrowData;
+        leftEar.pd = currentChar.earData;
+        rightEar.pd = currentChar.earData;
+        head.pd = currentChar.headData;
+        neck.pd = currentChar.neckData;
+        nose.pd = currentChar.noseData;
+        mouth.pd = currentChar.mouthData;
+        hair.pd = currentChar.hairBackData;
+        bangs.pd = currentChar.hairFrontData;
     }
 
     public void SetDefaultBlinkAndMouthPos(){
@@ -96,130 +69,6 @@ public class FaceController : MonoBehaviour
         mouthBottom = mouth.pd.shadePropertyDict["_MouthLipBottom"].propertyValue;
     }
 
-    private void ClearCurrentHover(){
-        if(hoveredTransform != null){
-            //Debug.Log(hoveredTransform.name);
-            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
-        }
-    }
-
-    private void DisappearControllers(){
-        widthRight.transform.localPosition = new Vector3(100, 100, 100);
-        heightTop.transform.localPosition = new Vector3(100, 100, 100);
-    }
-
-    private void SetTransformControllers(Transform selectedTarget){
-        
-        currentPC = selectedTarget.GetComponent<PartController>();
-        
-        if(currentTransform != selectedTarget){
-            currentTransform = selectedTarget;
-        
-            cube.position = currentTransform.position;
-        }
-        
-        DisappearControllers();
-
-        if(currentPC.rotatable)
-            widthRight.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.4f, 0, 0));
-        
-        widthRight.transform.localPosition = new Vector3(widthRight.transform.localPosition.x, widthRight.transform.localPosition.y, -1f);
-
-        if(currentPC.scalable)
-            heightTop.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.4f, 0.4f, 0));
-        
-        heightTop.transform.localPosition = new Vector3(heightTop.transform.localPosition.x, heightTop.transform.localPosition.y, -1f);
-    
-    }
-
-    private void SetPartPosition(Vector3 pos){
-        //each part has a relative position to other objects
-        float flip = currentPC.flippedXAxis? -1f : 1f;
-        //Debug.Log(currentPC.pd.GetAbsolutePosition() - pos);
-        
-        currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
-        Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
-
-        currentChange = Vector3.Distance(currentPC.pd.ReturnClampedPosition(pos), currentPC.pd.GetAbsolutePosition());
-        
-
-        currentPC.pd.ClampedPosition(absPos);
-
-        if(currentPC.affectedParts.Count > 0){
-            for(int i = 0; i < currentPC.affectedParts.Count; i++){
-                currentPC.affectedParts[i].pd.SetPositionBounds(currentPC.pd);
-                currentPC.affectedParts[i].pd.SetScaleBounds(currentPC.pd);
-
-                currentPC.affectedParts[i].UpdateAllTransformValues();
-            }
-        }
-
-        currentPC.UpdateAllTransformValues();
-
-        if(currentPC.mirroredPart != null){
-            currentPC.mirroredPart.UpdateAllTransformValues();
-        }
-        
-        SetTransformControllers(currentTransform);
-    }
-
-    private void SetPartScale(Vector3 pos){
-
-        float flip = 1;
-
-        if(currentPC.flippedXAxis){
-            flip = -1;
-        }
-        
-        Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
-        diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
-
-        currentChange = Vector3.Distance(diff, currentPC.pd.GetAbsoluteScale());
-
-        currentPC.pd.ClampedScale(diff);
-
-        if(currentPC.affectedParts.Count > 0){
-            for(int i = 0; i < currentPC.affectedParts.Count; i++){
-                currentPC.affectedParts[i].pd.SetPositionBounds(currentPC.pd);
-                currentPC.affectedParts[i].pd.SetScaleBounds(currentPC.pd);
-                currentPC.affectedParts[i].UpdateAllTransformValues();
-            }
-        }
-
-        currentPC.UpdateAllTransformValues();
-        
-        if(currentPC.mirroredPart != null){
-            currentPC.mirroredPart.UpdateAllTransformValues();
-        }
-        //currentPC.pd.SetPositionBounds();
-
-        SetTransformControllers(currentTransform);
-
-    }
-
-    private void SetPartRotation(Vector3 pos){
-
-        float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
-
-        if(angle < currentPC.pd.currentAngle){
-            //Debug.Log("The new angle is less than the current angle");
-        }else if (angle > currentPC.pd.currentAngle){
-          //  Debug.Log("The new angle is greater than the current angle");
-        }
-
-        currentChange = Mathf.Abs(angle - currentPC.pd.currentAngle);
-        //Debug.Log("The current angle diff: " + currentChange);
-
-        currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
-        
-        if(currentPC.mirroredPart != null){
-            currentPC.mirroredPart.UpdateAllTransformValues();
-        }
-        
-        SetTransformControllers(currentTransform);
-        
-    }
-    
     public Vector2 Rotate2D(Vector2 v, float delta) {
         return new Vector2(
             v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
@@ -238,20 +87,56 @@ public class FaceController : MonoBehaviour
         BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
         BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
 
-        scp.UpdateAllControllers();
+        UpdateAllControllers();
+    }
+
+    public void UpdateAllControllers(){
+        head.UpdateAllTransformValues();
+        head.UpdateAllShadersValue(0f);
+        rightEye.UpdateAllTransformValues();
+        rightEye.UpdateAllShadersValue(0f);
+        leftEye.UpdateAllShadersValue(0f);
+        rightEyebrow.UpdateAllTransformValues();
+        rightEyebrow.UpdateAllShadersValue(0f);
+        leftEyebrow.UpdateAllShadersValue(0f);
+        rightEar.UpdateAllTransformValues();
+        rightEar.UpdateAllShadersValue(0f);
+        leftEar.UpdateAllShadersValue(0f);
+        bangs.UpdateAllTransformValues();
+        bangs.UpdateAllShadersValue(0f);
+        hair.UpdateAllTransformValues();
+        hair.UpdateAllShadersValue(0f);
+        mouth.UpdateAllTransformValues();
+        mouth.UpdateAllShadersValue(0f);
+        neck.UpdateAllTransformValues();
+        neck.UpdateAllShadersValue(0f);
+        nose.UpdateAllTransformValues();
+        nose.UpdateAllShadersValue(0f);
+    }
+
+    public void InitializeDictionaries(){
+        head.InitializePartDataDictionary();
+        rightEye.InitializePartDataDictionary();
+        rightEyebrow.InitializePartDataDictionary();
+        rightEar.InitializePartDataDictionary();
+        bangs.InitializePartDataDictionary();
+        hair.InitializePartDataDictionary();
+        mouth.InitializePartDataDictionary();
+        neck.InitializePartDataDictionary();
+        nose.InitializePartDataDictionary();
     }
 
     public float GetCharacterDifference(CharacterData gameData, CharacterData targetData){
         float score = 0;
-        score +=GetPartDifference(gameData.headData, targetData.headData);
-        score +=GetPartDifference(gameData.neckData, targetData.neckData);
-        score +=GetPartDifference(gameData.eyeData, targetData.eyeData);
+        score += GetPartDifference(gameData.headData, targetData.headData);
+        score += GetPartDifference(gameData.neckData, targetData.neckData);
+        score += GetPartDifference(gameData.eyeData, targetData.eyeData);
         score += GetPartDifference(gameData.eyebrowData, targetData.eyebrowData);
-        score +=GetPartDifference(gameData.noseData, targetData.noseData);
-        score +=GetPartDifference(gameData.mouthData, targetData.mouthData);
-        score +=GetPartDifference(gameData.earData, targetData.earData);
-        score +=GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
-        score +=GetPartDifference(gameData.hairBackData, targetData.hairBackData);
+        score += GetPartDifference(gameData.noseData, targetData.noseData);
+        score += GetPartDifference(gameData.mouthData, targetData.mouthData);
+        score += GetPartDifference(gameData.earData, targetData.earData);
+        score += GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
+        score += GetPartDifference(gameData.hairBackData, targetData.hairBackData);
        Debug.Log("Similarity score between current face and : " + targetData.name + " is : " + score);
        return score;
     }
@@ -364,7 +249,6 @@ public class FaceController : MonoBehaviour
             
             yield return null;
         }
-        scp.Morph(cd2);
         currentChar.CopyData(cd2);
         if(cd1.writeable){
             cd1.CopyData(cd2);
@@ -381,7 +265,7 @@ public class FaceController : MonoBehaviour
             float percent = Mathf.Clamp01(journey/animLength);
             float blendPercent = blendCurve.Evaluate(percent);
             BlendProfile(blendPercent, currentChar.allParts[partID], char1.allParts[partID], char2.allParts[partID]);
-            scp.UpdateAllControllers();
+            UpdateAllControllers();
             yield return null;
         }
         
@@ -433,18 +317,6 @@ public class FaceController : MonoBehaviour
     }
 
     void Update(){
-        //Rotation();
-        if(currentTransform){
-            cube.position = Vector3.MoveTowards(cube.position, currentTransform.position, 2f*Time.deltaTime);
-            positionDifference = currentTransform.position - cube.position;
-            //sourceaud.pitch = positionDifference.magnitude*2f;
-            currentPC.UpdateSingleShaderVector("_PositionMomentum", positionDifference);
-            currentPC.UpdateRenderPropBlock();
-            if(currentPC.mirroredPart){
-                currentPC.mirroredPart.UpdateSingleShaderVector("_PositionMomentum", positionDifference);
-                currentPC.mirroredPart.UpdateRenderPropBlock();
-            }
-        }
 
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
          

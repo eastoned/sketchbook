@@ -10,43 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
-  m_Name: EyebrowData
+  m_Name: EyebrowData 1
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.5564532, y: 0.57994527, z: -0.2}
-  relativePosition: {x: 0.48387527, y: 0.5806453, z: -0.2}
-  minPosX: 0.375
-  maxPosX: 0.75
-  minPosY: -0.9529586
-  maxPosY: 1.6870418
+  absolutePosition: {x: 0.771263, y: 0.23275767, z: -0.2}
+  relativePosition: {x: 0.5019329, y: 0.44025975, z: -0.2}
+  minPosX: 0.5135136
+  maxPosX: 1.0270272
+  minPosY: -1.0897214
+  maxPosY: 1.9141395
   minAngle: -90
   maxAngle: 90
-  currentAngle: 0
-  absoluteScale: {x: 0.33974957, y: 0.40593773, z: 1}
-  relativeScale: {x: 0.86920446, y: 0.28320244, z: 1}
+  currentAngle: -15
+  absoluteScale: {x: 0.43036819, y: 0.82738817, z: 1}
+  relativeScale: {x: 1, y: 0.7805226, z: 1}
   minScaleX: 0.2
-  maxScaleX: 0.75
+  maxScaleX: 1.0270272
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:
   - propertyName: _EyebrowCount
-    propertyValue: 0.29116565
+    propertyValue: 0.28380388
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowThickness
-    propertyValue: 0.6449796
+    propertyValue: 0.22940743
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowRoundness
-    propertyValue: 0.5650354
+    propertyValue: 0.99112856
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowCurve
-    propertyValue: 0.2595411
+    propertyValue: 0.58016163
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.03543503, g: 0.025622837, b: 0.05266106, a: 1}
+    colorValue: {r: 0.13997404, g: 0.14400896, b: 0.15061069, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.071795456, g: 0.010250804, b: 0.8932353, a: 1}
+    colorValue: {r: 0.6188498, g: 0.6380666, b: 0.9761802, a: 1}
   affectedPartData: []
