@@ -5,7 +5,7 @@ Shader "Unlit/EyebrowQuad"
         _EyebrowCount ("Eyebrow Count", Range(0, 1)) = 1
         _EyebrowThickness ("Eyebrow Thickness", Range(0, 1)) = 0
         _EyebrowRoundness ("Eyebrow Roundness", Range(0, 1)) = 1
-        _Rounded ("Rounded", Range(1, 256)) = 40
+        _Rounded ("Rounded( not used)", Range(1, 256)) = 40
 
         _EyebrowCurve ("Eyebrow Curve", Range(0, 1)) = 0
 
@@ -74,7 +74,7 @@ Shader "Unlit/EyebrowQuad"
                 float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
                 float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength), i.uv.y + (_PositionMomentum.y * pullStrength));
                 float stretchUV = sin(uv.x*3.14);
-                uv.y += .01*sin(uv.x*8-_Time.z*3);
+                //uv.y += .01*sin(uv.x*8-_Time.z*3);
                 uv *= float2((int)(_EyebrowCount*15)+1, 1);
                 uv = frac(uv);
                 uv += float2(0, stretchUV * (_EyebrowCurve*2 -1) * ((_EyebrowThickness*7 + 1)-1)/16);

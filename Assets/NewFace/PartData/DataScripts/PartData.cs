@@ -96,6 +96,14 @@ public class PartData : ScriptableObject
 
     }
 
+    public virtual Vector2 GetColliderSize(){
+        return Vector2.one;
+    }
+
+    public virtual Vector2 GetColliderOffset(){
+        return Vector2.zero;
+    }
+
     public virtual void ClampedScale(Vector3 scaleIn){
         Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
         SetRelativeScale(clampedSize);

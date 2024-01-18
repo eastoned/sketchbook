@@ -202,13 +202,13 @@ public class FaceController : MonoBehaviour
         float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
 
         if(angle < currentPC.pd.currentAngle){
-            Debug.Log("The new angle is less than the current angle");
+            //Debug.Log("The new angle is less than the current angle");
         }else if (angle > currentPC.pd.currentAngle){
-            Debug.Log("The new angle is greater than the current angle");
+          //  Debug.Log("The new angle is greater than the current angle");
         }
 
         currentChange = Mathf.Abs(angle - currentPC.pd.currentAngle);
-        Debug.Log("The current angle diff: " + currentChange);
+        //Debug.Log("The current angle diff: " + currentChange);
 
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
         

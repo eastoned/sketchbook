@@ -8,7 +8,7 @@ Shader "Unlit/EyeQuad"
 
         _PupilWidth ("Pupil Width", Range(0.1, 1)) = 1
         _PupilLength ("Pupil Length", Range(0.1, 1)) = 1
-        
+        _PupilRatio ("Pupil Ratio", Range(0, 1)) = .5
         
         _EyelidTopLength ("Eyelid Top Length", Range(0, 1)) = 1
         _EyelidTopSkew ("Eyelid Top Skew", Range(0, 1)) = 1

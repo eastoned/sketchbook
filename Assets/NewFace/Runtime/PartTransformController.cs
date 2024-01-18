@@ -37,8 +37,6 @@ public class PartTransformController : MonoBehaviour
             transform.localPosition = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.localPosition.z);
         }
 
-        Debug.Log("money left: " + NuFaceManager.money);
-
         switch(controls){
             case TransformController.TRANSLATE:
                 if(NuFaceManager.money > 0){

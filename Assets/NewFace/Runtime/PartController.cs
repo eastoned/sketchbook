@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using OpenCvSharp;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -137,6 +138,10 @@ public class PartController : MonoBehaviour
         UpdateDependencies();
 
     }
+    void UpdateColliderBounds(){
+        colid.size = pd.GetColliderSize();
+        colid.offset = pd.GetColliderOffset();
+    }
 
     public void UpdateAllShadersValue(float ignore){
 
@@ -149,6 +154,7 @@ public class PartController : MonoBehaviour
         }
 
         rend.SetPropertyBlock(propBlock);
+        UpdateColliderBounds();
     }
 
     [ContextMenu("Shake Test")]
