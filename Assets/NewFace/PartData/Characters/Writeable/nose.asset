@@ -12,42 +12,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: nose
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0.29339862, z: -0.05}
-  relativePosition: {x: 0, y: 0.61904764, z: -0.05}
+  absolutePosition: {x: 0, y: 0.46973842, z: -0.1}
+  relativePosition: {x: 0, y: 0.69059825, z: -0.1}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.1221123
-  maxPosY: 1.1221123
+  minPosY: -1.2322738
+  maxPosY: 1.2322738
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.6279068, y: 0.44381255, z: 1}
+  absoluteScale: {x: 1.4693629, y: 2.3831818, z: 1}
+  relativeScale: {x: 0.4097875, y: 0.95858294, z: 1}
   minScaleX: 0.5
-  maxScaleX: 1.7821784
+  maxScaleX: 2.8655257
   minScaleY: 0.5
-  maxScaleY: 2.2442245
+  maxScaleY: 2.4645476
   shaderProperties:
   - propertyName: _NoseBaseWidth
-    propertyValue: 0.7612416
+    propertyValue: 0.38571876
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NoseTotalWidth
-    propertyValue: 0.71050555
+    propertyValue: 0.5268367
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NoseTopWidth
-    propertyValue: 0.63091934
+    propertyValue: 0.94088614
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NoseCurve
-    propertyValue: 0.08177496
+    propertyValue: 0.9224665
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NoseTotalLength
-    propertyValue: 0.29365277
+    propertyValue: 0.44420677
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NostrilRadius
-    propertyValue: 0.44802508
+    propertyValue: 0.13363755
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NostrilSpacing
-    propertyValue: 0.35134327
+    propertyValue: 0.5610283
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NostrilHeight
-    propertyValue: 0.4833954
+    propertyValue: 0.77122355
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NostrilScale
-    propertyValue: 0.2622674
+    propertyValue: 0.47013944
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0.6183199, b: 0.27987415, a: 1}
+    colorValue: {r: 0.12931196, g: 0.14230692, b: 0.123309374, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.8018868, g: 0, b: 0, a: 1}
+    colorValue: {r: 0.79894185, g: 0.78923523, b: 0.7907658, a: 1}
+  affectedPartData: []

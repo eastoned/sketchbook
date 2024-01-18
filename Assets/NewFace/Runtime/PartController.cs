@@ -47,7 +47,6 @@ public class PartController : MonoBehaviour
 
         UpdateDependencies();
 
-        
         UpdateAllShadersValue(0f);
         
     }
@@ -76,7 +75,6 @@ public class PartController : MonoBehaviour
         if(Input.GetMouseButton(0))
             return;
 
-        //rend.sharedMaterials = new Material[2]{currentMat, colliderMaterial};
         OnHoveredNewFacePartEvent.Instance.Invoke(transform);
     }
 
@@ -84,7 +82,6 @@ public class PartController : MonoBehaviour
         if(Input.GetMouseButton(0))
             return;
             
-        //rend.sharedMaterials = new Material[1]{currentMat};
     }
 
     void OnMouseDown(){
@@ -100,12 +97,10 @@ public class PartController : MonoBehaviour
             ptc.controls = PartTransformController.TransformController.TRANSLATE;
         }
         
-        //colid.enabled = false;
     }
 
 
     void OnValidate(){
-        //Initialize();
 
         if(propBlock == null)
             propBlock = new MaterialPropertyBlock();

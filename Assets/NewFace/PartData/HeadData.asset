@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
   m_Name: HeadData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0, z: 0.1}
-  relativePosition: {x: 0, y: 0, z: 0.1}
+  absolutePosition: {x: 0, y: 0, z: 0}
+  relativePosition: {x: 0, y: 0, z: 0}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 3.0627491, y: 2.3664782, z: 1}
-  relativeScale: {x: 0.62509966, y: 0.3465913, z: 1}
+  relativeScale: {x: 0.2216218, y: 0.6015444, z: 1}
   minScaleX: 1.5
   maxScaleX: 4
   minScaleY: 1.5

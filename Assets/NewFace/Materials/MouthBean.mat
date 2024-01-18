@@ -29,7 +29,7 @@ Material:
     - _MouthLipBottom: 1
     - _MouthLipMaskRoundness: 0
     - _MouthLipTop: 1
-    - _MouthRadius: 0.973
+    - _MouthRadius: 1
     - _Radius: 1
     - _Radius2: 1
     - _TeethAmount: 13.2

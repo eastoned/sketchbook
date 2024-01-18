@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NuFaceManager : MonoBehaviour
 {
@@ -24,7 +23,13 @@ public class NuFaceManager : MonoBehaviour
     public int count = 0;
 
     public static float money = 500f;
-    
+    public Vector3 dir1, dir2;
+    public float res;
+
+    void OnValidate(){
+        res = Vector3.Dot(dir1.normalized, dir2.normalized);
+    }
+
     public void Start(){
         
             //yield return new WaitForSeconds(Random.Range(0.5f, 5f));
@@ -102,6 +107,20 @@ public class NuFaceManager : MonoBehaviour
         fc.BlendCharacter(writeableData, targetData, Random.Range(.4f, 5f));
         
         
+        Story();
+    }
+
+    public void MakeSheep(){
+        fc.BlendCharacter(writeableData, characterSet[1], Random.Range(.4f, 5f));
+    }
+    public void MakeWolf(){
+        fc.BlendCharacter(writeableData, characterSet[2], Random.Range(.4f, 5f));
+    }
+    public void MakeBaby(){
+        fc.BlendCharacter(writeableData, characterSet[3], Random.Range(.4f, 5f));
+    }
+
+    void Story(){
         /*
         if(count < 10){
             for(int i = 0; i < parts.Length; i++){
@@ -232,49 +251,19 @@ public class NuFaceManager : MonoBehaviour
             length -= Time.deltaTime;
         }
     }
-/*
-    public IEnumerator Start(){
-        for(;;){
-            yield return new WaitForSeconds(5f);
-            writeableData.CopyData(currentChar);
-            if(Random.Range(0f, 1f) < 0.5f){
-                yield return new WaitForSeconds(1f);
-                fc.BlendCharacter(writeableData, characterSet[1], 2f);
-                yield return new WaitForSeconds(3f);
-                sc.SpeakText("Hi bitch.", 2f);
-                yield return new WaitForSeconds(3f);
-                sc.SpeakText("Fine.", 1f);
-                yield return new WaitForSeconds(0.5f);
-                sc.SpeakText("I'll go.", 1f);
-                yield return new WaitForSeconds(1.5f);
-                sc.SpeakText("No really.", 1f);
-                yield return new WaitForSeconds(1f);
-                sc.SpeakText("It's fine.", 1f);
-                yield return new WaitForSeconds(3f);
-                sc.SpeakText("Byeeeee.", 2f);
-                yield return new WaitForSeconds(1f);
-                fc.BlendCharacter(characterSet[1], writeableData, 2f);
-            }else{
-                yield return new WaitForSeconds(1f);
-                fc.BlendCharacter(writeableData, characterSet[2], 3f);
-                yield return new WaitForSeconds(3.5f);
-                sc.SpeakText("Hi beautiful.", 2f);
-                yield return new WaitForSeconds(4f);
-                sc.SpeakText("You're looking gooooooood. :D", 3f);
-                yield return new WaitForSeconds(4f);
-                sc.SpeakText("See U Around. <3r", 2f);
-                yield return new WaitForSeconds(1f);
-                fc.BlendCharacter(characterSet[2], writeableData, 4f);
-            }
-        }
-       // StartCoroutine(BlendRoutine());
-    }*/
 
     [ContextMenu("Sheep Score")]
     public void CheckSheepAmount(){
         //float sheepScore = 0;
         //Debug.Log("Sheep score: " + sheepScore);
         fc.GetCharacterDifference(currentChar, characterSet[1]);
+    }
+
+    [ContextMenu("Current Score")]
+    public void CheckCurrentScore(){
+        //float sheepScore = 0;
+        //Debug.Log("Sheep score: " + sheepScore);
+        fc.GetCharacterDifference(currentChar, characterSet[3]);
     }
 
     [ContextMenu("Wolf Score")]
@@ -292,14 +281,14 @@ public class NuFaceManager : MonoBehaviour
         yield return null;
     }
 
-    void OnValidate(){
-        foreach(RequestChange rc in requestList){
-            if(rc.shaderRequests.Count > 0){
-                for(int i = 0; i < rc.shaderRequests.Count; i++){ 
-                    rc.shaderRequests[i].valueName = rc.partToChange.pd.shaderProperties[Mathf.Clamp(rc.shaderRequests[i].shaderVariable, 0, rc.partToChange.pd.shaderProperties.Count)].propertyName;
-                }
-            }
-        }
-    }
+    //void OnValidate(){
+    //    foreach(RequestChange rc in requestList){
+    //        if(rc.shaderRequests.Count > 0){
+    //            for(int i = 0; i < rc.shaderRequests.Count; i++){ 
+    //                rc.shaderRequests[i].valueName = rc.partToChange.pd.shaderProperties[Mathf.Clamp(rc.shaderRequests[i].shaderVariable, 0, rc.partToChange.pd.shaderProperties.Count)].propertyName;
+    //            }
+    //        }
+    //    }
+    //}
 
 }

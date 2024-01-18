@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
   m_Name: MouthData
   m_EditorClassIdentifier: 
-  translatable: 1
-  rotatable: 0
-  scalable: 1
-  absolutePosition: {x: 0, y: -0.8068459, z: 0.05}
-  relativePosition: {x: 0, y: 0.17261907, z: 0.05}
+  absolutePosition: {x: 0, y: -0.68072283, z: -0.05}
+  relativePosition: {x: 0, y: 0.27338403, z: -0.05}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.2322738
-  maxPosY: 1.2322738
+  minPosY: -1.5019305
+  maxPosY: 1.5019305
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
@@ -33,70 +30,48 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
-    significant: 1
-    active: 1
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _MouthLipMaskRoundness
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _MouthLipTop
     propertyValue: 1
-    significant: 1
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _MouthLipBottom
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethTop
     propertyValue: 0.57002866
-    significant: 1
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethBottom
     propertyValue: 0.26972008
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethCount
     propertyValue: 0.25625914
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TeethRoundness
     propertyValue: 1
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TongueRadius
     propertyValue: 0.6518048
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TongueScale
     propertyValue: 0.5122591
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _TongueHeight
     propertyValue: 0.17966788
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}
@@ -106,3 +81,4 @@ MonoBehaviour:
     colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color4
     colorValue: {r: 0, g: 0, b: 0, a: 1}
+  affectedPartData: []

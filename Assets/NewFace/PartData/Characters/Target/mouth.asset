@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
   m_Name: mouth
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: -0.8068459, z: 0.05}
-  relativePosition: {x: 0, y: 0.17261907, z: 0.05}
+  absolutePosition: {x: 0, y: -0.8068459, z: -0.05}
+  relativePosition: {x: 0, y: 0.17261907, z: -0.05}
   minPosX: 0
   maxPosX: 0
   minPosY: -1.2322738
@@ -81,3 +81,4 @@ MonoBehaviour:
     colorValue: {r: 0, g: 0, b: 0, a: 1}
   - colorName: _Color4
     colorValue: {r: 0, g: 0, b: 0, a: 1}
+  affectedPartData: []
