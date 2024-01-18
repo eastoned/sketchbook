@@ -242,7 +242,7 @@ public class NuFaceManager : MonoBehaviour
     {
         string diffDebug = "";
         float score = 0;
-        score += Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized);
+        score += Vector3.Dot(gamePart.relativePosition.normalized, characterPart.relativePosition.normalized);
         
         diffDebug += "The absolutePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized) + ".\n";
         //diffDebug += "The relativePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativePosition.normalized, characterPart.relativePosition.normalized) + ".\n";

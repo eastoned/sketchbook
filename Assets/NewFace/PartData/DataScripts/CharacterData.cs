@@ -41,12 +41,12 @@ public class CharacterData : ScriptableObject
 
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            sp.SetValue(UnityEngine.Random.Range(0f, 1f));
+            sp.SetValue(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.4f : 0.6f);
         }
         foreach(ShaderColor sc in part.shaderColors){
-            sc.SetValue(UnityEngine.Random.Range(0f, 1f));
-            sc.SetHue(UnityEngine.Random.Range(0f, 1f));
-            sc.SetSaturation(UnityEngine.Random.Range(0f, 1f));
+            sc.SetValue(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0f : 1f);
+            sc.SetHue(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0f : 1f);
+            sc.SetSaturation(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0f : 1f);
         }
 
         if(part.affectedPartData.Count > 0){

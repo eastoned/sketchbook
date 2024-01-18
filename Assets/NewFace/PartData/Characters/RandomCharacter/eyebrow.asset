@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: eyebrow
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.4991789, y: 0.60424894, z: -0.2}
-  relativePosition: {x: 0.38968328, y: 0.64809394, z: -0.2}
+  absolutePosition: {x: 0.46572483, y: 1.0478408, z: -0.2}
+  relativePosition: {x: 0.30828038, y: 0.80559915, z: -0.2}
   minPosX: 0.33903122
   maxPosX: 0.75
-  minPosY: -1.1067193
-  maxPosY: 1.5332811
+  minPosY: -1.1521676
+  maxPosY: 1.5787296
   minAngle: -90
   maxAngle: 90
-  currentAngle: 0
+  currentAngle: 60
   absoluteScale: {x: 0.33974957, y: 0.40593773, z: 1}
   relativeScale: {x: 0.86920446, y: 0.28320244, z: 1}
   minScaleX: 0.2
@@ -41,7 +41,7 @@ MonoBehaviour:
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowCurve
-    propertyValue: 0.2595411
+    propertyValue: 0.681437
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:

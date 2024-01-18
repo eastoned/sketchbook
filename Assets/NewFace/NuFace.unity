@@ -21735,7 +21735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: RandomCharacter
-  charData: {fileID: 11400000, guid: e092967efee2d584abed5b638e0050b5, type: 2}
+  charData: {fileID: 0}
   ear: {fileID: 610878721}
   eyebrow: {fileID: 524532358}
   eye: {fileID: 99618909}
@@ -21814,7 +21814,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

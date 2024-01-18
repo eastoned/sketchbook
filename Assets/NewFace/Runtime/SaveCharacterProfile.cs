@@ -40,55 +40,55 @@ public class SaveCharacterProfile : MonoBehaviour
             newScriptableObject.name = characterName;
             newScriptableObject.allParts = new PartData[9];
 
-            PartData earData = ScriptableObject.CreateInstance<PartData>();
+            PartData earData = ScriptableObject.CreateInstance<EarData>();
             earData.CopyData(ear.pd);
             UnityEditor.AssetDatabase.CreateAsset(earData, newPath + "/ear.asset");
             newScriptableObject.earData = earData;
             newScriptableObject.allParts[0] = earData;
 
-            PartData eyebrowData = ScriptableObject.CreateInstance<PartData>();
+            PartData eyebrowData = ScriptableObject.CreateInstance<EyebrowData>();
             eyebrowData.CopyData(eyebrow.pd);
             UnityEditor.AssetDatabase.CreateAsset(eyebrowData, newPath + "/eyebrow.asset");
             newScriptableObject.eyebrowData = eyebrowData;
             newScriptableObject.allParts[2] = eyebrowData;
 
-            PartData eyeData = ScriptableObject.CreateInstance<PartData>();
+            PartData eyeData = ScriptableObject.CreateInstance<EyeData>();
             eyeData.CopyData(eye.pd);
             UnityEditor.AssetDatabase.CreateAsset(eyeData, newPath + "/eye.asset");
             newScriptableObject.eyeData = eyeData;
             newScriptableObject.allParts[1] = eyeData;
 
-            PartData hairBackData = ScriptableObject.CreateInstance<PartData>();
+            PartData hairBackData = ScriptableObject.CreateInstance<HairBackData>();
             hairBackData.CopyData(hairBack.pd);
             UnityEditor.AssetDatabase.CreateAsset(hairBackData, newPath + "/hairBack.asset");
             newScriptableObject.hairBackData = hairBackData;
             newScriptableObject.allParts[3] = hairBackData;
 
-            PartData hairFrontData = ScriptableObject.CreateInstance<PartData>();
+            PartData hairFrontData = ScriptableObject.CreateInstance<HairFrontData>();
             hairFrontData.CopyData(hairFront.pd);
             UnityEditor.AssetDatabase.CreateAsset(hairFrontData, newPath + "/hairFront.asset");
             newScriptableObject.hairFrontData = hairFrontData;
             newScriptableObject.allParts[4] = hairFrontData;
 
-            PartData headData = ScriptableObject.CreateInstance<PartData>();
+            PartData headData = ScriptableObject.CreateInstance<HeadData>();
             headData.CopyData(head.pd);
             UnityEditor.AssetDatabase.CreateAsset(headData, newPath + "/head.asset");
             newScriptableObject.headData = headData;
             newScriptableObject.allParts[5] = headData;
 
-            PartData mouthData = ScriptableObject.CreateInstance<PartData>();
+            PartData mouthData = ScriptableObject.CreateInstance<MouthData>();
             mouthData.CopyData(mouth.pd);
             UnityEditor.AssetDatabase.CreateAsset(mouthData, newPath + "/mouth.asset");
             newScriptableObject.mouthData = mouthData;
             newScriptableObject.allParts[6] = mouthData;
 
-            PartData neckData = ScriptableObject.CreateInstance<PartData>();
+            PartData neckData = ScriptableObject.CreateInstance<NeckData>();
             neckData.CopyData(neck.pd);
             UnityEditor.AssetDatabase.CreateAsset(neckData, newPath + "/neck.asset");
             newScriptableObject.neckData = neckData;
             newScriptableObject.allParts[7] = neckData;
 
-            PartData noseData = ScriptableObject.CreateInstance<PartData>();
+            PartData noseData = ScriptableObject.CreateInstance<NoseData>();
             noseData.CopyData(nose.pd);
             UnityEditor.AssetDatabase.CreateAsset(noseData, newPath + "/nose.asset");
             newScriptableObject.noseData = noseData;

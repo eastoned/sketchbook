@@ -9,24 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d04ea043f047634fac17772442c9c30, type: 3}
   m_Name: hairFront
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0.77806485, z: -0.15}
-  relativePosition: {x: 0, y: 0.58944297, z: -0.15}
+  absolutePosition: {x: 0, y: 0.7432701, z: -0.15}
+  relativePosition: {x: 0, y: 0.5443413, z: -0.15}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
-  maxPosY: 1.3200002
+  maxPosY: 1.3654486
   minAngle: -180
   maxAngle: 180
   currentAngle: -0
   absoluteScale: {x: 0.30900627, y: 0.8703906, z: 1}
-  relativeScale: {x: 0.5288024, y: 0.19319713, z: 1}
+  relativeScale: {x: 0.2806172, y: 0.40884018, z: 1}
   minScaleX: 0.25
   maxScaleX: 1.7624463
   minScaleY: 0.25
-  maxScaleY: 2.6400003
+  maxScaleY: 2.7308972
   shaderProperties:
   - propertyName: _BangRoundness
     propertyValue: 0.4537558

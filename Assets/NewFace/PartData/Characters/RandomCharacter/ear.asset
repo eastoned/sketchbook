@@ -9,60 +9,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b793ebbedc9495498fa2646b6b84ba5, type: 3}
   m_Name: ear
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 1.2216523, y: 0.15682225, z: 0.15}
-  relativePosition: {x: 0.90709686, y: 0.46421543, z: 0.15}
-  minPosX: 0.5413296
-  maxPosX: 1.2913296
-  minPosY: -1.3200002
-  maxPosY: 1.8613298
+  absolutePosition: {x: 1.1980582, y: 0.10064149, z: 0.15}
+  relativePosition: {x: 0.8372098, y: 0.44412866, z: 0.15}
+  minPosX: 0.5701509
+  maxPosX: 1.3201509
+  minPosY: -1.3654486
+  maxPosY: 1.9355996
   minAngle: -90
   maxAngle: 90
-  currentAngle: 15
-  absoluteScale: {x: 2.2908745, y: 1.0289428, z: 1}
-  relativeScale: {x: 0.16531849, y: 0.26412266, z: 1}
+  currentAngle: 0
+  absoluteScale: {x: 1, y: 1, z: 1}
+  relativeScale: {x: 0.2806036, y: 0.1440271, z: 1}
   minScaleX: 1
   maxScaleX: 1.5
   minScaleY: 1
-  maxScaleY: 2.6400003
+  maxScaleY: 2.7308972
   shaderProperties:
   - propertyName: _EarWidthSkew
-    propertyValue: 0.44036323
+    propertyValue: 0.46747524
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarLengthSkew
-    propertyValue: 0.11089158
+    propertyValue: 0.90984714
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarShape
-    propertyValue: 0.31716567
+    propertyValue: 0.30219716
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarRoundness
-    propertyValue: 0.09770119
+    propertyValue: 0.61566895
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarOpenWidth
-    propertyValue: 0.4813767
+    propertyValue: 0.6669235
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarOpenLength
-    propertyValue: 0.6573663
+    propertyValue: 0.7660973
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarConcha
-    propertyValue: 0.720883
+    propertyValue: 0.6395476
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarTragus
-    propertyValue: 0.51566225
+    propertyValue: 0.2912988
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.4035162, g: 0.69157493, b: 0.8073343, a: 1}
+    colorValue: {r: 1, g: 0, b: 0, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.16453052, g: 0.11415631, b: 0.095094815, a: 1}
+    colorValue: {r: 0, g: 0, b: 0, a: 1}
   affectedPartData: []
