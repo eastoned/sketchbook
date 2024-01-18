@@ -50,6 +50,7 @@ public class PartUIController : MonoBehaviour
                 //}
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
+                sliders[i].onValueChanged.AddListener(partData.UpdateColliderBounds);
                 sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
                 
                 if(partData.mirroredPart != null){

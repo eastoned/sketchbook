@@ -86,8 +86,6 @@ public class FaceController : MonoBehaviour
         BlendProfile(val, gameData.earData, blendFrom.earData, blendTo.earData);
         BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
         BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
-
-        UpdateAllControllers();
     }
 
     public void UpdateAllControllers(){
@@ -124,72 +122,6 @@ public class FaceController : MonoBehaviour
         mouth.InitializePartDataDictionary();
         neck.InitializePartDataDictionary();
         nose.InitializePartDataDictionary();
-    }
-
-    public float GetCharacterDifference(CharacterData gameData, CharacterData targetData){
-        float score = 0;
-        score += GetPartDifference(gameData.headData, targetData.headData);
-        score += GetPartDifference(gameData.neckData, targetData.neckData);
-        score += GetPartDifference(gameData.eyeData, targetData.eyeData);
-        score += GetPartDifference(gameData.eyebrowData, targetData.eyebrowData);
-        score += GetPartDifference(gameData.noseData, targetData.noseData);
-        score += GetPartDifference(gameData.mouthData, targetData.mouthData);
-        score += GetPartDifference(gameData.earData, targetData.earData);
-        score += GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
-        score += GetPartDifference(gameData.hairBackData, targetData.hairBackData);
-       Debug.Log("Similarity score between current face and : " + targetData.name + " is : " + score);
-       return score;
-    }
-
-    public float GetPartDifference(PartData gamePart, PartData characterPart)
-    {
-        string diffDebug = "";
-        float score = 0;
-        score += Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized);
-        
-        diffDebug += "The absolutePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized) + ".\n";
-        //diffDebug += "The relativePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativePosition.normalized, characterPart.relativePosition.normalized) + ".\n";
-        score += Vector3.Dot(gamePart.absoluteScale.normalized, characterPart.absoluteScale.normalized);
-        diffDebug += "The currentAngle difference of the: " + gamePart.name + " is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle) + ".\n";
-        score -= Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)/180f;
-        diffDebug += "The absoluteScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absoluteScale.normalized, characterPart.absoluteScale.normalized) + ".\n";
-        //diffDebug += "The relativeScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativeScale.normalized, characterPart.relativeScale.normalized) + ".\n";
-            
-            for(int i = 0; i < gamePart.shaderProperties.Count; i++){
-                diffDebug += "The " + gamePart.shaderProperties[i].propertyName + " difference of the " + gamePart.name + " is: " +
-                 Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue) + ".\n";
-                 score -= Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue)/2f;
-            }
-        diffDebug = "";
-            for(int j = 0; j < gamePart.shaderColors.Count; j++){
-                diffDebug += "The " + gamePart.shaderColors[j].colorName + " difference of the " + gamePart.name + " is: " +
-                Vector3.Dot(
-                    new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized,
-                    new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized) +
-                    ".\n";
-                Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
-                Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
-
-                if (currentColor.magnitude == 0f || charColor.magnitude == 0f){
-                    float addedScore = 1f;
-                    float differ = Vector3.Distance(currentColor.normalized, charColor.normalized);
-                    addedScore -= differ;
-                    Debug.Log("colors are not the same but one is zero so subtracting the value of the > 0 vector");
-                    if(currentColor == charColor){
-                        Debug.Log("current color is the exact same as the template color");
-                        //score += 1f;
-                    }
-                    //score += addedScore;
-                }else{
-                    //score += Vector3.Dot(currentColor, charColor);
-                }
-                //score += Vector3.Dot(
-                //    new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized,
-                //    new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized);
-            }
-
-        Debug.Log(diffDebug);
-        return score;
     }
 
     public void BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){
@@ -246,15 +178,16 @@ public class FaceController : MonoBehaviour
             float percent = Mathf.Clamp01(journey/value);
             float blendPercent = blendCurve.Evaluate(percent);
             Interpolate(blendPercent, currentChar, cd1, cd2);
-            
+            UpdateAllControllers();
             yield return null;
         }
+
         currentChar.CopyData(cd2);
+
         if(cd1.writeable){
             cd1.CopyData(cd2);
         }
         currentlyBlending = false;
-        Debug.Log("copied data from blend target to writeable character");
     }
 
     public IEnumerator BlendPart(CharacterData char1, CharacterData char2, int partID, float animLength){

@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 public class NuFaceManager : MonoBehaviour
 {
-    public FaceController fc;
+    public FaceController rfc;
+    public PlayerFaceController pfc;
     public SpeechController sc;
-
-    public CharacterData currentChar;
     public CharacterData writeableData;
     public CharacterData targetData;
 
@@ -24,7 +23,24 @@ public class NuFaceManager : MonoBehaviour
 
     public static float money = 500f;
 
-    public void Start(){
+    private IEnumerator Start(){
+        for(;;){
+            //yield return new WaitForSeconds(2f);
+            //Compare();
+            //writeableData.CopyData(rfc.currentChar);
+            //targetData.RandomizeData();
+            //targetData.RandomizeRandomPart();
+            //rfc.BlendCharacter(writeableData, targetData, 1f);
+            yield return new WaitForSeconds(10f);
+        }
+    }
+
+    [ContextMenu("Compare Faces")]
+    public void Compare(){
+        GetCharacterDifference(rfc.currentChar, pfc.currentChar);
+    }
+
+    public void Routine(){
         
             //yield return new WaitForSeconds(Random.Range(0.5f, 5f));
             //writeableData.CopyData(currentChar);
@@ -90,15 +106,13 @@ public class NuFaceManager : MonoBehaviour
 
         fc.BlendCharacter(writeableData, characterSet[0], 2f);
         */
-        //parts[10].colid.enabled = true;
-        //parts[11].colid.enabled = true;
     }
 
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
-        writeableData.CopyData(currentChar);
+        writeableData.CopyData(rfc.currentChar);
         targetData.RandomizeData();
-        fc.BlendCharacter(writeableData, targetData, Random.Range(.4f, 5f));
+        rfc.BlendCharacter(writeableData, targetData, Random.Range(.4f, 2f));
     }
 
     IEnumerator CountIncreaser(){
@@ -207,6 +221,72 @@ public class NuFaceManager : MonoBehaviour
         yield return TransformAnimation(transform, new Vector3(0, -2.5f, 0), new Vector3(0, -85, 0), new Vector3(1, 1, 1), new Vector3(40f, 40f, 1f), .5f);
         //transform.position = new Vector3(0, -2.5f, 0);
         yield return null;
+    }
+
+    public float GetCharacterDifference(CharacterData gameData, CharacterData targetData){
+        float score = 0;
+        score += GetPartDifference(gameData.headData, targetData.headData);
+        score += GetPartDifference(gameData.neckData, targetData.neckData);
+        score += GetPartDifference(gameData.eyeData, targetData.eyeData);
+        score += GetPartDifference(gameData.eyebrowData, targetData.eyebrowData);
+        score += GetPartDifference(gameData.noseData, targetData.noseData);
+        score += GetPartDifference(gameData.mouthData, targetData.mouthData);
+        score += GetPartDifference(gameData.earData, targetData.earData);
+        score += GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
+        score += GetPartDifference(gameData.hairBackData, targetData.hairBackData);
+       Debug.Log("Similarity score between current face and : " + targetData.name + " is : " + score);
+       return score;
+    }
+
+    public float GetPartDifference(PartData gamePart, PartData characterPart)
+    {
+        string diffDebug = "";
+        float score = 0;
+        score += Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized);
+        
+        diffDebug += "The absolutePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized) + ".\n";
+        //diffDebug += "The relativePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativePosition.normalized, characterPart.relativePosition.normalized) + ".\n";
+        score += Vector3.Dot(gamePart.absoluteScale.normalized, characterPart.absoluteScale.normalized);
+        diffDebug += "The currentAngle difference of the: " + gamePart.name + " is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle) + ".\n";
+        score -= Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)/180f;
+        diffDebug += "The absoluteScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absoluteScale.normalized, characterPart.absoluteScale.normalized) + ".\n";
+        //diffDebug += "The relativeScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativeScale.normalized, characterPart.relativeScale.normalized) + ".\n";
+            
+            for(int i = 0; i < gamePart.shaderProperties.Count; i++){
+                diffDebug += "The " + gamePart.shaderProperties[i].propertyName + " difference of the " + gamePart.name + " is: " +
+                 Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue) + ".\n";
+                 score -= Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue)/2f;
+            }
+        diffDebug = "";
+            for(int j = 0; j < gamePart.shaderColors.Count; j++){
+                diffDebug += "The " + gamePart.shaderColors[j].colorName + " difference of the " + gamePart.name + " is: " +
+                Vector3.Dot(
+                    new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized,
+                    new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized) +
+                    ".\n";
+                Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
+                Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
+
+                if (currentColor.magnitude == 0f || charColor.magnitude == 0f){
+                    float addedScore = 1f;
+                    float differ = Vector3.Distance(currentColor.normalized, charColor.normalized);
+                    addedScore -= differ;
+                    Debug.Log("colors are not the same but one is zero so subtracting the value of the > 0 vector");
+                    if(currentColor == charColor){
+                        Debug.Log("current color is the exact same as the template color");
+                        //score += 1f;
+                    }
+                    //score += addedScore;
+                }else{
+                    //score += Vector3.Dot(currentColor, charColor);
+                }
+                //score += Vector3.Dot(
+                //    new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized,
+                //    new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized);
+            }
+
+        //Debug.Log(diffDebug);
+        return score;
     }
 
 }

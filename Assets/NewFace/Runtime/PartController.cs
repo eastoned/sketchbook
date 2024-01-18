@@ -38,7 +38,6 @@ public class PartController : MonoBehaviour
 
     private void Initialize(){
         currentMat = rend.sharedMaterial;
-        colid = GetComponent<BoxCollider2D>();
 
         UpdateDependencies();
     }
@@ -120,7 +119,7 @@ public class PartController : MonoBehaviour
         UpdateDependencies();
 
     }
-    void UpdateColliderBounds(){
+    public void UpdateColliderBounds(float ignore){
         colid.size = pd.GetColliderSize();
         colid.offset = pd.GetColliderOffset();
     }
@@ -136,7 +135,7 @@ public class PartController : MonoBehaviour
         }
 
         rend.SetPropertyBlock(propBlock);
-        UpdateColliderBounds();
+        
     }
 
     [ContextMenu("Shake Test")]
