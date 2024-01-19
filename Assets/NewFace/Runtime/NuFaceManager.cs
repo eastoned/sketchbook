@@ -145,6 +145,13 @@ public class NuFaceManager : MonoBehaviour
         
     }
 
+    [ContextMenu("Set To Player")]
+    public void SetPlayer(){
+        targetData[0].CopyData(pfc.currentChar);
+        writeableData[0].CopyData(rfc[0].currentChar);
+        rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
+    }
+
     IEnumerator CountIncreaser(){
         yield return new WaitForSeconds(5f);
         RandomizeFace();
@@ -273,14 +280,14 @@ public class NuFaceManager : MonoBehaviour
         string diffDebug = "";
         float score = 0;
  
-        score += 2f - Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition);
+        score += 1f - Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition);
         
 
-        Debug.Log(gamePart.name + " scale diff is: " + Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale));
-        score += 2f - Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale);
+        //Debug.Log(gamePart.name + " scale diff is: " + Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale));
+        score += 1f - Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale);
 
-        Debug.Log(gamePart.name + " angle diff is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360);
-        //score += 2f - Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle);
+        //Debug.Log(gamePart.name + " angle diff is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360);
+        score += 1f - (Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360)/180f;
 
         for(int i = 0; i < gamePart.shaderProperties.Count; i++){
             score += 1f - Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue);
@@ -290,6 +297,7 @@ public class NuFaceManager : MonoBehaviour
             Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
             Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
         }
+         Debug.Log("Similarity score between : " + gamePart.name + " is : " + score);
 
         return score;
     }
