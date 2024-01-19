@@ -26,6 +26,7 @@ public class PartController : MonoBehaviour
     MaterialPropertyBlock propBlock;
 
     public Vector3 cachePosition;
+    PartTransformController ptc;
 
     void Awake(){
         propBlock = new MaterialPropertyBlock();
@@ -37,8 +38,6 @@ public class PartController : MonoBehaviour
 
     private void Initialize(){
         currentMat = rend.sharedMaterial;
-
-        UpdateDependencies();
     }
 
     public void InitializePartDataDictionary(){
@@ -83,14 +82,18 @@ public class PartController : MonoBehaviour
         
         if(EventSystem.current.IsPointerOverGameObject())
             return;
-
+        
+        
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
+        ptc = transform.gameObject.AddComponent<PartTransformController>();
+        ptc.controls = PartTransformController.TransformController.TRANSLATE;
         
-        if(!transform.gameObject.GetComponent<PartTransformController>()){
-            PartTransformController ptc = transform.gameObject.AddComponent<PartTransformController>();
-            ptc.controls = PartTransformController.TransformController.TRANSLATE;
+    }
+
+    void OnMouseUp(){
+        if(ptc != null){
+            Destroy(ptc);
         }
-        
     }
 
     public void UpdateAllTransformValues(){
@@ -118,7 +121,7 @@ public class PartController : MonoBehaviour
         UpdateDependencies();
 
     }
-    public void UpdateColliderBounds(float ignore){
+    public void UpdateColliderBounds(){
         colid.size = pd.GetColliderSize();
         colid.offset = pd.GetColliderOffset();
     }
@@ -134,6 +137,10 @@ public class PartController : MonoBehaviour
         }
 
         rend.SetPropertyBlock(propBlock);
+
+        if(colid != null){
+            UpdateColliderBounds();
+        }
         
     }
 

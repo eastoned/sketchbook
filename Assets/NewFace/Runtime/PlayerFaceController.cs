@@ -21,8 +21,9 @@ public class PlayerFaceController : FaceController
 
     public float currentChange = 0f;
 
-     void OnEnable()
+    public override void OnEnable()
 	{
+        base.OnEnable();
         OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnDeselectedFacePartEvent.Instance.AddListener(ClearCurrentHover);
@@ -34,7 +35,8 @@ public class PlayerFaceController : FaceController
         OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
     }
 
-    void OnDisable(){
+    public override void OnDisable(){
+        base.OnDisable();
         OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnDeselectedFacePartEvent.Instance.RemoveListener(ClearCurrentHover);

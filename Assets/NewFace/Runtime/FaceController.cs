@@ -36,6 +36,18 @@ public class FaceController : MonoBehaviour
     public float mouthClosedAmount;
     private float mouthTop, mouthBottom;
 
+    public virtual void OnEnable()
+	{
+        OnSelectedNewFacePartEvent.Instance.AddListener(Blink);
+    }
+    public virtual void OnDisable(){
+        OnSelectedNewFacePartEvent.Instance.RemoveListener(Blink);
+    }
+
+    private void Blink(Transform ignore){
+        StartCoroutine(Blink(Random.Range(.2f, .5f), rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
+    }
+
     private void Start(){
         InitializeControllers();
     }
