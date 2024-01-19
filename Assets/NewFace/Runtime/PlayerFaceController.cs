@@ -26,6 +26,7 @@ public class PlayerFaceController : FaceController
         OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnDeselectedFacePartEvent.Instance.AddListener(ClearCurrentHover);
+        OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
@@ -37,6 +38,7 @@ public class PlayerFaceController : FaceController
         OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnDeselectedFacePartEvent.Instance.RemoveListener(ClearCurrentHover);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
@@ -45,14 +47,16 @@ public class PlayerFaceController : FaceController
     }
 
     private void UpdateMoneyAmount(){
-        NuFaceManager.money -= currentChange;
+        //NuFaceManager.money -= currentChange;
         currentChange = 0f;
     }
 
     public void SetMaterialOutline(Transform hoveredTarget){
         ClearCurrentHover();
-        hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
-        hoveredTransform = hoveredTarget;
+        if(hoveredTarget.GetComponent<PartController>()){
+            hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
+            hoveredTransform = hoveredTarget;
+        }
     }
 
     private void ClearCurrentHover(){

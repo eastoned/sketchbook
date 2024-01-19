@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class NuFaceManager : MonoBehaviour
 {
-    public FaceController rfc;
+    public FaceController[] rfc;
     public PlayerFaceController pfc;
     public SpeechController sc;
-    public CharacterData writeableData;
-    public CharacterData targetData;
+    public CharacterData[] writeableData;
+    public CharacterData[] targetData;
 
     public string[] convo;
 
@@ -21,7 +21,13 @@ public class NuFaceManager : MonoBehaviour
     public List<RequestChange> requestList;
     public int count = 0;
 
-    public static float money = 500f;
+    public float money = 500f;
+    public float res;
+    public Vector3 dir1, dir2;
+
+    void OnValidate(){
+        res = Vector3.Dot(dir1, dir2);
+    }
 
     private IEnumerator Start(){
         for(;;){
@@ -37,7 +43,7 @@ public class NuFaceManager : MonoBehaviour
 
     [ContextMenu("Compare Faces")]
     public void Compare(){
-        GetCharacterDifference(rfc.currentChar, pfc.currentChar);
+        money += GetCharacterDifference(rfc[0].currentChar, pfc.currentChar);
     }
 
     public void Routine(){
@@ -110,9 +116,33 @@ public class NuFaceManager : MonoBehaviour
 
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
-        writeableData.CopyData(rfc.currentChar);
-        targetData.RandomizeData();
-        rfc.BlendCharacter(writeableData, targetData, Random.Range(.4f, 2f));
+        //Debug.Log("let random begin");
+        //Debug.Log(targetData[rfc.Length - 1].name);
+        targetData[0].RandomizeData();
+        writeableData[0].CopyData(rfc[0].currentChar);
+        rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
+
+        /*
+        if(Random.Range(0f,1f) < 0.5f){
+            targetData[rfc.Length-1].RandomizeData();
+            for(int i = 0; i < rfc.Length; i++){
+                writeableData[i].CopyData(rfc[i].currentChar);
+                float val = (float)i/((float)rfc.Length-1);
+                Debug.Log("interval val is: " + val);
+                rfc[i].Interpolate(val, targetData[i], targetData[0], targetData[rfc.Length-1]);
+                rfc[i].BlendCharacter(writeableData[i], targetData[i], (val+1)*2);
+            }
+        }else{
+            targetData[0].RandomizeData();
+            for(int i = rfc.Length-1; i > -1; i--){
+                writeableData[i].CopyData(rfc[i].currentChar);
+                float val = (float)i/((float)rfc.Length-1);
+                Debug.Log("interval val is: " + val);
+                rfc[i].Interpolate(val, targetData[i], targetData[0], targetData[rfc.Length-1]);
+                rfc[i].BlendCharacter(writeableData[i], targetData[i], (val+1)*2);
+            }
+        }*/
+        
     }
 
     IEnumerator CountIncreaser(){
@@ -242,50 +272,25 @@ public class NuFaceManager : MonoBehaviour
     {
         string diffDebug = "";
         float score = 0;
-        score += Vector3.Dot(gamePart.relativePosition.normalized, characterPart.relativePosition.normalized);
+ 
+        score += 2f - Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition);
         
-        diffDebug += "The absolutePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absolutePosition.normalized, characterPart.absolutePosition.normalized) + ".\n";
-        //diffDebug += "The relativePosition difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativePosition.normalized, characterPart.relativePosition.normalized) + ".\n";
-        score += Vector3.Dot(gamePart.absoluteScale.normalized, characterPart.absoluteScale.normalized);
-        diffDebug += "The currentAngle difference of the: " + gamePart.name + " is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle) + ".\n";
-        score -= Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)/180f;
-        diffDebug += "The absoluteScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.absoluteScale.normalized, characterPart.absoluteScale.normalized) + ".\n";
-        //diffDebug += "The relativeScale difference of the: " + gamePart.name + " is: " + Vector3.Dot(gamePart.relativeScale.normalized, characterPart.relativeScale.normalized) + ".\n";
-            
-            for(int i = 0; i < gamePart.shaderProperties.Count; i++){
-                diffDebug += "The " + gamePart.shaderProperties[i].propertyName + " difference of the " + gamePart.name + " is: " +
-                 Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue) + ".\n";
-                 score -= Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue)/2f;
-            }
-        diffDebug = "";
-            for(int j = 0; j < gamePart.shaderColors.Count; j++){
-                diffDebug += "The " + gamePart.shaderColors[j].colorName + " difference of the " + gamePart.name + " is: " +
-                Vector3.Dot(
-                    new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized,
-                    new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized) +
-                    ".\n";
-                Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
-                Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
 
-                if (currentColor.magnitude == 0f || charColor.magnitude == 0f){
-                    float addedScore = 1f;
-                    float differ = Vector3.Distance(currentColor.normalized, charColor.normalized);
-                    addedScore -= differ;
-                    Debug.Log("colors are not the same but one is zero so subtracting the value of the > 0 vector");
-                    if(currentColor == charColor){
-                        Debug.Log("current color is the exact same as the template color");
-                        //score += 1f;
-                    }
-                    //score += addedScore;
-                }else{
-                    //score += Vector3.Dot(currentColor, charColor);
-                }
-                //score += Vector3.Dot(
-                //    new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized,
-                //    new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized);
-            }
+        Debug.Log(gamePart.name + " scale diff is: " + Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale));
+        score += 2f - Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale);
 
-        //Debug.Log(diffDebug);
+        Debug.Log(gamePart.name + " angle diff is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360);
+        //score += 2f - Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle);
+
+        for(int i = 0; i < gamePart.shaderProperties.Count; i++){
+            score += 1f - Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue);
+        }
+
+        for(int j = 0; j < gamePart.shaderColors.Count; j++){
+            Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
+            Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
+        }
+
         return score;
     }
 

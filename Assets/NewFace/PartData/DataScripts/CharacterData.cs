@@ -10,12 +10,12 @@ public class CharacterData : ScriptableObject
 
     public PartData earData, eyebrowData, eyeData, hairBackData, hairFrontData, headData, mouthData, neckData, noseData;
 
-    
     public PartData[] allParts;
 
     [ContextMenu("Random A Piece")]
     void RandomPiece(PartData part){
-        part.currentAngle = UnityEngine.Random.Range(part.minAngle, part.maxAngle);
+        //part.currentAngle = UnityEngine.Random.Range(part.minAngle, part.maxAngle);
+        part.currentAngle = 0f;
         if(part == hairBackData || part == hairFrontData){
             part.currentAngle = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0 : part.maxAngle;
         }
@@ -41,12 +41,12 @@ public class CharacterData : ScriptableObject
 
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            sp.SetValue(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.4f : 0.6f);
+            sp.SetValue(.75f);
         }
         foreach(ShaderColor sc in part.shaderColors){
-            sc.SetValue(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0f : 1f);
-            sc.SetHue(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0f : 1f);
-            sc.SetSaturation(UnityEngine.Random.Range(0f, 1f) < 0.5f? 0f : 1f);
+            sc.SetValue(UnityEngine.Random.Range(0f, 1f));
+            sc.SetHue(UnityEngine.Random.Range(0f, 1f));
+            sc.SetSaturation(UnityEngine.Random.Range(0f, 1f));
         }
 
         if(part.affectedPartData.Count > 0){

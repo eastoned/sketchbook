@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
+  m_Name: RandomCharacter4
+  m_EditorClassIdentifier: 
+  name: RandomCharacter4
+  writeable: 0
+  earData: {fileID: 11400000, guid: 3db1e2f033585a0438734f7663f18224, type: 2}
+  eyebrowData: {fileID: 11400000, guid: ac5cb7736b7b301438dabfdf212f7786, type: 2}
+  eyeData: {fileID: 11400000, guid: 5cf70403fae927e4bbc735781be691ca, type: 2}
+  hairBackData: {fileID: 11400000, guid: 39e19030ec8fc7846b0063651b3bda40, type: 2}
+  hairFrontData: {fileID: 11400000, guid: e6ee83ae7efb68c419235c3519214245, type: 2}
+  headData: {fileID: 11400000, guid: fae48156a614b83449dece30a8dcab18, type: 2}
+  mouthData: {fileID: 11400000, guid: ac5bdfd8c7e2c6e42af13b915d1a282b, type: 2}
+  neckData: {fileID: 11400000, guid: 1291539014f0dbe4f9c0669fe7f455bd, type: 2}
+  noseData: {fileID: 11400000, guid: 1c5a9bedda3f9114bad2731583bc0104, type: 2}
+  allParts:
+  - {fileID: 11400000, guid: 3db1e2f033585a0438734f7663f18224, type: 2}
+  - {fileID: 11400000, guid: 5cf70403fae927e4bbc735781be691ca, type: 2}
+  - {fileID: 11400000, guid: ac5cb7736b7b301438dabfdf212f7786, type: 2}
+  - {fileID: 11400000, guid: 39e19030ec8fc7846b0063651b3bda40, type: 2}
+  - {fileID: 11400000, guid: e6ee83ae7efb68c419235c3519214245, type: 2}
+  - {fileID: 11400000, guid: fae48156a614b83449dece30a8dcab18, type: 2}
+  - {fileID: 11400000, guid: ac5bdfd8c7e2c6e42af13b915d1a282b, type: 2}
+  - {fileID: 11400000, guid: 1291539014f0dbe4f9c0669fe7f455bd, type: 2}
+  - {fileID: 11400000, guid: 1c5a9bedda3f9114bad2731583bc0104, type: 2}

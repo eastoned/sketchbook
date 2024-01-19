@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
   m_Name: head
   m_EditorClassIdentifier: 
   absolutePosition: {x: 0, y: 0, z: 0.1}
@@ -21,27 +21,40 @@ MonoBehaviour:
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.065714166, y: 0.3, z: 1}
+  absoluteScale: {x: 3.0627491, y: 2.3664782, z: 1}
+  relativeScale: {x: 0, y: 0, z: 1}
   minScaleX: 1.5
   maxScaleX: 4
   minScaleY: 1.5
   maxScaleY: 4
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0
+    propertyValue: 0.35472625
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _ForeheadWidth
-    propertyValue: 1
+    propertyValue: 0.7522422
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _ForeheadLength
-    propertyValue: 1
+    propertyValue: 0.08647668
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _ChinScale
-    propertyValue: 0
+    propertyValue: 0.27214366
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _ChinWidth
-    propertyValue: 0.10720389
+    propertyValue: 0.5310685
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _ChinLength
-    propertyValue: 0.4262765
+    propertyValue: 0.7990346
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 1}
+    colorValue: {r: 0.020252103, g: 0.07727469, b: 0.16817594, a: 1}
   - colorName: _Color2
-    colorValue: {r: 1, g: 0, b: 0, a: 1}
+    colorValue: {r: 0.3421367, g: 0.21896645, b: 0.3561656, a: 1}
+  affectedPartData: []

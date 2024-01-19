@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PartData : ScriptableObject
 {
@@ -106,6 +107,9 @@ public class PartData : ScriptableObject
 
     public virtual void ClampedScale(Vector3 scaleIn){
         Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
+        clampedSize = clampedSize/.25f;
+        clampedSize = new Vector3(Mathf.Round(clampedSize.x), Mathf.Round(clampedSize.y), clampedSize.z);
+        clampedSize *= .25f;
         SetRelativeScale(clampedSize);
     }
 
@@ -131,12 +135,19 @@ public class PartData : ScriptableObject
     }
 
     public virtual void ClampedPosition(Vector3 posIn){
+        
         Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
+        clampedPos = clampedPos/.1f;
+        clampedPos = new Vector3(Mathf.Round(clampedPos.x), Mathf.Round(clampedPos.y), clampedPos.z);
+        clampedPos *= .1f;
         SetRelativePos(clampedPos);
     }
 
     public virtual Vector3 ReturnClampedPosition(Vector3 posIn){
         Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
+        clampedPos = clampedPos/.1f;
+        clampedPos = new Vector3(Mathf.Round(clampedPos.x), Mathf.Round(clampedPos.y), clampedPos.z);
+        clampedPos *= .1f;
         return clampedPos;
     }
 }
@@ -149,6 +160,9 @@ public class ShaderProperty{
     public float propertyValue;
 
     public void SetValue(float value){
+        value /= 0.25f;
+        value = Mathf.Round(value);
+        value *= 0.25f;
         propertyValue = value;
     }
 
@@ -195,6 +209,9 @@ public class ShaderColor{
     public void SetHue(float value){
         //Debug.Log("Changing Hue");
         Color.RGBToHSV(colorValue, out h, out s, out v);
+        value /= 0.1f;
+        value = Mathf.Round(value);
+        value *= 0.1f;
         colorValue = Color.HSVToRGB(value, s, v);
     }
 
@@ -206,6 +223,9 @@ public class ShaderColor{
     public void SetSaturation(float value){
         //Debug.Log("Changing Saturation");
         Color.RGBToHSV(colorValue, out h, out s, out v);
+        value /= 0.1f;
+        value = Mathf.Round(value);
+        value *= 0.1f;
         colorValue = Color.HSVToRGB(h, value, v);
     }
     public float GetSaturation(){
@@ -216,6 +236,9 @@ public class ShaderColor{
     public void SetValue(float value){
         //Debug.Log("Changing Value");
         Color.RGBToHSV(colorValue, out h, out s, out v);
+        value /= 0.1f;
+        value = Mathf.Round(value);
+        value *= 0.1f;
         colorValue = Color.HSVToRGB(h, s, value);
     }
 

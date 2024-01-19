@@ -11,7 +11,7 @@ public class BackgroundController : MonoBehaviour
         if(EventSystem.current.IsPointerOverGameObject())
             return;
             
-        //OnDeselectedFacePartEvent.Instance.Invoke();
+        OnDeselectedFacePartEvent.Instance.Invoke();
     }
 
     void OnMouseEnter(){

@@ -9,22 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d14874ccaae784c87ba06add4fe0ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: eyebrow
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.51430553, y: 1.5283784, z: -0.2}
-  relativePosition: {x: 0.23609935, y: 1, z: -0.2}
-  minPosX: 0.41607136
-  maxPosX: 0.8321427
-  minPosY: -0.7438875
-  maxPosY: 1.5061126
+  absolutePosition: {x: 0.5, y: 0.25, z: -0.2}
+  relativePosition: {x: 0.34893626, y: 0.33333334, z: -0.2}
+  minPosX: 0.375
+  maxPosX: 0.75
+  minPosY: -0.375
+  maxPosY: 1.125
   minAngle: -90
   maxAngle: 90
-  currentAngle: -68.7937
+  currentAngle: 0
   absoluteScale: {x: 0.33974957, y: 0.40593773, z: 1}
-  relativeScale: {x: 0.22107282, y: 0.25742215, z: 1}
+  relativeScale: {x: 1, y: 0.6875, z: 1}
   minScaleX: 0.2
-  maxScaleX: 0.8321427
+  maxScaleX: 0.75
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:
