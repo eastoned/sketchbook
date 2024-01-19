@@ -33,15 +33,15 @@ public class CharacterData : ScriptableObject
         part.SetRelativePos(part.absolutePosition);
 
         part.absoluteScale = new Vector3(
-            UnityEngine.Random.Range(part.minScaleX, part.maxScaleX),
-            UnityEngine.Random.Range(part.minScaleY, part.maxScaleY),
+            1,
+            1,
             part.absoluteScale.z);
 
         part.SetRelativeScale(part.absoluteScale);
 
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            sp.SetValue(UnityEngine.Random.Range(0f, 1f));
+            sp.SetValue(.75f);
         }
         foreach(ShaderColor sc in part.shaderColors){
             sc.SetValue(UnityEngine.Random.Range(0f, 1f));

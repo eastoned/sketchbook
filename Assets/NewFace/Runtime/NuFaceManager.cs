@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
 
 public class NuFaceManager : MonoBehaviour
 {
@@ -25,8 +25,18 @@ public class NuFaceManager : MonoBehaviour
     public float res;
     public Vector3 dir1, dir2;
 
+    public TextMeshProUGUI scoreDebug;
+
     void OnValidate(){
         res = Vector3.Dot(dir1, dir2);
+    }
+
+    void OnEnable(){
+        OnConfirmTransformPart.Instance.AddListener(Compare);
+    }
+
+    void OnDisable(){
+        OnConfirmTransformPart.Instance.AddListener(Compare);
     }
 
     private IEnumerator Start(){
@@ -44,6 +54,7 @@ public class NuFaceManager : MonoBehaviour
     [ContextMenu("Compare Faces")]
     public void Compare(){
         money += GetCharacterDifference(rfc[0].currentChar, pfc.currentChar);
+        scoreDebug.text = GetCharacterDifference(rfc[0].currentChar, pfc.currentChar).ToString();
     }
 
     public void Routine(){

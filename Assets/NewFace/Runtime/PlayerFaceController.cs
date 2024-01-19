@@ -84,12 +84,12 @@ public class PlayerFaceController : FaceController
         DisappearControllers();
 
         if(currentPC.rotatable)
-            rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.4f, 0, 0));
+            rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0, 0));
         
         rotationController.transform.localPosition = new Vector3(rotationController.transform.localPosition.x, rotationController.transform.localPosition.y, -1f);
 
         if(currentPC.scalable)
-            scaleController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.4f, 0.4f, 0));
+            scaleController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
         
         scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
     
