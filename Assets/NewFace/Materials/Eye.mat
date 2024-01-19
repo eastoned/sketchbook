@@ -36,8 +36,8 @@ Material:
     - _Lid2: 0.753
     - _PupilLength: 0.1
     - _PupilOffsetX: 0
-    - _PupilOffsetY: 0
-    - _PupilRadius: 0.431
+    - _PupilOffsetY: -0.022
+    - _PupilRadius: 0.321
     - _PupilRatio: 0.5
     - _PupilRoundness: 1
     - _PupilWidth: 0.1

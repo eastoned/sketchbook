@@ -20,28 +20,32 @@ public class CharacterData : ScriptableObject
             part.currentAngle = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0 : part.maxAngle;
         }
         
-
-        part.absolutePosition = new Vector3(
-            UnityEngine.Random.Range(part.minPosX, part.maxPosX),
-            UnityEngine.Random.Range(part.minPosY, part.maxPosY),
-            part.absolutePosition.z);
+        if(part == noseData){
+            part.maxPosY = eyeData.absolutePosition.y;
+        }
+        if(part == mouthData){
+            part.maxPosY = noseData.absolutePosition.y;
+        }
+        part.absolutePosition = new Vector3(Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
+        Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
+        part.absolutePosition.z);
 
         if(part == eyebrowData){
             part.absolutePosition = new Vector3(eyeData.absolutePosition.x, eyeData.absolutePosition.y + UnityEngine.Random.Range(.1f, 1f), part.absolutePosition.z);
         }
+        
 
         part.SetRelativePos(part.absolutePosition);
 
-        part.absoluteScale = new Vector3(
-            1,
-            1,
-            part.absoluteScale.z);
+        part.absoluteScale = new Vector3(Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
+        Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
+        part.absoluteScale.z);
 
         part.SetRelativeScale(part.absoluteScale);
 
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            sp.SetValue(.75f);
+            sp.SetValue(UnityEngine.Random.Range(0f, 1f));
         }
         foreach(ShaderColor sc in part.shaderColors){
             sc.SetValue(UnityEngine.Random.Range(0f, 1f));

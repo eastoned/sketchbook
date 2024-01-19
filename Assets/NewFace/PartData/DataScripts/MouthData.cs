@@ -5,8 +5,8 @@ public class MouthData : PartData
 {
    public override void SetScaleBounds(PartData parentData)
     {
-        maxScaleX = parentData.maxScaleX/1.5f;
-        maxScaleY = parentData.maxScaleY/2f;
+        maxScaleX = parentData.GetAbsoluteScale().x;
+        maxScaleY = parentData.GetAbsoluteScale().y;
     }
 
     public override void SetPositionBounds(PartData parentData)

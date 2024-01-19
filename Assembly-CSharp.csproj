@@ -56,8 +56,8 @@
     <Compile Include="Assets\LongWalks\BooController.cs" />
     <Compile Include="Assets\Script\MeshTriangle.cs" />
     <Compile Include="Assets\PuppetController.cs" />
-    <Compile Include="Assets\Script\fakeTextInput.cs" />
     <Compile Include="Assets\Script\BathroomManager.cs" />
+    <Compile Include="Assets\Script\fakeTextInput.cs" />
     <Compile Include="Assets\Script\ControlSpriteStretch.cs" />
     <Compile Include="Assets\Lion\SnapEvent.cs" />
     <Compile Include="Assets\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />

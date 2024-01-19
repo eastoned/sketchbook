@@ -22,14 +22,7 @@ public class NuFaceManager : MonoBehaviour
     public int count = 0;
 
     public float money = 500f;
-    public float res;
-    public Vector3 dir1, dir2;
-
     public TextMeshProUGUI scoreDebug;
-
-    void OnValidate(){
-        res = Vector3.Dot(dir1, dir2);
-    }
 
     void OnEnable(){
         OnConfirmTransformPart.Instance.AddListener(Compare);
@@ -291,24 +284,24 @@ public class NuFaceManager : MonoBehaviour
         string diffDebug = "";
         float score = 0;
  
-        score += 1f - Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition);
+        score += Mathf.Clamp01(.5f - Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition));
         
 
         //Debug.Log(gamePart.name + " scale diff is: " + Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale));
-        score += 1f - Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale);
+        score += Mathf.Clamp01(.5f - Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale));
 
         //Debug.Log(gamePart.name + " angle diff is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360);
-        score += 1f - (Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360)/180f;
+        score += Mathf.Clamp01(.5f - (Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360)/180f);
 
         for(int i = 0; i < gamePart.shaderProperties.Count; i++){
-            score += 1f - Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue);
+            score += Mathf.Clamp01(.5f - Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue));
         }
 
         for(int j = 0; j < gamePart.shaderColors.Count; j++){
             Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
             Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
         }
-         Debug.Log("Similarity score between : " + gamePart.name + " is : " + score);
+         //Debug.Log("Similarity score between : " + gamePart.name + " is : " + score);
 
         return score;
     }

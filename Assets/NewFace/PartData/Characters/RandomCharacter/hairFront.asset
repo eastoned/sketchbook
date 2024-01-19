@@ -12,45 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d04ea043f047634fac17772442c9c30, type: 3}
   m_Name: hairFront
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0.7432701, z: -0.15}
-  relativePosition: {x: 0, y: 0.5443413, z: -0.15}
+  absolutePosition: {x: 0, y: 0.1875, z: -0.15}
+  relativePosition: {x: 0, y: 0.25, z: -0.15}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
-  maxPosY: 1.3654486
+  maxPosY: 0.75
   minAngle: -180
   maxAngle: 180
-  currentAngle: -0
-  absoluteScale: {x: 0.30900627, y: 0.8703906, z: 1}
-  relativeScale: {x: 0.2806172, y: 0.40884018, z: 1}
+  currentAngle: 180
+  absoluteScale: {x: 0.607687, y: 1.1875, z: 1}
+  relativeScale: {x: 0.25000003, y: 0.75, z: 1}
   minScaleX: 0.25
-  maxScaleX: 1.7624463
+  maxScaleX: 1.6807479
   minScaleY: 0.25
-  maxScaleY: 2.7308972
+  maxScaleY: 1
   shaderProperties:
   - propertyName: _BangRoundness
-    propertyValue: 0.4537558
+    propertyValue: 0.58660084
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandCount
-    propertyValue: 0.17381984
+    propertyValue: 0.955814
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandOffset
-    propertyValue: 0
+    propertyValue: 0.6130393
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairBangScale
-    propertyValue: 0.1343046
+    propertyValue: 0.2844903
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairRoundness
-    propertyValue: 0.5435014
+    propertyValue: 0.51504797
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.49076456, g: 0.45007926, b: 0.47736943, a: 1}
+    colorValue: {r: 0.3260541, g: 0.34752423, b: 0.33344877, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.7579773, g: 0.06896554, b: 0.8952098, a: 1}
+    colorValue: {r: 0.36400524, g: 0.014189648, b: 0.50783914, a: 1}
   affectedPartData: []

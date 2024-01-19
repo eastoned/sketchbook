@@ -84,7 +84,7 @@ public class PlayerFaceController : FaceController
         DisappearControllers();
 
         if(currentPC.rotatable)
-            rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(-0.5f, 0, 0));
+            rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0, 0));
         
         rotationController.transform.localPosition = new Vector3(rotationController.transform.localPosition.x, rotationController.transform.localPosition.y, -1f);
 
@@ -166,7 +166,7 @@ public class PlayerFaceController : FaceController
 
         pos -= transform.localPosition;
 
-        float angle = Mathf.Atan2(currentTransform.localPosition.y - pos.y, currentTransform.localPosition.x - pos.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(pos.y - currentTransform.localPosition.y, pos.x - currentTransform.localPosition.x) * Mathf.Rad2Deg;
 
         if(angle < currentPC.pd.currentAngle){
             //Debug.Log("The new angle is less than the current angle");
