@@ -12,36 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
   m_Name: mouth
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: -0.68072283, z: -0.05}
-  relativePosition: {x: 0, y: 0.27338403, z: -0.05}
+  absolutePosition: {x: 0, y: -0.35299802, z: 0}
+  relativePosition: {x: 0, y: 0.31499857, z: 0}
   minPosX: 0
   maxPosX: 0
-  minPosY: -0.8589537
-  maxPosY: 0.8589537
+  minPosY: -0.95404124
+  maxPosY: 0.95404124
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.6088018, y: 0.22532482, z: 1}
+  relativeScale: {x: 0.8127365, y: 1, z: 1}
   minScaleX: 0.05
-  maxScaleX: 1.5
+  maxScaleX: 1.9271
   minScaleY: 0.1
-  maxScaleY: 1.7179074
+  maxScaleY: 0.95404124
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _MouthOpen
-    propertyValue: 1
+    propertyValue: 0.3751416
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _MouthBend
-    propertyValue: 1
+    propertyValue: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TeethTop
-    propertyValue: 0.57002866
+    propertyValue: 0.99112886
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TeethBottom

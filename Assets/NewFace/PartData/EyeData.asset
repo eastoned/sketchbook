@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832921ba22668d7499079a9547de0203, type: 3}
   m_Name: EyeData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.56426966, y: -0.1384446, z: 0}
-  relativePosition: {x: 0.09884068, y: 0.45391113, z: 0}
-  minPosX: 0.375
-  maxPosX: 0.75
-  minPosY: -0.8589537
-  maxPosY: 0.8589537
+  absolutePosition: {x: 0.76069725, y: 0.41762894, z: -0.05}
+  relativePosition: {x: 0.5789472, y: 0.7188736, z: -0.05}
+  minPosX: 0.27258337
+  maxPosX: 0.96355
+  minPosY: -0.95404124
+  maxPosY: 0.95404124
   minAngle: -90
   maxAngle: 90
-  currentAngle: -15
+  currentAngle: -0
   absoluteScale: {x: 0.34027487, y: 0.9910763, z: 1}
-  relativeScale: {x: 1, y: 1, z: 1}
+  relativeScale: {x: 0.4136595, y: 0.37636936, z: 1}
   minScaleX: 0.25
-  maxScaleX: 0.75
+  maxScaleX: 0.96355
   minScaleY: 0.25
-  maxScaleY: 0.8589537
+  maxScaleY: 0.95404124
   shaderProperties:
   - propertyName: _PupilRadius
     propertyValue: 0.53836626

@@ -5,8 +5,6 @@ public class HairBackData : PartData
 {
     public override void SetScaleBounds(PartData parentData)
     {
-        maxScaleX = parentData.GetAbsoluteScale().x*2f;
-        maxScaleY = parentData.GetAbsoluteScale().y*2f;
     }
 
     public override void SetPositionBounds(PartData parentData)

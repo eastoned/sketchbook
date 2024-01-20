@@ -19,6 +19,7 @@ public class PartTransformController : MonoBehaviour
 
     public Vector3 mouseDelta2;
     public Vector3 offset;
+    public bool currentlyHeld = false;
 
     void Start(){
         if(icon != null){
@@ -27,16 +28,27 @@ public class PartTransformController : MonoBehaviour
     }
     
     void OnMouseDown(){
-        if(EventSystem.current.IsPointerOverGameObject())
+        if(IsPointerOverUIObject())
             return;
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.localPosition - mouseDelta2;
+        currentlyHeld = true;
     }
 
+    private bool IsPointerOverUIObject() {
+         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+         List<RaycastResult> results = new List<RaycastResult>();
+         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+         return results.Count > 0;
+     }
+
     void OnMouseDrag(){
-        if(EventSystem.current.IsPointerOverGameObject())
-            return;
+        if(!currentlyHeld){
+            if(IsPointerOverUIObject())
+                return;
+        }
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -45,25 +57,20 @@ public class PartTransformController : MonoBehaviour
 
         switch(controls){
             case TransformController.TRANSLATE:
-                
-                    OnTranslatePartController.Instance.Invoke(transform.localPosition + offset);
-                
+                OnTranslatePartController.Instance.Invoke(transform.localPosition + offset);
             break;
             case TransformController.ROTATION:
-                
-                    OnRotatePartController.Instance.Invoke(transform.localPosition);
-                
+                OnRotatePartController.Instance.Invoke(transform.localPosition);
             break;
             case TransformController.SCALE:
-                
                     OnScalePartController.Instance.Invoke(transform.localPosition);
-                
             break;
         }
         
     }
 
     void OnMouseUp(){
+        currentlyHeld = false;
         OnConfirmTransformPart.Instance.Invoke();
     }
 

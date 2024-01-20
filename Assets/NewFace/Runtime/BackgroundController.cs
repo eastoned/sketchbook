@@ -8,19 +8,21 @@ public class BackgroundController : MonoBehaviour
     void OnMouseDown(){
         OnMouseClickEvent.Instance.Invoke();
         
-        if(EventSystem.current.IsPointerOverGameObject())
+        if(IsPointerOverUIObject())
             return;
             
         OnDeselectedFacePartEvent.Instance.Invoke();
     }
 
+    private bool IsPointerOverUIObject() {
+         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+         List<RaycastResult> results = new List<RaycastResult>();
+         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+         return results.Count > 0;
+     }
+
     void OnMouseEnter(){
-        if(EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        if(Input.GetMouseButton(0))
-            return;
-
-        OnHoveredNewFacePartEvent.Instance.Invoke(transform);
+        OnHoveredNewFacePartEvent.Instance.Invoke(null);
     }
 }

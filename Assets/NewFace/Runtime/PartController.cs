@@ -61,8 +61,16 @@ public class PartController : MonoBehaviour
         }
     }
 
+    private bool IsPointerOverUIObject() {
+         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+         List<RaycastResult> results = new List<RaycastResult>();
+         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+         return results.Count > 0;
+     }
+
     void OnMouseEnter(){
-        if(EventSystem.current.IsPointerOverGameObject())
+        if(IsPointerOverUIObject())
             return;
 
         if(Input.GetMouseButton(0))
@@ -71,16 +79,10 @@ public class PartController : MonoBehaviour
         OnHoveredNewFacePartEvent.Instance.Invoke(transform);
     }
 
-    void OnMouseExit(){
-        if(Input.GetMouseButton(0))
-            return;
-            
-    }
-
     void OnMouseDown(){
         OnMouseClickEvent.Instance.Invoke();
         
-        if(EventSystem.current.IsPointerOverGameObject())
+        if(IsPointerOverUIObject())
             return;
         
         
@@ -121,6 +123,7 @@ public class PartController : MonoBehaviour
         UpdateDependencies();
 
     }
+
     public void UpdateColliderBounds(){
         colid.size = pd.GetColliderSize();
         colid.offset = pd.GetColliderOffset();

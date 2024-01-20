@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class NuFaceManager : MonoBehaviour
 {
@@ -26,13 +27,30 @@ public class NuFaceManager : MonoBehaviour
 
     void OnEnable(){
         OnConfirmTransformPart.Instance.AddListener(UpdateTextAmount);
+        OnDeselectedFacePartEvent.Instance.AddListener(DebugTouchBG);
     }
 
     void OnDisable(){
-        OnConfirmTransformPart.Instance.AddListener(UpdateTextAmount);
+        OnConfirmTransformPart.Instance.RemoveListener(UpdateTextAmount);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(DebugTouchBG);
     }
 
+    void DebugTouchBG(){
+        scoreDebug.text = "Touched BG";
+    }
+
+    private bool IsPointerOverUIObject() {
+         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+         List<RaycastResult> results = new List<RaycastResult>();
+         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+         return results.Count > 0;
+     }
+
     private IEnumerator Start(){
+        targetData[0].RandomizeData();
+        writeableData[0].CopyData(rfc[0].currentChar);
+        rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
         for(;;){
             //yield return new WaitForSeconds(2f);
             //Compare();
@@ -159,6 +177,12 @@ public class NuFaceManager : MonoBehaviour
         targetData[0].CopyData(pfc.currentChar);
         writeableData[0].CopyData(rfc[0].currentChar);
         rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
+    }
+
+    public void SetToReference(){
+        targetData[1].CopyData(rfc[0].currentChar);
+        writeableData[1].CopyData(pfc.currentChar);
+        pfc.BlendCharacter(writeableData[1], targetData[1], 1f);
     }
 
     IEnumerator CountIncreaser(){

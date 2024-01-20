@@ -21,40 +21,40 @@ MonoBehaviour:
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  absoluteScale: {x: 2.75, y: 3.375, z: 1}
-  relativeScale: {x: 0.5, y: 0.75, z: 1}
-  minScaleX: 1.5
-  maxScaleX: 4
-  minScaleY: 1.5
+  absoluteScale: {x: 2.0625, y: 3.375, z: 1}
+  relativeScale: {x: 0.75, y: 0.75, z: 1}
+  minScaleX: 0.75
+  maxScaleX: 2.5
+  minScaleY: 0.75
   maxScaleY: 4
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0.75
+    propertyValue: 0.5769054
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ForeheadWidth
-    propertyValue: 0.75
+    propertyValue: 0.30127543
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ForeheadLength
-    propertyValue: 0.75
+    propertyValue: 0.8089483
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinScale
-    propertyValue: 0.75
+    propertyValue: 0.11363423
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinWidth
-    propertyValue: 0.75
+    propertyValue: 0.70368755
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinLength
-    propertyValue: 0.75
+    propertyValue: 0.07588518
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.8467289, g: 0.56317174, b: 0.7307088, a: 1}
+    colorValue: {r: 0.87129354, g: 0.9603028, b: 0.77628046, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.34857047, g: 0.35191733, b: 0.31739572, a: 1}
+    colorValue: {r: 0.018189626, g: 0.01831716, b: 0.021720886, a: 1}
   affectedPartData: []

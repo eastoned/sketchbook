@@ -23,9 +23,9 @@ MonoBehaviour:
   currentAngle: 0
   absoluteScale: {x: 3.0627491, y: 2.3664782, z: 1}
   relativeScale: {x: 0, y: 0, z: 1}
-  minScaleX: 1.5
-  maxScaleX: 4
-  minScaleY: 1.5
+  minScaleX: 0.75
+  maxScaleX: 2.5
+  minScaleY: 0.75
   maxScaleY: 4
   shaderProperties:
   - propertyName: _ForeheadScale

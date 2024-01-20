@@ -65,11 +65,13 @@ Shader "Unlit/HairQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                
+                uv.x += .01*sin(abs(uv.y)*8-_Time.w*2);
                 uv.x *= (int)(19*_StrandCount+1);
                 uv.x += (0.5*_StrandOffset);
                 uv.x = frac(uv.x);
+                
                 uv.y = pow(uv.y, (1.5*_HairBangScale+0.5));
+                
                 
                 float bang = pow(abs(i.uv.x*2-1), (4*_HairRoundness+1)) + pow(abs(uv.y*2-1), (4*_HairRoundness+1));
                 bang = (1-step(1, bang)) * step(0.5, uv.y);

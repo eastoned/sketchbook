@@ -48,6 +48,10 @@ public class FaceController : MonoBehaviour
         StartCoroutine(Blink(Random.Range(.2f, .5f), rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
     }
 
+    private void BlinkMouth(){
+        StartCoroutine(BlinkMouth(Random.Range(1f, 2f), mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue));
+    }
+
     private void Start(){
         InitializeControllers();
     }
@@ -235,6 +239,18 @@ public class FaceController : MonoBehaviour
 
     }
 
+    private IEnumerator BlinkMouth(float blinkMouthLength, float mouthOpen){
+        float animationTime = 0;
+        while(animationTime < blinkMouthLength){
+            float interval = Mathf.Clamp01(animationTime/blinkMouthLength);
+            interval = blinkCurve.Evaluate(interval);
+            mouth.UpdateSingleShaderValue("_MouthOpen", Mathf.Lerp(mouthOpen, 0, interval));
+            mouth.UpdateRenderPropBlock();
+            animationTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
     private IEnumerator Blink(float blinkLength, float eyelidTopOpen, float eyelidBottomOpen){
         float animationTime = 0;
         currentlyBlending = true;
@@ -257,7 +273,10 @@ public class FaceController : MonoBehaviour
 
         timer += Time.deltaTime;
         if(timer >= 9f){
-            Blink(transform);
+            if(Random.Range(0f, 1f) < 0.5f) {
+                Blink(transform); }else{
+
+                 BlinkMouth();}
             timer = Random.Range(0f, 4f);
         }
 

@@ -13,8 +13,20 @@ public class ScrollFaces : MonoBehaviour
 
     public Transform face1;
 
+    public bool visible = false;
+
     void OnMouseUp(){
-        StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -.5f, -1f), new Vector3(0, -3f, -1f)));
+        //StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -.5f, -1f), new Vector3(0, -3f, -1f)));
+    }
+
+    public void ToggleFacePos(){
+        if(visible){
+            StartCoroutine(AnimateFacePos(.5f, new Vector3(0, 0f, -1f), new Vector3(0, -5f, -1f)));
+            visible = false;
+        }else{
+            StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -5f, -1f), new Vector3(0, 0, -1f)));
+            visible = true;
+        }
     }
 
     private IEnumerator AnimateFacePos(float animLength, Vector3 startPos, Vector3 endPos){
@@ -31,7 +43,7 @@ public class ScrollFaces : MonoBehaviour
         if(EventSystem.current.IsPointerOverGameObject())
             return;
 
-        StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -3f, -1f), new Vector3(0, -0.5f, -1f)));
+        //StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -3f, -1f), new Vector3(0, -0.5f, -1f)));
         //cacheFaces = new float[faces.Length];
         //startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
         for(int i = 0; i < faces.Length; i++){
@@ -42,7 +54,7 @@ public class ScrollFaces : MonoBehaviour
         if(EventSystem.current.IsPointerOverGameObject())
             return;
 
-        currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - startPos;
+        //currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - startPos;
         for(int i = 0; i < faces.Length; i++){
             //faces[i].position = new Vector3(faces[i].position.x, cacheFaces[i] + currentPos, faces[i].position.z);
         }

@@ -67,7 +67,7 @@ Shader "Unlit/MouthQuadBean"
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z-2)/60, v.vertex.z, v.vertex.w);
+                v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.w-2)/60, v.vertex.z, v.vertex.w);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPosition = ComputeScreenPos(o.vertex);
@@ -79,6 +79,7 @@ Shader "Unlit/MouthQuadBean"
             {
                 float2 uv = i.uv;
                 uv += float2(0, (_MouthBend*2-1)*pow((uv.x-0.5), 2));
+                uv.y += .01*sin(abs(uv.x-.5)*16-_Time.w*3);
                 float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_MouthOpen,2);
                 fixed4 col = fixed4(0,0,0,0);
                 float line1 = pow((uv.x-0.5), 2);

@@ -74,7 +74,8 @@ Shader "Unlit/EyebrowQuad"
                 float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
                 float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength), i.uv.y + (_PositionMomentum.y * pullStrength));
                 float stretchUV = sin(uv.x*3.14);
-                //uv.y += .01*sin(uv.x*8-_Time.z*3);
+                
+                uv.y += .01*sin(uv.x*6-_Time.z*2);
                 uv *= float2((int)(_EyebrowCount*15)+1, 1);
                 uv = frac(uv);
                 uv += float2(0, stretchUV * (_EyebrowCurve*2 -1) * ((_EyebrowThickness*7 + 1)-1)/16);

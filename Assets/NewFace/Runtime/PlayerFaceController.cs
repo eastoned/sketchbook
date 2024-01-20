@@ -53,10 +53,13 @@ public class PlayerFaceController : FaceController
 
     public void SetMaterialOutline(Transform hoveredTarget){
         ClearCurrentHover();
-        if(hoveredTarget.GetComponent<PartController>()){
-            hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
-            hoveredTransform = hoveredTarget;
+        if(hoveredTarget){
+            if(hoveredTarget.GetComponent<PartController>()){
+                hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
+                hoveredTransform = hoveredTarget;
+            }
         }
+        
     }
 
     private void ClearCurrentHover(){
@@ -108,17 +111,8 @@ public class PlayerFaceController : FaceController
 
         currentPC.pd.ClampedPosition(absPos);
 
-        if(currentPC.affectedParts.Count > 0){
-            for(int i = 0; i < currentPC.affectedParts.Count; i++){
-                currentPC.affectedParts[i].pd.SetPositionBounds(currentPC.pd);
-                currentPC.affectedParts[i].pd.SetScaleBounds(currentPC.pd);
-
-                currentPC.affectedParts[i].UpdateAllTransformValues();
-            }
-        }
-
         currentPC.UpdateAllTransformValues();
-
+        
         if(currentPC.mirroredPart != null){
             currentPC.mirroredPart.UpdateAllTransformValues();
         }
@@ -142,14 +136,6 @@ public class PlayerFaceController : FaceController
         currentChange = Vector3.Distance(diff, currentPC.pd.GetAbsoluteScale());
 
         currentPC.pd.ClampedScale(diff);
-
-        if(currentPC.affectedParts.Count > 0){
-            for(int i = 0; i < currentPC.affectedParts.Count; i++){
-                currentPC.affectedParts[i].pd.SetPositionBounds(currentPC.pd);
-                currentPC.affectedParts[i].pd.SetScaleBounds(currentPC.pd);
-                currentPC.affectedParts[i].UpdateAllTransformValues();
-            }
-        }
 
         currentPC.UpdateAllTransformValues();
         

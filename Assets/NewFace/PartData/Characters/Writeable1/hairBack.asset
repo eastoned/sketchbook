@@ -24,7 +24,7 @@ MonoBehaviour:
   absoluteScale: {x: 0, y: 0, z: 1}
   relativeScale: {x: 0.5, y: 0.5, z: 1}
   minScaleX: 1
-  maxScaleX: 3
+  maxScaleX: 2.5
   minScaleY: 1
   maxScaleY: 3
   shaderProperties:
