@@ -26,6 +26,7 @@ public class CharacterData : ScriptableObject
         if(part == mouthData){
             part.maxPosY = noseData.absolutePosition.y;
         }
+
         part.absolutePosition = new Vector3(Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
         Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
         part.absolutePosition.z);
@@ -34,7 +35,6 @@ public class CharacterData : ScriptableObject
             part.absolutePosition = new Vector3(eyeData.absolutePosition.x, eyeData.absolutePosition.y + UnityEngine.Random.Range(.1f, 1f), part.absolutePosition.z);
         }
         
-
         part.SetRelativePos(part.absolutePosition);
 
         part.absoluteScale = new Vector3(Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
@@ -47,6 +47,7 @@ public class CharacterData : ScriptableObject
         foreach(ShaderProperty sp in part.shaderProperties){
             sp.SetValue(UnityEngine.Random.Range(0f, 1f));
         }
+        
         foreach(ShaderColor sc in part.shaderColors){
             sc.SetValue(UnityEngine.Random.Range(0f, 1f));
             sc.SetHue(UnityEngine.Random.Range(0f, 1f));

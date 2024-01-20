@@ -31,7 +31,6 @@ public class PlayerFaceController : FaceController
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
-        OnSetKeyFrameData.Instance.AddListener(SetDefaultBlinkAndMouthPos);
         OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
     }
 
@@ -44,12 +43,11 @@ public class PlayerFaceController : FaceController
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
-        OnSetKeyFrameData.Instance.RemoveListener(SetDefaultBlinkAndMouthPos);
         OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
     }
 
     private void UpdateMoneyAmount(){
-        //NuFaceManager.money -= currentChange;
+        NuFaceManager.money -= currentChange;
         currentChange = 0f;
     }
 

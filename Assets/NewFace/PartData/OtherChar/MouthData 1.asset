@@ -32,15 +32,11 @@ MonoBehaviour:
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
-  - propertyName: _MouthLipMaskRoundness
+  - propertyName: _MouthOpen
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
-  - propertyName: _MouthLipTop
-    propertyValue: 1
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
-  - propertyName: _MouthLipBottom
+  - propertyName: _MouthBend
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []

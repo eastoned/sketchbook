@@ -5,12 +5,8 @@ Shader "Unlit/MouthQuadBean"
 
         _MouthRadius ("Mouth Radius", Range(0, 1)) = 0.5
 
-        
-        _MouthLipMaskRoundness ("Lip Mask Roundness", Range(0, 1)) = 0.5
-        
-        _MouthLipTop ("Top Lip", Range(0, 1)) = 0.5
-        
-        _MouthLipBottom ("Bottom Lip", Range(0, 1)) = 0.5
+        _MouthOpen ("Mouth Open", Range(0, 1)) = 0.5
+        _MouthBend ("Mouth Bend", Range(0, 1)) = 0.5
 
         _TeethTop ("Top Teeth", Range(0,1)) = 0.5
         _TeethBottom ("Bottom Teeth", Range(0,1)) = 0.5
@@ -61,14 +57,12 @@ Shader "Unlit/MouthQuadBean"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float _MouthRadius, _MouthLipMaskRoundness, _MouthLipTop;
-            float _MouthRadius2, _MouthLipMaskRoundness2, _MouthLipBottom;
+            float _MouthRadius, _MouthOpen, _MouthBend;
             float _TeethTop, _TeethBottom;
             float _TongueRadius, _TongueScale, _TongueHeight;
             float4 _Color1, _Color2, _Color3, _Color4;
             float _TeethCount;
             float _TeethRoundness;
-            float _Lips;
 
             v2f vert (appdata v)
             {
@@ -84,81 +78,39 @@ Shader "Unlit/MouthQuadBean"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                //uv.y += .05*sin(uv.x*16+_Time.w*3);
-                float2 uv2 = i.uv;
-                //uv2.y += sin(uv2.x);
-                float mouthLipAdjusted = lerp(1 - _MouthLipTop, 1, _MouthLipBottom);
-                float value = distance(uv2, float2(0.5, 0.5));
-                value = step(0.5, value);
-                float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/(2*_MouthLipTop-1),2);
-                float line1 = step(0, line0) * step(0.5, uv.y);
-                line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow(abs((uv.y-0.5)/(2*_MouthLipTop-1)), 2);
-                line0 *= step(0.5, uv.y);
+                uv += float2(0, (_MouthBend*2-1)*pow((uv.x-0.5), 2));
+                float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_MouthOpen,2);
+                fixed4 col = fixed4(0,0,0,0);
+                float line1 = pow((uv.x-0.5), 2);
+                line0 = step(0, line0);
+                clip(line0 - 0.5);
+                float2 teethUV = float2(frac(uv.x*(int)(_TeethCount*29+1)), (uv.y-0.5)*2);
 
-                float line2a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/(2*mouthLipAdjusted-1),2);
-                float line2 = step(0, line2a) * (1 - step(0.5, uv.y));
-                line2a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow(abs((uv.y-0.5)/(2*mouthLipAdjusted-1)),2);
-                line2a *= (1 - step(0.5, uv.y));
-                //min of two scale values absolute 
-                //if upper and upper 2 are <0 then mouth is gone, how do we address
-                float mask = 1-clamp(-min((2*_MouthLipTop-1), (2*mouthLipAdjusted-1)), 0, 1);
-                float line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow((uv.y-0.5)/clamp(-min((2*_MouthLipTop-1), (2*mouthLipAdjusted-1)), 0, 1),2);
-                float line3 = 1-step(0, line3a);
-                line3a = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5)*_MouthLipMaskRoundness, 2)) - pow(abs(0.5*(uv.y-0.5)/clamp(-min((2*_MouthLipTop-1), (2*mouthLipAdjusted-1)), -1, 1)),3);
-                line3a = 1 - step(0, line3a);
-                line1 += line2;
-                line1 *= (line3);
-
-               
-
-                //line0 += line2a;
-                //line0 *= line3a;
-                float uvStrength = ((-(2*_MouthLipTop-1) + 3) * (-(2*mouthLipAdjusted-1) + 3));
-                float2 teethUV = float2(frac(uv.x*(int)(_TeethCount*30)), (uv.y*(uvStrength)-(uvStrength/2) - (2*_MouthLipTop-1) + (2*mouthLipAdjusted-1)));
-
-                float topComp = teethUV.y - (1 - _TeethTop)*2 - 0.5;
+                float topComp = teethUV.y - (1 - _TeethTop) - 0.5;
                 float line4 = step(0, topComp);
-                float botComp = -teethUV.y - (1-_TeethBottom)*2 - 0.5;
+
+                float botComp = -teethUV.y - (1-_TeethBottom) - 0.5;
                 line4 += step(0, botComp);
-                
+
                 float toof = pow(abs(teethUV.x*2-1), (3.5*_TeethRoundness+.5)) + pow(abs(topComp*2), (3.5*_TeethRoundness+.5));
                 float toof2 = pow(abs(teethUV.x*2-1), (3.5*_TeethRoundness+.5)) + pow(abs(botComp*2), (3.5*_TeethRoundness+.5));
                 toof = 1-step(1, toof);
                 toof2 = 1 - step(1, toof2);
                 toof += toof2;
-                
                 line4 += toof;
-                float tongue = pow((.25*_TongueRadius), 2) - pow((uv.x-.5) *(1-(.5*_TongueScale+.25)), 2) - pow((uv.y-_TongueHeight)*(.5*_TongueScale+.25),2);
-                float tongueY = pow((.25*_TongueRadius), 2) - pow((uv.y-_TongueHeight/2)*(.5*_TongueScale+.25),2);
-                //tongueY *= 10;
-                tongueY = saturate(tongueY);
-                tongue = step(0, tongue);
-                //tongueY *= tongue;
-                
-                float4 tonColor = tongue * lerp(_Color3, _Color4, uv.y);//lerp(_Color3, _Color4, ((uv.y-_TongueHeight)*_TongueScale));
-                float4 mouthColor = (1-tongue) * lerp(_Color1, _Color2, uv.y);
-                //tongue *=10;
-                //float lipOutline;
-                //line1 += _Lips;
 
-                //clip(line1.r-0.5);
-                //line4 = saturate(line4+line5);
-                float4 res = saturate(saturate(tonColor + mouthColor) + line4);
-                float newLine = line3a;
-                newLine = line2a;
+                float tongue = pow((.125*_TongueRadius), 2) - pow((uv.x-.5) *(1-(.5*_TongueScale+.25)), 2) - pow((uv.y-(_TongueHeight))*(.5*_TongueScale+.25),2);
+                tongue = step(0, tongue);
+
+                float4 tonColor = tongue * lerp(_Color3, _Color4, uv.y);//lerp(_Color3, _Color4, ((uv.y-_TongueHeight)*_TongueScale));
+                float4 mouthColor = (1-tongue) * lerp(_Color1, _Color2, i.uv.y);
 
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
-                float4 col = tex2D(_MainTex, texCoord);
-                //return res;
-                //return res * pow((2*_MouthLipTop-1) + (2*mouthLipAdjusted-1), 0.5) * col;
+                col = tex2D(_MainTex, texCoord) * saturate(saturate(tonColor + mouthColor) + line4);
 
-                uv += float2(0, _MouthLipMaskRoundness * (_MouthLipTop * 2 - 1) * ((_MouthLipBottom * 7 + 1) - 1) / 16);
-                float result = pow(abs(uv.x*2-1), (_TeethRoundness*3.5+0.5)) + pow(abs(uv.y*2-1)*(_TeethCount*7+1), (_TeethRoundness*3.5+0.5));
-                result = 1 - step(1, result);
-                clip(result - 0.5);
                 return col;
             }
             ENDCG

@@ -73,14 +73,6 @@ public class FaceController : MonoBehaviour
         bangs.pd = currentChar.hairFrontData;
     }
 
-    public void SetDefaultBlinkAndMouthPos(){
-        Debug.Log("Set new eye and mouth vars");
-        eyelidTop = rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue;
-        eyelidBottom = rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue;
-        mouthTop = mouth.pd.shadePropertyDict["_MouthLipTop"].propertyValue;
-        mouthBottom = mouth.pd.shadePropertyDict["_MouthLipBottom"].propertyValue;
-    }
-
     public Vector2 Rotate2D(Vector2 v, float delta) {
         return new Vector2(
             v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
@@ -260,8 +252,14 @@ public class FaceController : MonoBehaviour
         }
         currentlyBlending = false;
     }
-
+    float timer = 0;
     void Update(){
+
+        timer += Time.deltaTime;
+        if(timer >= 9f){
+            Blink(transform);
+            timer = Random.Range(0f, 4f);
+        }
 
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
          

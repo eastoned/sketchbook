@@ -12,35 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
   m_Name: mouth
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: -0.25, z: -0.05}
-  relativePosition: {x: 0, y: 0.33333334, z: -0.05}
+  absolutePosition: {x: 0, y: -0.68072283, z: -0.05}
+  relativePosition: {x: 0, y: 0.27338403, z: -0.05}
   minPosX: 0
   maxPosX: 0
-  minPosY: -0.75
-  maxPosY: 0.75
+  minPosY: -0.8589537
+  maxPosY: 0.8589537
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.17197451, y: 0.21052632, z: 1}
+  relativeScale: {x: 0.6088018, y: 0.22532482, z: 1}
   minScaleX: 0.05
-  maxScaleX: 2.6666667
+  maxScaleX: 1.5
   minScaleY: 0.1
-  maxScaleY: 2
+  maxScaleY: 1.7179074
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
-  - propertyName: _MouthLipMaskRoundness
+  - propertyName: _MouthOpen
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
-  - propertyName: _MouthLipTop
-    propertyValue: 1
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
-  - propertyName: _MouthLipBottom
+  - propertyName: _MouthBend
     propertyValue: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []

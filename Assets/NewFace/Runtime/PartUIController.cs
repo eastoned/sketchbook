@@ -35,6 +35,7 @@ public class PartUIController : MonoBehaviour
     private void UpdateTitleText(Transform partTransform)
     {
         transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
         titleText.text = partTransform.name;
         partData = partTransform.GetComponent<PartController>();
         colorSliderContainer.SetActive(false); 
@@ -100,6 +101,7 @@ public class PartUIController : MonoBehaviour
 
     void TurnOffUI(){
         transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
         colorSliderContainer.SetActive(false);
     }
 

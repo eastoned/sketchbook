@@ -28,10 +28,6 @@ MonoBehaviour:
   minScaleY: 0.25
   maxScaleY: 1.125
   shaderProperties:
-  - propertyName: _EyeRadius
-    propertyValue: 0.82500124
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
   - propertyName: _PupilRadius
     propertyValue: 0.53836626
     IncreaseValueRemarks: []
