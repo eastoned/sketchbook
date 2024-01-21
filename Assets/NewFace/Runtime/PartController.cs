@@ -85,7 +85,6 @@ public class PartController : MonoBehaviour
         if(IsPointerOverUIObject())
             return;
         
-        
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;

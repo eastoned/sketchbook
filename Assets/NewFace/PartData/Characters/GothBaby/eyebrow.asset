@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
+  m_Name: eyebrow
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0.31803444, y: 0.31875047, z: -0.2}
+  relativePosition: {x: 0.0712739, y: 0.46886703, z: -0.2}
+  minPosX: 0.296875
+  maxPosX: 0.59375
+  minPosY: -1.1757632
+  maxPosY: 2.0117369
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: 0
+  absoluteScale: {x: 0.4078125, y: 0.8, z: 1}
+  relativeScale: {x: 1, y: 0.79496694, z: 1}
+  minScaleX: 0.2
+  maxScaleX: 0.59375
+  minScaleY: 0.2
+  maxScaleY: 1
+  shaderProperties:
+  - propertyName: _EyebrowCount
+    propertyValue: 0.52315
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyebrowThickness
+    propertyValue: 0.9749125
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyebrowRoundness
+    propertyValue: 0.11025202
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyebrowCurve
+    propertyValue: 0.40719038
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.59916157, g: 0.106951445, b: 0.57655066, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.3159867, g: 0.38609856, b: 0.29941726, a: 1}
+  affectedPartData: []

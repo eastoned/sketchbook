@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
+  m_Name: GothBaby
+  m_EditorClassIdentifier: 
+  name: GothBaby
+  writeable: 0
+  earData: {fileID: 11400000, guid: 8b27ae370e28318459b9d257f73a659b, type: 2}
+  eyebrowData: {fileID: 11400000, guid: 27d5687460c29614bb5415581a3bb55a, type: 2}
+  eyeData: {fileID: 11400000, guid: 9466079be25a8f34497154ed7a027995, type: 2}
+  hairBackData: {fileID: 11400000, guid: bb02ac6b7fea8bd48954a83f28b60b1c, type: 2}
+  hairFrontData: {fileID: 11400000, guid: b8167cee43b9ef044a8510da90c82e7f, type: 2}
+  headData: {fileID: 11400000, guid: 660d8ab6b8eec7044824f792fb69c6de, type: 2}
+  mouthData: {fileID: 11400000, guid: 8a1b5b22acf4cfc4f9ec5afcbd86a33f, type: 2}
+  neckData: {fileID: 11400000, guid: 01c5c780be2a0fd44b1ece3019bc274f, type: 2}
+  noseData: {fileID: 11400000, guid: 1a17ada2786a91a4f976ba73c1fc3c9c, type: 2}
+  allParts:
+  - {fileID: 11400000, guid: 8b27ae370e28318459b9d257f73a659b, type: 2}
+  - {fileID: 11400000, guid: 9466079be25a8f34497154ed7a027995, type: 2}
+  - {fileID: 11400000, guid: 27d5687460c29614bb5415581a3bb55a, type: 2}
+  - {fileID: 11400000, guid: bb02ac6b7fea8bd48954a83f28b60b1c, type: 2}
+  - {fileID: 11400000, guid: b8167cee43b9ef044a8510da90c82e7f, type: 2}
+  - {fileID: 11400000, guid: 660d8ab6b8eec7044824f792fb69c6de, type: 2}
+  - {fileID: 11400000, guid: 8a1b5b22acf4cfc4f9ec5afcbd86a33f, type: 2}
+  - {fileID: 11400000, guid: 01c5c780be2a0fd44b1ece3019bc274f, type: 2}
+  - {fileID: 11400000, guid: 1a17ada2786a91a4f976ba73c1fc3c9c, type: 2}

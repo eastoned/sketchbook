@@ -79,7 +79,7 @@ public class PlayerFaceController : FaceController
 
     private void SetTransformCache(){
         if(currentPC != null){
-            Debug.Log("Setting caches");
+            ///Debug.Log("Setting caches");
             if(currentPC.translatable){
                 positionCache = currentPC.pd.relativePosition;
             }

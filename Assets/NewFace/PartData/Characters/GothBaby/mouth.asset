@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
+  m_Name: mouth
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -0.5763888, z: 0}
+  relativePosition: {x: 0, y: 0.31917214, z: 0}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -1.59375
+  maxPosY: 1.59375
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 0.553125, y: 1.2203125, z: 1}
+  relativeScale: {x: 0.8489011, y: 0.8233378, z: 1}
+  minScaleX: 0.05
+  maxScaleX: 1.1875
+  minScaleY: 0.1
+  maxScaleY: 1.59375
+  shaderProperties:
+  - propertyName: _MouthRadius
+    propertyValue: 0.7420252
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthOpen
+    propertyValue: 0.11272343
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthBend
+    propertyValue: 0.21316986
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethTop
+    propertyValue: 0.9274556
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethBottom
+    propertyValue: 0.9386163
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethCount
+    propertyValue: 0.39174128
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethRoundness
+    propertyValue: 0.9763881
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueRadius
+    propertyValue: 0.537254
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueScale
+    propertyValue: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueHeight
+    propertyValue: 0.43638414
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.29796815, g: 0.33206072, b: 0.07947688, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.19572145, g: 0.28171068, b: 0.43074208, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.63562, g: 0.61342883, b: 0.6142344, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.056533985, g: 0.19332951, b: 0.20088601, a: 1}
+  affectedPartData: []

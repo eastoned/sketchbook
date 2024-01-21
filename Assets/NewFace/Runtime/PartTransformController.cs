@@ -32,7 +32,7 @@ public class PartTransformController : MonoBehaviour
             return;
 
 
-        Debug.Log("Clicked transform cnotroller");
+        //Debug.Log("Clicked transform cnotroller");
         OnSetTransformCacheEvent.Instance.Invoke();
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.localPosition - mouseDelta2;

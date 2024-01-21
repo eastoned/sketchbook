@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832921ba22668d7499079a9547de0203, type: 3}
+  m_Name: eye
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0.35850298, y: 0.17708355, z: -0.05}
+  relativePosition: {x: 0.207589, y: 0.55555564, z: -0.05}
+  minPosX: 0.296875
+  maxPosX: 0.59375
+  minPosY: -1.59375
+  maxPosY: 1.59375
+  minAngle: -90
+  maxAngle: 90
+  currentAngle: 0
+  absoluteScale: {x: 0.4453125, y: 0.5859375, z: 1}
+  relativeScale: {x: 1, y: 0.20930232, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 0.59375
+  minScaleY: 0.25
+  maxScaleY: 1.59375
+  shaderProperties:
+  - propertyName: _PupilRadius
+    propertyValue: 0.23170769
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _DotRadius
+    propertyValue: 0.39990726
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _PupilRatio
+    propertyValue: 0.5010635
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopLength
+    propertyValue: 0.8713083
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopSkew
+    propertyValue: 0.17348146
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomLength
+    propertyValue: 0.5382908
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomSkew
+    propertyValue: 0.2526315
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _PupilRoundness
+    propertyValue: 0.72656274
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidTopOpen
+    propertyValue: 0.49903527
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomOpen
+    propertyValue: 0.54072964
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.13740401, g: 0.15643151, b: 0.7355013, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.24734041, g: 0.20660496, b: 0.4802193, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.4564014, g: 0.47459787, b: 0.20834374, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.04806167, g: 0.24752808, b: 0.13225065, a: 1}
+  affectedPartData: []
+  reactiveProperties: []

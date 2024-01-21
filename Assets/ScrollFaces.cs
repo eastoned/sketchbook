@@ -14,17 +14,25 @@ public class ScrollFaces : MonoBehaviour
     public Transform face1;
 
     public bool visible = false;
+    private Coroutine movin;
+
+    public AnimationCurve bounceIn;
 
     void OnMouseUp(){
         //StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -.5f, -1f), new Vector3(0, -3f, -1f)));
     }
 
     public void ToggleFacePos(){
+        if(movin != null){
+            StopCoroutine(movin);
+        }
+        Vector3 pressedPos = face1.position;
+
         if(visible){
-            StartCoroutine(AnimateFacePos(.5f, new Vector3(0, 0f, -1f), new Vector3(0, -5f, -1f)));
+            movin = StartCoroutine(AnimateFacePos(.5f, pressedPos, new Vector3(0, -5f, -1f)));
             visible = false;
         }else{
-            StartCoroutine(AnimateFacePos(.5f, new Vector3(0, -5f, -1f), new Vector3(0, 0, -1f)));
+            movin = StartCoroutine(AnimateFacePos(.5f, pressedPos, new Vector3(0, 0, -1f)));
             visible = true;
         }
     }
@@ -33,10 +41,12 @@ public class ScrollFaces : MonoBehaviour
         float animationTime = 0;
         while(animationTime < animLength){
             float interval = Mathf.Clamp01(animationTime/animLength);
-            face1.position = Vector3.Lerp(startPos, endPos, interval);
+            float newint = bounceIn.Evaluate(interval);
+            face1.position = Vector3.Lerp(startPos, endPos, newint);
             animationTime += Time.deltaTime;
             yield return null;
         }
+        face1.position = endPos;
     }
 
     void OnMouseDown(){

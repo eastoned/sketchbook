@@ -12,57 +12,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b793ebbedc9495498fa2646b6b84ba5, type: 3}
   m_Name: ear
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 1, y: -0, z: 0.15}
-  relativePosition: {x: 0.57313216, y: 0.36229244, z: 0.15}
-  minPosX: 0.5
-  maxPosX: 1.25
-  minPosY: -0.75
-  maxPosY: 1.25
+  absolutePosition: {x: 0.9322917, y: 0.20377588, z: 0.15}
+  relativePosition: {x: 0.6096492, y: 0.4783437, z: 0.15}
+  minPosX: 0.5703125
+  maxPosX: 1.1640625
+  minPosY: -1.59375
+  maxPosY: 2.1640625
   minAngle: -90
   maxAngle: 90
-  currentAngle: -0
-  absoluteScale: {x: 1, y: 1, z: 1}
-  relativeScale: {x: 0, y: 0, z: 1}
-  minScaleX: 1
-  maxScaleX: 1.5
-  minScaleY: 1
-  maxScaleY: 1.5
+  currentAngle: 0
+  absoluteScale: {x: 1.796875, y: 1.546875, z: 1}
+  relativeScale: {x: 0.75, y: 0.25, z: 1}
+  minScaleX: 0.5
+  maxScaleX: 1.1875
+  minScaleY: 0.5
+  maxScaleY: 3.1875
   shaderProperties:
   - propertyName: _EarWidthSkew
-    propertyValue: 0.46747524
+    propertyValue: 0.87252915
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarLengthSkew
-    propertyValue: 0.90984714
+    propertyValue: 0.9316741
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarShape
-    propertyValue: 0.30219716
+    propertyValue: 0.36571938
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarRoundness
-    propertyValue: 0.61566895
+    propertyValue: 0.3976156
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarOpenWidth
-    propertyValue: 0.6669235
+    propertyValue: 0.75467587
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarOpenLength
-    propertyValue: 0.7660973
+    propertyValue: 0.3319022
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarConcha
-    propertyValue: 0.6395476
+    propertyValue: 0.8466507
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarTragus
-    propertyValue: 0.2912988
+    propertyValue: 0.056161165
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 1}
+    colorValue: {r: 0.028854946, g: 0.0756315, b: 0.058323532, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 1}
+    colorValue: {r: 0.02002032, g: 0.009512955, b: 0.026162624, a: 1}
   affectedPartData: []

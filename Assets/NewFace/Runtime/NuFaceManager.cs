@@ -20,6 +20,9 @@ public class NuFaceManager : MonoBehaviour
     private Coroutine skippableWait;
     public List<RequestChange> requestList;
     public int count = 0;
+    public int charStage = 0;
+
+    public int[] stageThresholds;
 
     public static float money = 0f;
     public TextMeshProUGUI scoreDebug, moneyDebug;
@@ -42,6 +45,17 @@ public class NuFaceManager : MonoBehaviour
         targetData[0].RandomizeData();
         writeableData[0].CopyData(rfc[0].currentChar);
         rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
+        stageThresholds = new int[9];
+        int scoreCount = 0;
+        for(int i = 0; i < stageThresholds.Length; i++){
+            scoreCount += 3;
+            scoreCount += pfc.bodyData[i].shaderProperties.Count;
+            stageThresholds[i] = scoreCount;
+        }
+
+        AffectStageCount(1);
+        
+
         for(;;){
             //yield return new WaitForSeconds(2f);
             //Compare();
@@ -56,8 +70,41 @@ public class NuFaceManager : MonoBehaviour
     [ContextMenu("Compare Faces")]
     public void Compare(){
         //money += GetCharacterDifference(rfc[0].currentChar, pfc.currentChar);
-        scoreDebug.text = "Compare Score: " + GetCharacterDifference(rfc[0].currentChar, pfc.currentChar).ToString();
+        //scoreDebug.text = "Compare Score: " + GetCharacterDifference(rfc[0].currentChar, pfc.currentChar).ToString();
+        float result = GetDataDifference(rfc[0].bodyData, pfc.bodyData);
+        scoreDebug.text = "Compare Score: " + result.ToString();
         UpdateTextAmount();
+        if(result >= stageThresholds[charStage-1]){
+            Debug.Log("Moving on to next stage");
+            if(charStage < stageThresholds.Length){
+                RandomizeFace();
+                AffectStageCount(1); 
+            }else{
+                scoreDebug.text = "You win"!;
+            }
+        }else{
+            scoreDebug.text = "You got: " + result + " components right. You need: " + stageThresholds[charStage-1];
+            Debug.Log("Try Again");
+        }
+    }
+    public void AffectStageCount(int diff){
+        charStage += diff;
+
+        for(int i = 0; i < pfc.bodyParts.Length; i++){
+            pfc.bodyParts[i].gameObject.GetComponent<MeshRenderer>().enabled = i < charStage;
+            pfc.bodyParts[i].gameObject.GetComponent<BoxCollider2D>().enabled = i < charStage;
+            if(pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart){
+                pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<MeshRenderer>().enabled = i < charStage;
+                pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<BoxCollider2D>().enabled = i < charStage;
+            }
+        }
+
+        for(int i = 0; i < rfc[0].bodyParts.Length; i++){
+            rfc[0].bodyParts[i].gameObject.GetComponent<MeshRenderer>().enabled = i < charStage;
+            if(rfc[0].bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart){
+                rfc[0].bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<MeshRenderer>().enabled = i < charStage;
+            }
+        }
     }
 
     void UpdateTextAmount(){
@@ -136,7 +183,12 @@ public class NuFaceManager : MonoBehaviour
     public void RandomizeFace(){
         //Debug.Log("let random begin");
         //Debug.Log(targetData[rfc.Length - 1].name);
-        targetData[0].RandomizeData();
+       // if(Random.Range(0f, 1f) < 0.5f){
+            targetData[0].RandomizeData();
+        //}else{
+           // targetData[0].RandomizeRandomPart();
+        //}
+        
         writeableData[0].CopyData(rfc[0].currentChar);
         rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
 
@@ -286,6 +338,7 @@ public class NuFaceManager : MonoBehaviour
 
     public float GetCharacterDifference(CharacterData gameData, CharacterData targetData){
         float score = 0;
+        
         score += GetPartDifference(gameData.headData, targetData.headData);
         score += GetPartDifference(gameData.neckData, targetData.neckData);
         score += GetPartDifference(gameData.eyeData, targetData.eyeData);
@@ -298,6 +351,30 @@ public class NuFaceManager : MonoBehaviour
        Debug.Log("Similarity score between current face and : " + targetData.name + " is : " + score);
        money += score;
        return score;
+    }
+    public float GetDataDifference(PartData[] data1, PartData[] data2){
+        float score = 0;
+
+        for(int i = 0; i < charStage; i++){
+            score += GetPartDifference(data1[i], data2[i]);
+        }
+        
+        money += score;
+        return score;
+    }
+
+    public float GetFaceDifference(FaceController fc1, FaceController fc2){
+        float score = 0;
+
+        for(int i = 0; i < charStage; i++){
+            //skip adding score if duplicate piece
+            if(!fc1.bodyParts[i].GetComponent<PartController>().flippedXAxis){
+                score += GetPartDifference(fc1.bodyParts[i].GetComponent<PartController>().pd, fc2.bodyParts[i].GetComponent<PartController>().pd);
+            }
+        }
+        
+        money += score;
+        return score;
     }
 
     public float GetPartDifference(PartData gamePart, PartData characterPart)
@@ -325,8 +402,8 @@ public class NuFaceManager : MonoBehaviour
             Vector3 currentColor = new Vector3(gamePart.shaderColors[j].GetValue(), gamePart.shaderColors[j].GetHue(), gamePart.shaderColors[j].GetSaturation()).normalized;
             Vector3 charColor = new Vector3(characterPart.shaderColors[j].GetValue(), characterPart.shaderColors[j].GetHue(), characterPart.shaderColors[j].GetSaturation()).normalized;
         }
-         //Debug.Log("Similarity score between : " + gamePart.name + " is : " + score);
-        Debug.Log(diffDebug);
+        //Debug.Log("Similarity score between : " + gamePart.name + " is : " + score);
+        Debug.Log("Graded: " + gamePart + "\n" + diffDebug);
 
         return score;
     }

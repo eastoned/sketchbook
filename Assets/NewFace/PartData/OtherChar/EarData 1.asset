@@ -23,9 +23,9 @@ MonoBehaviour:
   currentAngle: 90
   absoluteScale: {x: 1, y: 1, z: 1}
   relativeScale: {x: 0.2806036, y: 0.1440271, z: 1}
-  minScaleX: 1
+  minScaleX: 0.5
   maxScaleX: 2.3496666
-  minScaleY: 1
+  minScaleY: 0.5
   maxScaleY: 2.3190107
   shaderProperties:
   - propertyName: _EarWidthSkew
@@ -65,3 +65,4 @@ MonoBehaviour:
     colorValue: {r: 1, g: 0, b: 0, a: 1}
   - colorName: _Color2
     colorValue: {r: 0, g: 0, b: 0, a: 1}
+  affectedPartData: []

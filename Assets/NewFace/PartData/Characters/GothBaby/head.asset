@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
+  m_Name: head
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: 0, z: 0.1}
+  relativePosition: {x: 0, y: 0, z: 0.1}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: 0
+  maxPosY: 0
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 1.1875, y: 3.1875, z: 1}
+  relativeScale: {x: 0.25, y: 0.75, z: 1}
+  minScaleX: 0.75
+  maxScaleX: 2.5
+  minScaleY: 0.75
+  maxScaleY: 4
+  shaderProperties:
+  - propertyName: _ForeheadScale
+    propertyValue: 0.41744238
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ForeheadWidth
+    propertyValue: 0.3211488
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ForeheadLength
+    propertyValue: 0.96959925
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ChinScale
+    propertyValue: 0.7843175
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ChinWidth
+    propertyValue: 0.479348
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ChinLength
+    propertyValue: 0.46567184
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.6996798, g: 0.63683885, b: 0.8431574, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.16914949, g: 0.21988451, b: 0.16608943, a: 1}
+  affectedPartData: []

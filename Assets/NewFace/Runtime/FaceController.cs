@@ -9,6 +9,7 @@ public class FaceController : MonoBehaviour
 
     public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar;
     public Transform[] bodyParts;
+    public PartData[] bodyData;
 
     [Range(-90, 90)]
     public float rotation;
@@ -45,11 +46,19 @@ public class FaceController : MonoBehaviour
     }
 
     private void Blink(Transform ignore){
-        StartCoroutine(Blink(Random.Range(.2f, .5f), rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
+        if (faceAnim != null){
+            StopCoroutine(faceAnim);
+        }
+        //Debug.Log(gameObject.name + " eye top: " + rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue);
+        faceAnim = StartCoroutine(Blink(Random.Range(.2f, .5f), rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
     }
 
     private void BlinkMouth(){
-        StartCoroutine(BlinkMouth(Random.Range(1f, 2f), mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue));
+        if (faceAnim != null){
+            StopCoroutine(faceAnim);
+        }
+        //Debug.Log(gameObject.name + " mouth: " + mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue);
+        faceAnim = StartCoroutine(BlinkMouth(Random.Range(1f, 2f), mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue));
     }
 
     private void Start(){
@@ -63,18 +72,28 @@ public class FaceController : MonoBehaviour
 
     [ContextMenu("Refresh Connected Data")]
     public void RefreshDataConnection(){
+        bodyData = new PartData[9];
         leftEye.pd = currentChar.eyeData;
         rightEye.pd = currentChar.eyeData;
+        bodyData[5] = currentChar.eyeData;
         leftEyebrow.pd = currentChar.eyebrowData;
         rightEyebrow.pd = currentChar.eyebrowData;
+        bodyData[6] = currentChar.eyebrowData;
         leftEar.pd = currentChar.earData;
         rightEar.pd = currentChar.earData;
+        bodyData[4] = currentChar.earData;
         head.pd = currentChar.headData;
+        bodyData[1] = currentChar.headData;
         neck.pd = currentChar.neckData;
+        bodyData[0] = currentChar.neckData;
         nose.pd = currentChar.noseData;
+        bodyData[7] = currentChar.noseData;
         mouth.pd = currentChar.mouthData;
+        bodyData[8] = currentChar.mouthData;
         hair.pd = currentChar.hairBackData;
+        bodyData[2] = currentChar.hairBackData;
         bangs.pd = currentChar.hairFrontData;
+        bodyData[3] = currentChar.hairFrontData;
     }
 
     public Vector2 Rotate2D(Vector2 v, float delta) {
@@ -161,6 +180,10 @@ public class FaceController : MonoBehaviour
     }
 
     public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength){
+
+        if (faceAnim != null){
+            StopCoroutine(faceAnim);
+        }
 
         if(blending != null){
             StopCoroutine(blending);
@@ -269,14 +292,18 @@ public class FaceController : MonoBehaviour
         currentlyBlending = false;
     }
     float timer = 0;
+    private Coroutine faceAnim;
     void Update(){
 
         timer += Time.deltaTime;
+
         if(timer >= 9f){
             if(Random.Range(0f, 1f) < 0.5f) {
-                Blink(transform); }else{
-
-                 BlinkMouth();}
+                Blink(transform);
+            }else{
+                BlinkMouth();
+            }
+            
             timer = Random.Range(0f, 4f);
         }
 

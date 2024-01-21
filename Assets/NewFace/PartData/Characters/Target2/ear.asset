@@ -23,9 +23,9 @@ MonoBehaviour:
   currentAngle: -0
   absoluteScale: {x: 1, y: 1, z: 1}
   relativeScale: {x: 0, y: 0, z: 1}
-  minScaleX: 1
+  minScaleX: 0.5
   maxScaleX: 1.5
-  minScaleY: 1
+  minScaleY: 0.5
   maxScaleY: 1.5
   shaderProperties:
   - propertyName: _EarWidthSkew

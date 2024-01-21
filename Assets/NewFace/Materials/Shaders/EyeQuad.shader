@@ -91,7 +91,7 @@ Shader "Unlit/EyeQuad"
                 //return pullStrength.xxxx;
                 _EyeRadius = 1;
                 float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
-                uv.y += .01*sin(uv.x*8-_Time.w*3);
+                uv.y += .005*sin(uv.x*8-_Time.w*2);
                 float line1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
                 ((_EyelidTopLength - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
