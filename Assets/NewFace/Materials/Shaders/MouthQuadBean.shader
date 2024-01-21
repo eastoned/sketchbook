@@ -79,7 +79,7 @@ Shader "Unlit/MouthQuadBean"
             {
                 float2 uv = i.uv;
                 uv += float2(0, (_MouthBend*2-1)*pow((uv.x-0.5), 2));
-                uv.y += .01*sin(abs(uv.x-.5)*16-_Time.w*3);
+                uv.y += .01*sin(abs(uv.x-.5)*8-_Time.w*3);
                 float line0 = (pow(_MouthRadius/2, 2) - pow((uv.x-0.5), 2)) - pow((uv.y-0.5)/_MouthOpen,2);
                 fixed4 col = fixed4(0,0,0,0);
                 float line1 = pow((uv.x-0.5), 2);

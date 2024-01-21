@@ -31,6 +31,9 @@ public class PartTransformController : MonoBehaviour
         if(IsPointerOverUIObject())
             return;
 
+
+        Debug.Log("Clicked transform cnotroller");
+        OnSetTransformCacheEvent.Instance.Invoke();
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.localPosition - mouseDelta2;
         currentlyHeld = true;
@@ -53,7 +56,6 @@ public class PartTransformController : MonoBehaviour
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         transform.localPosition = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.localPosition.z);
-        
 
         switch(controls){
             case TransformController.TRANSLATE:
@@ -63,7 +65,7 @@ public class PartTransformController : MonoBehaviour
                 OnRotatePartController.Instance.Invoke(transform.localPosition);
             break;
             case TransformController.SCALE:
-                    OnScalePartController.Instance.Invoke(transform.localPosition);
+                OnScalePartController.Instance.Invoke(transform.localPosition);
             break;
         }
         

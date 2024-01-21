@@ -12,7 +12,8 @@ public class PlayerFaceController : FaceController
     public Transform currentTransform;
 
     public Transform cube;
-    public Vector3 positionDifference;
+    public Vector3 positionCache, scaleCache;
+    public float angleCache;
 
     public PartTransformController rotationController, scaleController;
 
@@ -26,6 +27,7 @@ public class PlayerFaceController : FaceController
         base.OnEnable();
         OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
+        OnSetTransformCacheEvent.Instance.AddListener(SetTransformCache);
         OnDeselectedFacePartEvent.Instance.AddListener(ClearCurrentHover);
         OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
@@ -38,12 +40,13 @@ public class PlayerFaceController : FaceController
         base.OnDisable();
         OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
+        OnSetTransformCacheEvent.Instance.RemoveListener(SetTransformCache);
         OnDeselectedFacePartEvent.Instance.RemoveListener(ClearCurrentHover);
         OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
-        OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
+        OnConfirmTransformPart.Instance.RemoveListener(UpdateMoneyAmount);
     }
 
     private void UpdateMoneyAmount(){
@@ -74,8 +77,22 @@ public class PlayerFaceController : FaceController
         scaleController.transform.localPosition = new Vector3(100, 100, 100);
     }
 
+    private void SetTransformCache(){
+        if(currentPC != null){
+            Debug.Log("Setting caches");
+            if(currentPC.translatable){
+                positionCache = currentPC.pd.relativePosition;
+            }
+            if(currentPC.rotatable){
+                angleCache = currentPC.pd.currentAngle;
+            }
+            if(currentPC.scalable){
+                scaleCache = currentPC.pd.relativeScale;
+            }
+        }
+    }
+
     private void SetTransformControllers(Transform selectedTarget){
-        
         currentPC = selectedTarget.GetComponent<PartController>();
         
         if(currentTransform != selectedTarget){
@@ -84,18 +101,17 @@ public class PlayerFaceController : FaceController
             cube.position = currentTransform.position;
         }
         
-        DisappearControllers();
+        DisappearControllers(); 
 
-        if(currentPC.rotatable)
+        if(currentPC.rotatable){
             rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0, 0));
-        
-        rotationController.transform.localPosition = new Vector3(rotationController.transform.localPosition.x, rotationController.transform.localPosition.y, -1f);
-
-        if(currentPC.scalable)
+            rotationController.transform.localPosition = new Vector3(rotationController.transform.localPosition.x, rotationController.transform.localPosition.y, -1f);
+        }
+            
+        if(currentPC.scalable){
             scaleController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
-        
-        scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
-    
+            scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
+        }
     }
 
     private void SetPartPosition(Vector3 pos){
@@ -106,10 +122,11 @@ public class PlayerFaceController : FaceController
         currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
         Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
 
-        currentChange = Vector3.Distance(currentPC.pd.ReturnClampedPosition(pos), currentPC.pd.GetAbsolutePosition());
         
-
         currentPC.pd.ClampedPosition(absPos);
+
+        currentChange = Vector2.Distance(currentPC.pd.relativePosition, positionCache);
+        //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
 
         currentPC.UpdateAllTransformValues();
         
@@ -133,10 +150,11 @@ public class PlayerFaceController : FaceController
         Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
         diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
 
-        currentChange = Vector3.Distance(diff, currentPC.pd.GetAbsoluteScale());
-
+        
+        
         currentPC.pd.ClampedScale(diff);
-
+        currentChange = Vector3.Distance(currentPC.pd.relativeScale, scaleCache);
+        //Debug.Log("Scale change: " + currentChange);
         currentPC.UpdateAllTransformValues();
         
         if(currentPC.mirroredPart != null){
@@ -160,8 +178,9 @@ public class PlayerFaceController : FaceController
           //  Debug.Log("The new angle is greater than the current angle");
         }
 
-        currentChange = Mathf.Abs(angle - currentPC.pd.currentAngle);
+        currentChange = Mathf.Abs(angleCache - currentPC.pd.currentAngle)/180f;
         //Debug.Log("The current angle diff: " + currentChange);
+        //Debug.Log("Angle change: " + currentChange);
 
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
         

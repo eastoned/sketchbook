@@ -7,7 +7,7 @@ public class EyeData : PartData{
 
     public override void SetPositionBounds(PartData parentData)
     {
-        Debug.Log("Setting eye lowest position with parent");
+        //Debug.Log("Setting eye lowest position with parent");
         minPosX = GetAbsoluteScale().x/2f;
         maxPosX = parentData.GetAbsoluteScale().x/2f;
         minPosY = -parentData.GetAbsoluteScale().y/2f;

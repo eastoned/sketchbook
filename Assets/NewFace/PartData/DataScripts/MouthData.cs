@@ -5,7 +5,7 @@ public class MouthData : PartData
 {
    public override void SetScaleBounds(PartData parentData)
     {
-        Debug.Log("Setting max scale of mouth");
+        //Debug.Log("Setting max scale of mouth");
         maxScaleX = parentData.GetAbsoluteScale().x;
         maxScaleY = parentData.GetAbsoluteScale().y/2f;
     }

@@ -89,7 +89,7 @@ public class PartController : MonoBehaviour
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
-        
+
     }
 
     void OnMouseUp(){

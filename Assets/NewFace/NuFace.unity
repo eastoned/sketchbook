@@ -4978,7 +4978,9 @@ MonoBehaviour:
   currentPC: {fileID: 0}
   currentTransform: {fileID: 0}
   cube: {fileID: 775294228}
-  positionDifference: {x: 0, y: 0, z: 0}
+  positionCache: {x: 0, y: 0, z: 0}
+  scaleCache: {x: 0, y: 0, z: 0}
+  angleCache: 0
   rotationController: {fileID: 834628291}
   scaleController: {fileID: 1401635628}
   currentHovered: {fileID: 0}
@@ -9908,6 +9910,7 @@ MonoBehaviour:
   controls: 1
   mouseDelta2: {x: 0, y: 0, z: 0}
   offset: {x: 0, y: 0, z: 0}
+  currentlyHeld: 0
 --- !u!61 &834628292
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11111,7 +11114,9 @@ MonoBehaviour:
   currentPC: {fileID: 0}
   currentTransform: {fileID: 0}
   cube: {fileID: 775294228}
-  positionDifference: {x: 0, y: 0, z: 0}
+  positionCache: {x: 0, y: 0, z: 0}
+  scaleCache: {x: 0, y: 0, z: 0}
+  angleCache: 0
   rotationController: {fileID: 834628291}
   scaleController: {fileID: 1401635628}
   currentHovered: {fileID: 0}
@@ -26559,6 +26564,7 @@ MonoBehaviour:
   controls: 2
   mouseDelta2: {x: 0, y: 0, z: 0}
   offset: {x: 0, y: 0, z: 0}
+  currentlyHeld: 0
 --- !u!1 &1421405300
 GameObject:
   m_ObjectHideFlags: 0
@@ -27395,7 +27401,7 @@ Transform:
   m_GameObject: {fileID: 1470558954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.38302922, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.64, y: 0.24, z: 1}
   m_Children: []
   m_Father: {fileID: 963588424}
   m_RootOrder: 8

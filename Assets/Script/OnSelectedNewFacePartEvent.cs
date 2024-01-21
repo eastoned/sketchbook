@@ -10,3 +10,8 @@ public class OnHoveredNewFacePartEvent : UnityEvent<Transform>
 {
     public static OnHoveredNewFacePartEvent Instance = new OnHoveredNewFacePartEvent();
 }
+
+public class OnSetTransformCacheEvent : UnityEvent
+{
+    public static OnSetTransformCacheEvent Instance = new OnSetTransformCacheEvent();
+}
