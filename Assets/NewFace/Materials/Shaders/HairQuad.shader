@@ -92,7 +92,7 @@ Shader "Unlit/HairQuad"
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
-                float4 col2 = tex2D(_MainTex, texCoord);
+                float4 col2 = tex2D(_MainTex, texCoord + float2(round(_Time.y)/4, round(_Time.y*.5)/.5));
                 float4 col = lerp(_Color1, _Color2, 1-uvCol);
                 //col = lerp(_Color1, _Color2, 1-step(1-uvCol/2,col2));
                 return col*col2;
