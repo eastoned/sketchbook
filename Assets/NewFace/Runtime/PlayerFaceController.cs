@@ -21,6 +21,7 @@ public class PlayerFaceController : FaceController
     [SerializeField] private Material colliderMaterial;
 
     public float currentChange = 0f;
+    public bool notInteracting = false;
 
     public override void OnEnable()
 	{
@@ -62,7 +63,16 @@ public class PlayerFaceController : FaceController
                 hoveredTransform = hoveredTarget;
             }
         }
-        
+    }
+
+    private void StartCrying(){
+        mouth.UpdateSingleShaderValue("_MouthBend", 0f);
+        mouth.UpdateRenderPropBlock();
+    }
+
+    private void StopCrying(){
+        mouth.UpdateSingleShaderValue("_MouthBend", 1f);
+        mouth.UpdateRenderPropBlock();
     }
 
     private void ClearCurrentHover(){
@@ -138,7 +148,6 @@ public class PlayerFaceController : FaceController
     }
 
     private void SetPartScale(Vector3 pos){
-
         pos -= transform.localPosition;
 
         float flip = 1;

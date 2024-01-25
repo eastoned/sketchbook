@@ -45,7 +45,9 @@ public class CharacterData : ScriptableObject
 
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            sp.SetValue(UnityEngine.Random.Range(0f, 1f));
+            float val = UnityEngine.Random.Range(0, 3);
+            val *= 0.5f;
+            sp.SetValue(val);
         }
         
         foreach(ShaderColor sc in part.shaderColors){
