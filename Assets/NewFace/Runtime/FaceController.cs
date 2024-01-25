@@ -37,6 +37,8 @@ public class FaceController : MonoBehaviour
     public float mouthClosedAmount;
     private float mouthTop, mouthBottom;
 
+    public bool animating = false;
+
     public virtual void OnEnable()
 	{
         OnSelectedNewFacePartEvent.Instance.AddListener(Blink);
@@ -155,19 +157,9 @@ public class FaceController : MonoBehaviour
         
         partData.absolutePosition = Vector3.Lerp(blendFrom.absolutePosition, blendTo.absolutePosition, val);
         partData.relativePosition = Vector3.Lerp(blendFrom.relativePosition, blendTo.relativePosition, val);
-        partData.minPosX = Mathf.Lerp(blendFrom.minPosX, blendTo.minPosX, val);
-        partData.maxPosX = Mathf.Lerp(blendFrom.maxPosX, blendTo.maxPosX, val);
-        partData.minPosY = Mathf.Lerp(blendFrom.minPosY, blendTo.minPosY, val);
-        partData.maxPosY = Mathf.Lerp(blendFrom.maxPosY, blendTo.maxPosY, val);
-        partData.minAngle = Mathf.Lerp(blendFrom.minAngle, blendTo.minAngle, val);
-        partData.maxAngle = Mathf.Lerp(blendFrom.maxAngle, blendTo.maxAngle, val);
         partData.currentAngle = Mathf.Lerp(blendFrom.currentAngle, blendTo.currentAngle, val);
         partData.absoluteScale = Vector3.Lerp(blendFrom.absoluteScale, blendTo.absoluteScale, val);
         partData.relativeScale = Vector3.Lerp(blendFrom.relativeScale, blendTo.relativeScale, val);
-        partData.minScaleX = Mathf.Lerp(blendFrom.minScaleX, blendTo.minScaleX, val);
-        partData.maxScaleX = Mathf.Lerp(blendFrom.maxScaleX, blendTo.maxScaleX, val);
-        partData.minScaleY = Mathf.Lerp(blendFrom.minScaleY, blendTo.minScaleY, val);
-        partData.maxScaleY = Mathf.Lerp(blendFrom.maxScaleY, blendTo.maxScaleY, val);
 
         for(int i = 0; i < partData.shaderProperties.Count; i++){
             partData.shaderProperties[i].SetValue(Mathf.Lerp(blendFrom.shaderProperties[i].propertyValue, blendTo.shaderProperties[i].propertyValue, val));
@@ -295,18 +287,20 @@ public class FaceController : MonoBehaviour
     private Coroutine faceAnim;
     void Update(){
 
-        timer += Time.deltaTime;
+        if(animating){
+            timer += Time.deltaTime;
 
-        if(timer >= 9f){
-            if(Random.Range(0f, 1f) < 0.5f) {
-                Blink(transform);
-            }else{
-                BlinkMouth();
+        
+            if(timer >= 9f){
+                if(Random.Range(0f, 1f) < 0.5f) {
+                    Blink(transform);
+                }else{
+                    BlinkMouth();
+                }
+                
+                timer = Random.Range(0f, 4f);
             }
-            
-            timer = Random.Range(0f, 4f);
         }
-
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
          
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);

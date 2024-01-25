@@ -91,6 +91,10 @@ public class PartData : ScriptableObject
         maxScaleY = pd.GetAbsoluteScale().y/2f;
     }
 
+    public virtual void SetScaleBounds(){
+        
+    }
+
     public virtual void SetPositionBounds(PartData pd){
 
     }

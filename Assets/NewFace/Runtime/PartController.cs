@@ -119,6 +119,8 @@ public class PartController : MonoBehaviour
             transform.localScale = pd.GetAbsoluteScale();
         }
 
+        pd.SetPositionBounds();
+        pd.SetScaleBounds();
         UpdateDependencies();
 
     }

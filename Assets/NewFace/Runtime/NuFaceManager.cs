@@ -27,6 +27,8 @@ public class NuFaceManager : MonoBehaviour
     public static float money = 0f;
     public TextMeshProUGUI scoreDebug, moneyDebug;
 
+    public bool isGame = false;
+
     void OnEnable(){
         OnConfirmTransformPart.Instance.AddListener(UpdateTextAmount);
         OnDeselectedFacePartEvent.Instance.AddListener(DebugTouchBG);
@@ -42,28 +44,33 @@ public class NuFaceManager : MonoBehaviour
     }
 
     private IEnumerator Start(){
-        targetData[0].RandomizeData();
-        writeableData[0].CopyData(rfc[0].currentChar);
-        rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
-        stageThresholds = new int[9];
-        int scoreCount = 0;
-        for(int i = 0; i < stageThresholds.Length; i++){
-            scoreCount += 3;
-            scoreCount += pfc.bodyData[i].shaderProperties.Count;
-            stageThresholds[i] = scoreCount;
-        }
+        if(isGame){
 
-        AffectStageCount(1);
         
+            targetData[0].RandomizeData(.1f);
+            writeableData[0].CopyData(rfc[0].currentChar);
+            rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
+            stageThresholds = new int[9];
+            int scoreCount = 0;
+            for(int i = 0; i < stageThresholds.Length; i++){
+                scoreCount += 3;
+                scoreCount += pfc.bodyData[i].shaderProperties.Count;
+                stageThresholds[i] = scoreCount;
+            }
 
-        for(;;){
-            //yield return new WaitForSeconds(2f);
-            //Compare();
-            //writeableData.CopyData(rfc.currentChar);
-            //targetData.RandomizeData();
-            //targetData.RandomizeRandomPart();
-            //rfc.BlendCharacter(writeableData, targetData, 1f);
-            yield return new WaitForSeconds(10f);
+            AffectStageCount(1);
+        }else{
+
+            for(;;){
+                //yield return new WaitForSeconds(2f);
+                //Compare();
+                //writeableData.CopyData(rfc.currentChar);
+                //targetData.RandomizeData();
+                //targetData.RandomizeRandomPart();
+                //rfc.BlendCharacter(writeableData, targetData, 1f);
+                ///RandomizePlayer();
+                yield return new WaitForSeconds(.2f);
+            }
         }
     }
 
@@ -178,13 +185,30 @@ public class NuFaceManager : MonoBehaviour
         fc.BlendCharacter(writeableData, characterSet[0], 2f);
         */
     }
-
+    public float counter = 0;
+    [ContextMenu("Randomize Player")]
+    public void RandomizePlayer(){
+        //Debug.Log("let random begin");
+        //Debug.Log(targetData[rfc.Length - 1].name);
+       // if(Random.Range(0f, 1f) < 0.5f){
+            targetData[1].RandomizeData(Random.Range(0f, .5f));
+            if(counter < .5f){
+                counter += .05f;}
+else{
+    counter = 0f;
+}        //}else{
+           // targetData[0].RandomizeRandomPart();
+        //}
+        
+        writeableData[1].CopyData(pfc.currentChar);
+        pfc.BlendCharacter(writeableData[1], targetData[1], Random.Range(.05f, .2f));
+    }
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
         //Debug.Log("let random begin");
         //Debug.Log(targetData[rfc.Length - 1].name);
        // if(Random.Range(0f, 1f) < 0.5f){
-            targetData[0].RandomizeData();
+            targetData[0].RandomizeData(.2f);
         //}else{
            // targetData[0].RandomizeRandomPart();
         //}

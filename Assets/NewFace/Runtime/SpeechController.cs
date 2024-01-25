@@ -105,7 +105,7 @@ public class SpeechController : MonoBehaviour
             spaceCounter *= 2;
             spaceCounter += 1;
             
-            float randomOffset = Random.Range(-150, 150);
+            float randomOffset = Random.Range(0, 150);
             float journey = 0;
             while(journey < value){
                 journey += Time.deltaTime;
@@ -113,7 +113,7 @@ public class SpeechController : MonoBehaviour
                 float scalePercent = scaleCurve.Evaluate(percent);
                 float translatePercent = translateCurve.Evaluate(percent);
                 bubble.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(0, Mathf.CeilToInt(text.Length*translatePercent));
-                bubble.transform.position = Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(50f, randomOffset, 0), translatePercent);
+                bubble.transform.position = Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(0, randomOffset, 0), translatePercent);
                 bubble.transform.localScale = Vector3.Lerp(new Vector3(0f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 
                 yield return null;

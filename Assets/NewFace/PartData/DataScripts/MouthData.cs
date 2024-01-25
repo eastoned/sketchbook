@@ -12,7 +12,7 @@ public class MouthData : PartData
 
     public override void SetPositionBounds(PartData parentData)
     {
-        minPosY = -parentData.GetAbsoluteScale().y/2f;
-        maxPosY = parentData.GetAbsoluteScale().y/2f;
+        minPosY = parentData.GetAbsolutePosition().y - parentData.GetAbsoluteScale().y/2f;
+        maxPosY = parentData.GetAbsolutePosition().y + parentData.GetAbsoluteScale().y/2f;
     }
 }

@@ -23,6 +23,8 @@ public class PlayerFaceController : FaceController
     public float currentChange = 0f;
     public bool notInteracting = false;
 
+    public SpeechController sc;
+
     public override void OnEnable()
 	{
         base.OnEnable();
@@ -100,6 +102,7 @@ public class PlayerFaceController : FaceController
                 scaleCache = currentPC.pd.relativeScale;
             }
         }
+        sc.SpeakText("Hello there my sweet.", 1f);
     }
 
     private void SetTransformControllers(Transform selectedTarget){
@@ -159,8 +162,6 @@ public class PlayerFaceController : FaceController
         Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
         diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
 
-        
-        
         currentPC.pd.ClampedScale(diff);
         currentChange = Vector3.Distance(currentPC.pd.relativeScale, scaleCache);
         //Debug.Log("Scale change: " + currentChange);

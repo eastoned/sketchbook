@@ -25,7 +25,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _ChinLength: 1
-    - _ChinScale: 0.908
+    - _ChinScale: 0
     - _ChinWidth: 0.813
     - _ForeheadLength: 1
     - _ForeheadScale: 0

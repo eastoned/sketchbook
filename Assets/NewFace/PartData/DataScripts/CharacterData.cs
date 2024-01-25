@@ -1,6 +1,8 @@
 using System;
 using System.Data;
+using AmplifyShaderEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 [CreateAssetMenu(fileName = "CharacterProfile", menuName = "ScriptableObjects/Character", order = 100)]
 public class CharacterData : ScriptableObject
@@ -13,9 +15,9 @@ public class CharacterData : ScriptableObject
     public PartData[] allParts;
 
     [ContextMenu("Random A Piece")]
-    void RandomPiece(PartData part){
-        //part.currentAngle = UnityEngine.Random.Range(part.minAngle, part.maxAngle);
-        part.currentAngle = 0f;
+    void RandomPiece(PartData part, float randomFactor){
+        part.currentAngle = Mathf.Lerp(part.minAngle, part.maxAngle, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor);
+        //part.currentAngle = 0f;
         if(part == hairBackData || part == hairFrontData){
             part.currentAngle = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0 : part.maxAngle;
         }
@@ -23,30 +25,30 @@ public class CharacterData : ScriptableObject
         if(part == noseData){
             part.maxPosY = eyeData.absolutePosition.y;
         }
+
         if(part == mouthData){
             part.maxPosY = noseData.absolutePosition.y;
         }
 
-        part.absolutePosition = new Vector3(Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
-        Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
+        part.absolutePosition = new Vector3(Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+        Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
         part.absolutePosition.z);
 
         if(part == eyebrowData){
-            part.absolutePosition = new Vector3(eyeData.absolutePosition.x, eyeData.absolutePosition.y + UnityEngine.Random.Range(.1f, 1f), part.absolutePosition.z);
+            part.absolutePosition = new Vector3(eyeData.absolutePosition.x, eyeData.absolutePosition.y + UnityEngine.Random.Range(.5f - randomFactor, .5f + randomFactor), part.absolutePosition.z);
         }
         
         part.SetRelativePos(part.absolutePosition);
 
-        part.absoluteScale = new Vector3(Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
-        Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.25f : .75f),
+        part.absoluteScale = new Vector3(Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+        Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
         part.absoluteScale.z);
 
         part.SetRelativeScale(part.absoluteScale);
 
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            float val = UnityEngine.Random.Range(0, 3);
-            val *= 0.5f;
+            float val = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor;
             sp.SetValue(val);
         }
         
@@ -64,19 +66,19 @@ public class CharacterData : ScriptableObject
         }
     }
     public void RandomizeRandomPart(){
-        RandomPiece(allParts[UnityEngine.Random.Range(0, allParts.Length)]);
+        RandomPiece(allParts[UnityEngine.Random.Range(0, allParts.Length)], .1f);
     }
 
-    public void RandomizeData(){
-        RandomPiece(headData);
-        RandomPiece(earData);
-        RandomPiece(eyeData);
-        RandomPiece(eyebrowData);
-        RandomPiece(hairBackData);
-        RandomPiece(hairFrontData);
-        RandomPiece(mouthData);
-        RandomPiece(neckData);
-        RandomPiece(noseData);
+    public void RandomizeData(float randomFactor){
+        RandomPiece(headData, randomFactor);
+        RandomPiece(earData, randomFactor);
+        RandomPiece(eyeData, randomFactor);
+        RandomPiece(eyebrowData, randomFactor);
+        RandomPiece(hairBackData, randomFactor);
+        RandomPiece(hairFrontData, randomFactor);
+        RandomPiece(mouthData, randomFactor);
+        RandomPiece(neckData, randomFactor);
+        RandomPiece(noseData, randomFactor);
     }
 
     public void CopyData(CharacterData cd){
