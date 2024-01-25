@@ -141,7 +141,7 @@ Shader "Unlit/EyeQuad"
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
-                float4 col = tex2D(_MainTex, texCoord);
+                float4 col = tex2D(_MainTex, texCoord/5);
                 //return distance(float2(0.5,0.5), i.uv);
                 return result * col;
                 //return pupil;
