@@ -102,7 +102,7 @@ public class PlayerFaceController : FaceController
                 scaleCache = currentPC.pd.relativeScale;
             }
         }
-        sc.SpeakText("Hello there my sweet.", 1f);
+        //sc.SpeakText("Hello there my sweet.", 1f);
     }
 
     private void SetTransformControllers(Transform selectedTarget){

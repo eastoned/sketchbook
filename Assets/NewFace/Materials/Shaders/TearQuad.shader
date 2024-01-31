@@ -51,13 +51,13 @@ Shader "Unlit/TearQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                float2 uv = float2(i.uv.y, frac(_Amount*i.uv.x+(_Time.w)));
-                float value = pow(_Radius*sin(i.uv.x*3.14), 2) - pow(abs(uv.x*2-1) + uv.y/1, 2) - pow(abs(uv.y*2-1), 2);
+                float2 uv = float2(i.uv.x, frac(_Amount*i.uv.y+(_Time.w)));
+                float value = pow(_Radius*sin(i.uv.y*3.14), 2) - pow(abs(uv.x*2-1) + uv.y, 2) - pow(abs(uv.y*2-1), 2);
                 value = step(0, value);
                 fixed4 col = tex2D(_MainTex, uv);
                 clip(value - 0.5);
                 //return i.uv.yyyy;
-                return value.xxxx * i.uv.x;
+                return value.xxxx * i.uv.y;
             }
             ENDCG
         }

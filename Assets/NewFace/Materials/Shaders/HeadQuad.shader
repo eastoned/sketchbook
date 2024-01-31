@@ -79,10 +79,10 @@ Shader "Unlit/HeadQuad"
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
-                float4 col = tex2D(_MainTex, texCoord/5);
-                clip(value - 0.5 - step(.7,col.r));
+                float4 col = tex2D(_MainTex, texCoord);
+                clip(value - 0.5);
                 float4 result = value * lerp(_Color1, _Color2, uv.y);
-                return result;
+                return result * col;
             }
             ENDCG
         }
