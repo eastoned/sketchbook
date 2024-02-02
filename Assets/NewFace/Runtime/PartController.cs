@@ -158,14 +158,18 @@ public class PartController : MonoBehaviour
     }
 
     public void ShakePieces(Vector3 strength, float time){
-        StartCoroutine(ShakeRoutine(strength, time));
+        StartCoroutine(ShakeRoutineTimed(strength, time));
     }
 
     public void ScalePieces(float size, float time, AnimationCurve curve){
         StartCoroutine(ScalePopRoutine(size, time, curve));
     }
 
-    public IEnumerator ShakeRoutine(Vector3 strength, float length){
+    public IEnumerator ToggleShaking(bool shaking){
+        yield return null;
+    }
+
+    public IEnumerator ShakeRoutineTimed(Vector3 strength, float length){
         float time = length;
         while(time > 0){
             time -= Time.deltaTime;

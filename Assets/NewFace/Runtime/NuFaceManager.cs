@@ -324,9 +324,9 @@ public class NuFaceManager : MonoBehaviour
         rc.SetCache(rc.partToChange.pd);
         rc.SetListenersForCorrectEvent();
         while(!rc.CheckTotalRequestFulfilled()){
-            yield return rc.partToChange.ShakeRoutine(new Vector3(.05f, 0.01f, 0f), .5f);
+            yield return rc.partToChange.ShakeRoutineTimed(new Vector3(.05f, 0.01f, 0f), .5f);
             if(rc.partToChange.mirroredPart != null){
-                yield return rc.partToChange.mirroredPart.ShakeRoutine(new Vector3(.05f, 0.01f, 0f), .5f);
+                yield return rc.partToChange.mirroredPart.ShakeRoutineTimed(new Vector3(.05f, 0.01f, 0f), .5f);
             }
             yield return new WaitForSeconds(0.5f);
         }
