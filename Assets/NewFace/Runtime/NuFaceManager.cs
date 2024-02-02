@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class NuFaceManager : MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class NuFaceManager : MonoBehaviour
 
     public static float money = 0f;
     public TextMeshProUGUI scoreDebug, moneyDebug;
+    public Button button;
 
     public bool isGame = false;
 
@@ -39,14 +42,22 @@ public class NuFaceManager : MonoBehaviour
         OnDeselectedFacePartEvent.Instance.RemoveListener(DebugTouchBG);
     }
 
+    public void HoveredButton(){
+        Debug.Log("PLEASE DON'T");
+        pfc.StartCrying();
+    }
+    public void UnhoveredButton(){
+        Debug.Log("PLEASE DO");
+        pfc.StopCrying();
+    }
+
     void DebugTouchBG(){
+       
         scoreDebug.text = "Touched BG";
     }
 
     private IEnumerator Start(){
         if(isGame){
-
-        
             targetData[0].RandomizeData(.1f);
             writeableData[0].CopyData(rfc[0].currentChar);
             rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
@@ -191,18 +202,12 @@ public class NuFaceManager : MonoBehaviour
         //Debug.Log("let random begin");
         //Debug.Log(targetData[rfc.Length - 1].name);
        // if(Random.Range(0f, 1f) < 0.5f){
-            targetData[1].RandomizeData(Random.Range(0f, .5f));
-            if(counter < .5f){
-                counter += .05f;}
-else{
-    counter = 0f;
-}        //}else{
-           // targetData[0].RandomizeRandomPart();
-        //}
+        targetData[1].RandomizeData(Random.Range(0f, .5f));
         
         writeableData[1].CopyData(pfc.currentChar);
-        pfc.BlendCharacter(writeableData[1], targetData[1], Random.Range(.05f, .2f));
+        pfc.BlendCharacter(writeableData[1], targetData[1], 2f);
     }
+
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
         //Debug.Log("let random begin");
@@ -214,7 +219,7 @@ else{
         //}
         
         writeableData[0].CopyData(rfc[0].currentChar);
-        rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
+        rfc[0].BlendCharacter(writeableData[0], targetData[0], 2f);
 
         /*
         if(Random.Range(0f,1f) < 0.5f){

@@ -452,6 +452,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &33298686
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +557,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &38475595
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +737,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 251851227}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &47109436
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +842,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1141720391}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &52364424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1069,7 @@ MonoBehaviour:
   - {fileID: 1242958228}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &56806361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,6 +1174,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 2140013906}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &80834083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1279,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &95416233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1422,7 @@ MonoBehaviour:
   - {fileID: 311225759}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &99618904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,6 +1555,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1451965502}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!114 &99618910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1691,6 +1700,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1681533229}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &131001638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,6 +1931,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &174120495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,6 +2303,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 855170750}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &210922068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,6 +2444,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1544279016}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &244385090
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,6 +2513,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!23 &244385094
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2667,6 +2681,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 45984627}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &259992522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,6 +2799,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -2921,6 +2942,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1300721908}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &281907024
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3294,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!23 &311225761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3450,6 +3473,7 @@ MonoBehaviour:
   - {fileID: 980233541}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &315327788
 GameObject:
   m_ObjectHideFlags: 0
@@ -3719,6 +3743,7 @@ MonoBehaviour:
   stageThresholds: 
   scoreDebug: {fileID: 642273190}
   moneyDebug: {fileID: 378029131}
+  button: {fileID: 0}
   isGame: 0
   counter: 0
 --- !u!4 &328473529
@@ -3950,6 +3975,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 706807078}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &369595669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4054,6 +4080,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &375119875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4442,6 +4469,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   currentlyBlending: 0
   blinkAmount: 0
   mouthClosedAmount: 0
@@ -4592,6 +4625,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   currentlyBlending: 0
   blinkAmount: 0
   mouthClosedAmount: 0
@@ -4610,6 +4649,8 @@ MonoBehaviour:
   currentChange: 0
   notInteracting: 0
   sc: {fileID: 0}
+  tear1: {fileID: 0}
+  tear2: {fileID: 0}
 --- !u!4 &383390659
 Transform:
   m_ObjectHideFlags: 0
@@ -5397,6 +5438,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &455367453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5659,6 +5701,7 @@ MonoBehaviour:
   - {fileID: 617622832}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &502532703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,6 +5833,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &511659768
 GameObject:
   m_ObjectHideFlags: 0
@@ -6092,6 +6136,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1792980034}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &528810794
 GameObject:
   m_ObjectHideFlags: 0
@@ -6196,6 +6241,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1134371819}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &530417388
 GameObject:
   m_ObjectHideFlags: 0
@@ -6411,6 +6457,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1252023699}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &573808646
 GameObject:
   m_ObjectHideFlags: 0
@@ -7126,6 +7173,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &610878716
 GameObject:
   m_ObjectHideFlags: 0
@@ -7257,6 +7305,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 838332028}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &617622828
 GameObject:
   m_ObjectHideFlags: 0
@@ -7361,6 +7410,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &624928234
 GameObject:
   m_ObjectHideFlags: 0
@@ -7465,6 +7515,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &639129982
 GameObject:
   m_ObjectHideFlags: 0
@@ -7912,6 +7963,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 2063804435}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &704330402
 GameObject:
   m_ObjectHideFlags: 0
@@ -8016,6 +8068,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &706807074
 GameObject:
   m_ObjectHideFlags: 0
@@ -8120,6 +8173,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 346428800}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &711774984
 GameObject:
   m_ObjectHideFlags: 0
@@ -8813,6 +8867,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &788748352
 GameObject:
   m_ObjectHideFlags: 0
@@ -8992,6 +9047,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &799570027
 GameObject:
   m_ObjectHideFlags: 0
@@ -9159,6 +9215,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &819774395
 GameObject:
   m_ObjectHideFlags: 0
@@ -9554,6 +9611,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 610878721}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &852867968
 GameObject:
   m_ObjectHideFlags: 0
@@ -9566,6 +9624,7 @@ GameObject:
   - component: {fileID: 852867972}
   - component: {fileID: 852867971}
   - component: {fileID: 852867970}
+  - component: {fileID: 852867973}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -9615,7 +9674,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.29803923}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -9687,6 +9746,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852867968}
   m_CullTransparentMesh: 1
+--- !u!114 &852867973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852867968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 328473528}
+          m_TargetAssemblyTypeName: NuFaceManager, Assembly-CSharp
+          m_MethodName: HoveredButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 328473528}
+          m_TargetAssemblyTypeName: NuFaceManager, Assembly-CSharp
+          m_MethodName: UnhoveredButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &855170745
 GameObject:
   m_ObjectHideFlags: 0
@@ -9818,6 +9922,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 205927775}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &891669014
 GameObject:
   m_ObjectHideFlags: 0
@@ -9922,6 +10027,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &893066189
 GameObject:
   m_ObjectHideFlags: 0
@@ -10092,6 +10198,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &917073714
 GameObject:
   m_ObjectHideFlags: 0
@@ -10365,6 +10472,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 2095792812}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &956454741
 GameObject:
   m_ObjectHideFlags: 0
@@ -10544,6 +10652,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &959430091
 GameObject:
   m_ObjectHideFlags: 0
@@ -10745,6 +10854,39 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   currentlyBlending: 0
   blinkAmount: 0
   mouthClosedAmount: 0
@@ -10763,6 +10905,8 @@ MonoBehaviour:
   currentChange: 0
   notInteracting: 0
   sc: {fileID: 397872630}
+  tear1: {fileID: 520213595}
+  tear2: {fileID: 1830880506}
 --- !u!4 &963588424
 Transform:
   m_ObjectHideFlags: 0
@@ -10896,6 +11040,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &984036932
 GameObject:
   m_ObjectHideFlags: 0
@@ -11046,6 +11191,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &988135049
 GameObject:
   m_ObjectHideFlags: 0
@@ -11150,6 +11296,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1619992075}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &999238333
 GameObject:
   m_ObjectHideFlags: 0
@@ -11290,6 +11437,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1016305753
 GameObject:
   m_ObjectHideFlags: 0
@@ -11394,6 +11542,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1309224967}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1023697020
 GameObject:
   m_ObjectHideFlags: 0
@@ -16465,6 +16614,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 2052349024}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1082434490
 GameObject:
   m_ObjectHideFlags: 0
@@ -16706,6 +16856,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1142818323}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1090809251
 GameObject:
   m_ObjectHideFlags: 0
@@ -17224,6 +17375,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1474762357}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1108089222
 GameObject:
   m_ObjectHideFlags: 0
@@ -17403,6 +17555,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1116655520
 GameObject:
   m_ObjectHideFlags: 0
@@ -17842,6 +17995,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 528810799}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1141720387
 GameObject:
   m_ObjectHideFlags: 0
@@ -17946,6 +18100,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 47109440}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1142793079
 GameObject:
   m_ObjectHideFlags: 0
@@ -18124,6 +18279,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1089451365}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1143583526
 GameObject:
   m_ObjectHideFlags: 0
@@ -18316,6 +18472,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -18608,6 +18770,7 @@ MonoBehaviour:
   - {fileID: 1004305409}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1211001757
 GameObject:
   m_ObjectHideFlags: 0
@@ -18787,6 +18950,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1249213331
 GameObject:
   m_ObjectHideFlags: 0
@@ -19130,6 +19294,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   currentlyBlending: 0
   blinkAmount: 0
   mouthClosedAmount: 0
@@ -19264,6 +19434,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 554007986}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1269006686
 GameObject:
   m_ObjectHideFlags: 0
@@ -19395,6 +19566,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1272764998
 GameObject:
   m_ObjectHideFlags: 0
@@ -19526,6 +19698,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1288620118
 GameObject:
   m_ObjectHideFlags: 0
@@ -19705,6 +19878,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 266228212}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1301393413
 GameObject:
   m_ObjectHideFlags: 0
@@ -19848,6 +20022,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1016305757}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!224 &1312392027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
@@ -19958,6 +20133,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1335978812
 GameObject:
   m_ObjectHideFlags: 0
@@ -25012,6 +25188,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1383439288
 GameObject:
   m_ObjectHideFlags: 0
@@ -25191,6 +25368,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1401635623
 GameObject:
   m_ObjectHideFlags: 0
@@ -25421,6 +25599,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1980367469}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1444006619
 GameObject:
   m_ObjectHideFlags: 0
@@ -25525,6 +25704,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1451965497
 GameObject:
   m_ObjectHideFlags: 0
@@ -25657,6 +25837,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 99618909}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!114 &1451965503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25828,6 +26009,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1626287311}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1465951083
 GameObject:
   m_ObjectHideFlags: 0
@@ -26119,6 +26301,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1471078204
 GameObject:
   m_ObjectHideFlags: 0
@@ -26357,6 +26540,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1103753350}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1511711454
 GameObject:
   m_ObjectHideFlags: 0
@@ -31379,6 +31563,7 @@ MonoBehaviour:
   - {fileID: 1748613274}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1519914563
 GameObject:
   m_ObjectHideFlags: 0
@@ -31633,6 +31818,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 243720594}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1568768625
 GameObject:
   m_ObjectHideFlags: 0
@@ -31871,6 +32057,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1591113964
 GameObject:
   m_ObjectHideFlags: 0
@@ -31986,6 +32173,7 @@ MonoBehaviour:
   - {fileID: 1444006623}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1598004549
 GameObject:
   m_ObjectHideFlags: 0
@@ -32090,6 +32278,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1743385959}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1599482575
 GameObject:
   m_ObjectHideFlags: 0
@@ -32221,6 +32410,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1643722412}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1602203798
 GameObject:
   m_ObjectHideFlags: 0
@@ -32482,6 +32672,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 988135053}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1626287307
 GameObject:
   m_ObjectHideFlags: 0
@@ -32586,6 +32777,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1462542028}
   cachePosition: {x: 2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1635023766
 GameObject:
   m_ObjectHideFlags: 0
@@ -32867,6 +33059,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1599482580}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1651714085
 GameObject:
   m_ObjectHideFlags: 0
@@ -32984,6 +33177,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -33373,6 +33572,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 117001334}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1699397321
 GameObject:
   m_ObjectHideFlags: 0
@@ -33567,7 +33767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1728964945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33674,6 +33874,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scalePopCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -33945,6 +34151,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1598004553}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1744106369
 GameObject:
   m_ObjectHideFlags: 0
@@ -34112,6 +34319,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1769513619
 GameObject:
   m_ObjectHideFlags: 0
@@ -34498,6 +34706,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 524532358}
   cachePosition: {x: -2, y: 0.85, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1806200127
 GameObject:
   m_ObjectHideFlags: 0
@@ -34677,6 +34886,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1823562524
 GameObject:
   m_ObjectHideFlags: 0
@@ -34781,6 +34991,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1830880503
 GameObject:
   m_ObjectHideFlags: 0
@@ -34981,6 +35192,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1867504513
 GameObject:
   m_ObjectHideFlags: 0
@@ -35812,6 +36024,7 @@ MonoBehaviour:
   - {fileID: 1324460312}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1980367465
 GameObject:
   m_ObjectHideFlags: 0
@@ -35916,6 +36129,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1421405304}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2036519118
 GameObject:
   m_ObjectHideFlags: 0
@@ -36298,6 +36512,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2052349020
 GameObject:
   m_ObjectHideFlags: 0
@@ -36402,6 +36617,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 1068846557}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2055894458
 GameObject:
   m_ObjectHideFlags: 0
@@ -36542,6 +36758,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 664121205}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2073647755
 GameObject:
   m_ObjectHideFlags: 0
@@ -36890,6 +37107,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2089736656
 GameObject:
   m_ObjectHideFlags: 0
@@ -36994,6 +37212,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2095792808
 GameObject:
   m_ObjectHideFlags: 0
@@ -37098,6 +37317,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 954249943}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2120201670
 GameObject:
   m_ObjectHideFlags: 0
@@ -37202,6 +37422,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2140013902
 GameObject:
   m_ObjectHideFlags: 0
@@ -37306,6 +37527,7 @@ MonoBehaviour:
   affectedParts: []
   mirroredPart: {fileID: 56806365}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!1001 &5391851006176455508
 PrefabInstance:
   m_ObjectHideFlags: 0

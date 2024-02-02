@@ -24,14 +24,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amount: 11
+    - _Amount: 8.3
     - _ChinLength: 1
     - _ChinScale: 0.908
     - _ChinWidth: 0.813
     - _ForeheadLength: 1
     - _ForeheadScale: 0
     - _ForeheadWidth: 1
-    - _Mani: 1
+    - _Mani: -1
     - _Radius: 1
     - _Radius2: 3.67
     - _Radius3: 1.33

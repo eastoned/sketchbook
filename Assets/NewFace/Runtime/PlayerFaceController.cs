@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine.Utility;
 using TMPro;
 using UnityEngine;
 
@@ -24,6 +23,8 @@ public class PlayerFaceController : FaceController
     public bool notInteracting = false;
 
     public SpeechController sc;
+    private MaterialPropertyBlock block;
+    public Renderer tear1, tear2;
 
     public override void OnEnable()
 	{
@@ -37,6 +38,9 @@ public class PlayerFaceController : FaceController
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
         OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
+        OnConfirmTransformPart.Instance.AddListener(PopOutScale);
+        OnSelectedNewFacePartEvent.Instance.AddListener(PopInScale);
+        block = new MaterialPropertyBlock();
     }
 
     public override void OnDisable(){
@@ -50,6 +54,8 @@ public class PlayerFaceController : FaceController
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
         OnConfirmTransformPart.Instance.RemoveListener(UpdateMoneyAmount);
+        OnConfirmTransformPart.Instance.RemoveListener(PopOutScale);
+        OnSelectedNewFacePartEvent.Instance.RemoveListener(PopInScale);
     }
 
     private void UpdateMoneyAmount(){
@@ -67,14 +73,46 @@ public class PlayerFaceController : FaceController
         }
     }
 
-    private void StartCrying(){
+    public void StartCrying(){
+        mouth.UpdateSingleShaderValue("_MouthBend", 1f);
+        block.SetFloat("_Radius", 1f);
+        tear1.SetPropertyBlock(block);
+        tear2.SetPropertyBlock(block);
+        mouth.UpdateRenderPropBlock();
+        ShakeAll();
+    }
+
+    public void StopCrying(){
         mouth.UpdateSingleShaderValue("_MouthBend", 0f);
+        block.SetFloat("_Radius", .3f);
+        tear1.SetPropertyBlock(block);
+        tear2.SetPropertyBlock(block);
         mouth.UpdateRenderPropBlock();
     }
 
-    private void StopCrying(){
-        mouth.UpdateSingleShaderValue("_MouthBend", 1f);
-        mouth.UpdateRenderPropBlock();
+    public void ShakeAll(){
+        leftEye.ShakeTest();
+        rightEye.ShakeTest();
+        mouth.ShakeTest();
+        nose.ShakeTest();
+        head.ShakeTest();
+        leftEyebrow.ShakeTest();
+        rightEyebrow.ShakeTest();
+        bangs.ShakeTest();
+        hair.ShakeTest();
+        neck.ShakeTest();
+        leftEar.ShakeTest();
+        rightEar.ShakeTest();
+    }
+
+    private void PopOutScale(){
+        Debug.Log("pop");
+        currentPC.ScalePieces(1f, .2f, scalePopCurve);
+    }
+
+    private void PopInScale(Transform ignore){
+        Debug.Log("pop");
+        ignore.GetComponent<PartController>().ScalePieces(-1f, .2f, scalePopCurve);
     }
 
     private void ClearCurrentHover(){

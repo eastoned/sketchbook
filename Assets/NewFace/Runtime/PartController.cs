@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -25,7 +26,7 @@ public class PartController : MonoBehaviour
 
     MaterialPropertyBlock propBlock;
 
-    public Vector3 cachePosition;
+    public Vector3 cachePosition, cacheScale;
     PartTransformController ptc;
 
     void Awake(){
@@ -86,6 +87,7 @@ public class PartController : MonoBehaviour
             return;
         
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
+        Debug.Log("select new face part");
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
 
@@ -115,8 +117,10 @@ public class PartController : MonoBehaviour
 
         if(flippedXAxis){
             transform.localScale = pd.GetFlippedAbsoluteScale();
+            cacheScale = pd.GetFlippedAbsoluteScale();
         }else{
             transform.localScale = pd.GetAbsoluteScale();
+            cacheScale = pd.GetAbsoluteScale();
         }
 
         pd.SetPositionBounds();
@@ -157,6 +161,10 @@ public class PartController : MonoBehaviour
         StartCoroutine(ShakeRoutine(strength, time));
     }
 
+    public void ScalePieces(float size, float time, AnimationCurve curve){
+        StartCoroutine(ScalePopRoutine(size, time, curve));
+    }
+
     public IEnumerator ShakeRoutine(Vector3 strength, float length){
         float time = length;
         while(time > 0){
@@ -165,6 +173,21 @@ public class PartController : MonoBehaviour
             yield return null;
         }
         transform.localPosition = cachePosition;
+    }
+
+    public IEnumerator ScalePopRoutine(float size, float length, AnimationCurve curve){
+        float time = length;
+        while(time > 0){
+            time -= Time.deltaTime;
+            float perc = Mathf.Clamp01(1f-(time/length));
+            float scl = size * curve.Evaluate(perc);
+            Debug.Log("Time: " + time);
+            Debug.Log("Perc: " + perc);
+            Debug.Log("Scale factor: " + scl);
+            transform.localScale = cacheScale + (Vector3.one*scl);//(size*curve.Evaluate(perc));
+            yield return null;
+        }
+        transform.localScale = cacheScale;
     }
 
     public void UpdateAllShadersValue(){

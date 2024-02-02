@@ -25,6 +25,7 @@ public class FaceController : MonoBehaviour
     public CharacterData currentChar;
     public AnimationCurve blendCurve; 
     public AnimationCurve blinkCurve;
+    public AnimationCurve scalePopCurve;
 
     public bool currentlyBlending = false;
 
@@ -48,6 +49,7 @@ public class FaceController : MonoBehaviour
     }
 
     private void Blink(Transform ignore){
+        Debug.Log("Blink");
         if (faceAnim != null){
             StopCoroutine(faceAnim);
         }
