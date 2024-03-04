@@ -47,15 +47,14 @@ Shader "Unlit/SpeechBubbleQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float value = pow(abs(i.uv.x*2-1), 25) + pow(abs(i.uv.y*2-1), 25);
-                clip(i.uv.x*_Amount-value);
 
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
-                float4 col = tex2D(_MainTex, texCoord);
-
-                return col;// * col;
+                float4 col = tex2D(_MainTex, i.uv);
+                clip(col.r-_Amount);
+                return float4(1,1,1,1);
             }
             ENDCG
         }

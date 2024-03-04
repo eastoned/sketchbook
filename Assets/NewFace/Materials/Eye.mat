@@ -26,12 +26,12 @@ Material:
     m_Floats:
     - _DotRadius: 0.536
     - _EyeRadius: 1
-    - _EyelidBottomLength: 0.531
+    - _EyelidBottomLength: 0.626
     - _EyelidBottomOpen: 0.648
     - _EyelidBottomSkew: 0.81
-    - _EyelidTopLength: 0.966
+    - _EyelidTopLength: 1
     - _EyelidTopOpen: 0.795
-    - _EyelidTopSkew: 0.481
+    - _EyelidTopSkew: 0.499
     - _Lid1: 0.632
     - _Lid2: 0.753
     - _PupilLength: 0.1

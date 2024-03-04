@@ -32,6 +32,8 @@ public class NuFaceManager : MonoBehaviour
 
     public bool isGame = false;
 
+    public AudioSource crunch;
+
     void OnEnable(){
         OnConfirmTransformPart.Instance.AddListener(UpdateTextAmount);
         OnDeselectedFacePartEvent.Instance.AddListener(DebugTouchBG);
@@ -203,9 +205,13 @@ public class NuFaceManager : MonoBehaviour
         //Debug.Log(targetData[rfc.Length - 1].name);
        // if(Random.Range(0f, 1f) < 0.5f){
         targetData[1].RandomizeData(Random.Range(0f, .5f));
-        
+        //crunch.Play();
         writeableData[1].CopyData(pfc.currentChar);
         pfc.BlendCharacter(writeableData[1], targetData[1], 2f);
+        //if(crunch.isPlaying){
+            //crunch.Stop();
+        //}
+        
     }
 
     [ContextMenu("Randomize Face")]

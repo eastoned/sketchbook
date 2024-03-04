@@ -93,19 +93,19 @@ Shader "Unlit/EyeQuad"
                 float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
                 uv.y += .005*sin(uv.x*8-_Time.w*2);
                 float line1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                ((_EyelidTopLength - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
+                (((_EyelidTopLength*.75 + .25) - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
 
                 float line2 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                ((_EyelidBottomLength - (.3 * abs(_EyelidBottomSkew - 0.5)))*2.5)*1.5*((_EyelidBottomSkew*uv.x)+((1-_EyelidBottomSkew)*(1-uv.x))))) 
+                (((_EyelidBottomLength*.75 + .25) - (.3 * abs(_EyelidBottomSkew - 0.5)))*2.5)*1.5*((_EyelidBottomSkew*uv.x)+((1-_EyelidBottomSkew)*(1-uv.x))))) 
                 * (1 - step(0.5, uv.y));
 
                 float mask1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                ((_EyelidTopLength - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*_EyelidTopOpen*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
+                (((_EyelidTopLength*.75 + .25) - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*_EyelidTopOpen*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 
                 * step(0.5, uv.y);
 
                 float mask2 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
-                ((_EyelidBottomLength - (.3 * abs(_EyelidBottomSkew - 0.5)))*2.5)*_EyelidBottomOpen*1.5*((_EyelidBottomSkew*uv.x)+((1-_EyelidBottomSkew)*(1-uv.x))))) 
+                (((_EyelidBottomLength*.75 + .25) - (.3 * abs(_EyelidBottomSkew - 0.5)))*2.5)*_EyelidBottomOpen*1.5*((_EyelidBottomSkew*uv.x)+((1-_EyelidBottomSkew)*(1-uv.x))))) 
                 * (1 - step(0.5, uv.y));
 
                 mask1 += mask2;

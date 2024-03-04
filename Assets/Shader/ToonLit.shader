@@ -1,4 +1,6 @@
-Shader "Unlit/ToonLit"
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/CustomLight"
 {
     Properties
     {
@@ -8,98 +10,86 @@ Shader "Unlit/ToonLit"
         [HDR]
         _AmbientColor("Ambient Color", Color) = (0.4,0.4,0.4,1)
 
-        [HDR]
-        _RimColor("Rim Color", Color) = (1,1,1,1)
-        _RimAmount("Rim Amount", Range(0, 1)) = 0.716
-            _RimThreshold("Rim Threshold", Range(0, 1)) = 0.1
     }
-    SubShader
-    {
-        Tags { "LightMode" = "ForwardBase"
-    "PassFlags" = "OnlyDirectional"}
-        LOD 100
 
-        Pass
-        {
+    SubShader{
+        Pass{
+
+            Tags {
+				"LightMode" = "ForwardBase"
+			}
             CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile_fwdbase
-            // make fog work
-            #pragma multi_compile_fog
+
+            #pragma vertex MyVertexProgram
+            #pragma fragment MyFragmentProgram
 
             #include "UnityCG.cginc"
-            #include "Lighting.cginc"
-            #include "AutoLight.cginc"
+            #include "UnityPBSLighting.cginc"
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+            struct VertexData {
+                float4 position : POSITION;
                 float3 normal : NORMAL;
             };
-
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float3 worldNormal : NORMAL;
-                float2 uv : TEXCOORD0;
-                float3 viewDir : TEXCOORD1;
-                // Macro found in Autolight.cginc. Declares a vector4
-                // into the TEXCOORD2 semantic with varying precision 
-                // depending on platform target.
-                SHADOW_COORDS(2)
+            
+            struct Interpolators {
+                float4 position : SV_POSITION;
+                float3 normal : TEXCOORD0;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float4 _Color, _AmbientColor;
-            float4 _RimColor;
-            float _RimAmount;
-            float _RimThreshold;
-
-            v2f vert (appdata v)
-            {
-                v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
-                o.worldNormal = UnityObjectToWorldNormal(v.normal);
-                o.viewDir = WorldSpaceViewDir(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                // Defined in Autolight.cginc. Assigns the above shadow coordinate
-                // by transforming the vertex from world space to shadow-map space.
-                TRANSFER_SHADOW(o)
-                return o;
+            Interpolators MyVertexProgram (VertexData v) {
+                Interpolators i;
+                i.position = UnityObjectToClipPos(v.position);
+                i.normal = UnityObjectToWorldNormal(v.normal);
+                i.normal = normalize(i.normal);
+                return i;
+            }
+        
+            float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
+                i.normal = normalize(i.normal);
+                return dot(i.normal, _WorldSpaceLightPos0.xyz);
             }
 
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // sample the texture
-                float3 viewDir = normalize(i.viewDir);
-                
-                float3 normal = normalize(i.worldNormal);
-                float4 rimDot = 1 - dot(viewDir, normal);
-                
-                float NdotL = dot(_WorldSpaceLightPos0, normal);
-
-                float rimIntensity = rimDot;// *pow(NdotL, _RimThreshold);
-                rimIntensity = smoothstep(_RimAmount - 0.01, _RimAmount + 0.01, rimIntensity);
-                float4 rim = rimIntensity * _RimColor;
-
-                float shadow = SHADOW_ATTENUATION(i);
-
-                float lightIntensity = smoothstep(0, 0.01, NdotL*shadow);
-                float4 light = lightIntensity * length(_LightColor0);
-                //just get hue of light color
-                fixed4 col = tex2D(_MainTex, i.uv) * (_Color * _LightColor0);
-
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                col = lerp(col, _AmbientColor, 1-light);
-                //col = lerp(col, rim, rimIntensity);
-                return col;
-            }
             ENDCG
         }
-        UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
+
+        Pass{
+
+            Tags {
+				"LightMode" = "ForwardAdd"
+			}
+            CGPROGRAM
+
+            #pragma vertex MyVertexProgram
+            #pragma fragment MyFragmentProgram
+
+            #include "UnityCG.cginc"
+            //#include "My Lighting.cginc"
+
+            struct VertexData {
+                float4 position : POSITION;
+                float3 normal : NORMAL;
+            };
+            
+            struct Interpolators {
+                float4 position : SV_POSITION;
+                float3 normal : TEXCOORD0;
+            };
+
+            Interpolators MyVertexProgram (VertexData v) {
+                Interpolators i;
+                i.position = UnityObjectToClipPos(v.position);
+                i.normal = UnityObjectToWorldNormal(v.normal);
+                i.normal = normalize(i.normal);
+                return i;
+            }
+        
+            float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
+                //i.normal = normalize(i.normal);
+                //i.normal.y += sin(i.normal.x + _Time.z);
+                return float4(0,0,0,0);
+            }
+
+            ENDCG
+        }
     }
 }
