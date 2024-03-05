@@ -107,12 +107,12 @@ public class PlayerFaceController : FaceController
     }
 
     private void PopOutScale(){
-        Debug.Log("pop");
+        //Debug.Log("pop");
         currentPC.ScalePieces(1f, .2f, scalePopCurve);
     }
 
     private void PopInScale(Transform ignore){
-        Debug.Log("pop");
+        //Debug.Log("pop");
         ignore.GetComponent<PartController>().ScalePieces(-1f, .2f, scalePopCurve);
     }
 

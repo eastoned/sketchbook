@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -143,6 +144,7 @@ public class RequestChange{
     }
 }
 
+[Serializable]
 public class ShaderCache{
     public int shaderID;
     public float shaderValue;

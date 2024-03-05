@@ -30,22 +30,32 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _BangRoundness
     propertyValue: 0.4537558
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandCount
     propertyValue: 0.17381984
+    wholeNumberInterval: 1
+    valueInterval: 20
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandOffset
     propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairBangScale
     propertyValue: 0.1343046
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairRoundness
     propertyValue: 0.5435014
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:

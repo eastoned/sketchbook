@@ -49,7 +49,7 @@ public class FaceController : MonoBehaviour
     }
 
     private void Blink(Transform ignore){
-        Debug.Log("Blink");
+        //Debug.Log("Blink");
         if (faceAnim != null){
             StopCoroutine(faceAnim);
         }

@@ -16,56 +16,76 @@ MonoBehaviour:
   relativePosition: {x: 0, y: 0.31499857, z: 0}
   minPosX: 0
   maxPosX: 0
-  minPosY: -0.95404124
-  maxPosY: 0.95404124
+  minPosY: -0.22478509
+  maxPosY: 0.79925334
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
   relativeScale: {x: 0.8127365, y: 1, z: 1}
   minScaleX: 0.05
-  maxScaleX: 1.9271
+  maxScaleX: 1.2031254
   minScaleY: 0.1
-  maxScaleY: 0.95404124
+  maxScaleY: 0.5120192
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _MouthOpen
     propertyValue: 0.3751416
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _MouthBend
     propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TeethTop
     propertyValue: 0.99112886
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TeethBottom
     propertyValue: 0.26972008
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TeethCount
     propertyValue: 0.25625914
+    wholeNumberInterval: 1
+    valueInterval: 30
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TeethRoundness
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TongueRadius
     propertyValue: 0.6518048
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TongueScale
     propertyValue: 0.5122591
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _TongueHeight
     propertyValue: 0.17966788
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:

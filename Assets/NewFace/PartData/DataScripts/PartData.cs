@@ -165,6 +165,9 @@ public class ShaderProperty{
     [Range(0f, 1f)]
     public float propertyValue;
 
+    public bool wholeNumberInterval;
+    public float valueInterval;
+
     public void SetValue(float value){
         //value /= 0.25f;
         //value = Mathf.Round(value);

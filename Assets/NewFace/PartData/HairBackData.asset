@@ -16,36 +16,46 @@ MonoBehaviour:
   relativePosition: {x: 0, y: 0.4836401, z: 0.3}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.9112518
-  maxPosY: 1.9112518
+  minPosY: -0.22478509
+  maxPosY: 0.79925334
   minAngle: -180
   maxAngle: 180
   currentAngle: -0
   absoluteScale: {x: 0, y: 0, z: 1}
   relativeScale: {x: 0.37422562, y: 0.6104268, z: 1}
   minScaleX: 1
-  maxScaleX: 2.5
+  maxScaleX: 2.4062507
   minScaleY: 1
-  maxScaleY: 3
+  maxScaleY: 2.0480769
   shaderProperties:
   - propertyName: _BangRoundness
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandCount
     propertyValue: 0.25836226
+    wholeNumberInterval: 1
+    valueInterval: 20
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandOffset
     propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairBangScale
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairRoundness
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:

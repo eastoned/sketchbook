@@ -27,6 +27,7 @@ public class PartController : MonoBehaviour
     MaterialPropertyBlock propBlock;
 
     public Vector3 cachePosition, cacheScale;
+    public ShaderCache[] shaderPropertyCache;
     PartTransformController ptc;
 
     void Awake(){
@@ -62,6 +63,13 @@ public class PartController : MonoBehaviour
         }
     }
 
+    public void SetCache(PartData pd){
+        shaderPropertyCache = new ShaderCache[pd.shaderProperties.Count];
+        for(int i = 0; i < shaderPropertyCache.Length; i++){
+            shaderPropertyCache[i] = new ShaderCache(i, pd.shaderProperties[i].propertyValue);
+        }
+    }
+
     private bool IsPointerOverUIObject() {
          PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
          eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -87,9 +95,10 @@ public class PartController : MonoBehaviour
             return;
         
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
-        Debug.Log("select new face part");
+        //Debug.Log("select new face part");
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
+        SetCache(pd);
 
     }
 
@@ -185,9 +194,9 @@ public class PartController : MonoBehaviour
             time -= Time.deltaTime;
             float perc = Mathf.Clamp01(1f-(time/length));
             float scl = size * curve.Evaluate(perc);
-            Debug.Log("Time: " + time);
-            Debug.Log("Perc: " + perc);
-            Debug.Log("Scale factor: " + scl);
+           // Debug.Log("Time: " + time);
+           //Debug.Log("Perc: " + perc);
+            //Debug.Log("Scale factor: " + scl);
             transform.localScale = cacheScale + (Vector3.one*scl);//(size*curve.Evaluate(perc));
             yield return null;
         }

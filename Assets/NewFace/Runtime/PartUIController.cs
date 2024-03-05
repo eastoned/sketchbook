@@ -51,7 +51,11 @@ public class PartUIController : MonoBehaviour
                 //}
                 sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(partData.UpdateAllShadersValue);
-                sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
+                if(partData.pd.shaderProperties[i].wholeNumberInterval){
+                    float intervalValue = partData.pd.shaderProperties[i].valueInterval;
+                    sliders[i].onValueChanged.AddListener(delegate{SetCurrentShaderInterval.Instance.Invoke(intervalValue);});
+                    sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
+                }
                 
                 if(partData.mirroredPart != null){
                     sliders[i].onValueChanged.AddListener(partData.mirroredPart.UpdateAllShadersValue);
@@ -103,6 +107,10 @@ public class PartUIController : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
         colorSliderContainer.SetActive(false);
+    }
+
+    void SetCurrentInterval(float intervalValue){
+        SetCurrentShaderInterval.Instance.Invoke(intervalValue);
     }
 
     void SetSlidersForCurrentColor(int currentColor)
