@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c1abad70c8c834dafcea312a1844d9, type: 3}
+  m_Name: nose
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -0.54344517, z: -0.1}
+  relativePosition: {x: 0, y: 0.29699242, z: -0.1}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -0.75
+  maxPosY: -0.054511413
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 0.7969924, y: 0.7969924, z: 1}
+  relativeScale: {x: 0.29699242, y: 0.29699242, z: 1}
+  minScaleX: 0.5
+  maxScaleX: 1.5
+  minScaleY: 0.5
+  maxScaleY: 1.5
+  shaderProperties:
+  - propertyName: _NoseBaseWidth
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseTotalWidth
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseTopWidth
+    propertyValue: 0.7030076
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseCurve
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NoseTotalLength
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilRadius
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilSpacing
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilHeight
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NostrilScale
+    propertyValue: 0.7030076
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.95130765, g: 0.42523086, b: 0.6309654, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.68870455, g: 0.3746517, b: 0.8041513, a: 1}
+  affectedPartData: []

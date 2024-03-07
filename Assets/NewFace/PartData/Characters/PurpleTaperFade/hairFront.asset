@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d04ea043f047634fac17772442c9c30, type: 3}
+  m_Name: hairFront
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: 0.52725565, z: -0.15}
+  relativePosition: {x: 0, y: 0.7030075, z: -0.15}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: 0
+  maxPosY: 0.75
+  minAngle: -180
+  maxAngle: 180
+  currentAngle: 0
+  absoluteScale: {x: 1.2558266, y: 0.6212405, z: 1}
+  relativeScale: {x: 0.7030076, y: 0.2969924, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 1.6807479
+  minScaleY: 0.25
+  maxScaleY: 1.5
+  shaderProperties:
+  - propertyName: _BangRoundness
+    propertyValue: 0.7030076
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _StrandCount
+    propertyValue: 0.7030076
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _StrandOffset
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _HairBangScale
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _HairRoundness
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.083659194, g: 0.09736038, b: 0.12072706, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.31537673, g: 0.24099159, b: 0.3239221, a: 1}
+  affectedPartData: []

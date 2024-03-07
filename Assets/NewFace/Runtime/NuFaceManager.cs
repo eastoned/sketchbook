@@ -14,6 +14,8 @@ public class NuFaceManager : MonoBehaviour
     public CharacterData[] writeableData;
     public CharacterData[] targetData;
 
+    public CharacterData[] compareTargets;
+
     public string[] convo;
 
     public PartController[] parts;
@@ -91,21 +93,34 @@ public class NuFaceManager : MonoBehaviour
     public void Compare(){
         //money += GetCharacterDifference(rfc[0].currentChar, pfc.currentChar);
         //scoreDebug.text = "Compare Score: " + GetCharacterDifference(rfc[0].currentChar, pfc.currentChar).ToString();
-        float result = GetDataDifference(rfc[0].bodyData, pfc.bodyData);
-        scoreDebug.text = "Compare Score: " + result.ToString();
-        UpdateTextAmount();
+        string currentClosestCharacter = "";
+        float highestResult = 0;
+        for(int i = 0 ; i < compareTargets.Length; i++){
+            float currentResult = GetDataDifference(compareTargets[i].allParts, pfc.currentChar.allParts);
+            if (currentResult > highestResult){
+                highestResult = currentResult;
+                currentClosestCharacter = compareTargets[i].name;
+            }
+        }
+
+        Debug.Log("The closest character is: " + currentClosestCharacter);
+        
+        //scoreDebug.text = "Compare Score: " + result.ToString();
+        //Debug.Log(result.ToString());
+        //UpdateTextAmount();
+        /*
         if(result >= stageThresholds[charStage-1]){
-            Debug.Log("Moving on to next stage");
+            //Debug.Log("Moving on to next stage");
             if(charStage < stageThresholds.Length){
-                RandomizeFace();
-                AffectStageCount(1); 
+                //RandomizeFace();
+                //AffectStageCount(1); 
             }else{
-                scoreDebug.text = "You win"!;
+                //scoreDebug.text = "You win"!;
             }
         }else{
-            scoreDebug.text = "You got: " + result + " components right. You need: " + stageThresholds[charStage-1];
-            Debug.Log("Try Again");
-        }
+            //scoreDebug.text = "You got: " + result + " components right. You need: " + stageThresholds[charStage-1];
+            //Debug.Log("Try Again");
+        }*/
     }
     public void AffectStageCount(int diff){
         charStage += diff;
@@ -387,14 +402,15 @@ public class NuFaceManager : MonoBehaviour
        money += score;
        return score;
     }
+
     public float GetDataDifference(PartData[] data1, PartData[] data2){
         float score = 0;
 
-        for(int i = 0; i < charStage; i++){
+        for(int i = 0; i < data1.Length; i++){
             score += GetPartDifference(data1[i], data2[i]);
         }
         
-        money += score;
+        //money += score;
         return score;
     }
 

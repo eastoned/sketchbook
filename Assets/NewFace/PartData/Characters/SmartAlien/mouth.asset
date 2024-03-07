@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
+  m_Name: mouth
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -0.6942783, z: 0}
+  relativePosition: {x: 0, y: 0.3088253, z: 0}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -0.75
+  maxPosY: -0.5695689
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 1.8585737, y: 0.6867682, z: 1}
+  relativeScale: {x: 0.6911746, y: 0.30882534, z: 1}
+  minScaleX: 0.05
+  maxScaleX: 2.6666667
+  minScaleY: 0.1
+  maxScaleY: 2
+  shaderProperties:
+  - propertyName: _MouthRadius
+    propertyValue: 0.6911746
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthOpen
+    propertyValue: 0.30882534
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _MouthBend
+    propertyValue: 0.30882534
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethTop
+    propertyValue: 0.30882534
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethBottom
+    propertyValue: 0.6911746
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethCount
+    propertyValue: 0.6911746
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TeethRoundness
+    propertyValue: 0.6911746
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueRadius
+    propertyValue: 0.30882534
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueScale
+    propertyValue: 0.30882534
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _TongueHeight
+    propertyValue: 0.30882534
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.39606422, g: 0.27919257, b: 0.48465985, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.6959003, g: 0.19170631, b: 0.3838045, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.10916495, g: 0.06088837, b: 0.016947359, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.24241447, g: 0.013318912, b: 0.21445952, a: 1}
+  affectedPartData: []

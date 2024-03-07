@@ -3678,6 +3678,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37326260a4a28e2449446a8bf51c5073, type: 2}
   - {fileID: 11400000, guid: cb5f54b3b831ec64b9f8358f12ae6a2a, type: 2}
   - {fileID: 11400000, guid: 6d77fc674b116b64cbb0016d22c6ea8f, type: 2}
+  compareTargets:
+  - {fileID: 11400000, guid: 9f5b8e7eac41c7242ad0410bd05fce10, type: 2}
+  - {fileID: 11400000, guid: ee9ff44763da92f48a7355f20351b353, type: 2}
+  - {fileID: 11400000, guid: 0bd8592c5979db64f8a4738d85a88409, type: 2}
+  - {fileID: 11400000, guid: a992013a6b10ec64593fb766271b76f0, type: 2}
   convo:
   - hello... sorry to interrupt your senseless shuffling.
   - i meant to bring this up earlier...
@@ -5951,7 +5956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &520213593
 Transform:
   m_ObjectHideFlags: 0
@@ -5960,7 +5965,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520213592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.519, y: 0, z: -1}
+  m_LocalPosition: {x: -0.5, y: -0.5, z: -1}
   m_LocalScale: {x: 0.25, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 963588424}
@@ -25880,7 +25885,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451965497}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.87, y: -2, z: -0.05}
+  m_LocalPosition: {x: -0.711, y: 0.084, z: -0.05}
   m_LocalScale: {x: -0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 963588424}
@@ -35227,7 +35232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1830880504
 Transform:
   m_ObjectHideFlags: 0
@@ -35236,7 +35241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830880503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.543, y: -0.483, z: -1}
+  m_LocalPosition: {x: 0.5, y: -0.5, z: -1}
   m_LocalScale: {x: 0.25, y: 2.304875, z: 1}
   m_Children: []
   m_Father: {fileID: 963588424}

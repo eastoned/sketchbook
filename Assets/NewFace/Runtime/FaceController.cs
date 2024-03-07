@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine.Utility;
 using TMPro;
 using UnityEngine;
 
@@ -309,16 +308,20 @@ public class FaceController : MonoBehaviour
         Shader.SetGlobalVector("_MousePos", mousePos);
         //position of mouse relative to right eye position
         float rightX = rightEye.pd.GetAbsolutePosition().x - (mousePos.x - transform.position.x);
+
         float rightY = rightEye.pd.GetAbsolutePosition().y - (mousePos.y - transform.position.y);
+        float rotatedRightX = (rightX*Mathf.Cos(-rightEye.pd.currentAngle)) - (rightY*Mathf.Sin(-rightEye.pd.currentAngle));
+        float rotatedRightY = (rightX*Mathf.Sin(-rightEye.pd.currentAngle)) + (rightY*Mathf.Cos(-rightEye.pd.currentAngle));
+        
         //Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
         float leftX = (mousePos.x - transform.position.x) - rightEye.pd.GetFlippedAbsolutePosition().x;
         float leftY = rightEye.pd.GetAbsolutePosition().y - (mousePos.y - transform.position.y);
 
-        rightX = Mathf.Clamp(rightX/5f, -.5f, .5f);
+        rotatedRightX = Mathf.Clamp(rotatedRightX/5f, -.5f, .5f);
         leftX = Mathf.Clamp(leftX/5f, -.5f, .5f);
-        rightY = Mathf.Clamp(rightY/5f, -.25f, .25f);
+        rotatedRightY = Mathf.Clamp(rotatedRightY/5f, -.25f, .25f);
         leftY = Mathf.Clamp(leftY/5f, -.25f, .25f);
         //Vector2 rotatedLeft = Rotate2D(leftX, rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedLeft2 = Rotate2D(leftY, rightEye.pd.currentAngle * Mathf.Deg2Rad);
@@ -344,8 +347,8 @@ public class FaceController : MonoBehaviour
        // leftEye.UpdateAllShadersValue(0f);
         //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-        rightEye.UpdateSingleShaderValue("_PupilOffsetX", rightX);
-        rightEye.UpdateSingleShaderValue("_PupilOffsetY", rightY);
+        rightEye.UpdateSingleShaderValue("_PupilOffsetX", rotatedRightX);
+        rightEye.UpdateSingleShaderValue("_PupilOffsetY", rotatedRightY);
         rightEye.UpdateRenderPropBlock();
         leftEye.UpdateSingleShaderValue("_PupilOffsetX", leftX);
         leftEye.UpdateSingleShaderValue("_PupilOffsetY", leftY);

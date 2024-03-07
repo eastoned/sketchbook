@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
+  m_Name: head
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -0.26986408, z: 0.1}
+  relativePosition: {x: 0, y: 0.25175795, z: 0.1}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -0.5435503
+  maxPosY: 0.5435503
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 1.3367916, y: 1.839756, z: 1}
+  relativeScale: {x: 0.3353095, y: 0.33530954, z: 1}
+  minScaleX: 0.75
+  maxScaleX: 2.5
+  minScaleY: 0.75
+  maxScaleY: 4
+  shaderProperties:
+  - propertyName: _ForeheadScale
+    propertyValue: 0.6646905
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ForeheadWidth
+    propertyValue: 0.6646905
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ForeheadLength
+    propertyValue: 0.6646905
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ChinScale
+    propertyValue: 0.33530954
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ChinWidth
+    propertyValue: 0.33530954
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _ChinLength
+    propertyValue: 0.33530954
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.47218558, g: 0.49705595, b: 0.5742509, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.9272344, g: 0.8559168, b: 0.061863318, a: 1}
+  affectedPartData: []

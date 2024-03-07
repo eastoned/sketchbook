@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794ef52737c212f45b21f4b64c293fc5, type: 3}
+  m_Name: neck
+  m_EditorClassIdentifier: 
+  absolutePosition: {x: 0, y: -1, z: 0.2}
+  relativePosition: {x: 0, y: 0, z: 0.2}
+  minPosX: 0
+  maxPosX: 0
+  minPosY: -1
+  maxPosY: -1
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  absoluteScale: {x: 1.1287595, y: 2, z: 1}
+  relativeScale: {x: 0.7030076, y: 0, z: 1}
+  minScaleX: 0.25
+  maxScaleX: 1.5
+  minScaleY: 2
+  maxScaleY: 2
+  shaderProperties:
+  - propertyName: _NeckTopWidth
+    propertyValue: 0.7030076
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NeckCurveRoundness
+    propertyValue: 0.7030076
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _NeckCurveScale
+    propertyValue: 0.2969924
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.3437708, g: 0.33275914, b: 0.33827275, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.9576453, g: 0.61460096, b: 0.14350566, a: 1}
+  affectedPartData: []
