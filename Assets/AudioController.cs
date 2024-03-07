@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip sound, sound2, soundDrip;
+    public AudioClip sound, sound2, soundDrip, soundSlide;
 
     public AudioSource aud;
     public int lastIntPlayed;
@@ -16,6 +16,7 @@ public class AudioController : MonoBehaviour
         //OnDeselectedFacePartEvent.Instance.AddListener(StopSound);
         OnChangedShaderProperty.Instance.AddListener(PlaySound);
         SetCurrentShaderInterval.Instance.AddListener(SetInterval);
+        OnSlideShaderProperty.Instance.AddListener(SlideSound);
     }
     void OnDisable(){
         //OnSelectedNewFacePartEvent.Instance.RemoveListener(PlaySound);
@@ -23,14 +24,22 @@ public class AudioController : MonoBehaviour
         //OnDeselectedFacePartEvent.Instance.RemoveListener(StopSound);
         OnChangedShaderProperty.Instance.RemoveListener(PlaySound);
         SetCurrentShaderInterval.Instance.RemoveListener(SetInterval);
+        OnSlideShaderProperty.Instance.RemoveListener(SlideSound);
     }
 
     void SetInterval(float interval){
         numberInterval = interval;
     }
+    void SlideSound(float pitch){
+        aud.clip = soundSlide;
+        aud.pitch = 1 + (pitch-.5f);
+        if(!aud.isPlaying){
+            aud.Play();
+        }
+    }
     
     void PlaySound(float ignore){
-
+        aud.clip = soundDrip;
         Debug.Log(((ignore * numberInterval) % 1) < 0.25f);
         if(((ignore * numberInterval) % 1) < 0.25f && Mathf.FloorToInt(ignore*numberInterval) != lastIntPlayed){
             aud.Stop();

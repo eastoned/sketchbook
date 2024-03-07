@@ -11122,6 +11122,7 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: 41f968365f33cfd40bf21504655903c0, type: 3}
   sound2: {fileID: 8300000, guid: 5fb675a768741734594b51dea5072990, type: 3}
   soundDrip: {fileID: 8300000, guid: f0f294eca8bb1dd4aad672c24bbef741, type: 3}
+  soundSlide: {fileID: 8300000, guid: eb4ec8c12d08cdc4a95251da980f4bd7, type: 3}
   aud: {fileID: 1674562520}
   lastIntPlayed: 0
   numberInterval: 0
@@ -16697,7 +16698,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082434490}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
