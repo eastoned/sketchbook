@@ -310,8 +310,6 @@ public class FaceController : MonoBehaviour
         float rightX = rightEye.pd.GetAbsolutePosition().x - (mousePos.x - transform.position.x);
 
         float rightY = rightEye.pd.GetAbsolutePosition().y - (mousePos.y - transform.position.y);
-        float rotatedRightX = (rightX*Mathf.Cos(-rightEye.pd.currentAngle)) - (rightY*Mathf.Sin(-rightEye.pd.currentAngle));
-        float rotatedRightY = (rightX*Mathf.Sin(-rightEye.pd.currentAngle)) + (rightY*Mathf.Cos(-rightEye.pd.currentAngle));
         
         //Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
@@ -319,10 +317,14 @@ public class FaceController : MonoBehaviour
         float leftX = (mousePos.x - transform.position.x) - rightEye.pd.GetFlippedAbsolutePosition().x;
         float leftY = rightEye.pd.GetAbsolutePosition().y - (mousePos.y - transform.position.y);
 
-        rotatedRightX = Mathf.Clamp(rotatedRightX/5f, -.5f, .5f);
+        rightX = Mathf.Clamp(rightX/5f, -.5f, .5f);
         leftX = Mathf.Clamp(leftX/5f, -.5f, .5f);
-        rotatedRightY = Mathf.Clamp(rotatedRightY/5f, -.25f, .25f);
+        rightY = Mathf.Clamp(rightY/5f, -.25f, .25f);
         leftY = Mathf.Clamp(leftY/5f, -.25f, .25f);
+
+        float rotatedRightX = (rightX*Mathf.Cos(-rightEye.pd.currentAngle)) - (rightY*Mathf.Sin(-rightEye.pd.currentAngle));
+        float rotatedRightY = (rightX*Mathf.Sin(-rightEye.pd.currentAngle)) + (rightY*Mathf.Cos(-rightEye.pd.currentAngle));
+        
         //Vector2 rotatedLeft = Rotate2D(leftX, rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedLeft2 = Rotate2D(leftY, rightEye.pd.currentAngle * Mathf.Deg2Rad);
 

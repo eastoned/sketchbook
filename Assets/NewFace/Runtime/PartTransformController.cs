@@ -9,7 +9,8 @@ public class PartTransformController : MonoBehaviour
     public enum TransformController{
         TRANSLATE,
         ROTATION,
-        SCALE
+        SCALE,
+        NOTHING
     }
 
     public Texture2D icon;
@@ -20,6 +21,10 @@ public class PartTransformController : MonoBehaviour
     public Vector3 mouseDelta2;
     public Vector3 offset;
     public bool currentlyHeld = false;
+
+    public bool gravity;
+    public Vector3 velocity;
+    public Collider2D mouth;
 
     void Start(){
         if(icon != null){
@@ -37,6 +42,10 @@ public class PartTransformController : MonoBehaviour
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.localPosition - mouseDelta2;
         currentlyHeld = true;
+        if(controls == TransformController.NOTHING){
+            gravity = false;
+            velocity = Vector3.zero;
+        }
     }
 
     private bool IsPointerOverUIObject() {
@@ -67,13 +76,52 @@ public class PartTransformController : MonoBehaviour
             case TransformController.SCALE:
                 OnScalePartController.Instance.Invoke(transform.localPosition);
             break;
+            case TransformController.NOTHING:
+            break;
+        }
+        
+    }
+
+    void Update(){
+        if(gravity){
+            transform.localPosition += velocity * Time.deltaTime;
+            velocity -= new Vector3(0, .1f, 0);
+        }
+
+        if (transform.localPosition.y < -2.25f){
+            gravity = false;
+            velocity = Vector3.zero;
+            transform.localPosition = new Vector3(1, -1.5f, -0.25f);
+        }
+
+        if(mouth.OverlapPoint(transform.localPosition)){
+            Debug.Log("Eating");
+        }else{
+            Debug.Log("Not Eating");
         }
         
     }
 
     void OnMouseUp(){
         currentlyHeld = false;
-        OnConfirmTransformPart.Instance.Invoke();
+        //OnConfirmTransformPart.Instance.Invoke();
+
+        if(mouth.OverlapPoint(transform.localPosition)){
+            Debug.Log("Eating");
+            gravity = false;
+            velocity = Vector3.zero;
+            transform.localPosition = new Vector3(1, -1.5f, -0.25f);
+        }else{
+            if(controls == TransformController.NOTHING){
+                gravity = true;
+            }
+        }
+
+        
+    }
+
+    void OnCollisionEnter(){
+        Debug.Log("collided");
     }
 
 }
