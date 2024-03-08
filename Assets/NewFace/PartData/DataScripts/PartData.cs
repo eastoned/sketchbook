@@ -11,19 +11,19 @@ public class PartData : ScriptableObject
     public void CopyData(PartData pd){
         absolutePosition = pd.absolutePosition;
         relativePosition = pd.relativePosition;
-        minPosX = pd.minPosX;
-        maxPosX = pd.maxPosX;
-        minPosY = pd.minPosY;
-        maxPosY = pd.maxPosY;
-        minAngle = pd.minAngle;
-        maxAngle = pd.maxAngle;
+        //minPosX = pd.minPosX;
+        //maxPosX = pd.maxPosX;
+        //minPosY = pd.minPosY;
+        //maxPosY = pd.maxPosY;
+        //minAngle = pd.minAngle;
+        //maxAngle = pd.maxAngle;
         currentAngle = pd.currentAngle;
         absoluteScale = pd.absoluteScale;
         relativeScale = pd.relativeScale;
-        minScaleX = pd.minScaleX;
-        maxScaleX = pd.maxScaleX;
-        minScaleY = pd.minScaleY;
-        maxScaleY = pd.maxScaleY;
+        //minScaleX = pd.minScaleX;
+        //maxScaleX = pd.maxScaleX;
+        //minScaleY = pd.minScaleY;
+        //maxScaleY = pd.maxScaleY;
 
         shaderProperties = new List<ShaderProperty>();
         for(int i = 0; i < pd.shaderProperties.Count; i++){

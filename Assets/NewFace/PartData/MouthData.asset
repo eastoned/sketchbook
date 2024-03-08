@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
   m_Name: MouthData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: -0.35299802, z: 0}
-  relativePosition: {x: 0, y: 0.31499857, z: 0}
+  absolutePosition: {x: 0, y: -0.5960812, z: 0}
+  relativePosition: {x: 0, y: 0.2565374, z: 0}
   minPosX: 0
   maxPosX: 0
-  minPosY: -0.22478509
-  maxPosY: 0.79925334
+  minPosY: -0.952945
+  maxPosY: 0.43813393
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0, y: 0, z: 1}
-  relativeScale: {x: 0.8127365, y: 1, z: 1}
-  minScaleX: 0.05
-  maxScaleX: 1.2031254
-  minScaleY: 0.1
-  maxScaleY: 0.5120192
+  relativeScale: {x: 0, y: 0, z: 1}
+  minScaleX: 0.2
+  maxScaleX: 2.0689657
+  minScaleY: 0.2
+  maxScaleY: 0.6955395
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 1

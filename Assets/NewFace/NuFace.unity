@@ -1416,12 +1416,9 @@ MonoBehaviour:
   colid: {fileID: 95416234}
   flippedXAxis: 0
   affectedParts:
-  - {fileID: 99618909}
   - {fileID: 1269006691}
   - {fileID: 1272765003}
   - {fileID: 1470558959}
-  - {fileID: 610878721}
-  - {fileID: 524532358}
   - {fileID: 1451965502}
   - {fileID: 1792980034}
   - {fileID: 838332028}
@@ -10941,7 +10938,7 @@ MonoBehaviour:
   currentlyBlending: 0
   blinkAmount: 0
   mouthClosedAmount: 0
-  animating: 0
+  animating: 1
   hoveredTransform: {fileID: 0}
   currentPC: {fileID: 0}
   currentTransform: {fileID: 0}
@@ -31668,7 +31665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1519914564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34248,7 +34245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728964944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: -1}
+  m_LocalPosition: {x: 0, y: 0.01, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 528810795}

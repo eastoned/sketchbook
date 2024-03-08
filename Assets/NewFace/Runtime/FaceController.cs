@@ -56,12 +56,21 @@ public class FaceController : MonoBehaviour
         faceAnim = StartCoroutine(Blink(Random.Range(.2f, .5f), rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
     }
 
-    private void BlinkMouth(){
+    private void Blink(float blinkLength, Transform ignore){
+        //Debug.Log("Blink");
+        if (faceAnim != null){
+            StopCoroutine(faceAnim);
+        }
+        //Debug.Log(gameObject.name + " eye top: " + rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue);
+        faceAnim = StartCoroutine(Blink(blinkLength, rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
+    }
+
+    private void BlinkMouth(float blinkMouthLength){
         if (faceAnim != null){
             StopCoroutine(faceAnim);
         }
         //Debug.Log(gameObject.name + " mouth: " + mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue);
-        faceAnim = StartCoroutine(BlinkMouth(Random.Range(1f, 2f), mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue));
+        faceAnim = StartCoroutine(BlinkMouth(blinkMouthLength, mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue));
     }
 
     private void Start(){
@@ -211,6 +220,7 @@ public class FaceController : MonoBehaviour
         if(cd1.writeable){
             cd1.CopyData(cd2);
         }
+
         currentlyBlending = false;
     }
 
@@ -234,25 +244,13 @@ public class FaceController : MonoBehaviour
     }
 
     void Rotation(){
-        /*
         nose.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/2f, head.pd.GetAbsoluteScale().x/2f, rotation/180f + 0.5f), nose.transform.position.y, nose.transform.position.z);
         mouth.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), mouth.transform.position.y, mouth.transform.position.z);
-        leftEye.transform.position = new Vector3(Mathf.Lerp(leftEye.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEye.transform.position.y, leftEye.transform.position.z);
+        leftEye.transform.position = new Vector3(Mathf.Lerp(leftEye.pd.GetFlippedAbsolutePosition().x * 2, 0, rotation/180f + 0.5f), leftEye.transform.position.y, leftEye.transform.position.z);
         rightEye.transform.position = new Vector3(Mathf.Lerp(0, rightEye.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEye.transform.position.y, rightEye.transform.position.z);
         leftEyebrow.transform.position = new Vector3(Mathf.Lerp(leftEyebrow.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEyebrow.transform.position.y, leftEyebrow.transform.position.z);
         rightEyebrow.transform.position = new Vector3(Mathf.Lerp(0, rightEyebrow.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEyebrow.transform.position.y, rightEyebrow.transform.position.z);
         bangs.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), bangs.transform.position.y, bangs.transform.position.z);
-        */
-        foreach(Transform part in bodyParts){
-            part.parent = this.transform;
-        }
-        
-        transform.localEulerAngles = new Vector3(0, 0, rotation);
-
-        foreach(Transform part in bodyParts){
-            part.parent = null;
-        }
-
     }
 
     private IEnumerator BlinkMouth(float blinkMouthLength, float mouthOpen){
@@ -287,6 +285,7 @@ public class FaceController : MonoBehaviour
     float timer = 0;
     private Coroutine faceAnim;
     void Update(){
+        Rotation();
 
         if(animating){
             timer += Time.deltaTime;
@@ -294,9 +293,9 @@ public class FaceController : MonoBehaviour
         
             if(timer >= 9f){
                 if(Random.Range(0f, 1f) < 0.5f) {
-                    Blink(transform);
+                    Blink(Random.Range(.1f, 2f), transform);
                 }else{
-                    BlinkMouth();
+                    BlinkMouth(Random.Range(.1f, 2f));
                 }
                 
                 timer = Random.Range(0f, 4f);

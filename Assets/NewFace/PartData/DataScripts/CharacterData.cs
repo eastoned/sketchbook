@@ -16,7 +16,7 @@ public class CharacterData : ScriptableObject
     [ContextMenu("Random A Piece")]
     void RandomPiece(PartData part, float randomFactor){
         part.currentAngle = Mathf.Lerp(part.minAngle, part.maxAngle, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor);
-        //part.currentAngle = 0f;
+
         if(part == hairBackData || part == hairFrontData){
             part.currentAngle = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0 : part.maxAngle;
         }
@@ -29,22 +29,22 @@ public class CharacterData : ScriptableObject
             part.maxPosY = noseData.absolutePosition.y;
         }
 
-        part.absolutePosition = new Vector3(Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
-        Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
-        part.absolutePosition.z);
+        part.absolutePosition = new Vector3(
+            Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+            Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+            part.absolutePosition.z);
+            
+        part.absoluteScale = new Vector3(
+            Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+            Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+            part.absoluteScale.z);
 
         if(part == eyebrowData){
             part.absolutePosition = new Vector3(eyeData.absolutePosition.x, eyeData.absolutePosition.y + UnityEngine.Random.Range(.5f - randomFactor, .5f + randomFactor), part.absolutePosition.z);
         }
         
         part.SetRelativePos(part.absolutePosition);
-
-        part.absoluteScale = new Vector3(Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
-        Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
-        part.absoluteScale.z);
-
         part.SetRelativeScale(part.absoluteScale);
-
 
         foreach(ShaderProperty sp in part.shaderProperties){
             float val = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor;

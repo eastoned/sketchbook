@@ -157,11 +157,13 @@ public class PlayerFaceController : FaceController
         if(currentPC.rotatable){
             rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0, 0));
             rotationController.transform.localPosition = new Vector3(rotationController.transform.localPosition.x, rotationController.transform.localPosition.y, -1f);
+            rotationController.transform.localScale = Vector3.one * currentTransform.localScale.y * 0.25f;
         }
             
         if(currentPC.scalable){
             scaleController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
             scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
+            scaleController.transform.localScale = Vector3.one * currentTransform.localScale.y * 0.25f;
         }
     }
 

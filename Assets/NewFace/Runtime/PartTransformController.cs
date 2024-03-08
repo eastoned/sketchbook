@@ -93,11 +93,12 @@ public class PartTransformController : MonoBehaviour
             velocity = Vector3.zero;
             transform.localPosition = new Vector3(1, -1.5f, -0.25f);
         }
-
-        if(mouth.OverlapPoint(transform.localPosition)){
-            Debug.Log("Eating");
-        }else{
-            Debug.Log("Not Eating");
+        if(controls == TransformController.NOTHING){
+            if(mouth.OverlapPoint(transform.localPosition)){
+                Debug.Log("Eating");
+            }else{
+                //Debug.Log("Not Eating");
+            }
         }
         
     }
