@@ -348,8 +348,8 @@ public class FaceController : MonoBehaviour
        // leftEye.UpdateAllShadersValue(0f);
         //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-        rightEye.UpdateSingleShaderValue("_PupilOffsetX", rotatedRightX);
-        rightEye.UpdateSingleShaderValue("_PupilOffsetY", rotatedRightY);
+        rightEye.UpdateSingleShaderValue("_PupilOffsetX", rightX);
+        rightEye.UpdateSingleShaderValue("_PupilOffsetY", rightY);
         rightEye.UpdateRenderPropBlock();
         leftEye.UpdateSingleShaderValue("_PupilOffsetX", leftX);
         leftEye.UpdateSingleShaderValue("_PupilOffsetY", leftY);

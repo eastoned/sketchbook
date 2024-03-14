@@ -12,49 +12,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: EyebrowData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.43808702, y: 0.6091798, z: -0.2}
-  relativePosition: {x: 0.5001396, y: 0.8143883, z: -0.2}
-  minPosX: 0.27452004
-  maxPosX: 0.6015627
-  minPosY: -0.22478509
-  maxPosY: 0.79925334
+  absolutePosition: {x: 0.4374755, y: 0.029538415, z: -0.2}
+  relativePosition: {x: 0.30715963, y: 0.68020093, z: -0.2}
+  minPosX: 0.2635995
+  maxPosX: 0.8296765
+  minPosY: -1.629535
+  maxPosY: 0.8095581
   minAngle: -90
   maxAngle: 90
-  currentAngle: 0
-  absoluteScale: {x: 0.33974957, y: 0.40593773, z: 1}
-  relativeScale: {x: 0.86920446, y: 0.28320244, z: 1}
+  currentAngle: 3.533451
+  absoluteScale: {x: 0.48579666, y: 0.58429575, z: 1}
+  relativeScale: {x: 0.51963025, y: 0.48036972, z: 1}
   minScaleX: 0.2
-  maxScaleX: 0.6015627
+  maxScaleX: 0.8296765
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:
   - propertyName: _EyebrowCount
-    propertyValue: 0.40818682
+    propertyValue: 0.6734764
     wholeNumberInterval: 1
-    valueInterval: 16
+    valueInterval: 20
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowThickness
-    propertyValue: 0.6449796
+    propertyValue: 0.507087
     wholeNumberInterval: 0
     valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowRoundness
-    propertyValue: 0.5650354
+    propertyValue: 0.48036972
     wholeNumberInterval: 0
     valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyebrowCurve
-    propertyValue: 0.2595411
+    propertyValue: 0.48036972
     wholeNumberInterval: 0
     valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.03543503, g: 0.025622837, b: 0.05266106, a: 1}
+    colorValue: {r: 0.4643021, g: 0.58757377, b: 0.50071204, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.071795456, g: 0.010250804, b: 0.8932353, a: 1}
+    colorValue: {r: 0.6805134, g: 0.43002212, b: 0.3065324, a: 1}
   affectedPartData: []

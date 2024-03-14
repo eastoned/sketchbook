@@ -1420,8 +1420,11 @@ MonoBehaviour:
   - {fileID: 1272765003}
   - {fileID: 1470558959}
   - {fileID: 1451965502}
+  - {fileID: 99618909}
   - {fileID: 1792980034}
+  - {fileID: 524532358}
   - {fileID: 838332028}
+  - {fileID: 610878721}
   - {fileID: 244385092}
   - {fileID: 311225759}
   mirroredPart: {fileID: 0}
@@ -11106,7 +11109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &984036933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31665,7 +31668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1519914564
 RectTransform:
   m_ObjectHideFlags: 0
