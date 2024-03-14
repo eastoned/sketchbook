@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 30554960}
   - component: {fileID: 30554959}
   - component: {fileID: 30554961}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -466,7 +468,7 @@ GameObject:
   - component: {fileID: 33298689}
   - component: {fileID: 33298688}
   - component: {fileID: 33298690}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +556,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -647,7 +651,7 @@ GameObject:
   - component: {fileID: 45984626}
   - component: {fileID: 45984625}
   - component: {fileID: 45984627}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +739,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 251851227}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -753,7 +759,7 @@ GameObject:
   - component: {fileID: 47109439}
   - component: {fileID: 47109438}
   - component: {fileID: 47109440}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +847,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1141720391}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -970,7 +978,7 @@ GameObject:
   - component: {fileID: 54958055}
   - component: {fileID: 54958054}
   - component: {fileID: 54958056}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1066,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 2052349024}
   - {fileID: 1382385255}
@@ -1087,7 +1097,7 @@ GameObject:
   - component: {fileID: 56806364}
   - component: {fileID: 56806363}
   - component: {fileID: 56806365}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1175,7 +1185,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 2140013906}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -1193,7 +1205,7 @@ GameObject:
   - component: {fileID: 80834086}
   - component: {fileID: 80834085}
   - component: {fileID: 80834087}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1281,7 +1293,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -1300,7 +1314,8 @@ GameObject:
   - component: {fileID: 95416235}
   - component: {fileID: 95416240}
   - component: {fileID: 95416234}
-  m_Layer: 0
+  - component: {fileID: 95416238}
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,6 +1411,27 @@ Transform:
   m_Father: {fileID: 963588424}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &95416238
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95416233}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &95416240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,7 +1450,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 95416234}
+  rb2D: {fileID: 95416238}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 1269006691}
   - {fileID: 1272765003}
@@ -1445,7 +1483,8 @@ GameObject:
   - component: {fileID: 99618909}
   - component: {fileID: 99618905}
   - component: {fileID: 99618910}
-  m_Layer: 0
+  - component: {fileID: 99618911}
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1559,7 +1598,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 99618905}
+  rb2D: {fileID: 99618911}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1451965502}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -1578,6 +1619,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tearObject: {fileID: 520213593}
+--- !u!50 &99618911
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99618904}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &117001329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1653,7 @@ GameObject:
   - component: {fileID: 117001332}
   - component: {fileID: 117001334}
   - component: {fileID: 117001331}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,7 +1767,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 117001331}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1681533229}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
@@ -1849,7 +1913,7 @@ GameObject:
   - component: {fileID: 157403608}
   - component: {fileID: 157403607}
   - component: {fileID: 157403609}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1937,7 +2001,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -2108,6 +2174,114 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &180635052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180635056}
+  - component: {fileID: 180635055}
+  - component: {fileID: 180635054}
+  - component: {fileID: 180635053}
+  m_Layer: 0
+  m_Name: Floor (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &180635053
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180635052}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001}
+  m_EdgeRadius: 0
+--- !u!23 &180635054
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180635052}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 09d650b4bc7bc4b4da1dcefc77ba2c39, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &180635055
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180635052}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &180635056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180635052}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3, y: 0, z: 0.5}
+  m_LocalScale: {x: 3, y: 4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &193695399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2370,7 @@ GameObject:
   - component: {fileID: 205927773}
   - component: {fileID: 205927775}
   - component: {fileID: 205927772}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2310,7 +2484,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 205927772}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 855170750}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -2364,7 +2540,7 @@ GameObject:
   - component: {fileID: 243720593}
   - component: {fileID: 243720592}
   - component: {fileID: 243720594}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2452,7 +2628,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1544279016}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -2471,7 +2649,8 @@ GameObject:
   - component: {fileID: 244385094}
   - component: {fileID: 244385092}
   - component: {fileID: 244385091}
-  m_Layer: 0
+  - component: {fileID: 244385093}
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2522,12 +2701,35 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 244385091}
+  rb2D: {fileID: 244385093}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &244385093
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244385090}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!23 &244385094
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2603,7 +2805,7 @@ GameObject:
   - component: {fileID: 251851226}
   - component: {fileID: 251851225}
   - component: {fileID: 251851227}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2691,7 +2893,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 45984627}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -2865,7 +3069,7 @@ GameObject:
   - component: {fileID: 266228211}
   - component: {fileID: 266228210}
   - component: {fileID: 266228212}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2953,7 +3157,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1300721908}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
@@ -3255,7 +3461,8 @@ GameObject:
   - component: {fileID: 311225761}
   - component: {fileID: 311225759}
   - component: {fileID: 311225758}
-  m_Layer: 0
+  - component: {fileID: 311225760}
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3306,12 +3513,35 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 311225758}
+  rb2D: {fileID: 311225760}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &311225760
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311225757}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!23 &311225761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3387,7 +3617,7 @@ GameObject:
   - component: {fileID: 315080385}
   - component: {fileID: 315080384}
   - component: {fileID: 315080386}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3475,7 +3705,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 2095792812}
   - {fileID: 2089736660}
@@ -3907,7 +4139,7 @@ GameObject:
   - component: {fileID: 346428799}
   - component: {fileID: 346428798}
   - component: {fileID: 346428800}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3995,7 +4227,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 706807078}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -4013,7 +4247,7 @@ GameObject:
   - component: {fileID: 369595672}
   - component: {fileID: 369595671}
   - component: {fileID: 369595673}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4101,7 +4335,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -4923,7 +5159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397872629}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d95592687839cf44cb072e2269def193, type: 3}
   m_Name: 
@@ -5190,6 +5426,114 @@ RectTransform:
   m_AnchoredPosition: {x: -25, y: 0}
   m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &429334248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429334252}
+  - component: {fileID: 429334251}
+  - component: {fileID: 429334250}
+  - component: {fileID: 429334249}
+  m_Layer: 0
+  m_Name: Floor (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &429334249
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429334248}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001}
+  m_EdgeRadius: 0
+--- !u!23 &429334250
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429334248}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 09d650b4bc7bc4b4da1dcefc77ba2c39, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &429334251
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429334248}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &429334252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429334248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0.5}
+  m_LocalScale: {x: 3, y: 4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &439720990
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,7 +5716,7 @@ GameObject:
   - component: {fileID: 449728106}
   - component: {fileID: 449728105}
   - component: {fileID: 449728107}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5460,7 +5804,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -5625,7 +5971,7 @@ GameObject:
   - component: {fileID: 499437053}
   - component: {fileID: 499437052}
   - component: {fileID: 499437054}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5713,7 +6059,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 706807078}
   - {fileID: 30554961}
@@ -5743,7 +6091,7 @@ GameObject:
   - component: {fileID: 502532706}
   - component: {fileID: 502532708}
   - component: {fileID: 502532705}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5857,7 +6205,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 502532705}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -6047,7 +6397,8 @@ GameObject:
   - component: {fileID: 524532355}
   - component: {fileID: 524532358}
   - component: {fileID: 524532354}
-  m_Layer: 0
+  - component: {fileID: 524532359}
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6161,12 +6512,35 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 524532354}
+  rb2D: {fileID: 524532359}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1792980034}
   cachePosition: {x: 2, y: 0.85, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &524532359
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524532353}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &528810794
 GameObject:
   m_ObjectHideFlags: 0
@@ -6179,7 +6553,7 @@ GameObject:
   - component: {fileID: 528810798}
   - component: {fileID: 528810797}
   - component: {fileID: 528810799}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6267,7 +6641,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1134371819}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -6396,7 +6772,7 @@ GameObject:
   - component: {fileID: 554007985}
   - component: {fileID: 554007984}
   - component: {fileID: 554007986}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6484,7 +6860,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1252023699}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -7087,7 +7465,7 @@ GameObject:
   - component: {fileID: 610081067}
   - component: {fileID: 610081069}
   - component: {fileID: 610081066}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7201,7 +7579,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 610081066}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -7220,7 +7600,8 @@ GameObject:
   - component: {fileID: 610878718}
   - component: {fileID: 610878721}
   - component: {fileID: 610878717}
-  m_Layer: 0
+  - component: {fileID: 610878722}
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7334,12 +7715,35 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 610878717}
+  rb2D: {fileID: 610878722}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 838332028}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &610878722
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610878716}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &617622828
 GameObject:
   m_ObjectHideFlags: 0
@@ -7352,7 +7756,7 @@ GameObject:
   - component: {fileID: 617622831}
   - component: {fileID: 617622830}
   - component: {fileID: 617622832}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7440,7 +7844,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -7458,7 +7864,7 @@ GameObject:
   - component: {fileID: 624928237}
   - component: {fileID: 624928236}
   - component: {fileID: 624928238}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7546,7 +7952,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -7907,7 +8315,7 @@ GameObject:
   - component: {fileID: 664121204}
   - component: {fileID: 664121203}
   - component: {fileID: 664121205}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7995,7 +8403,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 2063804435}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -8013,7 +8423,7 @@ GameObject:
   - component: {fileID: 704330405}
   - component: {fileID: 704330404}
   - component: {fileID: 704330406}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8101,7 +8511,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -8119,7 +8531,7 @@ GameObject:
   - component: {fileID: 706807077}
   - component: {fileID: 706807076}
   - component: {fileID: 706807078}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8207,7 +8619,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 346428800}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -8788,7 +9202,7 @@ GameObject:
   - component: {fileID: 785676146}
   - component: {fileID: 785676148}
   - component: {fileID: 785676145}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8902,7 +9316,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 785676145}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -8995,7 +9411,7 @@ GameObject:
   - component: {fileID: 799354447}
   - component: {fileID: 799354446}
   - component: {fileID: 799354448}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9083,7 +9499,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -9138,7 +9556,7 @@ GameObject:
   - component: {fileID: 810116952}
   - component: {fileID: 810116954}
   - component: {fileID: 810116951}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9252,7 +9670,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 810116951}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -9538,7 +9958,8 @@ GameObject:
   - component: {fileID: 838332025}
   - component: {fileID: 838332028}
   - component: {fileID: 838332024}
-  m_Layer: 0
+  - component: {fileID: 838332029}
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9652,12 +10073,35 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 838332024}
+  rb2D: {fileID: 838332029}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 610878721}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &838332029
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838332023}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &852867968
 GameObject:
   m_ObjectHideFlags: 0
@@ -9677,7 +10121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &852867969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9850,7 +10294,7 @@ GameObject:
   - component: {fileID: 855170748}
   - component: {fileID: 855170750}
   - component: {fileID: 855170747}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9964,7 +10408,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 855170747}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 205927775}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -9982,7 +10428,7 @@ GameObject:
   - component: {fileID: 891669018}
   - component: {fileID: 891669017}
   - component: {fileID: 891669019}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10070,7 +10516,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -10154,7 +10602,7 @@ GameObject:
   - component: {fileID: 903722518}
   - component: {fileID: 903722517}
   - component: {fileID: 903722519}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10242,7 +10690,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -10429,7 +10879,7 @@ GameObject:
   - component: {fileID: 954249942}
   - component: {fileID: 954249941}
   - component: {fileID: 954249943}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10517,7 +10967,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 2095792812}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -10610,7 +11062,7 @@ GameObject:
   - component: {fileID: 959269867}
   - component: {fileID: 959269866}
   - component: {fileID: 959269868}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10698,7 +11150,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -10999,7 +11453,7 @@ GameObject:
   - component: {fileID: 980233540}
   - component: {fileID: 980233539}
   - component: {fileID: 980233541}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11087,7 +11541,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -11155,7 +11611,7 @@ GameObject:
   - component: {fileID: 987146274}
   - component: {fileID: 987146273}
   - component: {fileID: 987146275}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11243,7 +11699,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -11261,7 +11719,7 @@ GameObject:
   - component: {fileID: 988135052}
   - component: {fileID: 988135051}
   - component: {fileID: 988135053}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11349,7 +11807,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1619992075}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -11403,7 +11863,7 @@ GameObject:
   - component: {fileID: 1004305408}
   - component: {fileID: 1004305407}
   - component: {fileID: 1004305409}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11491,7 +11951,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -11509,7 +11971,7 @@ GameObject:
   - component: {fileID: 1016305756}
   - component: {fileID: 1016305755}
   - component: {fileID: 1016305757}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11597,7 +12059,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1309224967}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
@@ -16582,7 +17046,7 @@ GameObject:
   - component: {fileID: 1068846556}
   - component: {fileID: 1068846555}
   - component: {fileID: 1068846557}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16670,7 +17134,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 2052349024}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -16825,7 +17291,7 @@ GameObject:
   - component: {fileID: 1089451364}
   - component: {fileID: 1089451363}
   - component: {fileID: 1089451365}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16913,7 +17379,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1142818323}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
@@ -17345,7 +17813,7 @@ GameObject:
   - component: {fileID: 1103753349}
   - component: {fileID: 1103753348}
   - component: {fileID: 1103753350}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17433,7 +17901,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1474762357}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -17526,7 +17996,7 @@ GameObject:
   - component: {fileID: 1113559736}
   - component: {fileID: 1113559735}
   - component: {fileID: 1113559737}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17614,7 +18084,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -17967,7 +18439,7 @@ GameObject:
   - component: {fileID: 1134371818}
   - component: {fileID: 1134371817}
   - component: {fileID: 1134371819}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18055,7 +18527,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 528810799}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -18073,7 +18547,7 @@ GameObject:
   - component: {fileID: 1141720390}
   - component: {fileID: 1141720389}
   - component: {fileID: 1141720391}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18161,7 +18635,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 47109440}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -18253,7 +18729,7 @@ GameObject:
   - component: {fileID: 1142818322}
   - component: {fileID: 1142818321}
   - component: {fileID: 1142818323}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18341,7 +18817,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1089451365}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -18735,7 +19213,7 @@ GameObject:
   - component: {fileID: 1204052217}
   - component: {fileID: 1204052216}
   - component: {fileID: 1204052218}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18823,7 +19301,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 528810799}
   - {fileID: 891669019}
@@ -18915,6 +19395,114 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211001757}
   m_CullTransparentMesh: 1
+--- !u!1 &1241570429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1241570433}
+  - component: {fileID: 1241570432}
+  - component: {fileID: 1241570431}
+  - component: {fileID: 1241570430}
+  m_Layer: 0
+  m_Name: Floor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1241570430
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241570429}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001}
+  m_EdgeRadius: 0
+--- !u!23 &1241570431
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241570429}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 09d650b4bc7bc4b4da1dcefc77ba2c39, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1241570432
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241570429}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1241570433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241570429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0.5}
+  m_LocalScale: {x: 9, y: 4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242958224
 GameObject:
   m_ObjectHideFlags: 0
@@ -18927,7 +19515,7 @@ GameObject:
   - component: {fileID: 1242958227}
   - component: {fileID: 1242958226}
   - component: {fileID: 1242958228}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19015,7 +19603,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -19412,7 +20002,7 @@ GameObject:
   - component: {fileID: 1252023698}
   - component: {fileID: 1252023697}
   - component: {fileID: 1252023699}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19500,7 +20090,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 554007986}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -19519,7 +20111,8 @@ GameObject:
   - component: {fileID: 1269006688}
   - component: {fileID: 1269006691}
   - component: {fileID: 1269006687}
-  m_Layer: 0
+  - component: {fileID: 1269006692}
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19633,12 +20226,35 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 1269006687}
+  rb2D: {fileID: 1269006692}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &1269006692
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269006686}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1272764998
 GameObject:
   m_ObjectHideFlags: 0
@@ -19652,7 +20268,9 @@ GameObject:
   - component: {fileID: 1272765000}
   - component: {fileID: 1272765003}
   - component: {fileID: 1272764999}
-  m_Layer: 0
+  - component: {fileID: 1272765004}
+  - component: {fileID: 1272765005}
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19683,7 +20301,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.35}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!23 &1272765000
 MeshRenderer:
@@ -19766,12 +20384,51 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 1272764999}
+  rb2D: {fileID: 1272765004}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &1272765004
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272764998}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &1272765005
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272764998}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.33
 --- !u!1 &1288620118
 GameObject:
   m_ObjectHideFlags: 0
@@ -19859,7 +20516,7 @@ GameObject:
   - component: {fileID: 1300721907}
   - component: {fileID: 1300721906}
   - component: {fileID: 1300721908}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19947,7 +20604,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 266228212}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -20004,7 +20663,7 @@ GameObject:
   - component: {fileID: 1309224966}
   - component: {fileID: 1309224965}
   - component: {fileID: 1309224967}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20092,7 +20751,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1016305757}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -20116,7 +20777,7 @@ GameObject:
   - component: {fileID: 1324460311}
   - component: {fileID: 1324460310}
   - component: {fileID: 1324460312}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20204,7 +20865,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -25172,7 +25835,7 @@ GameObject:
   - component: {fileID: 1382385254}
   - component: {fileID: 1382385253}
   - component: {fileID: 1382385255}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25260,7 +25923,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -25353,7 +26018,7 @@ GameObject:
   - component: {fileID: 1390798855}
   - component: {fileID: 1390798854}
   - component: {fileID: 1390798856}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25441,7 +26106,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
@@ -25588,7 +26255,7 @@ GameObject:
   - component: {fileID: 1421405303}
   - component: {fileID: 1421405302}
   - component: {fileID: 1421405304}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25676,7 +26343,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1980367469}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
@@ -25694,7 +26363,7 @@ GameObject:
   - component: {fileID: 1444006622}
   - component: {fileID: 1444006621}
   - component: {fileID: 1444006623}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25782,7 +26451,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -25802,7 +26473,8 @@ GameObject:
   - component: {fileID: 1451965502}
   - component: {fileID: 1451965498}
   - component: {fileID: 1451965503}
-  m_Layer: 0
+  - component: {fileID: 1451965504}
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25916,7 +26588,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 1451965498}
+  rb2D: {fileID: 1451965504}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 99618909}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
@@ -25935,6 +26609,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tearObject: {fileID: 1830880504}
+--- !u!50 &1451965504
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451965497}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1457880869
 GameObject:
   m_ObjectHideFlags: 0
@@ -26001,7 +26696,7 @@ GameObject:
   - component: {fileID: 1462542027}
   - component: {fileID: 1462542026}
   - component: {fileID: 1462542028}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26089,7 +26784,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1626287311}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -26268,7 +26965,8 @@ GameObject:
   - component: {fileID: 1470558956}
   - component: {fileID: 1470558959}
   - component: {fileID: 1470558955}
-  m_Layer: 0
+  - component: {fileID: 1470558960}
+  m_Layer: 12
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26382,12 +27080,35 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 1470558955}
+  rb2D: {fileID: 1470558960}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &1470558960
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470558954}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1471078204
 GameObject:
   m_ObjectHideFlags: 0
@@ -26534,7 +27255,7 @@ GameObject:
   - component: {fileID: 1474762356}
   - component: {fileID: 1474762355}
   - component: {fileID: 1474762357}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26622,7 +27343,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1103753350}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
@@ -31521,7 +32244,7 @@ GameObject:
   - component: {fileID: 1519607712}
   - component: {fileID: 1519607714}
   - component: {fileID: 1519607711}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31635,7 +32358,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 1519607711}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 205927775}
   - {fileID: 810116954}
@@ -31668,7 +32393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1519914564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31814,7 +32539,7 @@ GameObject:
   - component: {fileID: 1544279015}
   - component: {fileID: 1544279014}
   - component: {fileID: 1544279016}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31902,7 +32627,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 243720594}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -32054,7 +32781,7 @@ GameObject:
   - component: {fileID: 1580239260}
   - component: {fileID: 1580239259}
   - component: {fileID: 1580239261}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32142,7 +32869,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -32160,7 +32889,7 @@ GameObject:
   - component: {fileID: 1591113967}
   - component: {fileID: 1591113966}
   - component: {fileID: 1591113968}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32248,7 +32977,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 251851227}
   - {fileID: 2046618414}
@@ -32284,7 +33015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1594937908
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32406,7 +33137,7 @@ GameObject:
   - component: {fileID: 1598004552}
   - component: {fileID: 1598004551}
   - component: {fileID: 1598004553}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32494,7 +33225,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1743385959}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -32513,7 +33246,7 @@ GameObject:
   - component: {fileID: 1599482578}
   - component: {fileID: 1599482580}
   - component: {fileID: 1599482577}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32627,7 +33360,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 1599482577}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1643722412}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -32802,7 +33537,7 @@ GameObject:
   - component: {fileID: 1619992074}
   - component: {fileID: 1619992073}
   - component: {fileID: 1619992075}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32890,7 +33625,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 988135053}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -32908,7 +33645,7 @@ GameObject:
   - component: {fileID: 1626287310}
   - component: {fileID: 1626287309}
   - component: {fileID: 1626287311}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32996,7 +33733,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1462542028}
   cachePosition: {x: 2, y: 0.85, z: 0}
@@ -33165,7 +33904,7 @@ GameObject:
   - component: {fileID: 1643722410}
   - component: {fileID: 1643722412}
   - component: {fileID: 1643722409}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33279,7 +34018,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 1643722409}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1599482580}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -33806,7 +34547,7 @@ GameObject:
   - component: {fileID: 1681533227}
   - component: {fileID: 1681533229}
   - component: {fileID: 1681533226}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33920,7 +34661,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 1681533226}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 117001334}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -34412,7 +35155,7 @@ GameObject:
   - component: {fileID: 1743385958}
   - component: {fileID: 1743385957}
   - component: {fileID: 1743385959}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34500,7 +35243,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1598004553}
   cachePosition: {x: -2, y: 0.85, z: 0}
@@ -34555,7 +35300,7 @@ GameObject:
   - component: {fileID: 1748613272}
   - component: {fileID: 1748613274}
   - component: {fileID: 1748613271}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34669,7 +35414,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 1748613271}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
@@ -34839,7 +35586,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34943,7 +35690,8 @@ GameObject:
   - component: {fileID: 1792980031}
   - component: {fileID: 1792980034}
   - component: {fileID: 1792980030}
-  m_Layer: 0
+  - component: {fileID: 1792980035}
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35057,12 +35805,35 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 1792980030}
+  rb2D: {fileID: 1792980035}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 524532358}
   cachePosition: {x: -2, y: 0.85, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
   shaderPropertyCache: []
+--- !u!50 &1792980035
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792980029}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1806200127
 GameObject:
   m_ObjectHideFlags: 0
@@ -35150,7 +35921,7 @@ GameObject:
   - component: {fileID: 1823288589}
   - component: {fileID: 1823288588}
   - component: {fileID: 1823288590}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35238,7 +36009,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
@@ -35256,7 +36029,7 @@ GameObject:
   - component: {fileID: 1823562527}
   - component: {fileID: 1823562526}
   - component: {fileID: 1823562528}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35344,7 +36117,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -35458,7 +36233,7 @@ GameObject:
   - component: {fileID: 1833928610}
   - component: {fileID: 1833928609}
   - component: {fileID: 1833928611}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35546,7 +36321,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -36052,6 +36829,114 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902532867}
   m_CullTransparentMesh: 1
+--- !u!1 &1905379475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905379479}
+  - component: {fileID: 1905379478}
+  - component: {fileID: 1905379477}
+  - component: {fileID: 1905379476}
+  m_Layer: 0
+  m_Name: Floor (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1905379476
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905379475}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001}
+  m_EdgeRadius: 0
+--- !u!23 &1905379477
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905379475}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 09d650b4bc7bc4b4da1dcefc77ba2c39, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1905379478
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905379475}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1905379479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905379475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4, z: 0.5}
+  m_LocalScale: {x: 9, y: 4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906137402
 GameObject:
   m_ObjectHideFlags: 0
@@ -36280,7 +37165,7 @@ GameObject:
   - component: {fileID: 1938655054}
   - component: {fileID: 1938655053}
   - component: {fileID: 1938655055}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36368,7 +37253,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts:
   - {fileID: 2063804435}
   - {fileID: 33298690}
@@ -36397,7 +37284,7 @@ GameObject:
   - component: {fileID: 1980367468}
   - component: {fileID: 1980367467}
   - component: {fileID: 1980367469}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36485,7 +37372,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 1
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1421405304}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
@@ -36781,7 +37670,7 @@ GameObject:
   - component: {fileID: 2046618413}
   - component: {fileID: 2046618412}
   - component: {fileID: 2046618414}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36869,7 +37758,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -36887,7 +37778,7 @@ GameObject:
   - component: {fileID: 2052349023}
   - component: {fileID: 2052349022}
   - component: {fileID: 2052349024}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36975,7 +37866,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 1068846557}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -37029,7 +37922,7 @@ GameObject:
   - component: {fileID: 2063804434}
   - component: {fileID: 2063804433}
   - component: {fileID: 2063804435}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37117,7 +38010,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 664121205}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -37379,7 +38274,7 @@ GameObject:
   - component: {fileID: 2083456860}
   - component: {fileID: 2083456859}
   - component: {fileID: 2083456861}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37467,7 +38362,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -37485,7 +38382,7 @@ GameObject:
   - component: {fileID: 2089736659}
   - component: {fileID: 2089736658}
   - component: {fileID: 2089736660}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37573,7 +38470,9 @@ MonoBehaviour:
   rotatable: 0
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
@@ -37591,7 +38490,7 @@ GameObject:
   - component: {fileID: 2095792811}
   - component: {fileID: 2095792810}
   - component: {fileID: 2095792812}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37679,7 +38578,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 954249943}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
@@ -37697,7 +38598,7 @@ GameObject:
   - component: {fileID: 2120201673}
   - component: {fileID: 2120201672}
   - component: {fileID: 2120201674}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37785,7 +38686,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
@@ -37803,7 +38706,7 @@ GameObject:
   - component: {fileID: 2140013905}
   - component: {fileID: 2140013904}
   - component: {fileID: 2140013906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37891,7 +38794,9 @@ MonoBehaviour:
   rotatable: 1
   scalable: 1
   colid: {fileID: 0}
+  rb2D: {fileID: 0}
   flippedXAxis: 0
+  detached: 0
   affectedParts: []
   mirroredPart: {fileID: 56806365}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}

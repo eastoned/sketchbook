@@ -17,6 +17,7 @@ public class NuFaceManager : MonoBehaviour
     public CharacterData[] compareTargets;
 
     public string[] convo;
+    public static bool couldBeShared = false;
 
     public PartController[] parts;
 
@@ -223,10 +224,17 @@ public class NuFaceManager : MonoBehaviour
         //crunch.Play();
         writeableData[1].CopyData(pfc.currentChar);
         pfc.BlendCharacter(writeableData[1], targetData[1], 2f);
+        string targetURL = "http://unity3d.com/";
+        if(Random.Range(0f, 1f) < .5f){
+            targetURL = "https://twitter.com/home";
+        }else{
+            targetURL = "https://www.instagram.com/";
+        }
+        //Application.OpenURL(targetURL);
+        couldBeShared = true;
         //if(crunch.isPlaying){
             //crunch.Stop();
         //}
-        
     }
 
     [ContextMenu("Randomize Face")]
@@ -241,7 +249,7 @@ public class NuFaceManager : MonoBehaviour
         
         writeableData[0].CopyData(rfc[0].currentChar);
         rfc[0].BlendCharacter(writeableData[0], targetData[0], 2f);
-
+        //couldBeShared = true;
         /*
         if(Random.Range(0f,1f) < 0.5f){
             targetData[rfc.Length-1].RandomizeData();

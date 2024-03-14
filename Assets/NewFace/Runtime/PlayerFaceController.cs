@@ -145,7 +145,7 @@ public class PlayerFaceController : FaceController
 
     private void SetTransformControllers(Transform selectedTarget){
         currentPC = selectedTarget.GetComponent<PartController>();
-        
+        Debug.Log("Set the transform controllers on object");
         if(currentTransform != selectedTarget){
             currentTransform = selectedTarget;
         
@@ -165,27 +165,46 @@ public class PlayerFaceController : FaceController
             scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
             scaleController.transform.localScale = Vector3.one * currentTransform.localScale.y * 0.25f;
         }
+
+        if(NuFaceManager.couldBeShared){
+            sc.SpeakEvent("Did you already share that photo of me?");
+        }
     }
 
     private void SetPartPosition(Vector3 pos){
         //each part has a relative position to other objects
         float flip = currentPC.flippedXAxis? -1f : 1f;
+        if(!currentPC.detached){
+            currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+
+            Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
+
+            Debug.Log(currentPC.pd.PositionOutsideMaximum(absPos));
+            currentPC.pd.ClampedPosition(absPos);
+
+            currentChange = Vector2.Distance(currentPC.pd.relativePosition, positionCache);
+            //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
+
+            currentPC.UpdateAllTransformValues();
+            
+            if(currentPC.mirroredPart != null){
+                if(!currentPC.mirroredPart.detached)
+                    currentPC.mirroredPart.UpdateAllTransformValues();
+            }
+
+            if(currentPC.pd.PositionOutsideMaximum(absPos)){
+                currentPC.ShakePieces(absPos, 0.25f);
+                //Debug.Log(absPos.magnitude);
+                if(absPos.magnitude > 1.5f)
+                    currentPC.UpdateAttachmentStatus(true);
+            }
+        }else{
+            currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+        }
+        
         //Debug.Log(currentPC.pd.GetAbsolutePosition() - pos);
         
-        currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
-        Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
-
         
-        currentPC.pd.ClampedPosition(absPos);
-
-        currentChange = Vector2.Distance(currentPC.pd.relativePosition, positionCache);
-        //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
-
-        currentPC.UpdateAllTransformValues();
-        
-        if(currentPC.mirroredPart != null){
-            currentPC.mirroredPart.UpdateAllTransformValues();
-        }
         
         SetTransformControllers(currentTransform);
     }
@@ -208,7 +227,8 @@ public class PlayerFaceController : FaceController
         currentPC.UpdateAllTransformValues();
         
         if(currentPC.mirroredPart != null){
-            currentPC.mirroredPart.UpdateAllTransformValues();
+            if(!currentPC.mirroredPart.detached)
+                currentPC.mirroredPart.UpdateAllTransformValues();
         }
         //currentPC.pd.SetPositionBounds();
 
@@ -235,7 +255,8 @@ public class PlayerFaceController : FaceController
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
         
         if(currentPC.mirroredPart != null){
-            currentPC.mirroredPart.UpdateAllTransformValues();
+            if(!currentPC.mirroredPart.detached)
+                currentPC.mirroredPart.UpdateAllTransformValues();
         }
         
         SetTransformControllers(currentTransform);

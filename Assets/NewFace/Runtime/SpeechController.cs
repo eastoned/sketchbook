@@ -27,13 +27,13 @@ public class SpeechController : MonoBehaviour
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
-        //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+        OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void OnDisable(){
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
-        //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+        OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     private IEnumerator Start(){
@@ -44,6 +44,7 @@ public class SpeechController : MonoBehaviour
     }
 
     void PartMention(Transform part){
+        if(!NuFaceManager.couldBeShared){
         if(SpeakingRoutine != null){
             //StopCoroutine(SpeakingRoutine);
         }
@@ -53,6 +54,7 @@ public class SpeechController : MonoBehaviour
         }
 
         SpeakingRoutine = StartCoroutine(Speak("You have selected my " + part.name + ".<br>Please make " + plural + " beautiful.", 2f));
+        }
     }
 
     void MouthSpeech(float value){

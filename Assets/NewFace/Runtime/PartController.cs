@@ -18,8 +18,10 @@ public class PartController : MonoBehaviour
     public bool translatable, rotatable, scalable;
 
     public BoxCollider2D colid;
+    public Rigidbody2D rb2D;
     
     public bool flippedXAxis = false;
+    public bool detached = false;
 
     public List<PartController> affectedParts = new List<PartController>();
     public PartController mirroredPart; 
@@ -29,6 +31,8 @@ public class PartController : MonoBehaviour
     public Vector3 cachePosition, cacheScale;
     public ShaderCache[] shaderPropertyCache;
     PartTransformController ptc;
+
+    private IEnumerator stretchShake;
 
     void Awake(){
         propBlock = new MaterialPropertyBlock();
@@ -56,9 +60,11 @@ public class PartController : MonoBehaviour
     public void UpdateDependencies(){
         if(affectedParts.Count > 0){
             for(int j = 0; j < affectedParts.Count; j++){
-                affectedParts[j].pd.SetPositionBounds(pd);
-                affectedParts[j].pd.SetScaleBounds(pd);
-                affectedParts[j].UpdateAllTransformValues();
+                if(!affectedParts[j].detached){
+                    affectedParts[j].pd.SetPositionBounds(pd);
+                    affectedParts[j].pd.SetScaleBounds(pd);
+                    affectedParts[j].UpdateAllTransformValues();
+                }
             }
         }
     }
@@ -95,21 +101,35 @@ public class PartController : MonoBehaviour
             return;
         
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
-        //Debug.Log("select new face part");
+        Debug.Log("OnMouse Down");
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
+        
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
         SetCache(pd);
-
     }
 
     void OnMouseUp(){
         if(ptc != null){
             Destroy(ptc);
         }
+        if(detached){
+           rb2D.Sleep();
+            rb2D.bodyType = RigidbodyType2D.Dynamic; 
+        }
+        
     }
 
     public void UpdateAllTransformValues(){
-        
+
+        if(flippedXAxis){
+            transform.localScale = pd.GetFlippedAbsoluteScale();
+            cacheScale = pd.GetFlippedAbsoluteScale();
+        }else{
+            transform.localScale = pd.GetAbsoluteScale();
+            cacheScale = pd.GetAbsoluteScale();
+        }
+
         if(flippedXAxis){
             transform.localPosition = pd.GetFlippedAbsolutePosition();
             cachePosition = pd.GetFlippedAbsolutePosition();
@@ -124,18 +144,9 @@ public class PartController : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0, 0, pd.currentAngle);
         }
 
-        if(flippedXAxis){
-            transform.localScale = pd.GetFlippedAbsoluteScale();
-            cacheScale = pd.GetFlippedAbsoluteScale();
-        }else{
-            transform.localScale = pd.GetAbsoluteScale();
-            cacheScale = pd.GetAbsoluteScale();
-        }
-
         pd.SetPositionBounds();
         pd.SetScaleBounds();
         UpdateDependencies();
-
     }
 
     public void UpdateColliderBounds(){
@@ -167,7 +178,10 @@ public class PartController : MonoBehaviour
     }
 
     public void ShakePieces(Vector3 strength, float time){
-        StartCoroutine(ShakeRoutineTimed(strength, time));
+        if(stretchShake == null){
+            Debug.Log("no current shaking so lets shake");
+            stretchShake = ShakeRoutineTimed(strength, time);
+        }
     }
 
     public void ScalePieces(float size, float time, AnimationCurve curve){
@@ -201,6 +215,18 @@ public class PartController : MonoBehaviour
             yield return null;
         }
         transform.localScale = cacheScale;
+    }
+
+    public void UpdateAttachmentStatus(bool detach){
+        detached = detach;
+        if(detached){
+            transform.gameObject.layer = 11;
+            rb2D.bodyType = RigidbodyType2D.Dynamic;
+            rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
+        }else{
+            transform.gameObject.layer = 12;
+            rb2D.bodyType = RigidbodyType2D.Kinematic;
+        }
     }
 
     public void UpdateAllShadersValue(){

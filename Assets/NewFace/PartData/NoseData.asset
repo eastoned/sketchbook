@@ -12,61 +12,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c1abad70c8c834dafcea312a1844d9, type: 3}
   m_Name: NoseData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0.46973842, z: -0.1}
-  relativePosition: {x: 0, y: 0.69059825, z: -0.1}
+  absolutePosition: {x: -0.007903971, y: 0.13212802, z: -0.1}
+  relativePosition: {x: 0.496048, y: 0.55919284, z: -0.1}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.2322738
-  maxPosY: 1.2322738
+  minPosY: -1.0972217
+  maxPosY: 1.1012145
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  absoluteScale: {x: 1.4693629, y: 2.3831818, z: 1}
-  relativeScale: {x: 0.4097875, y: 0.95858294, z: 1}
+  absoluteScale: {x: 0.98281205, y: 1.017188, z: 1}
+  relativeScale: {x: 0.48281205, y: 0.51718795, z: 1}
   minScaleX: 0.5
-  maxScaleX: 2.8655257
+  maxScaleX: 1.5949211
   minScaleY: 0.5
-  maxScaleY: 2.4645476
+  maxScaleY: 2.1984363
   shaderProperties:
   - propertyName: _NoseBaseWidth
-    propertyValue: 0.38571876
+    propertyValue: 0.51718795
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NoseTotalWidth
-    propertyValue: 0.5268367
+    propertyValue: 0.48281205
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NoseTopWidth
-    propertyValue: 0.94088614
+    propertyValue: 0.51718795
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NoseCurve
-    propertyValue: 0.9224665
+    propertyValue: 0.51718795
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NoseTotalLength
-    propertyValue: 0.44420677
+    propertyValue: 0.51718795
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NostrilRadius
-    propertyValue: 0.13363755
+    propertyValue: 0.48281205
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NostrilSpacing
-    propertyValue: 0.5610283
+    propertyValue: 0.48281205
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NostrilHeight
-    propertyValue: 0.77122355
+    propertyValue: 0.48281205
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _NostrilScale
-    propertyValue: 0.47013944
+    propertyValue: 0.48281205
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.12931196, g: 0.14230692, b: 0.123309374, a: 1}
+    colorValue: {r: 0.24254954, g: 0.2489034, b: 0.023149721, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.79894185, g: 0.78923523, b: 0.7907658, a: 1}
+    colorValue: {r: 0.12161079, g: 0.3664294, b: 0.058594357, a: 1}
   affectedPartData: []

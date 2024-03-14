@@ -140,6 +140,10 @@ public class PartData : ScriptableObject
         
     }
 
+    public bool PositionOutsideMaximum(Vector3 posIn){
+        return posIn.x > maxPosX || posIn.y > maxPosY;
+    }
+
     public virtual void ClampedPosition(Vector3 posIn){
         
         Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);

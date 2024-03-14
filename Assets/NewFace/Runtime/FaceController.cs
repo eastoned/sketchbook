@@ -147,7 +147,9 @@ public class FaceController : MonoBehaviour
         mouth.UpdateAllShadersValue(0f);
         neck.UpdateAllTransformValues();
         neck.UpdateAllShadersValue(0f);
-        nose.UpdateAllTransformValues();
+        if(!nose.detached){
+            nose.UpdateAllTransformValues();
+        }
         nose.UpdateAllShadersValue(0f);
     }
 
@@ -285,7 +287,7 @@ public class FaceController : MonoBehaviour
     float timer = 0;
     private Coroutine faceAnim;
     void Update(){
-        Rotation();
+        //Rotation();
 
         if(animating){
             timer += Time.deltaTime;
@@ -306,15 +308,14 @@ public class FaceController : MonoBehaviour
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Shader.SetGlobalVector("_MousePos", mousePos);
         //position of mouse relative to right eye position
-        float rightX = rightEye.pd.GetAbsolutePosition().x - (mousePos.x - transform.position.x);
-
-        float rightY = rightEye.pd.GetAbsolutePosition().y - (mousePos.y - transform.position.y);
+        float rightX = rightEye.transform.position.x - (mousePos.x - transform.position.x);
+        float rightY = rightEye.transform.position.y - (mousePos.y - transform.position.y);
         
         //Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
-        float leftX = (mousePos.x - transform.position.x) - rightEye.pd.GetFlippedAbsolutePosition().x;
-        float leftY = rightEye.pd.GetAbsolutePosition().y - (mousePos.y - transform.position.y);
+        float leftX = (mousePos.x - transform.position.x) - leftEye.transform.position.x;
+        float leftY = leftEye.transform.position.y - (mousePos.y - transform.position.y);
 
         rightX = Mathf.Clamp(rightX/5f, -.5f, .5f);
         leftX = Mathf.Clamp(leftX/5f, -.5f, .5f);
