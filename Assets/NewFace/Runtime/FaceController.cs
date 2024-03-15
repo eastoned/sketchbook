@@ -260,7 +260,7 @@ public class FaceController : MonoBehaviour
         while(animationTime < blinkMouthLength){
             float interval = Mathf.Clamp01(animationTime/blinkMouthLength);
             interval = blinkCurve.Evaluate(interval);
-            mouth.UpdateSingleShaderValue("_MouthOpen", Mathf.Lerp(mouthOpen, 0, interval));
+            mouth.UpdateSingleShaderFloat("_MouthOpen", Mathf.Lerp(mouthOpen, 0, interval));
             mouth.UpdateRenderPropBlock();
             animationTime += Time.deltaTime;
             yield return null;
@@ -273,10 +273,10 @@ public class FaceController : MonoBehaviour
         while(animationTime < blinkLength){
             float interval = Mathf.Clamp01(animationTime/blinkLength);
             interval = blinkCurve.Evaluate(interval);
-            rightEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
-            leftEye.UpdateSingleShaderValue("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
-            rightEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
-            leftEye.UpdateSingleShaderValue("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
+            rightEye.UpdateSingleShaderFloat("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
+            leftEye.UpdateSingleShaderFloat("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
+            rightEye.UpdateSingleShaderFloat("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
+            leftEye.UpdateSingleShaderFloat("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
             rightEye.UpdateRenderPropBlock();
             leftEye.UpdateRenderPropBlock();
             animationTime += Time.deltaTime;
@@ -349,11 +349,11 @@ public class FaceController : MonoBehaviour
        // leftEye.UpdateAllShadersValue(0f);
         //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-        rightEye.UpdateSingleShaderValue("_PupilOffsetX", rightX);
-        rightEye.UpdateSingleShaderValue("_PupilOffsetY", rightY);
+        rightEye.UpdateSingleShaderFloat("_PupilOffsetX", rightX);
+        rightEye.UpdateSingleShaderFloat("_PupilOffsetY", rightY);
         rightEye.UpdateRenderPropBlock();
-        leftEye.UpdateSingleShaderValue("_PupilOffsetX", leftX);
-        leftEye.UpdateSingleShaderValue("_PupilOffsetY", leftY);
+        leftEye.UpdateSingleShaderFloat("_PupilOffsetX", leftX);
+        leftEye.UpdateSingleShaderFloat("_PupilOffsetY", leftY);
         leftEye.UpdateRenderPropBlock();
         //rightEye.UpdateAllShadersValue(0f);
         //RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);

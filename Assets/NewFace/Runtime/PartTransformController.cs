@@ -33,11 +33,9 @@ public class PartTransformController : MonoBehaviour
     }
     
     void OnMouseDown(){
-        if(IsPointerOverUIObject())
+        if(CustomUtils.IsPointerOverUIObject())
             return;
 
-
-        //Debug.Log("Clicked transform cnotroller");
         OnSetTransformCacheEvent.Instance.Invoke();
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.localPosition - mouseDelta2;
@@ -48,17 +46,9 @@ public class PartTransformController : MonoBehaviour
         }
     }
 
-    private bool IsPointerOverUIObject() {
-         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-         List<RaycastResult> results = new List<RaycastResult>();
-         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-         return results.Count > 0;
-     }
-
     void OnMouseDrag(){
         if(!currentlyHeld){
-            if(IsPointerOverUIObject())
+            if(CustomUtils.IsPointerOverUIObject())
                 return;
         }
 
@@ -81,7 +71,7 @@ public class PartTransformController : MonoBehaviour
         }
         
     }
-
+/*
     void Update(){
         if(gravity){
             transform.localPosition += velocity * Time.deltaTime;
@@ -103,7 +93,7 @@ public class PartTransformController : MonoBehaviour
         
     }
 
-/*
+
     void OnMouseUp(){
         currentlyHeld = false;
         //OnConfirmTransformPart.Instance.Invoke();

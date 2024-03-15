@@ -21,7 +21,6 @@ public class EyeData : PartData{
 
     public override void SetScaleBounds(PartData parentData)
     {
-        //Debug.Log(this.name + " has new scale factors");
         maxScaleX = parentData.GetAbsoluteScale().x/2f;
         maxScaleY = parentData.GetAbsoluteScale().y/2f;
     }

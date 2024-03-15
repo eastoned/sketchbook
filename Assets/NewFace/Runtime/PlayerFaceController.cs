@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine.Utility;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerFaceController : FaceController
 {
@@ -13,6 +14,7 @@ public class PlayerFaceController : FaceController
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
+    public GameObject node;
 
     public PartTransformController rotationController, scaleController;
 
@@ -25,6 +27,7 @@ public class PlayerFaceController : FaceController
     public SpeechController sc;
     private MaterialPropertyBlock block;
     public Renderer tear1, tear2;
+    public List<GameObject> availableNodes;
 
     public override void OnEnable()
 	{
@@ -67,7 +70,7 @@ public class PlayerFaceController : FaceController
     }
 
     public void StartCrying(){
-        mouth.UpdateSingleShaderValue("_MouthBend", 1f);
+        mouth.UpdateSingleShaderFloat("_MouthBend", 1f);
         block.SetFloat("_Radius", 1f);
         tear1.SetPropertyBlock(block);
         tear2.SetPropertyBlock(block);
@@ -76,7 +79,7 @@ public class PlayerFaceController : FaceController
     }
 
     public void StopCrying(){
-        mouth.UpdateSingleShaderValue("_MouthBend", 0f);
+        mouth.UpdateSingleShaderFloat("_MouthBend", 0f);
         block.SetFloat("_Radius", .3f);
         tear1.SetPropertyBlock(block);
         tear2.SetPropertyBlock(block);
@@ -184,26 +187,61 @@ public class PlayerFaceController : FaceController
                 if(!currentPC.mirroredPart.detached)
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }
-            //Debug.Log(absPos);
-            //Debug.Log(absPos.Abs());
-            Debug.Log(currentPC.pd.maxPosX);
-            Debug.Log(currentPC.pd.maxPosY);
-            Debug.Log(absPos.Abs());
 
-            if(currentPC.pd.PositionOutsideMaximum(absPos.Abs())){
+            if(currentPC.pd.PositionOutsideMaximum(absPos)){
                 currentPC.ShakePiece(absPos.magnitude*10f, 0.25f);
                 
-                if(absPos.magnitude > 1.2f)
+                if(absPos.magnitude > 1.2f){
                     currentPC.UpdateAttachmentStatus(true);
+                    if(currentPC.flippedXAxis){
+                        bool didSpawn = false;
+                        foreach(GameObject nod in availableNodes){
+                            if(!nod.activeInHierarchy){
+                                nod.transform.position = currentPC.pd.GetFlippedAbsolutePosition();
+                                nod.SetActive(true);
+                                didSpawn = true;
+                                break;
+                            }
+                        }
+                        if(!didSpawn){
+                            Debug.Log("add node if didn't have enough avilaable");
+                            availableNodes.Add(Instantiate(node, currentPC.pd.GetFlippedAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+                        }//add node to list
+                    }else{
+                        bool didSpawn = false;
+                        foreach(GameObject nod in availableNodes){
+                            if(!nod.activeInHierarchy){
+                                nod.transform.position = currentPC.pd.GetAbsolutePosition();
+                                nod.SetActive(true);
+                                didSpawn = true;
+                                break;
+                            }
+                        }
+                        if(!didSpawn){
+                            Debug.Log("add node if didn't have enough avilaable");
+                            availableNodes.Add(Instantiate(node, currentPC.pd.GetAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+                        }
+                    }
+                    
+                    //set empty node here
+                }
+                    
             }
         }else{
             currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+            currentPC.overAttachmentNode = false;
+            for(int i = 0; i < availableNodes.Count; i++){
+                if(currentTransform.GetComponent<BoxCollider2D>().OverlapPoint(availableNodes[i].transform.position)){
+                   currentPC.overAttachmentNode = true;
+                   currentPC.attachPosition = availableNodes[i].transform.position;
+                   currentPC.nodeToDelete = availableNodes[i];
+                }
+            }
+            //if position is on  node then we can attach to it
         }
         
         //Debug.Log(currentPC.pd.GetAbsolutePosition() - pos);
-        
-        
-        
+
         SetTransformControllers(currentTransform);
     }
 

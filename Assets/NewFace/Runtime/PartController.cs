@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PartController : MonoBehaviour
 {
 
-    private int[] shaderIDs;
-
     public Renderer rend;
     private Material currentMat;
-
 
     public PartData pd;
 
@@ -22,6 +18,9 @@ public class PartController : MonoBehaviour
     
     public bool flippedXAxis = false;
     public bool detached = false;
+    public bool overAttachmentNode = false;
+    public Vector3 attachPosition;
+    public GameObject nodeToDelete;
 
     public List<PartController> affectedParts = new List<PartController>();
     public PartController mirroredPart; 
@@ -32,8 +31,6 @@ public class PartController : MonoBehaviour
     public float cacheAngle;
     public ShaderCache[] shaderPropertyCache;
     PartTransformController ptc;
-
-    private IEnumerator stretchShake;
 
     void Awake(){
         propBlock = new MaterialPropertyBlock();
@@ -77,16 +74,8 @@ public class PartController : MonoBehaviour
         }
     }
 
-    private bool IsPointerOverUIObject() {
-         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-         List<RaycastResult> results = new List<RaycastResult>();
-         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-         return results.Count > 0;
-     }
-
     void OnMouseEnter(){
-        if(IsPointerOverUIObject())
+        if(CustomUtils.IsPointerOverUIObject())
             return;
 
         if(Input.GetMouseButton(0))
@@ -98,15 +87,15 @@ public class PartController : MonoBehaviour
     void OnMouseDown(){
         OnMouseClickEvent.Instance.Invoke();
         
-        if(IsPointerOverUIObject())
+        if(CustomUtils.IsPointerOverUIObject())
             return;
         
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
-        //Debug.Log("OnMouse Down");
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
+        
         SetCache(pd);
     }
 
@@ -115,8 +104,14 @@ public class PartController : MonoBehaviour
             Destroy(ptc);
         }
         if(detached){
-           rb2D.Sleep();
-            rb2D.bodyType = RigidbodyType2D.Dynamic; 
+            rb2D.Sleep();
+            rb2D.bodyType = RigidbodyType2D.Dynamic;
+
+            if(overAttachmentNode){
+                transform.position = attachPosition;
+                nodeToDelete.SetActive(false);
+                UpdateAttachmentStatus(false);
+            }
         }
         
     }
@@ -160,7 +155,7 @@ public class PartController : MonoBehaviour
     public void UpdateAllShadersValue(float ignore){
 
         for(int i = 0; i < pd.shaderProperties.Count; i++){
-            UpdateSingleShaderValue(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
+            UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }
 
         for(int j = 0; j < pd.shaderColors.Count; j++){
@@ -184,16 +179,11 @@ public class PartController : MonoBehaviour
     }
 
     public void ShakePieces(Vector3 strength, float time){
-        Debug.Log("no current shaking so lets shake");
-        //stretchShake = ShakePositionRoutineTimed(strength, time);
+        ShakePositionRoutineTimed(strength, time);
     }
 
     public void ScalePieces(float size, float time, AnimationCurve curve){
         StartCoroutine(ScalePopRoutine(size, time, curve));
-    }
-
-    public IEnumerator ToggleShaking(bool shaking){
-        yield return null;
     }
 
     public IEnumerator ShakePositionRoutineTimed(Vector3 strength, float length){
@@ -226,9 +216,6 @@ public class PartController : MonoBehaviour
             time -= Time.deltaTime;
             float perc = Mathf.Clamp01(1f-(time/length));
             float scl = size * curve.Evaluate(perc);
-           // Debug.Log("Time: " + time);
-           //Debug.Log("Perc: " + perc);
-            //Debug.Log("Scale factor: " + scl);
             transform.localScale = cacheScale + (Vector3.one*scl);//(size*curve.Evaluate(perc));
             yield return null;
         }
@@ -260,7 +247,7 @@ public class PartController : MonoBehaviour
         rend.SetPropertyBlock(propBlock);
     }
 
-    public void UpdateSingleShaderValue(string param, float value){
+    public void UpdateSingleShaderFloat(string param, float value){
         propBlock.SetFloat(param, value);
     }
 

@@ -91,7 +91,7 @@ public class NuFaceManager : MonoBehaviour
     }
 
     public void ExportCharacter(){
-        
+        couldBeShared = true;
     }
 
     [ContextMenu("Compare Faces")]

@@ -34,7 +34,24 @@ public class PartData : ScriptableObject
         for(int j = 0; j < pd.shaderColors.Count; j++){
             shaderColors.Add(new ShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue));
         }
+    }
 
+    public void CopyPartData(PartData pd){
+        absolutePosition = pd.absolutePosition;
+        relativePosition = pd.relativePosition;
+        //minPosX = pd.minPosX;
+        //maxPosX = pd.maxPosX;
+        //minPosY = pd.minPosY;
+        //maxPosY = pd.maxPosY;
+        //minAngle = pd.minAngle;
+        //maxAngle = pd.maxAngle;
+        currentAngle = pd.currentAngle;
+        absoluteScale = pd.absoluteScale;
+        relativeScale = pd.relativeScale;
+        //minScaleX = pd.minScaleX;
+        //maxScaleX = pd.maxScaleX;
+        //minScaleY = pd.minScaleY;
+        //maxScaleY = pd.maxScaleY;
     }
 
     #region TransformData
@@ -66,6 +83,10 @@ public class PartData : ScriptableObject
     //return absolute values to render object in space
     public Vector3 GetAbsolutePosition(){
         return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
+    }
+
+    public Quaternion GetAbsoluteRotation(){
+        return Quaternion.Euler(0, 0, currentAngle);
     }
 
     public Vector3 GetFlippedAbsolutePosition(){
@@ -141,7 +162,7 @@ public class PartData : ScriptableObject
     }
 
     public bool PositionOutsideMaximum(Vector3 posIn){
-        return posIn.x > maxPosX || posIn.y > maxPosY;
+        return posIn.x > maxPosX || posIn.y > maxPosY || posIn.x < minPosX || posIn.y < minPosY;
     }
 
     public virtual void ClampedPosition(Vector3 posIn){

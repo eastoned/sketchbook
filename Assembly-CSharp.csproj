@@ -181,6 +181,7 @@
     <Compile Include="Assets\Script\CameraMovement.cs" />
     <Compile Include="Assets\Script\GeneratedMesh.cs" />
     <Compile Include="Assets\Script\followMouse.cs" />
+    <Compile Include="Assets\NewFace\Runtime\CustomUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
