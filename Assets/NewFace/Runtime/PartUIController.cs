@@ -8,6 +8,7 @@ using System;
 
 public class PartUIController : MonoBehaviour
 {
+    [SerializeField] private GameObject editButton;
 
     [SerializeField] private TextMeshProUGUI titleText;
 
@@ -22,22 +23,29 @@ public class PartUIController : MonoBehaviour
 
     void OnEnable()
 	{
-        OnSelectedNewFacePartEvent.Instance.AddListener(UpdateTitleText);
+        OnSelectedNewFacePartEvent.Instance.AddListener(EnableEditButton);
         OnDeselectedFacePartEvent.Instance.AddListener(TurnOffUI);
     }
 
     void OnDisable()
     {
-        OnSelectedNewFacePartEvent.Instance.RemoveListener(UpdateTitleText);
+        OnSelectedNewFacePartEvent.Instance.RemoveListener(EnableEditButton);
         OnDeselectedFacePartEvent.Instance.RemoveListener(TurnOffUI);
     }
 
-    private void UpdateTitleText(Transform partTransform)
+    private void EnableEditButton(Transform partTransform){
+        TurnOffUI();
+        editButton.SetActive(true);
+        titleText.text = partTransform.name;
+        partData = partTransform.GetComponent<PartController>();
+    }
+
+    public void UpdateTitleText()
     {
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(true);
-        titleText.text = partTransform.name;
-        partData = partTransform.GetComponent<PartController>();
+        //titleText.text = partTransform.name;
+        //partData = partTransform.GetComponent<PartController>();
         colorSliderContainer.SetActive(false); 
 
         for(int i = 0; i < sliders.Count; i++){
@@ -106,6 +114,7 @@ public class PartUIController : MonoBehaviour
     }
 
     void TurnOffUI(){
+        editButton.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
         colorSliderContainer.SetActive(false);

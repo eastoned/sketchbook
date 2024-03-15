@@ -103,6 +103,7 @@ public class PartTransformController : MonoBehaviour
         
     }
 
+/*
     void OnMouseUp(){
         currentlyHeld = false;
         //OnConfirmTransformPart.Instance.Invoke();
@@ -119,10 +120,5 @@ public class PartTransformController : MonoBehaviour
         }
 
         
-    }
-
-    void OnCollisionEnter(){
-        Debug.Log("collided");
-    }
-
+    }*/
 }

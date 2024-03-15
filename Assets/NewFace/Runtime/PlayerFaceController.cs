@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine.Utility;
 using TMPro;
 using UnityEngine;
 
 public class PlayerFaceController : FaceController
 {
-
     public Transform hoveredTransform;
     public PartController currentPC;
     public Transform currentTransform;
@@ -37,7 +37,6 @@ public class PlayerFaceController : FaceController
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
-        OnConfirmTransformPart.Instance.AddListener(UpdateMoneyAmount);
         OnConfirmTransformPart.Instance.AddListener(PopOutScale);
         OnSelectedNewFacePartEvent.Instance.AddListener(PopInScale);
         block = new MaterialPropertyBlock();
@@ -53,14 +52,8 @@ public class PlayerFaceController : FaceController
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
-        OnConfirmTransformPart.Instance.RemoveListener(UpdateMoneyAmount);
         OnConfirmTransformPart.Instance.RemoveListener(PopOutScale);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(PopInScale);
-    }
-
-    private void UpdateMoneyAmount(){
-        NuFaceManager.money -= currentChange;
-        currentChange = 0f;
     }
 
     public void SetMaterialOutline(Transform hoveredTarget){
@@ -145,7 +138,7 @@ public class PlayerFaceController : FaceController
 
     private void SetTransformControllers(Transform selectedTarget){
         currentPC = selectedTarget.GetComponent<PartController>();
-        Debug.Log("Set the transform controllers on object");
+        //Debug.Log("Set the transform controllers on object");
         if(currentTransform != selectedTarget){
             currentTransform = selectedTarget;
         
@@ -179,7 +172,7 @@ public class PlayerFaceController : FaceController
 
             Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
 
-            Debug.Log(currentPC.pd.PositionOutsideMaximum(absPos));
+            //Debug.Log(currentPC.pd.PositionOutsideMaximum(absPos));
             currentPC.pd.ClampedPosition(absPos);
 
             currentChange = Vector2.Distance(currentPC.pd.relativePosition, positionCache);
@@ -191,11 +184,16 @@ public class PlayerFaceController : FaceController
                 if(!currentPC.mirroredPart.detached)
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }
+            //Debug.Log(absPos);
+            //Debug.Log(absPos.Abs());
+            Debug.Log(currentPC.pd.maxPosX);
+            Debug.Log(currentPC.pd.maxPosY);
+            Debug.Log(absPos.Abs());
 
-            if(currentPC.pd.PositionOutsideMaximum(absPos)){
-                currentPC.ShakePieces(absPos, 0.25f);
-                //Debug.Log(absPos.magnitude);
-                if(absPos.magnitude > 1.5f)
+            if(currentPC.pd.PositionOutsideMaximum(absPos.Abs())){
+                currentPC.ShakePiece(absPos.magnitude*10f, 0.25f);
+                
+                if(absPos.magnitude > 1.2f)
                     currentPC.UpdateAttachmentStatus(true);
             }
         }else{

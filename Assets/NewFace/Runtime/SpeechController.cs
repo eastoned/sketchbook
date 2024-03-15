@@ -27,13 +27,13 @@ public class SpeechController : MonoBehaviour
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
-        OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+        //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void OnDisable(){
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
-        OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+       // OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     private IEnumerator Start(){

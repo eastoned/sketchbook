@@ -29,6 +29,7 @@ public class PartController : MonoBehaviour
     MaterialPropertyBlock propBlock;
 
     public Vector3 cachePosition, cacheScale;
+    public float cacheAngle;
     public ShaderCache[] shaderPropertyCache;
     PartTransformController ptc;
 
@@ -101,7 +102,7 @@ public class PartController : MonoBehaviour
             return;
         
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
-        Debug.Log("OnMouse Down");
+        //Debug.Log("OnMouse Down");
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
         
@@ -140,8 +141,10 @@ public class PartController : MonoBehaviour
 
         if(flippedXAxis){
             transform.localRotation = Quaternion.Euler(0, 0, -pd.currentAngle);
+            cacheAngle = -pd.currentAngle;
         }else{
             transform.localRotation = Quaternion.Euler(0, 0, pd.currentAngle);
+            cacheAngle = pd.currentAngle;
         }
 
         pd.SetPositionBounds();
@@ -176,12 +179,13 @@ public class PartController : MonoBehaviour
     public void ShakeTest(){
         ShakePieces(new Vector3(.1f, 0.01f, 0f), .5f);
     }
+    public void ShakePiece(float strength, float time){
+        StartCoroutine(ShakeRotationRoutineTimed(strength, time));
+    }
 
     public void ShakePieces(Vector3 strength, float time){
-        if(stretchShake == null){
-            Debug.Log("no current shaking so lets shake");
-            stretchShake = ShakeRoutineTimed(strength, time);
-        }
+        Debug.Log("no current shaking so lets shake");
+        //stretchShake = ShakePositionRoutineTimed(strength, time);
     }
 
     public void ScalePieces(float size, float time, AnimationCurve curve){
@@ -192,7 +196,7 @@ public class PartController : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator ShakeRoutineTimed(Vector3 strength, float length){
+    public IEnumerator ShakePositionRoutineTimed(Vector3 strength, float length){
         float time = length;
         while(time > 0){
             time -= Time.deltaTime;
@@ -200,6 +204,20 @@ public class PartController : MonoBehaviour
             yield return null;
         }
         transform.localPosition = cachePosition;
+    }
+
+    public IEnumerator ShakeRotationRoutineTimed(float strength, float length){
+        float time = length;
+        while(time > 0){
+            time -= Time.deltaTime;
+            if(flippedXAxis){
+                transform.localRotation = Quaternion.Euler(0, 0, -cacheAngle + Random.Range(-strength, strength));
+            }else{
+                transform.localRotation = Quaternion.Euler(0, 0, cacheAngle + Random.Range(-strength, strength));
+            }
+            yield return null;
+        }
+        transform.localRotation = Quaternion.Euler(0, 0, cacheAngle);
     }
 
     public IEnumerator ScalePopRoutine(float size, float length, AnimationCurve curve){
@@ -223,6 +241,11 @@ public class PartController : MonoBehaviour
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
+            if(affectedParts.Count > 0){
+                for(int j = 0; j < affectedParts.Count; j++){
+                    affectedParts[j].UpdateAttachmentStatus(true);
+                }
+            }
         }else{
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;

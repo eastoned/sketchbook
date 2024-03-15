@@ -79,11 +79,11 @@
     <Compile Include="Assets\UpdateLikes.cs" />
     <Compile Include="Assets\NewFace\Runtime\NuFaceManager.cs" />
     <Compile Include="Assets\LionController.cs" />
-    <Compile Include="Assets\ScrollFaces.cs" />
+    <Compile Include="Assets\NewFace\Runtime\Unused\ScrollFaces.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\EyebrowData.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnSendRemarkToSpeech.cs" />
     <Compile Include="Assets\Script\BoneAdder.cs" />
-    <Compile Include="Assets\AudioController.cs" />
+    <Compile Include="Assets\NewFace\Runtime\AudioController.cs" />
     <Compile Include="Assets\Script\RandomWorld.cs" />
     <Compile Include="Assets\Script\FollowPhoneTransform.cs" />
     <Compile Include="Assets\Script\FollowMouseEye.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Assets\NewFace\Runtime\BackgroundController.cs" />
     <Compile Include="Assets\Script\Pose.cs" />
     <Compile Include="Assets\MouseAnimation.cs" />
-    <Compile Include="Assets\CameraController.cs" />
+    <Compile Include="Assets\NewFace\Runtime\CameraController.cs" />
     <Compile Include="Assets\NewFace\Runtime\SaveCharacterProfile.cs" />
     <Compile Include="Assets\Script\PingPongBall.cs" />
     <Compile Include="Assets\Script\FollowMeshVertices.cs" />
@@ -133,7 +133,7 @@
     <Compile Include="Assets\Script\SaveImage.cs" />
     <Compile Include="Assets\Script\TextWithEvents.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
-    <Compile Include="Assets\TearController.cs" />
+    <Compile Include="Assets\NewFace\Runtime\TearController.cs" />
     <Compile Include="Assets\Script\OptimalCameraPosition.cs" />
     <Compile Include="Assets\NewFace\Runtime\Request.cs" />
     <Compile Include="Assets\Script\EyeController.cs" />
