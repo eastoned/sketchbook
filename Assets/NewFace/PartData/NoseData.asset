@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c1abad70c8c834dafcea312a1844d9, type: 3}
   m_Name: NoseData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: -0.007903971, y: 0.13212802, z: -0.1}
-  relativePosition: {x: 0.496048, y: 0.55919284, z: -0.1}
+  absolutePosition: {x: 0, y: 0.2843145, z: -0.1}
+  relativePosition: {x: 0, y: 0.54382426, z: -0.1}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.0972217
-  maxPosY: 1.1012145
+  minPosY: -0.27258238
+  maxPosY: 0.751456
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
   absoluteScale: {x: 0.98281205, y: 1.017188, z: 1}
   relativeScale: {x: 0.48281205, y: 0.51718795, z: 1}
   minScaleX: 0.5
-  maxScaleX: 1.5949211
+  maxScaleX: 1.2031254
   minScaleY: 0.5
-  maxScaleY: 2.1984363
+  maxScaleY: 1.0240384
   shaderProperties:
   - propertyName: _NoseBaseWidth
     propertyValue: 0.51718795

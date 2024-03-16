@@ -22,6 +22,7 @@ public class FaceController : MonoBehaviour
     public float clampVal;
 
     public CharacterData currentChar;
+    public AnimationCurve propertyCurve;
     public AnimationCurve blendCurve; 
     public AnimationCurve blinkCurve;
     public AnimationCurve scalePopCurve;
@@ -41,36 +42,10 @@ public class FaceController : MonoBehaviour
 
     public virtual void OnEnable()
 	{
-        OnSelectedNewFacePartEvent.Instance.AddListener(Blink);
+        //OnSelectedNewFacePartEvent.Instance.AddListener(Blink);
     }
     public virtual void OnDisable(){
-        OnSelectedNewFacePartEvent.Instance.RemoveListener(Blink);
-    }
-
-    private void Blink(Transform ignore){
-        //Debug.Log("Blink");
-        if (faceAnim != null){
-            StopCoroutine(faceAnim);
-        }
-        //Debug.Log(gameObject.name + " eye top: " + rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue);
-        faceAnim = StartCoroutine(Blink(Random.Range(.2f, .5f), rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
-    }
-
-    private void Blink(float blinkLength, Transform ignore){
-        //Debug.Log("Blink");
-        if (faceAnim != null){
-            StopCoroutine(faceAnim);
-        }
-        //Debug.Log(gameObject.name + " eye top: " + rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue);
-        faceAnim = StartCoroutine(Blink(blinkLength, rightEye.pd.shadePropertyDict["_EyelidTopOpen"].propertyValue, rightEye.pd.shadePropertyDict["_EyelidBottomOpen"].propertyValue));
-    }
-
-    private void BlinkMouth(float blinkMouthLength){
-        if (faceAnim != null){
-            StopCoroutine(faceAnim);
-        }
-        //Debug.Log(gameObject.name + " mouth: " + mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue);
-        faceAnim = StartCoroutine(BlinkMouth(blinkMouthLength, mouth.pd.shadePropertyDict["_MouthOpen"].propertyValue));
+        //OnSelectedNewFacePartEvent.Instance.RemoveListener(Blink);
     }
 
     private void Start(){
@@ -106,13 +81,6 @@ public class FaceController : MonoBehaviour
         bodyData[2] = currentChar.hairBackData;
         bangs.pd = currentChar.hairFrontData;
         bodyData[3] = currentChar.hairFrontData;
-    }
-
-    public Vector2 Rotate2D(Vector2 v, float delta) {
-        return new Vector2(
-            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
-            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
-        );
     }
 
     public void Interpolate(float val, CharacterData gameData, CharacterData blendFrom, CharacterData blendTo){
@@ -153,7 +121,8 @@ public class FaceController : MonoBehaviour
         nose.UpdateAllShadersValue(0f);
     }
 
-    public void InitializeDictionaries(){
+    public void InitializeDictionaries()
+    {
         head.InitializePartDataDictionary();
         rightEye.InitializePartDataDictionary();
         rightEyebrow.InitializePartDataDictionary();
@@ -183,18 +152,19 @@ public class FaceController : MonoBehaviour
 
     }
 
-    public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength){
-
-        if (faceAnim != null){
-            StopCoroutine(faceAnim);
-        }
+    public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength)
+    {
 
         if(blending != null){
             StopCoroutine(blending);
         }
 
         blending = StartCoroutine(Blend(char1, char2, animLength));
-        
+    }
+
+    public void SetCharacter(CharacterData characterToBe){
+        currentChar.CopyData(characterToBe);
+        UpdateAllControllers();
     }
 
     public Coroutine BlendCharacterSequence(CharacterData char1, CharacterData char2, float animLength){
@@ -255,54 +225,25 @@ public class FaceController : MonoBehaviour
         bangs.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), bangs.transform.position.y, bangs.transform.position.z);
     }
 
-    private IEnumerator BlinkMouth(float blinkMouthLength, float mouthOpen){
+    private IEnumerator AnimatePartShaderProperty(PartController pc, string shaderParam, float animationLength)
+    {
         float animationTime = 0;
-        while(animationTime < blinkMouthLength){
-            float interval = Mathf.Clamp01(animationTime/blinkMouthLength);
-            interval = blinkCurve.Evaluate(interval);
-            mouth.UpdateSingleShaderFloat("_MouthOpen", Mathf.Lerp(mouthOpen, 0, interval));
-            mouth.UpdateRenderPropBlock();
+        float initialPropertyValue = pc.GetSingleShaderFloat(shaderParam);
+
+        while(animationTime < animationLength)
+        {
+            float interval = Mathf.Clamp01(animationTime/animationLength);
+            interval = propertyCurve.Evaluate(interval);
+            pc.UpdateSingleShaderFloat(shaderParam, initialPropertyValue * interval);
+            pc.UpdateRenderPropBlock();
             animationTime += Time.deltaTime;
             yield return null;
         }
     }
 
-    private IEnumerator Blink(float blinkLength, float eyelidTopOpen, float eyelidBottomOpen){
-        float animationTime = 0;
-        currentlyBlending = true;
-        while(animationTime < blinkLength){
-            float interval = Mathf.Clamp01(animationTime/blinkLength);
-            interval = blinkCurve.Evaluate(interval);
-            rightEye.UpdateSingleShaderFloat("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
-            leftEye.UpdateSingleShaderFloat("_EyelidTopOpen", Mathf.Lerp(eyelidTopOpen, 0, interval));
-            rightEye.UpdateSingleShaderFloat("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
-            leftEye.UpdateSingleShaderFloat("_EyelidBottomOpen", Mathf.Lerp(eyelidBottomOpen, 0, interval));
-            rightEye.UpdateRenderPropBlock();
-            leftEye.UpdateRenderPropBlock();
-            animationTime += Time.deltaTime;
-            yield return null;
-        }
-        currentlyBlending = false;
-    }
-    float timer = 0;
-    private Coroutine faceAnim;
-    void Update(){
-        //Rotation();
+    void Update()
+    {
 
-        if(animating){
-            timer += Time.deltaTime;
-
-        
-            if(timer >= 9f){
-                if(Random.Range(0f, 1f) < 0.5f) {
-                    Blink(Random.Range(.1f, 2f), transform);
-                }else{
-                    BlinkMouth(Random.Range(.1f, 2f));
-                }
-                
-                timer = Random.Range(0f, 4f);
-            }
-        }
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
          
         mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);

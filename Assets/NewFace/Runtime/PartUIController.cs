@@ -63,6 +63,7 @@ public class PartUIController : MonoBehaviour
                     float intervalValue = partData.pd.shaderProperties[i].valueInterval;
                     sliders[i].onValueChanged.AddListener(delegate{SetCurrentShaderInterval.Instance.Invoke(intervalValue);});
                     sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
+                    
                 }else{
                     sliders[i].onValueChanged.AddListener(OnSlideShaderProperty.Instance.Invoke);
                 }

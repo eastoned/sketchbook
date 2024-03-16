@@ -37,31 +37,34 @@ public class NuFaceManager : MonoBehaviour
 
     public AudioSource crunch;
 
+    public List<PlayerActionData> playerActionHistory = new List<PlayerActionData>();
+
     void OnEnable(){
-        OnConfirmTransformPart.Instance.AddListener(UpdateTextAmount);
-        OnDeselectedFacePartEvent.Instance.AddListener(DebugTouchBG);
+        OnConfirmTransformPart.Instance.AddListener(AddPlayerActionToHistory);
+        //OnDeselectedFacePartEvent.Instance.AddListener(DebugTouchBG);
     }
 
     void OnDisable(){
-        OnConfirmTransformPart.Instance.RemoveListener(UpdateTextAmount);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(DebugTouchBG);
+        OnConfirmTransformPart.Instance.RemoveListener(AddPlayerActionToHistory);
+        //OnDeselectedFacePartEvent.Instance.RemoveListener(DebugTouchBG);
+    }
+
+    private void AddPlayerActionToHistory(PlayerActionData pad){
+        playerActionHistory.Add(pad);
     }
 
     public void HoveredButton(){
-        Debug.Log("PLEASE DON'T");
-        pfc.StartCrying();
     }
     public void UnhoveredButton(){
-        Debug.Log("PLEASE DO");
-        pfc.StopCrying();
     }
 
     void DebugTouchBG(){
-       
-        scoreDebug.text = "Touched BG";
     }
 
-    private IEnumerator Start(){
+    private IEnumerator Start()
+    {
+        writeableData[0].RandomizeData(.1f);
+        pfc.SetCharacter(writeableData[0]);
         if(isGame){
             targetData[0].RandomizeData(.1f);
             writeableData[0].CopyData(rfc[0].currentChar);
@@ -218,6 +221,7 @@ public class NuFaceManager : MonoBehaviour
         fc.BlendCharacter(writeableData, characterSet[0], 2f);
         */
     }
+
     public float counter = 0;
     [ContextMenu("Randomize Player")]
     public void RandomizePlayer(){
@@ -364,15 +368,6 @@ public class NuFaceManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         yield return sc.SpeakText(rc.successMessage, 2f);
-    }
-
-    [ContextMenu("Debug Animation")]
-    void CharacterExit(){
-        foreach(PartController part in parts){
-            part.transform.SetParent(transform);
-        }
-           
-        //yield return null;
     }
 
     IEnumerator WaitForMouse(){

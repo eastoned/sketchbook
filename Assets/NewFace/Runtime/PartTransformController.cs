@@ -69,7 +69,11 @@ public class PartTransformController : MonoBehaviour
             case TransformController.NOTHING:
             break;
         }
-        
+    }
+
+    void OnMouseUp(){
+        currentlyHeld = false;
+        //OnConfirmTransformPart.Instance.Invoke();
     }
 /*
     void Update(){

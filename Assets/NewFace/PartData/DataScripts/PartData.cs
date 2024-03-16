@@ -24,15 +24,13 @@ public class PartData : ScriptableObject
         //maxScaleX = pd.maxScaleX;
         //minScaleY = pd.minScaleY;
         //maxScaleY = pd.maxScaleY;
-
-        shaderProperties = new List<ShaderProperty>();
+        
         for(int i = 0; i < pd.shaderProperties.Count; i++){
-            shaderProperties.Add(new ShaderProperty(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue));
+            shaderProperties[i] = new ShaderProperty(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }
 
-        shaderColors = new List<ShaderColor>();
         for(int j = 0; j < pd.shaderColors.Count; j++){
-            shaderColors.Add(new ShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue));
+            shaderColors[j] = new ShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
         }
     }
 
@@ -138,6 +136,10 @@ public class PartData : ScriptableObject
         //clampedSize = new Vector3(Mathf.Round(clampedSize.x), Mathf.Round(clampedSize.y), clampedSize.z);
         //clampedSize *= .25f;
         SetRelativeScale(clampedSize);
+    }
+    public Vector3 GetClampedScale(Vector3 scaleIn)
+    {
+        return new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
     public float ClampedAngle(float angle, bool flippedXAxis){

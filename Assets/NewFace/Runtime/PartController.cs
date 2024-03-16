@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using AmplifyShaderEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Controls the state of each face part between physics-based or face-based.
+/// </summary>
 public class PartController : MonoBehaviour
 {
 
@@ -31,20 +35,26 @@ public class PartController : MonoBehaviour
     public float cacheAngle;
     public ShaderCache[] shaderPropertyCache;
     PartTransformController ptc;
+    PlayerActionData currentPAD;
+    float timeCache;
 
-    void Awake(){
+    void Awake()
+    {
         propBlock = new MaterialPropertyBlock();
     }
 
-    private void Start(){
+    private void Start()
+    {
         Initialize();
     }
 
-    private void Initialize(){
+    private void Initialize()
+    {
         currentMat = rend.sharedMaterial;
     }
 
-    public void InitializePartDataDictionary(){
+    public void InitializePartDataDictionary()
+    {
         pd.shadePropertyDict.Clear();
         if(!flippedXAxis){
             for(int i = 0; i < pd.shaderProperties.Count; i++){
@@ -55,7 +65,8 @@ public class PartController : MonoBehaviour
         }
     }
 
-    public void UpdateDependencies(){
+    public void UpdateDependencies()
+    {
         if(affectedParts.Count > 0){
             for(int j = 0; j < affectedParts.Count; j++){
                 if(!affectedParts[j].detached){
@@ -67,14 +78,16 @@ public class PartController : MonoBehaviour
         }
     }
 
-    public void SetCache(PartData pd){
+    public void SetCache(PartData pd)
+    {
         shaderPropertyCache = new ShaderCache[pd.shaderProperties.Count];
         for(int i = 0; i < shaderPropertyCache.Length; i++){
             shaderPropertyCache[i] = new ShaderCache(i, pd.shaderProperties[i].propertyValue);
         }
     }
 
-    void OnMouseEnter(){
+    void OnMouseEnter()
+    {
         if(CustomUtils.IsPointerOverUIObject())
             return;
 
@@ -84,9 +97,13 @@ public class PartController : MonoBehaviour
         OnHoveredNewFacePartEvent.Instance.Invoke(transform);
     }
 
-    void OnMouseDown(){
+    void OnMouseDown()
+    {
         OnMouseClickEvent.Instance.Invoke();
+        //Begin transform part
+        currentPAD = new PlayerActionData(pd, PlayerActionData.ActionType.TRANSFORMCHANGE);
         
+        timeCache = Time.time;
         if(CustomUtils.IsPointerOverUIObject())
             return;
         
@@ -99,7 +116,8 @@ public class PartController : MonoBehaviour
         SetCache(pd);
     }
 
-    void OnMouseUp(){
+    void OnMouseUp()
+    {
         if(ptc != null){
             Destroy(ptc);
         }
@@ -108,15 +126,18 @@ public class PartController : MonoBehaviour
             rb2D.bodyType = RigidbodyType2D.Dynamic;
 
             if(overAttachmentNode){
-                transform.position = attachPosition;
+                transform.position = new Vector3(attachPosition.x, attachPosition.y, transform.position.z);
                 nodeToDelete.SetActive(false);
                 UpdateAttachmentStatus(false);
             }
         }
-        
+        currentPAD.timeToChange = Time.time - timeCache;
+        currentPAD.brokePart = detached;
+        OnConfirmTransformPart.Instance.Invoke(currentPAD);
     }
 
-    public void UpdateAllTransformValues(){
+    public void UpdateAllTransformValues()
+    {
 
         if(flippedXAxis){
             transform.localScale = pd.GetFlippedAbsoluteScale();
@@ -147,12 +168,14 @@ public class PartController : MonoBehaviour
         UpdateDependencies();
     }
 
-    public void UpdateColliderBounds(){
+    public void UpdateColliderBounds()
+    {
         colid.size = pd.GetColliderSize();
         colid.offset = pd.GetColliderOffset();
     }
 
-    public void UpdateAllShadersValue(float ignore){
+    public void UpdateAllShadersValue(float ignore)
+    {
 
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
@@ -164,29 +187,34 @@ public class PartController : MonoBehaviour
 
         rend.SetPropertyBlock(propBlock);
 
-        if(colid != null){
+        if(colid != null && pd.shadePropertyDict.Count > 0){
             UpdateColliderBounds();
         }
         
     }
 
     [ContextMenu("Shake Test")]
-    public void ShakeTest(){
+    public void ShakeTest()
+    {
         ShakePieces(new Vector3(.1f, 0.01f, 0f), .5f);
     }
-    public void ShakePiece(float strength, float time){
+    public void ShakePiece(float strength, float time)
+    {
         StartCoroutine(ShakeRotationRoutineTimed(strength, time));
     }
 
-    public void ShakePieces(Vector3 strength, float time){
+    public void ShakePieces(Vector3 strength, float time)
+    {
         ShakePositionRoutineTimed(strength, time);
     }
 
-    public void ScalePieces(float size, float time, AnimationCurve curve){
+    public void ScalePieces(float size, float time, AnimationCurve curve)
+    {
         StartCoroutine(ScalePopRoutine(size, time, curve));
     }
 
-    public IEnumerator ShakePositionRoutineTimed(Vector3 strength, float length){
+    public IEnumerator ShakePositionRoutineTimed(Vector3 strength, float length)
+    {
         float time = length;
         while(time > 0){
             time -= Time.deltaTime;
@@ -196,7 +224,8 @@ public class PartController : MonoBehaviour
         transform.localPosition = cachePosition;
     }
 
-    public IEnumerator ShakeRotationRoutineTimed(float strength, float length){
+    public IEnumerator ShakeRotationRoutineTimed(float strength, float length)
+    {
         float time = length;
         while(time > 0){
             time -= Time.deltaTime;
@@ -210,7 +239,8 @@ public class PartController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, 0, cacheAngle);
     }
 
-    public IEnumerator ScalePopRoutine(float size, float length, AnimationCurve curve){
+    public IEnumerator ScalePopRoutine(float size, float length, AnimationCurve curve)
+    {
         float time = length;
         while(time > 0){
             time -= Time.deltaTime;
@@ -222,7 +252,8 @@ public class PartController : MonoBehaviour
         transform.localScale = cacheScale;
     }
 
-    public void UpdateAttachmentStatus(bool detach){
+    public void UpdateAttachmentStatus(bool detach)
+    {
         detached = detach;
         if(detached){
             transform.gameObject.layer = 11;
@@ -239,23 +270,33 @@ public class PartController : MonoBehaviour
         }
     }
 
-    public void UpdateAllShadersValue(){
+    public void UpdateAllShadersValue()
+    {
         rend.SetPropertyBlock(propBlock);
     }
 
-    public void UpdateRenderPropBlock(){
+    public void UpdateRenderPropBlock()
+    {
         rend.SetPropertyBlock(propBlock);
     }
 
-    public void UpdateSingleShaderFloat(string param, float value){
+    public void UpdateSingleShaderFloat(string param, float value)
+    {
         propBlock.SetFloat(param, value);
     }
 
-    public void UpdateSingleShaderVector(string param, Vector3 vec){
+    public float GetSingleShaderFloat(string param)
+    {
+        return propBlock.GetFloat(param);
+    }
+
+    public void UpdateSingleShaderVector(string param, Vector3 vec)
+    {
         propBlock.SetVector(param, vec);
     }
 
-    void UpdateSingleShaderColor(string param, Color col){
+    void UpdateSingleShaderColor(string param, Color col)
+    {
         propBlock.SetColor(param, col);
     }
 

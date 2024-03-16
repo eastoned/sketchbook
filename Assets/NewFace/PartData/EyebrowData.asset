@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: EyebrowData
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0.4374755, y: 0.029538415, z: -0.2}
-  relativePosition: {x: 0.30715963, y: 0.68020093, z: -0.2}
-  minPosX: 0.2635995
-  maxPosX: 0.8296765
-  minPosY: -1.629535
-  maxPosY: 0.8095581
+  absolutePosition: {x: 0.35572404, y: 0.6899965, z: -0.2}
+  relativePosition: {x: 0.3811186, y: 0.9399832, z: -0.2}
+  minPosX: 0.20433205
+  maxPosX: 0.6015627
+  minPosY: -0.27258238
+  maxPosY: 0.751456
   minAngle: -90
   maxAngle: 90
-  currentAngle: 3.533451
+  currentAngle: -0
   absoluteScale: {x: 0.48579666, y: 0.58429575, z: 1}
   relativeScale: {x: 0.51963025, y: 0.48036972, z: 1}
   minScaleX: 0.2
-  maxScaleX: 0.8296765
+  maxScaleX: 0.6015627
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:
