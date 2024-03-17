@@ -25,11 +25,14 @@ public class PartData : ScriptableObject
         //minScaleY = pd.minScaleY;
         //maxScaleY = pd.maxScaleY;
         
-        for(int i = 0; i < pd.shaderProperties.Count; i++){
+        Debug.Log(pd.shaderProperties.Count);
+        for(int i = 0; i < shaderProperties.Count; i++)
+        {
             shaderProperties[i] = new ShaderProperty(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }
 
-        for(int j = 0; j < pd.shaderColors.Count; j++){
+        for(int j = 0; j < shaderColors.Count; j++)
+        {
             shaderColors[j] = new ShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
         }
     }

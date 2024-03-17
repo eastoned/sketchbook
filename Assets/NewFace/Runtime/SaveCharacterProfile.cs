@@ -37,7 +37,7 @@ public class SaveCharacterProfile : MonoBehaviour
             
             string newPath = AssetDatabase.GUIDToAssetPath(guid);
             CharacterData newScriptableObject = ScriptableObject.CreateInstance<CharacterData>();
-            newScriptableObject.name = characterName;
+            newScriptableObject.characterName = characterName;
             newScriptableObject.allParts = new PartData[9];
 
             PartData earData = ScriptableObject.CreateInstance<EarData>();

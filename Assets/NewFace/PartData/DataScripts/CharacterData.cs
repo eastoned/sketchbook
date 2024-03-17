@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -6,7 +5,7 @@ using UnityEngine.SocialPlatforms;
 [CreateAssetMenu(fileName = "CharacterProfile", menuName = "ScriptableObjects/Character", order = 100)]
 public class CharacterData : ScriptableObject
 {
-    public string name;
+    public string characterName;
     public bool writeable = false;
 
     public PartData earData, eyebrowData, eyeData, hairBackData, hairFrontData, headData, mouthData, neckData, noseData;
@@ -47,7 +46,7 @@ public class CharacterData : ScriptableObject
         part.SetRelativeScale(part.absoluteScale);
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            float val = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor;
+            float val = Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor;
             sp.SetValue(val);
         }
         

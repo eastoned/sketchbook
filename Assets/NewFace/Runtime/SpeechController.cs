@@ -137,7 +137,7 @@ public class SpeechController : MonoBehaviour
     }
 
     IEnumerator Speak(string text, float value){
-        mouthRadius = mouth.pd.shadePropertyDict["_MouthRadius"].propertyValue;
+        mouthRadius = mouth.GetSingleShaderFloat("_MouthOpen");
         
         if(mouthRadius>0.05f){
             GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
@@ -164,10 +164,21 @@ public class SpeechController : MonoBehaviour
                 float scalePercent = scaleCurve.Evaluate(percent);
                 float translatePercent = translateCurve.Evaluate(percent);
                 if(speakTime > 4f/amountofwords){
-                    OnTriggerAudioOneShot.Instance.Invoke("Beep");
+                    if(Random.Range(0f, 1f) < .5f){
+                        OnTriggerAudioOneShot.Instance.Invoke("Beep");
+                    }else{
+                        OnTriggerAudioOneShot.Instance.Invoke("Beep2");
+                    }
+                    
                     speakTime = 0f;
                 }
                 speakTime += Time.deltaTime;
+                //Debug.Log(text.Length*translatePercent);
+                //if(text[Mathf.FloorToInt((text.Length-1)*translatePercent)].Equals("e")){
+                ///    mouth.UpdateSingleShaderFloat("_MouthOpen", 0f);
+                //}else{
+                mouth.UpdateSingleShaderFloat("_MouthOpen", Random.Range(0f, 1f) * mouthRadius);
+                //}
                 
                 ///if(text[Mathf.CeilToInt(text.Length*translatePercent)].Equals(" ")){
                 //Debug.Log(text[Mathf.CeilToInt(text.Length*translatePercent)]);
