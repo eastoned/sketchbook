@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip sound, sound2, soundDrip, soundSlide, attach, detach;
+    public AudioClip sound, sound2, soundDrip, soundSlide, attach, detach, beep;
 
     public Dictionary<string, AudioClip> audioLibrary = new Dictionary<string, AudioClip>();
 
@@ -35,6 +35,7 @@ public class AudioController : MonoBehaviour
         audioLibrary.Clear();
         audioLibrary.Add("Attach", attach);
         audioLibrary.Add("Detach", detach);
+        audioLibrary.Add("Beep", beep);
     }
 
     void SetInterval(float interval){
