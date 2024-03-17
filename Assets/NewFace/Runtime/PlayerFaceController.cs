@@ -174,6 +174,40 @@ public class PlayerFaceController : FaceController
         //}
     }
 
+    private void UpdatePartAttachmentStatus(PartController pc, bool status){
+        pc.UpdateAttachmentStatus(status);
+        if(currentPC.flippedXAxis){
+            bool didSpawn = false;
+            foreach(GameObject nod in availableNodes){
+                if(!nod.activeInHierarchy){
+                    nod.transform.position = currentPC.pd.GetFlippedAbsolutePosition();
+                    nod.SetActive(true);
+                    didSpawn = true;
+                    break;
+                }
+            }
+
+            if(!didSpawn){
+                Debug.Log("add node if didn't have enough avilaable");
+                availableNodes.Add(Instantiate(node, currentPC.pd.GetFlippedAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+            }//add node to list
+        }else{
+            bool didSpawn = false;
+            foreach(GameObject nod in availableNodes){
+                if(!nod.activeInHierarchy){
+                    nod.transform.position = currentPC.pd.GetAbsolutePosition();
+                    nod.SetActive(true);
+                    didSpawn = true;
+                    break;
+                }
+            }
+            if(!didSpawn){
+                Debug.Log("add node if didn't have enough avilaable");
+                availableNodes.Add(Instantiate(node, currentPC.pd.GetAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+            }
+        }
+    }
+
     private void SetPartPosition(Vector3 pos){
         //each part has a relative position to other objects
         
@@ -200,37 +234,13 @@ public class PlayerFaceController : FaceController
                 currentPC.ShakePiece(absPos.magnitude*10f, 0.25f);
                 
                 if(absPos.magnitude > 1.2f){
-                    currentPC.UpdateAttachmentStatus(true);
-                    if(currentPC.flippedXAxis){
-                        bool didSpawn = false;
-                        foreach(GameObject nod in availableNodes){
-                            if(!nod.activeInHierarchy){
-                                nod.transform.position = currentPC.pd.GetFlippedAbsolutePosition();
-                                nod.SetActive(true);
-                                didSpawn = true;
-                                break;
-                            }
-                        }
-                        if(!didSpawn){
-                            Debug.Log("add node if didn't have enough avilaable");
-                            availableNodes.Add(Instantiate(node, currentPC.pd.GetFlippedAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
-                        }//add node to list
-                    }else{
-                        bool didSpawn = false;
-                        foreach(GameObject nod in availableNodes){
-                            if(!nod.activeInHierarchy){
-                                nod.transform.position = currentPC.pd.GetAbsolutePosition();
-                                nod.SetActive(true);
-                                didSpawn = true;
-                                break;
-                            }
-                        }
-                        if(!didSpawn){
-                            Debug.Log("add node if didn't have enough avilaable");
-                            availableNodes.Add(Instantiate(node, currentPC.pd.GetAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+                    UpdatePartAttachmentStatus(currentPC, true);
+                    if(currentPC.affectedParts.Count > 0){
+                        foreach(PartController pc in currentPC.affectedParts){
+                            UpdatePartAttachmentStatus(pc, true);
                         }
                     }
-                    
+                    //currentPC.UpdateAttachmentStatus(true);
                     //set empty node here
                 }
                     
@@ -273,10 +283,15 @@ public class PlayerFaceController : FaceController
         }else{
             Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
             diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
-            currentTransform.localScale = currentPC.pd.GetClampedScale(diff);
+            
+
+            if(!currentPC.flippedXAxis){
+                currentTransform.localScale = currentPC.pd.GetClampedScale(diff);
+            }else{
+                currentTransform.localScale = currentPC.pd.GetFlippedClampedScale(diff);
+            }
         }
         SetTransformControllers(currentTransform);
-
     }
 
     private void SetPartRotation(Vector3 pos){

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b793ebbedc9495498fa2646b6b84ba5, type: 3}
   m_Name: EarData
   m_EditorClassIdentifier: 
+  partName: ears
   absolutePosition: {x: 0.8489584, y: 0.00065108016, z: 0.15}
   relativePosition: {x: 0.4692983, y: 0.42428967, z: 0.15}
   minPosX: 0.5703125
@@ -30,34 +31,50 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _EarWidthSkew
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarLengthSkew
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarShape
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarRoundness
     propertyValue: 1
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarOpenWidth
     propertyValue: 0.22433057
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarOpenLength
     propertyValue: 0.3319022
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarConcha
     propertyValue: 0.8466507
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EarTragus
     propertyValue: 0.056161165
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:

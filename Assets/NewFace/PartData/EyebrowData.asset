@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1426d8acc900f684db9408d966bf2a48, type: 3}
   m_Name: EyebrowData
   m_EditorClassIdentifier: 
+  partName: eyebrows
   absolutePosition: {x: 0.35572404, y: 0.6899965, z: -0.2}
   relativePosition: {x: 0.3811186, y: 0.9399832, z: -0.2}
   minPosX: 0.20433205

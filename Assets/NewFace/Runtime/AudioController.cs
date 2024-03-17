@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip sound, sound2, soundDrip, soundSlide;
+    public AudioClip sound, sound2, soundDrip, soundSlide, attach, detach;
+
+    public Dictionary<string, AudioClip> audioLibrary = new Dictionary<string, AudioClip>();
 
     public AudioSource aud;
     public int lastIntPlayed;
@@ -17,6 +19,7 @@ public class AudioController : MonoBehaviour
         OnChangedShaderProperty.Instance.AddListener(PlaySound);
         SetCurrentShaderInterval.Instance.AddListener(SetInterval);
         OnSlideShaderProperty.Instance.AddListener(SlideSound);
+        OnTriggerAudioOneShot.Instance.AddListener(PlayOneShot);
     }
     void OnDisable(){
         //OnSelectedNewFacePartEvent.Instance.RemoveListener(PlaySound);
@@ -25,6 +28,13 @@ public class AudioController : MonoBehaviour
         OnChangedShaderProperty.Instance.RemoveListener(PlaySound);
         SetCurrentShaderInterval.Instance.RemoveListener(SetInterval);
         OnSlideShaderProperty.Instance.RemoveListener(SlideSound);
+        OnTriggerAudioOneShot.Instance.RemoveListener(PlayOneShot);
+    }
+
+    void Start(){
+        audioLibrary.Clear();
+        audioLibrary.Add("Attach", attach);
+        audioLibrary.Add("Detach", detach);
     }
 
     void SetInterval(float interval){
@@ -51,10 +61,23 @@ public class AudioController : MonoBehaviour
         //if(!aud.isPlaying)
             
     }
+    void PlayOneShot(string soundName){
+        if(audioLibrary.ContainsKey(soundName)){
+            aud.pitch = Random.Range(.8f, 1.2f);
+            aud.PlayOneShot(audioLibrary[soundName]);
+        }
+    }
 
     void PlaySound(Transform ignore){
         if(!aud.isPlaying)
             aud.PlayOneShot(sound);
+    }
+
+    void PlayAttach(){
+        aud.PlayOneShot(attach);
+    }
+    void PlayDetach(){
+        aud.PlayOneShot(detach);
     }
     
     void UpdateSound(Vector3 pos){

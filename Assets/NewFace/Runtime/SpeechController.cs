@@ -43,6 +43,53 @@ public class SpeechController : MonoBehaviour
         }
     }
 
+    public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
+    {
+        
+        
+        if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f){
+            yield return SpeakText("You changed my " + pad.partName + ".", 2f);
+            string verticalChange = "";
+            string horizontalChange = "";
+            string totalChange = "";
+
+            if(pad.partName.EndsWith("s")){
+            //is plural
+                totalChange += " were ";
+            }else{
+                totalChange += " was ";
+            }
+            bool bothFlagged = false;
+
+            if(pad.positionChange.y > 0.05f){
+                bothFlagged = true;
+                verticalChange = "too low";
+            }else if (pad.positionChange.y < -0.05f){
+                bothFlagged = true;
+                verticalChange = "too high";
+            }
+            totalChange += verticalChange;
+
+            if(pad.positionChange.x > 0.05f){
+                if(bothFlagged){
+                    totalChange += " and ";
+                }
+                horizontalChange = "too close together";
+            }else if (pad.positionChange.x < -0.05f){
+                if(bothFlagged){
+                    totalChange += " and ";
+                }
+                horizontalChange = "too far apart";
+            }
+            totalChange += horizontalChange;
+
+            yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", 4f);
+
+        }
+        //
+       
+    }
+
     void PartMention(Transform part){
         if(!NuFaceManager.couldBeShared){
         if(SpeakingRoutine != null){
@@ -116,7 +163,7 @@ public class SpeechController : MonoBehaviour
                 float translatePercent = translateCurve.Evaluate(percent);
                 bubble.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(0, Mathf.CeilToInt(text.Length*translatePercent));
                 bubble.transform.position = Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(0, randomOffset, 0), translatePercent);
-                bubble.transform.localScale = Vector3.Lerp(new Vector3(0f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
+                bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 
                 yield return null;
             }

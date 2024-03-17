@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 
 public class NuFaceManager : MonoBehaviour
 {
-    public FaceController[] rfc;
     public PlayerFaceController pfc;
     public SpeechController sc;
     public CharacterData[] writeableData;
@@ -39,26 +38,19 @@ public class NuFaceManager : MonoBehaviour
 
     public List<PlayerActionData> playerActionHistory = new List<PlayerActionData>();
 
-    void OnEnable(){
+    void OnEnable()
+    {
         OnConfirmTransformPart.Instance.AddListener(AddPlayerActionToHistory);
-        //OnDeselectedFacePartEvent.Instance.AddListener(DebugTouchBG);
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         OnConfirmTransformPart.Instance.RemoveListener(AddPlayerActionToHistory);
-        //OnDeselectedFacePartEvent.Instance.RemoveListener(DebugTouchBG);
     }
 
-    private void AddPlayerActionToHistory(PlayerActionData pad){
+    private void AddPlayerActionToHistory(PlayerActionData pad)
+    {
         playerActionHistory.Add(pad);
-    }
-
-    public void HoveredButton(){
-    }
-    public void UnhoveredButton(){
-    }
-
-    void DebugTouchBG(){
     }
 
     private IEnumerator Start()
@@ -67,8 +59,6 @@ public class NuFaceManager : MonoBehaviour
         pfc.SetCharacter(writeableData[0]);
         if(isGame){
             targetData[0].RandomizeData(.1f);
-            writeableData[0].CopyData(rfc[0].currentChar);
-            rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
             stageThresholds = new int[9];
             int scoreCount = 0;
             for(int i = 0; i < stageThresholds.Length; i++){
@@ -83,10 +73,9 @@ public class NuFaceManager : MonoBehaviour
             for(;;){
                 //yield return new WaitForSeconds(2f);
                 //Compare();
-                //writeableData.CopyData(rfc.currentChar);
                 //targetData.RandomizeData();
                 //targetData.RandomizeRandomPart();
-                //rfc.BlendCharacter(writeableData, targetData, 1f);
+
                 ///RandomizePlayer();
                 yield return new WaitForSeconds(.2f);
             }
@@ -95,12 +84,21 @@ public class NuFaceManager : MonoBehaviour
 
     public void ExportCharacter(){
         couldBeShared = true;
+        //character evaluation
+        //find closest character template
+        StartCoroutine(GiveReport());
+    }
+
+    private IEnumerator GiveReport(){
+        for(int i = 0; i < playerActionHistory.Count; i++){
+            yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
+        }
+        playerActionHistory.Clear();
+        //yield return null;
     }
 
     [ContextMenu("Compare Faces")]
     public void Compare(){
-        //money += GetCharacterDifference(rfc[0].currentChar, pfc.currentChar);
-        //scoreDebug.text = "Compare Score: " + GetCharacterDifference(rfc[0].currentChar, pfc.currentChar).ToString();
         string currentClosestCharacter = "";
         float highestResult = 0;
         for(int i = 0 ; i < compareTargets.Length; i++){
@@ -139,13 +137,6 @@ public class NuFaceManager : MonoBehaviour
             if(pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart){
                 pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<MeshRenderer>().enabled = i < charStage;
                 pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<BoxCollider2D>().enabled = i < charStage;
-            }
-        }
-
-        for(int i = 0; i < rfc[0].bodyParts.Length; i++){
-            rfc[0].bodyParts[i].gameObject.GetComponent<MeshRenderer>().enabled = i < charStage;
-            if(rfc[0].bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart){
-                rfc[0].bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<MeshRenderer>().enabled = i < charStage;
             }
         }
     }
@@ -225,8 +216,7 @@ public class NuFaceManager : MonoBehaviour
     public float counter = 0;
     [ContextMenu("Randomize Player")]
     public void RandomizePlayer(){
-        //Debug.Log("let random begin");
-        //Debug.Log(targetData[rfc.Length - 1].name);
+
        // if(Random.Range(0f, 1f) < 0.5f){
         targetData[1].RandomizeData(Random.Range(0f, .5f));
         //crunch.Play();
@@ -248,16 +238,12 @@ public class NuFaceManager : MonoBehaviour
     [ContextMenu("Randomize Face")]
     public void RandomizeFace(){
         //Debug.Log("let random begin");
-        //Debug.Log(targetData[rfc.Length - 1].name);
+
        // if(Random.Range(0f, 1f) < 0.5f){
             targetData[0].RandomizeData(.2f);
         //}else{
            // targetData[0].RandomizeRandomPart();
         //}
-        
-        writeableData[0].CopyData(rfc[0].currentChar);
-        rfc[0].BlendCharacter(writeableData[0], targetData[0], 2f);
-        //couldBeShared = true;
         /*
         if(Random.Range(0f,1f) < 0.5f){
             targetData[rfc.Length-1].RandomizeData();
@@ -279,19 +265,6 @@ public class NuFaceManager : MonoBehaviour
             }
         }*/
         
-    }
-
-    [ContextMenu("Set To Player")]
-    public void SetPlayer(){
-        targetData[0].CopyData(pfc.currentChar);
-        writeableData[0].CopyData(rfc[0].currentChar);
-        rfc[0].BlendCharacter(writeableData[0], targetData[0], 1f);
-    }
-
-    public void SetToReference(){
-        targetData[1].CopyData(rfc[0].currentChar);
-        writeableData[1].CopyData(pfc.currentChar);
-        pfc.BlendCharacter(writeableData[1], targetData[1], 1f);
     }
 
     IEnumerator CountIncreaser(){

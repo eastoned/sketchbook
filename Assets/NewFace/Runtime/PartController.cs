@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using AmplifyShaderEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,6 +36,9 @@ public class PartController : MonoBehaviour
     PartTransformController ptc;
     PlayerActionData currentPAD;
     float timeCache;
+    Vector3 positionCache, scaleCache;
+    float angleCache;
+    Coroutine shakeRotate;
 
     void Awake()
     {
@@ -100,12 +102,19 @@ public class PartController : MonoBehaviour
     void OnMouseDown()
     {
         OnMouseClickEvent.Instance.Invoke();
+        
+        if(CustomUtils.IsPointerOverUIObject())
+            return;
+
+        
         //Begin transform part
         currentPAD = new PlayerActionData(pd, PlayerActionData.ActionType.TRANSFORMCHANGE);
         
         timeCache = Time.time;
-        if(CustomUtils.IsPointerOverUIObject())
-            return;
+        positionCache = transform.position;
+        //scaleCache = transform.localScale;
+        //angleCache = transform.localEulerAngles.z;
+        
         
         OnSelectedNewFacePartEvent.Instance.Invoke(transform);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
@@ -133,7 +142,13 @@ public class PartController : MonoBehaviour
         }
         currentPAD.timeToChange = Time.time - timeCache;
         currentPAD.brokePart = detached;
+        currentPAD.positionChange = transform.position - positionCache;
+        //currentPAD.scaleChange = transform.localScale - scaleCache;
+        //currentPAD.angleChange = transform.localEulerAngles.z - angleCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
+        //PlayerActionData doingNothingAction = new PlayerActionData(pd, PlayerActionData.ActionType.NOTHINGCHANGE);
+        //doingNothingAction.timeToChange
+        //OnConfirmTransformPart.Instance.Invoke();
     }
 
     public void UpdateAllTransformValues()
@@ -200,7 +215,10 @@ public class PartController : MonoBehaviour
     }
     public void ShakePiece(float strength, float time)
     {
-        StartCoroutine(ShakeRotationRoutineTimed(strength, time));
+        if(shakeRotate != null){
+            StopCoroutine(shakeRotate);
+        }
+        shakeRotate = StartCoroutine(ShakeRotationRoutineTimed(strength, time));
     }
 
     public void ShakePieces(Vector3 strength, float time)
@@ -256,15 +274,12 @@ public class PartController : MonoBehaviour
     {
         detached = detach;
         if(detached){
+            OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            if(affectedParts.Count > 0){
-                for(int j = 0; j < affectedParts.Count; j++){
-                    affectedParts[j].UpdateAttachmentStatus(true);
-                }
-            }
         }else{
+            OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }

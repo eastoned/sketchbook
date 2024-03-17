@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794ef52737c212f45b21f4b64c293fc5, type: 3}
   m_Name: NeckData
   m_EditorClassIdentifier: 
-  translatable: 0
-  rotatable: 0
-  scalable: 1
+  partName: neck
   absolutePosition: {x: 0, y: -1, z: 0.2}
   relativePosition: {x: 0, y: 0, z: 0.2}
   minPosX: 0
@@ -33,24 +31,25 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _NeckTopWidth
     propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NeckCurveRoundness
     propertyValue: 0.35198832
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   - propertyName: _NeckCurveScale
     propertyValue: 0
-    significant: 0
-    active: 0
-    pos: 
-    neg: 
+    wholeNumberInterval: 0
+    valueInterval: 0
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 1, g: 0, b: 0, a: 1}
   - colorName: _Color2
     colorValue: {r: 0, g: 0, b: 0, a: 1}
+  affectedPartData: []

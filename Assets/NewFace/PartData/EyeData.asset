@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832921ba22668d7499079a9547de0203, type: 3}
   m_Name: EyeData
   m_EditorClassIdentifier: 
+  partName: eyes
   absolutePosition: {x: 0.32575452, y: 0.37245435, z: -0.05}
   relativePosition: {x: 0.31705138, y: 0.62989503, z: -0.05}
   minPosX: 0.19771363

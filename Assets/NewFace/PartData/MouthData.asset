@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2f0a0b1f34354582aabef246afb8d, type: 3}
   m_Name: MouthData
   m_EditorClassIdentifier: 
+  partName: mouth
   absolutePosition: {x: 0, y: 0.009107739, z: 0}
   relativePosition: {x: 0, y: 0.2750777, z: 0}
   minPosX: 0

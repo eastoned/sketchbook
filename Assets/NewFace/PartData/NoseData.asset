@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c1abad70c8c834dafcea312a1844d9, type: 3}
   m_Name: NoseData
   m_EditorClassIdentifier: 
+  partName: nose
   absolutePosition: {x: 0, y: 0.2843145, z: -0.1}
   relativePosition: {x: 0, y: 0.54382426, z: -0.1}
   minPosX: 0

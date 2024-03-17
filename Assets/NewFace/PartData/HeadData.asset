@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
   m_Name: HeadData
   m_EditorClassIdentifier: 
+  partName: head
   absolutePosition: {x: 0, y: 0, z: 0.1}
   relativePosition: {x: 0, y: 0, z: 0.1}
   minPosX: 0
@@ -30,26 +31,38 @@ MonoBehaviour:
   shaderProperties:
   - propertyName: _ForeheadScale
     propertyValue: 0.39740264
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ForeheadWidth
     propertyValue: 0.60259736
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ForeheadLength
     propertyValue: 0.60259736
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinScale
     propertyValue: 0.39740264
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinWidth
     propertyValue: 0.39740264
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinLength
     propertyValue: 0.39740264
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:

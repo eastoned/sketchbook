@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d04ea043f047634fac17772442c9c30, type: 3}
   m_Name: HairFrontData
   m_EditorClassIdentifier: 
+  partName: bangs
   absolutePosition: {x: 0, y: 0.5571233, z: -0.15}
   relativePosition: {x: 0, y: 0.81022906, z: -0.15}
   minPosX: 0

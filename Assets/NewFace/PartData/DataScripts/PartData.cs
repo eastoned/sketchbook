@@ -51,6 +51,7 @@ public class PartData : ScriptableObject
         //minScaleY = pd.minScaleY;
         //maxScaleY = pd.maxScaleY;
     }
+        public string partName;
 
     #region TransformData
         public Vector3 absolutePosition;
@@ -142,6 +143,11 @@ public class PartData : ScriptableObject
         return new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
+    public Vector3 GetFlippedClampedScale(Vector3 scaleIn)
+    {
+        return new Vector3(Mathf.Clamp(-scaleIn.x, -maxScaleX, -minScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
+    }
+
     public float ClampedAngle(float angle, bool flippedXAxis){
         if(flippedXAxis){
             if(angle < 0){
@@ -164,7 +170,7 @@ public class PartData : ScriptableObject
     }
 
     public bool PositionOutsideMaximum(Vector3 posIn){
-        return posIn.x > maxPosX || posIn.y > maxPosY || posIn.x < minPosX || posIn.y < minPosY;
+        return posIn.x > maxPosX + .3f || posIn.y > maxPosY + .3f || posIn.x < minPosX - .3f || posIn.y < minPosY - .3f;
     }
 
     public virtual void ClampedPosition(Vector3 posIn){
