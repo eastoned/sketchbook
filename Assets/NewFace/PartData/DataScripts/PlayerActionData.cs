@@ -22,6 +22,7 @@ public class CharacterActionData
     {
         TRANSFORMCHANGE,
         PROPERTYCHANGE,
+        BREAKCHANGE,
         NOTHINGCHANGE
     }
     

@@ -115,6 +115,7 @@
     <Compile Include="Assets\Lion\SnapEvent.cs" />
     <Compile Include="Assets\Script\ObjectMover.cs" />
     <Compile Include="Assets\NewFace\Runtime\SpeechController.cs" />
+    <Compile Include="Assets\AnimateTMPElement.cs" />
     <Compile Include="Assets\NewFace\Runtime\FaceController.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnDeselectedFacePartEvent.cs" />
     <Compile Include="Assets\Script\houseGame.cs" />

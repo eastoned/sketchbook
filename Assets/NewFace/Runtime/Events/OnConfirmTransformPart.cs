@@ -9,3 +9,8 @@ public class OnBeginTransformPart : UnityEvent
 {
     public static OnBeginTransformPart Instance = new OnBeginTransformPart();
 }
+
+public class OnBreakPart : UnityEvent<PlayerActionData>
+{
+    public static OnBreakPart Instance = new OnBreakPart();
+}

@@ -91,7 +91,7 @@ public class SpeechController : MonoBehaviour
     }
 
     void PartMention(Transform part){
-        if(!NuFaceManager.couldBeShared){
+        if(!NuFaceManager.canShareFeedback){
         if(SpeakingRoutine != null){
             //StopCoroutine(SpeakingRoutine);
         }
@@ -183,7 +183,7 @@ public class SpeechController : MonoBehaviour
                 ///if(text[Mathf.CeilToInt(text.Length*translatePercent)].Equals(" ")){
                 //Debug.Log(text[Mathf.CeilToInt(text.Length*translatePercent)]);
                 //}
-                bubble.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(0, Mathf.FloorToInt(text.Length*translatePercent));
+                bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;///text.Substring(0, Mathf.FloorToInt(text.Length*translatePercent));
                 bubble.transform.position = new Vector3(Screen.width/2f, Screen.height * .75f, 0);//Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(0, randomOffset, 0), translatePercent);
                 bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 

@@ -16,7 +16,7 @@ public class NuFaceManager : MonoBehaviour
     public CharacterData[] compareTargets;
 
     public string[] convo;
-    public static bool couldBeShared = false;
+    public static bool canShareFeedback = false;
 
     public PartController[] parts;
 
@@ -41,11 +41,15 @@ public class NuFaceManager : MonoBehaviour
     void OnEnable()
     {
         OnConfirmTransformPart.Instance.AddListener(AddPlayerActionToHistory);
+        OnBreakPart.Instance.AddListener(AddPlayerActionToHistory);
+        OnMouseClickEvent.Instance.AddListener(ReportPlayerActions);
     }
 
     void OnDisable()
     {
         OnConfirmTransformPart.Instance.RemoveListener(AddPlayerActionToHistory);
+        OnBreakPart.Instance.RemoveListener(AddPlayerActionToHistory);
+        OnMouseClickEvent.Instance.RemoveListener(ReportPlayerActions);
     }
 
     private void AddPlayerActionToHistory(PlayerActionData pad)
@@ -83,13 +87,34 @@ public class NuFaceManager : MonoBehaviour
     }
 
     public void ExportCharacter(){
-        couldBeShared = true;
+        canShareFeedback = true;
         //character evaluation
         //find closest character template
-        StartCoroutine(GiveReport());
+        
+    }
+
+    private void ReportPlayerActions(){
+        if(canShareFeedback && playerActionHistory.Count > 0){
+            StartCoroutine(GiveReport());
+        }
+    }
+    
+    private IEnumerator GreetPlayer()
+    {
+        if(playerActionHistory.Exists(x => x.actionType == PlayerActionData.ActionType.BREAKCHANGE)){
+            yield return sc.SpeakText("Oh.", 1f); 
+        }else{
+            yield return sc.SpeakText("Oh!", 1f); 
+        }
+        yield return new WaitForSeconds(.2f);
+
+        yield return sc.SpeakText("You came back.", 2f);
+        
     }
 
     private IEnumerator GiveReport(){
+        yield return GreetPlayer();
+        yield return new WaitForSeconds(.5f);
         for(int i = 0; i < playerActionHistory.Count; i++){
             yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
         }
@@ -229,7 +254,7 @@ public class NuFaceManager : MonoBehaviour
             targetURL = "https://www.instagram.com/";
         }
         //Application.OpenURL(targetURL);
-        couldBeShared = true;
+        canShareFeedback = true;
         //if(crunch.isPlaying){
             //crunch.Stop();
         //}

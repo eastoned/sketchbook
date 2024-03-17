@@ -33,7 +33,7 @@ public class PlayerFaceController : FaceController
         OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnSetTransformCacheEvent.Instance.AddListener(SetTransformCache);
-        OnDeselectedFacePartEvent.Instance.AddListener(ClearCurrentHover);
+        OnDeselectedFacePartEvent.Instance.AddListener(RemoveMaterialOutlineFromPreviousHover);
         OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
@@ -48,7 +48,7 @@ public class PlayerFaceController : FaceController
         OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnSetTransformCacheEvent.Instance.RemoveListener(SetTransformCache);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(ClearCurrentHover);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(RemoveMaterialOutlineFromPreviousHover);
         OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
@@ -58,8 +58,8 @@ public class PlayerFaceController : FaceController
     }
 
     public void SetMaterialOutline(Transform hoveredTarget){
-        ClearCurrentHover();
-        if(hoveredTarget){
+        RemoveMaterialOutlineFromPreviousHover();
+        if(hoveredTarget != null){
             if(hoveredTarget.GetComponent<PartController>()){
                 hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
                 hoveredTransform = hoveredTarget;
@@ -101,7 +101,7 @@ public class PlayerFaceController : FaceController
 
     private void Comment(){
         Debug.Log("Beeing comment");
-        if(NuFaceManager.couldBeShared){
+        if(NuFaceManager.canShareFeedback){
 
         }
     }
@@ -116,9 +116,8 @@ public class PlayerFaceController : FaceController
         ignore.GetComponent<PartController>().ScalePieces(-1f, .2f, scalePopCurve);
     }
 
-    private void ClearCurrentHover(){
+    private void RemoveMaterialOutlineFromPreviousHover(){
         if(hoveredTransform != null){
-            //Debug.Log(hoveredTransform.name);
             hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
         }
     }
@@ -176,11 +175,11 @@ public class PlayerFaceController : FaceController
 
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
         pc.UpdateAttachmentStatus(status);
-        if(currentPC.flippedXAxis){
+        if(pc.flippedXAxis){
             bool didSpawn = false;
             foreach(GameObject nod in availableNodes){
                 if(!nod.activeInHierarchy){
-                    nod.transform.position = currentPC.pd.GetFlippedAbsolutePosition();
+                    nod.transform.position = pc.pd.GetFlippedAbsolutePosition();
                     nod.SetActive(true);
                     didSpawn = true;
                     break;
@@ -189,13 +188,13 @@ public class PlayerFaceController : FaceController
 
             if(!didSpawn){
                 Debug.Log("add node if didn't have enough avilaable");
-                availableNodes.Add(Instantiate(node, currentPC.pd.GetFlippedAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+                availableNodes.Add(Instantiate(node, pc.pd.GetFlippedAbsolutePosition(), pc.pd.GetAbsoluteRotation()));
             }//add node to list
         }else{
             bool didSpawn = false;
             foreach(GameObject nod in availableNodes){
                 if(!nod.activeInHierarchy){
-                    nod.transform.position = currentPC.pd.GetAbsolutePosition();
+                    nod.transform.position = pc.pd.GetAbsolutePosition();
                     nod.SetActive(true);
                     didSpawn = true;
                     break;
@@ -203,7 +202,7 @@ public class PlayerFaceController : FaceController
             }
             if(!didSpawn){
                 Debug.Log("add node if didn't have enough avilaable");
-                availableNodes.Add(Instantiate(node, currentPC.pd.GetAbsolutePosition(), currentPC.pd.GetAbsoluteRotation()));
+                availableNodes.Add(Instantiate(node, pc.pd.GetAbsolutePosition(), pc.pd.GetAbsoluteRotation()));
             }
         }
     }
