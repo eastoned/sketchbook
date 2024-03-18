@@ -2443,6 +2443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfc: {fileID: 963588423}
   sc: {fileID: 397872630}
+  eye: {fileID: 1451965502}
   writeableData:
   - {fileID: 11400000, guid: 74e97103a8ac70149b9ea328905947b8, type: 2}
   - {fileID: 11400000, guid: 5bf6c93d7a9c70645b086c731db3be7c, type: 2}
@@ -7468,9 +7469,6 @@ GameObject:
   - component: {fileID: 984036934}
   - component: {fileID: 984036933}
   - component: {fileID: 984036935}
-  - component: {fileID: 984036936}
-  - component: {fileID: 984036937}
-  - component: {fileID: 984036938}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -7612,60 +7610,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &984036936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984036932}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402a75410f265254688339f8169f9cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 0
-  timeIndex: 0
-  lowPassFilter: {fileID: 984036937}
-  frequency1: 2738
-  frequency2: 1642
-  sampleRate: 44100
-  waveLengthInSeconds: 5
---- !u!169 &984036937
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984036932}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_LowpassResonanceQ: 1
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.035925422
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!165 &984036938
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984036932}
-  m_Enabled: 0
-  m_CutoffFrequency: 1000
-  m_HighpassResonanceQ: 1
 --- !u!1 &999238333
 GameObject:
   m_ObjectHideFlags: 0
@@ -8873,7 +8817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -61.818184}
+  m_AnchoredPosition: {x: 200, y: -61.818237}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1133054761

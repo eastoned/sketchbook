@@ -10,6 +10,7 @@ public class NuFaceManager : MonoBehaviour
 {
     public PlayerFaceController pfc;
     public SpeechController sc;
+    public PartController eye;
     public CharacterData[] writeableData;
     public CharacterData[] targetData;
 
@@ -55,7 +56,11 @@ public class NuFaceManager : MonoBehaviour
 
     private void AddPlayerActionToHistory(PlayerActionData pad)
     {
-        playerActionHistory.Add(pad);
+        
+        float eyeRadius = eye.GetSingleShaderFloat("_PupilRadius");
+        if(eyeRadius > 0.05f){
+            playerActionHistory.Add(pad);
+        }
     }
 
     private void Start()
@@ -93,7 +98,7 @@ public class NuFaceManager : MonoBehaviour
             Debug.Log("corotuinen full so stopping it");
             StopCoroutine(reportRoutine);
         }
-        Debug.Log("starting coroutine");
+        Debug.Log("starting new coroutine");
         reportRoutine = StartCoroutine(GiveReport());
         //}
     }
@@ -117,7 +122,8 @@ public class NuFaceManager : MonoBehaviour
 
     private IEnumerator GiveReport(){
         Debug.Log("Started coroutine");
-        yield return StartCoroutine(GreetPlayer());
+        yield return sc.SpeakText("You came back.", 1.5f);
+        //yield return StartCoroutine(GreetPlayer());
         //yield return new WaitForSeconds(.5f);
         //for(int i = 0; i < playerActionHistory.Count; i++){
             ///yield return sc.TranslatePlayerActionData(playerActionHistory[i]);

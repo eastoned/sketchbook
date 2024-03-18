@@ -76,8 +76,7 @@ public class SpeechController : MonoBehaviour
             yield return SpeakText("You changed my " + pad.partName + ".", Random.Range(1.5f, 2.5f));
             yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", totalChange.Length/8f);
         }
-        yield return null;
-        //
+
     }
 
     void PartMention(Transform part){
@@ -123,13 +122,17 @@ public class SpeechController : MonoBehaviour
     }
 
     public IEnumerator SpeakText(string text, float animLength){
+        Debug.Log("returning speak ienumer");
         return Speak(text, animLength);
     }
 
     private IEnumerator Speak(string text, float value){
+        Debug.Log("Starting the speak routine");
         mouthRadius = mouth.GetSingleShaderFloat("_MouthOpen");
+        float mouthOpen = mouth.GetSingleShaderFloat("_MouthRadius"); 
         
-        if(mouthRadius>0.05f){
+        if(mouthRadius>0.05f && mouthOpen > 0.05f){
+            Debug.Log("mouth is big enought");
             GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
             bubble.transform.localScale = Vector3.zero;
             
@@ -141,6 +144,7 @@ public class SpeechController : MonoBehaviour
                     
                 }
             }
+
             spaceCounter *= 2;
             spaceCounter += 1;
             
@@ -166,11 +170,12 @@ public class SpeechController : MonoBehaviour
                 }
                 speakTime += Time.deltaTime;
                 //Debug.Log(text.Length*translatePercent);
-                //if(text[Mathf.FloorToInt((text.Length-1)*translatePercent)].Equals("e")){
-                ///    mouth.UpdateSingleShaderFloat("_MouthOpen", 0f);
-                //}else{
-                mouth.UpdateSingleShaderFloat("_MouthOpen", Random.Range(0f, 1f) * mouthRadius);
-                //}
+                if(text[Mathf.FloorToInt((text.Length-1)*translatePercent)].Equals("e")){
+                    mouth.UpdateSingleShaderFloat("_MouthOpen", 0f);
+                }else{
+                    mouth.UpdateSingleShaderFloat("_MouthOpen", Random.Range(0f, 1f) * mouthRadius);
+                }
+                mouth.UpdateRenderPropBlock();
                 
                 ///if(text[Mathf.CeilToInt(text.Length*translatePercent)].Equals(" ")){
                 //Debug.Log(text[Mathf.CeilToInt(text.Length*translatePercent)]);
@@ -182,9 +187,11 @@ public class SpeechController : MonoBehaviour
                 bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 yield return null;
             }
+            mouth.UpdateSingleShaderFloat("_MouthOpen", mouthRadius);
+            mouth.UpdateRenderPropBlock();
             Destroy(bubble);
         }else{
-           yield return null; 
+            Debug.Log("mouth is too small");
         }
         
     }

@@ -254,7 +254,7 @@ SubShader {
 			half4 faceColor = _FaceColor;
 			half4 outlineColor = _OutlineColor;
 
-			faceColor.rgb = float3(0,0,0);//.vPosition.xyz;
+			faceColor.rgb = float3(1,1,1);//.vPosition.xyz;
 			faceColor.a = saturate(input.color.g + _CharacterVisibility);
 			//faceColor.a *= input.color.r;
 			
