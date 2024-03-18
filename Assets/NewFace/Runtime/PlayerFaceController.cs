@@ -27,7 +27,7 @@ public class PlayerFaceController : FaceController
     public Renderer tear1, tear2;
     public List<GameObject> availableNodes;
     public ParticleSystem blood;
-    public Rigidbody2D hoveredParent;
+    public PartController hoveredParent;
     public override void OnEnable()
 	{
         base.OnEnable();
@@ -164,9 +164,6 @@ public class PlayerFaceController : FaceController
             scaleController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
             scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
             scaleController.transform.localScale = Vector3.one * currentTransform.localScale.y * 0.25f;
-            //if(currentPC.detached){
-                //scaleController.transform.SetParent(selectedTarget);
-            //}
         }
 
         //if(NuFaceManager.couldBeShared){
@@ -175,39 +172,9 @@ public class PlayerFaceController : FaceController
     }
 
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
+        pc.parentController = null;
         pc.UpdateAttachmentStatus(status, hoveredParent);
-        if(pc.flippedXAxis){
-            Instantiate(blood, pc.pd.GetFlippedAbsolutePosition(), Quaternion.identity);
-            bool didSpawn = false;
-            foreach(GameObject nod in availableNodes){
-                if(!nod.activeInHierarchy){
-                    nod.transform.position = pc.pd.GetFlippedAbsolutePosition();
-                    nod.SetActive(true);
-                    didSpawn = true;
-                    break;
-                }
-            }
-
-            if(!didSpawn){
-                Debug.Log("add node if didn't have enough avilaable");
-                availableNodes.Add(Instantiate(node, pc.pd.GetFlippedAbsolutePosition(), pc.pd.GetAbsoluteRotation()));
-            }//add node to list
-        }else{
-            Instantiate(blood, pc.pd.GetAbsolutePosition(), Quaternion.identity);
-            bool didSpawn = false;
-            foreach(GameObject nod in availableNodes){
-                if(!nod.activeInHierarchy){
-                    nod.transform.position = pc.pd.GetAbsolutePosition();
-                    nod.SetActive(true);
-                    didSpawn = true;
-                    break;
-                }
-            }
-            if(!didSpawn){
-                Debug.Log("add node if didn't have enough avilaable");
-                availableNodes.Add(Instantiate(node, pc.pd.GetAbsolutePosition(), pc.pd.GetAbsoluteRotation()));
-            }
-        }
+        Instantiate(blood, pc.transform.position, Quaternion.identity);
     }
 
     private void SetPartPosition(Vector3 pos){
@@ -237,11 +204,11 @@ public class PlayerFaceController : FaceController
                 
                 if(absPos.magnitude > 1.2f){
                     UpdatePartAttachmentStatus(currentPC, true);
-                    if(currentPC.affectedParts.Count > 0){
-                        foreach(PartController pc in currentPC.affectedParts){
-                            UpdatePartAttachmentStatus(pc, true);
-                        }
-                    }
+                    //if(currentPC.childControllers.Count > 0){
+                        //foreach(PartController pc in currentPC.childControllers){
+                        //    UpdatePartAttachmentStatus(pc, true);
+                        //}//
+                    //}
                     //currentPC.UpdateAttachmentStatus(true);
                     //set empty node here
                 }
@@ -254,7 +221,7 @@ public class PlayerFaceController : FaceController
             for(int i = 0; i < bodyParts.Length; i++){
                 if(currentTransform != bodyParts[i]){
                     if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentTransform.position)){
-                        hoveredParent = bodyParts[i].GetComponent<Rigidbody2D>();
+                        hoveredParent = bodyParts[i].GetComponent<PartController>();
                         currentPC.overAttachmentNode = true;
                         currentPC.parent = hoveredParent;
                    //currentPC.attachPosition = availableNodes[i].transform.position;

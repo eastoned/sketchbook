@@ -109,9 +109,9 @@ public class PartData : ScriptableObject
 
 
     public virtual void SetScaleBounds(PartData pd){
-        //Debug.Log(this.name + " has new scale factors");
-        maxScaleX = pd.GetAbsoluteScale().x/2f;
-        maxScaleY = pd.GetAbsoluteScale().y/2f;
+        Debug.Log(this.name + " has new scale factors");
+        //maxScaleX = pd.GetAbsoluteScale().x/2f;
+        //maxScaleY = pd.GetAbsoluteScale().y/2f;
     }
 
     public virtual void SetScaleBounds(){

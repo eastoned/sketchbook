@@ -13,63 +13,69 @@ MonoBehaviour:
   m_Name: HeadData
   m_EditorClassIdentifier: 
   partName: head
-  absolutePosition: {x: 0, y: 0, z: 0.1}
+  absolutePosition: {x: 0, y: -0.5800816, z: 0.1}
   relativePosition: {x: 0, y: 0, z: 0.1}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1
-  maxPosY: 1
+  minPosY: -0.5800816
+  maxPosY: 0.5800816
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  absoluteScale: {x: 1.8045454, y: 2.0415585, z: 1}
-  relativeScale: {x: 0.25892878, y: 0.09134615, z: 1}
-  minScaleX: 0.75
-  maxScaleX: 2.5
+  absoluteScale: {x: 1.625, y: 2.375, z: 1}
+  relativeScale: {x: 0.65912193, y: 0.4328424, z: 1}
+  minScaleX: 0.1
+  maxScaleX: 2
   minScaleY: 0.75
-  maxScaleY: 3.75
+  maxScaleY: 3
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0.39740264
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ForeheadWidth
-    propertyValue: 0.60259736
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ForeheadLength
-    propertyValue: 0.60259736
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinScale
-    propertyValue: 0.39740264
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinWidth
-    propertyValue: 0.39740264
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _ChinLength
-    propertyValue: 0.39740264
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.22988112, g: 0.7158993, b: 0.84401643, a: 1}
+    colorValue: {r: 0.48211318, g: 0.48644593, b: 0.6032508, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.03252837, g: 0.05084248, b: 0.1994847, a: 1}
+    colorValue: {r: 0.73983586, g: 0.4723242, b: 0.6732162, a: 1}
   affectedPartData:
   - {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
   - {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}

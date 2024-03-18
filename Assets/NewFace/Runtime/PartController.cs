@@ -18,13 +18,13 @@ public class PartController : MonoBehaviour
 
     public BoxCollider2D colid;
     public Rigidbody2D rb2D;
-    public FixedJoint2D partJoint;
     
     public bool flippedXAxis = false;
     public bool detached = false;
     public bool overAttachmentNode = false;
 
-    public List<PartController> affectedParts = new List<PartController>();
+    public List<PartController> childControllers = new List<PartController>();
+    public PartController parentController;
     public PartController mirroredPart; 
 
     MaterialPropertyBlock propBlock;
@@ -38,7 +38,7 @@ public class PartController : MonoBehaviour
     Vector3 positionCache, scaleCache;
     float angleCache;
     Coroutine shakeRotate;
-    public Rigidbody2D parent;
+    public PartController parent;
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
@@ -69,12 +69,12 @@ public class PartController : MonoBehaviour
 
     public void UpdateDependencies()
     {
-        if(affectedParts.Count > 0){
-            for(int j = 0; j < affectedParts.Count; j++){
-                if(!affectedParts[j].detached){
-                    affectedParts[j].pd.SetPositionBounds(pd);
-                    affectedParts[j].pd.SetScaleBounds(pd);
-                    affectedParts[j].UpdateAllTransformValues();
+        if(childControllers.Count > 0){
+            for(int j = 0; j < childControllers.Count; j++){
+                if(!childControllers[j].detached){
+                    childControllers[j].pd.SetPositionBounds(pd);
+                    childControllers[j].pd.SetScaleBounds(pd);
+                    childControllers[j].UpdateAllTransformValues();
                 }
             }
         }
@@ -184,9 +184,9 @@ public class PartController : MonoBehaviour
             cacheAngle = pd.currentAngle;
         }
 
-        //pd.SetPositionBounds();
-        //pd.SetScaleBounds();
-        //UpdateDependencies();
+        pd.SetPositionBounds();
+        pd.SetScaleBounds();
+        UpdateDependencies();
     }
 
     public void UpdateColliderBounds()
@@ -279,23 +279,30 @@ public class PartController : MonoBehaviour
         transform.localScale = cacheScale;
     }
 
-    public void UpdateAttachmentStatus(bool detach, Rigidbody2D parent)
+    public void UpdateAttachmentStatus(bool detach, PartController parent)
     {
         detached = detach;
-        partJoint.connectedBody = parent; 
+        parentController = parent; 
+        if(parentController != null){
+            if(!parentController.childControllers.Contains(this))
+                parentController.childControllers.Add(this);
+        }
+
         if(detached){
+            if(parentController != null){
+                if(!parentController.childControllers.Contains(this))
+                    parentController.childControllers.Remove(this);
+            }
             PlayerActionData padBreak = new PlayerActionData(pd, CharacterActionData.ActionType.BREAKCHANGE);
             OnBreakPart.Instance.Invoke(padBreak);
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            partJoint.enabled = false;
         }else{
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
-            partJoint.enabled = true;
         }
     }
 
