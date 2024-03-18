@@ -65,7 +65,8 @@ Shader "Unlit/HairQuad"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                uv.x += .01*sin(abs(uv.y)*8-_Time.w*2);
+                //animated hair pixels
+                //uv.x += .01*sin(abs(uv.y)*8-_Time.w*2);
                 uv.x *= (int)(19*_StrandCount+1);
                 uv.x += (0.5*_StrandOffset);
                 uv.x = frac(uv.x);

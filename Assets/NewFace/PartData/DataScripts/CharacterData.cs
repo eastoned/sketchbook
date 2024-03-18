@@ -1,4 +1,5 @@
 using System.Data;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -11,6 +12,8 @@ public class CharacterData : ScriptableObject
     public PartData earData, eyebrowData, eyeData, hairBackData, hairFrontData, headData, mouthData, neckData, noseData;
 
     public PartData[] allParts;
+
+    public FaceFeatureData featureData;
 
     [ContextMenu("Random A Piece")]
     void RandomPiece(PartData part, float randomFactor){

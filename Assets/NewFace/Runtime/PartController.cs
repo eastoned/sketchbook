@@ -18,12 +18,11 @@ public class PartController : MonoBehaviour
 
     public BoxCollider2D colid;
     public Rigidbody2D rb2D;
+    public FixedJoint2D partJoint;
     
     public bool flippedXAxis = false;
     public bool detached = false;
     public bool overAttachmentNode = false;
-    public Vector3 attachPosition;
-    public GameObject nodeToDelete;
 
     public List<PartController> affectedParts = new List<PartController>();
     public PartController mirroredPart; 
@@ -39,8 +38,7 @@ public class PartController : MonoBehaviour
     Vector3 positionCache, scaleCache;
     float angleCache;
     Coroutine shakeRotate;
-    public ParticleSystem blood;
-
+    public Rigidbody2D parent;
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
@@ -54,6 +52,7 @@ public class PartController : MonoBehaviour
     private void Initialize()
     {
         currentMat = rend.sharedMaterial;
+
     }
 
     public void InitializePartDataDictionary()
@@ -125,9 +124,15 @@ public class PartController : MonoBehaviour
         
         SetCache(pd);
     }
+    void OnValidate(){
+    }
 
     void OnMouseUp()
     {
+
+        if(CustomUtils.IsPointerOverUIObject())
+            return;
+
         if(ptc != null){
             Destroy(ptc);
         }
@@ -136,9 +141,9 @@ public class PartController : MonoBehaviour
             rb2D.bodyType = RigidbodyType2D.Dynamic;
 
             if(overAttachmentNode){
-                transform.position = new Vector3(attachPosition.x, attachPosition.y, transform.position.z);
-                nodeToDelete.SetActive(false);
-                UpdateAttachmentStatus(false);
+                //transform.position = new Vector3(attachPosition.x, attachPosition.y, transform.position.z);
+                UpdateAttachmentStatus(false, parent);
+                
             }
         }
         currentPAD.timeToChange = Time.time - timeCache;
@@ -179,9 +184,9 @@ public class PartController : MonoBehaviour
             cacheAngle = pd.currentAngle;
         }
 
-        pd.SetPositionBounds();
-        pd.SetScaleBounds();
-        UpdateDependencies();
+        //pd.SetPositionBounds();
+        //pd.SetScaleBounds();
+        //UpdateDependencies();
     }
 
     public void UpdateColliderBounds()
@@ -192,6 +197,8 @@ public class PartController : MonoBehaviour
 
     public void UpdateAllShadersValue(float ignore)
     {
+
+        //Debug.Log("updating shaders");
 
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
@@ -205,6 +212,7 @@ public class PartController : MonoBehaviour
 
         if(colid != null && pd.shadePropertyDict.Count > 0){
             UpdateColliderBounds();
+            UpdateDependencies();
         }
         
     }
@@ -271,9 +279,10 @@ public class PartController : MonoBehaviour
         transform.localScale = cacheScale;
     }
 
-    public void UpdateAttachmentStatus(bool detach)
+    public void UpdateAttachmentStatus(bool detach, Rigidbody2D parent)
     {
         detached = detach;
+        partJoint.connectedBody = parent; 
         if(detached){
             PlayerActionData padBreak = new PlayerActionData(pd, CharacterActionData.ActionType.BREAKCHANGE);
             OnBreakPart.Instance.Invoke(padBreak);
@@ -281,10 +290,12 @@ public class PartController : MonoBehaviour
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
+            partJoint.enabled = false;
         }else{
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
+            partJoint.enabled = true;
         }
     }
 

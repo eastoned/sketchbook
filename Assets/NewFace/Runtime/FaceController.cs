@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,10 +6,14 @@ using UnityEngine;
 
 public class FaceController : MonoBehaviour
 {
-
     public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar;
     public Transform[] bodyParts;
     public PartData[] bodyData;
+    public enum EyeTarget{
+        MOUSE,
+        PART
+    }
+    public EyeTarget eyeTarget;
 
     [Range(-90, 90)]
     public float rotation;
@@ -18,10 +23,10 @@ public class FaceController : MonoBehaviour
     public float rightPupilX;
     public float rightPupilY;
 
-    public Vector2 mousePos;
+    public Vector2 eyeLookAtPos;
     public float clampVal;
-
     public CharacterData currentChar;
+    public FaceFeatureData faceFeatures => currentChar.featureData;
     public AnimationCurve propertyCurve;
     public AnimationCurve blendCurve; 
     public AnimationCurve blinkCurve;
@@ -30,6 +35,7 @@ public class FaceController : MonoBehaviour
     public bool currentlyBlending = false;
 
     private Coroutine blending;
+    //need a list of face states
 
     [Range(0f, 1f)]
     public float blinkAmount;
@@ -245,18 +251,24 @@ public class FaceController : MonoBehaviour
     {
 
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-         
-        mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        Shader.SetGlobalVector("_MousePos", mousePos);
+        switch(eyeTarget){
+            case EyeTarget.MOUSE:
+            eyeLookAtPos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            break;
+            case EyeTarget.PART:
+            eyeLookAtPos = new Vector2(0, 0);
+            break;
+        }
+        Shader.SetGlobalVector("_MousePos", eyeLookAtPos);
         //position of mouse relative to right eye position
-        float rightX = rightEye.transform.position.x - (mousePos.x - transform.position.x);
-        float rightY = rightEye.transform.position.y - (mousePos.y - transform.position.y);
+        float rightX = rightEye.transform.position.x - (eyeLookAtPos.x - transform.position.x);
+        float rightY = rightEye.transform.position.y - (eyeLookAtPos.y - transform.position.y);
         
         //Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
-        float leftX = (mousePos.x - transform.position.x) - leftEye.transform.position.x;
-        float leftY = leftEye.transform.position.y - (mousePos.y - transform.position.y);
+        float leftX = (eyeLookAtPos.x - transform.position.x) - leftEye.transform.position.x;
+        float leftY = leftEye.transform.position.y - (eyeLookAtPos.y - transform.position.y);
 
         rightX = Mathf.Clamp(rightX/5f, -.5f, .5f);
         leftX = Mathf.Clamp(leftX/5f, -.5f, .5f);

@@ -12,45 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d04ea043f047634fac17772442c9c30, type: 3}
   m_Name: hairFront
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0.5, z: -0.15}
-  relativePosition: {x: 0, y: 0.6666667, z: -0.15}
+  partName: 
+  absolutePosition: {x: 0, y: 0.375, z: -0.15}
+  relativePosition: {x: 0, y: 0.5, z: -0.15}
   minPosX: 0
   maxPosX: 0
   minPosY: 0
   maxPosY: 0.75
-  minAngle: -180
-  maxAngle: 180
-  currentAngle: -0
-  absoluteScale: {x: 0.30900627, y: 0.8703906, z: 1}
-  relativeScale: {x: 0.33059025, y: 0.4, z: 1}
+  minAngle: 0
+  maxAngle: 360
+  currentAngle: 180
+  absoluteScale: {x: 0.96537393, y: 0.875, z: 1}
+  relativeScale: {x: 0.5, y: 0.5, z: 1}
   minScaleX: 0.25
   maxScaleX: 1.6807479
   minScaleY: 0.25
   maxScaleY: 1.5
   shaderProperties:
   - propertyName: _BangRoundness
-    propertyValue: 0.4537558
+    propertyValue: 0.5
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandCount
-    propertyValue: 0.17381984
+    propertyValue: 0.5
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandOffset
-    propertyValue: 0
+    propertyValue: 0.5
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairBangScale
-    propertyValue: 0.1343046
+    propertyValue: 0.5
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairRoundness
-    propertyValue: 0.5435014
+    propertyValue: 0.5
+    wholeNumberInterval: 0
+    valueInterval: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.49076456, g: 0.45007926, b: 0.47736943, a: 1}
+    colorValue: {r: 0.15813385, g: 0.122387, b: 0.34289116, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.7579773, g: 0.06896554, b: 0.8952098, a: 1}
+    colorValue: {r: 0.29162505, g: 0.5452567, b: 0.5129464, a: 1}
   affectedPartData: []

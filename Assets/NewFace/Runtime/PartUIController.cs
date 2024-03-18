@@ -44,8 +44,6 @@ public class PartUIController : MonoBehaviour
     {
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(true);
-        //titleText.text = partTransform.name;
-        //partData = partTransform.GetComponent<PartController>();
         colorSliderContainer.SetActive(false); 
 
         for(int i = 0; i < sliders.Count; i++){
@@ -63,9 +61,12 @@ public class PartUIController : MonoBehaviour
                     float intervalValue = partData.pd.shaderProperties[i].valueInterval;
                     sliders[i].onValueChanged.AddListener(delegate{SetCurrentShaderInterval.Instance.Invoke(intervalValue);});
                     sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
-                    
                 }else{
                     sliders[i].onValueChanged.AddListener(OnSlideShaderProperty.Instance.Invoke);
+                }
+
+                if(partData.pd.shaderProperties[i].affectedFeature != ShaderProperty.AffectedFeature.NOTHING){
+                    //sliders[i].onValueChanged.AddListener(delegate{OnAffectFeatureWithShaderProperty.Instance.Invoke(partData.pd.shaderProperties[i].affectedFeature);});
                 }
                 
                 if(partData.mirroredPart != null){

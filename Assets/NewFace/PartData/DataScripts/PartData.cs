@@ -196,6 +196,15 @@ public class PartData : ScriptableObject
 
 [System.Serializable]
 public class ShaderProperty{
+
+    public enum AffectedFeature
+    {
+        NOTHING,
+        SIGHT,
+        HEARING,
+        SMELL,
+        SPEECH
+    }
     public string propertyName;
 
     [Range(0f, 1f)]
@@ -203,6 +212,7 @@ public class ShaderProperty{
 
     public bool wholeNumberInterval;
     public float valueInterval;
+    public AffectedFeature affectedFeature;
 
     public void SetValue(float value){
         //value /= 0.25f;

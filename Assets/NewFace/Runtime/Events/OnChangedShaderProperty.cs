@@ -11,6 +11,11 @@ public class OnSlideShaderProperty : UnityEvent<float>
     public static OnSlideShaderProperty Instance = new OnSlideShaderProperty();
 }
 
+public class OnAffectFeatureWithShaderProperty : UnityEvent<ShaderProperty.AffectedFeature>
+{
+    public static OnAffectFeatureWithShaderProperty Instance = new OnAffectFeatureWithShaderProperty();
+}
+
 public class SetCurrentShaderInterval : UnityEvent<float>
 {
     public static SetCurrentShaderInterval Instance = new SetCurrentShaderInterval();

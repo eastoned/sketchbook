@@ -34,8 +34,6 @@ public class NuFaceManager : MonoBehaviour
     public Button button;
 
     public bool isGame = false;
-
-    public AudioSource crunch;
     private Coroutine reportRoutine;
 
     public List<PlayerActionData> playerActionHistory = new List<PlayerActionData>();
@@ -58,14 +56,15 @@ public class NuFaceManager : MonoBehaviour
     {
         
         float eyeRadius = eye.GetSingleShaderFloat("_PupilRadius");
-        if(eyeRadius > 0.05f){
+        float eyeOpen = eye.GetSingleShaderFloat("_EyelidBottomOpen") + eye.GetSingleShaderFloat("_EyelidTopOpen");
+        if(eyeRadius > 0.05f && eyeOpen > 0.05f){
             playerActionHistory.Add(pad);
         }
     }
 
     private void Start()
     {
-        writeableData[0].RandomizeData(.1f);
+        writeableData[0].RandomizeData(0f);
         pfc.SetCharacter(writeableData[0]);
         if(isGame){
             targetData[0].RandomizeData(.1f);
@@ -121,13 +120,15 @@ public class NuFaceManager : MonoBehaviour
     }
 
     private IEnumerator GiveReport(){
-        Debug.Log("Started coroutine");
-        yield return sc.SpeakText("You came back.", 1.5f);
+        
+        Coroutine currentAction = StartCoroutine(sc.SpeakText("You came back.", 1.5f));
+        yield return currentAction;
+        currentAction = StartCoroutine(sc.TranslatePlayerActionData(playerActionHistory[0]));
         //yield return StartCoroutine(GreetPlayer());
         //yield return new WaitForSeconds(.5f);
-        for(int i = 0; i < playerActionHistory.Count; i++){
-            yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
-        }
+        //for(int i = 0; i < playerActionHistory.Count; i++){
+        yield return currentAction;
+        //}
         //playerActionHistory.Clear();
         //yield return null;
     }

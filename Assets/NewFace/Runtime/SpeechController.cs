@@ -27,18 +27,28 @@ public class SpeechController : MonoBehaviour
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
+        OnBreakPart.Instance.AddListener(BreakEvent);
         //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void OnDisable(){
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
+        OnBreakPart.Instance.RemoveListener(BreakEvent);
        // OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
+    }
+
+    void BreakEvent(PlayerActionData pad){
+        SpeakEvent("Please be careful.");
     }
 
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
     {
-        if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f){
+        if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
+            yield return SpeakText("You broke my " + pad.partName + ".", 2f);
+        }
+        else if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f)
+        {
             Debug.Log("speak about my parts");
             string verticalChange = "";
             string horizontalChange = "";

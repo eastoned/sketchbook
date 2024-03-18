@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889eebba0bbb22545a5ed261a68e033d, type: 3}
   m_Name: SceneCharacter
   m_EditorClassIdentifier: 
-  name: SceneCharacter
+  characterName: 
   writeable: 1
   earData: {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
   eyebrowData: {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
@@ -33,3 +33,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
   - {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
   - {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+  featureData: {fileID: 11400000, guid: b2413369bcb095f43a5ce2f52fa14494, type: 2}

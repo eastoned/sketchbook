@@ -13,84 +13,100 @@ MonoBehaviour:
   m_Name: EyeData
   m_EditorClassIdentifier: 
   partName: eyes
-  absolutePosition: {x: 0.31689075, y: -0.6265435, z: -0.05}
-  relativePosition: {x: 0.09595465, y: 0.44168052, z: -0.05}
-  minPosX: 0.255
-  maxPosX: 0.90000004
-  minPosY: -1.4878205
-  maxPosY: 0.46217942
+  absolutePosition: {x: 0.61806667, y: 0, z: -0.05}
+  relativePosition: {x: 0.5, y: 0.5, z: -0.05}
+  minPosX: 0.265625
+  maxPosX: 0.8125
+  minPosY: -1.5694444
+  maxPosY: 0.6805556
   minAngle: -90
   maxAngle: 90
-  currentAngle: -0
-  absoluteScale: {x: 0.53542, y: 0.67242473, z: 1}
-  relativeScale: {x: 0.4, y: 0.59999996, z: 1}
+  currentAngle: 0
+  absoluteScale: {x: 0.606775, y: 0.6020206, z: 1}
+  relativeScale: {x: 0.5, y: 0.5, z: 1}
   minScaleX: 0.25
-  maxScaleX: 0.90000004
+  maxScaleX: 0.8125
   minScaleY: 0.25
-  maxScaleY: 0.97499996
+  maxScaleY: 1.125
   shaderProperties:
   - propertyName: _PupilRadius
-    propertyValue: 0.6
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _DotRadius
-    propertyValue: 0.6
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _PupilRatio
-    propertyValue: 0.6
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyelidTopLength
-    propertyValue: 0.6
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyelidTopSkew
-    propertyValue: 0.6
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyelidBottomLength
-    propertyValue: 0.4489469
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyelidBottomSkew
-    propertyValue: 0.6
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _PupilRoundness
-    propertyValue: 0.4
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _EyelidTopOpen
-    propertyValue: 0.4
+    propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 1
+    IncreaseValueRemarks: []
+    DecreaseValueRemarks: []
+  - propertyName: _EyelidBottomOpen
+    propertyValue: 0.5
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 1
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.6762674, g: 0.6198412, b: 0.058410335, a: 1}
+    colorValue: {r: 0.16323256, g: 0.14007933, b: 0.08470003, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.22093654, g: 0.22516464, b: 0.33075434, a: 1}
+    colorValue: {r: 0.5756421, g: 0.19135657, b: 0.96384835, a: 1}
   - colorName: _Color3
-    colorValue: {r: 0.6509489, g: 0.49164656, b: 0.4622863, a: 1}
+    colorValue: {r: 0.7314568, g: 0.84559965, b: 0.7515821, a: 1}
   - colorName: _Color4
-    colorValue: {r: 0.17272437, g: 0.15075101, b: 0.15764453, a: 1}
+    colorValue: {r: 0.1373328, g: 0.13046503, b: 0.12500608, a: 1}
   affectedPartData: []
   reactiveProperties: []

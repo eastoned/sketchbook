@@ -27,7 +27,7 @@ public class PlayerFaceController : FaceController
     public Renderer tear1, tear2;
     public List<GameObject> availableNodes;
     public ParticleSystem blood;
-
+    public Rigidbody2D hoveredParent;
     public override void OnEnable()
 	{
         base.OnEnable();
@@ -175,7 +175,7 @@ public class PlayerFaceController : FaceController
     }
 
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
-        pc.UpdateAttachmentStatus(status);
+        pc.UpdateAttachmentStatus(status, hoveredParent);
         if(pc.flippedXAxis){
             Instantiate(blood, pc.pd.GetFlippedAbsolutePosition(), Quaternion.identity);
             bool didSpawn = false;
@@ -250,11 +250,16 @@ public class PlayerFaceController : FaceController
         }else{
             currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
             currentPC.overAttachmentNode = false;
-            for(int i = 0; i < availableNodes.Count; i++){
-                if(currentTransform.GetComponent<BoxCollider2D>().OverlapPoint(availableNodes[i].transform.position)){
-                   currentPC.overAttachmentNode = true;
-                   currentPC.attachPosition = availableNodes[i].transform.position;
-                   currentPC.nodeToDelete = availableNodes[i];
+            currentPC.parent = null;
+            for(int i = 0; i < bodyParts.Length; i++){
+                if(currentTransform != bodyParts[i]){
+                    if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentTransform.position)){
+                        hoveredParent = bodyParts[i].GetComponent<Rigidbody2D>();
+                        currentPC.overAttachmentNode = true;
+                        currentPC.parent = hoveredParent;
+                   //currentPC.attachPosition = availableNodes[i].transform.position;
+                        //currentPC.nodeToDelete = availableNodes[i];
+                    }
                 }
             }
             //if position is on  node then we can attach to it
