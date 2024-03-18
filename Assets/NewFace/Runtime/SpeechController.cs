@@ -36,18 +36,10 @@ public class SpeechController : MonoBehaviour
        // OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
-    private IEnumerator Start(){
-        for(;;){
-            //timeSinceLastRemark += 0.5f;
-            //yield return new WaitForSeconds(0.5f);
-        }
-    }
-
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
     {
         if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f){
             Debug.Log("speak about my parts");
-            yield return SpeakText("You changed my " + pad.partName + ".", 2f);
             string verticalChange = "";
             string horizontalChange = "";
             string totalChange = "";
@@ -81,14 +73,11 @@ public class SpeechController : MonoBehaviour
                 horizontalChange = "too far apart";
             }
             totalChange += horizontalChange;
-
-            yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", 4f);
-
-        }else{
-            Debug.Log("nothing to talk about here");
+            yield return SpeakText("You changed my " + pad.partName + ".", Random.Range(1.5f, 2.5f));
+            yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", totalChange.Length/8f);
         }
+        yield return null;
         //
-       
     }
 
     void PartMention(Transform part){
@@ -130,14 +119,14 @@ public class SpeechController : MonoBehaviour
             }
         spaceCounter += 1;
         timeSinceLastRemark = Random.Range(0f, 2f);
-        SpeakText(text, spaceCounter/2f);
+        StartCoroutine(SpeakText(text, spaceCounter/2f));
     }
 
-    public Coroutine SpeakText(string text, float animLength){
-        return StartCoroutine(Speak(text, animLength));
+    public IEnumerator SpeakText(string text, float animLength){
+        return Speak(text, animLength);
     }
 
-    IEnumerator Speak(string text, float value){
+    private IEnumerator Speak(string text, float value){
         mouthRadius = mouth.GetSingleShaderFloat("_MouthOpen");
         
         if(mouthRadius>0.05f){
@@ -166,7 +155,7 @@ public class SpeechController : MonoBehaviour
                 float percent = Mathf.Clamp01(journey/value);
                 float scalePercent = scaleCurve.Evaluate(percent);
                 float translatePercent = translateCurve.Evaluate(percent);
-                if(speakTime > 2f/amountofwords){
+                if(speakTime * amountofwords > 2f){
                     if(Random.Range(0f, 1f) < .5f){
                         OnTriggerAudioOneShot.Instance.Invoke("Beep");
                     }else{
@@ -191,11 +180,12 @@ public class SpeechController : MonoBehaviour
                 //bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;///text.Substring(0, Mathf.FloorToInt(text.Length*translatePercent));
                 bubble.transform.position = new Vector3(Screen.width/2f, Screen.height * .75f, 0);//Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(0, randomOffset, 0), translatePercent);
                 bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
-                
                 yield return null;
             }
-            yield return new WaitForSeconds(.3f);
             Destroy(bubble);
+        }else{
+           yield return null; 
         }
+        
     }
 }

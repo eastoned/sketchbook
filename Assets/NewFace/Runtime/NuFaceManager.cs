@@ -58,7 +58,7 @@ public class NuFaceManager : MonoBehaviour
         playerActionHistory.Add(pad);
     }
 
-    private IEnumerator Start()
+    private void Start()
     {
         writeableData[0].RandomizeData(.1f);
         pfc.SetCharacter(writeableData[0]);
@@ -73,56 +73,55 @@ public class NuFaceManager : MonoBehaviour
             }
 
             AffectStageCount(1);
-        }else{
-
-            for(;;){
-                //yield return new WaitForSeconds(2f);
-                //Compare();
-                //targetData.RandomizeData();
-                //targetData.RandomizeRandomPart();
-
-                ///RandomizePlayer();
-                yield return new WaitForSeconds(.2f);
-            }
         }
     }
 
     public void ExportCharacter(){
-        canShareFeedback = true;
+        //canShareFeedback = true;
+        Debug.Log("Pressed button");
         ReportPlayerActions();
         //character evaluation
         //find closest character template
         
     }
 
-    private void ReportPlayerActions(){
-        if(canShareFeedback && playerActionHistory.Count > 0){
-            if(reportRoutine != null){
-                //StopCoroutine(reportRoutine);
-            }
-            //reportRoutine = StartCoroutine(GiveReport());
+    private void ReportPlayerActions()
+    {
+        Debug.Log("wanted to start coroutine");
+        //if(canShareFeedback && playerActionHistory.Count > 0){
+        if(reportRoutine != null){
+            Debug.Log("corotuinen full so stopping it");
+            StopCoroutine(reportRoutine);
         }
+        Debug.Log("starting coroutine");
+        reportRoutine = StartCoroutine(GiveReport());
+        //}
     }
     
     private IEnumerator GreetPlayer()
     {
+        Debug.Log("greeing rotuine");
         if(playerActionHistory.Exists(x => x.actionType == PlayerActionData.ActionType.BREAKCHANGE)){
-            yield return sc.SpeakText("Oh.", 1f); 
+            Debug.Log("broke rotuine");
+            yield return sc.SpeakText("Oh.", Random.Range(.7f, 1.5f)); 
         }else{
-            yield return sc.SpeakText("Oh!", 1f); 
+            Debug.Log("not broke rotuine");
+            yield return sc.SpeakText("Oh!", Random.Range(.7f, 1.5f)); 
         }
+        Debug.Log("pause");
         yield return new WaitForSeconds(.2f);
 
-        yield return sc.SpeakText("You came back.", 2f);
-        
+        Debug.Log("one more word");
+        yield return sc.SpeakText("You came back.", 1.5f);
     }
 
     private IEnumerator GiveReport(){
-        yield return GreetPlayer();
-        yield return new WaitForSeconds(.5f);
-        for(int i = 0; i < playerActionHistory.Count; i++){
-            yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
-        }
+        Debug.Log("Started coroutine");
+        yield return StartCoroutine(GreetPlayer());
+        //yield return new WaitForSeconds(.5f);
+        //for(int i = 0; i < playerActionHistory.Count; i++){
+            ///yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
+        //}
         //playerActionHistory.Clear();
         //yield return null;
     }

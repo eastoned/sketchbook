@@ -31,7 +31,7 @@ public class AnimateTMPElement : MonoBehaviour
     public void UpdateTextVisibility(float textToShow){
         int currentChar = Mathf.Clamp((int)textToShow, 0, textOriginal.Length-1);
         //currentChar = currentChar < 1 ? 1);
-        Debug.Log(currentChar);
+        //Debug.Log(currentChar);
         
         textMesh.text = textOriginal.Substring(0, currentChar);
         textMesh.text += "<color=red>";
