@@ -38,16 +38,15 @@ public class SpeechController : MonoBehaviour
 
     private IEnumerator Start(){
         for(;;){
-            timeSinceLastRemark += 0.5f;
-            yield return new WaitForSeconds(0.5f);
+            //timeSinceLastRemark += 0.5f;
+            //yield return new WaitForSeconds(0.5f);
         }
     }
 
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
     {
-        
-        
         if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f){
+            Debug.Log("speak about my parts");
             yield return SpeakText("You changed my " + pad.partName + ".", 2f);
             string verticalChange = "";
             string horizontalChange = "";
@@ -85,6 +84,8 @@ public class SpeechController : MonoBehaviour
 
             yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", 4f);
 
+        }else{
+            Debug.Log("nothing to talk about here");
         }
         //
        
@@ -157,13 +158,15 @@ public class SpeechController : MonoBehaviour
             float randomOffset = Random.Range(150, 350);
             float journey = 0;
             int amountofwords = text.Length;
+            AnimateTMPElement textAnimator = bubble.GetComponentInChildren<AnimateTMPElement>();
+            textAnimator.SetOriginalText(text);
             float speakTime = 0;
             while(journey < value){
                 journey += Time.deltaTime;
                 float percent = Mathf.Clamp01(journey/value);
                 float scalePercent = scaleCurve.Evaluate(percent);
                 float translatePercent = translateCurve.Evaluate(percent);
-                if(speakTime > 4f/amountofwords){
+                if(speakTime > 2f/amountofwords){
                     if(Random.Range(0f, 1f) < .5f){
                         OnTriggerAudioOneShot.Instance.Invoke("Beep");
                     }else{
@@ -183,12 +186,15 @@ public class SpeechController : MonoBehaviour
                 ///if(text[Mathf.CeilToInt(text.Length*translatePercent)].Equals(" ")){
                 //Debug.Log(text[Mathf.CeilToInt(text.Length*translatePercent)]);
                 //}
-                bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;///text.Substring(0, Mathf.FloorToInt(text.Length*translatePercent));
+                
+                textAnimator.UpdateTextVisibility(translatePercent * text.Length);
+                //bubble.GetComponentInChildren<TextMeshProUGUI>().text = text;///text.Substring(0, Mathf.FloorToInt(text.Length*translatePercent));
                 bubble.transform.position = new Vector3(Screen.width/2f, Screen.height * .75f, 0);//Vector3.Lerp(Camera.main.WorldToScreenPoint(mouthPos.position), Camera.main.WorldToScreenPoint(mouthPos.position) + new Vector3(0, randomOffset, 0), translatePercent);
                 bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 
                 yield return null;
             }
+            yield return new WaitForSeconds(.3f);
             Destroy(bubble);
         }
     }

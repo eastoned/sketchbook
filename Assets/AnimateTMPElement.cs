@@ -21,5 +21,28 @@ public class AnimateTMPElement : MonoBehaviour
         //textMesh.text += 
         textMesh.text += "<color=red>";
         textMesh.text += textOriginal[currentCharacter-1];
+        Shader.SetGlobalFloat("_CharacterVisibility", characterVisibility);
+    }
+
+    public void SetOriginalText(string text){
+        textOriginal = text;
+    }
+
+    public void UpdateTextVisibility(float textToShow){
+        int currentChar = Mathf.Clamp((int)textToShow, 0, textOriginal.Length-1);
+        //currentChar = currentChar < 1 ? 1);
+        Debug.Log(currentChar);
+        
+        textMesh.text = textOriginal.Substring(0, currentChar);
+        textMesh.text += "<color=red>";
+        textMesh.text += textOriginal[currentChar];
+        characterVisibility = textToShow%1f;
+        //Debug.Log(characterVisibility);
+        if(currentChar < textOriginal.Length-1){
+            Shader.SetGlobalFloat("_CharacterVisibility", textToShow%1f);
+        }else{
+            Shader.SetGlobalFloat("_CharacterVisibility", 1f);
+        }
+        
     }
 }

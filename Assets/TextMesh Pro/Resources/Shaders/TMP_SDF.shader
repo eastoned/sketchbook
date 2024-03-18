@@ -156,6 +156,7 @@ SubShader {
 		// Used by Unity internally to handle Texture Tiling and Offset.
 		float4 _FaceTex_ST;
 		float4 _OutlineTex_ST;
+		float _CharacterVisibility;
 
 		pixel_t VertShader(vertex_t input)
 		{
@@ -253,7 +254,8 @@ SubShader {
 			half4 faceColor = _FaceColor;
 			half4 outlineColor = _OutlineColor;
 
-			faceColor.rgb = input.color.rgb;//.vPosition.xyz;
+			faceColor.rgb = float3(0,0,0);//.vPosition.xyz;
+			faceColor.a = saturate(input.color.g + _CharacterVisibility);
 			//faceColor.a *= input.color.r;
 			
 			faceColor *= tex2D(_FaceTex, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y);

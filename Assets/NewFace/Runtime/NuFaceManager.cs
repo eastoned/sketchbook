@@ -35,6 +35,7 @@ public class NuFaceManager : MonoBehaviour
     public bool isGame = false;
 
     public AudioSource crunch;
+    private Coroutine reportRoutine;
 
     public List<PlayerActionData> playerActionHistory = new List<PlayerActionData>();
 
@@ -42,14 +43,14 @@ public class NuFaceManager : MonoBehaviour
     {
         OnConfirmTransformPart.Instance.AddListener(AddPlayerActionToHistory);
         OnBreakPart.Instance.AddListener(AddPlayerActionToHistory);
-        OnMouseClickEvent.Instance.AddListener(ReportPlayerActions);
+       // OnMouseClickEvent.Instance.AddListener(ReportPlayerActions);
     }
 
     void OnDisable()
     {
         OnConfirmTransformPart.Instance.RemoveListener(AddPlayerActionToHistory);
         OnBreakPart.Instance.RemoveListener(AddPlayerActionToHistory);
-        OnMouseClickEvent.Instance.RemoveListener(ReportPlayerActions);
+       // OnMouseClickEvent.Instance.RemoveListener(ReportPlayerActions);
     }
 
     private void AddPlayerActionToHistory(PlayerActionData pad)
@@ -88,6 +89,7 @@ public class NuFaceManager : MonoBehaviour
 
     public void ExportCharacter(){
         canShareFeedback = true;
+        ReportPlayerActions();
         //character evaluation
         //find closest character template
         
@@ -95,7 +97,10 @@ public class NuFaceManager : MonoBehaviour
 
     private void ReportPlayerActions(){
         if(canShareFeedback && playerActionHistory.Count > 0){
-            StartCoroutine(GiveReport());
+            if(reportRoutine != null){
+                //StopCoroutine(reportRoutine);
+            }
+            //reportRoutine = StartCoroutine(GiveReport());
         }
     }
     
@@ -118,7 +123,7 @@ public class NuFaceManager : MonoBehaviour
         for(int i = 0; i < playerActionHistory.Count; i++){
             yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
         }
-        playerActionHistory.Clear();
+        //playerActionHistory.Clear();
         //yield return null;
     }
 

@@ -2447,9 +2447,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74e97103a8ac70149b9ea328905947b8, type: 2}
   - {fileID: 11400000, guid: 5bf6c93d7a9c70645b086c731db3be7c, type: 2}
   - {fileID: 11400000, guid: ce7daae8ce1b1014ea4cc4deb78c84ff, type: 2}
-  - {fileID: 11400000, guid: 7a7d13602e69c1b42bf15330cc2d1aeb, type: 2}
-  - {fileID: 11400000, guid: 0066d3a600ecf5b46a457feee8917c75, type: 2}
-  - {fileID: 11400000, guid: b47e03152a01e74409eb408f24c161e5, type: 2}
   targetData:
   - {fileID: 11400000, guid: f5d941677e3fe374aa7385a1b1998bfe, type: 2}
   - {fileID: 11400000, guid: 4f2ea3c96a32d23409b8da091ba5973b, type: 2}
@@ -22048,45 +22045,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
---- !u!1 &1704230250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5391851005508244352, guid: eb1498493e3e0e140b46cdaac96a2c65,
-    type: 3}
-  m_PrefabInstance: {fileID: 5391851006176455508}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1704230253 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-    type: 3}
-  m_PrefabInstance: {fileID: 5391851006176455508}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704230250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1704230255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704230250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85e5b67013f2e434a87c49fd2dae1810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterVisibility: 1
-  currentCharacter: 44
-  textMesh: {fileID: 1704230253}
-  textOriginal: 'Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me.Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. '
 --- !u!1 &1742845891
 GameObject:
   m_ObjectHideFlags: 0
@@ -24285,7 +24243,7 @@ PrefabInstance:
     - target: {fileID: 5391851005333956622, guid: eb1498493e3e0e140b46cdaac96a2c65,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
         type: 3}
@@ -24320,12 +24278,12 @@ PrefabInstance:
     - target: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 254
       objectReference: {fileID: 0}
     - target: {fileID: 5391851005333956623, guid: eb1498493e3e0e140b46cdaac96a2c65,
         type: 3}
@@ -24387,59 +24345,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_text
-      value: 'Fight me. Fight me. <color=green>Fight me. Fight me. '
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_colorMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_fontColorGradient.topLeft.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_fontColorGradient.topLeft.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_fontColorGradient.topLeft.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_fontColorGradient.topRight.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_fontColorGradient.topRight.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      propertyPath: m_fontColorGradient.topRight.r
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5391851005508244352, guid: eb1498493e3e0e140b46cdaac96a2c65,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1704230255}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1498493e3e0e140b46cdaac96a2c65, type: 3}
 --- !u!114 &6748752776853493779
 MonoBehaviour:

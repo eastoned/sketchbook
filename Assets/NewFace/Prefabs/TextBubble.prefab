@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 5391851005508244355}
   - component: {fileID: 5391851005508244354}
   - component: {fileID: 1831626520427078946}
+  - component: {fileID: 2600271877904723533}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -206,9 +207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me. '
+  m_text: Fight me. Fight me. Fight me. <color=red>F
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f6104a988b0ced04296bfa2a5f5b5d50, type: 2}
   m_sharedMaterial: {fileID: 1826697919671455151, guid: f6104a988b0ced04296bfa2a5f5b5d50,
@@ -220,8 +219,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
+  m_enableVertexGradient: 1
+  m_colorMode: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
@@ -298,6 +297,27 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &2600271877904723533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5391851005508244352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e5b67013f2e434a87c49fd2dae1810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterVisibility: 1
+  currentCharacter: 31
+  textMesh: {fileID: 5391851005508244354}
+  textOriginal: 'Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
+    me.Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
+    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
+    me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight me. Fight me. Fight
+    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
+    me. Fight me. Fight me. Fight me. '
 --- !u!1 &6512706018148329715
 GameObject:
   m_ObjectHideFlags: 0
