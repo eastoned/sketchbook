@@ -26,6 +26,7 @@ public class PlayerFaceController : FaceController
     private MaterialPropertyBlock block;
     public Renderer tear1, tear2;
     public List<GameObject> availableNodes;
+    public ParticleSystem blood;
 
     public override void OnEnable()
 	{
@@ -176,6 +177,7 @@ public class PlayerFaceController : FaceController
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
         pc.UpdateAttachmentStatus(status);
         if(pc.flippedXAxis){
+            Instantiate(blood, pc.pd.GetFlippedAbsolutePosition(), Quaternion.identity);
             bool didSpawn = false;
             foreach(GameObject nod in availableNodes){
                 if(!nod.activeInHierarchy){
@@ -191,6 +193,7 @@ public class PlayerFaceController : FaceController
                 availableNodes.Add(Instantiate(node, pc.pd.GetFlippedAbsolutePosition(), pc.pd.GetAbsoluteRotation()));
             }//add node to list
         }else{
+            Instantiate(blood, pc.pd.GetAbsolutePosition(), Quaternion.identity);
             bool didSpawn = false;
             foreach(GameObject nod in availableNodes){
                 if(!nod.activeInHierarchy){

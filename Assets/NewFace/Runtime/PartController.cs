@@ -39,6 +39,7 @@ public class PartController : MonoBehaviour
     Vector3 positionCache, scaleCache;
     float angleCache;
     Coroutine shakeRotate;
+    public ParticleSystem blood;
 
     void Awake()
     {

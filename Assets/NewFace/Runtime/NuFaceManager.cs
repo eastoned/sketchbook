@@ -125,9 +125,9 @@ public class NuFaceManager : MonoBehaviour
         yield return sc.SpeakText("You came back.", 1.5f);
         //yield return StartCoroutine(GreetPlayer());
         //yield return new WaitForSeconds(.5f);
-        //for(int i = 0; i < playerActionHistory.Count; i++){
-            ///yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
-        //}
+        for(int i = 0; i < playerActionHistory.Count; i++){
+            yield return sc.TranslatePlayerActionData(playerActionHistory[i]);
+        }
         //playerActionHistory.Clear();
         //yield return null;
     }

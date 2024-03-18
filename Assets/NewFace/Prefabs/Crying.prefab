@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3509575048113369132}
   - component: {fileID: 3509575048113369131}
   m_Layer: 0
-  m_Name: ParticleSystem_Stream
+  m_Name: Crying
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
