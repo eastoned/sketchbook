@@ -119,9 +119,10 @@ public class PlayerFaceController : FaceController
 
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
         pc.UpdateAttachmentStatus(status, hoveredParent);
-        Instantiate(blood, pc.transform.position, Quaternion.identity);
+        //Instantiate(blood, pc.transform.position, Quaternion.identity);
     }
 
+    bool startedTickling = false;
     private void SetPartPosition(Vector3 pos){
         //each part has a relative position to other objects
         
@@ -143,9 +144,13 @@ public class PlayerFaceController : FaceController
                 if(!currentPC.mirroredPart.detached)
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }
-
+            
             if(currentPC.pd.PositionOutsideMaximum(absPos)){
                 currentPC.ShakePiece(absPos.magnitude*10f, 0.25f);
+                if(!startedTickling){
+                    OnTickleEvent.Instance.Invoke();
+                    startedTickling = true;
+                }
                 
                 if(absPos.magnitude > 1.2f){
                     UpdatePartAttachmentStatus(currentPC, true);

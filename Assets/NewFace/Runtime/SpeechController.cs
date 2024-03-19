@@ -28,6 +28,7 @@ public class SpeechController : MonoBehaviour
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
         OnBreakPart.Instance.AddListener(BreakEvent);
+        OnTickleEvent.Instance.AddListener(TickleEvent);
         //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
@@ -35,11 +36,34 @@ public class SpeechController : MonoBehaviour
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
         OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
         OnBreakPart.Instance.RemoveListener(BreakEvent);
+        OnTickleEvent.Instance.RemoveListener(TickleEvent);
        // OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void BreakEvent(PlayerActionData pad){
-        SpeakEvent("Please be careful.");
+        //SpeakEvent("Please be careful.");
+        StartCoroutine(BreakRoutine(pad.partName));
+    }
+
+    void TickleEvent(){
+        StartCoroutine(TickleRoutine());
+    }
+
+    private IEnumerator TickleRoutine(){
+        yield return SpeakText("hehe that tickles!!", 1f);
+        yield return SpeakText("stopppp!!", 1f);
+    }
+
+    private IEnumerator BreakRoutine(string name){
+        yield return SpeakText("YEEEOOOOW!", .5f);
+        yield return new WaitForSeconds(1.6f);
+        yield return SpeakText("Alright... well there goes my " + name + "...", 2f);
+        yield return new WaitForSeconds(1f);
+        yield return SpeakText("No no no don't worry about it! I'm sure you didn't mean it.", 2f);
+        yield return SpeakText("But do you mind calling my primary care doc?", 2f);
+        yield return SpeakText("Number's on the fridge.", 1f);
+        yield return new WaitForSeconds(1f);
+        //yield return SpeakText(".", 2f);
     }
 
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
@@ -162,6 +186,7 @@ public class SpeechController : MonoBehaviour
             float journey = 0;
             int amountofwords = text.Length;
             AnimateTMPElement textAnimator = bubble.GetComponentInChildren<AnimateTMPElement>();
+            Debug.Log(text);
             textAnimator.SetOriginalText(text);
             float speakTime = 0;
             while(journey < value){
@@ -199,6 +224,9 @@ public class SpeechController : MonoBehaviour
             }
             mouth.UpdateSingleShaderFloat("_MouthOpen", mouthRadius);
             mouth.UpdateRenderPropBlock();
+            yield return new WaitForSeconds(1f);
+            
+            
             Destroy(bubble);
         }else{
            // Debug.Log("mouth is too small");

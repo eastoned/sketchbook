@@ -68,7 +68,7 @@ public class NuFaceManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        writeableData[0].RandomizeData(.25f);
+        writeableData[0].RandomizeData(.1f);
         pfc.SetCharacter(writeableData[0]);
         for(;;){
             //Debug.Log("loop time");

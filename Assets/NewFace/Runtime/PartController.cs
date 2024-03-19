@@ -134,16 +134,19 @@ public class PartController : MonoBehaviour
         if(ptc != null){
             Destroy(ptc);
         }
-        if(detached){
-            rb2D.Sleep();
-            rb2D.bodyType = RigidbodyType2D.Dynamic;
 
+        if(detached){
             if(overAttachmentNode){
                 //transform.position = new Vector3(attachPosition.x, attachPosition.y, transform.position.z);
                 UpdateAttachmentStatus(false, parent);
-                
+            }else{
+                Debug.Log("drop item");
+                rb2D.Sleep();
+                rb2D.WakeUp();
+                rb2D.bodyType = RigidbodyType2D.Dynamic;   
             }
         }
+
         currentPAD.timeToChange = Time.time - timeCache;
         currentPAD.brokePart = detached;
         currentPAD.positionChange = transform.position - positionCache;

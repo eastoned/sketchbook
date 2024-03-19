@@ -254,9 +254,8 @@ SubShader {
 			half4 faceColor = _FaceColor;
 			half4 outlineColor = _OutlineColor;
 
-			faceColor.rgb = float3(1,1,1);//.vPosition.xyz;
-			faceColor.a = saturate(input.color.g + _CharacterVisibility);
-			//faceColor.a *= input.color.r;
+			faceColor.rgb *= input.color.rgb;
+			faceColor.a *= input.color.a;
 			
 			faceColor *= tex2D(_FaceTex, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y);
 			outlineColor *= tex2D(_OutlineTex, input.textures.zw + float2(_OutlineUVSpeedX, _OutlineUVSpeedY) * _Time.y);

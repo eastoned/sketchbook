@@ -14,3 +14,8 @@ public class OnBreakPart : UnityEvent<PlayerActionData>
 {
     public static OnBreakPart Instance = new OnBreakPart();
 }
+
+public class OnTickleEvent : UnityEvent
+{
+    public static OnTickleEvent Instance = new OnTickleEvent();
+}

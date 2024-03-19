@@ -938,7 +938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &125961749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6654,7 +6654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &852867969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8749,7 +8749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -20.810028}
+  m_AnchoredPosition: {x: 125, y: -20.810059}
   m_SizeDelta: {x: 250, y: 41.620056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1133054761
@@ -9075,9 +9075,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1288925966}
-  - {fileID: 1046939496}
   - {fileID: 1519914564}
+  - {fileID: 1288925966}
+  - {fileID: 852867969}
+  - {fileID: 125961749}
+  - {fileID: 1046939496}
   - {fileID: 1091496513}
   - {fileID: 1312392027}
   - {fileID: 8099176331921006978}
@@ -9085,8 +9087,6 @@ RectTransform:
   - {fileID: 642273189}
   - {fileID: 378029130}
   - {fileID: 573808647}
-  - {fileID: 852867969}
-  - {fileID: 125961749}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10027,7 +10027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1288925966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11383,7 +11383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1519914564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14419,6 +14419,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1190886370}
     m_Modifications:
+    - target: {fileID: 2600271877904723533, guid: eb1498493e3e0e140b46cdaac96a2c65,
+        type: 3}
+      propertyPath: textOriginal
+      value: Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight
+        me. Fight me. Fight m
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600271877904723533, guid: eb1498493e3e0e140b46cdaac96a2c65,
+        type: 3}
+      propertyPath: currentCharacter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600271877904723533, guid: eb1498493e3e0e140b46cdaac96a2c65,
+        type: 3}
+      propertyPath: characterVisibility
+      value: 0.333
+      objectReference: {fileID: 0}
     - target: {fileID: 5391851005333956622, guid: eb1498493e3e0e140b46cdaac96a2c65,
         type: 3}
       propertyPath: m_Name
@@ -14528,6 +14544,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391851005508244354, guid: eb1498493e3e0e140b46cdaac96a2c65,
+        type: 3}
+      propertyPath: m_text
+      value: Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight
+        me. Fight me. Fight me. Fight me. Fight me. Fight m
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
