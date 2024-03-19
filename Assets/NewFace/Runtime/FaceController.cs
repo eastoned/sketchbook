@@ -35,7 +35,6 @@ public class FaceController : MonoBehaviour
     public bool currentlyBlending = false;
 
     private Coroutine blending;
-    //need a list of face states
 
     [Range(0f, 1f)]
     public float blinkAmount;

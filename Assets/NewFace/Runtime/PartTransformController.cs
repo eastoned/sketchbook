@@ -22,9 +22,7 @@ public class PartTransformController : MonoBehaviour
     public Vector3 offset;
     public bool currentlyHeld = false;
 
-    public bool gravity;
-    public Vector3 velocity;
-    public Collider2D mouth;
+    public PartController partInEdit;
 
     void Start(){
         if(icon != null){
@@ -40,10 +38,6 @@ public class PartTransformController : MonoBehaviour
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.localPosition - mouseDelta2;
         currentlyHeld = true;
-        if(controls == TransformController.NOTHING){
-            gravity = false;
-            velocity = Vector3.zero;
-        }
     }
 
     void OnMouseDrag(){
@@ -75,8 +69,29 @@ public class PartTransformController : MonoBehaviour
         currentlyHeld = false;
         //OnConfirmTransformPart.Instance.Invoke();
     }
-/*
+
+    public void Disappear(){
+        transform.localPosition = new Vector3(100, 100, 100);
+    }
+
     void Update(){
+
+        if(partInEdit != null){
+                switch(controls){
+                    case TransformController.ROTATION:
+                    transform.localPosition = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
+                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                    transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                break;
+                case TransformController.SCALE:
+                    transform.localPosition = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0));
+                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                    transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                break;
+            }
+        }
+
+        /*
         if(gravity){
             transform.localPosition += velocity * Time.deltaTime;
             velocity -= new Vector3(0, .1f, 0);
@@ -93,11 +108,11 @@ public class PartTransformController : MonoBehaviour
             }else{
                 //Debug.Log("Not Eating");
             }
-        }
+        }*/
         
     }
 
-
+/*
     void OnMouseUp(){
         currentlyHeld = false;
         //OnConfirmTransformPart.Instance.Invoke();

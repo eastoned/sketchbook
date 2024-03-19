@@ -124,8 +124,6 @@ public class PartController : MonoBehaviour
         
         SetCache(pd);
     }
-    void OnValidate(){
-    }
 
     void OnMouseUp()
     {

@@ -57,26 +57,29 @@ public class NuFaceManager : MonoBehaviour
         
         float eyeRadius = eye.GetSingleShaderFloat("_PupilRadius");
         float eyeOpen = eye.GetSingleShaderFloat("_EyelidBottomOpen") + eye.GetSingleShaderFloat("_EyelidTopOpen");
-        if(eyeRadius > 0.05f && eyeOpen > 0.05f){
+        //if broke then will always remember
+        if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
+           playerActionHistory.Add(pad); 
+        }else if(eyeRadius > 0.05f && eyeOpen > 0.05f){
+            // but doesn't remember if can't see
             playerActionHistory.Add(pad);
         }
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        writeableData[0].RandomizeData(0f);
+        writeableData[0].RandomizeData(.25f);
         pfc.SetCharacter(writeableData[0]);
-        if(isGame){
-            targetData[0].RandomizeData(.1f);
-            stageThresholds = new int[9];
-            int scoreCount = 0;
-            for(int i = 0; i < stageThresholds.Length; i++){
-                scoreCount += 3;
-                scoreCount += pfc.bodyData[i].shaderProperties.Count;
-                stageThresholds[i] = scoreCount;
+        for(;;){
+            //Debug.Log("loop time");
+            if(playerActionHistory.Exists(x => x.actionType == PlayerActionData.ActionType.BREAKCHANGE)){
+                //make sad
+             //   Debug.Log("Time to be sad");
+            }else{
+             //   Debug.Log("Time to be happy");
             }
-
-            AffectStageCount(1);
+            
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -254,18 +257,18 @@ public class NuFaceManager : MonoBehaviour
     public void RandomizePlayer(){
 
        // if(Random.Range(0f, 1f) < 0.5f){
-        targetData[1].RandomizeData(Random.Range(0f, .5f));
+        targetData[0].RandomizeData(Random.Range(0f, .5f));
         //crunch.Play();
-        writeableData[1].CopyData(pfc.currentChar);
-        pfc.BlendCharacter(writeableData[1], targetData[1], 2f);
-        string targetURL = "http://unity3d.com/";
-        if(Random.Range(0f, 1f) < .5f){
-            targetURL = "https://twitter.com/home";
-        }else{
-            targetURL = "https://www.instagram.com/";
-        }
+        writeableData[0].CopyData(pfc.currentChar);
+        pfc.BlendCharacter(writeableData[0], targetData[0], 2f);
+        ///string targetURL = "http://unity3d.com/";
+        //if(Random.Range(0f, 1f) < .5f){
+        //    targetURL = "https://twitter.com/home";
+        //}else{
+          //  targetURL = "https://www.instagram.com/";
+        //}
         //Application.OpenURL(targetURL);
-        canShareFeedback = true;
+        //canShareFeedback = true;
         //if(crunch.isPlaying){
             //crunch.Stop();
         //}

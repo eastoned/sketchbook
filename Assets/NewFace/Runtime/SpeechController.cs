@@ -137,12 +137,12 @@ public class SpeechController : MonoBehaviour
     }
 
     private IEnumerator Speak(string text, float value){
-        Debug.Log("Starting the speak routine");
+       /// Debug.Log("Starting the speak routine");
         mouthRadius = mouth.GetSingleShaderFloat("_MouthOpen");
         float mouthOpen = mouth.GetSingleShaderFloat("_MouthRadius"); 
         
         if(mouthRadius>0.05f && mouthOpen > 0.05f){
-            Debug.Log("mouth is big enought");
+            //Debug.Log("mouth is big enought");
             GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
             bubble.transform.localScale = Vector3.zero;
             
@@ -201,7 +201,7 @@ public class SpeechController : MonoBehaviour
             mouth.UpdateRenderPropBlock();
             Destroy(bubble);
         }else{
-            Debug.Log("mouth is too small");
+           // Debug.Log("mouth is too small");
         }
         
     }

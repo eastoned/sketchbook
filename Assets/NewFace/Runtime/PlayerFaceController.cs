@@ -5,27 +5,24 @@ using UnityEngine;
 
 public class PlayerFaceController : FaceController
 {
+
     public Transform hoveredTransform;
+    
     public PartController currentPC;
     public Transform currentTransform;
 
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
-    public GameObject node;
-
     public PartTransformController rotationController, scaleController;
 
     public PartController currentHovered;
     [SerializeField] private Material colliderMaterial;
 
     public float currentChange = 0f;
-    public bool notInteracting = false;
-
     public SpeechController sc;
     private MaterialPropertyBlock block;
     public Renderer tear1, tear2;
-    public List<GameObject> availableNodes;
     public ParticleSystem blood;
     public PartController hoveredParent;
     public override void OnEnable()
@@ -35,7 +32,6 @@ public class PlayerFaceController : FaceController
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnSetTransformCacheEvent.Instance.AddListener(SetTransformCache);
         OnDeselectedFacePartEvent.Instance.AddListener(RemoveMaterialOutlineFromPreviousHover);
-        OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
@@ -50,7 +46,6 @@ public class PlayerFaceController : FaceController
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnSetTransformCacheEvent.Instance.RemoveListener(SetTransformCache);
         OnDeselectedFacePartEvent.Instance.RemoveListener(RemoveMaterialOutlineFromPreviousHover);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
@@ -65,45 +60,6 @@ public class PlayerFaceController : FaceController
                 hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
                 hoveredTransform = hoveredTarget;
             }
-        }
-    }
-
-    public void StartCrying(){
-        mouth.UpdateSingleShaderFloat("_MouthBend", 1f);
-        block.SetFloat("_Radius", 1f);
-        tear1.SetPropertyBlock(block);
-        tear2.SetPropertyBlock(block);
-        mouth.UpdateRenderPropBlock();
-        ShakeAll();
-    }
-
-    public void StopCrying(){
-        mouth.UpdateSingleShaderFloat("_MouthBend", 0f);
-        block.SetFloat("_Radius", .3f);
-        tear1.SetPropertyBlock(block);
-        tear2.SetPropertyBlock(block);
-        mouth.UpdateRenderPropBlock();
-    }
-
-    public void ShakeAll(){
-        leftEye.ShakeTest();
-        rightEye.ShakeTest();
-        mouth.ShakeTest();
-        nose.ShakeTest();
-        head.ShakeTest();
-        leftEyebrow.ShakeTest();
-        rightEyebrow.ShakeTest();
-        bangs.ShakeTest();
-        hair.ShakeTest();
-        neck.ShakeTest();
-        leftEar.ShakeTest();
-        rightEar.ShakeTest();
-    }
-
-    private void Comment(){
-        Debug.Log("Beeing comment");
-        if(NuFaceManager.canShareFeedback){
-
         }
     }
 
@@ -123,12 +79,6 @@ public class PlayerFaceController : FaceController
         }
     }
 
-    private void DisappearControllers(){
-        rotationController.transform.localPosition = new Vector3(100, 100, 100);
-        scaleController.transform.localPosition = new Vector3(100, 100, 100);
-        //scaleController.transform.SetParent(null);
-    }
-
     private void SetTransformCache(){
         if(currentPC != null){
             if(currentPC.translatable){
@@ -144,35 +94,30 @@ public class PlayerFaceController : FaceController
     }
 
     private void SetTransformControllers(Transform selectedTarget){
+
         currentPC = selectedTarget.GetComponent<PartController>();
-        //Debug.Log("Set the transform controllers on object");
+        Debug.Log("Set the transform controllers on: " + selectedTarget);
         if(currentTransform != selectedTarget){
             currentTransform = selectedTarget;
-        
             cube.position = currentTransform.position;
         }
-        
-        DisappearControllers(); 
 
         if(currentPC.rotatable){
-            rotationController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0, 0));
-            rotationController.transform.localPosition = new Vector3(rotationController.transform.localPosition.x, rotationController.transform.localPosition.y, -1f);
-            rotationController.transform.localScale = Vector3.one * currentTransform.localScale.y * 0.25f;
+            rotationController.partInEdit = currentPC;
+        }else{
+            rotationController.partInEdit = null;
+            rotationController.Disappear();
         }
             
         if(currentPC.scalable){
-            scaleController.transform.localPosition = selectedTarget.TransformPoint(new Vector3(0.5f, 0.5f, 0));
-            scaleController.transform.localPosition = new Vector3(scaleController.transform.localPosition.x, scaleController.transform.localPosition.y, -1f);
-            scaleController.transform.localScale = Vector3.one * currentTransform.localScale.y * 0.25f;
+            scaleController.partInEdit = currentPC;
+        }else{
+            scaleController.partInEdit = null;
+            scaleController.Disappear();
         }
-
-        //if(NuFaceManager.couldBeShared){
-        //    sc.SpeakEvent("Did you already share that photo of me?");
-        //}
     }
 
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
-        pc.parentController = null;
         pc.UpdateAttachmentStatus(status, hoveredParent);
         Instantiate(blood, pc.transform.position, Quaternion.identity);
     }
@@ -204,13 +149,6 @@ public class PlayerFaceController : FaceController
                 
                 if(absPos.magnitude > 1.2f){
                     UpdatePartAttachmentStatus(currentPC, true);
-                    //if(currentPC.childControllers.Count > 0){
-                        //foreach(PartController pc in currentPC.childControllers){
-                        //    UpdatePartAttachmentStatus(pc, true);
-                        //}//
-                    //}
-                    //currentPC.UpdateAttachmentStatus(true);
-                    //set empty node here
                 }
                     
             }
@@ -224,17 +162,12 @@ public class PlayerFaceController : FaceController
                         hoveredParent = bodyParts[i].GetComponent<PartController>();
                         currentPC.overAttachmentNode = true;
                         currentPC.parent = hoveredParent;
-                   //currentPC.attachPosition = availableNodes[i].transform.position;
-                        //currentPC.nodeToDelete = availableNodes[i];
                     }
                 }
             }
             //if position is on  node then we can attach to it
         }
-        
-        //Debug.Log(currentPC.pd.GetAbsolutePosition() - pos);
-
-        SetTransformControllers(currentTransform);
+    
     }
 
     private void SetPartScale(Vector3 pos){
@@ -265,7 +198,6 @@ public class PlayerFaceController : FaceController
                 currentTransform.localScale = currentPC.pd.GetFlippedClampedScale(diff);
             }
         }
-        SetTransformControllers(currentTransform);
     }
 
     private void SetPartRotation(Vector3 pos){
@@ -273,26 +205,17 @@ public class PlayerFaceController : FaceController
         pos -= transform.localPosition;
 
         float angle = Mathf.Atan2(pos.y - currentTransform.localPosition.y, pos.x - currentTransform.localPosition.x) * Mathf.Rad2Deg;
-
-        if(angle < currentPC.pd.currentAngle){
-            //Debug.Log("The new angle is less than the current angle");
-        }else if (angle > currentPC.pd.currentAngle){
-          //  Debug.Log("The new angle is greater than the current angle");
-        }
-
         currentChange = Mathf.Abs(angleCache - currentPC.pd.currentAngle)/180f;
-        //Debug.Log("The current angle diff: " + currentChange);
-        //Debug.Log("Angle change: " + currentChange);
-
         currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
-        
+
         if(currentPC.mirroredPart != null){
             if(!currentPC.mirroredPart.detached)
                 currentPC.mirroredPart.UpdateAllTransformValues();
         }
-        
-        SetTransformControllers(currentTransform);
-        
+    }
+
+    public void SetExpression(){
+
     }
 
 }

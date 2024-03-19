@@ -5,7 +5,11 @@ public class HeadData : PartData
 {
      public override Vector2 GetColliderSize()
     {
-        return new Vector2(1f, Mathf.Lerp(1f, .5f, shadePropertyDict["_ChinScale"].propertyValue/2f + shadePropertyDict["_ForeheadScale"].propertyValue/2f));
+        if(shadePropertyDict.Count > 0){
+            return new Vector2(1f, Mathf.Lerp(1f, .5f, shadePropertyDict["_ChinScale"].propertyValue/2f + shadePropertyDict["_ForeheadScale"].propertyValue/2f));
+        }else{
+            return Vector2.one;
+        }
     }
 
     public override Vector2 GetColliderOffset()

@@ -109,21 +109,18 @@ public class PartData : ScriptableObject
 
 
     public virtual void SetScaleBounds(PartData pd){
-        Debug.Log(this.name + " has new scale factors");
-        //maxScaleX = pd.GetAbsoluteScale().x/2f;
-        //maxScaleY = pd.GetAbsoluteScale().y/2f;
     }
 
     public virtual void SetScaleBounds(){
         
     }
 
-    public virtual void SetPositionBounds(PartData pd){
+    public virtual void SetPositionBounds(PartData parentBounds){
 
     }
 
     public virtual void SetPositionBounds(){
-
+        
     }
 
     public virtual Vector2 GetColliderSize(){

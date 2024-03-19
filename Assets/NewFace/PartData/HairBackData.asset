@@ -17,51 +17,56 @@ MonoBehaviour:
   relativePosition: {x: 0, y: 0.5, z: 0.3}
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.5694444
-  maxPosY: 0.6805556
-  minAngle: 0
-  maxAngle: 360
-  currentAngle: 180
+  minPosY: -1.4708333
+  maxPosY: 0.40416664
+  minAngle: -180
+  maxAngle: 180
+  currentAngle: 0
   absoluteScale: {x: 1.75, y: 2, z: 1}
   relativeScale: {x: 0.5, y: 0.5, z: 1}
   minScaleX: 1
-  maxScaleX: 3.25
+  maxScaleX: 2.1
   minScaleY: 1
-  maxScaleY: 4.5
+  maxScaleY: 3.75
   shaderProperties:
   - propertyName: _BangRoundness
     propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandCount
     propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _StrandOffset
     propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairBangScale
     propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   - propertyName: _HairRoundness
     propertyValue: 0.5
     wholeNumberInterval: 0
     valueInterval: 0
+    affectedFeature: 0
     IncreaseValueRemarks: []
     DecreaseValueRemarks: []
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.9365195, g: 0.9793543, b: 0.9984927, a: 1}
+    colorValue: {r: 0.5246211, g: 0.72571814, b: 0.5955806, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.040507555, g: 0.015149558, b: 0.019721624, a: 1}
+    colorValue: {r: 0.40689504, g: 0.4924429, b: 0.39538223, a: 1}
   affectedPartData: []
