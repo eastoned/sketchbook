@@ -149,12 +149,7 @@ public class PartController : MonoBehaviour
         currentPAD.timeToChange = Time.time - timeCache;
         currentPAD.brokePart = detached;
         currentPAD.positionChange = transform.position - positionCache;
-        //currentPAD.scaleChange = transform.localScale - scaleCache;
-        //currentPAD.angleChange = transform.localEulerAngles.z - angleCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
-        //PlayerActionData doingNothingAction = new PlayerActionData(pd, PlayerActionData.ActionType.NOTHINGCHANGE);
-        //doingNothingAction.timeToChange
-        //OnConfirmTransformPart.Instance.Invoke();
     }
 
     public void UpdateAllTransformValues()
