@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -118,7 +119,7 @@ public class PlayerFaceController : FaceController
     }
 
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
-        pc.UpdateAttachmentStatus(status, hoveredParent);
+        pc.UpdateAttachmentStatus(status);
         //Instantiate(blood, pc.transform.position, Quaternion.identity);
     }
 
@@ -154,25 +155,29 @@ public class PlayerFaceController : FaceController
                 
                 if(absPos.magnitude > 1.2f){
                     UpdatePartAttachmentStatus(currentPC, true);
+                    for(int i = 0; i < bodyParts.Length; i++){
+                        if(bodyParts[i].GetComponent<PartController>().childControllers.Contains(currentPC)){
+                            bodyParts[i].GetComponent<PartController>().childControllers.Remove(currentPC);
+                        }
+                    }
                 }
                     
             }
         }else{
             currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
             currentPC.overAttachmentNode = false;
-            currentPC.parent = null;
             for(int i = 0; i < bodyParts.Length; i++){
-                if(currentTransform != bodyParts[i]){
-                    if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentTransform.position)){
-                        hoveredParent = bodyParts[i].GetComponent<PartController>();
+                if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentTransform.position)){
+                    if(currentTransform != bodyParts[i]){
+                        if(!bodyParts[i].GetComponent<PartController>().childControllers.Contains(currentPC))
+                            bodyParts[i].GetComponent<PartController>().childControllers.Add(currentPC);
+                        
                         currentPC.overAttachmentNode = true;
-                        currentPC.parent = hoveredParent;
                     }
                 }
             }
-            //if position is on  node then we can attach to it
         }
-    
+            //if position is on  node then we can attach to it
     }
 
     private void SetPartScale(Vector3 pos){

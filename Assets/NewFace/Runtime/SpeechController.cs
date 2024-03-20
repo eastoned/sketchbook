@@ -19,7 +19,7 @@ public class SpeechController : MonoBehaviour
 
     public float upperLip, lowerLip, mouthRadius;
 
-    private Coroutine SpeakingRoutine;
+    private IEnumerator speakingRoutine;
 
     public static float timeSinceLastRemark;
 
@@ -115,28 +115,28 @@ public class SpeechController : MonoBehaviour
 
     void PartMention(Transform part){
         if(!NuFaceManager.canShareFeedback){
-        if(SpeakingRoutine != null){
+        //if(SpeakingRoutine != null){
             //StopCoroutine(SpeakingRoutine);
-        }
+        //}
         string plural = "it";
         if(part.name[part.name.Length-1].Equals(char.Parse("s"))){
             plural = "them";
         }
 
-        SpeakingRoutine = StartCoroutine(Speak("You have selected my " + part.name + ".<br>Please make " + plural + " beautiful.", 2f));
+        //SpeakingRoutine = StartCoroutine(Speak("You have selected my " + part.name + ".<br>Please make " + plural + " beautiful.", 2f));
         }
     }
 
     void MouthSpeech(float value){
         
-        if(SpeakingRoutine != null){
+        //if(SpeakingRoutine != null){
             //StopCoroutine(SpeakingRoutine);
-        }
+        //}
 
         if(value > 0){
-            SpeakingRoutine = StartCoroutine(Speak("I can be quieter if you want.", 8f));
+           // SpeakingRoutine = StartCoroutine(Speak("I can be quieter if you want.", 8f));
         }else{
-            SpeakingRoutine = StartCoroutine(Speak("Do you want me to speak up?", 6f));
+           // SpeakingRoutine = StartCoroutine(Speak("Do you want me to speak up?", 6f));
         }
         
     }
@@ -156,8 +156,11 @@ public class SpeechController : MonoBehaviour
     }
 
     public IEnumerator SpeakText(string text, float animLength){
-        Debug.Log("returning speak ienumer");
-        return Speak(text, animLength);
+        if(speakingRoutine != null){
+            StopCoroutine(speakingRoutine);
+        }
+        speakingRoutine = Speak(text, animLength);
+        return speakingRoutine;
     }
 
     private IEnumerator Speak(string text, float value){

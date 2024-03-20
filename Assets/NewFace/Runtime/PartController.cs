@@ -24,7 +24,6 @@ public class PartController : MonoBehaviour
     public bool overAttachmentNode = false;
 
     public List<PartController> childControllers = new List<PartController>();
-    public PartController parentController;
     public PartController mirroredPart; 
 
     MaterialPropertyBlock propBlock;
@@ -38,7 +37,6 @@ public class PartController : MonoBehaviour
     Vector3 positionCache, scaleCache;
     float angleCache;
     Coroutine shakeRotate;
-    public PartController parent;
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
@@ -137,8 +135,7 @@ public class PartController : MonoBehaviour
 
         if(detached){
             if(overAttachmentNode){
-                //transform.position = new Vector3(attachPosition.x, attachPosition.y, transform.position.z);
-                UpdateAttachmentStatus(false, parent);
+                UpdateAttachmentStatus(false);
             }else{
                 Debug.Log("drop item");
                 rb2D.Sleep();
@@ -275,20 +272,11 @@ public class PartController : MonoBehaviour
         transform.localScale = cacheScale;
     }
 
-    public void UpdateAttachmentStatus(bool detach, PartController parent)
+    public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
-        parentController = parent; 
-        if(parentController != null){
-            if(!parentController.childControllers.Contains(this))
-                parentController.childControllers.Add(this);
-        }
 
         if(detached){
-            if(parentController != null){
-                if(!parentController.childControllers.Contains(this))
-                    parentController.childControllers.Remove(this);
-            }
             PlayerActionData padBreak = new PlayerActionData(pd, CharacterActionData.ActionType.BREAKCHANGE);
             OnBreakPart.Instance.Invoke(padBreak);
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
