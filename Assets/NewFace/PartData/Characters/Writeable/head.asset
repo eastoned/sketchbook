@@ -12,49 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca376c0bee84f4aae70eea1a62143c, type: 3}
   m_Name: head
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: 0, z: 0.1}
-  relativePosition: {x: 0, y: 0, z: 0.1}
+  partName: 
+  relativeToParentPosition: {x: 0, y: 0}
+  absoluteWorldPositionZ: 0
   minPosX: 0
   maxPosX: 0
   minPosY: 0
   maxPosY: 0
   minAngle: 0
   maxAngle: 0
-  currentAngle: 0
-  absoluteScale: {x: 2.0625, y: 3.375, z: 1}
-  relativeScale: {x: 0.75, y: 0.75, z: 1}
+  relativeToParentAngle: 0
+  relativeToParentScale: {x: 0.5200225, y: 0.5702434}
   minScaleX: 0.75
-  maxScaleX: 2.5
+  maxScaleX: 3
   minScaleY: 0.75
   maxScaleY: 4
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0.5769054
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.41249546
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 0
   - propertyName: _ForeheadWidth
-    propertyValue: 0.30127543
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.5910306
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 0
   - propertyName: _ForeheadLength
-    propertyValue: 0.8089483
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.5120735
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 0
   - propertyName: _ChinScale
-    propertyValue: 0.11363423
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.4402739
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 0
   - propertyName: _ChinWidth
-    propertyValue: 0.70368755
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.5576135
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 0
   - propertyName: _ChinLength
-    propertyValue: 0.07588518
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.46220282
+    wholeNumberInterval: 0
+    valueInterval: 0
+    affectedFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.87129354, g: 0.9603028, b: 0.77628046, a: 1}
+    colorValue: {r: 0.054602504, g: 0.015537745, b: 0.016844131, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.018189626, g: 0.01831716, b: 0.021720886, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.057658356, g: 0.049212947, b: 0.12074053, a: 1}

@@ -10,6 +10,7 @@ public class PartData : ScriptableObject
     public void CopyData(PartData pd)
     {
         relativeToParentPosition = pd.relativeToParentPosition;
+        relativeToParentAngle = pd.relativeToParentAngle;
         //minPosX = pd.minPosX;
         //maxPosX = pd.maxPosX;
         //minPosY = pd.minPosY;

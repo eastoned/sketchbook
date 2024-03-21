@@ -17,10 +17,10 @@ public class CharacterData : ScriptableObject
 
     [ContextMenu("Random A Piece")]
     void RandomPiece(PartData part, float randomFactor){
-        part.relativeToParentAngle = Mathf.Lerp(part.minAngle, part.maxAngle, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor);
+        part.relativeToParentAngle = Mathf.Lerp(part.minAngle, part.maxAngle, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor));
 
         if(part == hairBackData || part == hairFrontData){
-            part.relativeToParentAngle = UnityEngine.Random.Range(0f, 1f) < 0.5f? 0 : part.maxAngle;
+            part.relativeToParentAngle = Mathf.Lerp(0, part.maxAngle, UnityEngine.Random.Range(0f, 1f));
         }
         
         if(part == noseData){
@@ -32,24 +32,24 @@ public class CharacterData : ScriptableObject
         }
 
         part.relativeToParentPosition = new Vector3(
-            Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
-            Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+            Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             part.absoluteWorldPositionZ);
             
         part.relativeToParentScale = new Vector3(
-            Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
-            Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor),
+            Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             1f);
 
         if(part == eyebrowData){
-            part.relativeToParentPosition = new Vector3(eyeData.relativeToParentPosition.x, eyeData.relativeToParentPosition.y + UnityEngine.Random.Range(.5f - randomFactor, .5f + randomFactor), part.absoluteWorldPositionZ);
+            part.minPosY = eyeData.relativeToParentPosition.y;
         }
         
         part.SetClampedPosition(part.relativeToParentPosition);
         part.SetRelativeScale(part.relativeToParentScale);
 
         foreach(ShaderProperty sp in part.shaderProperties){
-            float val = Random.Range(0f, 1f) < 0.5f? 0.5f - randomFactor : .5f + randomFactor;
+            float val = UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor);
             sp.SetValue(val);
         }
         

@@ -134,7 +134,7 @@ public class PlayerFaceController : FaceController
             currentChange = Vector2.Distance(currentPC.pd.relativeToParentPosition, positionCache);
             //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
             
-            if(currentPC.mirroredPart != null){
+            if(currentPC.mirroredPart != null && currentPC.canUpdateMirror){
                 if(!currentPC.mirroredPart.detached)
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }
@@ -151,6 +151,7 @@ public class PlayerFaceController : FaceController
                 
                 if(absPos.magnitude > 1.2f){
                     UpdatePartAttachmentStatus(currentPC, true);
+                    //currentPC.canUpdateMirror = false;
                     //remove this part from any parent if the magnitude is too high
                     for(int i = 0; i < bodyParts.Length; i++){
                         if(bodyParts[i].GetComponent<PartController>().childControllers.Contains(currentPC)){
@@ -199,9 +200,9 @@ public class PlayerFaceController : FaceController
             //Debug.Log("Scale change: " + currentChange);
             currentPC.UpdateAllTransformValues();
             
-            if(currentPC.mirroredPart != null){
-                //if(!currentPC.mirroredPart.detached)
-                    //currentPC.mirroredPart.UpdateAllTransformValues();
+            if(currentPC.mirroredPart != null && currentPC.canUpdateMirror){
+                if(!currentPC.mirroredPart.detached)
+                    currentPC.mirroredPart.UpdateAllTransformValues();
             }
             //currentPC.pd.SetPositionBounds();
         }else{

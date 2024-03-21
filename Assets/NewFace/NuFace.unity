@@ -715,9 +715,6 @@ MonoBehaviour:
   detached: 0
   childControllers:
   - {fileID: 311225759}
-  - {fileID: 244385092}
-  - {fileID: 838332028}
-  - {fileID: 610878721}
   - {fileID: 1792980034}
   - {fileID: 524532358}
   - {fileID: 1470558959}
@@ -725,6 +722,7 @@ MonoBehaviour:
   - {fileID: 1451965502}
   - {fileID: 99618909}
   mirroredPart: {fileID: 0}
+  canUpdateMirror: 0
   cachePosition: {x: 0, y: 0, z: 0.1}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -884,6 +882,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 1451965502}
+  canUpdateMirror: 1
   cachePosition: {x: 2, y: 0.038425446, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -1695,8 +1694,11 @@ MonoBehaviour:
   rb2D: {fileID: 244385093}
   flippedXAxis: 0
   detached: 0
-  childControllers: []
+  childControllers:
+  - {fileID: 610878721}
+  - {fileID: 838332028}
   mirroredPart: {fileID: 0}
+  canUpdateMirror: 0
   cachePosition: {x: 0, y: 0.75, z: 0.3}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -2166,6 +2168,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 0}
+  canUpdateMirror: 0
   cachePosition: {x: 0, y: 0.75, z: -0.1}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -4188,6 +4191,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 1792980034}
+  canUpdateMirror: 1
   cachePosition: {x: 2, y: 0.85, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -5097,6 +5101,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 838332028}
+  canUpdateMirror: 1
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -6589,6 +6594,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 610878721}
+  canUpdateMirror: 1
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -7195,7 +7201,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
   - {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
   - {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
-  eyeTarget: 0
+  eyeTarget: 2
   rotation: 0
   leftPupilX: 0
   leftPupilY: 0
@@ -9693,6 +9699,7 @@ MonoBehaviour:
   childControllers:
   - {fileID: 95416240}
   mirroredPart: {fileID: 0}
+  canUpdateMirror: 0
   cachePosition: {x: 0, y: -1, z: 0.2}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -9879,6 +9886,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 0}
+  canUpdateMirror: 0
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -10689,6 +10697,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 99618909}
+  canUpdateMirror: 1
   cachePosition: {x: -2, y: 0.038425446, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -11099,6 +11108,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 0}
+  canUpdateMirror: 0
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
@@ -12726,6 +12736,7 @@ MonoBehaviour:
   detached: 0
   childControllers: []
   mirroredPart: {fileID: 524532358}
+  canUpdateMirror: 1
   cachePosition: {x: -2, y: 0.85, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0

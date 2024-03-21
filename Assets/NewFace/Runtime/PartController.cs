@@ -21,7 +21,8 @@ public class PartController : MonoBehaviour
     public bool detached = false;
 
     public List<PartController> childControllers = new List<PartController>();
-    public PartController mirroredPart; 
+    public PartController mirroredPart;
+    public bool canUpdateMirror = false;
 
     MaterialPropertyBlock propBlock;
 
@@ -267,12 +268,19 @@ public class PartController : MonoBehaviour
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            Debug.Log("remove object from parent");
+            canUpdateMirror = false;
+            if(mirroredPart != null)
+                mirroredPart.canUpdateMirror = false;
+            //Debug.Log("remove object from parent");
         }else{
             if(!parent.childControllers.Contains(this)){
                 parent.childControllers.Add(this);
-                Debug.Log("add object to parent");
+                canUpdateMirror = parent.childControllers.Contains(mirroredPart);
+                if(mirroredPart != null)
+                    mirroredPart.canUpdateMirror = canUpdateMirror;
+                //Debug.Log("add object to parent");
             }
+            parent.UpdateAllTransformValues();
             
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;

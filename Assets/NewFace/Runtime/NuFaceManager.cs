@@ -260,7 +260,7 @@ public class NuFaceManager : MonoBehaviour
         targetData[0].RandomizeData(Random.Range(0f, .5f));
         //crunch.Play();
         writeableData[0].CopyData(pfc.currentChar);
-        pfc.BlendCharacter(writeableData[0], targetData[0], 2f);
+        pfc.BlendCharacter(writeableData[0], targetData[0], 1f);
         ///string targetURL = "http://unity3d.com/";
         //if(Random.Range(0f, 1f) < .5f){
         //    targetURL = "https://twitter.com/home";

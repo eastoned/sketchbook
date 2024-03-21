@@ -13,65 +13,53 @@ MonoBehaviour:
   m_Name: HeadData
   m_EditorClassIdentifier: 
   partName: head
-  absoluteWorldPosition: {x: 0, y: 0}
   relativeToParentPosition: {x: 0, y: 0}
   absoluteWorldPositionZ: 0.1
   minPosX: 0
   maxPosX: 0
-  minPosY: -0.47619045
-  maxPosY: 0.47619045
+  minPosY: -0.42743036
+  maxPosY: 0.42743036
   minAngle: 0
   maxAngle: 0
-  absoluteWorldAngle: 0
   relativeToParentAngle: 0
-  absoluteWorldScale: {x: 1.8000001, y: 2.7}
-  relativeToParentScale: {x: 0.6, y: 0.6}
-  minScaleX: 0.1
-  maxScaleX: 2
+  relativeToParentScale: {x: 0.5119823, y: 0.48909613}
+  minScaleX: 0.75
+  maxScaleX: 3
   minScaleY: 0.75
-  maxScaleY: 3
+  maxScaleY: 4
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0.6
+    propertyValue: 0.584497
     wholeNumberInterval: 0
     valueInterval: 0
     affectedFeature: 0
   - propertyName: _ForeheadWidth
-    propertyValue: 0.4
+    propertyValue: 0.565365
     wholeNumberInterval: 0
     valueInterval: 0
     affectedFeature: 0
   - propertyName: _ForeheadLength
-    propertyValue: 0.4
+    propertyValue: 0.43915108
     wholeNumberInterval: 0
     valueInterval: 0
     affectedFeature: 0
   - propertyName: _ChinScale
-    propertyValue: 0.6
+    propertyValue: 0.4431506
     wholeNumberInterval: 0
     valueInterval: 0
     affectedFeature: 0
   - propertyName: _ChinWidth
-    propertyValue: 0.4
+    propertyValue: 0.46986577
     wholeNumberInterval: 0
     valueInterval: 0
     affectedFeature: 0
   - propertyName: _ChinLength
-    propertyValue: 0.4
+    propertyValue: 0.52516884
     wholeNumberInterval: 0
     valueInterval: 0
     affectedFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.086498484, g: 0.6830088, b: 0.57192314, a: 1}
+    colorValue: {r: 0.1862121, g: 0.4917698, b: 0.83950996, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.0911069, g: 0.085769355, b: 0.13483953, a: 1}
-  affectedPartData:
-  - {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
-  - {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
-  - {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
-  - {fileID: 11400000, guid: 088f17da964ed4b49ac4bc1566ce15cb, type: 2}
-  - {fileID: 11400000, guid: 684fb974399e64049b4045c0ce09853a, type: 2}
-  - {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
-  - {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
-  - {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+    colorValue: {r: 0.057078123, g: 0.060246587, b: 0.054402042, a: 1}

@@ -11,7 +11,8 @@ public class FaceController : MonoBehaviour
     public PartData[] bodyData;
     public enum EyeTarget{
         MOUSE,
-        PART
+        PART,
+        BLANK
     }
     public EyeTarget eyeTarget;
 
@@ -249,25 +250,40 @@ public class FaceController : MonoBehaviour
     void Update()
     {
 
+        float rightX = 0f;
+        float leftX = 0f;
+        float rightY = 0f;
+        float leftY = 0f;
         //mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         switch(eyeTarget){
             case EyeTarget.MOUSE:
             eyeLookAtPos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            rightX = rightEye.transform.position.x - (eyeLookAtPos.x - transform.position.x);
+            rightY = rightEye.transform.position.y - (eyeLookAtPos.y - transform.position.y);
+            leftX = (eyeLookAtPos.x - transform.position.x) - leftEye.transform.position.x;
+            leftY = leftEye.transform.position.y - (eyeLookAtPos.y - transform.position.y);
+
             break;
             case EyeTarget.PART:
-            eyeLookAtPos = new Vector2(0, 0);
+            
+            //eyeLookAtPos = new Vector2(0, 0);
+            break;
+            case EyeTarget.BLANK:
+            rightX = 0.5f;
+            leftX = 0.5f;
+            rightY = 0.5f;
+            leftY = 0.5f;
+            //eyeLookAtPos = new Vector2();
             break;
         }
-        Shader.SetGlobalVector("_MousePos", eyeLookAtPos);
+        //Shader.SetGlobalVector("_MousePos", eyeLookAtPos);
         //position of mouse relative to right eye position
-        float rightX = rightEye.transform.position.x - (eyeLookAtPos.x - transform.position.x);
-        float rightY = rightEye.transform.position.y - (eyeLookAtPos.y - transform.position.y);
+        
         
         //Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
-        float leftX = (eyeLookAtPos.x - transform.position.x) - leftEye.transform.position.x;
-        float leftY = leftEye.transform.position.y - (eyeLookAtPos.y - transform.position.y);
+        
 
         rightX = Mathf.Clamp(rightX/5f, -.5f, .5f);
         leftX = Mathf.Clamp(leftX/5f, -.5f, .5f);
