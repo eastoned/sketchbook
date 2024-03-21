@@ -14,11 +14,6 @@ public class EyeData : PartData{
         maxPosY = parentData.GetAbsolutePosition().y + parentData.GetColliderSize().y/2f;
     }
 
-    public override void SetPositionBounds(){
-        //Debug.Log("Setting eye lowest position without parent");
-        minPosX = GetAbsoluteScale().x/2f;
-    }
-
     public override void SetScaleBounds(PartData parentData)
     {
         maxScaleX = parentData.GetAbsoluteScale().x/2f;

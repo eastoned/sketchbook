@@ -27,9 +27,9 @@ public class RequestChange{
     public bool successIfAnyConditionMet = false;
 
     public void SetCache(PartData pd){
-        initialPosition = new Vector2(pd.absolutePosition.x, pd.absolutePosition.y);
-        initialScale = new Vector2(pd.absoluteScale.x, pd.absoluteScale.y);
-        initialAngle = pd.currentAngle;
+        //initialPosition = new Vector2(pd.absoluteWorldPosition.x, pd.absoluteWorldPosition.y);
+        //iitialScale = new Vector2(pd.absoluteWorldScale.x, pd.absoluteWorldScale.y);
+        //initialAngle = pd.absoluteWorldAngle;
         shaderPropertyCache = new ShaderCache[shaderRequests.Count];
         for(int i = 0; i < shaderRequests.Count; i++){
             shaderPropertyCache[i] = new ShaderCache(shaderRequests[i].shaderVariable, pd.shaderProperties[shaderRequests[i].shaderVariable].propertyValue);
@@ -95,12 +95,12 @@ public class RequestChange{
         bool yConditionFulfilled = false;
         if(!positionDelta.x.Equals(0f)){
             if(positionDelta.x > 0f){
-                if(partToChange.pd.absolutePosition.x - initialPosition.x >= positionDelta.x){
+                if(partToChange.pd.relativeToParentPosition.x - initialPosition.x >= positionDelta.x){
                     Debug.Log("X Condition is fulfilled");
                     xConditionFulfilled = true;
                 }
             }else{
-                if(partToChange.pd.absolutePosition.x - initialPosition.x <= positionDelta.x){
+                if(partToChange.pd.relativeToParentPosition.x - initialPosition.x <= positionDelta.x){
                     Debug.Log("X Condition is fulfilled");
                     xConditionFulfilled = true;
                 }
@@ -111,12 +111,12 @@ public class RequestChange{
 
         if(!positionDelta.y.Equals(0f)){
             if(positionDelta.y > 0f){
-                if(partToChange.pd.absolutePosition.y - initialPosition.y >= positionDelta.y){
+                if(partToChange.pd.relativeToParentPosition.y - initialPosition.y >= positionDelta.y){
                     Debug.Log("Y Condition is fulfilled");
                     yConditionFulfilled = true;
                 }
             }else{
-                if(partToChange.pd.absolutePosition.y - initialPosition.y <= positionDelta.y){
+                if(partToChange.pd.relativeToParentPosition.y - initialPosition.y <= positionDelta.y){
                     Debug.Log("Y Condition is fulfilled");
                     yConditionFulfilled = true;
                 }

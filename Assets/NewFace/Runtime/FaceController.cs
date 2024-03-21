@@ -141,11 +141,11 @@ public class FaceController : MonoBehaviour
 
     public void BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){
         
-        partData.absolutePosition = Vector3.Lerp(blendFrom.absolutePosition, blendTo.absolutePosition, val);
-        partData.relativePosition = Vector3.Lerp(blendFrom.relativePosition, blendTo.relativePosition, val);
-        partData.currentAngle = Mathf.Lerp(blendFrom.currentAngle, blendTo.currentAngle, val);
-        partData.absoluteScale = Vector3.Lerp(blendFrom.absoluteScale, blendTo.absoluteScale, val);
-        partData.relativeScale = Vector3.Lerp(blendFrom.relativeScale, blendTo.relativeScale, val);
+        //partData.absoluteWorldPosition = Vector3.Lerp(blendFrom.absoluteWorldPosition, blendTo.absoluteWorldPosition, val);
+        partData.relativeToParentPosition = Vector3.Lerp(blendFrom.relativeToParentPosition, blendTo.relativeToParentPosition, val);
+        partData.relativeToParentAngle = Mathf.Lerp(blendFrom.relativeToParentAngle, blendTo.relativeToParentAngle, val);
+        //partData.absoluteWorldScale = Vector3.Lerp(blendFrom.absoluteWorldScale, blendTo.absoluteWorldScale, val);
+        partData.relativeToParentScale = Vector3.Lerp(blendFrom.relativeToParentScale, blendTo.relativeToParentScale, val);
 
         for(int i = 0; i < partData.shaderProperties.Count; i++){
             partData.shaderProperties[i].SetValue(Mathf.Lerp(blendFrom.shaderProperties[i].propertyValue, blendTo.shaderProperties[i].propertyValue, val));
@@ -274,8 +274,8 @@ public class FaceController : MonoBehaviour
         rightY = Mathf.Clamp(rightY/5f, -.25f, .25f);
         leftY = Mathf.Clamp(leftY/5f, -.25f, .25f);
 
-        float rotatedRightX = (rightX*Mathf.Cos(-rightEye.pd.currentAngle)) - (rightY*Mathf.Sin(-rightEye.pd.currentAngle));
-        float rotatedRightY = (rightX*Mathf.Sin(-rightEye.pd.currentAngle)) + (rightY*Mathf.Cos(-rightEye.pd.currentAngle));
+        float rotatedRightX = (rightX*Mathf.Cos(-rightEye.pd.relativeToParentAngle)) - (rightY*Mathf.Sin(-rightEye.pd.relativeToParentAngle));
+        float rotatedRightY = (rightX*Mathf.Sin(-rightEye.pd.relativeToParentAngle)) + (rightY*Mathf.Cos(-rightEye.pd.relativeToParentAngle));
         
         //Vector2 rotatedLeft = Rotate2D(leftX, rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedLeft2 = Rotate2D(leftY, rightEye.pd.currentAngle * Mathf.Deg2Rad);

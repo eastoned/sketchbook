@@ -713,7 +713,6 @@ MonoBehaviour:
   rb2D: {fileID: 95416238}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers:
   - {fileID: 311225759}
   - {fileID: 244385092}
@@ -725,7 +724,6 @@ MonoBehaviour:
   - {fileID: 1272765003}
   - {fileID: 1451965502}
   - {fileID: 99618909}
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0, z: 0.1}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -884,9 +882,7 @@ MonoBehaviour:
   rb2D: {fileID: 99618911}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 1451965502}
   cachePosition: {x: 2, y: 0.038425446, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -1699,9 +1695,7 @@ MonoBehaviour:
   rb2D: {fileID: 244385093}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: 0.3}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -2170,9 +2164,7 @@ MonoBehaviour:
   rb2D: {fileID: 311225760}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: 0.75, z: -0.1}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -3139,7 +3131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &397872630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4194,9 +4186,7 @@ MonoBehaviour:
   rb2D: {fileID: 524532359}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 1792980034}
   cachePosition: {x: 2, y: 0.85, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -4632,7 +4622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -104.05014}
+  m_AnchoredPosition: {x: 125, y: -104.05005}
   m_SizeDelta: {x: 250, y: 41.620056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &590936251
@@ -5105,9 +5095,7 @@ MonoBehaviour:
   rb2D: {fileID: 610878722}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 838332028}
   cachePosition: {x: 2.5, y: -0.75, z: 0.15}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -6599,9 +6587,7 @@ MonoBehaviour:
   rb2D: {fileID: 838332029}
   flippedXAxis: 1
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 610878721}
   cachePosition: {x: -2.5, y: -0.75, z: 0.15}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -6654,7 +6640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &852867969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7188,7 +7174,6 @@ MonoBehaviour:
   rightEar: {fileID: 610878721}
   bodyParts:
   - {fileID: 1269006690}
-  - {fileID: 95416237}
   - {fileID: 244385096}
   - {fileID: 311225763}
   - {fileID: 838332027}
@@ -7199,6 +7184,7 @@ MonoBehaviour:
   - {fileID: 610878720}
   - {fileID: 99618908}
   - {fileID: 524532357}
+  - {fileID: 95416237}
   bodyData:
   - {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
   - {fileID: 11400000, guid: 4a4fc646c04034f42826ed5037daf22a, type: 2}
@@ -7345,23 +7331,18 @@ MonoBehaviour:
   blinkAmount: 0
   mouthClosedAmount: 0
   animating: 1
-  hoveredTransform: {fileID: 0}
   currentPC: {fileID: 0}
-  currentTransform: {fileID: 0}
   cube: {fileID: 775294228}
   positionCache: {x: 0, y: 0, z: 0}
   scaleCache: {x: 0, y: 0, z: 0}
   angleCache: 0
   rotationController: {fileID: 834628291}
   scaleController: {fileID: 1401635628}
-  currentHovered: {fileID: 0}
   colliderMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
   currentChange: 0
   sc: {fileID: 397872630}
   tear1: {fileID: 520213595}
   tear2: {fileID: 1830880506}
-  blood: {fileID: 8863154302868071707, guid: d4a811fc9c57e3146a2bc50ec5becd62, type: 3}
-  hoveredParent: {fileID: 0}
 --- !u!4 &963588424
 Transform:
   m_ObjectHideFlags: 0
@@ -7375,18 +7356,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 311225763}
-  - {fileID: 244385096}
-  - {fileID: 1269006690}
-  - {fileID: 838332027}
   - {fileID: 610878720}
+  - {fileID: 838332027}
   - {fileID: 1792980033}
   - {fileID: 524532357}
-  - {fileID: 95416237}
-  - {fileID: 1470558958}
-  - {fileID: 1272765002}
   - {fileID: 1451965501}
   - {fileID: 99618908}
+  - {fileID: 244385096}
+  - {fileID: 311225763}
+  - {fileID: 95416237}
+  - {fileID: 1470558958}
+  - {fileID: 1269006690}
+  - {fileID: 1272765002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984036932
@@ -9709,10 +9690,8 @@ MonoBehaviour:
   rb2D: {fileID: 1269006692}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers:
   - {fileID: 95416240}
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -1, z: 0.2}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -9898,9 +9877,7 @@ MonoBehaviour:
   rb2D: {fileID: 1272765004}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.07850218, z: -0.05}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -10710,9 +10687,7 @@ MonoBehaviour:
   rb2D: {fileID: 1451965504}
   flippedXAxis: 1
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 99618909}
   cachePosition: {x: -2, y: 0.038425446, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -11122,9 +11097,7 @@ MonoBehaviour:
   rb2D: {fileID: 1470558960}
   flippedXAxis: 0
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 0}
   cachePosition: {x: 0, y: -0.3830292, z: -0.05}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -11378,12 +11351,12 @@ GameObject:
   - component: {fileID: 1519914564}
   - component: {fileID: 1519914565}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: SliderParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1519914564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11441,7 +11414,7 @@ MonoBehaviour:
   - {fileID: 711774986}
   - {fileID: 396084490}
   colorSliderContainer: {fileID: 1046939495}
-  partData: {fileID: 0}
+  currentPC: {fileID: 0}
 --- !u!1 &1543308327
 GameObject:
   m_ObjectHideFlags: 0
@@ -12751,9 +12724,7 @@ MonoBehaviour:
   rb2D: {fileID: 1792980035}
   flippedXAxis: 1
   detached: 0
-  overAttachmentNode: 0
   childControllers: []
-  parentController: {fileID: 0}
   mirroredPart: {fileID: 524532358}
   cachePosition: {x: -2, y: 0.85, z: 0}
   cacheScale: {x: 0, y: 0, z: 0}
@@ -13877,7 +13848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -62.430084}
+  m_AnchoredPosition: {x: 125, y: -62.430176}
   m_SizeDelta: {x: 250, y: 41.620056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1931908631

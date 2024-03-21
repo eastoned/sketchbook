@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnSelectedNewFacePartEvent : UnityEvent<Transform>
+public class OnSelectedNewFacePartEvent : UnityEvent<PartController>
 {
     public static OnSelectedNewFacePartEvent Instance = new OnSelectedNewFacePartEvent();
 }

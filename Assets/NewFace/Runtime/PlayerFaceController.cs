@@ -6,26 +6,20 @@ using UnityEngine;
 
 public class PlayerFaceController : FaceController
 {
-
-    public Transform hoveredTransform;
-    
     public PartController currentPC;
-    public Transform currentTransform;
-
+    private Transform currentTransform;
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
     public PartTransformController rotationController, scaleController;
 
-    public PartController currentHovered;
     [SerializeField] private Material colliderMaterial;
 
     public float currentChange = 0f;
     public SpeechController sc;
     private MaterialPropertyBlock block;
     public Renderer tear1, tear2;
-    public ParticleSystem blood;
-    public PartController hoveredParent;
+
     public override void OnEnable()
 	{
         base.OnEnable();
@@ -54,53 +48,54 @@ public class PlayerFaceController : FaceController
         //OnSelectedNewFacePartEvent.Instance.RemoveListener(PopInScale);
     }
 
-    public void SetMaterialOutline(Transform hoveredTarget){
-        RemoveMaterialOutlineFromPreviousHover();
-        if(hoveredTarget != null){
-            if(hoveredTarget.GetComponent<PartController>()){
-                hoveredTarget.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTarget.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
-                hoveredTransform = hoveredTarget;
-            }
+    public void SetMaterialOutline(Transform hoveredTransform)
+    {
+       RemoveMaterialOutlineFromPreviousHover();
+
+        if(hoveredTransform != null)
+        {
+            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
+            currentTransform = hoveredTransform;
         }
     }
 
     private void PopOutScale(){
         //Debug.Log("pop");
-        currentPC.ScalePieces(1f, .2f, scalePopCurve);
+        //currentPC.ScalePieces(1f, .2f, scalePopCurve);
     }
 
     private void PopInScale(Transform ignore){
         //Debug.Log("pop");
-        ignore.GetComponent<PartController>().ScalePieces(-1f, .2f, scalePopCurve);
+        //ignore.GetComponent<PartController>().ScalePieces(-1f, .2f, scalePopCurve);
     }
 
-    private void RemoveMaterialOutlineFromPreviousHover(){
-        if(hoveredTransform != null){
-            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0]};
+    private void RemoveMaterialOutlineFromPreviousHover()
+    {
+        if(currentTransform != null)
+        {
+            currentTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{currentTransform.GetComponent<Renderer>().sharedMaterials[0]};
         }
     }
 
     private void SetTransformCache(){
         if(currentPC != null){
             if(currentPC.translatable){
-                positionCache = currentPC.pd.relativePosition;
+                positionCache = currentPC.pd.relativeToParentPosition;
             }
             if(currentPC.rotatable){
-                angleCache = currentPC.pd.currentAngle;
+                angleCache = currentPC.pd.relativeToParentAngle;
             }
             if(currentPC.scalable){
-                scaleCache = currentPC.pd.relativeScale;
+                scaleCache = currentPC.pd.relativeToParentScale;
             }
         }
     }
 
-    private void SetTransformControllers(Transform selectedTarget){
+    private void SetTransformControllers(PartController selectedPC){
 
-        currentPC = selectedTarget.GetComponent<PartController>();
-        Debug.Log("Set the transform controllers on: " + selectedTarget);
-        if(currentTransform != selectedTarget){
-            currentTransform = selectedTarget;
-            cube.position = currentTransform.position;
+        if(currentPC != selectedPC){
+            currentPC = selectedPC;
+            cube.position = currentPC.transform.position;
         }
 
         if(currentPC.rotatable){
@@ -129,32 +124,34 @@ public class PlayerFaceController : FaceController
         
         if(!currentPC.detached){
             float flip = currentPC.flippedXAxis? -1f : 1f;
-            currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
+            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.transform.localPosition.z);
 
-            Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentTransform.localPosition.z);
+            Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentPC.transform.localPosition.z);
 
             //Debug.Log(currentPC.pd.PositionOutsideMaximum(absPos));
-            currentPC.pd.ClampedPosition(absPos);
+            currentPC.pd.SetClampedPosition(absPos);
 
-            currentChange = Vector2.Distance(currentPC.pd.relativePosition, positionCache);
+            currentChange = Vector2.Distance(currentPC.pd.relativeToParentPosition, positionCache);
             //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
-
-            currentPC.UpdateAllTransformValues();
             
             if(currentPC.mirroredPart != null){
                 if(!currentPC.mirroredPart.detached)
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }
             
-            if(currentPC.pd.PositionOutsideMaximum(absPos)){
+            if(currentPC.pd.IsPositionOutsideMaximum(absPos))
+            {
                 currentPC.ShakePiece(absPos.magnitude*10f, 0.25f);
-                if(!startedTickling){
+
+                if(!startedTickling)
+                {
                     OnTickleEvent.Instance.Invoke();
                     startedTickling = true;
                 }
                 
                 if(absPos.magnitude > 1.2f){
                     UpdatePartAttachmentStatus(currentPC, true);
+                    //remove this part from any parent if the magnitude is too high
                     for(int i = 0; i < bodyParts.Length; i++){
                         if(bodyParts[i].GetComponent<PartController>().childControllers.Contains(currentPC)){
                             bodyParts[i].GetComponent<PartController>().childControllers.Remove(currentPC);
@@ -164,19 +161,29 @@ public class PlayerFaceController : FaceController
                     
             }
         }else{
-            currentTransform.localPosition = new Vector3(pos.x, pos.y, currentTransform.localPosition.z);
-            currentPC.overAttachmentNode = false;
-            for(int i = 0; i < bodyParts.Length; i++){
-                if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentTransform.position)){
-                    if(currentTransform != bodyParts[i]){
-                        if(!bodyParts[i].GetComponent<PartController>().childControllers.Contains(currentPC))
-                            bodyParts[i].GetComponent<PartController>().childControllers.Add(currentPC);
-                        
-                        currentPC.overAttachmentNode = true;
+            
+            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.transform.localPosition.z);
+            currentPC.parent = null;
+            for(int i = 0; i < bodyParts.Length; i++)
+            {
+                if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentPC.transform.position))
+                {
+                    if(currentPC.transform != bodyParts[i])
+                    {
+                        PartController parent = bodyParts[i].GetComponent<PartController>();
+                        if(currentPC.pd.absoluteWorldPositionZ < parent.pd.absoluteWorldPositionZ)
+                        {
+                            //currentPC.overAttachmentNode = true;
+                            currentPC.parent = parent;
+                        }
                     }
                 }
             }
+
+
         }
+
+        currentPC.UpdateAllTransformValues();
             //if position is on  node then we can attach to it
     }
 
@@ -184,28 +191,28 @@ public class PlayerFaceController : FaceController
         pos -= transform.localPosition;
 
         if(!currentPC.detached){
-            Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
+            Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.localPosition - pos)*2f;
             diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
 
-            currentPC.pd.ClampedScale(diff);
-            currentChange = Vector3.Distance(currentPC.pd.relativeScale, scaleCache);
+            currentPC.pd.SetClampedScale(diff);
+            currentChange = Vector3.Distance(currentPC.pd.relativeToParentScale, scaleCache);
             //Debug.Log("Scale change: " + currentChange);
             currentPC.UpdateAllTransformValues();
             
             if(currentPC.mirroredPart != null){
-                if(!currentPC.mirroredPart.detached)
-                    currentPC.mirroredPart.UpdateAllTransformValues();
+                //if(!currentPC.mirroredPart.detached)
+                    //currentPC.mirroredPart.UpdateAllTransformValues();
             }
             //currentPC.pd.SetPositionBounds();
         }else{
-            Vector3 diff = currentTransform.InverseTransformDirection(currentTransform.localPosition - pos)*2f;
+            Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.localPosition - pos)*2f;
             diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
             
 
             if(!currentPC.flippedXAxis){
-                currentTransform.localScale = currentPC.pd.GetClampedScale(diff);
+                currentPC.transform.localScale = currentPC.pd.GetClampedScale(diff);
             }else{
-                currentTransform.localScale = currentPC.pd.GetFlippedClampedScale(diff);
+                currentPC.transform.localScale = currentPC.pd.GetFlippedClampedScale(diff);
             }
         }
     }
@@ -214,9 +221,9 @@ public class PlayerFaceController : FaceController
 
         pos -= transform.localPosition;
 
-        float angle = Mathf.Atan2(pos.y - currentTransform.localPosition.y, pos.x - currentTransform.localPosition.x) * Mathf.Rad2Deg;
-        currentChange = Mathf.Abs(angleCache - currentPC.pd.currentAngle)/180f;
-        currentTransform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.ClampedAngle(angle, currentPC.flippedXAxis));
+        float angle = Mathf.Atan2(pos.y - currentPC.transform.localPosition.y, pos.x - currentPC.transform.localPosition.x) * Mathf.Rad2Deg;
+        currentChange = Mathf.Abs(angleCache - currentPC.pd.relativeToParentAngle)/180f;
+        currentPC.transform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.GetClampedAngle(angle, currentPC.flippedXAxis));
 
         if(currentPC.mirroredPart != null){
             if(!currentPC.mirroredPart.detached)

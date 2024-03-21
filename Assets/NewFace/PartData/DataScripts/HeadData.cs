@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 [CreateAssetMenu(fileName = "HeadData", menuName = "ScriptableObjects/Head", order = 1)]
 public class HeadData : PartData
@@ -17,13 +18,13 @@ public class HeadData : PartData
         return new Vector2(0f, (shadePropertyDict["_ChinScale"].propertyValue - shadePropertyDict["_ForeheadScale"].propertyValue)/8f);
     }
 
-    public override void SetPositionBounds()
+    public override void SetPositionBounds(PartData parentBounds)
     {
         minPosY = -1/GetAbsoluteScale().y;
         maxPosY = 1/GetAbsoluteScale().y;
     }
 
-    public override void SetScaleBounds()
+    public override void SetScaleBounds(PartData parentBounds)
     {
         //maxScaleX = parentData.GetAbsoluteScale().x/2f;
         //maxScaleY = parentData.GetAbsoluteScale().y/2f;

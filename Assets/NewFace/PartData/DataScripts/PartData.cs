@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -8,18 +7,16 @@ using UnityEngine.UIElements;
 public class PartData : ScriptableObject
 {
 
-    public void CopyData(PartData pd){
-        absolutePosition = pd.absolutePosition;
-        relativePosition = pd.relativePosition;
+    public void CopyData(PartData pd)
+    {
+        relativeToParentPosition = pd.relativeToParentPosition;
         //minPosX = pd.minPosX;
         //maxPosX = pd.maxPosX;
         //minPosY = pd.minPosY;
         //maxPosY = pd.maxPosY;
         //minAngle = pd.minAngle;
         //maxAngle = pd.maxAngle;
-        currentAngle = pd.currentAngle;
-        absoluteScale = pd.absoluteScale;
-        relativeScale = pd.relativeScale;
+        relativeToParentScale = pd.relativeToParentScale;
         //minScaleX = pd.minScaleX;
         //maxScaleX = pd.maxScaleX;
         //minScaleY = pd.minScaleY;
@@ -37,18 +34,16 @@ public class PartData : ScriptableObject
         }
     }
 
-    public void CopyPartData(PartData pd){
-        absolutePosition = pd.absolutePosition;
-        relativePosition = pd.relativePosition;
+    public void CopyPartData(PartData pd)
+    {
+        relativeToParentPosition = pd.relativeToParentPosition;
         //minPosX = pd.minPosX;
         //maxPosX = pd.maxPosX;
         //minPosY = pd.minPosY;
         //maxPosY = pd.maxPosY;
         //minAngle = pd.minAngle;
         //maxAngle = pd.maxAngle;
-        currentAngle = pd.currentAngle;
-        absoluteScale = pd.absoluteScale;
-        relativeScale = pd.relativeScale;
+        relativeToParentScale = pd.relativeToParentScale;
         //minScaleX = pd.minScaleX;
         //maxScaleX = pd.maxScaleX;
         //minScaleY = pd.minScaleY;
@@ -57,14 +52,16 @@ public class PartData : ScriptableObject
         public string partName;
 
     #region TransformData
-        public Vector3 absolutePosition;
-        public Vector3 relativePosition;
+        public Vector2 relativeToParentPosition;
+
+        public float absoluteWorldPositionZ;
 
         public float minPosX, maxPosX, minPosY, maxPosY;
+
         public float minAngle, maxAngle;
-        public float currentAngle;
-        public Vector3 absoluteScale;
-        public Vector3 relativeScale;
+        public float relativeToParentAngle;
+        public Vector2 relativeToParentScale;
+
         public float minScaleX, maxScaleX, minScaleY, maxScaleY;
     #endregion
 
@@ -74,70 +71,80 @@ public class PartData : ScriptableObject
         public List<ShaderColor> shaderColors = new List<ShaderColor>();
     #endregion
 
-    public List<PartData> affectedPartData = new List<PartData>();
-
-    //return normalized values to store part relation to parent object
-    public void SetRelativePos(Vector3 pos){
-        relativePosition = new Vector3(Mathf.InverseLerp(minPosX, maxPosX, pos.x), Mathf.InverseLerp(minPosY, maxPosY, pos.y), pos.z);
-        absolutePosition = pos;
-    }
+   
 
     //return absolute values to render object in space
-    public Vector3 GetAbsolutePosition(){
-        return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
+    public Vector3 GetAbsolutePosition()
+    {
+        return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativeToParentPosition.x), Mathf.Lerp(minPosY, maxPosY, relativeToParentPosition.y), absoluteWorldPositionZ);
     }
 
+    public Vector3 GetFlippedAbsolutePosition()
+    {
+        return new Vector3(Mathf.Lerp(-minPosX, -maxPosX, relativeToParentPosition.x), Mathf.Lerp(minPosY, maxPosY, relativeToParentPosition.y), absoluteWorldPositionZ);
+    }
+
+    public virtual void SetClampedPosition(Vector3 posIn)
+    {
+        Vector2 clampedPos = new Vector2(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY));
+        relativeToParentPosition = new Vector2(Mathf.InverseLerp(minPosX, maxPosX, clampedPos.x), Mathf.InverseLerp(minPosY, maxPosY, clampedPos.y));
+    }
+
+    public virtual Vector3 GetClampedPosition(Vector3 posIn)
+    {
+        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), absoluteWorldPositionZ);
+        return clampedPos;
+    }
+    
     public Quaternion GetAbsoluteRotation(){
-        return Quaternion.Euler(0, 0, currentAngle);
-    }
-
-    public Vector3 GetFlippedAbsolutePosition(){
-        return new Vector3(Mathf.Lerp(-minPosX, -maxPosX, relativePosition.x), Mathf.Lerp(minPosY, maxPosY, relativePosition.y), absolutePosition.z);
+        return Quaternion.Euler(0, 0, relativeToParentAngle);
     }
 
     public void SetRelativeScale(Vector3 scl){
-        relativeScale = new Vector3(Mathf.InverseLerp(minScaleX, maxScaleX, scl.x), Mathf.InverseLerp(minScaleY, maxScaleY, scl.y), scl.z);
+        relativeToParentScale = new Vector3(Mathf.InverseLerp(minScaleX, maxScaleX, scl.x), Mathf.InverseLerp(minScaleY, maxScaleY, scl.y), scl.z);
     }
 
     public Vector3 GetFlippedAbsoluteScale(){
-        return new Vector3(Mathf.Lerp(-minScaleX, -maxScaleX, relativeScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeScale.y), relativeScale.z);
+        return new Vector3(Mathf.Lerp(-minScaleX, -maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
 
     public Vector3 GetAbsoluteScale(){
-        return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeScale.y), relativeScale.z);
+        return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
 
 
-    public virtual void SetScaleBounds(PartData pd){
-    }
-
-    public virtual void SetScaleBounds(){
-        
-    }
-
-    public virtual void SetPositionBounds(PartData parentBounds){
+    public virtual void SetScaleBounds(PartData parentBounds)
+    {
 
     }
 
-    public virtual void SetPositionBounds(){
-        
+    public virtual void SetPositionBounds(PartData parentBounds)
+    {
+        minPosX = parentBounds.relativeToParentPosition.x - parentBounds.relativeToParentScale.x/2f;
+        maxPosX = parentBounds.relativeToParentPosition.x + parentBounds.relativeToParentScale.x/2f;
+        minPosY = parentBounds.relativeToParentPosition.y - parentBounds.relativeToParentScale.y/2f;
+        maxPosY = parentBounds.relativeToParentPosition.y + parentBounds.relativeToParentScale.y/2f;
     }
 
-    public virtual Vector2 GetColliderSize(){
+    public virtual Vector2 GetColliderSize()
+    {
         return Vector2.one;
     }
 
-    public virtual Vector2 GetColliderOffset(){
+    public virtual Vector2 GetColliderOffset()
+    {
         return Vector2.zero;
     }
 
-    public virtual void ClampedScale(Vector3 scaleIn){
+    public virtual void SetClampedScale(Vector3 scaleIn)
+    {
         Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
         //clampedSize = clampedSize/.25f;
         //clampedSize = new Vector3(Mathf.Round(clampedSize.x), Mathf.Round(clampedSize.y), clampedSize.z);
         //clampedSize *= .25f;
         SetRelativeScale(clampedSize);
     }
+
     public Vector3 GetClampedScale(Vector3 scaleIn)
     {
         return new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
@@ -148,46 +155,30 @@ public class PartData : ScriptableObject
         return new Vector3(Mathf.Clamp(-scaleIn.x, -maxScaleX, -minScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
-    public float ClampedAngle(float angle, bool flippedXAxis){
+    public float GetClampedAngle(float angle, bool flippedXAxis){
         if(flippedXAxis){
             if(angle < 0){
-                currentAngle = -Mathf.Clamp(angle + 180, minAngle, maxAngle);
+                relativeToParentAngle = -Mathf.Clamp(angle + 180, minAngle, maxAngle);
             }else{
-                currentAngle = -Mathf.Clamp(angle - 180, minAngle, maxAngle);
+                relativeToParentAngle = -Mathf.Clamp(angle - 180, minAngle, maxAngle);
             }
-            currentAngle = currentAngle/15f;
-            currentAngle = Mathf.Round(currentAngle);
-            currentAngle *= 15f;
-            return -currentAngle;
+            relativeToParentAngle = relativeToParentAngle/15f;
+            relativeToParentAngle = Mathf.Round(relativeToParentAngle);
+            relativeToParentAngle *= 15f;
+            return -relativeToParentAngle;
         }else{
-            currentAngle = Mathf.Clamp(angle, minAngle, maxAngle);
-            currentAngle = currentAngle/15f;
-            currentAngle = Mathf.Round(currentAngle);
-            currentAngle *= 15f;
-            return currentAngle;
+            relativeToParentAngle = Mathf.Clamp(angle, minAngle, maxAngle);
+            relativeToParentAngle = relativeToParentAngle/15f;
+            relativeToParentAngle = Mathf.Round(relativeToParentAngle);
+            relativeToParentAngle *= 15f;
+            return relativeToParentAngle;
         }
         
     }
 
-    public bool PositionOutsideMaximum(Vector3 posIn){
+    public bool IsPositionOutsideMaximum(Vector3 posIn)
+    {
         return posIn.x > maxPosX + .3f || posIn.y > maxPosY + .3f || posIn.x < minPosX - .3f || posIn.y < minPosY - .3f;
-    }
-
-    public virtual void ClampedPosition(Vector3 posIn){
-        
-        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
-        //clampedPos = clampedPos/.1f;
-        //clampedPos = new Vector3(Mathf.Round(clampedPos.x), Mathf.Round(clampedPos.y), clampedPos.z);
-        //clampedPos *= .1f;
-        SetRelativePos(clampedPos);
-    }
-
-    public virtual Vector3 ReturnClampedPosition(Vector3 posIn){
-        Vector3 clampedPos = new Vector3(Mathf.Clamp(posIn.x, minPosX, maxPosX), Mathf.Clamp(posIn.y, minPosY, maxPosY), posIn.z);
-        //clampedPos = clampedPos/.1f;
-        //clampedPos = new Vector3(Mathf.Round(clampedPos.x), Mathf.Round(clampedPos.y), clampedPos.z);
-        //clampedPos *= .1f;
-        return clampedPos;
     }
 }
 
@@ -222,33 +213,6 @@ public class ShaderProperty{
         propertyName = name;
         propertyValue = value;
     }
-
-    public void ReadRandomRemark(float value){
-        //Debug.Log("Getting value as: " + value + ". And the current property value is: " + propertyValue + ".");
-        if(SpeechController.timeSinceLastRemark > 5f){
-            if(value > propertyValue){
-                //
-                if(IncreaseValueRemarks.Length > 0){
-                    OnSendRemarkToSpeech.Instance.Invoke(IncreaseValueRemarks[Random.Range(0, IncreaseValueRemarks.Length)].message);
-                }
-            }else{
-                //
-                if(DecreaseValueRemarks.Length > 0){
-                    OnSendRemarkToSpeech.Instance.Invoke(DecreaseValueRemarks[Random.Range(0, DecreaseValueRemarks.Length)].message);
-                }
-            }
-        }
-    }
-
-    public Remark[] IncreaseValueRemarks;
-    public Remark[] DecreaseValueRemarks;
-
-}
-
-[System.Serializable]
-public class Remark{
-    public string message;
-    public bool wasSaid = false;
 }
 
 [System.Serializable]
@@ -298,7 +262,6 @@ public class ShaderColor{
         Color.RGBToHSV(colorValue, out h, out s, out v);
         return v;
     }
-
 
     public ShaderColor(string name, Color value){
         colorName = name;

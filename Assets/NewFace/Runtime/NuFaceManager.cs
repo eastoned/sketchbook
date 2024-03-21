@@ -452,16 +452,16 @@ public class NuFaceManager : MonoBehaviour
         string diffDebug = "";
         float score = 0;
  
-        score += Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition) < 0.2f ? 1 : 0;
-        diffDebug += "Position is close enough? " + (Vector3.Distance(gamePart.relativePosition, characterPart.relativePosition) < 0.2f ? "Yes" : "No") + "\n";
+        score += Vector3.Distance(gamePart.relativeToParentPosition, characterPart.relativeToParentPosition) < 0.2f ? 1 : 0;
+        diffDebug += "Position is close enough? " + (Vector3.Distance(gamePart.relativeToParentPosition, characterPart.relativeToParentPosition) < 0.2f ? "Yes" : "No") + "\n";
 
         //Debug.Log(gamePart.name + " scale diff is: " + Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale));
-        score += Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale) < 0.2f ? 1 : 0;
-        diffDebug += "Scale is close enough? " + (Vector3.Distance(gamePart.relativeScale, characterPart.relativeScale) < 0.2f ? "Yes" : "No")+ "\n";
+        score += Vector3.Distance(gamePart.relativeToParentScale, characterPart.relativeToParentScale) < 0.2f ? 1 : 0;
+        diffDebug += "Scale is close enough? " + (Vector3.Distance(gamePart.relativeToParentScale, characterPart.relativeToParentScale) < 0.2f ? "Yes" : "No")+ "\n";
 
         //Debug.Log(gamePart.name + " angle diff is: " + Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360);
-        score += ((Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360)/180f) < 0.05f ? 1 : 0;
-        diffDebug += "Angle is close enough? " + (((Mathf.Abs(gamePart.currentAngle - characterPart.currentAngle)%360)/180f) < 0.05f ? "Yes" : "No")+ "\n";
+        score += ((Mathf.Abs(gamePart.relativeToParentAngle - characterPart.relativeToParentAngle)%360)/180f) < 0.05f ? 1 : 0;
+        diffDebug += "Angle is close enough? " + (((Mathf.Abs(gamePart.relativeToParentAngle - characterPart.relativeToParentAngle)%360)/180f) < 0.05f ? "Yes" : "No")+ "\n";
 
         for(int i = 0; i < gamePart.shaderProperties.Count; i++){
             score += Mathf.Abs(gamePart.shaderProperties[i].propertyValue - characterPart.shaderProperties[i].propertyValue) < 0.2f ? 1 : 0;
