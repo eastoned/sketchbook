@@ -20,8 +20,8 @@ public class HeadData : PartData
 
     public override void SetPositionBounds(PartData parentBounds)
     {
-        minPosY = -1/GetAbsoluteScale().y;
-        maxPosY = 1/GetAbsoluteScale().y;
+        //minPosY = -1/GetAbsoluteScale().y;
+        //maxPosY = 1/GetAbsoluteScale().y;
     }
 
     public override void SetScaleBounds(PartData parentBounds)

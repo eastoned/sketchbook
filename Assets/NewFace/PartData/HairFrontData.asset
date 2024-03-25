@@ -13,52 +13,49 @@ MonoBehaviour:
   m_Name: HairFrontData
   m_EditorClassIdentifier: 
   partName: bangs
-  absoluteWorldPosition: {x: 0, y: 0.3}
-  relativeToParentPosition: {x: 0, y: 0.4}
+  relativeToParentPosition: {x: 0, y: 0.5787896}
   absoluteWorldPositionZ: -0.15
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.5261905
-  maxPosY: 0.5738096
+  minPosY: 0
+  maxPosY: 0
   minAngle: -180
   maxAngle: 180
-  absoluteWorldAngle: 180
-  relativeToParentAngle: 0
-  absoluteWorldScale: {x: 1.1084487, y: 0.75}
-  relativeToParentScale: {x: 0.6, y: 0.4}
+  relativeToParentAngle: 133.75296
+  relativeToParentScale: {x: 0.61339736, y: 0.6172017}
+  detached: 0
   minScaleX: 0.25
-  maxScaleX: 1.4882298
+  maxScaleX: 3.5719132
   minScaleY: 0.25
-  maxScaleY: 1.0500001
+  maxScaleY: 2
   shaderProperties:
   - propertyName: _BangRoundness
-    propertyValue: 0.4
+    propertyValue: 0.25297633
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _StrandCount
-    propertyValue: 0.6
+    propertyValue: 0.81069523
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _StrandOffset
-    propertyValue: 0.6
+    propertyValue: 0.613738
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _HairBangScale
-    propertyValue: 0.4
+    propertyValue: 0.32325038
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _HairRoundness
-    propertyValue: 0.6
+    propertyValue: 0.30632338
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.7474233, g: 0.19066326, b: 0.08195631, a: 1}
+    colorValue: {r: 0.0070095444, g: 0.007666588, b: 0.007539483, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.11569171, g: 0.1139783, b: 0.28645867, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.12524366, g: 0.1917634, b: 0.17892037, a: 1}

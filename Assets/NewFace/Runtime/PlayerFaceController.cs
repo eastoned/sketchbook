@@ -27,6 +27,7 @@ public class PlayerFaceController : FaceController
         OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
         OnSetTransformCacheEvent.Instance.AddListener(SetTransformCache);
         OnDeselectedFacePartEvent.Instance.AddListener(RemoveMaterialOutlineFromPreviousHover);
+        OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
@@ -41,6 +42,7 @@ public class PlayerFaceController : FaceController
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
         OnSetTransformCacheEvent.Instance.RemoveListener(SetTransformCache);
         OnDeselectedFacePartEvent.Instance.RemoveListener(RemoveMaterialOutlineFromPreviousHover);
+        OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
@@ -91,6 +93,13 @@ public class PlayerFaceController : FaceController
         }
     }
 
+    private void DisappearControllers(){
+        rotationController.partInEdit = null;
+        rotationController.Disappear();
+        scaleController.partInEdit = null;
+        scaleController.Disappear();
+    }
+
     private void SetTransformControllers(PartController selectedPC){
 
         if(currentPC != selectedPC){
@@ -119,14 +128,16 @@ public class PlayerFaceController : FaceController
     }
 
     bool startedTickling = false;
-    private void SetPartPosition(Vector3 pos){
+    private void SetPartPosition(Vector3 pos)
+    {
         //each part has a relative position to other objects
         
-        if(!currentPC.detached){
+        if(!currentPC.detached)
+        {
             float flip = currentPC.flippedXAxis? -1f : 1f;
-            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.transform.localPosition.z);
+            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.pd.absoluteWorldPositionZ);
 
-            Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentPC.transform.localPosition.z);
+            Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentPC.pd.absoluteWorldPositionZ);
 
             //Debug.Log(currentPC.pd.PositionOutsideMaximum(absPos));
             currentPC.pd.SetClampedPosition(absPos);
@@ -149,8 +160,10 @@ public class PlayerFaceController : FaceController
                     startedTickling = true;
                 }
                 
-                if(absPos.magnitude > 1.2f){
+                if(absPos.magnitude > 1.2f)
+                {
                     UpdatePartAttachmentStatus(currentPC, true);
+                    //currentPC.pd.SetWorldPositionBounds();
                     //currentPC.canUpdateMirror = false;
                     //remove this part from any parent if the magnitude is too high
                     for(int i = 0; i < bodyParts.Length; i++){
@@ -163,8 +176,10 @@ public class PlayerFaceController : FaceController
             }
         }else{
             
-            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.transform.localPosition.z);
+            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.pd.absoluteWorldPositionZ);
             currentPC.parent = null;
+
+            currentPC.pd.SetClampedPosition(pos);
             for(int i = 0; i < bodyParts.Length; i++)
             {
                 if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentPC.transform.position))
@@ -174,7 +189,6 @@ public class PlayerFaceController : FaceController
                         PartController parent = bodyParts[i].GetComponent<PartController>();
                         if(currentPC.pd.absoluteWorldPositionZ < parent.pd.absoluteWorldPositionZ)
                         {
-                            //currentPC.overAttachmentNode = true;
                             currentPC.parent = parent;
                         }
                     }

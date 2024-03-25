@@ -16,22 +16,13 @@ public class NuFaceManager : MonoBehaviour
 
     public CharacterData[] compareTargets;
 
-    public string[] convo;
     public static bool canShareFeedback = false;
 
     public PartController[] parts;
-
-    public CharacterData[] characterSet;
     private Coroutine skippableWait;
     public List<RequestChange> requestList;
     public int count = 0;
     public int charStage = 0;
-
-    public int[] stageThresholds;
-
-    public static float money = 0f;
-    public TextMeshProUGUI scoreDebug, moneyDebug;
-    public Button button;
 
     public bool isGame = false;
     private Coroutine reportRoutine;
@@ -54,13 +45,14 @@ public class NuFaceManager : MonoBehaviour
 
     private void AddPlayerActionToHistory(PlayerActionData pad)
     {
-        
         float eyeRadius = eye.GetSingleShaderFloat("_PupilRadius");
         float eyeOpen = eye.GetSingleShaderFloat("_EyelidBottomOpen") + eye.GetSingleShaderFloat("_EyelidTopOpen");
         //if broke then will always remember
         if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
            playerActionHistory.Add(pad); 
-        }else if(eyeRadius > 0.05f && eyeOpen > 0.05f){
+        }
+        else if(pfc.currentChar.CanSee())
+        {
             // but doesn't remember if can't see
             playerActionHistory.Add(pad);
         }
@@ -68,8 +60,8 @@ public class NuFaceManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        writeableData[0].RandomizeData(.1f);
-        pfc.SetCharacter(writeableData[0]);
+        //writeableData[0].RandomizeData(.1f);
+        //pfc.SetCharacter(writeableData[0]);
         for(;;){
             //Debug.Log("loop time");
             if(playerActionHistory.Exists(x => x.actionType == PlayerActionData.ActionType.BREAKCHANGE)){
@@ -85,7 +77,6 @@ public class NuFaceManager : MonoBehaviour
 
     public void ExportCharacter(){
         //canShareFeedback = true;
-        Debug.Log("Pressed button");
         ReportPlayerActions();
         //character evaluation
         //find closest character template
@@ -180,10 +171,6 @@ public class NuFaceManager : MonoBehaviour
         }
     }
 
-    void UpdateTextAmount(){
-        moneyDebug.text = "Money Amount: " + money.ToString();
-    }
-
     public void Routine(){
         
             //yield return new WaitForSeconds(Random.Range(0.5f, 5f));
@@ -272,43 +259,6 @@ public class NuFaceManager : MonoBehaviour
         //if(crunch.isPlaying){
             //crunch.Stop();
         //}
-    }
-
-    [ContextMenu("Randomize Face")]
-    public void RandomizeFace(){
-        //Debug.Log("let random begin");
-
-       // if(Random.Range(0f, 1f) < 0.5f){
-            targetData[0].RandomizeData(.2f);
-        //}else{
-           // targetData[0].RandomizeRandomPart();
-        //}
-        /*
-        if(Random.Range(0f,1f) < 0.5f){
-            targetData[rfc.Length-1].RandomizeData();
-            for(int i = 0; i < rfc.Length; i++){
-                writeableData[i].CopyData(rfc[i].currentChar);
-                float val = (float)i/((float)rfc.Length-1);
-                Debug.Log("interval val is: " + val);
-                rfc[i].Interpolate(val, targetData[i], targetData[0], targetData[rfc.Length-1]);
-                rfc[i].BlendCharacter(writeableData[i], targetData[i], (val+1)*2);
-            }
-        }else{
-            targetData[0].RandomizeData();
-            for(int i = rfc.Length-1; i > -1; i--){
-                writeableData[i].CopyData(rfc[i].currentChar);
-                float val = (float)i/((float)rfc.Length-1);
-                Debug.Log("interval val is: " + val);
-                rfc[i].Interpolate(val, targetData[i], targetData[0], targetData[rfc.Length-1]);
-                rfc[i].BlendCharacter(writeableData[i], targetData[i], (val+1)*2);
-            }
-        }*/
-        
-    }
-
-    IEnumerator CountIncreaser(){
-        yield return new WaitForSeconds(5f);
-        RandomizeFace();
     }
 
     IEnumerator BirthRoutine(){
@@ -418,7 +368,6 @@ public class NuFaceManager : MonoBehaviour
         score += GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
         score += GetPartDifference(gameData.hairBackData, targetData.hairBackData);
        Debug.Log("Similarity score between current face and : " + targetData.name + " is : " + score);
-       money += score;
        return score;
     }
 
@@ -443,7 +392,6 @@ public class NuFaceManager : MonoBehaviour
             }
         }
         
-        money += score;
         return score;
     }
 

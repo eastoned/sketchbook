@@ -71,8 +71,17 @@ public class PartUIController : MonoBehaviour
                     sliders[i].onValueChanged.AddListener(OnSlideShaderProperty.Instance.Invoke);
                 }
 
-                if(currentPC.pd.shaderProperties[i].affectedFeature != ShaderProperty.AffectedFeature.NOTHING){
-                    //sliders[i].onValueChanged.AddListener(delegate{OnAffectFeatureWithShaderProperty.Instance.Invoke(partData.pd.shaderProperties[i].affectedFeature);});
+                if(currentPC.pd.shaderProperties[i].propertyFeature != ShaderProperty.AffectedFeature.NOTHING)
+                {
+                    Debug.Log("slider should change an affected property");
+                    switch(currentPC.pd.shaderProperties[i].propertyFeature)
+                    {
+                        case ShaderProperty.AffectedFeature.SIGHT:
+                        break;
+                        case ShaderProperty.AffectedFeature.SPEECH:
+                            sliders[i].onValueChanged.AddListener(OnAffectSpeakAbility.Instance.Invoke);
+                        break;
+                    }
                 }
                 
                 if(currentPC.mirroredPart != null){

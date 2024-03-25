@@ -27,7 +27,6 @@ public class FaceController : MonoBehaviour
     public Vector2 eyeLookAtPos;
     public float clampVal;
     public CharacterData currentChar;
-    public FaceFeatureData faceFeatures => currentChar.featureData;
     public AnimationCurve propertyCurve;
     public AnimationCurve blendCurve; 
     public AnimationCurve blinkCurve;

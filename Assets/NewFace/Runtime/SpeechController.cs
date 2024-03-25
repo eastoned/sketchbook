@@ -21,6 +21,8 @@ public class SpeechController : MonoBehaviour
 
     private IEnumerator speakingRoutine;
 
+    public bool canSpeak = true;
+
     public static float timeSinceLastRemark;
 
     void OnEnable()
@@ -29,6 +31,7 @@ public class SpeechController : MonoBehaviour
         OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
         OnBreakPart.Instance.AddListener(BreakEvent);
         OnTickleEvent.Instance.AddListener(TickleEvent);
+        OnAffectSpeakAbility.Instance.AddListener(UpdateCanSpeak);
         //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
@@ -37,6 +40,7 @@ public class SpeechController : MonoBehaviour
         OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
         OnBreakPart.Instance.RemoveListener(BreakEvent);
         OnTickleEvent.Instance.RemoveListener(TickleEvent);
+        OnAffectSpeakAbility.Instance.RemoveListener(UpdateCanSpeak);
        // OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
@@ -47,6 +51,11 @@ public class SpeechController : MonoBehaviour
 
     void TickleEvent(){
         StartCoroutine(TickleRoutine());
+    }
+
+    void UpdateCanSpeak(float value){
+        Debug.Log("updating speaking status");
+        canSpeak = value > 0.05f;
     }
 
     private IEnumerator TickleRoutine(){
@@ -164,11 +173,7 @@ public class SpeechController : MonoBehaviour
     }
 
     private IEnumerator Speak(string text, float value){
-       /// Debug.Log("Starting the speak routine");
-        mouthRadius = mouth.GetSingleShaderFloat("_MouthOpen");
-        float mouthOpen = mouth.GetSingleShaderFloat("_MouthRadius"); 
-        
-        if(mouthRadius>0.05f && mouthOpen > 0.05f){
+        if(canSpeak){
             //Debug.Log("mouth is big enought");
             GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
             bubble.transform.localScale = Vector3.zero;

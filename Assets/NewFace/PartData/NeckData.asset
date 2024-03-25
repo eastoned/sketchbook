@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: NeckData
   m_EditorClassIdentifier: 
   partName: neck
-  absoluteWorldPosition: {x: 0, y: -1}
   relativeToParentPosition: {x: 0, y: 0}
   absoluteWorldPositionZ: 0.2
   minPosX: 0
@@ -22,33 +21,31 @@ MonoBehaviour:
   maxPosY: -1
   minAngle: 0
   maxAngle: 0
-  absoluteWorldAngle: 0
   relativeToParentAngle: 0
-  absoluteWorldScale: {x: 1, y: 2}
-  relativeToParentScale: {x: 0.6, y: 0}
+  relativeToParentScale: {x: 0.40553516, y: 0}
+  detached: 0
   minScaleX: 0.25
   maxScaleX: 1.7821784
   minScaleY: 2
   maxScaleY: 2
   shaderProperties:
   - propertyName: _NeckTopWidth
-    propertyValue: 0.4
+    propertyValue: 0.8309149
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NeckCurveRoundness
-    propertyValue: 0.4
+    propertyValue: 0.21390577
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NeckCurveScale
-    propertyValue: 0.4
+    propertyValue: 0.8704966
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.09790071, g: 0.21549511, b: 0.16360873, a: 1}
+    colorValue: {r: 0.22448488, g: 0.32807952, b: 0.28012747, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.57669145, g: 0.4072123, b: 0.944437, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.19812775, g: 0.17337674, b: 0.01855251, a: 1}

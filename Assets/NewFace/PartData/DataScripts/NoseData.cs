@@ -13,6 +13,8 @@ public class NoseData : PartData
 
     public override void SetPositionBounds(PartData parentData)
     {
+        minPosX = parentData.GetAbsolutePosition().x;
+        maxPosX = parentData.GetAbsolutePosition().x;
         minPosY = parentData.GetAbsolutePosition().y - parentData.GetAbsoluteScale().y/2f;
         maxPosY = parentData.GetAbsolutePosition().y + parentData.GetAbsoluteScale().y/2f;
     }

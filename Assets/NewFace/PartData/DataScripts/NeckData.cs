@@ -13,8 +13,8 @@ public class NeckData : PartData{
 
     public override void SetPositionBounds(PartData parentData)
     {
-        minPosY = Mathf.Lerp(-2f, parentData.GetAbsolutePosition().y, 0.5f);
-        maxPosY = Mathf.Lerp(-2f, parentData.GetAbsolutePosition().y, 0.5f);
+        //minPosY = Mathf.Lerp(-2f, parentData.GetAbsolutePosition().y, 0.5f);
+        //maxPosY = Mathf.Lerp(-2f, parentData.GetAbsolutePosition().y, 0.5f);
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
@@ -26,7 +27,7 @@ public class PartData : ScriptableObject
         
         for(int i = 0; i < shaderProperties.Count; i++)
         {
-            shaderProperties[i] = new ShaderProperty(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
+            shaderProperties[i] = new ShaderProperty(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue, pd.shaderProperties[i].propertyFeature);
         }
 
         for(int j = 0; j < shaderColors.Count; j++)
@@ -58,10 +59,14 @@ public class PartData : ScriptableObject
         public float absoluteWorldPositionZ;
 
         public float minPosX, maxPosX, minPosY, maxPosY;
+        public readonly Vector2 worldBoundsMin = new Vector2(-6, -4);
+        public readonly Vector2 worldBoundsMax = new Vector2(6, 4);
 
         public float minAngle, maxAngle;
         public float relativeToParentAngle;
         public Vector2 relativeToParentScale;
+
+        public bool detached = false;
 
         public float minScaleX, maxScaleX, minScaleY, maxScaleY;
     #endregion
@@ -119,12 +124,20 @@ public class PartData : ScriptableObject
 
     }
 
+    public virtual void SetWorldPositionBounds(){
+        minPosX = worldBoundsMin.x;
+        maxPosX = worldBoundsMax.x;
+        minPosY = worldBoundsMin.y;
+        maxPosY = worldBoundsMax.y;
+    }
+
     public virtual void SetPositionBounds(PartData parentBounds)
     {
         minPosX = parentBounds.relativeToParentPosition.x - parentBounds.relativeToParentScale.x/2f;
         maxPosX = parentBounds.relativeToParentPosition.x + parentBounds.relativeToParentScale.x/2f;
         minPosY = parentBounds.relativeToParentPosition.y - parentBounds.relativeToParentScale.y/2f;
         maxPosY = parentBounds.relativeToParentPosition.y + parentBounds.relativeToParentScale.y/2f;
+        
     }
 
     public virtual Vector2 GetColliderSize()
@@ -201,7 +214,7 @@ public class ShaderProperty{
 
     public bool wholeNumberInterval;
     public float valueInterval;
-    public AffectedFeature affectedFeature;
+    public AffectedFeature propertyFeature;
 
     public void SetValue(float value){
         //value /= 0.25f;
@@ -210,9 +223,10 @@ public class ShaderProperty{
         propertyValue = value;
     }
 
-    public ShaderProperty(string name, float value){
+    public ShaderProperty(string name, float value, AffectedFeature affectedFeature){
         propertyName = name;
         propertyValue = value;
+        propertyFeature = affectedFeature;
     }
 }
 

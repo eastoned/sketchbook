@@ -13,52 +13,49 @@ MonoBehaviour:
   m_Name: HairBackData
   m_EditorClassIdentifier: 
   partName: hair
-  absoluteWorldPosition: {x: 0, y: 0.15000004}
-  relativeToParentPosition: {x: 0, y: 0.6}
+  relativeToParentPosition: {x: 0, y: 0.4387669}
   absoluteWorldPositionZ: 0.3
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.5261905
-  maxPosY: 0.5738096
+  minPosY: 0
+  maxPosY: 0
   minAngle: -180
   maxAngle: 180
-  absoluteWorldAngle: 180
-  relativeToParentAngle: 0
-  absoluteWorldScale: {x: 1.9000001, y: 2.2}
-  relativeToParentScale: {x: 0.6000001, y: 0.6}
+  relativeToParentAngle: 130.75099
+  relativeToParentScale: {x: 0.8457119, y: 0.3998865}
+  detached: 0
   minScaleX: 1
   maxScaleX: 2.48
   minScaleY: 1
   maxScaleY: 4.2000003
   shaderProperties:
   - propertyName: _BangRoundness
-    propertyValue: 0.6
+    propertyValue: 0.5840572
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _StrandCount
-    propertyValue: 0.6
+    propertyValue: 0.3971733
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _StrandOffset
-    propertyValue: 0.4
+    propertyValue: 0.7933095
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _HairBangScale
-    propertyValue: 0.6
+    propertyValue: 0.49015045
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _HairRoundness
-    propertyValue: 0.4
+    propertyValue: 0.57588327
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.49787155, g: 0.76669586, b: 0.47405207, a: 1}
+    colorValue: {r: 0.59768164, g: 0.5643788, b: 0.619626, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.57457596, g: 0.48925427, b: 0.88769495, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.21944082, g: 0.3380254, b: 0.31369618, a: 1}

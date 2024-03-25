@@ -1,7 +1,5 @@
 using System.Data;
-using Unity.Profiling;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 [CreateAssetMenu(fileName = "CharacterProfile", menuName = "ScriptableObjects/Character", order = 100)]
 public class CharacterData : ScriptableObject
@@ -13,7 +11,43 @@ public class CharacterData : ScriptableObject
 
     public PartData[] allParts;
 
-    public FaceFeatureData featureData;
+    public enum Expression
+    {
+        NEUTRAL,
+        HAPPY,
+        SAD,
+        ANGRY,
+        SURPRISE,
+        SCARED
+    }
+    
+    public Expression currentExpression;
+
+    public bool canSee = true;
+    public bool canSpeak = true;
+    public bool canSmell = true;
+    public bool canHear = true;
+
+    public void UpdateVisionStatus()
+    {
+        float eyeRadius = eyeData.shadePropertyDict["_PupilRadius"].propertyValue;
+        float eyeOpen = eyeData.shadePropertyDict["_EyelidBottomOpen"].propertyValue + eyeData.shadePropertyDict["_EyelidTopOpen"].propertyValue;
+        canSee = eyeRadius > 0.05f && eyeOpen > 0.05f;
+    }
+
+    public bool CanSee()
+    {
+        float eyeRadius = eyeData.shadePropertyDict["_PupilRadius"].propertyValue;
+        float eyeOpen = eyeData.shadePropertyDict["_EyelidBottomOpen"].propertyValue + eyeData.shadePropertyDict["_EyelidTopOpen"].propertyValue;
+
+        canSee =  eyeRadius > 0.05f && eyeOpen > 0.05f;
+        return canSee;
+    }
+
+    public void UpdateHearingStatus(PartController ear)
+    {
+        canHear = true;
+    }
 
     [ContextMenu("Random A Piece")]
     void RandomPiece(PartData part, float randomFactor){

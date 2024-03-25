@@ -60,8 +60,10 @@ public class PartController : MonoBehaviour
 
     public void UpdateDependencies()
     {
+        
         if(childControllers.Count > 0)
         {
+            //Debug.Log("updating the children of: " + transform.name);
             for(int j = 0; j < childControllers.Count; j++)
             {
                 childControllers[j].pd.SetPositionBounds(pd);
@@ -146,8 +148,9 @@ public class PartController : MonoBehaviour
 
     public void UpdateAllTransformValues()
     {
-
+        
         if(!detached){
+            //Debug.Log(transform.name + " is still on body so going to update");
             if(flippedXAxis)
             {
                 transform.localScale = pd.GetFlippedAbsoluteScale();
@@ -174,8 +177,9 @@ public class PartController : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
                 cacheAngle = pd.relativeToParentAngle;
             }
+        }else{
+            Debug.Log(transform.name + " was detached");
         }
-
         UpdateDependencies();
     }
 
@@ -260,10 +264,9 @@ public class PartController : MonoBehaviour
     public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
-
+        PlayerActionData padBreak = new PlayerActionData(pd, CharacterActionData.ActionType.BREAKCHANGE);
+        padBreak.brokePart = detached;
         if(detached){
-            PlayerActionData padBreak = new PlayerActionData(pd, CharacterActionData.ActionType.BREAKCHANGE);
-            OnBreakPart.Instance.Invoke(padBreak);
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
@@ -286,6 +289,8 @@ public class PartController : MonoBehaviour
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }
+        OnBreakPart.Instance.Invoke(padBreak);
+
     }
 
     public void UpdateAllShadersValue()

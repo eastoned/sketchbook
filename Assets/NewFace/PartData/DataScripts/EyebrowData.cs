@@ -5,8 +5,8 @@ public class EyebrowData : PartData
 {
     public override void SetPositionBounds(PartData parentData)
     {
-        minPosX = GetAbsoluteScale().x/2f;
-        maxPosX = parentData.GetAbsoluteScale().x/2f;
+        minPosX = parentData.GetAbsolutePosition().x + GetAbsoluteScale().x/2f;
+        maxPosX = parentData.GetAbsolutePosition().x + parentData.GetAbsoluteScale().x/2f;
         minPosY = parentData.GetAbsolutePosition().y - parentData.GetAbsoluteScale().y/2f;
         maxPosY = parentData.GetAbsolutePosition().y + parentData.GetAbsoluteScale().y/2f;
     }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EyeData", menuName = "ScriptableObjects/Eye", order = 3)]
-public class EyeData : PartData{
+public class EyeData : PartData
+{
 
     public override void SetPositionBounds(PartData parentData)
     {
         //Debug.Log("Setting eye lowest position with parent");
-        minPosX = GetAbsoluteScale().x/2f;
-        maxPosX = parentData.GetAbsoluteScale().x/2f;
+        minPosX = parentData.GetAbsolutePosition().x + GetAbsoluteScale().x/2f;
+        maxPosX = parentData.GetAbsolutePosition().x + parentData.GetAbsoluteScale().x/2f;
         minPosY = parentData.GetAbsolutePosition().y - parentData.GetColliderSize().y/2f;
         maxPosY = parentData.GetAbsolutePosition().y + parentData.GetColliderSize().y/2f;
     }

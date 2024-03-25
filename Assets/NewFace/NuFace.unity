@@ -933,7 +933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &125961749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2441,23 +2441,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee9ff44763da92f48a7355f20351b353, type: 2}
   - {fileID: 11400000, guid: 0bd8592c5979db64f8a4738d85a88409, type: 2}
   - {fileID: 11400000, guid: a992013a6b10ec64593fb766271b76f0, type: 2}
-  convo:
-  - hello... sorry to interrupt your senseless shuffling.
-  - i meant to bring this up earlier...
-  - but i was hoping it would stop before i had to say something.
-  - so you've been pressing that button. a lot.
-  - and i feel like... if you didn't want to keep me the last ten times,
-  - are you ever going to keep me, much less like me :/
-  - well it was funny, we had our laughs
-  - not anymore
-  - give it up
-  - that's enough
-  - please don't make me into something im not
-  - ...
-  - .......
-  - ..
-  - ok, try it
-  - ok, try it
   parts:
   - {fileID: 99618909}
   - {fileID: 1451965502}
@@ -2471,7 +2454,6 @@ MonoBehaviour:
   - {fileID: 1269006691}
   - {fileID: 244385092}
   - {fileID: 311225759}
-  characterSet: []
   requestList:
   - requestMessage: Bring the nose up.
     successMessage: Tahnks for the nose.
@@ -2521,10 +2503,6 @@ MonoBehaviour:
     successIfAnyConditionMet: 0
   count: 0
   charStage: 0
-  stageThresholds: 
-  scoreDebug: {fileID: 642273190}
-  moneyDebug: {fileID: 378029131}
-  button: {fileID: 0}
   isGame: 0
   playerActionHistory: []
   counter: 0
@@ -3209,6 +3187,7 @@ MonoBehaviour:
   upperLip: 0
   lowerLip: 0
   mouthRadius: 0
+  canSpeak: 1
 --- !u!4 &397872631
 Transform:
   m_ObjectHideFlags: 0
@@ -9857,7 +9836,7 @@ Transform:
   m_GameObject: {fileID: 1272764998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.07850218, z: -0.1}
+  m_LocalPosition: {x: 0, y: -1.75, z: -0.1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11361,7 +11340,7 @@ GameObject:
   - component: {fileID: 1519914564}
   - component: {fileID: 1519914565}
   m_Layer: 5
-  m_Name: SliderParent
+  m_Name: CustomizationSliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
