@@ -713,14 +713,7 @@ MonoBehaviour:
   rb2D: {fileID: 95416238}
   flippedXAxis: 0
   detached: 0
-  childControllers:
-  - {fileID: 311225759}
-  - {fileID: 1792980034}
-  - {fileID: 524532358}
-  - {fileID: 1470558959}
-  - {fileID: 1272765003}
-  - {fileID: 1451965502}
-  - {fileID: 99618909}
+  childControllers: []
   mirroredPart: {fileID: 0}
   canUpdateMirror: 0
   cachePosition: {x: 0, y: 0, z: 0.1}
@@ -748,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &99618905
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1627,7 +1620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &244385091
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2099,7 +2092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &311225758
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2436,11 +2429,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74e97103a8ac70149b9ea328905947b8, type: 2}
   targetData:
   - {fileID: 11400000, guid: f5d941677e3fe374aa7385a1b1998bfe, type: 2}
-  compareTargets:
-  - {fileID: 11400000, guid: 9f5b8e7eac41c7242ad0410bd05fce10, type: 2}
-  - {fileID: 11400000, guid: ee9ff44763da92f48a7355f20351b353, type: 2}
-  - {fileID: 11400000, guid: 0bd8592c5979db64f8a4738d85a88409, type: 2}
-  - {fileID: 11400000, guid: a992013a6b10ec64593fb766271b76f0, type: 2}
   parts:
   - {fileID: 99618909}
   - {fileID: 1451965502}
@@ -4036,7 +4024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &524532354
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4946,7 +4934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &610878717
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6439,7 +6427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &838332024
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7157,6 +7145,8 @@ MonoBehaviour:
   neck: {fileID: 1269006691}
   leftEar: {fileID: 838332028}
   rightEar: {fileID: 610878721}
+  partControllers:
+  - {fileID: 95416240}
   bodyParts:
   - {fileID: 1269006690}
   - {fileID: 244385096}
@@ -8786,7 +8776,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 328473527}
           m_TargetAssemblyTypeName: 
           m_MethodName: 
           m_Mode: 1
@@ -9543,7 +9533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1269006687
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9731,7 +9721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1272764999
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10542,7 +10532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1451965498
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10953,7 +10943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1470558955
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12581,7 +12571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1792980030
 BoxCollider2D:
   m_ObjectHideFlags: 0

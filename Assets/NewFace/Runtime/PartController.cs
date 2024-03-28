@@ -41,6 +41,19 @@ public class PartController : MonoBehaviour
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
+        InitializePropertyBlock();
+        InitializePartDataDictionary();
+    }
+
+    private void InitializePropertyBlock()
+    {
+        for(int i = 0; i < pd.shaderProperties.Count; i++){
+            propBlock.SetFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
+        }
+
+        for(int j = 0;  j < pd.shaderColors.Count; j++){
+            propBlock.SetColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
+        }
     }
 
     public void InitializePartDataDictionary()
@@ -101,7 +114,7 @@ public class PartController : MonoBehaviour
 
         
         //Begin transform part
-        currentPAD = new PlayerActionData(pd, PlayerActionData.ActionType.TRANSFORMCHANGE);
+        currentPAD = new PlayerActionData(PlayerActionData.ActionType.TRANSFORMCHANGE, pd);
         
         timeCache = Time.time;
         positionCache = transform.position;
@@ -141,7 +154,7 @@ public class PartController : MonoBehaviour
         }
 
         currentPAD.timeToChange = Time.time - timeCache;
-        currentPAD.brokePart = detached;
+        //currentPAD.brokePart = detached;
         currentPAD.positionChange = transform.position - positionCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
     }
@@ -150,7 +163,6 @@ public class PartController : MonoBehaviour
     {
         
         if(!detached){
-            //Debug.Log(transform.name + " is still on body so going to update");
             if(flippedXAxis)
             {
                 transform.localScale = pd.GetFlippedAbsoluteScale();
@@ -206,7 +218,6 @@ public class PartController : MonoBehaviour
             UpdateColliderBounds();
             UpdateDependencies();
         }
-        
     }
 
     public void ShakePiece(float strength, float time)
@@ -264,8 +275,8 @@ public class PartController : MonoBehaviour
     public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
-        PlayerActionData padBreak = new PlayerActionData(pd, CharacterActionData.ActionType.BREAKCHANGE);
-        padBreak.brokePart = detached;
+        PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
+        //padBreak.brokePart = detached;
         if(detached){
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
@@ -290,12 +301,6 @@ public class PartController : MonoBehaviour
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }
         OnBreakPart.Instance.Invoke(padBreak);
-
-    }
-
-    public void UpdateAllShadersValue()
-    {
-        rend.SetPropertyBlock(propBlock);
     }
 
     public void UpdateRenderPropBlock()
@@ -305,7 +310,12 @@ public class PartController : MonoBehaviour
 
     public void UpdateSingleShaderFloat(string param, float value)
     {
-        propBlock.SetFloat(param, value);
+        Debug.Log(param);
+        if(propBlock.HasFloat(param)){
+            propBlock.SetFloat(param, value);
+        }else{
+            Debug.Log(param + " is not an available float.");
+        }
     }
 
     public float GetSingleShaderFloat(string param)
@@ -320,7 +330,12 @@ public class PartController : MonoBehaviour
 
     void UpdateSingleShaderColor(string param, Color col)
     {
-        propBlock.SetColor(param, col);
+        if(propBlock.HasColor(param)){
+           propBlock.SetColor(param, col); 
+        }else{
+            Debug.Log(param + " is not an available color.");
+        }
+        
     }
 
 }

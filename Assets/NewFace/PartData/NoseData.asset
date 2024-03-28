@@ -13,72 +13,70 @@ MonoBehaviour:
   m_Name: NoseData
   m_EditorClassIdentifier: 
   partName: nose
-  absoluteWorldPosition: {x: 0, y: -0.185515}
-  relativeToParentPosition: {x: 0, y: 0.6}
+  relativeToParentPosition: {x: 0, y: 0.71475065}
   absoluteWorldPositionZ: -0.1
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.5261905
-  maxPosY: 0.5738096
+  minPosY: -0.9318167
+  maxPosY: 0.95762193
   minAngle: 0
   maxAngle: 0
-  absoluteWorldAngle: 0
   relativeToParentAngle: 0
-  absoluteWorldScale: {x: 1.1, y: 0.9}
-  relativeToParentScale: {x: 0.6, y: 0.39999998}
+  relativeToParentScale: {x: 0.6596881, y: 0.31862324}
+  detached: 0
+  activeInScene: 0
   minScaleX: 0.5
-  maxScaleX: 1.24
+  maxScaleX: 1.7563603
   minScaleY: 0.5
-  maxScaleY: 2.1000001
+  maxScaleY: 1.8894386
   shaderProperties:
   - propertyName: _NoseBaseWidth
-    propertyValue: 0.4
+    propertyValue: 0.6390532
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NoseTotalWidth
-    propertyValue: 0.4
+    propertyValue: 0.29466343
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NoseTopWidth
-    propertyValue: 0.6
+    propertyValue: 0.38625842
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NoseCurve
-    propertyValue: 0.6
+    propertyValue: 0.58244485
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NoseTotalLength
-    propertyValue: 0.4
+    propertyValue: 0.39462504
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NostrilRadius
-    propertyValue: 0.6
+    propertyValue: 0.66760325
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NostrilSpacing
-    propertyValue: 0.4
+    propertyValue: 0.6094078
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NostrilHeight
-    propertyValue: 0.4
+    propertyValue: 0.60057914
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _NostrilScale
-    propertyValue: 0.4
+    propertyValue: 0.5604688
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.86030054, g: 0.50641054, b: 0.34134653, a: 1}
+    colorValue: {r: 0.0042200815, g: 0.0037586866, b: 0.0057195425, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.15121372, g: 0.18371654, b: 0.1541395, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.46298486, g: 0.42487705, b: 0.4598513, a: 1}

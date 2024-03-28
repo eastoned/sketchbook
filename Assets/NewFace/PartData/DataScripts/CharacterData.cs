@@ -20,6 +20,13 @@ public class CharacterData : ScriptableObject
         SURPRISE,
         SCARED
     }
+
+    public enum CharacterState
+    {
+        SLEEPING,
+        TIRED,
+        CRYING
+    }
     
     public Expression currentExpression;
 
@@ -37,11 +44,16 @@ public class CharacterData : ScriptableObject
 
     public bool CanSee()
     {
-        float eyeRadius = eyeData.shadePropertyDict["_PupilRadius"].propertyValue;
-        float eyeOpen = eyeData.shadePropertyDict["_EyelidBottomOpen"].propertyValue + eyeData.shadePropertyDict["_EyelidTopOpen"].propertyValue;
+        if(eyeData.activeInScene){
+           float eyeRadius = eyeData.shadePropertyDict["_PupilRadius"].propertyValue;
+            float eyeOpen = eyeData.shadePropertyDict["_EyelidBottomOpen"].propertyValue + eyeData.shadePropertyDict["_EyelidTopOpen"].propertyValue;
 
-        canSee =  eyeRadius > 0.05f && eyeOpen > 0.05f;
-        return canSee;
+            canSee =  eyeRadius > 0.05f && eyeOpen > 0.05f;
+            return canSee; 
+        }else{
+            return false;
+        }
+        
     }
 
     public void UpdateHearingStatus(PartController ear)
@@ -65,11 +77,17 @@ public class CharacterData : ScriptableObject
             part.maxPosY = noseData.relativeToParentPosition.y;
         }
 
+        
+
         part.relativeToParentPosition = new Vector3(
             Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             Mathf.Lerp(part.minPosY, part.maxPosY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             part.absoluteWorldPositionZ);
             
+        if(part == headData){
+            Debug.Log("Randomizing head");
+            Debug.Log(part.minPosY);
+        }
         part.relativeToParentScale = new Vector3(
             Mathf.Lerp(part.minScaleX, part.maxScaleX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             Mathf.Lerp(part.minScaleY, part.maxScaleY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),

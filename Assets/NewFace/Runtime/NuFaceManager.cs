@@ -14,8 +14,6 @@ public class NuFaceManager : MonoBehaviour
     public CharacterData[] writeableData;
     public CharacterData[] targetData;
 
-    public CharacterData[] compareTargets;
-
     public static bool canShareFeedback = false;
 
     public PartController[] parts;
@@ -45,8 +43,6 @@ public class NuFaceManager : MonoBehaviour
 
     private void AddPlayerActionToHistory(PlayerActionData pad)
     {
-        float eyeRadius = eye.GetSingleShaderFloat("_PupilRadius");
-        float eyeOpen = eye.GetSingleShaderFloat("_EyelidBottomOpen") + eye.GetSingleShaderFloat("_EyelidTopOpen");
         //if broke then will always remember
         if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
            playerActionHistory.Add(pad); 
@@ -131,13 +127,13 @@ public class NuFaceManager : MonoBehaviour
     public void Compare(){
         string currentClosestCharacter = "";
         float highestResult = 0;
-        for(int i = 0 ; i < compareTargets.Length; i++){
-            float currentResult = GetDataDifference(compareTargets[i].allParts, pfc.currentChar.allParts);
-            if (currentResult > highestResult){
-                highestResult = currentResult;
-                currentClosestCharacter = compareTargets[i].name;
-            }
-        }
+        //for(int i = 0 ; i < compareTargets.Length; i++){
+            //float currentResult = GetDataDifference(compareTargets[i].allParts, pfc.currentChar.allParts);
+            //if (currentResult > highestResult){
+              //  highestResult = currentResult;
+               // currentClosestCharacter = compareTargets[i].name;
+           // }
+        //}
 
         Debug.Log("The closest character is: " + currentClosestCharacter);
         
@@ -261,6 +257,11 @@ public class NuFaceManager : MonoBehaviour
         //}
     }
 
+    public void PressedRandomButton(){
+        PlayerActionData pad = new PlayerActionData(CharacterActionData.ActionType.BUTTONCHANGE);
+        AddPlayerActionToHistory(pad);
+    }
+
     IEnumerator BirthRoutine(){
         parts[9].rend.enabled = true;
         yield return TransformAnimation(parts[9].transform, new Vector3(0f,-2f,0.2f), new Vector3(0f,-1f,0.2f), new Vector3(0f, 0f, 1f), new Vector3(2f, 2f, 1f), 1f);
@@ -367,7 +368,6 @@ public class NuFaceManager : MonoBehaviour
         score += GetPartDifference(gameData.earData, targetData.earData);
         score += GetPartDifference(gameData.hairFrontData, targetData.hairFrontData);
         score += GetPartDifference(gameData.hairBackData, targetData.hairBackData);
-       Debug.Log("Similarity score between current face and : " + targetData.name + " is : " + score);
        return score;
     }
 

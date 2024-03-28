@@ -9,7 +9,11 @@ public class PlayerActionData : CharacterActionData
 {
     public bool characterExported = false;
     //part edited to be recorded
-    public PlayerActionData(PartData partData, ActionType actionType) : base(partData, actionType){
+    public PlayerActionData(ActionType actionType) : base(actionType)
+    {
+    }
+    public PlayerActionData(ActionType actionType, PartData partData) : base(actionType, partData)
+    {
     }
 }
 
@@ -23,18 +27,22 @@ public class CharacterActionData
         TRANSFORMCHANGE,
         PROPERTYCHANGE,
         BREAKCHANGE,
+        BUTTONCHANGE,
         NOTHINGCHANGE
     }
     
     public ActionType actionType;
     public float timeToChange;
-    public bool brokePart;
     public Vector2 positionChange, scaleChange;
     public float angleChange;
     public float propertyChange;
-    public CharacterActionData(PartData partData, ActionType actionType){
-        this.partEdited = partData;
+    public CharacterActionData(ActionType actionType){
         this.actionType = actionType;
+    }
+
+    public CharacterActionData(ActionType actionType, PartData partData){
+        this.actionType = actionType;
+        this.partEdited = partData;
         this.partName = partData.partName;
     }
 }

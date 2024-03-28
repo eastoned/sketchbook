@@ -13,47 +13,45 @@ MonoBehaviour:
   m_Name: EyebrowData
   m_EditorClassIdentifier: 
   partName: eyebrows
-  absoluteWorldPosition: {x: 0.54897, y: 0.69487286}
-  relativeToParentPosition: {x: 0.46391997, y: 0.71324855}
+  relativeToParentPosition: {x: 0.46394658, y: 0.7131661}
   absoluteWorldPositionZ: -0.2
-  minPosX: 0.22600003
-  maxPosX: 0.62
-  minPosY: -1.5261905
-  maxPosY: 0.5738096
+  minPosX: 0.30345157
+  maxPosX: 0.8781773
+  minPosY: -0.9318351
+  maxPosY: 0.95761913
   minAngle: -90
   maxAngle: 90
-  absoluteWorldAngle: -17.999998
-  relativeToParentAngle: 0
-  absoluteWorldScale: {x: 0.53000003, y: 0.68}
-  relativeToParentScale: {x: 0.6000001, y: 0.6}
+  relativeToParentAngle: 0.0015322767
+  relativeToParentScale: {x: 0.5999952, y: 0.59995365}
+  detached: 0
+  activeInScene: 0
   minScaleX: 0.2
-  maxScaleX: 0.62
+  maxScaleX: 0.8781773
   minScaleY: 0.2
   maxScaleY: 1
   shaderProperties:
   - propertyName: _EyebrowCount
-    propertyValue: 0.4
+    propertyValue: 0.40001136
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EyebrowThickness
-    propertyValue: 0.6
+    propertyValue: 0.5999914
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EyebrowRoundness
-    propertyValue: 0.4
+    propertyValue: 0.40003842
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EyebrowCurve
-    propertyValue: 0.4
+    propertyValue: 0.40002623
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.40904677, g: 0.29733157, b: 0.7345072, a: 1}
+    colorValue: {r: 0.40903416, g: 0.2973355, b: 0.7344189, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.20342292, g: 0.3681602, b: 0.26222664, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.20349716, g: 0.36820883, b: 0.26228097, a: 1}

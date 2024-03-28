@@ -13,77 +13,79 @@ MonoBehaviour:
   m_Name: MouthData
   m_EditorClassIdentifier: 
   partName: mouth
-  relativeToParentPosition: {x: 0, y: 0.3145383}
+  relativeToParentPosition: {x: 0, y: 0.6771085}
   absoluteWorldPositionZ: 0
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.5629494
-  maxPosY: 0.6654403
+  minPosY: -0.9318167
+  maxPosY: 0.95762193
   minAngle: 0
   maxAngle: 0
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 1, y: 1}
+  relativeToParentScale: {x: 0.28874856, y: 0.5588098}
+  detached: 0
+  activeInScene: 0
   minScaleX: 0.2
-  maxScaleX: 1.6579859
+  maxScaleX: 1.7563603
   minScaleY: 0.2
-  maxScaleY: 1.1141949
+  maxScaleY: 0.9447193
   shaderProperties:
   - propertyName: _MouthRadius
-    propertyValue: 0.5312618
+    propertyValue: 0.63601243
     wholeNumberInterval: 0
     valueInterval: 0
-    propertyFeature: 4
+    propertyFeature: 0
   - propertyName: _MouthOpen
-    propertyValue: 0.5327763
+    propertyValue: 0.61753917
     wholeNumberInterval: 0
     valueInterval: 0
-    propertyFeature: 4
+    propertyFeature: 0
   - propertyName: _MouthBend
-    propertyValue: 0.4616596
+    propertyValue: 0.6359645
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TeethTop
-    propertyValue: 0.5504402
+    propertyValue: 0.3774852
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TeethBottom
-    propertyValue: 0.4155089
+    propertyValue: 0.67967737
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TeethCount
-    propertyValue: 0.5225724
+    propertyValue: 0.45454526
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TeethRoundness
-    propertyValue: 0.40215614
+    propertyValue: 0.34658417
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TongueRadius
-    propertyValue: 0.42575032
+    propertyValue: 0.3085145
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TongueScale
-    propertyValue: 0.47615373
+    propertyValue: 0.5793809
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _TongueHeight
-    propertyValue: 0.54536
+    propertyValue: 0.35487095
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.47396266, g: 0.54586965, b: 0.46587208, a: 1}
+    colorValue: {r: 0.515979, g: 0.52027065, b: 0.37187442, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.6139909, g: 0.6213209, b: 0.579895, a: 1}
+    colorValue: {r: 0.24068117, g: 0.23576628, b: 0.15465337, a: 1}
   - colorName: _Color3
-    colorValue: {r: 0.0001140407, g: 0.12643969, b: 0.006558531, a: 1}
+    colorValue: {r: 0.82381856, g: 0.5978984, b: 0.7577951, a: 1}
   - colorName: _Color4
-    colorValue: {r: 0.04696417, g: 0.023093695, b: 0.012152279, a: 1}
+    colorValue: {r: 0.30502683, g: 0.6930586, b: 0.18627086, a: 1}

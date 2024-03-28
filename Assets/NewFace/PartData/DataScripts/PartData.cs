@@ -67,6 +67,7 @@ public class PartData : ScriptableObject
         public Vector2 relativeToParentScale;
 
         public bool detached = false;
+        public bool activeInScene = true;
 
         public float minScaleX, maxScaleX, minScaleY, maxScaleY;
     #endregion

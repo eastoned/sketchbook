@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: EarData
   m_EditorClassIdentifier: 
   partName: ears
-  absoluteWorldPosition: {x: 0.9265625, y: 0.6609376}
   relativeToParentPosition: {x: 0.59999996, y: 0.6}
   absoluteWorldPositionZ: 0.15
   minPosX: 0.398
@@ -22,10 +21,10 @@ MonoBehaviour:
   maxPosY: 0.5738096
   minAngle: -90
   maxAngle: 90
-  absoluteWorldAngle: 18.000004
   relativeToParentAngle: 0
-  absoluteWorldScale: {x: 0.775, y: 2.1125}
   relativeToParentScale: {x: 0.39999998, y: 0.59999996}
+  detached: 0
+  activeInScene: 0
   minScaleX: 0.5
   maxScaleX: 1.24
   minScaleY: 0.5
@@ -35,45 +34,44 @@ MonoBehaviour:
     propertyValue: 0.6
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarLengthSkew
     propertyValue: 0.4
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarShape
     propertyValue: 0.6
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarRoundness
     propertyValue: 0.4
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarOpenWidth
     propertyValue: 0.4
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarOpenLength
     propertyValue: 0.4
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarConcha
     propertyValue: 0.4
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   - propertyName: _EarTragus
     propertyValue: 0.4
     wholeNumberInterval: 0
     valueInterval: 0
-    affectedFeature: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 0.14281109, g: 0.11755885, b: 0.20263267, a: 1}
   - colorName: _Color2
     colorValue: {r: 0.5469939, g: 0.42520976, b: 0.297457, a: 1}
-  affectedPartData: []

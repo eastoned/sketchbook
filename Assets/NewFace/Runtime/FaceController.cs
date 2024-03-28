@@ -7,6 +7,7 @@ using UnityEngine;
 public class FaceController : MonoBehaviour
 {
     public PartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar;
+    public PartController[] partControllers;
     public Transform[] bodyParts;
     public PartData[] bodyData;
     public enum EyeTarget{
@@ -14,6 +15,7 @@ public class FaceController : MonoBehaviour
         PART,
         BLANK
     }
+    
     public EyeTarget eyeTarget;
 
     [Range(-90, 90)]
@@ -47,10 +49,10 @@ public class FaceController : MonoBehaviour
 
     public virtual void OnEnable()
 	{
-        //OnSelectedNewFacePartEvent.Instance.AddListener(Blink);
+
     }
     public virtual void OnDisable(){
-        //OnSelectedNewFacePartEvent.Instance.RemoveListener(Blink);
+
     }
 
     private void Start(){
@@ -58,8 +60,8 @@ public class FaceController : MonoBehaviour
     }
 
     private void InitializeControllers(){
-        InitializeDictionaries();
-        UpdateAllControllers();
+        //InitializeDictionaries();
+        //UpdateAllControllers();
     }
 
     [ContextMenu("Refresh Connected Data")]
@@ -88,42 +90,26 @@ public class FaceController : MonoBehaviour
         bodyData[3] = currentChar.hairFrontData;
     }
 
-    public void Interpolate(float val, CharacterData gameData, CharacterData blendFrom, CharacterData blendTo){
-        BlendProfile(val, gameData.headData, blendFrom.headData, blendTo.headData);
-        BlendProfile(val, gameData.neckData, blendFrom.neckData, blendTo.neckData);
-        BlendProfile(val, gameData.eyeData, blendFrom.eyeData, blendTo.eyeData);
-        BlendProfile(val, gameData.eyebrowData, blendFrom.eyebrowData, blendTo.eyebrowData);
-        BlendProfile(val, gameData.noseData, blendFrom.noseData, blendTo.noseData);
-        BlendProfile(val, gameData.mouthData, blendFrom.mouthData, blendTo.mouthData);
-        BlendProfile(val, gameData.earData, blendFrom.earData, blendTo.earData);
-        BlendProfile(val, gameData.hairFrontData, blendFrom.hairFrontData, blendTo.hairFrontData);
-        BlendProfile(val, gameData.hairBackData, blendFrom.hairBackData, blendTo.hairBackData);
+    public void Interpolate(float val, CharacterData gameData, CharacterData blendFrom, CharacterData blendTo)
+    {
+        for(int i = 0; i < gameData.allParts.Length; i++)
+        {
+            Debug.Log(gameData.allParts[i].activeInScene);
+            if(gameData.allParts[i].activeInScene)
+                BlendProfile(val, gameData.allParts[i], blendFrom.allParts[i], blendTo.allParts[i]);
+        }
     }
 
-    public void UpdateAllControllers(){
-        head.UpdateAllTransformValues();
-        head.UpdateAllShadersValue(0f);
-        rightEye.UpdateAllTransformValues();
-        rightEye.UpdateAllShadersValue(0f);
-        leftEye.UpdateAllShadersValue(0f);
-        rightEyebrow.UpdateAllTransformValues();
-        rightEyebrow.UpdateAllShadersValue(0f);
-        leftEyebrow.UpdateAllShadersValue(0f);
-        rightEar.UpdateAllTransformValues();
-        rightEar.UpdateAllShadersValue(0f);
-        leftEar.UpdateAllShadersValue(0f);
-        bangs.UpdateAllTransformValues();
-        bangs.UpdateAllShadersValue(0f);
-        hair.UpdateAllTransformValues();
-        hair.UpdateAllShadersValue(0f);
-        mouth.UpdateAllTransformValues();
-        mouth.UpdateAllShadersValue(0f);
-        neck.UpdateAllTransformValues();
-        neck.UpdateAllShadersValue(0f);
-        if(!nose.detached){
-            nose.UpdateAllTransformValues();
+    public void UpdateAllControllers()
+    {
+        foreach(PartController pc in partControllers){
+            if(pc.pd.activeInScene){
+                pc.UpdateAllShadersValue(0f);
+                if(!pc.detached){
+                   pc.UpdateAllTransformValues(); 
+                }
+            }
         }
-        nose.UpdateAllShadersValue(0f);
     }
 
     public void InitializeDictionaries()
@@ -291,7 +277,12 @@ public class FaceController : MonoBehaviour
 
         float rotatedRightX = (rightX*Mathf.Cos(-rightEye.pd.relativeToParentAngle)) - (rightY*Mathf.Sin(-rightEye.pd.relativeToParentAngle));
         float rotatedRightY = (rightX*Mathf.Sin(-rightEye.pd.relativeToParentAngle)) + (rightY*Mathf.Cos(-rightEye.pd.relativeToParentAngle));
-        
+        //rightEye.UpdateSingleShaderFloat("_PupilOffsetX", rightX);
+        //rightEye.UpdateSingleShaderFloat("_PupilOffsetY", rightY);
+        //rightEye.UpdateRenderPropBlock();
+        //leftEye.UpdateSingleShaderFloat("_PupilOffsetX", leftX);
+        //leftEye.UpdateSingleShaderFloat("_PupilOffsetY", leftY);
+        //leftEye.UpdateRenderPropBlock();
         //Vector2 rotatedLeft = Rotate2D(leftX, rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedLeft2 = Rotate2D(leftY, rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
@@ -316,12 +307,7 @@ public class FaceController : MonoBehaviour
        // leftEye.UpdateAllShadersValue(0f);
         //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
         //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-        rightEye.UpdateSingleShaderFloat("_PupilOffsetX", rightX);
-        rightEye.UpdateSingleShaderFloat("_PupilOffsetY", rightY);
-        rightEye.UpdateRenderPropBlock();
-        leftEye.UpdateSingleShaderFloat("_PupilOffsetX", leftX);
-        leftEye.UpdateSingleShaderFloat("_PupilOffsetY", leftY);
-        leftEye.UpdateRenderPropBlock();
+        
         //rightEye.UpdateAllShadersValue(0f);
         //RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
         //RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);

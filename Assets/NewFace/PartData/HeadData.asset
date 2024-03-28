@@ -13,54 +13,55 @@ MonoBehaviour:
   m_Name: HeadData
   m_EditorClassIdentifier: 
   partName: head
-  relativeToParentPosition: {x: 0, y: 0}
+  relativeToParentPosition: {x: 0, y: 0.50647825}
   absoluteWorldPositionZ: 0.1
   minPosX: 0
   maxPosX: 0
-  minPosY: 0
-  maxPosY: 0
+  minPosY: -1
+  maxPosY: 1
   minAngle: -180
   maxAngle: 180
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 1, y: 1}
+  relativeToParentScale: {x: 0.44715983, y: 0.5065171}
   detached: 0
+  activeInScene: 1
   minScaleX: 0.75
   maxScaleX: 3
   minScaleY: 0.75
-  maxScaleY: 4
+  maxScaleY: 3
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0.2911614
+    propertyValue: 0.53398
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ForeheadWidth
-    propertyValue: 0.47613174
+    propertyValue: 0.46141088
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ForeheadLength
-    propertyValue: 0.4077239
+    propertyValue: 0.44258684
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinScale
-    propertyValue: 0.25751868
+    propertyValue: 0.5679086
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinWidth
-    propertyValue: 0.8687213
+    propertyValue: 0.52576536
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinLength
-    propertyValue: 0.5000305
+    propertyValue: 0.44269472
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.9611485, g: 0.39548147, b: 0.74122274, a: 1}
+    colorValue: {r: 0.0413545, g: 0.043123603, b: 0.019214787, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.1090541, g: 0.06372066, b: 0.11810613, a: 1}
+    colorValue: {r: 0.9194602, g: 0.2037578, b: 0.83967626, a: 1}

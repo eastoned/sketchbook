@@ -80,6 +80,7 @@ public class PartUIController : MonoBehaviour
                         break;
                         case ShaderProperty.AffectedFeature.SPEECH:
                             sliders[i].onValueChanged.AddListener(OnAffectSpeakAbility.Instance.Invoke);
+                            
                         break;
                     }
                 }

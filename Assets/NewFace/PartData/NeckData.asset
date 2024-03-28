@@ -22,30 +22,31 @@ MonoBehaviour:
   minAngle: 0
   maxAngle: 0
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 0.40553516, y: 0}
+  relativeToParentScale: {x: 0.57328737, y: 0}
   detached: 0
+  activeInScene: 0
   minScaleX: 0.25
   maxScaleX: 1.7821784
   minScaleY: 2
   maxScaleY: 2
   shaderProperties:
   - propertyName: _NeckTopWidth
-    propertyValue: 0.8309149
+    propertyValue: 0.28587672
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _NeckCurveRoundness
-    propertyValue: 0.21390577
+    propertyValue: 0.5237041
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _NeckCurveScale
-    propertyValue: 0.8704966
+    propertyValue: 0.5002011
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.22448488, g: 0.32807952, b: 0.28012747, a: 1}
+    colorValue: {r: 0.1293402, g: 0.5176664, b: 0.48556617, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.19812775, g: 0.17337674, b: 0.01855251, a: 1}
+    colorValue: {r: 0.23642802, g: 0.24149719, b: 0.24329305, a: 1}
