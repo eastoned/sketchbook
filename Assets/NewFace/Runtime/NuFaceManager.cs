@@ -93,7 +93,7 @@ public class NuFaceManager : MonoBehaviour
     }
 
     private IEnumerator MoveToRandomPosition(){
-        Vector3 randomPos = new Vector3(Random.Range(hand.pd.minPosX, hand.pd.maxPosX), Random.Range(hand.pd.minPosY, hand.pd.maxPosY), hand.pd.absoluteWorldPositionZ);
+        Vector3 randomPos = new Vector3(Random.Range(hand.pd.minPosX-1f, hand.pd.maxPosX+1f), Random.Range(hand.pd.minPosY-1f, hand.pd.maxPosY+1f), hand.pd.absoluteWorldPositionZ);
         while(Vector3.Distance(hand.transform.localPosition, randomPos) > 0.1f){
             Vector3 currentPos = Vector3.MoveTowards(hand.transform.localPosition, randomPos, 0.01f);
             OnTranslatePartController.Instance.Invoke(hand, currentPos);
@@ -144,7 +144,7 @@ public class NuFaceManager : MonoBehaviour
         //for(int i = 0; i < playerActionHistory.Count; i++){
         yield return currentAction;
         //}
-        //playerActionHistory.Clear();
+        playerActionHistory.Clear();
         //yield return null;
     }
 
@@ -334,7 +334,6 @@ public class NuFaceManager : MonoBehaviour
             part.transform.SetParent(transform);
         }
         yield return TransformAnimation(transform, new Vector3(0, -2.5f, 0), new Vector3(0, -85, 0), new Vector3(1, 1, 1), new Vector3(40f, 40f, 1f), .5f);
-        //transform.position = new Vector3(0, -2.5f, 0);
         yield return null;
     }
 
@@ -356,7 +355,8 @@ public class NuFaceManager : MonoBehaviour
     public float GetDataDifference(PartData[] data1, PartData[] data2){
         float score = 0;
 
-        for(int i = 0; i < data1.Length; i++){
+        for(int i = 0; i < data1.Length; i++)
+        {
             score += GetPartDifference(data1[i], data2[i]);
         }
         

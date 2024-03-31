@@ -62,6 +62,8 @@ public class PartController : MonoBehaviour
         
         if(!flippedXAxis)
         {
+
+            //dummy was clearing the dictionary before and not populating it after smh
             pd.shadePropertyDict.Clear();
             for(int i = 0; i < pd.shaderProperties.Count; i++)
             {

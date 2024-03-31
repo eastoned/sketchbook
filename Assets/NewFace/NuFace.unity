@@ -13095,8 +13095,8 @@ MonoBehaviour:
   rend: {fileID: 1833672508}
   pd: {fileID: 11400000, guid: 3cf8aefbae66bf746a9e127d70d8fd11, type: 2}
   translatable: 1
-  rotatable: 0
-  scalable: 0
+  rotatable: 1
+  scalable: 1
   colid: {fileID: 1833672507}
   rb2D: {fileID: 1833672506}
   flippedXAxis: 0
