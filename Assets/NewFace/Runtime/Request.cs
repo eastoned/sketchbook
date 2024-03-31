@@ -44,7 +44,7 @@ public class RequestChange{
 
         if(!positionDelta.magnitude.Equals(0f)){
             Debug.Log("Request needs a position change");
-            OnTranslatePartController.Instance.AddListener(CheckPositionChange);
+            //OnTranslatePartController.Instance.AddListener(CheckPositionChange);
             positionFulfilled = false;
         }
 
@@ -135,7 +135,7 @@ public class RequestChange{
 
     public bool CheckTotalRequestFulfilled(){
         if(positionFulfilled && scaleFulfilled && rotationFulfilled && shadersFulfilled){
-            OnTranslatePartController.Instance.RemoveListener(CheckPositionChange);
+            //OnTranslatePartController.Instance.RemoveListener(CheckPositionChange);
             OnChangedShaderProperty.Instance.RemoveListener(CheckShaderChange);
             return true;
         }

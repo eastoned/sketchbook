@@ -52,7 +52,7 @@ public class PartTransformController : MonoBehaviour
 
         switch(controls){
             case TransformController.TRANSLATE:
-                OnTranslatePartController.Instance.Invoke(transform.localPosition + offset);
+                OnTranslatePartController.Instance.Invoke(partInEdit, transform.localPosition + offset);
             break;
             case TransformController.ROTATION:
                 OnRotatePartController.Instance.Invoke(transform.localPosition);

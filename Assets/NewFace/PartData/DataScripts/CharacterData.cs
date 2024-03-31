@@ -7,7 +7,7 @@ public class CharacterData : ScriptableObject
     public string characterName;
     public bool writeable = false;
 
-    public PartData earData, eyebrowData, eyeData, hairBackData, hairFrontData, headData, mouthData, neckData, noseData;
+    public PartData earData, eyebrowData, eyeData, hairBackData, hairFrontData, headData, mouthData, neckData, noseData, handData;
 
     public PartData[] allParts;
 
@@ -76,8 +76,6 @@ public class CharacterData : ScriptableObject
         if(part == mouthData){
             part.maxPosY = noseData.relativeToParentPosition.y;
         }
-
-        
 
         part.relativeToParentPosition = new Vector3(
             Mathf.Lerp(part.minPosX, part.maxPosX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),

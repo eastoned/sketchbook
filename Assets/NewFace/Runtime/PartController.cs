@@ -58,22 +58,24 @@ public class PartController : MonoBehaviour
 
     public void InitializePartDataDictionary()
     {
-        pd.shadePropertyDict.Clear();
+        Debug.Log("clear and init the dict");
+        
         if(!flippedXAxis)
         {
+            pd.shadePropertyDict.Clear();
             for(int i = 0; i < pd.shaderProperties.Count; i++)
             {
                 if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName))
                 {
                     pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
+                    Debug.Log("populated dictionary: " + pd.shaderProperties[i].propertyName);
                 }
             }
         }
     }
 
     public void UpdateDependencies()
-    {
-        
+    {  
         if(childControllers.Count > 0)
         {
             //Debug.Log("updating the children of: " + transform.name);
@@ -125,6 +127,7 @@ public class PartController : MonoBehaviour
         OnSelectedNewFacePartEvent.Instance.Invoke(this);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
+        ptc.partInEdit = this;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         

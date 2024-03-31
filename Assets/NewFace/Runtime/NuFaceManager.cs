@@ -10,7 +10,7 @@ public class NuFaceManager : MonoBehaviour
 {
     public PlayerFaceController pfc;
     public SpeechController sc;
-    public PartController eye;
+    public PartController eye, hand;
     public CharacterData[] writeableData;
     public CharacterData[] targetData;
 
@@ -24,6 +24,7 @@ public class NuFaceManager : MonoBehaviour
 
     public bool isGame = false;
     private Coroutine reportRoutine;
+    private Coroutine movingRoutine;
 
     public List<PlayerActionData> playerActionHistory = new List<PlayerActionData>();
 
@@ -49,8 +50,11 @@ public class NuFaceManager : MonoBehaviour
         }
         else if(pfc.currentChar.CanSee())
         {
+            
             // but doesn't remember if can't see
             playerActionHistory.Add(pad);
+        }else{
+            Debug.Log("cant see");
         }
     }
 
@@ -77,6 +81,27 @@ public class NuFaceManager : MonoBehaviour
         //character evaluation
         //find closest character template
         
+    }
+
+    [ContextMenu("Test Face Animation")]
+    public void DoRandomMovement(){
+        if(movingRoutine != null){
+            StopCoroutine(movingRoutine);
+        }
+
+        movingRoutine = StartCoroutine(MoveToRandomPosition());
+    }
+
+    private IEnumerator MoveToRandomPosition(){
+        Vector3 randomPos = new Vector3(Random.Range(hand.pd.minPosX, hand.pd.maxPosX), Random.Range(hand.pd.minPosY, hand.pd.maxPosY), hand.pd.absoluteWorldPositionZ);
+        while(Vector3.Distance(hand.transform.localPosition, randomPos) > 0.1f){
+            Vector3 currentPos = Vector3.MoveTowards(hand.transform.localPosition, randomPos, 0.01f);
+            OnTranslatePartController.Instance.Invoke(hand, currentPos);
+            yield return null;
+        }
+        Debug.Log("Hand reached random target");
+
+        yield return null;
     }
 
     private void ReportPlayerActions()
@@ -123,49 +148,6 @@ public class NuFaceManager : MonoBehaviour
         //yield return null;
     }
 
-    [ContextMenu("Compare Faces")]
-    public void Compare(){
-        string currentClosestCharacter = "";
-        float highestResult = 0;
-        //for(int i = 0 ; i < compareTargets.Length; i++){
-            //float currentResult = GetDataDifference(compareTargets[i].allParts, pfc.currentChar.allParts);
-            //if (currentResult > highestResult){
-              //  highestResult = currentResult;
-               // currentClosestCharacter = compareTargets[i].name;
-           // }
-        //}
-
-        Debug.Log("The closest character is: " + currentClosestCharacter);
-        
-        //scoreDebug.text = "Compare Score: " + result.ToString();
-        //Debug.Log(result.ToString());
-        //UpdateTextAmount();
-        /*
-        if(result >= stageThresholds[charStage-1]){
-            //Debug.Log("Moving on to next stage");
-            if(charStage < stageThresholds.Length){
-                //RandomizeFace();
-                //AffectStageCount(1); 
-            }else{
-                //scoreDebug.text = "You win"!;
-            }
-        }else{
-            //scoreDebug.text = "You got: " + result + " components right. You need: " + stageThresholds[charStage-1];
-            //Debug.Log("Try Again");
-        }*/
-    }
-    public void AffectStageCount(int diff){
-        charStage += diff;
-
-        for(int i = 0; i < pfc.bodyParts.Length; i++){
-            pfc.bodyParts[i].gameObject.GetComponent<MeshRenderer>().enabled = i < charStage;
-            pfc.bodyParts[i].gameObject.GetComponent<BoxCollider2D>().enabled = i < charStage;
-            if(pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart){
-                pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<MeshRenderer>().enabled = i < charStage;
-                pfc.bodyParts[i].gameObject.GetComponent<PartController>().mirroredPart.GetComponent<BoxCollider2D>().enabled = i < charStage;
-            }
-        }
-    }
 
     public void Routine(){
         

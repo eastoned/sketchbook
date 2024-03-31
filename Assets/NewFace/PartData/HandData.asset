@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9920ca242bbde2146949210edc824caf, type: 3}
+  m_Name: HandData
+  m_EditorClassIdentifier: 
+  partName: hands
+  relativeToParentPosition: {x: 0.6426845, y: 0.7419842}
+  absoluteWorldPositionZ: -0.3
+  minPosX: -1
+  maxPosX: 1
+  minPosY: -1
+  maxPosY: 1
+  minAngle: 0
+  maxAngle: 0
+  relativeToParentAngle: 0
+  relativeToParentScale: {x: 0, y: 0}
+  detached: 0
+  activeInScene: 1
+  minScaleX: 1
+  maxScaleX: 1
+  minScaleY: 1
+  maxScaleY: 1
+  shaderProperties: []
+  shaderColors: []

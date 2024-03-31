@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: EyeData
   m_EditorClassIdentifier: 
   partName: eyes
-  relativeToParentPosition: {x: 0.48147386, y: 0.35952103}
+  relativeToParentPosition: {x: 0.34465745, y: 0.32156244}
   absoluteWorldPositionZ: -0.05
-  minPosX: 0.18618216
-  maxPosX: 0.87818015
-  minPosY: -0.34939754
-  maxPosY: 0.37520278
+  minPosX: 0.34647045
+  maxPosX: 1.0060459
+  minPosY: -0.30036956
+  maxPosY: 0.50363547
   minAngle: -90
   maxAngle: 90
-  relativeToParentAngle: 35.407196
+  relativeToParentAngle: 15
   relativeToParentScale: {x: 0.5858651, y: 0.51148593}
   detached: 0
-  activeInScene: 0
+  activeInScene: 1
   minScaleX: 0.25
-  maxScaleX: 0.87818015
+  maxScaleX: 1.0060459
   minScaleY: 0.25
-  maxScaleY: 0.9447193
+  maxScaleY: 0.75620115
   shaderProperties:
   - propertyName: _PupilRadius
-    propertyValue: 0.5042368
+    propertyValue: 0.35930943
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0

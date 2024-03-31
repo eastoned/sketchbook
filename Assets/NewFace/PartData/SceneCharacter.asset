@@ -23,6 +23,7 @@ MonoBehaviour:
   mouthData: {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
   neckData: {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
   noseData: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+  handData: {fileID: 11400000, guid: 3cf8aefbae66bf746a9e127d70d8fd11, type: 2}
   allParts:
   - {fileID: 11400000, guid: 5b4f7d92c9775464a980e1646df57b94, type: 2}
   - {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
@@ -33,4 +34,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
   - {fileID: 11400000, guid: fe7fa66f4e5d4a14abde3f72979bc79c, type: 2}
   - {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
-  featureData: {fileID: 11400000, guid: b2413369bcb095f43a5ce2f52fa14494, type: 2}
+  currentExpression: 0
+  canSee: 1
+  canSpeak: 1
+  canSmell: 1
+  canHear: 1

@@ -128,31 +128,31 @@ public class PlayerFaceController : FaceController
     }
 
     bool startedTickling = false;
-    private void SetPartPosition(Vector3 pos)
+    private void SetPartPosition(PartController translatingPC, Vector3 pos)
     {
         //each part has a relative position to other objects
         
-        if(!currentPC.detached)
+        if(!translatingPC.detached)
         {
-            float flip = currentPC.flippedXAxis? -1f : 1f;
-            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.pd.absoluteWorldPositionZ);
+            float flip = translatingPC.flippedXAxis? -1f : 1f;
+            translatingPC.transform.localPosition = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
 
-            Vector3 absPos = new Vector3(pos.x*flip, pos.y, currentPC.pd.absoluteWorldPositionZ);
+            Vector3 absPos = new Vector3(pos.x*flip, pos.y, translatingPC.pd.absoluteWorldPositionZ);
 
             //Debug.Log(currentPC.pd.PositionOutsideMaximum(absPos));
-            currentPC.pd.SetClampedPosition(absPos);
+            translatingPC.pd.SetClampedPosition(absPos);
 
-            currentChange = Vector2.Distance(currentPC.pd.relativeToParentPosition, positionCache);
+            currentChange = Vector2.Distance(translatingPC.pd.relativeToParentPosition, positionCache);
             //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
             
-            if(currentPC.mirroredPart != null && currentPC.canUpdateMirror){
-                if(!currentPC.mirroredPart.detached)
-                    currentPC.mirroredPart.UpdateAllTransformValues();
+            if(translatingPC.mirroredPart != null && translatingPC.canUpdateMirror){
+                if(!translatingPC.mirroredPart.detached)
+                    translatingPC.mirroredPart.UpdateAllTransformValues();
             }
             
-            if(currentPC.pd.IsPositionOutsideMaximum(absPos))
+            if(translatingPC.pd.IsPositionOutsideMaximum(absPos))
             {
-                currentPC.ShakePiece(absPos.magnitude*10f, 0.25f);
+                translatingPC.ShakePiece(absPos.magnitude*10f, 0.25f);
 
                 if(!startedTickling)
                 {
@@ -162,13 +162,13 @@ public class PlayerFaceController : FaceController
                 
                 if(absPos.magnitude > 1.2f)
                 {
-                    UpdatePartAttachmentStatus(currentPC, true);
+                    UpdatePartAttachmentStatus(translatingPC, true);
                     //currentPC.pd.SetWorldPositionBounds();
                     //currentPC.canUpdateMirror = false;
                     //remove this part from any parent if the magnitude is too high
                     for(int i = 0; i < bodyParts.Length; i++){
-                        if(bodyParts[i].GetComponent<PartController>().childControllers.Contains(currentPC)){
-                            bodyParts[i].GetComponent<PartController>().childControllers.Remove(currentPC);
+                        if(bodyParts[i].GetComponent<PartController>().childControllers.Contains(translatingPC)){
+                            bodyParts[i].GetComponent<PartController>().childControllers.Remove(translatingPC);
                         }
                     }
                 }
@@ -176,20 +176,20 @@ public class PlayerFaceController : FaceController
             }
         }else{
             
-            currentPC.transform.localPosition = new Vector3(pos.x, pos.y, currentPC.pd.absoluteWorldPositionZ);
-            currentPC.parent = null;
+            translatingPC.transform.localPosition = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
+            translatingPC.parent = null;
 
-            currentPC.pd.SetClampedPosition(pos);
+            translatingPC.pd.SetClampedPosition(pos);
             for(int i = 0; i < bodyParts.Length; i++)
             {
-                if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(currentPC.transform.position))
+                if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(translatingPC.transform.position))
                 {
-                    if(currentPC.transform != bodyParts[i])
+                    if(translatingPC.transform != bodyParts[i])
                     {
                         PartController parent = bodyParts[i].GetComponent<PartController>();
-                        if(currentPC.pd.absoluteWorldPositionZ < parent.pd.absoluteWorldPositionZ)
+                        if(translatingPC.pd.absoluteWorldPositionZ < parent.pd.absoluteWorldPositionZ)
                         {
-                            currentPC.parent = parent;
+                            translatingPC.parent = parent;
                         }
                     }
                 }
@@ -198,7 +198,7 @@ public class PlayerFaceController : FaceController
 
         }
 
-        currentPC.UpdateAllTransformValues();
+        translatingPC.UpdateAllTransformValues();
             //if position is on  node then we can attach to it
     }
 
