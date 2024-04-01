@@ -93,10 +93,11 @@ public class NuFaceManager : MonoBehaviour
     }
 
     private IEnumerator MoveToRandomPosition(){
-        Vector3 randomPos = new Vector3(Random.Range(hand.pd.minPosX-1f, hand.pd.maxPosX+1f), Random.Range(hand.pd.minPosY-1f, hand.pd.maxPosY+1f), hand.pd.absoluteWorldPositionZ);
+        Vector3 randomPos = new Vector3(Random.Range(hand.pd.minPosX-1f, hand.pd.maxPosX+1f), Random.Range(hand.pd.minPosY-2f, hand.pd.maxPosY+2f), hand.pd.absoluteWorldPositionZ);
+        Vector3 handPos = hand.transform.localPosition;
         while(Vector3.Distance(hand.transform.localPosition, randomPos) > 0.1f){
-            Vector3 currentPos = Vector3.MoveTowards(hand.transform.localPosition, randomPos, 0.01f);
-            OnTranslatePartController.Instance.Invoke(hand, currentPos);
+            handPos = Vector3.MoveTowards(handPos, randomPos, 0.005f);
+            OnTranslatePartController.Instance.Invoke(hand, handPos);
             yield return null;
         }
         Debug.Log("Hand reached random target");

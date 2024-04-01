@@ -145,7 +145,7 @@ public class PlayerFaceController : FaceController
             currentChange = Vector2.Distance(translatingPC.pd.relativeToParentPosition, positionCache);
             //Debug.Log("Position change: " + currentPC.pd.relativePosition + " is the clamped pos : " + positionCache + "is the abs position: " +  currentChange);
             
-            if(translatingPC.mirroredPart != null && translatingPC.canUpdateMirror){
+            if(translatingPC.mirroredPart != null){
                 if(!translatingPC.mirroredPart.detached)
                     translatingPC.mirroredPart.UpdateAllTransformValues();
             }
@@ -162,40 +162,17 @@ public class PlayerFaceController : FaceController
                 
                 if(absPos.magnitude > 1.2f)
                 {
+                    Debug.Log("Reached limit so break");
                     UpdatePartAttachmentStatus(translatingPC, true);
-                    //currentPC.pd.SetWorldPositionBounds();
-                    //currentPC.canUpdateMirror = false;
-                    //remove this part from any parent if the magnitude is too high
-                    for(int i = 0; i < bodyParts.Length; i++){
-                        if(bodyParts[i].GetComponent<PartController>().childControllers.Contains(translatingPC)){
-                            bodyParts[i].GetComponent<PartController>().childControllers.Remove(translatingPC);
-                        }
-                    }
                 }
                     
             }
         }else{
             
             translatingPC.transform.localPosition = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
-            translatingPC.parent = null;
 
             translatingPC.pd.SetClampedPosition(pos);
-            for(int i = 0; i < bodyParts.Length; i++)
-            {
-                if(bodyParts[i].GetComponent<BoxCollider2D>().OverlapPoint(translatingPC.transform.position))
-                {
-                    if(translatingPC.transform != bodyParts[i])
-                    {
-                        PartController parent = bodyParts[i].GetComponent<PartController>();
-                        if(translatingPC.pd.absoluteWorldPositionZ < parent.pd.absoluteWorldPositionZ)
-                        {
-                            translatingPC.parent = parent;
-                        }
-                    }
-                }
-            }
-
-
+            
         }
 
         translatingPC.UpdateAllTransformValues();
@@ -214,7 +191,7 @@ public class PlayerFaceController : FaceController
             //Debug.Log("Scale change: " + currentChange);
             currentPC.UpdateAllTransformValues();
             
-            if(currentPC.mirroredPart != null && currentPC.canUpdateMirror){
+            if(currentPC.mirroredPart != null){
                 if(!currentPC.mirroredPart.detached)
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }

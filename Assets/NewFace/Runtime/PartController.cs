@@ -22,7 +22,6 @@ public class PartController : MonoBehaviour
 
     public List<PartController> childControllers = new List<PartController>();
     public PartController mirroredPart;
-    public bool canUpdateMirror = false;
 
     MaterialPropertyBlock propBlock;
 
@@ -70,7 +69,7 @@ public class PartController : MonoBehaviour
                 if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName))
                 {
                     pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
-                    Debug.Log("populated dictionary: " + pd.shaderProperties[i].propertyName);
+                    //Debug.Log("populated dictionary: " + pd.shaderProperties[i].propertyName);
                 }
             }
         }
@@ -83,9 +82,11 @@ public class PartController : MonoBehaviour
             //Debug.Log("updating the children of: " + transform.name);
             for(int j = 0; j < childControllers.Count; j++)
             {
-                childControllers[j].pd.SetPositionBounds(pd);
-                childControllers[j].pd.SetScaleBounds(pd);
-                childControllers[j].UpdateAllTransformValues();
+                if(!childControllers[j].detached){
+                    childControllers[j].pd.SetPositionBounds(pd);
+                    childControllers[j].pd.SetScaleBounds(pd);
+                    childControllers[j].UpdateAllTransformValues();
+                }
             }
         }
     }
@@ -151,10 +152,17 @@ public class PartController : MonoBehaviour
             rb2D.WakeUp();
 
             if(parent != null){
-                UpdateAttachmentStatus(false);
+                if(parent.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position)){
+                    UpdateAttachmentStatus(false);
+                }else{
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                }
             }else{
-                
-                rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                if(Vector3.Distance(transform.position, new Vector3(0, -1, transform.position.z)) < 0.1f){
+                    UpdateAttachmentStatus(false);
+                }else{
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                }
             }
         }
 
@@ -194,8 +202,6 @@ public class PartController : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
                 cacheAngle = pd.relativeToParentAngle;
             }
-        }else{
-            Debug.Log(transform.name + " was detached");
         }
         UpdateDependencies();
     }
@@ -280,32 +286,26 @@ public class PartController : MonoBehaviour
     public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
-        PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
         //padBreak.brokePart = detached;
         if(detached){
+            PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
+            OnBreakPart.Instance.Invoke(padBreak);
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            canUpdateMirror = false;
-            if(mirroredPart != null)
-                mirroredPart.canUpdateMirror = false;
+
             //Debug.Log("remove object from parent");
         }else{
-            if(!parent.childControllers.Contains(this)){
-                parent.childControllers.Add(this);
-                canUpdateMirror = parent.childControllers.Contains(mirroredPart);
-                if(mirroredPart != null)
-                    mirroredPart.canUpdateMirror = canUpdateMirror;
                 //Debug.Log("add object to parent");
-            }
+            
             parent.UpdateAllTransformValues();
             
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }
-        OnBreakPart.Instance.Invoke(padBreak);
+        
     }
 
     public void UpdateRenderPropBlock()
