@@ -4,7 +4,7 @@ using UnityEngine;
 public class HandData : PartData{
     public override void SetPositionBounds(PartData parentData)
     {
-        minPosX = GetAbsoluteScale().x/2f;
+        minPosX = -parentData.GetAbsoluteScale().x/2f - GetAbsoluteScale().x/2f;
         maxPosX = parentData.GetAbsoluteScale().x/2f + GetAbsoluteScale().x/2f;
         minPosY = parentData.GetAbsolutePosition().y - parentData.GetAbsoluteScale().y/2f;
         maxPosY = parentData.GetAbsolutePosition().y + parentData.GetAbsoluteScale().y/2f;

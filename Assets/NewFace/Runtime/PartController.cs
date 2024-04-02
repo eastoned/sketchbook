@@ -77,6 +77,7 @@ public class PartController : MonoBehaviour
 
     public void UpdateDependencies()
     {  
+
         if(childControllers.Count > 0)
         {
             //Debug.Log("updating the children of: " + transform.name);
@@ -147,24 +148,7 @@ public class PartController : MonoBehaviour
             Destroy(ptc);
         }
 
-        if(detached){
-            rb2D.Sleep();
-            rb2D.WakeUp();
-
-            if(parent != null){
-                if(parent.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position)){
-                    UpdateAttachmentStatus(false);
-                }else{
-                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
-                }
-            }else{
-                if(Vector3.Distance(transform.position, new Vector3(0, -1, transform.position.z)) < 0.1f){
-                    UpdateAttachmentStatus(false);
-                }else{
-                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
-                }
-            }
-        }
+        ReleasePart();
 
         currentPAD.timeToChange = Time.time - timeCache;
         //currentPAD.brokePart = detached;
@@ -172,9 +156,36 @@ public class PartController : MonoBehaviour
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
     }
 
+    public void ReleasePart()
+    {
+        if(detached)
+        {
+            rb2D.Sleep();
+            rb2D.WakeUp();
+
+            if(parent != null)
+            {
+                if(parent.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position)){
+                    UpdateAttachmentStatus(false);
+                }else{
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                }
+            }
+            else
+            {
+                if(Vector3.Distance(transform.position, new Vector3(0, -1, transform.position.z)) < 0.1f){
+                    UpdateAttachmentStatus(false);
+                }else{
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                }
+            }
+        }
+    }
+
     public void UpdateAllTransformValues()
     {
-        
+        pd.SetPositionBounds();
+
         if(!detached){
             if(flippedXAxis)
             {
@@ -203,6 +214,7 @@ public class PartController : MonoBehaviour
                 cacheAngle = pd.relativeToParentAngle;
             }
         }
+
         UpdateDependencies();
     }
 
@@ -315,7 +327,6 @@ public class PartController : MonoBehaviour
 
     public void UpdateSingleShaderFloat(string param, float value)
     {
-        Debug.Log(param);
         if(propBlock.HasFloat(param)){
             propBlock.SetFloat(param, value);
         }else{

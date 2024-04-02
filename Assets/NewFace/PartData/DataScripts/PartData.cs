@@ -132,13 +132,20 @@ public class PartData : ScriptableObject
         maxPosY = worldBoundsMax.y;
     }
 
+    public virtual void SetScaleBounds(){
+        
+    }
+
+    public virtual void SetPositionBounds(){
+
+    }
+
     public virtual void SetPositionBounds(PartData parentBounds)
     {
         minPosX = parentBounds.relativeToParentPosition.x - parentBounds.relativeToParentScale.x/2f;
         maxPosX = parentBounds.relativeToParentPosition.x + parentBounds.relativeToParentScale.x/2f;
         minPosY = parentBounds.relativeToParentPosition.y - parentBounds.relativeToParentScale.y/2f;
         maxPosY = parentBounds.relativeToParentPosition.y + parentBounds.relativeToParentScale.y/2f;
-        
     }
 
     public virtual Vector2 GetColliderSize()

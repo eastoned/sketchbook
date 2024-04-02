@@ -101,7 +101,7 @@ public class NuFaceManager : MonoBehaviour
             yield return null;
         }
         Debug.Log("Hand reached random target");
-
+        hand.ReleasePart();
         yield return null;
     }
 

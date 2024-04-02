@@ -13,50 +13,50 @@ MonoBehaviour:
   m_Name: HeadData
   m_EditorClassIdentifier: 
   partName: head
-  relativeToParentPosition: {x: 0, y: 0.50647825}
+  relativeToParentPosition: {x: 0, y: 0}
   absoluteWorldPositionZ: 0.1
   minPosX: 0
   maxPosX: 0
-  minPosY: -1
-  maxPosY: 1
+  minPosY: 0.32380748
+  maxPosY: 0.32380748
   minAngle: -180
   maxAngle: 180
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 0.44715983, y: 0.5065171}
+  relativeToParentScale: {x: 0.20567372, y: 0.27618408}
   detached: 0
   activeInScene: 1
-  minScaleX: 0.75
-  maxScaleX: 3
+  minScaleX: 1.2619047
+  maxScaleX: 2.5
   minScaleY: 0.75
   maxScaleY: 3
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0.53398
+    propertyValue: 0
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ForeheadWidth
-    propertyValue: 0.46141088
+    propertyValue: 0.16617285
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ForeheadLength
-    propertyValue: 0.44258684
+    propertyValue: 0.4425868
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinScale
-    propertyValue: 0.5679086
+    propertyValue: 0.11076584
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinWidth
-    propertyValue: 0.52576536
+    propertyValue: 0.36386058
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinLength
-    propertyValue: 0.44269472
+    propertyValue: 1
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0

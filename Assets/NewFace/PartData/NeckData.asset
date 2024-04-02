@@ -17,31 +17,31 @@ MonoBehaviour:
   absoluteWorldPositionZ: 0.2
   minPosX: 0
   maxPosX: 0
-  minPosY: -1
-  maxPosY: -1
+  minPosY: -1.009524
+  maxPosY: -1.009524
   minAngle: 0
   maxAngle: 0
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 0.57328737, y: 0}
+  relativeToParentScale: {x: 0.61692435, y: 0.46158722}
   detached: 0
   activeInScene: 0
   minScaleX: 0.25
   maxScaleX: 1.7821784
-  minScaleY: 2
-  maxScaleY: 2
+  minScaleY: 0.25
+  maxScaleY: 3
   shaderProperties:
   - propertyName: _NeckTopWidth
-    propertyValue: 0.28587672
+    propertyValue: 0
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _NeckCurveRoundness
-    propertyValue: 0.5237041
+    propertyValue: 1
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _NeckCurveScale
-    propertyValue: 0.5002011
+    propertyValue: 1
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
