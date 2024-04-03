@@ -17,14 +17,14 @@ MonoBehaviour:
   absoluteWorldPositionZ: 0.2
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.009524
-  maxPosY: -1.009524
+  minPosY: -1.2111124
+  maxPosY: -1.2111124
   minAngle: 0
   maxAngle: 0
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 0.61692435, y: 0.46158722}
+  relativeToParentScale: {x: 0.3662179, y: 0.48282737}
   detached: 0
-  activeInScene: 0
+  activeInScene: 1
   minScaleX: 0.25
   maxScaleX: 1.7821784
   minScaleY: 0.25

@@ -13,7 +13,6 @@ public class NeckData : PartData{
 
     public override void SetPositionBounds()
     {
-        Debug.Log("nexk " + GetAbsoluteScale().y);
         minPosY = -2f + GetAbsoluteScale().y/2f;
         maxPosY = -2f + GetAbsoluteScale().y/2f;
     }

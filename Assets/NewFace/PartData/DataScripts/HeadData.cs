@@ -15,7 +15,6 @@ public class HeadData : PartData
 
     public override void SetPositionBounds(PartData parentBounds)
     {
-        Debug.Log("setting head position bounds");
         minPosY = parentBounds.GetAbsolutePosition().y + parentBounds.GetAbsoluteScale().y/2f;
         maxPosY = parentBounds.GetAbsolutePosition().y + parentBounds.GetAbsoluteScale().y/2f;
     }

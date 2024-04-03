@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: NoseData
   m_EditorClassIdentifier: 
   partName: nose
-  relativeToParentPosition: {x: 0, y: 0.71475065}
+  relativeToParentPosition: {x: 0, y: 0.44710615}
   absoluteWorldPositionZ: -0.1
   minPosX: 0
   maxPosX: 0
-  minPosY: -0.9318167
-  maxPosY: 0.95762193
+  minPosY: -1.0444443
+  maxPosY: 0.1999948
   minAngle: 0
   maxAngle: 0
   relativeToParentAngle: 0
   relativeToParentScale: {x: 0.6596881, y: 0.31862324}
   detached: 0
-  activeInScene: 0
+  activeInScene: 1
   minScaleX: 0.5
-  maxScaleX: 1.7563603
+  maxScaleX: 1.5579754
   minScaleY: 0.5
-  maxScaleY: 1.8894386
+  maxScaleY: 1.2444391
   shaderProperties:
   - propertyName: _NoseBaseWidth
     propertyValue: 0.6390532
