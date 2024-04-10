@@ -161,6 +161,7 @@ public class PartController : MonoBehaviour
             {
                 if(!connectablePart.detached && connectablePart.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position)){
                     UpdateAttachmentStatus(false);
+                    UpdateAllTransformValues();
                 }else{
                     rb2D.bodyType = RigidbodyType2D.Dynamic;   
                 }

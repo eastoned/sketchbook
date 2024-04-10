@@ -62,7 +62,7 @@ public class FaceController : MonoBehaviour
 
     private void InitializeControllers(){
         //InitializeDictionaries();
-        //UpdateAllControllers();
+        UpdateAllControllers();
     }
 
     [ContextMenu("Refresh Connected Data")]

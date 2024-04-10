@@ -63,15 +63,12 @@ public class PartData : ScriptableObject
         relativeToParentScale = new Vector3(Mathf.InverseLerp(minScaleX, maxScaleX, scl.x), Mathf.InverseLerp(minScaleY, maxScaleY, scl.y), scl.z);
     }
 
+    public Vector3 GetAbsoluteScale(){
+        return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
+    }
     public Vector3 GetFlippedAbsoluteScale(){
         return new Vector3(Mathf.Lerp(-minScaleX, -maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
-
-    public Vector3 GetAbsoluteScale(){
-        //Debug.Log(relativeToParentScale);
-        return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
-    }
-
 
     public virtual void SetScaleBounds(PartData parentBounds)
     {
@@ -105,8 +102,8 @@ public class PartData : ScriptableObject
 
     public virtual void SetClampedScale(Vector3 scaleIn)
     {
-        Vector3 clampedSize = new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
-        SetRelativeScale(clampedSize);
+        Vector2 clampedScale = new Vector2(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY));
+        relativeToParentScale = new Vector2(Mathf.InverseLerp(minScaleX, maxScaleX, clampedScale.x), Mathf.InverseLerp(minScaleY, maxScaleY, clampedScale.y));
     }
 
     public Vector3 GetClampedScale(Vector3 scaleIn)

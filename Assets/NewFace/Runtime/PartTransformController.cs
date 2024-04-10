@@ -57,6 +57,7 @@ public class PartTransformController : MonoBehaviour
                 OnRotatePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.SCALE:
+                //Debug.Log(transform.position);
                 OnScalePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.NOTHING:

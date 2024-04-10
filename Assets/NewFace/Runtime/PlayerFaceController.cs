@@ -157,12 +157,16 @@ public class PlayerFaceController : FaceController
     }
 
     private void SetPartScale(Vector3 pos){
-        pos -= transform.position;
+        //pos -= currentPC.transform.position;
+        //Debug.Log(pos);
+        Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.position - pos)*2f;
+        diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
 
         if(!currentPC.detached){
-            Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.position - pos)*2f;
-            diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
+            
+            currentPC.transform.localScale = diff;
 
+            Debug.Log(diff);
             currentPC.pd.SetClampedScale(diff);
 
             currentPC.UpdateAllTransformValues();
@@ -172,10 +176,7 @@ public class PlayerFaceController : FaceController
                     currentPC.mirroredPart.UpdateAllTransformValues();
             }
         }else{
-            Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.position - pos)*2f;
-            diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
             
-
             if(!currentPC.flippedXAxis){
                 currentPC.transform.localScale = currentPC.pd.GetClampedScale(diff);
             }else{

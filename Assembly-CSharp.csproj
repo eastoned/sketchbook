@@ -254,6 +254,7 @@
     <None Include="Assets\Shader\treeShadowShader.shader" />
     <None Include="Assets\NewFace\Materials\Shaders\TearQuad.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\NewFace\Materials\Shaders\HandQuad.shader" />
     <None Include="Assets\NewFace\Materials\Shaders\EyebrowQuad.shader" />
     <None Include="Assets\Shader\shakeSpriteVertShader.shader" />
     <None Include="Assets\DynamicBone\ReadMe.txt" />

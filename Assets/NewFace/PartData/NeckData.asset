@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: NeckData
   m_EditorClassIdentifier: 
   partName: neck
-  relativeToParentPosition: {x: 0, y: 0}
+  relativeToParentPosition: {x: 0.5703704, y: 0}
   absoluteWorldPositionZ: 0.2
   minPosX: 0
   maxPosX: 0
-  minPosY: -1.2111124
-  maxPosY: -1.2111124
+  minPosY: -1
+  maxPosY: -1
   minAngle: 0
   maxAngle: 0
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 0.3662179, y: 0.48282737}
+  relativeToParentScale: {x: 0.42906722, y: 0.25925922}
   detached: 0
   activeInScene: 1
   minScaleX: 0.25
@@ -31,17 +31,17 @@ MonoBehaviour:
   maxScaleY: 3
   shaderProperties:
   - propertyName: _NeckTopWidth
-    propertyValue: 0
+    propertyValue: 0.425926
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _NeckCurveRoundness
-    propertyValue: 1
+    propertyValue: 0
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _NeckCurveScale
-    propertyValue: 1
+    propertyValue: 0
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
