@@ -16,14 +16,11 @@ public class PartController : MonoBehaviour
 
     public BoxCollider2D colid;
     public Rigidbody2D rb2D;
+    public FixedJoint2D fj2D;
     
     public bool flippedXAxis = false;
     public bool detached = false;
-
-    public List<PartController> childControllers = new List<PartController>();
     public PartController mirroredPart;
-    public bool canUpdateMirror = false;
-
     MaterialPropertyBlock propBlock;
 
     public Vector3 cachePosition, cacheScale;
@@ -36,7 +33,7 @@ public class PartController : MonoBehaviour
     float angleCache;
     Coroutine shakeRotate;
 
-    public PartController parent;
+    public PartController connectablePart;
 
     void Awake()
     {
@@ -47,6 +44,7 @@ public class PartController : MonoBehaviour
 
     private void InitializePropertyBlock()
     {
+        pd.absoluteWorldPositionZ = transform.position.z;
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             propBlock.SetFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }
@@ -62,7 +60,6 @@ public class PartController : MonoBehaviour
         
         if(!flippedXAxis)
         {
-
             //dummy was clearing the dictionary before and not populating it after smh
             pd.shadePropertyDict.Clear();
             for(int i = 0; i < pd.shaderProperties.Count; i++)
@@ -70,7 +67,7 @@ public class PartController : MonoBehaviour
                 if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName))
                 {
                     pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
-                    Debug.Log("populated dictionary: " + pd.shaderProperties[i].propertyName);
+                    //Debug.Log("populated dictionary: " + pd.shaderProperties[i].propertyName);
                 }
             }
         }
@@ -78,14 +75,15 @@ public class PartController : MonoBehaviour
 
     public void UpdateDependencies()
     {  
-        if(childControllers.Count > 0)
+        if(transform.childCount > 0)
         {
-            //Debug.Log("updating the children of: " + transform.name);
-            for(int j = 0; j < childControllers.Count; j++)
+            for(int j = 0; j < transform.childCount; j++)
             {
-                childControllers[j].pd.SetPositionBounds(pd);
-                childControllers[j].pd.SetScaleBounds(pd);
-                childControllers[j].UpdateAllTransformValues();
+                PartController childController = transform.GetChild(j).GetComponent<PartController>();
+                if(!childController.detached){
+                    childController.pd.SetPositionBounds(pd);
+                    childController.pd.SetScaleBounds(pd);
+                }
             }
         }
     }
@@ -115,7 +113,6 @@ public class PartController : MonoBehaviour
         
         if(CustomUtils.IsPointerOverUIObject())
             return;
-
         
         //Begin transform part
         currentPAD = new PlayerActionData(PlayerActionData.ActionType.TRANSFORMCHANGE, pd);
@@ -124,7 +121,6 @@ public class PartController : MonoBehaviour
         positionCache = transform.position;
         //scaleCache = transform.localScale;
         //angleCache = transform.localEulerAngles.z;
-        
         
         OnSelectedNewFacePartEvent.Instance.Invoke(this);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
@@ -146,17 +142,7 @@ public class PartController : MonoBehaviour
             Destroy(ptc);
         }
 
-        if(detached){
-            rb2D.Sleep();
-            rb2D.WakeUp();
-
-            if(parent != null){
-                UpdateAttachmentStatus(false);
-            }else{
-                
-                rb2D.bodyType = RigidbodyType2D.Dynamic;   
-            }
-        }
+        ReleasePart();
 
         currentPAD.timeToChange = Time.time - timeCache;
         //currentPAD.brokePart = detached;
@@ -164,9 +150,37 @@ public class PartController : MonoBehaviour
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
     }
 
+    public void ReleasePart()
+    {
+        if(detached)
+        {
+            rb2D.Sleep();
+            rb2D.WakeUp();
+
+            if(connectablePart != null)
+            {
+                if(!connectablePart.detached && connectablePart.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position)){
+                    UpdateAttachmentStatus(false);
+                    UpdateAllTransformValues();
+                }else{
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                }
+            }
+            else
+            {
+                if(Vector3.Distance(transform.position, new Vector3(0, -1, transform.position.z)) < 0.1f){
+                    UpdateAttachmentStatus(false);
+                }else{
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                }
+            }
+        }
+    }
+
     public void UpdateAllTransformValues()
     {
-        
+        pd.SetPositionBounds();
+
         if(!detached){
             if(flippedXAxis)
             {
@@ -179,10 +193,10 @@ public class PartController : MonoBehaviour
 
             if(flippedXAxis)
             {
-                transform.localPosition = pd.GetFlippedAbsolutePosition();
+                transform.position = pd.GetFlippedAbsolutePosition();
                 cachePosition = pd.GetFlippedAbsolutePosition();
             }else{
-                transform.localPosition = pd.GetAbsolutePosition();
+                transform.position = pd.GetAbsolutePosition();
                 cachePosition = pd.GetAbsolutePosition();
             }
 
@@ -194,9 +208,8 @@ public class PartController : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
                 cacheAngle = pd.relativeToParentAngle;
             }
-        }else{
-            Debug.Log(transform.name + " was detached");
         }
+
         UpdateDependencies();
     }
 
@@ -280,32 +293,24 @@ public class PartController : MonoBehaviour
     public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
-        PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
-        //padBreak.brokePart = detached;
+
         if(detached){
+            PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
+            OnBreakPart.Instance.Invoke(padBreak);
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
+            fj2D.enabled = false;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            canUpdateMirror = false;
-            if(mirroredPart != null)
-                mirroredPart.canUpdateMirror = false;
-            //Debug.Log("remove object from parent");
+
         }else{
-            if(!parent.childControllers.Contains(this)){
-                parent.childControllers.Add(this);
-                canUpdateMirror = parent.childControllers.Contains(mirroredPart);
-                if(mirroredPart != null)
-                    mirroredPart.canUpdateMirror = canUpdateMirror;
-                //Debug.Log("add object to parent");
-            }
-            parent.UpdateAllTransformValues();
-            
+            connectablePart.UpdateAllTransformValues();
+            fj2D.enabled = true;
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }
-        OnBreakPart.Instance.Invoke(padBreak);
+        
     }
 
     public void UpdateRenderPropBlock()
@@ -315,7 +320,6 @@ public class PartController : MonoBehaviour
 
     public void UpdateSingleShaderFloat(string param, float value)
     {
-        Debug.Log(param);
         if(propBlock.HasFloat(param)){
             propBlock.SetFloat(param, value);
         }else{

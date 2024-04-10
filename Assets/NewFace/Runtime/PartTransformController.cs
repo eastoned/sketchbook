@@ -15,7 +15,6 @@ public class PartTransformController : MonoBehaviour
 
     public Texture2D icon;
 
-    
     public TransformController controls;
 
     public Vector3 mouseDelta2;
@@ -42,23 +41,24 @@ public class PartTransformController : MonoBehaviour
 
     void OnMouseDrag(){
         if(!currentlyHeld){
-            if(CustomUtils.IsPointerOverUIObject())
-                return;
+            //if(CustomUtils.IsPointerOverUIObject())
+              //  return;
         }
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        transform.localPosition = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.localPosition.z);
+        transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
 
         switch(controls){
             case TransformController.TRANSLATE:
-                OnTranslatePartController.Instance.Invoke(partInEdit, transform.localPosition + offset);
+                OnTranslatePartController.Instance.Invoke(partInEdit, transform.position);
             break;
             case TransformController.ROTATION:
-                OnRotatePartController.Instance.Invoke(transform.localPosition);
+                OnRotatePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.SCALE:
-                OnScalePartController.Instance.Invoke(transform.localPosition);
+                //Debug.Log(transform.position);
+                OnScalePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.NOTHING:
             break;
@@ -74,60 +74,22 @@ public class PartTransformController : MonoBehaviour
         transform.localPosition = new Vector3(100, 100, 100);
     }
 
-    void Update(){
-
+    void Update()
+    {
         if(partInEdit != null){
                 switch(controls){
                     case TransformController.ROTATION:
-                    transform.localPosition = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
-                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                    transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
+                    transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
                     transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
                 break;
                 case TransformController.SCALE:
-                    transform.localPosition = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0));
-                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                    transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0));
+                    transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
                     transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
                 break;
             }
         }
-
-        /*
-        if(gravity){
-            transform.localPosition += velocity * Time.deltaTime;
-            velocity -= new Vector3(0, .1f, 0);
-        }
-
-        if (transform.localPosition.y < -2.25f){
-            gravity = false;
-            velocity = Vector3.zero;
-            transform.localPosition = new Vector3(1, -1.5f, -0.25f);
-        }
-        if(controls == TransformController.NOTHING){
-            if(mouth.OverlapPoint(transform.localPosition)){
-                Debug.Log("Eating");
-            }else{
-                //Debug.Log("Not Eating");
-            }
-        }*/
-        
     }
 
-/*
-    void OnMouseUp(){
-        currentlyHeld = false;
-        //OnConfirmTransformPart.Instance.Invoke();
-
-        if(mouth.OverlapPoint(transform.localPosition)){
-            Debug.Log("Eating");
-            gravity = false;
-            velocity = Vector3.zero;
-            transform.localPosition = new Vector3(1, -1.5f, -0.25f);
-        }else{
-            if(controls == TransformController.NOTHING){
-                gravity = true;
-            }
-        }
-
-        
-    }*/
 }

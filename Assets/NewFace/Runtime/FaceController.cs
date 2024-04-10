@@ -10,7 +10,8 @@ public class FaceController : MonoBehaviour
     public PartController[] partControllers;
     public Transform[] bodyParts;
     public PartData[] bodyData;
-    public enum EyeTarget{
+    public enum EyeTarget
+    {
         MOUSE,
         PART,
         BLANK
@@ -61,7 +62,7 @@ public class FaceController : MonoBehaviour
 
     private void InitializeControllers(){
         //InitializeDictionaries();
-        //UpdateAllControllers();
+        UpdateAllControllers();
     }
 
     [ContextMenu("Refresh Connected Data")]
@@ -114,15 +115,9 @@ public class FaceController : MonoBehaviour
 
     public void InitializeDictionaries()
     {
-        head.InitializePartDataDictionary();
-        rightEye.InitializePartDataDictionary();
-        rightEyebrow.InitializePartDataDictionary();
-        rightEar.InitializePartDataDictionary();
-        bangs.InitializePartDataDictionary();
-        hair.InitializePartDataDictionary();
-        mouth.InitializePartDataDictionary();
-        neck.InitializePartDataDictionary();
-        nose.InitializePartDataDictionary();
+        foreach(PartController pc in partControllers){
+            pc.InitializePartDataDictionary();
+        }
     }
 
     public void BlendProfile(float val, PartData partData, PartData blendFrom, PartData blendTo){

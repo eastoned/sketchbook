@@ -15,13 +15,13 @@ public class HeadData : PartData
 
     public override void SetPositionBounds(PartData parentBounds)
     {
-        //minPosY = -1/GetAbsoluteScale().y;
-        //maxPosY = 1/GetAbsoluteScale().y;
+        minPosY = parentBounds.GetAbsolutePosition().y + parentBounds.GetAbsoluteScale().y/2f;
+        maxPosY = parentBounds.GetAbsolutePosition().y + parentBounds.GetAbsoluteScale().y/2f;
     }
 
     public override void SetScaleBounds(PartData parentBounds)
     {
-        //maxScaleX = parentData.GetAbsoluteScale().x/2f;
+        minScaleX = parentBounds.GetAbsoluteScale().x;
         //maxScaleY = parentData.GetAbsoluteScale().y/2f;
     }
 }
