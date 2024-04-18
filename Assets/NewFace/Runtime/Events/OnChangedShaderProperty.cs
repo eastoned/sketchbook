@@ -6,6 +6,11 @@ public class OnChangedShaderProperty : UnityEvent<float>
     public static OnChangedShaderProperty Instance = new OnChangedShaderProperty();
 }
 
+public class OnChangePartShaderProperty : UnityEvent<PartController, string, float>
+{
+    public static OnChangePartShaderProperty Instance = new OnChangePartShaderProperty();
+}
+
 public class OnSlideShaderProperty : UnityEvent<float>
 {
     public static OnSlideShaderProperty Instance = new OnSlideShaderProperty();

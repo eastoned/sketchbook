@@ -29,6 +29,7 @@ public class PlayerFaceController : FaceController
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
+        OnChangePartShaderProperty.Instance.AddListener(SetPartShaderProperty);
         block = new MaterialPropertyBlock();
     }
 
@@ -42,6 +43,7 @@ public class PlayerFaceController : FaceController
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
+        OnChangePartShaderProperty.Instance.RemoveListener(SetPartShaderProperty);
     }
 
     public void SetMaterialOutline(Transform hoveredTransform)
@@ -109,6 +111,15 @@ public class PlayerFaceController : FaceController
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
         pc.UpdateAttachmentStatus(status);
         //Instantiate(blood, pc.transform.position, Quaternion.identity);
+    }
+
+    private void SetPartShaderProperty(PartController editingPC, string shaderPropertyName, float shaderValue)
+    {
+        Debug.Log("updating shader on: " + editingPC.name);
+        if(editingPC != null){
+            editingPC.UpdateSingleShaderFloat(shaderPropertyName, shaderValue);
+            editingPC.UpdateRenderPropBlock();
+        }
     }
 
     bool startedTickling = false;

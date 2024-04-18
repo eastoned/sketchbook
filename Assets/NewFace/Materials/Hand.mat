@@ -35,8 +35,8 @@ Material:
     - _Finger1: 0
     - _Finger2: 0
     - _Finger3: 0
-    - _Finger4: 1
-    - _FingerRoundness: 0.401
+    - _Finger4: 0
+    - _FingerRoundness: 0
     - _ForeheadLength: 1
     - _ForeheadScale: 0
     - _ForeheadWidth: 1

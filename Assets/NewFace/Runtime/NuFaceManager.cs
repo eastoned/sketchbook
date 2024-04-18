@@ -95,15 +95,25 @@ public class NuFaceManager : MonoBehaviour
     private IEnumerator MoveToRandomPosition(){
         Vector3 randomPos = new Vector3(Random.Range(hand.pd.minPosX-1f, hand.pd.maxPosX+1f), Random.Range(hand.pd.minPosY-2f, hand.pd.maxPosY+2f), hand.pd.absoluteWorldPositionZ);
         Vector3 handPos = hand.transform.localPosition;
-        while(Vector3.Distance(hand.transform.localPosition, randomPos) > 0.1f){
-            handPos = Vector3.MoveTowards(handPos, randomPos, 0.005f);
+        Vector3 startPos = handPos;
+        float counter = 0f;
+        float animationTime = 2f;
+        while(counter <= animationTime){
+            counter += Time.deltaTime;
+            handPos = Vector3.Lerp(startPos, randomPos, counter);
             OnTranslatePartController.Instance.Invoke(hand, handPos);
+            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger1", Mathf.Sin((counter/animationTime) * Mathf.PI));
+            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger2", Mathf.Sin((counter/animationTime) * Mathf.PI));
+            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger3", Mathf.Sin((counter/animationTime) * Mathf.PI));
+            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger4", Mathf.Sin((counter/animationTime) * Mathf.PI));
             yield return null;
         }
         Debug.Log("Hand reached random target");
         hand.ReleasePart();
         yield return null;
     }
+
+
 
     private void ReportPlayerActions()
     {
