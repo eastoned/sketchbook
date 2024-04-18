@@ -187,11 +187,22 @@ public class PlayerFaceController : FaceController
 
     private void SetPartRotation(Vector3 pos){
 
-        pos -= transform.localPosition;
+        pos -= transform.position;
 
-        float angle = Mathf.Atan2(pos.y - currentPC.transform.localPosition.y, pos.x - currentPC.transform.localPosition.x) * Mathf.Rad2Deg;
-        currentChange = Mathf.Abs(angleCache - currentPC.pd.relativeToParentAngle)/180f;
-        currentPC.transform.localRotation = Quaternion.Euler(0f, 0f, currentPC.pd.GetClampedAngle(angle, currentPC.flippedXAxis));
+        float angle = Mathf.Atan2(pos.y - currentPC.transform.position.y, pos.x - currentPC.transform.position.x) * Mathf.Rad2Deg;
+
+        if(currentPC.flippedXAxis){
+            currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
+        }
+        else
+        {
+            currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);     
+        }
+            
+        currentPC.pd.relativeToParentAngle = angle;
+        
+        //if(!currentPC.detached)
+            //currentPC.UpdateAllTransformValues();
 
         if(currentPC.mirroredPart != null){
             if(!currentPC.mirroredPart.detached)

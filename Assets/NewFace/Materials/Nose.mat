@@ -74,13 +74,13 @@ Material:
     - _Mode: 0
     - _NoseBaseWidth: 0
     - _NoseCurve: 0
-    - _NoseTopWidth: 0
-    - _NoseTotalLength: 0
-    - _NoseTotalWidth: 0
+    - _NoseTopWidth: 0.707
+    - _NoseTotalLength: 0.441
+    - _NoseTotalWidth: 0.43
     - _NostrilHeight: 0
-    - _NostrilRadius: 0
+    - _NostrilRadius: 0.328
     - _NostrilScale: 0.19
-    - _NostrilSpacing: 0
+    - _NostrilSpacing: 0.238
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Radius: 0.09

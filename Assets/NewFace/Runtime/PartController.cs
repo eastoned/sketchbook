@@ -128,6 +128,8 @@ public class PartController : MonoBehaviour
         ptc.partInEdit = this;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
+        pd.RandomizeShaders(.5f);
+        UpdateAllShadersValue(1f);
         
         SetCache(pd);
     }
@@ -211,6 +213,16 @@ public class PartController : MonoBehaviour
         }
 
         UpdateDependencies();
+    }
+
+    public void UpdateScale(){
+
+    }
+    public void UpdatePosition(){
+
+    }
+    public void UpdateRotation(){
+
     }
 
     public void UpdateColliderBounds()
@@ -300,12 +312,12 @@ public class PartController : MonoBehaviour
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
-            fj2D.enabled = false;
+            //fj2D.enabled = false;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
 
         }else{
             connectablePart.UpdateAllTransformValues();
-            fj2D.enabled = true;
+            //fj2D.enabled = true;
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;

@@ -4,7 +4,7 @@ Shader "Unlit/HandQuad"
     {
 
         _PalmWidth ("Palm Width", Range(0, 1)) = 0.5
-        _WristBase ("Wrist", Range(0, 1)) = 0.5
+        _FingerRoundness ("FingerRoundness", Range(0, 1)) = 0.5
 
         _Finger1 ("Finger 1 Length", Range(0, 1)) = 0.5
         _Finger2 ("Finger 2 Length", Range(0, 1)) = 0.5
@@ -47,7 +47,8 @@ Shader "Unlit/HandQuad"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            float _PalmWidth, _WristBase;
+            float _PalmWidth;
+            float _FingerRoundness;
             float _Finger1, _Finger2, _Finger3, _Finger4;
             float4 _Color1, _Color2;
 
@@ -67,46 +68,54 @@ Shader "Unlit/HandQuad"
                 float2 uv = i.uv;
                 float2 uv2 = i.uv;
                 float value = i.uv;
+                
+                float roundness = _FingerRoundness*3.5+0.5;
 
-                float knuckles = 1 - step(1, pow(abs(frac(uv.x*4)*2 - 1), 2) + pow(abs(uv.y*8 - 4), 2));
+                float knuckles = 1 - step(1, pow(abs(frac(uv.x*4)*2 - 1), roundness) + pow(abs(uv.y*8 - 4), roundness));
 
                 float fingerValue = (i.uv.y*8 - 1 - _Finger1 * 6);
-                fingerValue = lerp( step(0, fingerValue) * step(.5, 1-i.uv.y), 1-step(0, fingerValue) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger1)) * step(.75, 1 - i.uv.x);
+                float fingerMask = step(.75, 1 - i.uv.x);
+                fingerValue = lerp( step(0, fingerValue) * step(.5, 1-i.uv.y), 1-step(0, fingerValue) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger1));
 
-                float fingerCircle = pow(abs(uv.x*8 - 1), 2) + pow(abs(uv.y*8 - 1 - _Finger1*6), 2);
-                fingerCircle = 1-step(1, fingerCircle);
-                //fingerValue += fingerCircle;
+                float fingerCircle = pow(abs(uv.x*8 - 1), roundness) + pow(abs(uv.y*8 - 1 - _Finger1*6), roundness);
+                fingerValue += 1-step(1, fingerCircle);
+                fingerValue += knuckles;
+                fingerValue *= fingerMask;
                 fingerValue = saturate(fingerValue);
 
 
                 float fingerValue2 = (i.uv.y*8 - 1 - _Finger2 * 6);
-                fingerValue2 = lerp(step(0, fingerValue2) * step(.5, 1-i.uv.y), 1-step(0, fingerValue2) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger2)) * step(.25, i.uv.x) * step(.5, 1 - i.uv.x);
+                float fingerMask2 = step(.25, i.uv.x) * step(.5, 1 - i.uv.x);
+                fingerValue2 = lerp(step(0, fingerValue2) * step(.5, 1-i.uv.y), 1-step(0, fingerValue2) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger2));
 
-                float fingerCircle2 = pow(abs(uv.x*8 - 3), 2) + pow(abs(uv.y*8 - 1 - _Finger2*6), 2);
+                float fingerCircle2 = pow(abs(uv.x*8 - 3), roundness) + pow(abs(uv.y*8 - 1 - _Finger2*6), roundness);
                 fingerCircle2 = 1-step(1, fingerCircle2);
-                //fingerValue2 += fingerCircle2;
-                //float fingerValue2 = (-i.uv.y + _Finger2/2 + 1.5) * step(.25, i.uv.x) * step(.5, 1 - i.uv.x);
-                //fingerValue2 = step(1, fingerValue2) * step(0.5, i.uv.y);
-
+                fingerValue2 += fingerCircle2;
+                fingerValue2 += knuckles;
+                fingerValue2 *= fingerMask2;
+                fingerValue2 = saturate(fingerValue2);
 
                 float fingerValue3 = (i.uv.y*8 - 1 - _Finger3 * 6);
-                fingerValue3 = lerp(step(0, fingerValue3) * step(.5, 1-i.uv.y), 1-step(0, fingerValue3) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger3)) * step(.5, i.uv.x) * step(.25, 1 - i.uv.x);
+                float fingerMask3 = step(.5, i.uv.x) * step(.25, 1 - i.uv.x);
+                fingerValue3 = lerp(step(0, fingerValue3) * step(.5, 1-i.uv.y), 1-step(0, fingerValue3) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger3));
 
-                float fingerCircle3 = pow(abs(uv.x*8 - 5), 2) + pow(abs(uv.y*8 - 1 - _Finger3*6), 2);
+                float fingerCircle3 = pow(abs(uv.x*8 - 5), roundness) + pow(abs(uv.y*8 - 1 - _Finger3*6), roundness);
                 fingerCircle3 = 1-step(1, fingerCircle3);
-                //fingerValue3 += fingerCircle3;
+                fingerValue3 += fingerCircle3;
+                fingerValue3 += knuckles;
+                fingerValue3 *= fingerMask3;
                 fingerValue3 = saturate(fingerValue3);
-                //float fingerValue3 = (-i.uv.y + _Finger3/2 + 1.5) * step(.5, i.uv.x) * step(.25, 1 - i.uv.x);
-                //fingerValue3 = step(1, fingerValue3) * step(0.5, i.uv.y);
 
                 float fingerValue4 = (i.uv.y*8 - 1 - _Finger4 * 6);
-                fingerValue4 = lerp(step(0, fingerValue4) * step(.5, 1-i.uv.y), 1-step(0, fingerValue4) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger4)) * step(.75, i.uv.x);
+                float fingerMask4 = step(.75, i.uv.x);
+                fingerValue4 = lerp(step(0, fingerValue4) * step(.5, 1-i.uv.y), 1-step(0, fingerValue4) * 1-step(.5, 1-i.uv.y), step(0.5, _Finger4));
 
-                float fingerCircle4 = pow(abs(uv.x*8 - 7), 2) + pow(abs(uv.y*8 - 1 - _Finger4*6), 2);
+                float fingerCircle4 = pow(abs(uv.x*8 - 7), roundness) + pow(abs(uv.y*8 - 1 - _Finger4*6), roundness);
                 fingerCircle4 = 1-step(1, fingerCircle4);
-                //fingerValue4 += fingerCircle4;
-                //float fingerValue4 = (-i.uv.y + _Finger4/2 + 1.5) * step(.75, i.uv.x);
-                //fingerValue4 = step(1, fingerValue4) * step(0.5, i.uv.y);
+                fingerValue4 += fingerCircle4;
+                fingerValue4 += knuckles;
+                fingerValue4 *= fingerMask4;
+                fingerValue4 = saturate(fingerValue4); 
 
                 float value2 = pow(abs(uv.x*2-1), (_PalmWidth*4.9 + 0.1)) + pow(abs((uv.y*2)-1), 5);
                 value2 = (1-step(1, value2)) * step(0.5, 1-i.uv.y);
@@ -115,18 +124,22 @@ Shader "Unlit/HandQuad"
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
-
                 
-                float fingers = fingerValue + fingerValue2 + fingerValue3 + fingerValue4 + value2 + knuckles;
+                float fingers = fingerValue + fingerValue2 + fingerValue3 + fingerValue4 + value2;
                 fingers = saturate(fingers);
                 float circles = fingerCircle + fingerCircle2 + fingerCircle3 + fingerCircle4;
-                clip(fingers + circles - 0.5);
-                
+                clip(fingers - 0.5);
+                float val = (sin(frac(uv.x*4) * 3.14));
+                float fingColor = saturate(fingerValue * val * lerp(1-uv.y*2, (uv.y-.5)*2, _Finger1)) +
+                saturate(fingerValue2 * val * lerp(1-uv.y*2, (uv.y-.5)*2, _Finger2)) +
+                saturate(fingerValue3 * val * lerp(1-uv.y*2, (uv.y-.5)*2, _Finger3)) +
+                saturate(fingerValue4 * val * lerp(1-uv.y*2, (uv.y-.5)*2, _Finger4));
+                //fingerValue3 * val * saturate(lerp(1-uv.y*2, (uv.y-.5)*2, _Finger3));
 
-                float4 col = tex2D(_MainTex, texCoord) * lerp(_Color1, _Color2, saturate(i.uv.y + circles));
-
+                float4 col = tex2D(_MainTex, texCoord) * lerp(_Color1, _Color2, saturate(fingColor + uv.y));
 
                 return col;
+                return fingerValue3 * val * lerp(1-uv.y*2, (uv.y-.5)*2, _Finger3);
             }
             ENDCG
         }

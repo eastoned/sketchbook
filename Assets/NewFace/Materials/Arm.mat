@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Neck
+  m_Name: Arm
   m_Shader: {fileID: 4800000, guid: e075afbac899ed94781e3d62917c7044, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,15 +29,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NeckCurveRoundness: 0.007
+    - _NeckCurveRoundness: 0.332
     - _NeckCurveScale: 5
     - _NeckScale: 1
-    - _NeckTopWidth: 0.191
+    - _NeckTopWidth: 0.898
     - _Radius: 3
     - _Radius2: 0.465
     - _Width: 1
     m_Colors:
     - _Color: {r: 0.95294124, g: 0.60784316, b: 0.43529415, a: 1}
-    - _Color1: {r: 0, g: 0, b: 0, a: 1}
-    - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 0, b: 0, a: 1}
+    - _Color2: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

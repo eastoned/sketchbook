@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HandData
   m_EditorClassIdentifier: 
   partName: hands
-  relativeToParentPosition: {x: 0.58706176, y: 0.26527512}
+  relativeToParentPosition: {x: 0.9251339, y: 0.059915453}
   absoluteWorldPositionZ: -0.3
   minPosX: -1
   maxPosX: 1
@@ -29,5 +29,39 @@ MonoBehaviour:
   maxScaleX: 1
   minScaleY: 0.5
   maxScaleY: 1
-  shaderProperties: []
-  shaderColors: []
+  shaderProperties:
+  - propertyName: _PalmWidth
+    propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _FingerRoundness
+    propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _Finger1
+    propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _Finger2
+    propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _Finger3
+    propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _Finger4
+    propertyValue: 0
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+  - colorName: _Color2
+    colorValue: {r: 0, g: 0, b: 0, a: 0}

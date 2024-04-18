@@ -134,6 +134,40 @@ public class PartData : ScriptableObject
         return posIn.x > maxPosX + .3f || posIn.y > maxPosY + .3f || posIn.x < minPosX - .3f || posIn.y < minPosY - .3f;
     }
 
+    [ContextMenu("Random")]
+    public void Randomize(float randomFactor){
+        relativeToParentAngle = Mathf.Lerp(minAngle, maxAngle, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor));
+
+        relativeToParentPosition = new Vector3(
+            Mathf.Lerp(minPosX, maxPosX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(minPosY, maxPosY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            absoluteWorldPositionZ);
+            
+        relativeToParentScale = new Vector3(
+            Mathf.Lerp(minScaleX, maxScaleX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(minScaleY, maxScaleY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            1f);
+        
+        SetClampedPosition(relativeToParentPosition);
+        SetRelativeScale(relativeToParentScale);
+
+        RandomizeShaders(randomFactor);
+    }
+
+    public void RandomizeShaders(float randomFactor){
+
+        foreach(ShaderProperty sp in shaderProperties){
+            float val = UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor);
+            sp.SetValue(val);
+        }
+        
+        foreach(ShaderColor sc in shaderColors){
+            sc.SetValue(UnityEngine.Random.Range(0f, 1f));
+            sc.SetHue(UnityEngine.Random.Range(0f, 1f));
+            sc.SetSaturation(UnityEngine.Random.Range(0f, 1f));
+        }
+    }
+
         public void CopyData(PartData pd)
     {
         relativeToParentPosition = pd.relativeToParentPosition;

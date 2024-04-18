@@ -32,10 +32,11 @@ Material:
     - _ChinLength: 1
     - _ChinScale: 0
     - _ChinWidth: 0.813
-    - _Finger1: 1
-    - _Finger2: 0.32
-    - _Finger3: 0.394
-    - _Finger4: 0.376
+    - _Finger1: 0
+    - _Finger2: 0
+    - _Finger3: 0
+    - _Finger4: 1
+    - _FingerRoundness: 0.401
     - _ForeheadLength: 1
     - _ForeheadScale: 0
     - _ForeheadWidth: 1
@@ -43,7 +44,7 @@ Material:
     - _MouthLipMaskRoundness: 0.508
     - _MouthLipTop: 0.745
     - _MouthRadius: 1
-    - _PalmWidth: 0.874
+    - _PalmWidth: 0.3
     - _Radius: 0.73
     - _Radius2: 3.67
     - _Radius3: 1.33
@@ -58,11 +59,11 @@ Material:
     - _TongueHeight: 0
     - _TongueRadius: 0.5
     - _TongueScale: 0.5
-    - _WristBase: 0.897
+    - _WristBase: 0.965
     m_Colors:
     - _Color: {r: 0.8018868, g: 0.2912513, b: 0.45554373, a: 1}
-    - _Color1: {r: 1, g: 0, b: 0, a: 1}
-    - _Color2: {r: 0, g: 0.17458725, b: 1, a: 1}
+    - _Color1: {r: 0, g: 0, b: 0, a: 1}
+    - _Color2: {r: 1, g: 0, b: 0, a: 1}
     - _Color3: {r: 1, g: 1, b: 1, a: 1}
     - _Color4: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

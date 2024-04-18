@@ -35,7 +35,7 @@ public class PartTransformController : MonoBehaviour
 
         OnSetTransformCacheEvent.Instance.Invoke();
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        offset = transform.localPosition - mouseDelta2;
+        offset = transform.position - mouseDelta2;
         currentlyHeld = true;
     }
 
@@ -51,7 +51,7 @@ public class PartTransformController : MonoBehaviour
 
         switch(controls){
             case TransformController.TRANSLATE:
-                OnTranslatePartController.Instance.Invoke(partInEdit, transform.position);
+                OnTranslatePartController.Instance.Invoke(partInEdit, transform.position + offset);
             break;
             case TransformController.ROTATION:
                 OnRotatePartController.Instance.Invoke(transform.position);

@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: HairFrontData
   m_EditorClassIdentifier: 
   partName: bangs
-  relativeToParentPosition: {x: 0, y: 0.5787896}
+  relativeToParentPosition: {x: 0, y: 0.80747926}
   absoluteWorldPositionZ: -0.15
   minPosX: 0
   maxPosX: 0
-  minPosY: 0
-  maxPosY: 0
+  minPosY: -1
+  maxPosY: 1
   minAngle: -180
   maxAngle: 180
   relativeToParentAngle: 133.75296
-  relativeToParentScale: {x: 0.61339736, y: 0.6172017}
+  relativeToParentScale: {x: 0.20783667, y: 0.13156131}
   detached: 0
+  activeInScene: 1
   minScaleX: 0.25
   maxScaleX: 3.5719132
   minScaleY: 0.25
