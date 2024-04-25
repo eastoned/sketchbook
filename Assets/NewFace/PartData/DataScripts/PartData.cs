@@ -33,12 +33,13 @@ public class PartData : ScriptableObject
     #endregion
 
     //return absolute values to render object in space
-    public Vector3 GetAbsolutePosition()
+    public Vector3 GetAbsPosition()
     {
+        //Debug.Log(minPosY);
         return new Vector3(Mathf.Lerp(minPosX, maxPosX, relativeToParentPosition.x), Mathf.Lerp(minPosY, maxPosY, relativeToParentPosition.y), absoluteWorldPositionZ);
     }
 
-    public Vector3 GetFlippedAbsolutePosition()
+    public Vector3 GetFlippedAbsPosition()
     {
         return new Vector3(Mathf.Lerp(-minPosX, -maxPosX, relativeToParentPosition.x), Mathf.Lerp(minPosY, maxPosY, relativeToParentPosition.y), absoluteWorldPositionZ);
     }
@@ -55,18 +56,16 @@ public class PartData : ScriptableObject
         return clampedPos;
     }
     
-    public Quaternion GetAbsoluteRotation(){
+    public Quaternion GetAbsRotation(){
         return Quaternion.Euler(0, 0, relativeToParentAngle);
     }
 
-    public void SetRelativeScale(Vector3 scl){
-        relativeToParentScale = new Vector3(Mathf.InverseLerp(minScaleX, maxScaleX, scl.x), Mathf.InverseLerp(minScaleY, maxScaleY, scl.y), scl.z);
-    }
-
-    public Vector3 GetAbsoluteScale(){
+    public Vector3 GetAbsScale(){
         return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
-    public Vector3 GetFlippedAbsoluteScale(){
+
+    public Vector3 GetFlippedAbsScale(){
+        //Debug.Log("returning flipped absolute scale");
         return new Vector3(Mathf.Lerp(-minScaleX, -maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
 
@@ -102,17 +101,20 @@ public class PartData : ScriptableObject
 
     public virtual void SetClampedScale(Vector3 scaleIn)
     {
+        //Debug.Log("Setting scale clamped : "+ scaleIn);
         Vector2 clampedScale = new Vector2(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY));
         relativeToParentScale = new Vector2(Mathf.InverseLerp(minScaleX, maxScaleX, clampedScale.x), Mathf.InverseLerp(minScaleY, maxScaleY, clampedScale.y));
     }
 
     public Vector3 GetClampedScale(Vector3 scaleIn)
     {
+        Debug.Log("returning absolute scale clamped");
         return new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
     public Vector3 GetFlippedClampedScale(Vector3 scaleIn)
     {
+        Debug.Log("returning flipped absolute scale clamped");
         return new Vector3(Mathf.Clamp(-scaleIn.x, -maxScaleX, -minScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
@@ -149,7 +151,7 @@ public class PartData : ScriptableObject
             1f);
         
         SetClampedPosition(relativeToParentPosition);
-        SetRelativeScale(relativeToParentScale);
+        SetClampedScale(relativeToParentScale);
 
         RandomizeShaders(randomFactor);
     }

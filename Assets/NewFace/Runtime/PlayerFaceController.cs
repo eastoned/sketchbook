@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerFaceController : FaceController
 {
     public PartController currentPC;
-    private Transform currentTransform;
+    private PartController hoveredPC;
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
@@ -46,22 +46,22 @@ public class PlayerFaceController : FaceController
         OnChangePartShaderProperty.Instance.RemoveListener(SetPartShaderProperty);
     }
 
-    public void SetMaterialOutline(Transform hoveredTransform)
+    public void SetMaterialOutline(PartController hoveredPart)
     {
        RemoveMaterialOutlineFromPreviousHover();
 
-        if(hoveredTransform != null)
+        if(hoveredPart != null)
         {
-            hoveredTransform.GetComponent<Renderer>().sharedMaterials = new Material[2]{hoveredTransform.GetComponent<Renderer>().sharedMaterials[0], colliderMaterial};
-            currentTransform = hoveredTransform;
+            hoveredPart.AddHoveredMaterial(colliderMaterial);
+            hoveredPC = hoveredPart;
         }
     }
 
     private void RemoveMaterialOutlineFromPreviousHover()
     {
-        if(currentTransform != null)
+        if(hoveredPC != null)
         {
-            currentTransform.GetComponent<Renderer>().sharedMaterials = new Material[1]{currentTransform.GetComponent<Renderer>().sharedMaterials[0]};
+            hoveredPC.ResetMaterial();
         }
     }
 
@@ -95,6 +95,7 @@ public class PlayerFaceController : FaceController
 
         if(currentPC.rotatable){
             rotationController.partInEdit = currentPC;
+            rotationController.UpdateControllerPositions();
         }else{
             rotationController.partInEdit = null;
             rotationController.Disappear();
@@ -102,6 +103,7 @@ public class PlayerFaceController : FaceController
             
         if(currentPC.scalable){
             scaleController.partInEdit = currentPC;
+            scaleController.UpdateControllerPositions();
         }else{
             scaleController.partInEdit = null;
             scaleController.Disappear();
@@ -126,12 +128,14 @@ public class PlayerFaceController : FaceController
     private void SetPartPosition(PartController translatingPC, Vector3 pos)
     {
         //each part has a relative position to other objects
-        
+        Debug.Log(pos);
         if(!translatingPC.detached)
         {
             float flip = translatingPC.flippedXAxis? -1f : 1f;
+            
             translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
-
+            
+            
             Vector3 absPos = new Vector3(pos.x*flip, pos.y, translatingPC.pd.absoluteWorldPositionZ);
 
             translatingPC.pd.SetClampedPosition(absPos);
@@ -150,7 +154,7 @@ public class PlayerFaceController : FaceController
                     OnTickleEvent.Instance.Invoke();
                     startedTickling = true;
                 }
-                
+                Debug.Log(absPos);
                 if(absPos.magnitude > 1.2f)
                 {
                     Debug.Log("Reached limit so break");
@@ -169,31 +173,23 @@ public class PlayerFaceController : FaceController
 
     private void SetPartScale(Vector3 pos){
         //pos -= currentPC.transform.position;
-        //Debug.Log(pos);
+        //currentPC.UpdatePosition();
+
         Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.position - pos)*2f;
-        diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
-
-        if(!currentPC.detached){
-            
-            currentPC.transform.localScale = diff;
-
-            Debug.Log(diff);
-            currentPC.pd.SetClampedScale(diff);
-
-            currentPC.UpdateAllTransformValues();
-            
-            if(currentPC.mirroredPart != null){
-                if(!currentPC.mirroredPart.detached)
-                    currentPC.mirroredPart.UpdateAllTransformValues();
-            }
-        }else{
-            
-            if(!currentPC.flippedXAxis){
-                currentPC.transform.localScale = currentPC.pd.GetClampedScale(diff);
-            }else{
-                currentPC.transform.localScale = currentPC.pd.GetFlippedClampedScale(diff);
-            }
+        
+        if(currentPC.customScaleAnchor != null){
+            diff = currentPC.customScaleAnchor.InverseTransformDirection(currentPC.customScaleAnchor.position - pos)*2f;
+            diff = new Vector3(diff.x, diff.y/2f, diff.z);
         }
+        
+        diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
+        
+        if(!currentPC.detached){
+            currentPC.pd.SetClampedScale(diff);
+        }
+
+        currentPC.UpdateScale();
+        currentPC.UpdateDependencies();
     }
 
     private void SetPartRotation(Vector3 pos){

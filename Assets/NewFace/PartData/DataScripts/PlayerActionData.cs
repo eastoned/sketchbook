@@ -32,6 +32,7 @@ public class CharacterActionData
     }
     
     public ActionType actionType;
+    public float timeStamp;
     public float timeToChange;
     public Vector2 positionChange, scaleChange;
     public float angleChange;

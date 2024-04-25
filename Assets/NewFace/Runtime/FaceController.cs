@@ -202,13 +202,13 @@ public class FaceController : MonoBehaviour
     }
 
     void Rotation(){
-        nose.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/2f, head.pd.GetAbsoluteScale().x/2f, rotation/180f + 0.5f), nose.transform.position.y, nose.transform.position.z);
-        mouth.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), mouth.transform.position.y, mouth.transform.position.z);
-        leftEye.transform.position = new Vector3(Mathf.Lerp(leftEye.pd.GetFlippedAbsolutePosition().x * 2, 0, rotation/180f + 0.5f), leftEye.transform.position.y, leftEye.transform.position.z);
-        rightEye.transform.position = new Vector3(Mathf.Lerp(0, rightEye.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEye.transform.position.y, rightEye.transform.position.z);
-        leftEyebrow.transform.position = new Vector3(Mathf.Lerp(leftEyebrow.pd.GetFlippedAbsolutePosition().x*2, 0, rotation/180f + 0.5f), leftEyebrow.transform.position.y, leftEyebrow.transform.position.z);
-        rightEyebrow.transform.position = new Vector3(Mathf.Lerp(0, rightEyebrow.pd.GetAbsolutePosition().x*2, rotation/180f + 0.5f), rightEyebrow.transform.position.y, rightEyebrow.transform.position.z);
-        bangs.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsoluteScale().x/4f, head.pd.GetAbsoluteScale().x/4f, rotation/180f + 0.5f), bangs.transform.position.y, bangs.transform.position.z);
+        nose.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsScale().x/2f, head.pd.GetAbsScale().x/2f, rotation/180f + 0.5f), nose.transform.position.y, nose.transform.position.z);
+        mouth.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsScale().x/4f, head.pd.GetAbsScale().x/4f, rotation/180f + 0.5f), mouth.transform.position.y, mouth.transform.position.z);
+        leftEye.transform.position = new Vector3(Mathf.Lerp(leftEye.pd.GetFlippedAbsPosition().x * 2, 0, rotation/180f + 0.5f), leftEye.transform.position.y, leftEye.transform.position.z);
+        rightEye.transform.position = new Vector3(Mathf.Lerp(0, rightEye.pd.GetAbsPosition().x*2, rotation/180f + 0.5f), rightEye.transform.position.y, rightEye.transform.position.z);
+        leftEyebrow.transform.position = new Vector3(Mathf.Lerp(leftEyebrow.pd.GetFlippedAbsPosition().x*2, 0, rotation/180f + 0.5f), leftEyebrow.transform.position.y, leftEyebrow.transform.position.z);
+        rightEyebrow.transform.position = new Vector3(Mathf.Lerp(0, rightEyebrow.pd.GetAbsPosition().x*2, rotation/180f + 0.5f), rightEyebrow.transform.position.y, rightEyebrow.transform.position.z);
+        bangs.transform.position = new Vector3(Mathf.Lerp(-head.pd.GetAbsScale().x/4f, head.pd.GetAbsScale().x/4f, rotation/180f + 0.5f), bangs.transform.position.y, bangs.transform.position.z);
     }
 
     private IEnumerator AnimatePartShaderProperty(PartController pc, string shaderParam, float animationLength)

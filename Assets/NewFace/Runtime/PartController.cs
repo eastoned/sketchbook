@@ -16,7 +16,6 @@ public class PartController : MonoBehaviour
 
     public BoxCollider2D colid;
     public Rigidbody2D rb2D;
-    public FixedJoint2D fj2D;
     
     public bool flippedXAxis = false;
     public bool detached = false;
@@ -35,11 +34,16 @@ public class PartController : MonoBehaviour
 
     public PartController connectablePart;
 
+    public PartController[] affectedChildren;
+
+    public Transform customScaleAnchor;
+
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
         InitializePropertyBlock();
         InitializePartDataDictionary();
+        
     }
 
     private void InitializePropertyBlock()
@@ -56,7 +60,7 @@ public class PartController : MonoBehaviour
 
     public void InitializePartDataDictionary()
     {
-        Debug.Log("clear and init the dict");
+        //Debug.Log("clear and init the dict");
         
         if(!flippedXAxis)
         {
@@ -75,16 +79,18 @@ public class PartController : MonoBehaviour
 
     public void UpdateDependencies()
     {  
-        if(transform.childCount > 0)
-        {
-            for(int j = 0; j < transform.childCount; j++)
-            {
-                PartController childController = transform.GetChild(j).GetComponent<PartController>();
-                if(!childController.detached){
-                    childController.pd.SetPositionBounds(pd);
-                    childController.pd.SetScaleBounds(pd);
-                }
+        //Debug.Log("updating affected parts");
+        foreach(PartController pc in affectedChildren){
+            if(!pc.detached){
+                pc.pd.SetPositionBounds(pd);
+                pc.pd.SetScaleBounds(pd);
+                pc.UpdateAllTransformValues();
             }
+        }
+
+        if(mirroredPart != null){
+            if(!mirroredPart.detached)
+                mirroredPart.UpdateAllTransformValues();
         }
     }
 
@@ -104,7 +110,7 @@ public class PartController : MonoBehaviour
         if(Input.GetMouseButton(0))
             return;
 
-        OnHoveredNewFacePartEvent.Instance.Invoke(transform);
+        OnHoveredNewFacePartEvent.Instance.Invoke(this);
     }
 
     void OnMouseDown()
@@ -118,7 +124,12 @@ public class PartController : MonoBehaviour
         currentPAD = new PlayerActionData(PlayerActionData.ActionType.TRANSFORMCHANGE, pd);
         
         timeCache = Time.time;
-        positionCache = transform.position;
+        if(customScaleAnchor != null){
+            positionCache = customScaleAnchor.position;
+        }else{
+            positionCache = transform.position;
+        }
+        
         //scaleCache = transform.localScale;
         //angleCache = transform.localEulerAngles.z;
         
@@ -130,6 +141,12 @@ public class PartController : MonoBehaviour
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         pd.RandomizeShaders(.5f);
         UpdateAllShadersValue(1f);
+        
+        if(!detached && mirroredPart != null){
+            if(!mirroredPart.detached)
+                mirroredPart.UpdateAllShadersValue(1f);
+        }
+            
         
         SetCache(pd);
     }
@@ -145,7 +162,7 @@ public class PartController : MonoBehaviour
         }
 
         ReleasePart();
-
+        currentPAD.timeStamp = Time.time;
         currentPAD.timeToChange = Time.time - timeCache;
         //currentPAD.brokePart = detached;
         currentPAD.positionChange = transform.position - positionCache;
@@ -181,28 +198,58 @@ public class PartController : MonoBehaviour
 
     public void UpdateAllTransformValues()
     {
-        pd.SetPositionBounds();
-
         if(!detached){
-            if(flippedXAxis)
-            {
-                transform.localScale = pd.GetFlippedAbsoluteScale();
-                cacheScale = pd.GetFlippedAbsoluteScale();
-            }else{
-                transform.localScale = pd.GetAbsoluteScale();
-                cacheScale = pd.GetAbsoluteScale();
-            }
+            UpdatePosition();
+            UpdateScale();
+            UpdateRotation();
+        }
+    }
 
-            if(flippedXAxis)
+    public void UpdateScale(){
+        if(flippedXAxis)
             {
-                transform.position = pd.GetFlippedAbsolutePosition();
-                cachePosition = pd.GetFlippedAbsolutePosition();
+                if(customScaleAnchor != null){
+                    customScaleAnchor.localScale = pd.GetFlippedAbsScale();
+                    cacheScale = pd.GetFlippedAbsScale();
+                }else{
+                    transform.localScale = pd.GetFlippedAbsScale();
+                    cacheScale = pd.GetFlippedAbsScale();
+                }
+                
             }else{
-                transform.position = pd.GetAbsolutePosition();
-                cachePosition = pd.GetAbsolutePosition();
+                if(customScaleAnchor != null){
+                    customScaleAnchor.localScale = pd.GetAbsScale();
+                    cacheScale = pd.GetAbsScale();
+                }else{
+                    transform.localScale = pd.GetAbsScale();
+                    cacheScale = pd.GetAbsScale();
+                }
+                
             }
-
-            if(flippedXAxis)
+        pd.SetPositionBounds();
+    }
+    public void UpdatePosition(){
+        if(flippedXAxis)
+            {
+                if(customScaleAnchor != null){
+                    customScaleAnchor.position = pd.GetFlippedAbsPosition();
+                    cachePosition = pd.GetFlippedAbsPosition();
+                }else{
+                    transform.position = pd.GetFlippedAbsPosition();
+                    cachePosition = pd.GetFlippedAbsPosition();
+                }
+            }else{
+                if(customScaleAnchor != null){
+                    customScaleAnchor.position = pd.GetAbsPosition();
+                    cachePosition = pd.GetAbsPosition();
+                }else{
+                    transform.position = pd.GetAbsPosition();
+                    cachePosition = pd.GetAbsPosition();
+                }
+            }
+    }
+    public void UpdateRotation(){
+        if(flippedXAxis)
             {
                 transform.localRotation = Quaternion.Euler(0, 0, -pd.relativeToParentAngle);
                 cacheAngle = -pd.relativeToParentAngle;
@@ -210,25 +257,25 @@ public class PartController : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
                 cacheAngle = pd.relativeToParentAngle;
             }
-        }
-
-        UpdateDependencies();
-    }
-
-    public void UpdateScale(){
-
-    }
-    public void UpdatePosition(){
-
-    }
-    public void UpdateRotation(){
-
     }
 
     public void UpdateColliderBounds()
     {
         colid.size = pd.GetColliderSize();
-        colid.offset = pd.GetColliderOffset();
+        if(customScaleAnchor != null){
+            colid.offset = new Vector2(transform.GetChild(0).transform.localPosition.x, transform.GetChild(0).transform.localPosition.y);
+        }else{
+            colid.offset = pd.GetColliderOffset();
+        }
+        
+    }
+
+    public void AddHoveredMaterial(Material mat){
+        rend.sharedMaterials = new Material[2]{rend.sharedMaterials[0], mat};
+    }
+
+    public void ResetMaterial(){
+        rend.sharedMaterials = new Material[1]{rend.sharedMaterials[0]};
     }
 
     public void UpdateAllShadersValue(float ignore)
@@ -312,17 +359,23 @@ public class PartController : MonoBehaviour
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
-            //fj2D.enabled = false;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
 
         }else{
             connectablePart.UpdateAllTransformValues();
-            //fj2D.enabled = true;
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
         }
         
+    }
+
+    void Update(){
+        //for(int i = 0; i < pd.shaderProperties.Count; i++){
+           // UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, Mathf.PerlinNoise(Time.time * pd.shaderProperties[i].propertyValue, pd.shaderProperties[i].propertyValue));
+            //Debug.Log(Mathf.PerlinNoise(Time.time, pd.shaderProperties[i].propertyValue) + " is thge noise.");
+        //}
+        //UpdateRenderPropBlock();
     }
 
     public void UpdateRenderPropBlock()

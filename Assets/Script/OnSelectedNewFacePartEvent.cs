@@ -6,7 +6,7 @@ public class OnSelectedNewFacePartEvent : UnityEvent<PartController>
     public static OnSelectedNewFacePartEvent Instance = new OnSelectedNewFacePartEvent();
 }
 
-public class OnHoveredNewFacePartEvent : UnityEvent<Transform>
+public class OnHoveredNewFacePartEvent : UnityEvent<PartController>
 {
     public static OnHoveredNewFacePartEvent Instance = new OnHoveredNewFacePartEvent();
 }

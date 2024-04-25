@@ -23,6 +23,8 @@ public class PartTransformController : MonoBehaviour
 
     public PartController partInEdit;
 
+    public Vector3 testInput;
+
     void Start(){
         if(icon != null){
             GetComponent<Renderer>().material.SetTexture("_IconTex", icon);
@@ -36,6 +38,8 @@ public class PartTransformController : MonoBehaviour
         OnSetTransformCacheEvent.Instance.Invoke();
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = transform.position - mouseDelta2;
+        
+        
         currentlyHeld = true;
     }
 
@@ -47,17 +51,21 @@ public class PartTransformController : MonoBehaviour
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
-
         switch(controls){
             case TransformController.TRANSLATE:
+                Debug.Log(transform.position + offset);
+                transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
+                if(partInEdit.customScaleAnchor != null){
+                    //offset += transform.localPosition;
+                }
                 OnTranslatePartController.Instance.Invoke(partInEdit, transform.position + offset);
             break;
             case TransformController.ROTATION:
+                transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
                 OnRotatePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.SCALE:
-                //Debug.Log(transform.position);
+                transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
                 OnScalePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.NOTHING:
@@ -74,20 +82,31 @@ public class PartTransformController : MonoBehaviour
         transform.localPosition = new Vector3(100, 100, 100);
     }
 
+    public void UpdateControllerPositions(){
+        if(partInEdit.customScaleAnchor != null){
+            transform.position = partInEdit.customScaleAnchor.TransformPoint(new Vector3(0.5f, 1f, 0));
+        }else{
+            transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0)); 
+        }
+        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+    }
+
     void Update()
     {
         if(partInEdit != null){
-                switch(controls){
-                    case TransformController.ROTATION:
-                    transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
-                    transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-                    transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
-                break;
-                case TransformController.SCALE:
-                    transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0));
-                    transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-                    transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
-                break;
+            if(partInEdit.detached){
+                    switch(controls){
+                        case TransformController.ROTATION:
+                        transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
+                        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                        transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                    break;
+                    case TransformController.SCALE:
+                        transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0));
+                        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                        //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                    break;
+                    }
             }
         }
     }

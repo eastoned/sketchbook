@@ -9,16 +9,16 @@ public class EyeData : PartData
     public override void SetPositionBounds(PartData parentData)
     {
         //Debug.Log("Setting eye lowest position with parent");
-        minPosX = parentData.GetAbsolutePosition().x + GetAbsoluteScale().x/2f;
-        maxPosX = parentData.GetAbsolutePosition().x + parentData.GetAbsoluteScale().x/2f;
-        minPosY = parentData.GetAbsolutePosition().y - parentData.GetColliderSize().y/2f;
-        maxPosY = parentData.GetAbsolutePosition().y + parentData.GetColliderSize().y/2f;
+        minPosX = parentData.GetAbsPosition().x + GetAbsScale().x/2f;
+        maxPosX = parentData.GetAbsPosition().x + parentData.GetAbsScale().x/2f;
+        minPosY = parentData.GetAbsPosition().y - parentData.GetColliderSize().y/2f;
+        maxPosY = parentData.GetAbsPosition().y + parentData.GetColliderSize().y/2f;
     }
 
     public override void SetScaleBounds(PartData parentData)
     {
-        maxScaleX = parentData.GetAbsoluteScale().x/2f;
-        maxScaleY = parentData.GetAbsoluteScale().y/2f;
+        maxScaleX = parentData.GetAbsScale().x/2f;
+        maxScaleY = parentData.GetAbsScale().y/2f;
     }
 
     public override Vector2 GetColliderSize()

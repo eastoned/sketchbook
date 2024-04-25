@@ -17,12 +17,12 @@ MonoBehaviour:
   absoluteWorldPositionZ: 0.1
   minPosX: 0
   maxPosX: 0
-  minPosY: 0.32380748
-  maxPosY: 0.32380748
+  minPosY: 0
+  maxPosY: 0
   minAngle: -180
   maxAngle: 180
   relativeToParentAngle: 0
-  relativeToParentScale: {x: 0.20567372, y: 0.27618408}
+  relativeToParentScale: {x: 0.50412595, y: 0.40228966}
   detached: 0
   activeInScene: 1
   minScaleX: 1.2619047
@@ -31,37 +31,37 @@ MonoBehaviour:
   maxScaleY: 3
   shaderProperties:
   - propertyName: _ForeheadScale
-    propertyValue: 0
+    propertyValue: 0.24700189
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ForeheadWidth
-    propertyValue: 0.16617285
+    propertyValue: 0.7468424
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ForeheadLength
-    propertyValue: 0.4425868
+    propertyValue: 0.37119895
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinScale
-    propertyValue: 0.11076584
+    propertyValue: 0.3248939
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinWidth
-    propertyValue: 0.36386058
+    propertyValue: 0.65534437
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   - propertyName: _ChinLength
-    propertyValue: 1
+    propertyValue: 0.62353617
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 0.0413545, g: 0.043123603, b: 0.019214787, a: 1}
+    colorValue: {r: 0.014339028, g: 0.9960604, b: 0.0067105712, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0.9194602, g: 0.2037578, b: 0.83967626, a: 1}
+    colorValue: {r: 0.4888439, g: 0.5190025, b: 0.50935113, a: 1}
