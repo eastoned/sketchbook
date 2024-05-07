@@ -35,11 +35,14 @@ public class PartTransformController : MonoBehaviour
         if(CustomUtils.IsPointerOverUIObject())
             return;
 
-        OnSetTransformCacheEvent.Instance.Invoke();
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        offset = transform.position - mouseDelta2;
-        
-        
+        OnHandDown(mouseDelta2);
+    }
+
+    public void OnHandDown(Vector3 pos)
+    {
+        OnSetTransformCacheEvent.Instance.Invoke();
+        offset = transform.position - pos;
         currentlyHeld = true;
     }
 
@@ -51,21 +54,24 @@ public class PartTransformController : MonoBehaviour
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        OnHandDrag(mouseDelta2);
+    }
+
+    public void OnHandDrag(Vector3 pos){
         switch(controls){
             case TransformController.TRANSLATE:
-                Debug.Log(transform.position + offset);
-                transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
+                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
                 if(partInEdit.customScaleAnchor != null){
                     //offset += transform.localPosition;
                 }
-                OnTranslatePartController.Instance.Invoke(partInEdit, transform.position + offset);
+                OnTranslatePartController.Instance.Invoke(partInEdit, transform.position + offset, true);
             break;
             case TransformController.ROTATION:
-                transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
+                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
                 OnRotatePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.SCALE:
-                transform.position = new Vector3(mouseDelta2.x, mouseDelta2.y, transform.position.z);
+                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
                 OnScalePartController.Instance.Invoke(transform.position);
             break;
             case TransformController.NOTHING:
@@ -74,8 +80,11 @@ public class PartTransformController : MonoBehaviour
     }
 
     void OnMouseUp(){
-        currentlyHeld = false;
+        OnHandUp();
         //OnConfirmTransformPart.Instance.Invoke();
+    }
+    public void OnHandUp(){
+        currentlyHeld = false;
     }
 
     public void Disappear(){

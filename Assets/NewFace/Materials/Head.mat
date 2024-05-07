@@ -30,10 +30,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _ChinLength: 0.5
-    - _ChinScale: 0
+    - _ChinScale: 1
     - _ChinWidth: 0.4
     - _ForeheadLength: 0.5
-    - _ForeheadScale: 0
+    - _ForeheadScale: 1
     - _ForeheadWidth: 0.4
     - _Radius: 0.73
     - _Radius2: 3.67
@@ -46,4 +46,5 @@ Material:
     - _Color: {r: 0.8018868, g: 0.2912513, b: 0.45554373, a: 1}
     - _Color1: {r: 0, g: 0, b: 0, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 0, g: 0, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -117,7 +117,7 @@ public class PlayerFaceController : FaceController
 
     private void SetPartShaderProperty(PartController editingPC, string shaderPropertyName, float shaderValue)
     {
-        Debug.Log("updating shader on: " + editingPC.name);
+        //Debug.Log("updating shader on: " + editingPC.name);
         if(editingPC != null){
             editingPC.UpdateSingleShaderFloat(shaderPropertyName, shaderValue);
             editingPC.UpdateRenderPropBlock();
@@ -125,10 +125,9 @@ public class PlayerFaceController : FaceController
     }
 
     bool startedTickling = false;
-    private void SetPartPosition(PartController translatingPC, Vector3 pos)
+    private void SetPartPosition(PartController translatingPC, Vector3 pos, bool mirror)
     {
         //each part has a relative position to other objects
-        Debug.Log(pos);
         if(!translatingPC.detached)
         {
             float flip = translatingPC.flippedXAxis? -1f : 1f;
@@ -141,8 +140,9 @@ public class PlayerFaceController : FaceController
             translatingPC.pd.SetClampedPosition(absPos);
             
             if(translatingPC.mirroredPart != null){
-                if(!translatingPC.mirroredPart.detached)
+                if(!translatingPC.mirroredPart.detached && mirror){
                     translatingPC.mirroredPart.UpdateAllTransformValues();
+                }
             }
             
             if(translatingPC.pd.IsPositionOutsideMaximum(absPos))
@@ -212,8 +212,9 @@ public class PlayerFaceController : FaceController
             //currentPC.UpdateAllTransformValues();
 
         if(currentPC.mirroredPart != null){
-            if(!currentPC.mirroredPart.detached)
+            if(!currentPC.mirroredPart.detached){
                 currentPC.mirroredPart.UpdateAllTransformValues();
+                }
         }
     }
 

@@ -85,6 +85,7 @@ public class PartController : MonoBehaviour
                 pc.pd.SetPositionBounds(pd);
                 pc.pd.SetScaleBounds(pd);
                 pc.UpdateAllTransformValues();
+                pc.UpdateDependencies();
             }
         }
 
@@ -124,6 +125,11 @@ public class PartController : MonoBehaviour
         currentPAD = new PlayerActionData(PlayerActionData.ActionType.TRANSFORMCHANGE, pd);
         
         timeCache = Time.time;
+        PartClicked();
+    }
+
+    public void PartClicked()
+    {
         if(customScaleAnchor != null){
             positionCache = customScaleAnchor.position;
         }else{
@@ -139,15 +145,14 @@ public class PartController : MonoBehaviour
         ptc.partInEdit = this;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
-        pd.RandomizeShaders(.5f);
-        UpdateAllShadersValue(1f);
+        //pd.RandomizeShaders(.5f);
+        //UpdateAllShadersValue(1f);
         
         if(!detached && mirroredPart != null){
             if(!mirroredPart.detached)
                 mirroredPart.UpdateAllShadersValue(1f);
         }
             
-        
         SetCache(pd);
     }
 
@@ -157,16 +162,21 @@ public class PartController : MonoBehaviour
         if(CustomUtils.IsPointerOverUIObject())
             return;
 
-        if(ptc != null){
-            Destroy(ptc);
-        }
-
-        ReleasePart();
+        PartUnclicked();
         currentPAD.timeStamp = Time.time;
         currentPAD.timeToChange = Time.time - timeCache;
         //currentPAD.brokePart = detached;
         currentPAD.positionChange = transform.position - positionCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
+    }
+
+    public void PartUnclicked()
+    {
+        if(ptc != null){
+            Destroy(ptc);
+        }
+
+        ReleasePart();
     }
 
     public void ReleasePart()
@@ -251,12 +261,22 @@ public class PartController : MonoBehaviour
     public void UpdateRotation(){
         if(flippedXAxis)
             {
-                transform.localRotation = Quaternion.Euler(0, 0, -pd.relativeToParentAngle);
-                cacheAngle = -pd.relativeToParentAngle;
+                if(customScaleAnchor != null){
+                    customScaleAnchor.localRotation = Quaternion.Euler(0, 0, -pd.relativeToParentAngle);
+                    cacheAngle = -pd.relativeToParentAngle;
+                }else{
+                    transform.localRotation = Quaternion.Euler(0, 0, -pd.relativeToParentAngle);
+                    cacheAngle = -pd.relativeToParentAngle;
+                }
             }else{
-                transform.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
-                cacheAngle = pd.relativeToParentAngle;
-            }
+                if(customScaleAnchor != null){
+                    customScaleAnchor.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
+                    cacheAngle = pd.relativeToParentAngle;
+                }else{
+                    transform.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
+                    cacheAngle = pd.relativeToParentAngle;
+                }
+        }
     }
 
     public void UpdateColliderBounds()
@@ -371,11 +391,11 @@ public class PartController : MonoBehaviour
     }
 
     void Update(){
-        //for(int i = 0; i < pd.shaderProperties.Count; i++){
-           // UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, Mathf.PerlinNoise(Time.time * pd.shaderProperties[i].propertyValue, pd.shaderProperties[i].propertyValue));
+        for(int i = 0; i < pd.shaderProperties.Count; i++){
+            //UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, Mathf.PerlinNoise(Time.time * pd.shaderProperties[i].propertyValue * 0.1f, pd.shaderProperties[i].propertyValue));
             //Debug.Log(Mathf.PerlinNoise(Time.time, pd.shaderProperties[i].propertyValue) + " is thge noise.");
-        //}
-        //UpdateRenderPropBlock();
+        }
+        UpdateRenderPropBlock();
     }
 
     public void UpdateRenderPropBlock()

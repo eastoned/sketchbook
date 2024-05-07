@@ -12,6 +12,8 @@ Shader "Unlit/HeadQuad"
         _Color1("Top", Color) = (1,1,1,1)
         _Color2("Bottom", Color) = (1,1,1,1)
 
+        _Offset("Offset", Vector) = (1,1,1,1)
+
         _MainTex("Tex", 2D) = "white" {}
     }
     SubShader
@@ -49,11 +51,14 @@ Shader "Unlit/HeadQuad"
             float _ChinWidth, _ChinLength, _ForeheadWidth, _ForeheadLength;
             float _ForeheadScale, _ChinScale;
             float4 _Color1, _Color2;
+            float4 _Offset;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 v.vertex = float4(v.vertex.x, v.vertex.y + sin(_Time.z)/60, v.vertex.z, v.vertex.w);
+                v.vertex.x += _Offset.x;
+                v.vertex.y += _Offset.y;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPosition = ComputeScreenPos(o.vertex);
