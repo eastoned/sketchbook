@@ -145,8 +145,8 @@ public class PartController : MonoBehaviour
         ptc.partInEdit = this;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
-        //pd.RandomizeShaders(.5f);
-        //UpdateAllShadersValue(1f);
+        pd.RandomizeShaders(.5f);
+        UpdateAllShadersValue(1f);
         
         if(!detached && mirroredPart != null){
             if(!mirroredPart.detached)

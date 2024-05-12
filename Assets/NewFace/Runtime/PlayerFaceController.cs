@@ -154,7 +154,6 @@ public class PlayerFaceController : FaceController
                     OnTickleEvent.Instance.Invoke();
                     startedTickling = true;
                 }
-                Debug.Log(absPos);
                 if(absPos.magnitude > 1.2f)
                 {
                     Debug.Log("Reached limit so break");

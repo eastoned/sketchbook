@@ -91,8 +91,11 @@ public class NuFaceManager : MonoBehaviour
         if(movingRoutine != null){
             StopCoroutine(movingRoutine);
         }
+        int targetPart = Random.Range(0, parts.Length);
+        Debug.Log("attempt to move: " + parts[targetPart].name);
+        Vector3 partTargetPos = parts[targetPart].transform.position;
 
-        movingRoutine = StartCoroutine(MovePartToPosition(new Vector3(Random.Range(hand.pd.minPosX-1f, hand.pd.maxPosX+1f), Random.Range(hand.pd.minPosY-2f, hand.pd.maxPosY+2f), hand.pd.absoluteWorldPositionZ)));
+        movingRoutine = StartCoroutine(MovePartToPosition(new Vector3(partTargetPos.x, partTargetPos.y, hand.pd.absoluteWorldPositionZ)));
     }
 
     private IEnumerator MovePartToPosition(Vector3 handTargetPos){
@@ -113,11 +116,17 @@ public class NuFaceManager : MonoBehaviour
 
         Debug.Log("Hand reached target");
         hand.ReleasePart();
-        for(int i = 0; i < parts.Length; i++){
+        for(int i = 0; i < parts.Length; i++)
+        {
             ///Debug.Log();
             if(parts[i].transform.GetComponent<BoxCollider2D>().OverlapPoint(handTargetPos)){
-                Debug.Log(parts[i].name);
-                StartCoroutine(MovePiece(parts[i], handTargetPos));
+                Debug.Log("successful click on: " + parts[i].name);
+                Vector3 randomPos = new Vector3(
+                    Random.Range(parts[i].pd.minPosX-1f, parts[i].pd.maxPosX+1f),
+                    Random.Range(parts[i].pd.minPosY-2f, parts[i].pd.maxPosY+2f),
+                    parts[i].pd.absoluteWorldPositionZ);
+                StartCoroutine(MovePiece(parts[i], handTargetPos, randomPos));
+                StartCoroutine(MovePiece(hand, handTargetPos, new Vector3(randomPos.x, randomPos.y, hand.pd.absoluteWorldPositionZ)));
                 break;
             }
         }
@@ -125,18 +134,18 @@ public class NuFaceManager : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator MovePiece(PartController pc, Vector3 startPos)
+    private IEnumerator MovePiece(PartController pc, Vector3 startPos, Vector3 endPos)
     {
         pc.PartClicked();
-        Vector3 randomPos = new Vector3(Random.Range(pc.pd.minPosX-1f, pc.pd.maxPosX+1f), Random.Range(pc.pd.minPosY-2f, pc.pd.maxPosY+2f), pc.pd.absoluteWorldPositionZ);
         Vector3 partPos = startPos;
         PartTransformController ptc = pc.GetComponent<PartTransformController>();
         ptc.OnHandDown(startPos);
         float counter = 0f;
         float animationTime = 2f;
-        while(counter <= animationTime){
+        while(counter <= animationTime)
+        {
             counter += Time.deltaTime;
-            partPos = Vector3.Lerp(startPos, randomPos, counter/animationTime);
+            partPos = Vector3.Lerp(startPos, endPos, counter/animationTime);
             ptc.OnHandDrag(partPos);
             yield return null;
         }
@@ -151,7 +160,8 @@ public class NuFaceManager : MonoBehaviour
     {
         Debug.Log("wanted to start coroutine");
         //if(canShareFeedback && playerActionHistory.Count > 0){
-        if(reportRoutine != null){
+        if(reportRoutine != null)
+        {
             Debug.Log("corotuinen full so stopping it");
             StopCoroutine(reportRoutine);
         }
