@@ -188,6 +188,7 @@
     <Compile Include="Assets\Script\RotationController.cs" />
     <Compile Include="Assets\NewFace\Runtime\SaveCharacterProfile.cs" />
     <Compile Include="Assets\Script\PingPongBall.cs" />
+    <Compile Include="Assets\MouseController.cs" />
     <Compile Include="Assets\LionController.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\EyebrowData.cs" />
     <Compile Include="Assets\Script\PupilShape.cs" />

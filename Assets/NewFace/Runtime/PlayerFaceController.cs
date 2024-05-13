@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerFaceController : FaceController
 {
     public PartController currentPC;
-    private PartController hoveredPC;
+    [SerializeField]private PartController hoveredPC;
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
@@ -161,12 +161,14 @@ public class PlayerFaceController : FaceController
                 }
                     
             }
+            scaleController.UpdateControllerPositions();
+            rotationController.UpdateControllerPositions();
         }else{
             
             translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
             
         }
-
+    
         translatingPC.UpdateAllTransformValues();
     }
 
@@ -185,7 +187,10 @@ public class PlayerFaceController : FaceController
         
         if(!currentPC.detached){
             currentPC.pd.SetClampedScale(diff);
+            scaleController.UpdateControllerPositions();
+            rotationController.UpdateControllerPositions();
         }
+        
 
         currentPC.UpdateScale();
         currentPC.UpdateDependencies();
@@ -207,14 +212,18 @@ public class PlayerFaceController : FaceController
             
         currentPC.pd.relativeToParentAngle = angle;
         
-        //if(!currentPC.detached)
+        if(!currentPC.detached){
+            scaleController.UpdateControllerPositions();
+            rotationController.UpdateControllerPositions();
+        }
             //currentPC.UpdateAllTransformValues();
 
         if(currentPC.mirroredPart != null){
             if(!currentPC.mirroredPart.detached){
                 currentPC.mirroredPart.UpdateAllTransformValues();
-                }
+            }
         }
+        
     }
 
 }

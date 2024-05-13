@@ -91,13 +91,35 @@ public class PartTransformController : MonoBehaviour
         transform.localPosition = new Vector3(100, 100, 100);
     }
 
-    public void UpdateControllerPositions(){
-        if(partInEdit.customScaleAnchor != null){
-            transform.position = partInEdit.customScaleAnchor.TransformPoint(new Vector3(0.5f, 1f, 0));
-        }else{
-            transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0)); 
+    public void UpdateControllerPositions()
+    {
+        switch(controls){
+            case TransformController.ROTATION:
+                if(partInEdit.customScaleAnchor != null)
+                {
+                    transform.position = partInEdit.customScaleAnchor.TransformPoint(new Vector3(0.5f, 0, 0));
+                }
+                else
+                {
+                    Debug.Log("moving bangs");
+                    Debug.Log(transform.name + " : " + partInEdit.transform.position);
+                    transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
+                }
+                transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+            break;
+
+            case TransformController.SCALE:
+                if(partInEdit.customScaleAnchor != null)
+                {
+                    transform.position = partInEdit.customScaleAnchor.TransformPoint(new Vector3(0.5f, 0.5f, 0));
+                }
+                else
+                {
+                    transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0)); 
+                }
+                transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+            break;
         }
-        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
     }
 
     void Update()
@@ -108,7 +130,7 @@ public class PartTransformController : MonoBehaviour
                         case TransformController.ROTATION:
                         transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0, 0));
                         transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-                        transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                        //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
                     break;
                     case TransformController.SCALE:
                         transform.position = partInEdit.transform.TransformPoint(new Vector3(0.5f, 0.5f, 0));

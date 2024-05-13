@@ -35,6 +35,7 @@ public class PartController : MonoBehaviour
     public PartController connectablePart;
 
     public PartController[] affectedChildren;
+    public GameObject[] detailChildren;
 
     public Transform customScaleAnchor;
 
@@ -43,7 +44,6 @@ public class PartController : MonoBehaviour
         propBlock = new MaterialPropertyBlock();
         InitializePropertyBlock();
         InitializePartDataDictionary();
-        
     }
 
     private void InitializePropertyBlock()
@@ -380,12 +380,25 @@ public class PartController : MonoBehaviour
             transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
             rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-
+            if(detailChildren.Length > 0)
+            {
+                foreach(GameObject go in detailChildren)
+                {
+                    go.SetActive(false);
+                }
+            }
         }else{
             connectablePart.UpdateAllTransformValues();
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
             rb2D.bodyType = RigidbodyType2D.Kinematic;
+            if(detailChildren.Length > 0)
+            {
+                foreach(GameObject go in detailChildren)
+                {
+                    go.SetActive(true);
+                }
+            }
         }
         
     }

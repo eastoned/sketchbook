@@ -28,6 +28,13 @@ public class NuFaceManager : MonoBehaviour
 
     public List<PlayerActionData> playerActionHistory = new List<PlayerActionData>();
 
+    private enum GameState
+    {
+        Self = 0,
+        Other = 1
+    }
+    [SerializeField] private GameState gameState;
+
     void OnEnable()
     {
         OnConfirmTransformPart.Instance.AddListener(AddPlayerActionToHistory);
