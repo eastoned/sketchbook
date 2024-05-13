@@ -103,7 +103,8 @@ public class NuFaceManager : MonoBehaviour
         Vector3 startPos = handPos;
         float counter = 0f;
         float animationTime = 2f;
-        while(counter <= animationTime){
+        while(counter <= animationTime)
+        {
             counter += Time.deltaTime;
             handPos = Vector3.Lerp(startPos, handTargetPos, counter/animationTime);
             OnTranslatePartController.Instance.Invoke(hand, handPos, false);
