@@ -6,13 +6,15 @@ using UnityEngine;
 public class PlayerFaceController : FaceController
 {
     public PartController currentPC;
-    [SerializeField]private PartController hoveredPC;
+    [SerializeField]
+    private PartController hoveredPC;
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
     public PartTransformController rotationController, scaleController;
 
-    [SerializeField] private Material colliderMaterial;
+    [SerializeField]
+    private Material colliderMaterial;
 
     public float currentChange = 0f;
     public SpeechController sc;
@@ -110,6 +112,20 @@ public class PlayerFaceController : FaceController
         }
     }
 
+    private void UpdateControllers()
+    {
+
+        if(currentPC.rotatable)
+        {
+            rotationController.UpdateControllerPositions();
+        }
+            
+        if(currentPC.scalable)
+        {
+            scaleController.UpdateControllerPositions();
+        }
+    }
+
     private void UpdatePartAttachmentStatus(PartController pc, bool status){
         pc.UpdateAttachmentStatus(status);
         //Instantiate(blood, pc.transform.position, Quaternion.identity);
@@ -118,7 +134,8 @@ public class PlayerFaceController : FaceController
     private void SetPartShaderProperty(PartController editingPC, string shaderPropertyName, float shaderValue)
     {
         //Debug.Log("updating shader on: " + editingPC.name);
-        if(editingPC != null){
+        if(editingPC != null)
+        {
             editingPC.UpdateSingleShaderFloat(shaderPropertyName, shaderValue);
             editingPC.UpdateRenderPropBlock();
         }
@@ -161,10 +178,9 @@ public class PlayerFaceController : FaceController
                 }
                     
             }
-            scaleController.UpdateControllerPositions();
-            rotationController.UpdateControllerPositions();
-        }else{
-            
+            UpdateControllers();
+        }else
+        {
             translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
             
         }
@@ -187,8 +203,7 @@ public class PlayerFaceController : FaceController
         
         if(!currentPC.detached){
             currentPC.pd.SetClampedScale(diff);
-            scaleController.UpdateControllerPositions();
-            rotationController.UpdateControllerPositions();
+            UpdateControllers();
         }
         
 
@@ -197,29 +212,31 @@ public class PlayerFaceController : FaceController
     }
 
     private void SetPartRotation(Vector3 pos){
-
         pos -= transform.position;
 
         float angle = Mathf.Atan2(pos.y - currentPC.transform.position.y, pos.x - currentPC.transform.position.x) * Mathf.Rad2Deg;
 
-        if(currentPC.flippedXAxis){
+        if(currentPC.flippedXAxis)
+        {
             currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
+            currentPC.pd.relativeToParentAngle = -angle + 180f;
         }
         else
         {
-            currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);     
+            currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            currentPC.pd.relativeToParentAngle = angle;
         }
             
-        currentPC.pd.relativeToParentAngle = angle;
+        //currentPC.pd.relativeToParentAngle = currentPC.pd.GetClampedAngle(angle, currentPC.flippedXAxis);
         
         if(!currentPC.detached){
-            scaleController.UpdateControllerPositions();
-            rotationController.UpdateControllerPositions();
+            UpdateControllers();
         }
             //currentPC.UpdateAllTransformValues();
 
         if(currentPC.mirroredPart != null){
-            if(!currentPC.mirroredPart.detached){
+            if(!currentPC.mirroredPart.detached)
+            {
                 currentPC.mirroredPart.UpdateAllTransformValues();
             }
         }

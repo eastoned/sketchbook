@@ -33,6 +33,7 @@ public class NuFaceManager : MonoBehaviour
         Self = 0,
         Other = 1
     }
+
     [SerializeField] private GameState gameState;
 
     void OnEnable()
@@ -103,6 +104,11 @@ public class NuFaceManager : MonoBehaviour
         Vector3 partTargetPos = parts[targetPart].transform.position;
 
         movingRoutine = StartCoroutine(MovePartToPosition(new Vector3(partTargetPos.x, partTargetPos.y, hand.pd.absoluteWorldPositionZ)));
+    }
+
+    [ContextMenu("Test Head")]
+    public void MoveCharacterPast(){
+        StartCoroutine(MoveAround());
     }
 
     private IEnumerator MovePartToPosition(Vector3 handTargetPos){
@@ -300,9 +306,21 @@ public class NuFaceManager : MonoBehaviour
         //}
     }
 
+    public AnimationCurve animCurve;
+
     public void PressedRandomButton(){
         PlayerActionData pad = new PlayerActionData(CharacterActionData.ActionType.BUTTONCHANGE);
         AddPlayerActionToHistory(pad);
+    }
+    IEnumerator MoveAround()
+    {
+        yield return TransformAnimation(pfc.transform, Vector3.zero, new Vector3(-4, 0, 0), Vector3.one, Vector3.one, 1f);
+        
+        targetData[0].RandomizeData(0f);
+        //crunch.Play();
+        writeableData[0].CopyData(pfc.currentChar);
+        yield return pfc.Blend(writeableData[0], targetData[0], 1f);
+        yield return TransformAnimation(pfc.transform, new Vector3(4, 0, 0), Vector3.zero, Vector3.one, Vector3.one, 1f);
     }
 
     IEnumerator BirthRoutine(){
@@ -352,7 +370,7 @@ public class NuFaceManager : MonoBehaviour
         float counter = 0f;
         while(counter <= timeToAnimate){
             counter += Time.deltaTime;
-            float frame = Mathf.Clamp01(counter/timeToAnimate);
+            float frame = animCurve.Evaluate(Mathf.Clamp01(counter/timeToAnimate));
             transformToAnimate.position = Vector3.Lerp(startPosition, endPosition, frame);
             transformToAnimate.localScale = Vector3.Lerp(startScale, endScale, frame);
             yield return null;

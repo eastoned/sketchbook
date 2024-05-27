@@ -39,6 +39,9 @@ public class PartController : MonoBehaviour
 
     public Transform customScaleAnchor;
 
+    public Vector3 scaleControllerPos = new Vector3(0.5f, 0.5f, 0);
+    public Vector3 rotateControllerPos = new Vector3(0.5f, 0, 0);
+
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
@@ -49,18 +52,19 @@ public class PartController : MonoBehaviour
     private void InitializePropertyBlock()
     {
         pd.absoluteWorldPositionZ = transform.position.z;
-        for(int i = 0; i < pd.shaderProperties.Count; i++){
+        for(int i = 0; i < pd.shaderProperties.Count; i++)
+        {
             propBlock.SetFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
         }
 
-        for(int j = 0;  j < pd.shaderColors.Count; j++){
+        for(int j = 0;  j < pd.shaderColors.Count; j++)
+        {
             propBlock.SetColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
         }
     }
 
     public void InitializePartDataDictionary()
     {
-        //Debug.Log("clear and init the dict");
         
         if(!flippedXAxis)
         {
@@ -80,8 +84,10 @@ public class PartController : MonoBehaviour
     public void UpdateDependencies()
     {  
         //Debug.Log("updating affected parts");
-        foreach(PartController pc in affectedChildren){
-            if(!pc.detached){
+        foreach(PartController pc in affectedChildren)
+        {
+            if(!pc.detached)
+            {
                 pc.pd.SetPositionBounds(pd);
                 pc.pd.SetScaleBounds(pd);
                 pc.UpdateAllTransformValues();
@@ -89,7 +95,8 @@ public class PartController : MonoBehaviour
             }
         }
 
-        if(mirroredPart != null){
+        if(mirroredPart != null)
+        {
             if(!mirroredPart.detached)
                 mirroredPart.UpdateAllTransformValues();
         }
@@ -98,7 +105,8 @@ public class PartController : MonoBehaviour
     public void SetCache(PartData pd)
     {
         shaderPropertyCache = new ShaderCache[pd.shaderProperties.Count];
-        for(int i = 0; i < shaderPropertyCache.Length; i++){
+        for(int i = 0; i < shaderPropertyCache.Length; i++)
+        {
             shaderPropertyCache[i] = new ShaderCache(i, pd.shaderProperties[i].propertyValue);
         }
     }
@@ -130,7 +138,8 @@ public class PartController : MonoBehaviour
 
     public void PartClicked()
     {
-        if(customScaleAnchor != null){
+        if(customScaleAnchor != null)
+        {
             positionCache = customScaleAnchor.position;
         }else{
             positionCache = transform.position;
@@ -145,10 +154,11 @@ public class PartController : MonoBehaviour
         ptc.partInEdit = this;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
-        pd.RandomizeShaders(.5f);
-        UpdateAllShadersValue(1f);
+        //pd.RandomizeShaders(.5f);
+        //UpdateAllShadersValue(1f);
         
-        if(!detached && mirroredPart != null){
+        if(!detached && mirroredPart != null)
+        {
             if(!mirroredPart.detached)
                 mirroredPart.UpdateAllShadersValue(1f);
         }
@@ -208,17 +218,22 @@ public class PartController : MonoBehaviour
 
     public void UpdateAllTransformValues()
     {
-        if(!detached){
-            UpdatePosition();
-            UpdateScale();
-            UpdateRotation();
+        if(!detached)
+        {
+            if(translatable) UpdatePosition();
+
+            if(scalable) UpdateScale();
+
+            if(rotatable) UpdateRotation();
         }
     }
 
-    public void UpdateScale(){
+    public void UpdateScale()
+    {
         if(flippedXAxis)
             {
-                if(customScaleAnchor != null){
+                if(customScaleAnchor != null)
+                {
                     customScaleAnchor.localScale = pd.GetFlippedAbsScale();
                     cacheScale = pd.GetFlippedAbsScale();
                 }else{
@@ -227,7 +242,8 @@ public class PartController : MonoBehaviour
                 }
                 
             }else{
-                if(customScaleAnchor != null){
+                if(customScaleAnchor != null)
+                {
                     customScaleAnchor.localScale = pd.GetAbsScale();
                     cacheScale = pd.GetAbsScale();
                 }else{
@@ -238,30 +254,38 @@ public class PartController : MonoBehaviour
             }
         pd.SetPositionBounds();
     }
-    public void UpdatePosition(){
+
+    public void UpdatePosition()
+    {
         if(flippedXAxis)
             {
-                if(customScaleAnchor != null){
-                    customScaleAnchor.position = pd.GetFlippedAbsPosition();
+                if(customScaleAnchor != null)
+                {
+                    customScaleAnchor.localPosition = pd.GetFlippedAbsPosition();
                     cachePosition = pd.GetFlippedAbsPosition();
                 }else{
-                    transform.position = pd.GetFlippedAbsPosition();
+                    transform.localPosition = pd.GetFlippedAbsPosition();
                     cachePosition = pd.GetFlippedAbsPosition();
                 }
             }else{
-                if(customScaleAnchor != null){
-                    customScaleAnchor.position = pd.GetAbsPosition();
+                if(customScaleAnchor != null)
+                {
+                    customScaleAnchor.localPosition = pd.GetAbsPosition();
                     cachePosition = pd.GetAbsPosition();
                 }else{
-                    transform.position = pd.GetAbsPosition();
+                    transform.localPosition = pd.GetAbsPosition();
                     cachePosition = pd.GetAbsPosition();
                 }
             }
     }
-    public void UpdateRotation(){
+
+    public void UpdateRotation()
+    {   
         if(flippedXAxis)
             {
-                if(customScaleAnchor != null){
+                Debug.Log(-pd.relativeToParentAngle);
+                if(customScaleAnchor != null)
+                {
                     customScaleAnchor.localRotation = Quaternion.Euler(0, 0, -pd.relativeToParentAngle);
                     cacheAngle = -pd.relativeToParentAngle;
                 }else{
@@ -269,7 +293,9 @@ public class PartController : MonoBehaviour
                     cacheAngle = -pd.relativeToParentAngle;
                 }
             }else{
-                if(customScaleAnchor != null){
+                Debug.Log(pd.relativeToParentAngle);
+                if(customScaleAnchor != null)
+                {
                     customScaleAnchor.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);
                     cacheAngle = pd.relativeToParentAngle;
                 }else{
@@ -290,11 +316,13 @@ public class PartController : MonoBehaviour
         
     }
 
-    public void AddHoveredMaterial(Material mat){
+    public void AddHoveredMaterial(Material mat)
+    {
         rend.sharedMaterials = new Material[2]{rend.sharedMaterials[0], mat};
     }
 
-    public void ResetMaterial(){
+    public void ResetMaterial()
+    {
         rend.sharedMaterials = new Material[1]{rend.sharedMaterials[0]};
     }
 
@@ -403,7 +431,8 @@ public class PartController : MonoBehaviour
         
     }
 
-    void Update(){
+    void Update()
+    {
         for(int i = 0; i < pd.shaderProperties.Count; i++){
             //UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, Mathf.PerlinNoise(Time.time * pd.shaderProperties[i].propertyValue * 0.1f, pd.shaderProperties[i].propertyValue));
             //Debug.Log(Mathf.PerlinNoise(Time.time, pd.shaderProperties[i].propertyValue) + " is thge noise.");
@@ -437,7 +466,8 @@ public class PartController : MonoBehaviour
 
     void UpdateSingleShaderColor(string param, Color col)
     {
-        if(propBlock.HasColor(param)){
+        if(propBlock.HasColor(param))
+        {
            propBlock.SetColor(param, col); 
         }else{
             Debug.Log(param + " is not an available color.");

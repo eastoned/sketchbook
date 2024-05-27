@@ -140,7 +140,6 @@ public class FaceController : MonoBehaviour
 
     public void BlendCharacter(CharacterData char1, CharacterData char2, float animLength)
     {
-
         if(blending != null){
             StopCoroutine(blending);
         }

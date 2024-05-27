@@ -71,6 +71,7 @@ public class CharacterData : ScriptableObject
     }
 
     public void RandomizeData(float randomFactor){
+        RandomPiece(neckData, randomFactor);
         RandomPiece(headData, randomFactor);
         RandomPiece(earData, randomFactor);
         RandomPiece(eyeData, randomFactor);
@@ -78,7 +79,6 @@ public class CharacterData : ScriptableObject
         RandomPiece(hairBackData, randomFactor);
         RandomPiece(hairFrontData, randomFactor);
         RandomPiece(mouthData, randomFactor);
-        RandomPiece(neckData, randomFactor);
         RandomPiece(noseData, randomFactor);
     }
 

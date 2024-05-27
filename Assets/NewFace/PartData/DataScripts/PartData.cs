@@ -56,15 +56,18 @@ public class PartData : ScriptableObject
         return clampedPos;
     }
     
-    public Quaternion GetAbsRotation(){
+    public Quaternion GetAbsRotation()
+    {
         return Quaternion.Euler(0, 0, relativeToParentAngle);
     }
 
-    public Vector3 GetAbsScale(){
+    public Vector3 GetAbsScale()
+    {
         return new Vector3(Mathf.Lerp(minScaleX, maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
 
-    public Vector3 GetFlippedAbsScale(){
+    public Vector3 GetFlippedAbsScale()
+    {
         //Debug.Log("returning flipped absolute scale");
         return new Vector3(Mathf.Lerp(-minScaleX, -maxScaleX, relativeToParentScale.x), Mathf.Lerp(minScaleY, maxScaleY, relativeToParentScale.y), 1f);
     }
@@ -73,12 +76,12 @@ public class PartData : ScriptableObject
     {
     }
 
-    public virtual void SetScaleBounds(){
-        
+    public virtual void SetScaleBounds()
+    {  
     }
 
-    public virtual void SetPositionBounds(){
-
+    public virtual void SetPositionBounds()
+    {
     }
 
     public virtual void SetPositionBounds(PartData parentBounds)
@@ -108,19 +111,19 @@ public class PartData : ScriptableObject
 
     public Vector3 GetClampedScale(Vector3 scaleIn)
     {
-        Debug.Log("returning absolute scale clamped");
         return new Vector3(Mathf.Clamp(scaleIn.x, minScaleX, maxScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
     public Vector3 GetFlippedClampedScale(Vector3 scaleIn)
     {
-        Debug.Log("returning flipped absolute scale clamped");
         return new Vector3(Mathf.Clamp(-scaleIn.x, -maxScaleX, -minScaleX), Mathf.Clamp(scaleIn.y, minScaleY, maxScaleY), 1);
     }
 
     public float GetClampedAngle(float angle, bool flippedXAxis){
-        if(flippedXAxis){
-            if(angle < 0){
+        if(flippedXAxis)
+        {
+            if(angle < 0)
+            {
                 relativeToParentAngle = -Mathf.Clamp(angle + 180, minAngle, maxAngle);
             }else{
                 relativeToParentAngle = -Mathf.Clamp(angle - 180, minAngle, maxAngle);
@@ -137,7 +140,8 @@ public class PartData : ScriptableObject
     }
 
     [ContextMenu("Random")]
-    public void Randomize(float randomFactor){
+    public void Randomize(float randomFactor)
+    {
         relativeToParentAngle = Mathf.Lerp(minAngle, maxAngle, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor));
 
         relativeToParentPosition = new Vector3(
