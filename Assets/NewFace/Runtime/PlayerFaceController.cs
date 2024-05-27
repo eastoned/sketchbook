@@ -171,7 +171,7 @@ public class PlayerFaceController : FaceController
                     OnTickleEvent.Instance.Invoke();
                     startedTickling = true;
                 }
-                if(absPos.magnitude > 1.2f)
+                if(absPos.magnitude > translatingPC.pd.breakAmount)
                 {
                     Debug.Log("Reached limit so break");
                     UpdatePartAttachmentStatus(translatingPC, true);
@@ -179,10 +179,10 @@ public class PlayerFaceController : FaceController
                     
             }
             UpdateControllers();
-        }else
+        }
+        else
         {
             translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
-            
         }
     
         translatingPC.UpdateAllTransformValues();

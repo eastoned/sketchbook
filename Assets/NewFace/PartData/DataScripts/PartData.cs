@@ -26,6 +26,8 @@ public class PartData : ScriptableObject
         public float minScaleX, maxScaleX, minScaleY, maxScaleY;
     #endregion
 
+    public float breakAmount = 1.2f;
+
     #region ShaderData
         public List<ShaderProperty> shaderProperties = new List<ShaderProperty>();
         public Dictionary<string, ShaderProperty> shadePropertyDict = new Dictionary<string, ShaderProperty>();

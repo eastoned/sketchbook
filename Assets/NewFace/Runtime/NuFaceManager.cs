@@ -319,8 +319,9 @@ public class NuFaceManager : MonoBehaviour
         targetData[0].RandomizeData(0.5f);
         //crunch.Play();
         writeableData[0].CopyData(pfc.currentChar);
-        yield return pfc.Blend(writeableData[0], targetData[0], 1f);
+        yield return pfc.Blend(writeableData[0], targetData[0], .1f);
         yield return TransformAnimation(pfc.transform, new Vector3(4, 0, 0), Vector3.zero, Vector3.one, Vector3.one, 2f);
+        yield return sc.SpeakText("Oh!", 0.25f);
     }
 
     IEnumerator BirthRoutine(){

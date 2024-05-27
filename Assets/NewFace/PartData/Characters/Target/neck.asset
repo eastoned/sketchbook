@@ -12,37 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794ef52737c212f45b21f4b64c293fc5, type: 3}
   m_Name: neck
   m_EditorClassIdentifier: 
-  absolutePosition: {x: 0, y: -1, z: 0.2}
-  relativePosition: {x: 0, y: 0, z: 0.2}
+  partName: 
+  relativeToParentPosition: {x: 0, y: 0}
+  absoluteWorldPositionZ: 0
   minPosX: 0
   maxPosX: 0
   minPosY: -1
   maxPosY: -1
   minAngle: 0
   maxAngle: 0
-  currentAngle: 0
-  absoluteScale: {x: 0.1, y: 2, z: 1}
-  relativeScale: {x: 0.6, y: 0, z: 1}
+  relativeToParentAngle: 0
+  relativeToParentScale: {x: 0.7983519, y: 0.6707892}
+  detached: 0
+  activeInScene: 1
   minScaleX: 0.25
   maxScaleX: 1.5
-  minScaleY: 2
-  maxScaleY: 2
+  minScaleY: 0.25
+  maxScaleY: 3
   shaderProperties:
   - propertyName: _NeckTopWidth
-    propertyValue: 0
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.043407798
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
   - propertyName: _NeckCurveRoundness
-    propertyValue: 0.35198832
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.44395047
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
   - propertyName: _NeckCurveScale
-    propertyValue: 0
-    IncreaseValueRemarks: []
-    DecreaseValueRemarks: []
+    propertyValue: 0.2401669
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
   shaderColors:
   - colorName: _Color1
-    colorValue: {r: 1, g: 0, b: 0, a: 1}
+    colorValue: {r: 0.39285943, g: 0.85194993, b: 0.83913004, a: 1}
   - colorName: _Color2
-    colorValue: {r: 0, g: 0, b: 0, a: 1}
-  affectedPartData: []
+    colorValue: {r: 0.20936848, g: 0.16067646, b: 0.2294935, a: 1}

@@ -18,6 +18,8 @@ public class AnimateTMPElement : MonoBehaviour
     public string textOriginal;
     private string textVisible;
 
+
+
     static byte floattoByte(float ro)
         {
             return (byte)(ro * 0x100);
@@ -57,8 +59,15 @@ public class AnimateTMPElement : MonoBehaviour
         //Shader.SetGlobalFloat("_CharacterVisibility", characterVisibility);
     }*/
 
+    [ContextMenu("pref height print")]
+    public void SetHeightToText()
+    {
+        GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textMesh.renderedHeight);
+    }
+
     public void SetOriginalText(string text){
         textMesh.text = text;
+        //GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textMesh.renderedHeight);
     }
 
     public void UpdateTextVisibility(float textToShow){

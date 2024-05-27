@@ -83,7 +83,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5391851005333956622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 4
 --- !u!114 &594980231164325589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5391851005333956622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
@@ -177,7 +177,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 645, y: 245}
+  m_SizeDelta: {x: 415, y: 346.33203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5391851005508244355
 CanvasRenderer:
@@ -207,7 +207,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fight me. Fight me. Fight me. <color=red>F
+  m_text: Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight
+    me. Fight me. Fight me. Fight me. Fight me. Fight m
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f6104a988b0ced04296bfa2a5f5b5d50, type: 2}
   m_sharedMaterial: {fileID: 1826697919671455151, guid: f6104a988b0ced04296bfa2a5f5b5d50,
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 100, y: 15, z: 100, w: 15}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -284,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5391851005508244352}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
@@ -309,15 +310,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e5b67013f2e434a87c49fd2dae1810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterVisibility: 1
-  currentCharacter: 31
+  characterVisibility: 0.333
+  currentCharacter: 1
+  currentWord: 
   textMesh: {fileID: 5391851005508244354}
-  textOriginal: 'Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me.Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me.Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
-    me. Fight me. Fight me. Fight me. '
+  textOriginal: Fight me. Fight me. Fight me. Fight me. Fight me. Fight me. Fight
+    me.Fight me. Fight me. Fight m
 --- !u!1 &6512706018148329715
 GameObject:
   m_ObjectHideFlags: 0

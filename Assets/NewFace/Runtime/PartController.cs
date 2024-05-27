@@ -417,7 +417,7 @@ public class PartController : MonoBehaviour
             connectablePart.UpdateAllTransformValues();
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
             transform.gameObject.layer = 12;
-            rb2D.bodyType = RigidbodyType2D.Kinematic;
+            //rb2D.bodyType = RigidbodyType2D.Kinematic;
             if(detailChildren.Length > 0)
             {
                 foreach(GameObject go in detailChildren)

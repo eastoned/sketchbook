@@ -32,10 +32,10 @@ Material:
     - _ChinLength: 1
     - _ChinScale: 0
     - _ChinWidth: 0.813
-    - _Finger1: 0.57910156
-    - _Finger2: 0.82910156
-    - _Finger3: 0.92089844
-    - _Finger4: 0.67089844
+    - _Finger1: 1
+    - _Finger2: 0
+    - _Finger3: 0
+    - _Finger4: 0
     - _FingerRoundness: 0.245
     - _ForeheadLength: 1
     - _ForeheadScale: 0
