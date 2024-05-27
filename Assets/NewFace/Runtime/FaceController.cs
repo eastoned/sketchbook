@@ -95,7 +95,6 @@ public class FaceController : MonoBehaviour
     {
         for(int i = 0; i < gameData.allParts.Length; i++)
         {
-            Debug.Log(gameData.allParts[i].activeInScene);
             if(gameData.allParts[i].activeInScene)
                 BlendProfile(val, gameData.allParts[i], blendFrom.allParts[i], blendTo.allParts[i]);
         }

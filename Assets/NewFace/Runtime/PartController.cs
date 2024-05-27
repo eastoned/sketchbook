@@ -283,7 +283,6 @@ public class PartController : MonoBehaviour
     {   
         if(flippedXAxis)
             {
-                Debug.Log(-pd.relativeToParentAngle);
                 if(customScaleAnchor != null)
                 {
                     customScaleAnchor.localRotation = Quaternion.Euler(0, 0, -pd.relativeToParentAngle);
@@ -293,7 +292,6 @@ public class PartController : MonoBehaviour
                     cacheAngle = -pd.relativeToParentAngle;
                 }
             }else{
-                Debug.Log(pd.relativeToParentAngle);
                 if(customScaleAnchor != null)
                 {
                     customScaleAnchor.localRotation = Quaternion.Euler(0, 0, pd.relativeToParentAngle);

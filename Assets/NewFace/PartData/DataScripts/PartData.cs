@@ -142,18 +142,18 @@ public class PartData : ScriptableObject
     [ContextMenu("Random")]
     public void Randomize(float randomFactor)
     {
-        relativeToParentAngle = Mathf.Lerp(minAngle, maxAngle, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor));
+        relativeToParentAngle = Mathf.Lerp(minAngle, maxAngle, Random.Range(0.5f - randomFactor, 0.5f + randomFactor));
 
         relativeToParentPosition = new Vector3(
-            Mathf.Lerp(minPosX, maxPosX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
-            Mathf.Lerp(minPosY, maxPosY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(minPosX, maxPosX, Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(minPosY, maxPosY, Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             absoluteWorldPositionZ);
             
         relativeToParentScale = new Vector3(
-            Mathf.Lerp(minScaleX, maxScaleX, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
-            Mathf.Lerp(minScaleY, maxScaleY, UnityEngine.Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(minScaleX, maxScaleX, Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
+            Mathf.Lerp(minScaleY, maxScaleY, Random.Range(0.5f - randomFactor, 0.5f + randomFactor)),
             1f);
-        
+
         SetClampedPosition(relativeToParentPosition);
         SetClampedScale(relativeToParentScale);
 
@@ -174,7 +174,7 @@ public class PartData : ScriptableObject
         }
     }
 
-        public void CopyData(PartData pd)
+    public void CopyData(PartData pd)
     {
         relativeToParentPosition = pd.relativeToParentPosition;
         relativeToParentAngle = pd.relativeToParentAngle;

@@ -289,7 +289,7 @@ public class NuFaceManager : MonoBehaviour
     public void RandomizePlayer(){
 
        // if(Random.Range(0f, 1f) < 0.5f){
-        targetData[0].RandomizeData(Random.Range(0f, .5f));
+        targetData[0].RandomizeData(0.5f);
         //crunch.Play();
         writeableData[0].CopyData(pfc.currentChar);
         pfc.BlendCharacter(writeableData[0], targetData[0], 1f);
@@ -314,13 +314,13 @@ public class NuFaceManager : MonoBehaviour
     }
     IEnumerator MoveAround()
     {
-        yield return TransformAnimation(pfc.transform, Vector3.zero, new Vector3(-4, 0, 0), Vector3.one, Vector3.one, 1f);
+        yield return TransformAnimation(pfc.transform, Vector3.zero, new Vector3(-4, 0, 0), Vector3.one, Vector3.one, 2f);
         
-        targetData[0].RandomizeData(0f);
+        targetData[0].RandomizeData(0.5f);
         //crunch.Play();
         writeableData[0].CopyData(pfc.currentChar);
         yield return pfc.Blend(writeableData[0], targetData[0], 1f);
-        yield return TransformAnimation(pfc.transform, new Vector3(4, 0, 0), Vector3.zero, Vector3.one, Vector3.one, 1f);
+        yield return TransformAnimation(pfc.transform, new Vector3(4, 0, 0), Vector3.zero, Vector3.one, Vector3.one, 2f);
     }
 
     IEnumerator BirthRoutine(){
