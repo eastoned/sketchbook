@@ -149,6 +149,12 @@ public class SpeechController : MonoBehaviour
         }
         
     }
+    
+    [ContextMenu("Test")]
+    public void test()
+    {
+
+    }
 
     public void SpeakEvent(string text){
         int spaceCounter = 0;
