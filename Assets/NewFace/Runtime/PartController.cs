@@ -145,17 +145,12 @@ public class PartController : MonoBehaviour
             positionCache = transform.position;
         }
         
-        //scaleCache = transform.localScale;
-        //angleCache = transform.localEulerAngles.z;
-        
         OnSelectedNewFacePartEvent.Instance.Invoke(this);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
         ptc.partInEdit = this;
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
-        //pd.RandomizeShaders(.5f);
-        //UpdateAllShadersValue(1f);
         
         if(!detached && mirroredPart != null)
         {
@@ -175,7 +170,6 @@ public class PartController : MonoBehaviour
         PartUnclicked();
         currentPAD.timeStamp = Time.time;
         currentPAD.timeToChange = Time.time - timeCache;
-        //currentPAD.brokePart = detached;
         currentPAD.positionChange = transform.position - positionCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
     }

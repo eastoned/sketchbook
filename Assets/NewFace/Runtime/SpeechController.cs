@@ -200,7 +200,6 @@ public class SpeechController : MonoBehaviour
             float journey = 0;
             int amountofwords = text.Length;
             AnimateTMPElement textAnimator = bubble.GetComponentInChildren<AnimateTMPElement>();
-            Debug.Log(text);
             textAnimator.SetOriginalText(text);
             float speakTime = 0;
             while(journey < value){

@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public class PartTransformController : MonoBehaviour
 {
 
-    public enum TransformController{
+    public enum TransformController
+    {
         TRANSLATE,
         ROTATION,
         SCALE,
@@ -25,13 +26,16 @@ public class PartTransformController : MonoBehaviour
 
     public Vector3 testInput;
 
-    void Start(){
-        if(icon != null){
+    void Start()
+    {
+        if(icon != null)
+        {
             GetComponent<Renderer>().material.SetTexture("_IconTex", icon);
         }
     }
     
-    void OnMouseDown(){
+    void OnMouseDown()
+    {
         if(CustomUtils.IsPointerOverUIObject())
             return;
 
@@ -46,7 +50,8 @@ public class PartTransformController : MonoBehaviour
         currentlyHeld = true;
     }
 
-    void OnMouseDrag(){
+    void OnMouseDrag()
+    {
         if(!currentlyHeld){
             //if(CustomUtils.IsPointerOverUIObject())
               //  return;
@@ -57,7 +62,8 @@ public class PartTransformController : MonoBehaviour
         OnHandDrag(mouseDelta2);
     }
 
-    public void OnHandDrag(Vector3 pos){
+    public void OnHandDrag(Vector3 pos)
+    {
         switch(controls){
             case TransformController.TRANSLATE:
                 transform.position = new Vector3(pos.x, pos.y, transform.position.z);
@@ -79,15 +85,18 @@ public class PartTransformController : MonoBehaviour
         }
     }
 
-    void OnMouseUp(){
+    void OnMouseUp()
+    {
         OnHandUp();
         //OnConfirmTransformPart.Instance.Invoke();
     }
-    public void OnHandUp(){
+    public void OnHandUp()
+    {
         currentlyHeld = false;
     }
 
-    public void Disappear(){
+    public void Disappear()
+    {
         transform.localPosition = new Vector3(100, 100, 100);
     }
 
@@ -124,15 +133,20 @@ public class PartTransformController : MonoBehaviour
 
     void Update()
     {
-        if(partInEdit != null){
-            if(partInEdit.detached){
-                    switch(controls){
+        if(partInEdit != null)
+        {
+            if(partInEdit.detached)
+            {
+                    switch(controls)
+                    {
                         case TransformController.ROTATION:
+                        
                         transform.position = partInEdit.transform.TransformPoint(partInEdit.rotateControllerPos);
                         transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
                         //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
                     break;
                     case TransformController.SCALE:
+                        Debug.Log(partInEdit.scaleControllerPos);
                         transform.position = partInEdit.transform.TransformPoint(partInEdit.scaleControllerPos);
                         transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
                         //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
