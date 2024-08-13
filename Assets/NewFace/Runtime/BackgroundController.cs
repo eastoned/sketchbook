@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class BackgroundController : MonoBehaviour
 {
+
+    public Renderer rend;
+    MaterialPropertyBlock propBlock;
+    public List<ShaderColor> shaderColors;
     void OnMouseDown(){
         OnMouseClickEvent.Instance.Invoke();
         
@@ -24,5 +28,57 @@ public class BackgroundController : MonoBehaviour
 
     void OnMouseEnter(){
         OnHoveredNewFacePartEvent.Instance.Invoke(null);
+    }
+
+    private void InitializePropertyBlock()
+    {
+        propBlock = new MaterialPropertyBlock();
+
+        for(int j = 0;  j < shaderColors.Count; j++)
+        {
+            propBlock.SetColor(shaderColors[j].colorName, shaderColors[j].colorValue);
+        }
+
+    }
+
+    public void UpdateRenderPropBlock()
+    {
+        rend.SetPropertyBlock(propBlock);
+    }
+
+    public void RandomizeData()
+    {
+        if(propBlock != null)
+        {
+            for(int j = 0; j < shaderColors.Count; j++)
+            {
+                shaderColors[j].colorValue = Random.ColorHSV();
+                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
+            }
+            UpdateRenderPropBlock();
+        }
+        else
+        {
+            InitializePropertyBlock();
+            RandomizeData();
+        }
+    }
+
+    void UpdateSingleShaderColor(string param, Color col)
+    {
+        if(propBlock != null)
+        {
+            if(propBlock.HasColor(param))
+            {
+            propBlock.SetColor(param, col); 
+            }else{
+                Debug.Log(param + " is not an available color.");
+            }
+        }
+        else
+        {
+            Debug.Log("Prop Block not initialized");
+        }
+        
     }
 }

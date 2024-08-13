@@ -55,14 +55,8 @@ public class NuFaceManager : MonoBehaviour
         //if broke then will always remember
         if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
            playerActionHistory.Add(pad); 
-        }
-        else if(pfc.currentChar.CanSee())
-        {
-            
-            // but doesn't remember if can't see
-            playerActionHistory.Add(pad);
         }else{
-            Debug.Log("cant see");
+            //Debug.Log("cant see");
         }
     }
 

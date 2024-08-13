@@ -39,6 +39,8 @@ public class PartTransformController : MonoBehaviour
         if(CustomUtils.IsPointerOverUIObject())
             return;
 
+        
+
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         OnHandDown(mouseDelta2);
     }
@@ -78,7 +80,7 @@ public class PartTransformController : MonoBehaviour
             break;
             case TransformController.SCALE:
                 transform.position = new Vector3(pos.x, pos.y, transform.position.z);
-                OnScalePartController.Instance.Invoke(transform.position);
+                OnScalePartController.Instance.Invoke(partInEdit, transform.position);
             break;
             case TransformController.NOTHING:
             break;

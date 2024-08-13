@@ -11,56 +11,6 @@ public class CharacterData : ScriptableObject
 
     public PartData[] allParts;
 
-    public enum Expression
-    {
-        NEUTRAL,
-        HAPPY,
-        SAD,
-        ANGRY,
-        SURPRISE,
-        SCARED
-    }
-
-    public enum CharacterState
-    {
-        SLEEPING,
-        TIRED,
-        CRYING
-    }
-    
-    public Expression currentExpression;
-
-    public bool canSee = true;
-    public bool canSpeak = true;
-    public bool canSmell = true;
-    public bool canHear = true;
-
-    public void UpdateVisionStatus()
-    {
-        float eyeRadius = eyeData.shadePropertyDict["_PupilRadius"].propertyValue;
-        float eyeOpen = eyeData.shadePropertyDict["_EyelidBottomOpen"].propertyValue + eyeData.shadePropertyDict["_EyelidTopOpen"].propertyValue;
-        canSee = eyeRadius > 0.05f && eyeOpen > 0.05f;
-    }
-
-    public bool CanSee()
-    {
-        if(eyeData.activeInScene){
-           float eyeRadius = eyeData.shadePropertyDict["_PupilRadius"].propertyValue;
-            float eyeOpen = eyeData.shadePropertyDict["_EyelidBottomOpen"].propertyValue + eyeData.shadePropertyDict["_EyelidTopOpen"].propertyValue;
-
-            canSee =  eyeRadius > 0.05f && eyeOpen > 0.05f;
-            return canSee; 
-        }else{
-            return false;
-        }
-        
-    }
-
-    public void UpdateHearingStatus(PartController ear)
-    {
-        canHear = true;
-    }
-
     void RandomPiece(PartData part, float randomFactor){
         part.Randomize(randomFactor);
     }

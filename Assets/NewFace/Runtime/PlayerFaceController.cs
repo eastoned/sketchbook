@@ -149,19 +149,28 @@ public class PlayerFaceController : FaceController
         {
             float flip = translatingPC.flippedXAxis? -1f : 1f;
             
-            translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
+            translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.transform.position.z);
             
-            
-            Vector3 absPos = new Vector3(pos.x*flip, pos.y, translatingPC.pd.absoluteWorldPositionZ);
+            Vector3 absPos = new Vector3(pos.x*flip, pos.y, translatingPC.transform.position.z);
+            //if(translatingPC.sj2D != null)
+                //translatingPC.sj2D.connectedAnchor = Vector3.Lerp(translatingPC.sj2D.connectedAnchor, new Vector3(pos.x, pos.y, translatingPC.transform.position.z), Time.deltaTime);
 
-            translatingPC.pd.SetClampedPosition(absPos);
+            //turn on clamped position
+            //translatingPC.pd.SetClampedPosition(absPos);
             
             if(translatingPC.mirroredPart != null){
                 if(!translatingPC.mirroredPart.detached && mirror){
                     translatingPC.mirroredPart.UpdateAllTransformValues();
                 }
             }
-            
+            if(translatingPC.ffv != null)
+            {
+                
+                translatingPC.ffv.pc.transform.localScale = new Vector3(translatingPC.ffv.pc.transform.localScale.x, pos.y + 2f, 1f);
+                translatingPC.ffv.pc.UpdateSingleShaderFloatUnsafe("_HeadPosX", pos.x - translatingPC.ffv.pc.transform.position.x);
+                translatingPC.ffv.pc.UpdateRenderPropBlock();
+            }
+            /*
             if(translatingPC.pd.IsPositionOutsideMaximum(absPos))
             {
                 translatingPC.ShakePiece(absPos.magnitude*10f, 0.25f);
@@ -177,41 +186,45 @@ public class PlayerFaceController : FaceController
                     UpdatePartAttachmentStatus(translatingPC, true);
                 }
                     
-            }
+            }*/
             UpdateControllers();
         }
         else
         {
-            translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.pd.absoluteWorldPositionZ);
+            translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.transform.position.z);
         }
     
-        translatingPC.UpdateAllTransformValues();
+        //translatingPC.UpdateAllTransformValues();
     }
 
-    private void SetPartScale(Vector3 pos){
+    private void SetPartScale(PartController scalingPC, Vector3 pos)
+    {
         //pos -= currentPC.transform.position;
         //currentPC.UpdatePosition();
 
-        Vector3 diff = currentPC.transform.InverseTransformDirection(currentPC.transform.position - pos)*2f;
+        Vector3 diff = scalingPC.transform.InverseTransformDirection(scalingPC.transform.position - pos)*2f;
         
-        if(currentPC.customScaleAnchor != null){
-            diff = currentPC.customScaleAnchor.InverseTransformDirection(currentPC.customScaleAnchor.position - pos)*2f;
+        if(scalingPC.customScaleAnchor != null){
+            diff = scalingPC.customScaleAnchor.InverseTransformDirection(scalingPC.customScaleAnchor.position - pos)*2f;
             diff = new Vector3(diff.x, diff.y/2f, diff.z);
         }
         
         diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
         
+        scalingPC.transform.localScale = new Vector3(diff.x, diff.y, 1f);
+            
         if(!currentPC.detached){
-            currentPC.pd.SetClampedScale(diff);
+            //currentPC.pd.SetClampedScale(diff);
             UpdateControllers();
         }
         
 
-        currentPC.UpdateScale();
-        currentPC.UpdateDependencies();
+        //currentPC.UpdateScale();
+        //currentPC.UpdateDependencies();
     }
 
-    private void SetPartRotation(Vector3 pos){
+    private void SetPartRotation(Vector3 pos)
+    {
         pos -= transform.position;
 
         float angle = Mathf.Atan2(pos.y - currentPC.transform.position.y, pos.x - currentPC.transform.position.x) * Mathf.Rad2Deg;

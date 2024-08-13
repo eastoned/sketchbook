@@ -53,28 +53,28 @@ public class PartUIController : MonoBehaviour
 
         for(int i = 0; i < sliders.Count; i++)
         {
-            if(i < currentPC.pd.shaderProperties.Count){
+            if(i < currentPC.shaderProperties.Count){
                 sliders[i].gameObject.SetActive(true);
                 sliders[i].onValueChanged.RemoveAllListeners();
-                sliders[i].value = currentPC.pd.shaderProperties[i].propertyValue;
-                sliders[i].name = currentPC.pd.shaderProperties[i].propertyName;
+                sliders[i].value = currentPC.shaderProperties[i].propertyValue;
+                sliders[i].name = currentPC.shaderProperties[i].propertyName;
                 //if(partData.pd.shaderProperties[i].IncreaseValueRemarks.Length > 0 || partData.pd.shaderProperties[i].DecreaseValueRemarks.Length > 0){
                     //sliders[i].onValueChanged.AddListener(partData.pd.shaderProperties[i].ReadRandomRemark);
                 //}
-                sliders[i].onValueChanged.AddListener(currentPC.pd.shaderProperties[i].SetValue);
+                sliders[i].onValueChanged.AddListener(currentPC.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(currentPC.UpdateAllShadersValue);
-                if(currentPC.pd.shaderProperties[i].wholeNumberInterval){
-                    float intervalValue = currentPC.pd.shaderProperties[i].valueInterval;
+                if(currentPC.shaderProperties[i].wholeNumberInterval){
+                    float intervalValue = currentPC.shaderProperties[i].valueInterval;
                     sliders[i].onValueChanged.AddListener(delegate{SetCurrentShaderInterval.Instance.Invoke(intervalValue);});
                     sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
                 }else{
                     sliders[i].onValueChanged.AddListener(OnSlideShaderProperty.Instance.Invoke);
                 }
 
-                if(currentPC.pd.shaderProperties[i].propertyFeature != ShaderProperty.AffectedFeature.NOTHING)
+                if(currentPC.shaderProperties[i].propertyFeature != ShaderProperty.AffectedFeature.NOTHING)
                 {
                     Debug.Log("slider should change an affected property");
-                    switch(currentPC.pd.shaderProperties[i].propertyFeature)
+                    switch(currentPC.shaderProperties[i].propertyFeature)
                     {
                         case ShaderProperty.AffectedFeature.SIGHT:
                         break;
@@ -94,13 +94,13 @@ public class PartUIController : MonoBehaviour
         }
 
         for(int j = 0; j < buttons.Count; j++){
-            if(j < currentPC.pd.shaderColors.Count){
+            if(j < currentPC.shaderColors.Count){
                 buttons[j].gameObject.SetActive(true);
                 buttons[j].onClick.RemoveAllListeners();
                 ColorBlock cb = ColorBlock.defaultColorBlock;
-                cb.normalColor = currentPC.pd.shaderColors[j].colorValue;
-                cb.pressedColor = currentPC.pd.shaderColors[j].colorValue;
-                cb.highlightedColor = Color.white - currentPC.pd.shaderColors[j].colorValue;
+                cb.normalColor = currentPC.shaderColors[j].colorValue;
+                cb.pressedColor = currentPC.shaderColors[j].colorValue;
+                cb.highlightedColor = Color.white - currentPC.shaderColors[j].colorValue;
                 buttons[j].colors = cb;
                 int l = j;
                 buttons[j].onClick.AddListener(ToggleColorSliders);
@@ -118,11 +118,11 @@ public class PartUIController : MonoBehaviour
     }
 
     void UpdateButtonColor(float ignore){
-        for(int j = 0; j < currentPC.pd.shaderColors.Count; j++){
+        for(int j = 0; j < currentPC.shaderColors.Count; j++){
             ColorBlock cb = ColorBlock.defaultColorBlock;
-            cb.normalColor = currentPC.pd.shaderColors[j].colorValue;
-            cb.pressedColor = currentPC.pd.shaderColors[j].colorValue;
-            cb.highlightedColor = Color.white - currentPC.pd.shaderColors[j].colorValue;
+            cb.normalColor = currentPC.shaderColors[j].colorValue;
+            cb.pressedColor = currentPC.shaderColors[j].colorValue;
+            cb.highlightedColor = Color.white - currentPC.shaderColors[j].colorValue;
             buttons[j].colors = cb;
         }
     }
@@ -150,19 +150,19 @@ public class PartUIController : MonoBehaviour
             colorSliders[i].onValueChanged.RemoveAllListeners();
         }
 
-        colorSliders[0].value = currentPC.pd.shaderColors[currentColor].GetHue();
-        colorSliders[1].value = currentPC.pd.shaderColors[currentColor].GetSaturation();
-        colorSliders[2].value = currentPC.pd.shaderColors[currentColor].GetValue();
+        colorSliders[0].value = currentPC.shaderColors[currentColor].GetHue();
+        colorSliders[1].value = currentPC.shaderColors[currentColor].GetSaturation();
+        colorSliders[2].value = currentPC.shaderColors[currentColor].GetValue();
 
-        colorSliders[0].onValueChanged.AddListener(currentPC.pd.shaderColors[currentColor].SetHue);
+        colorSliders[0].onValueChanged.AddListener(currentPC.shaderColors[currentColor].SetHue);
         colorSliders[0].onValueChanged.AddListener(currentPC.UpdateAllShadersValue);
         colorSliders[0].onValueChanged.AddListener(UpdateButtonColor);
 
-        colorSliders[1].onValueChanged.AddListener(currentPC.pd.shaderColors[currentColor].SetSaturation);
+        colorSliders[1].onValueChanged.AddListener(currentPC.shaderColors[currentColor].SetSaturation);
         colorSliders[1].onValueChanged.AddListener(currentPC.UpdateAllShadersValue);
         colorSliders[1].onValueChanged.AddListener(UpdateButtonColor);
 
-        colorSliders[2].onValueChanged.AddListener(currentPC.pd.shaderColors[currentColor].SetValue);
+        colorSliders[2].onValueChanged.AddListener(currentPC.shaderColors[currentColor].SetValue);
         colorSliders[2].onValueChanged.AddListener(currentPC.UpdateAllShadersValue);
         colorSliders[2].onValueChanged.AddListener(UpdateButtonColor);
 

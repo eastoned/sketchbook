@@ -117,6 +117,7 @@
     <Compile Include="Assets\NewFace\Runtime\SpeechController.cs" />
     <Compile Include="Assets\AnimateTMPElement.cs" />
     <Compile Include="Assets\NewFace\Runtime\FaceController.cs" />
+    <Compile Include="Assets\FollowFaceVertices.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnDeselectedFacePartEvent.cs" />
     <Compile Include="Assets\Script\houseGame.cs" />
     <Compile Include="Assets\Script\mouseControl.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets\Script\callNewGrid.cs" />
     <Compile Include="Assets\Script\edible.cs" />
     <Compile Include="Assets\Script\SelectByDistance.cs" />
+    <Compile Include="Assets\CharacterCreationController.cs" />
     <Compile Include="Assets\NewFace\Runtime\Unused\ScrollFaces.cs" />
     <Compile Include="Assets\Script\createParagraph.cs" />
   </ItemGroup>

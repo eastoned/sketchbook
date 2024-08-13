@@ -16,6 +16,7 @@ public class PartController : MonoBehaviour
 
     public BoxCollider2D colid;
     public Rigidbody2D rb2D;
+    public SpringJoint2D sj2D;
     
     public bool flippedXAxis = false;
     public bool detached = false;
@@ -42,40 +43,52 @@ public class PartController : MonoBehaviour
     public Vector3 scaleControllerPos = new Vector3(0.5f, 0.5f, 0);
     public Vector3 rotateControllerPos = new Vector3(0.5f, 0, 0);
 
-    void Awake()
-    {
-        propBlock = new MaterialPropertyBlock();
-        InitializePropertyBlock();
-        InitializePartDataDictionary();
-    }
+    public List<ShaderProperty> shaderProperties;
+    public List<ShaderColor> shaderColors;
+    public FollowFaceVertices ffv;
+    public CharacterCreationController ccc;
+    public Dictionary<string, ShaderProperty> shadePropertyDict = new Dictionary<string, ShaderProperty>();
 
     private void InitializePropertyBlock()
     {
-        pd.absoluteWorldPositionZ = transform.position.z;
-        for(int i = 0; i < pd.shaderProperties.Count; i++)
+        propBlock = new MaterialPropertyBlock();
+        for(int i = 0; i < shaderProperties.Count; i++)
         {
-            propBlock.SetFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
+            propBlock.SetFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
         }
 
-        for(int j = 0;  j < pd.shaderColors.Count; j++)
+        for(int j = 0;  j < shaderColors.Count; j++)
         {
-            propBlock.SetColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
+            propBlock.SetColor(shaderColors[j].colorName, shaderColors[j].colorValue);
+        }
+    }
+
+    void Start()
+    {
+        RandomizeData();
+    }
+
+    void Update()
+    {
+        if(ffv != null)
+        {
+            ffv.pc.transform.localScale = new Vector3(ffv.pc.transform.localScale.x, transform.position.y + 2f, 1f);
+            ffv.pc.UpdateSingleShaderFloatUnsafe("_HeadPosX", transform.position.x - ffv.pc.transform.position.x);
+            ffv.pc.UpdateRenderPropBlock();
         }
     }
 
     public void InitializePartDataDictionary()
     {
-        
         if(!flippedXAxis)
         {
             //dummy was clearing the dictionary before and not populating it after smh
-            pd.shadePropertyDict.Clear();
-            for(int i = 0; i < pd.shaderProperties.Count; i++)
+            shadePropertyDict.Clear();
+            for(int i = 0; i < shaderProperties.Count; i++)
             {
-                if(!pd.shadePropertyDict.ContainsKey(pd.shaderProperties[i].propertyName))
+                if(!shadePropertyDict.ContainsKey(shaderProperties[i].propertyName))
                 {
-                    pd.shadePropertyDict.Add(pd.shaderProperties[i].propertyName, pd.shaderProperties[i]);
-                    //Debug.Log("populated dictionary: " + pd.shaderProperties[i].propertyName);
+                    shadePropertyDict.Add(shaderProperties[i].propertyName, shaderProperties[i]);
                 }
             }
         }
@@ -88,8 +101,8 @@ public class PartController : MonoBehaviour
         {
             if(!pc.detached)
             {
-                pc.pd.SetPositionBounds(pd);
-                pc.pd.SetScaleBounds(pd);
+                //pc.pd.SetPositionBounds(pd);
+                //pc.pd.SetScaleBounds(pd);
                 pc.UpdateAllTransformValues();
                 pc.UpdateDependencies();
             }
@@ -104,10 +117,10 @@ public class PartController : MonoBehaviour
 
     public void SetCache(PartData pd)
     {
-        shaderPropertyCache = new ShaderCache[pd.shaderProperties.Count];
+        shaderPropertyCache = new ShaderCache[shaderProperties.Count];
         for(int i = 0; i < shaderPropertyCache.Length; i++)
         {
-            shaderPropertyCache[i] = new ShaderCache(i, pd.shaderProperties[i].propertyValue);
+            shaderPropertyCache[i] = new ShaderCache(i, shaderProperties[i].propertyValue);
         }
     }
 
@@ -185,6 +198,9 @@ public class PartController : MonoBehaviour
 
     public void ReleasePart()
     {
+        rb2D.Sleep();
+        rb2D.WakeUp();
+        rb2D.bodyType = RigidbodyType2D.Dynamic;
         if(detached)
         {
             rb2D.Sleep();
@@ -208,6 +224,7 @@ public class PartController : MonoBehaviour
                 }
             }
         }
+        ccc.DeleteCharacterHead(this.gameObject);
     }
 
     public void UpdateAllTransformValues()
@@ -246,7 +263,7 @@ public class PartController : MonoBehaviour
                 }
                 
             }
-        pd.SetPositionBounds();
+        //pd.SetPositionBounds();
     }
 
     public void UpdatePosition()
@@ -321,17 +338,16 @@ public class PartController : MonoBehaviour
     public void UpdateAllShadersValue(float ignore)
     {
 
-        for(int i = 0; i < pd.shaderProperties.Count; i++){
-            UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, pd.shaderProperties[i].propertyValue);
+        for(int i = 0; i < shaderProperties.Count; i++){
+            UpdateSingleShaderFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
         }
 
-        for(int j = 0; j < pd.shaderColors.Count; j++){
-            UpdateSingleShaderColor(pd.shaderColors[j].colorName, pd.shaderColors[j].colorValue);
+        for(int j = 0; j < shaderColors.Count; j++){
+            UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
         }
-
         rend.SetPropertyBlock(propBlock);
 
-        if(colid != null && pd.shadePropertyDict.Count > 0){
+        if(colid != null && shadePropertyDict.Count > 0){
             UpdateColliderBounds();
             UpdateDependencies();
         }
@@ -348,6 +364,30 @@ public class PartController : MonoBehaviour
     public void ShakePieces(Vector3 strength, float time)
     {
         ShakePositionRoutineTimed(strength, time);
+    }
+    
+    public void RandomizeData()
+    {
+        if(propBlock != null)
+        {
+            for(int i = 0; i < shaderProperties.Count; i++)
+            {
+                shaderProperties[i].propertyValue = Random.Range(0f, 1f);
+                UpdateSingleShaderFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
+            }
+            for(int j = 0; j < shaderColors.Count; j++)
+            {
+                shaderColors[j].colorValue = Random.ColorHSV();
+                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
+            }
+            rend.SetPropertyBlock(propBlock);
+        }
+        else
+        {
+            InitializePropertyBlock();
+            //try randomizing after initializing again
+            RandomizeData();
+        }
     }
 
     public IEnumerator ShakePositionRoutineTimed(Vector3 strength, float length)
@@ -423,15 +463,6 @@ public class PartController : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        for(int i = 0; i < pd.shaderProperties.Count; i++){
-            //UpdateSingleShaderFloat(pd.shaderProperties[i].propertyName, Mathf.PerlinNoise(Time.time * pd.shaderProperties[i].propertyValue * 0.1f, pd.shaderProperties[i].propertyValue));
-            //Debug.Log(Mathf.PerlinNoise(Time.time, pd.shaderProperties[i].propertyValue) + " is thge noise.");
-        }
-        UpdateRenderPropBlock();
-    }
-
     public void UpdateRenderPropBlock()
     {
         rend.SetPropertyBlock(propBlock);
@@ -439,12 +470,26 @@ public class PartController : MonoBehaviour
 
     public void UpdateSingleShaderFloat(string param, float value)
     {
-        if(propBlock.HasFloat(param)){
-            propBlock.SetFloat(param, value);
-        }else{
-            Debug.Log(param + " is not an available float.");
+        if(propBlock != null)
+        {
+            if(propBlock.HasFloat(param))
+            {
+                propBlock.SetFloat(param, value);
+            }
+            else
+            {
+                Debug.Log(param + " is not an available float.");
+            } 
+        }
+        else
+        {
+            Debug.Log("Prop Block not initialized");
         }
     }
+    public void UpdateSingleShaderFloatUnsafe(string param, float value)
+    {
+        propBlock.SetFloat(param, value);
+    } 
 
     public float GetSingleShaderFloat(string param)
     {
@@ -458,13 +503,19 @@ public class PartController : MonoBehaviour
 
     void UpdateSingleShaderColor(string param, Color col)
     {
-        if(propBlock.HasColor(param))
+        if(propBlock != null)
         {
-           propBlock.SetColor(param, col); 
-        }else{
-            Debug.Log(param + " is not an available color.");
+            if(propBlock.HasColor(param))
+            {
+                propBlock.SetColor(param, col); 
+            }else{
+                Debug.Log(param + " is not an available color.");
+            }
         }
-        
+        else
+        {
+            Debug.Log("Prop Block not initialized");
+        }
     }
 
 }

@@ -45,11 +45,13 @@ Shader "Unlit/NeckQuad"
 
             float _NeckTopWidth, _NeckCurveRoundness, _NeckCurveScale;
             float4 _Color1, _Color2;
+            float _HeadPosX;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 v.vertex = lerp(v.vertex, float4(v.vertex.x, v.vertex.y + sin(_Time.z)/60, v.vertex.z, v.vertex.w), v.uv.y);
+                v.vertex.x += _HeadPosX * v.uv.y;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPosition = ComputeScreenPos(o.vertex);
@@ -61,7 +63,6 @@ Shader "Unlit/NeckQuad"
             {
 
                 float2 uv = i.uv;//*float2(2, 2) - float2(0.5, 0.5);
-                //
                 
                 float line1 = step(0, pow(0.5, 2) - pow(abs(uv.x), (4*_NeckTopWidth + 1)*2) - pow(abs(uv.y-0.5),2));
                 float line2 = step(0, (pow(0.5, 2) - pow(abs((uv.x-1))-(uv.y*(4*_NeckCurveScale+1)), (4*_NeckTopWidth + 1)*2)) - pow(abs(uv.y-0.5),2));

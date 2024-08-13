@@ -222,7 +222,8 @@ public class PartData : ScriptableObject
 }
 
 [System.Serializable]
-public class ShaderProperty{
+public class ShaderProperty
+{
 
     public enum AffectedFeature
     {
