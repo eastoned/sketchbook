@@ -116,6 +116,7 @@
     <Compile Include="Assets\Script\ObjectMover.cs" />
     <Compile Include="Assets\NewFace\Runtime\SpeechController.cs" />
     <Compile Include="Assets\AnimateTMPElement.cs" />
+    <Compile Include="Assets\NewFace\Runtime\BodyPartController.cs" />
     <Compile Include="Assets\NewFace\Runtime\FaceController.cs" />
     <Compile Include="Assets\FollowFaceVertices.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnDeselectedFacePartEvent.cs" />
@@ -164,7 +165,6 @@
     <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\Script\Cutter.cs" />
     <Compile Include="Assets\Script\EyeController.cs" />
-    <Compile Include="Assets\NewFace\Runtime\BackgroundController.cs" />
     <Compile Include="Assets\Script\generateSprites.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\EyeData.cs" />
     <Compile Include="Assets\DynamicBone\Scripts\DynamicBone.cs" />

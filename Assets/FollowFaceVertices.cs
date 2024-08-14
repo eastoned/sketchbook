@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class FollowFaceVertices : MonoBehaviour
 {
-    public PartController pc;
+    public BodyPartController pc;
 }

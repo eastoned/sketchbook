@@ -9,7 +9,7 @@ public class FaceEditor : Editor
     public override void OnInspectorGUI(){
         DrawDefaultInspector();
 
-        EditorGUILayout.HelpBox("This is a help box.", MessageType.Info);
+        EditorGUILayout.HelpBox("This is a help box from the Face Editor class.", MessageType.Info);
 
         FaceController faceControl = (FaceController)target;
         if(GUILayout.Button("Randomize All")){

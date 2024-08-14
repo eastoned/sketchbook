@@ -22,7 +22,7 @@ public class PartTransformController : MonoBehaviour
     public Vector3 offset;
     public bool currentlyHeld = false;
 
-    public PartController partInEdit;
+    public BodyPartController partInEdit;
 
     public Vector3 testInput;
 

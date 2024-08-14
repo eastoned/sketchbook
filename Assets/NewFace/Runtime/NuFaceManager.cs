@@ -10,13 +10,13 @@ public class NuFaceManager : MonoBehaviour
 {
     public PlayerFaceController pfc;
     public SpeechController sc;
-    public PartController eye, hand;
+    public BodyPartController eye, hand;
     public CharacterData[] writeableData;
     public CharacterData[] targetData;
 
     public static bool canShareFeedback = false;
 
-    public PartController[] parts;
+    public BodyPartController[] parts;
     private Coroutine skippableWait;
     public List<RequestChange> requestList;
     public int count = 0;
@@ -142,7 +142,7 @@ public class NuFaceManager : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator MovePiece(PartController pc, Vector3 startPos, Vector3 endPos)
+    private IEnumerator MovePiece(BodyPartController pc, Vector3 startPos, Vector3 endPos)
     {
         pc.PartClicked();
         Vector3 partPos = startPos;
@@ -403,7 +403,7 @@ public class NuFaceManager : MonoBehaviour
     }
 
     public IEnumerator Consume(){
-        foreach(PartController part in parts){
+        foreach(BodyPartController part in parts){
             part.StopAllCoroutines();
             part.transform.SetParent(transform);
         }
@@ -443,8 +443,8 @@ public class NuFaceManager : MonoBehaviour
 
         for(int i = 0; i < charStage; i++){
             //skip adding score if duplicate piece
-            if(!fc1.bodyParts[i].GetComponent<PartController>().flippedXAxis){
-                score += GetPartDifference(fc1.bodyParts[i].GetComponent<PartController>().pd, fc2.bodyParts[i].GetComponent<PartController>().pd);
+            if(!fc1.bodyParts[i].GetComponent<BodyPartController>().flippedXAxis){
+                score += GetPartDifference(fc1.bodyParts[i].GetComponent<BodyPartController>().pd, fc2.bodyParts[i].GetComponent<BodyPartController>().pd);
             }
         }
         

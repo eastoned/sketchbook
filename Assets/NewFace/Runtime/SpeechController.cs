@@ -12,7 +12,7 @@ public class SpeechController : MonoBehaviour
 
     public AnimationCurve scaleCurve, translateCurve;
 
-    public PartController mouth;
+    public BodyPartController mouth;
 
     public int currentSpeak;
     public string[] sppeech;

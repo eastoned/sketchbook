@@ -10,7 +10,7 @@ public class SaveCharacterProfile : MonoBehaviour
 {
     public string characterName;
     public CharacterData charData;
-    public PartController ear, eyebrow, eye, hairBack, hairFront, head, mouth, neck, nose;
+    public BodyPartController ear, eyebrow, eye, hairBack, hairFront, head, mouth, neck, nose;
     
     #if UNITY_EDITOR
     [ContextMenu("SaveCharacter")]

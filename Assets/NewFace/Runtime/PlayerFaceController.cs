@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayerFaceController : FaceController
 {
-    public PartController currentPC;
+    public BodyPartController currentPC;
     [SerializeField]
-    private PartController hoveredPC;
+    private BodyPartController hoveredPC;
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
@@ -18,7 +18,6 @@ public class PlayerFaceController : FaceController
 
     public float currentChange = 0f;
     public SpeechController sc;
-    private MaterialPropertyBlock block;
 
     public override void OnEnable()
 	{
@@ -32,7 +31,6 @@ public class PlayerFaceController : FaceController
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
         OnChangePartShaderProperty.Instance.AddListener(SetPartShaderProperty);
-        block = new MaterialPropertyBlock();
     }
 
     public override void OnDisable(){
@@ -48,7 +46,7 @@ public class PlayerFaceController : FaceController
         OnChangePartShaderProperty.Instance.RemoveListener(SetPartShaderProperty);
     }
 
-    public void SetMaterialOutline(PartController hoveredPart)
+    public void SetMaterialOutline(BodyPartController hoveredPart)
     {
        RemoveMaterialOutlineFromPreviousHover();
 
@@ -88,11 +86,11 @@ public class PlayerFaceController : FaceController
         scaleController.Disappear();
     }
 
-    private void SetTransformControllers(PartController selectedPC){
+    private void SetTransformControllers(BodyPartController selectedPC){
 
         if(currentPC != selectedPC){
             currentPC = selectedPC;
-            cube.position = currentPC.transform.position;
+            //cube.position = currentPC.transform.position;
         }
 
         if(currentPC.rotatable){
@@ -126,12 +124,12 @@ public class PlayerFaceController : FaceController
         }
     }
 
-    private void UpdatePartAttachmentStatus(PartController pc, bool status){
+    private void UpdatePartAttachmentStatus(BodyPartController pc, bool status){
         pc.UpdateAttachmentStatus(status);
         //Instantiate(blood, pc.transform.position, Quaternion.identity);
     }
 
-    private void SetPartShaderProperty(PartController editingPC, string shaderPropertyName, float shaderValue)
+    private void SetPartShaderProperty(BodyPartController editingPC, string shaderPropertyName, float shaderValue)
     {
         //Debug.Log("updating shader on: " + editingPC.name);
         if(editingPC != null)
@@ -142,7 +140,7 @@ public class PlayerFaceController : FaceController
     }
 
     bool startedTickling = false;
-    private void SetPartPosition(PartController translatingPC, Vector3 pos, bool mirror)
+    private void SetPartPosition(BodyPartController translatingPC, Vector3 pos, bool mirror)
     {
         //each part has a relative position to other objects
         if(!translatingPC.detached)
@@ -163,13 +161,7 @@ public class PlayerFaceController : FaceController
                     translatingPC.mirroredPart.UpdateAllTransformValues();
                 }
             }
-            if(translatingPC.ffv != null)
-            {
-                
-                translatingPC.ffv.pc.transform.localScale = new Vector3(translatingPC.ffv.pc.transform.localScale.x, pos.y + 2f, 1f);
-                translatingPC.ffv.pc.UpdateSingleShaderFloatUnsafe("_HeadPosX", pos.x - translatingPC.ffv.pc.transform.position.x);
-                translatingPC.ffv.pc.UpdateRenderPropBlock();
-            }
+
             /*
             if(translatingPC.pd.IsPositionOutsideMaximum(absPos))
             {
@@ -197,7 +189,7 @@ public class PlayerFaceController : FaceController
         //translatingPC.UpdateAllTransformValues();
     }
 
-    private void SetPartScale(PartController scalingPC, Vector3 pos)
+    private void SetPartScale(BodyPartController scalingPC, Vector3 pos)
     {
         //pos -= currentPC.transform.position;
         //currentPC.UpdatePosition();

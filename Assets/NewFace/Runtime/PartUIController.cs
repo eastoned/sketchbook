@@ -19,7 +19,7 @@ public class PartUIController : MonoBehaviour
 
     [SerializeField] private GameObject colorSliderContainer;
 
-    public PartController currentPC;
+    public BodyPartController currentPC;
 
     void OnEnable()
 	{
@@ -33,7 +33,7 @@ public class PartUIController : MonoBehaviour
         OnDeselectedFacePartEvent.Instance.RemoveListener(TurnOffUI);
     }
 
-    private void EnableEditButton(PartController selectedPC)
+    private void EnableEditButton(BodyPartController selectedPC)
     {
         TurnOffUI();
         editButton.SetActive(true);

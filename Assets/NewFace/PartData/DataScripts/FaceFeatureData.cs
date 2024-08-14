@@ -25,14 +25,14 @@ public class FaceFeatureData : ScriptableObject
     public bool canSmell = true;
     public bool canHear = true;
 
-    public void UpdateVisionStatus(PartController eye)
+    public void UpdateVisionStatus(BodyPartController eye)
     {
         float eyeRadius = eye.GetSingleShaderFloat("_PupilRadius");
         float eyeOpen = eye.GetSingleShaderFloat("_EyelidBottomOpen") + eye.GetSingleShaderFloat("_EyelidTopOpen");
         canSee = eyeRadius > 0.05f && eyeOpen > 0.05f;
     }
 
-    public void UpdateHearingStatus(PartController ear)
+    public void UpdateHearingStatus(BodyPartController ear)
     {
         canHear = true;
     }

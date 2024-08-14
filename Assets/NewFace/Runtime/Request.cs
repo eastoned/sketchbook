@@ -8,7 +8,7 @@ using UnityEngine;
 public class RequestChange{
     public string requestMessage;
     public string successMessage;
-    public PartController partToChange;
+    public BodyPartController partToChange;
     public Vector2 positionDelta;
     public Vector2 scaleDelta;
 
