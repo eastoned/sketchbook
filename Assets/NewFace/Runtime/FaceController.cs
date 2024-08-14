@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FaceController : MonoBehaviour
 {
-    public BodyPartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar;
+    public BodyPartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar, leftHand, leftArm;
     public BodyPartController[] partControllers;
     public Transform[] bodyParts;
     public PartData[] bodyData;
@@ -57,11 +57,18 @@ public class FaceController : MonoBehaviour
     public void Start()
     {
         //InitializeControllers();
+        RandomizePieces();
+    }
+
+    public void RandomizePieces()
+    {
         mouth.RandomizeData();
         neck.RandomizeData();
         head.RandomizeData();
         leftEye.RandomizeData();
-        rightEye.RandomizeData();
+        rightEye.CopyData(leftEye);
+        leftHand.RandomizeData();
+        leftArm.RandomizeData();
         mouthOpen = mouth.GetSingleShaderFloat("_MouthOpen");
     }
 
@@ -77,6 +84,14 @@ public class FaceController : MonoBehaviour
         mouth.UpdateSingleShaderFloat("_MouthOpen", mouthValue);
         mouth.UpdateRenderPropBlock();
 
+        neck.transform.localScale = new Vector3(neck.transform.localScale.x, head.transform.position.y + 2f, 1f);
+        neck.UpdateSingleShaderFloatUnsafe("_HeadPosX", head.transform.position.x);
+        neck.UpdateRenderPropBlock();
+
+        leftArm.transform.localScale = new Vector3(leftArm.transform.localScale.x, leftHand.transform.position.y + 2f, 1f);
+        leftArm.UpdateSingleShaderFloatUnsafe("_HeadPosX", (leftHand.transform.position.x - leftArm.transform.position.x)*2f);
+        leftArm.UpdateRenderPropBlock();
+
         float rightX = 0f;
         float leftX = 0f;
         float rightY = 0f;
@@ -86,14 +101,9 @@ public class FaceController : MonoBehaviour
         {
             case EyeTarget.MOUSE:
                 eyeLookAtPos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-                rightX = rightEye.transform.position.x - eyeLookAtPos.x;
-                rightY = rightEye.transform.position.y - eyeLookAtPos.y;
-                leftX = leftEye.transform.position.x - eyeLookAtPos.x;
-                leftY = leftEye.transform.position.y - eyeLookAtPos.y;
-
             break;
             case EyeTarget.PART:
-            
+                eyeLookAtPos = new Vector2(leftHand.transform.position.x, leftHand.transform.position.y);
             //eyeLookAtPos = new Vector2(0, 0);
             break;
             case EyeTarget.BLANK:
@@ -112,7 +122,10 @@ public class FaceController : MonoBehaviour
         //Vector2 rotatedRight = Rotate2D(rightX, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
         //Vector2 rotatedRight2 = Rotate2D(rightY, -rightEye.pd.currentAngle * Mathf.Deg2Rad);
 
-
+        rightX = rightEye.transform.position.x - eyeLookAtPos.x;
+        rightY = rightEye.transform.position.y - eyeLookAtPos.y;
+        leftX = leftEye.transform.position.x - eyeLookAtPos.x;
+        leftY = leftEye.transform.position.y - eyeLookAtPos.y;
         rightX = Mathf.Clamp(rightX/5f, -.5f, .5f);
         leftX = Mathf.Clamp(leftX/5f, -.5f, .5f);
         rightY = Mathf.Clamp(rightY/5f, -.25f, .25f);
@@ -130,34 +143,6 @@ public class FaceController : MonoBehaviour
         leftEye.UpdateSingleShaderFloatUnsafe("_PupilOffsetX", rotatedLeftX);
         leftEye.UpdateSingleShaderFloatUnsafe("_PupilOffsetY", rotatedLeftY);
         leftEye.UpdateRenderPropBlock();
-        //Vector2 rotatedLeft = Rotate2D(leftX, rightEye.pd.currentAngle * Mathf.Deg2Rad);
-        //Vector2 rotatedLeft2 = Rotate2D(leftY, rightEye.pd.currentAngle * Mathf.Deg2Rad);
-
-        //clampVal = rightEye.pd.shadePropertyDict["_EyeRadius"].propertyValue/6f;
-        //rightPupilX = rotatedRight.x - rotatedRight2.x;
-        //rightPupilY = rotatedRight2.y - rotatedRight.y;
-
-        //Vector2 rightPupilTarget = new Vector2(rotatedRight.x - rotatedRight2.x, rotatedRight2.y - rotatedRight.y);
-        //Vector2 leftPupilTarget = new Vector2(rotatedLeft.x - rotatedLeft2.x, rotatedLeft2.y - rotatedLeft.y);
-
-        //rightPupilX = Mathf.Lerp(rightPupilX, rightPupilTarget.x*clampVal, 4f* Time.deltaTime);
-        //rightPupilY = Mathf.Lerp(rightPupilY, rightPupilTarget.y*clampVal, 4f* Time.deltaTime);
-        //leftPupilX = Mathf.Lerp(leftPupilX, leftPupilTarget.x*clampVal, 4f* Time.deltaTime);
-        //leftPupilY = Mathf.Lerp(leftPupilY, leftPupilTarget.y*clampVal, 4f* Time.deltaTime);
-        
-        //rightPupilX = Mathf.Lerp(rightPupilX, Mathf.Clamp(rightPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
-        //rightPupilY = Mathf.Lerp(rightPupilY, Mathf.Clamp(rightPupilTarget.y, -clampVal, clampVal), Time.deltaTime * 3f);
-        //leftPupilX = Mathf.Lerp(leftPupilX, Mathf.Clamp(leftPupilTarget.x, -clampVal, clampVal), Time.deltaTime * 3f);
-        //leftPupilY = Mathf.Lerp(leftPupilY, Mathf.Clamp(leftPupilTarget.y, -clampVal, clampVal), Time.deltaTime * 3f);
-       // leftEye.UpdateSingleShaderValue("_PupilOffsetX", -leftPupilX);
-       // leftEye.UpdateSingleShaderValue("_PupilOffsetY", leftPupilY);
-       // leftEye.UpdateAllShadersValue(0f);
-        //LeftEyeProp.SetFloat("_PupilOffsetX", -leftPupilX);
-        //LeftEyeProp.SetFloat("_PupilOffsetY", leftPupilY);
-        
-        //rightEye.UpdateAllShadersValue(0f);
-        //RightEyeProp.SetFloat("_PupilOffsetX", rightPupilX);
-        //RightEyeProp.SetFloat("_PupilOffsetY", rightPupilY);
     }
 
     [ContextMenu("Refresh Connected Data")]

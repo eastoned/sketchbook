@@ -42,8 +42,6 @@ public class BodyPartController : PartController
     public Vector3 rotateControllerPos = new Vector3(0.5f, 0, 0);
 
     public List<ShaderProperty> shaderProperties;
-    public FollowFaceVertices ffv;
-    public CharacterCreationController ccc;
     public Dictionary<string, ShaderProperty> shadePropertyDict = new Dictionary<string, ShaderProperty>();
 
     public override void InitializePropertyBlock()
@@ -53,16 +51,6 @@ public class BodyPartController : PartController
         for(int i = 0; i < shaderProperties.Count; i++)
         {
             propBlock.SetFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
-        }
-    }
-
-    void Update()
-    {
-        if(ffv != null)
-        {
-            ffv.pc.transform.localScale = new Vector3(ffv.pc.transform.localScale.x, transform.position.y + 2f, 1f);
-            ffv.pc.UpdateSingleShaderFloatUnsafe("_HeadPosX", transform.position.x);
-            ffv.pc.UpdateRenderPropBlock();
         }
     }
 
@@ -352,6 +340,30 @@ public class BodyPartController : PartController
     public void ShakePieces(Vector3 strength, float time)
     {
         ShakePositionRoutineTimed(strength, time);
+    }
+
+    public void CopyData(BodyPartController bpcToCopyFrom)
+    {
+        if(propBlock != null)
+        {
+            for(int i = 0; i < shaderProperties.Count; i++)
+            {
+                shaderProperties[i].propertyValue = bpcToCopyFrom.shaderProperties[i].propertyValue;
+                UpdateSingleShaderFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
+            }
+            
+            for(int j = 0; j < shaderColors.Count; j++)
+            {
+                shaderColors[j].colorValue = bpcToCopyFrom.shaderColors[j].colorValue;
+                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
+            }
+            UpdateRenderPropBlock();
+        }
+        else
+        {
+            InitializePropertyBlock();
+            CopyData(bpcToCopyFrom);
+        }
     }
     
     public override void RandomizeData()

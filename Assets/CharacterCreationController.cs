@@ -92,8 +92,6 @@ public class CharacterCreationController : MonoBehaviour
         spawnObjs[3].GetComponent<SpringJoint2D>().connectedAnchor = new Vector2(.5f, eyePosY);
         spawnObjs[2].transform.localScale = new Vector3(.5f, .5f, 1);
         spawnObjs[3].transform.localScale = new Vector3(.5f, .5f, 1);
-        spawnObjs[0].GetComponent<BodyPartController>().ffv = spawnObjs[1].GetComponent<BodyPartController>().ffv;
-        spawnObjs[1].GetComponent<BodyPartController>().ffv = null;
         /*
         spawnObjs.Add(Instantiate(parts[3], new Vector3(headPos.x, headPos.y - .05f, -0.1f + layerCount), Quaternion.Euler(0, 0, 0)));
         spawnObjs.Add(Instantiate(parts[4], new Vector3(headPos.x, headPos.y - .1f, 0f + layerCount), Quaternion.Euler(0, 0, 0)));
