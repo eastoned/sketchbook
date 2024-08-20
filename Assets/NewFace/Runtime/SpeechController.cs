@@ -153,7 +153,7 @@ public class SpeechController : MonoBehaviour
     [ContextMenu("Test")]
     public void test()
     {
-
+        SpeakEvent("Hello World.");
     }
 
     public void SpeakEvent(string text){
@@ -170,16 +170,20 @@ public class SpeechController : MonoBehaviour
         StartCoroutine(SpeakText(text, spaceCounter/2f));
     }
 
-    public IEnumerator SpeakText(string text, float animLength){
-        if(speakingRoutine != null){
+    public IEnumerator SpeakText(string text, float animLength)
+    {
+        if(speakingRoutine != null)
+        {
             StopCoroutine(speakingRoutine);
         }
         speakingRoutine = Speak(text, animLength);
         return speakingRoutine;
     }
 
-    private IEnumerator Speak(string text, float value){
-        if(canSpeak){
+    private IEnumerator Speak(string text, float value)
+    {
+        if(canSpeak)
+        {
             //Debug.Log("mouth is big enought");
             GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
             bubble.transform.localScale = Vector3.zero;

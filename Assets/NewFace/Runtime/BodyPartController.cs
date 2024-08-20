@@ -176,7 +176,8 @@ public class BodyPartController : PartController
     {
         rb2D.Sleep();
         rb2D.WakeUp();
-        rb2D.bodyType = RigidbodyType2D.Dynamic;
+        if(sj2D != null)
+            rb2D.bodyType = RigidbodyType2D.Dynamic;
         if(detached)
         {
             rb2D.Sleep();
@@ -188,7 +189,8 @@ public class BodyPartController : PartController
                     UpdateAttachmentStatus(false);
                     UpdateAllTransformValues();
                 }else{
-                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                    if(sj2D != null)
+                        rb2D.bodyType = RigidbodyType2D.Dynamic;   
                 }
             }
             else
@@ -196,7 +198,8 @@ public class BodyPartController : PartController
                 if(Vector3.Distance(transform.position, new Vector3(0, -1, transform.position.z)) < 0.1f){
                     UpdateAttachmentStatus(false);
                 }else{
-                    rb2D.bodyType = RigidbodyType2D.Dynamic;   
+                    if(sj2D != null)
+                        rb2D.bodyType = RigidbodyType2D.Dynamic;   
                 }
             }
         }
@@ -493,7 +496,6 @@ public class BodyPartController : PartController
         {
             if(propBlock.HasFloat(param))
             {
-                Debug.Log("Returning " + param + ": " + propBlock.GetFloat(param));
                 defaultValue = propBlock.GetFloat(param);
             }
             else
@@ -514,4 +516,9 @@ public class BodyPartController : PartController
         propBlock.SetVector(param, vec);
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log("Collision between: " + collision.gameObject + " and " + collision.otherCollider);
+        //collision.relativeVelocity
+    }
 }

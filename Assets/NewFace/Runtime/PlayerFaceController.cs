@@ -17,7 +17,6 @@ public class PlayerFaceController : FaceController
     private Material colliderMaterial;
 
     public float currentChange = 0f;
-    public SpeechController sc;
 
     public override void OnEnable()
 	{
@@ -209,7 +208,6 @@ public class PlayerFaceController : FaceController
             //currentPC.pd.SetClampedScale(diff);
             UpdateControllers();
         }
-        
 
         //currentPC.UpdateScale();
         //currentPC.UpdateDependencies();

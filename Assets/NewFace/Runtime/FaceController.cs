@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +7,7 @@ public class FaceController : MonoBehaviour
 {
     public BodyPartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar, leftHand, leftArm;
     public BodyPartController[] partControllers;
+    public SpeechController sc;
     public Transform[] bodyParts;
     public PartData[] bodyData;
     public enum EyeTarget
@@ -58,10 +58,13 @@ public class FaceController : MonoBehaviour
     {
         //InitializeControllers();
         RandomizePieces();
+        
+        leftHand.sj2D.connectedAnchor = new Vector2(1 + transform.position.x, -1);
     }
 
     public void RandomizePieces()
     {
+        head.sj2D.connectedAnchor = new Vector2(transform.position.x, Random.Range(0f, 1.5f));
         mouth.RandomizeData();
         neck.RandomizeData();
         head.RandomizeData();
@@ -85,7 +88,7 @@ public class FaceController : MonoBehaviour
         mouth.UpdateRenderPropBlock();
 
         neck.transform.localScale = new Vector3(neck.transform.localScale.x, head.transform.position.y + 2f, 1f);
-        neck.UpdateSingleShaderFloatUnsafe("_HeadPosX", head.transform.position.x);
+        neck.UpdateSingleShaderFloatUnsafe("_HeadPosX", (head.transform.position.x - neck.transform.position.x)/neck.transform.localScale.x);
         neck.UpdateRenderPropBlock();
 
         leftArm.transform.localScale = new Vector3(leftArm.transform.localScale.x, leftHand.transform.position.y + 2f, 1f);

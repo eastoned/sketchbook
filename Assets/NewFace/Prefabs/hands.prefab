@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4652112389933040326}
   - component: {fileID: 6688398966482247774}
   - component: {fileID: 6740992454240815278}
+  - component: {fileID: 3060241100452954808}
   m_Layer: 12
   m_Name: hands
   m_TagString: Untagged
@@ -171,12 +172,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 709771362623896523}
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.8187665, g: 0.19445221, b: 0.7319904, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.62387437, g: 0.7361517, b: 0.88787615, a: 1}
   pd: {fileID: 11400000, guid: 3cf8aefbae66bf746a9e127d70d8fd11, type: 2}
   translatable: 1
   rotatable: 1
   scalable: 1
   colid: {fileID: 4652112389933040326}
   rb2D: {fileID: 6688398966482247774}
+  sj2D: {fileID: 3060241100452954808}
   flippedXAxis: 0
   detached: 0
   mirroredPart: {fileID: 0}
@@ -222,8 +229,24 @@ MonoBehaviour:
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
-  shaderColors:
-  - colorName: _Color1
-    colorValue: {r: 0.8187665, g: 0.19445221, b: 0.7319904, a: 1}
-  - colorName: _Color2
-    colorValue: {r: 0.62387437, g: 0.7361517, b: 0.88787615, a: 1}
+--- !u!231 &3060241100452954808
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586489965259238109}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 1, y: -1}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.005
+  m_DampingRatio: 1
+  m_Frequency: 10
