@@ -58,13 +58,12 @@ public class FaceController : MonoBehaviour
     {
         //InitializeControllers();
         RandomizePieces();
-        
-        leftHand.sj2D.connectedAnchor = new Vector2(1 + transform.position.x, -1);
     }
 
     public void RandomizePieces()
     {
         head.sj2D.connectedAnchor = new Vector2(transform.position.x, Random.Range(0f, 1.5f));
+        leftHand.sj2D.connectedAnchor = new Vector2(1+transform.position.x, Random.Range(-1f, 1.5f));
         mouth.RandomizeData();
         neck.RandomizeData();
         head.RandomizeData();
