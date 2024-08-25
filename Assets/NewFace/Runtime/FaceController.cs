@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class FaceController : MonoBehaviour
         PART,
         BLANK
     }
+
+    public Transform attentionTarget;
     
     public EyeTarget eyeTarget;
 
@@ -42,16 +45,16 @@ public class FaceController : MonoBehaviour
     [Range(0f, 1f)]
     public float mouthOverride = 1f;
     public float mouthOpen;
-
+    public AnimationCurve headScale;
     public bool animating = false;
 
     public virtual void OnEnable()
 	{
-
+        OnCharacterCollisionEvent.Instance.AddListener(UpdateAttentionTarget);
     }
 
     public virtual void OnDisable(){
-
+        OnCharacterCollisionEvent.Instance.RemoveListener(UpdateAttentionTarget);
     }
 
     public void Start()
@@ -62,8 +65,16 @@ public class FaceController : MonoBehaviour
 
     public void RandomizePieces()
     {
-        head.sj2D.connectedAnchor = new Vector2(transform.position.x, Random.Range(0f, 1.5f));
+
+        head.transform.localScale = new Vector2(headScale.Evaluate(Random.Range(0f, 1f)), headScale.Evaluate(Random.Range(0f, 1f)));
+        head.sj2D.connectedAnchor = new Vector2(transform.position.x, Random.Range(-1f, 1.5f));
         leftHand.sj2D.connectedAnchor = new Vector2(1+transform.position.x, Random.Range(-1f, 1.5f));
+        leftEye.transform.localScale = new Vector3(Random.Range(0.25f, head.transform.localScale.x/2f), Random.Range(0.25f, head.transform.localScale.y/2f));
+        rightEye.transform.localScale = leftEye.transform.localScale;
+        nose.transform.localScale = new Vector2(Random.Range(0.1f, head.transform.localScale.x), Random.Range(0.1f, head.transform.localScale.y));
+        bangs.transform.localScale = new Vector2(Random.Range(0.25f, head.transform.localScale.x * 2f), Random.Range(0.1f, head.transform.localScale.y));
+
+        bangs.RandomizeData();
         mouth.RandomizeData();
         neck.RandomizeData();
         head.RandomizeData();
@@ -71,6 +82,12 @@ public class FaceController : MonoBehaviour
         rightEye.CopyData(leftEye);
         leftHand.RandomizeData();
         leftArm.RandomizeData();
+        leftEyebrow.RandomizeData();
+        rightEyebrow.CopyData(leftEyebrow);
+        nose.RandomizeData();
+        hair.CopyData(bangs);
+        leftEar.RandomizeData();
+        rightEar.CopyData(leftEar);
         mouthOpen = mouth.GetSingleShaderFloat("_MouthOpen");
     }
 
@@ -80,15 +97,23 @@ public class FaceController : MonoBehaviour
         UpdateAllControllers();
     }
 
+    private void UpdateAttentionTarget(BodyPartController bpc, BodyPartController bpc2)
+    {
+        if(bpc != head && bpc2 == head)
+        {
+            attentionTarget = bpc.gameObject.transform;
+            eyeTarget = EyeTarget.PART;
+        }
+    }
+
     public void Update()
     {
-        float mouthValue = Mathf.Lerp(0.05f, mouthOpen, mouthOverride);
-        mouth.UpdateSingleShaderFloat("_MouthOpen", mouthValue);
-        mouth.UpdateRenderPropBlock();
 
         neck.transform.localScale = new Vector3(neck.transform.localScale.x, head.transform.position.y + 2f, 1f);
         neck.UpdateSingleShaderFloatUnsafe("_HeadPosX", (head.transform.position.x - neck.transform.position.x)/neck.transform.localScale.x);
         neck.UpdateRenderPropBlock();
+
+        //bangs.sj2D.connectedAnchor = new Vector2(0, head.transform.localScale.y/4f);
 
         leftArm.transform.localScale = new Vector3(leftArm.transform.localScale.x, leftHand.transform.position.y + 2f, 1f);
         leftArm.UpdateSingleShaderFloatUnsafe("_HeadPosX", (leftHand.transform.position.x - leftArm.transform.position.x)*2f);
@@ -105,7 +130,15 @@ public class FaceController : MonoBehaviour
                 eyeLookAtPos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
             break;
             case EyeTarget.PART:
-                eyeLookAtPos = new Vector2(leftHand.transform.position.x, leftHand.transform.position.y);
+                if(attentionTarget != null)
+                {
+                    eyeLookAtPos = new Vector2(attentionTarget.position.x, attentionTarget.position.y);
+                }
+                else
+                {
+                    eyeLookAtPos = Vector2.zero;
+                }
+                
             //eyeLookAtPos = new Vector2(0, 0);
             break;
             case EyeTarget.BLANK:

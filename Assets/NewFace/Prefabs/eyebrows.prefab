@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3173324617948242267}
   - component: {fileID: 536810382342013574}
   - component: {fileID: 3754065907517338796}
+  - component: {fileID: 2360229685651148875}
   m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
@@ -29,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6128148254144194925}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.254, y: 1.064, z: -0.20000002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,12 +100,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 2737751733427128245}
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.40903416, g: 0.2973355, b: 0.7344189, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.20349716, g: 0.36820883, b: 0.26228097, a: 1}
   pd: {fileID: 11400000, guid: 0e41634262afb134687ff7a63c5fb84c, type: 2}
   translatable: 1
   rotatable: 1
   scalable: 1
   colid: {fileID: 536810382342013574}
   rb2D: {fileID: 3754065907517338796}
+  sj2D: {fileID: 2360229685651148875}
   flippedXAxis: 0
   detached: 0
   mirroredPart: {fileID: 0}
@@ -139,11 +146,6 @@ MonoBehaviour:
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
-  shaderColors:
-  - colorName: _Color1
-    colorValue: {r: 0.40903416, g: 0.2973355, b: 0.7344189, a: 1}
-  - colorName: _Color2
-    colorValue: {r: 0.20349716, g: 0.36820883, b: 0.26228097, a: 1}
 --- !u!61 &536810382342013574
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,14 +199,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6128148254144194925}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -216,3 +218,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!231 &2360229685651148875
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128148254144194925}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.47169906
+  m_DampingRatio: 0
+  m_Frequency: 1

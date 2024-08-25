@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2866156580960425639}
   - component: {fileID: 3562202179177089700}
   - component: {fileID: 2394984303648220518}
-  - component: {fileID: 4599117203659610574}
   - component: {fileID: 67694900477274314}
   - component: {fileID: 7331366482692456745}
+  - component: {fileID: 4007383415805991326}
   - component: {fileID: 1610321512465297433}
   m_Layer: 12
   m_Name: mouth
@@ -87,100 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4599117203659610574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6169158378715319551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80801891b9d34944aa36410990c38a5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rend: {fileID: 2394984303648220518}
-  pd: {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
-  translatable: 1
-  rotatable: 1
-  scalable: 1
-  colid: {fileID: 67694900477274314}
-  rb2D: {fileID: 7331366482692456745}
-  sj2D: {fileID: 1610321512465297433}
-  flippedXAxis: 0
-  detached: 0
-  mirroredPart: {fileID: 0}
-  cachePosition: {x: 0, y: -0.3830292, z: -0.05}
-  cacheScale: {x: 0, y: 0, z: 0}
-  cacheAngle: 0
-  shaderPropertyCache: []
-  connectablePart: {fileID: 0}
-  affectedChildren: []
-  detailChildren: []
-  customScaleAnchor: {fileID: 0}
-  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
-  rotateControllerPos: {x: 0.5, y: 0, z: 0}
-  shaderProperties:
-  - propertyName: _MouthRadius
-    propertyValue: 0.66445696
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _MouthOpen
-    propertyValue: 0.61753917
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _MouthBend
-    propertyValue: 0.6359645
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TeethTop
-    propertyValue: 0.3774852
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TeethBottom
-    propertyValue: 0.67967737
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TeethCount
-    propertyValue: 0.3976564
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TeethRoundness
-    propertyValue: 0.06213979
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TongueRadius
-    propertyValue: 0.3085145
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TongueScale
-    propertyValue: 0.5793809
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  - propertyName: _TongueHeight
-    propertyValue: 0.35487095
-    wholeNumberInterval: 0
-    valueInterval: 0
-    propertyFeature: 0
-  shaderColors:
-  - colorName: _Color1
-    colorValue: {r: 0.515979, g: 0.52027065, b: 0.37187442, a: 1}
-  - colorName: _Color2
-    colorValue: {r: 0.24068117, g: 0.23576628, b: 0.15465337, a: 1}
-  - colorName: _Color3
-    colorValue: {r: 0.82381856, g: 0.5978984, b: 0.7577951, a: 1}
-  - colorName: _Color4
-    colorValue: {r: 0.30502683, g: 0.6930586, b: 0.18627086, a: 1}
-  ffv: {fileID: 0}
 --- !u!61 &67694900477274314
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -253,6 +159,156 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4007383415805991326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169158378715319551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45da851227cf2ab4d87df3aa33b7865a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 2394984303648220518}
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.515979, g: 0.52027065, b: 0.37187442, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.24068117, g: 0.23576628, b: 0.15465337, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.82381856, g: 0.5978984, b: 0.7577951, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.30502683, g: 0.6930586, b: 0.18627086, a: 1}
+  pd: {fileID: 0}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
+  colid: {fileID: 67694900477274314}
+  rb2D: {fileID: 7331366482692456745}
+  sj2D: {fileID: 1610321512465297433}
+  flippedXAxis: 0
+  detached: 0
+  mirroredPart: {fileID: 0}
+  cachePosition: {x: 0, y: 0, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
+  cacheAngle: 0
+  shaderPropertyCache: []
+  connectablePart: {fileID: 0}
+  affectedChildren: []
+  detailChildren: []
+  customScaleAnchor: {fileID: 0}
+  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
+  rotateControllerPos: {x: 0.5, y: 0, z: 0}
+  shaderProperties:
+  - propertyName: _MouthRadius
+    propertyValue: 0.66445696
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _MouthOpen
+    propertyValue: 0.61753917
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _MouthBend
+    propertyValue: 0.6359645
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TeethTop
+    propertyValue: 0.3774852
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TeethBottom
+    propertyValue: 0.67967737
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TeethCount
+    propertyValue: 0.3976564
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TeethRoundness
+    propertyValue: 0.06213979
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TongueRadius
+    propertyValue: 0.3085145
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TongueScale
+    propertyValue: 0.5793809
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  - propertyName: _TongueHeight
+    propertyValue: 0.35487095
+    wholeNumberInterval: 0
+    valueInterval: 0
+    propertyFeature: 0
+  speechBubble: {fileID: 5391851005333956622, guid: eb1498493e3e0e140b46cdaac96a2c65,
+    type: 3}
+  canvas: {fileID: 0}
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  translateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  currentSpeak: 0
+  sppeech: []
+  upperLip: 0
+  lowerLip: 0
+  mouthRadius: 0
+  canSpeak: 1
 --- !u!231 &1610321512465297433
 SpringJoint2D:
   m_ObjectHideFlags: 0

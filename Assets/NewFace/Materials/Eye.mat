@@ -37,6 +37,7 @@ Material:
     - _EyelidTopLength: 1
     - _EyelidTopOpen: 0.795
     - _EyelidTopSkew: 0.499
+    - _FillWithRed: 0
     - _Lid1: 0.632
     - _Lid2: 0.753
     - _PupilLength: 0.1

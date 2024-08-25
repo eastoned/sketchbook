@@ -32,6 +32,9 @@ Shader "Unlit/EyeQuad"
 
         _PositionMomentum ("Position Momementum", Vector) = (0,0,0)
 
+        [Toggle(FILL_WITH_RED)]
+        _FillWithRed ("Fill With Red", Float) = 0
+
     }
     SubShader
     {
@@ -43,6 +46,7 @@ Shader "Unlit/EyeQuad"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma shader_feature FILL_WITH_RED
             // make fog work
             #pragma multi_compile_fog
 
@@ -90,7 +94,12 @@ Shader "Unlit/EyeQuad"
                 float pullStrength = smoothstep(0, 1, distance(float2(0.5,0.5), i.uv));
                 //return pullStrength.xxxx;
                 _EyeRadius = 1;
-                float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
+                #ifdef FILL_WITH_RED
+                    float2 uv = float2(1-i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
+                #else
+                    float2 uv = float2(i.uv.x + (_PositionMomentum.x * pullStrength * 1/_EyeRadius), i.uv.y + (_PositionMomentum.y * pullStrength * 1/_EyeRadius));
+                #endif
+                
                 uv.y += .005*sin(uv.x*8-_Time.w*2);
                 float line1 = step(0, (pow(abs(_EyeRadius/2), 2) - pow(abs(uv.x-0.5)/1, 2)) - pow(abs(uv.y-0.5)/1,
                 (((_EyelidTopLength*.75 + .25) - (.3 * abs(_EyelidTopSkew - 0.5)))*2.5)*1.5*((_EyelidTopSkew*uv.x)+((1-_EyelidTopSkew)*(1-uv.x))))) 

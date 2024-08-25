@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class SpeechController : MonoBehaviour
+public class MouthPartController : BodyPartController
 {
-
     public GameObject speechBubble;
     public Transform canvas;
-    public Transform mouthPos;
 
     public AnimationCurve scaleCurve, translateCurve;
-
-    public BodyPartController mouth;
 
     public int currentSpeak;
     public string[] sppeech;
@@ -31,8 +26,6 @@ public class SpeechController : MonoBehaviour
         OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
         OnBreakPart.Instance.AddListener(BreakEvent);
         OnTickleEvent.Instance.AddListener(TickleEvent);
-        OnAffectSpeakAbility.Instance.AddListener(UpdateCanSpeak);
-        //OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void OnDisable(){
@@ -40,8 +33,6 @@ public class SpeechController : MonoBehaviour
         OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
         OnBreakPart.Instance.RemoveListener(BreakEvent);
         OnTickleEvent.Instance.RemoveListener(TickleEvent);
-        OnAffectSpeakAbility.Instance.RemoveListener(UpdateCanSpeak);
-       // OnSelectedNewFacePartEvent.Instance.AddListener(PartMention);
     }
 
     void BreakEvent(PlayerActionData pad){
@@ -185,8 +176,8 @@ public class SpeechController : MonoBehaviour
         if(canSpeak)
         {
             //Debug.Log("mouth is big enought");
-            GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(mouthPos.position), Quaternion.identity, canvas);
-            bubble.transform.localScale = Vector3.zero;
+            GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(transform.position) + new Vector3(0, 300, 0), Quaternion.identity, canvas);
+            //bubble.transform.localScale = Vector3.zero;
             
             int spaceCounter = 0;
             for(int i = 0; i < text.Length; i++){
@@ -225,14 +216,10 @@ public class SpeechController : MonoBehaviour
                 
                 textAnimator.UpdateTextVisibility(translatePercent * text.Length);
                 
-                bubble.transform.position = new Vector3(Screen.width/2f, Screen.height * .75f, 0);
-                bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
+                //bubble.transform.position = transform.position + new Vector3(0, 1f, 0);
+                //bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
                 yield return null;
             }
-            mouth.UpdateSingleShaderFloat("_MouthOpen", mouthRadius);
-            mouth.UpdateRenderPropBlock();
-            yield return new WaitForSeconds(1f);
-            
             
             Destroy(bubble);
         }else{

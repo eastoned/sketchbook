@@ -54,6 +54,11 @@ public class BodyPartController : PartController
         }
     }
 
+    private void Start()
+    {
+        transform.name = transform.name + Random.Range(0, 20);
+    }
+
     public void InitializePartDataDictionary()
     {
         if(!flippedXAxis)
@@ -516,9 +521,11 @@ public class BodyPartController : PartController
         propBlock.SetVector(param, vec);
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        //Debug.Log("Collision between: " + collision.gameObject + " and " + collision.otherCollider);
-        //collision.relativeVelocity
+
+        Debug.Log(col.transform.name + " has a velocity of: " + col.rigidbody.velocity);
+        Debug.Log(transform.name + " has a velocity of: " + rb2D.velocity);
+        OnCharacterCollisionEvent.Instance.Invoke(this, col.gameObject.GetComponent<BodyPartController>());
     }
 }

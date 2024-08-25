@@ -85,10 +85,19 @@ public class PlayerFaceController : FaceController
         scaleController.Disappear();
     }
 
-    private void SetTransformControllers(BodyPartController selectedPC){
+    private void SetTransformControllers(BodyPartController selectedPC)
+    {
 
-        if(currentPC != selectedPC){
+        if(currentPC != selectedPC)
+        {
             currentPC = selectedPC;
+            foreach(BodyPartController bpc in partControllers)
+            {
+                if(bpc == selectedPC)
+                {
+                    eyeTarget = EyeTarget.MOUSE;
+                }
+            }
             //cube.position = currentPC.transform.position;
         }
 
@@ -195,9 +204,10 @@ public class PlayerFaceController : FaceController
 
         Vector3 diff = scalingPC.transform.InverseTransformDirection(scalingPC.transform.position - pos)*2f;
         
-        if(scalingPC.customScaleAnchor != null){
+        if(scalingPC.customScaleAnchor != null)
+        {
             diff = scalingPC.customScaleAnchor.InverseTransformDirection(scalingPC.customScaleAnchor.position - pos)*2f;
-            diff = new Vector3(diff.x, diff.y/2f, diff.z);
+            diff = new Vector3(diff.x/2f, diff.y/2f, diff.z);
         }
         
         diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
@@ -215,19 +225,19 @@ public class PlayerFaceController : FaceController
 
     private void SetPartRotation(Vector3 pos)
     {
-        pos -= transform.position;
+        //pos -= transform.localPosition;
 
         float angle = Mathf.Atan2(pos.y - currentPC.transform.position.y, pos.x - currentPC.transform.position.x) * Mathf.Rad2Deg;
 
         if(currentPC.flippedXAxis)
         {
             currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
-            currentPC.pd.relativeToParentAngle = -angle + 180f;
+            ///currentPC.pd.relativeToParentAngle = -angle + 180f;
         }
         else
         {
             currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-            currentPC.pd.relativeToParentAngle = angle;
+            //currentPC.pd.relativeToParentAngle = angle;
         }
             
         //currentPC.pd.relativeToParentAngle = currentPC.pd.GetClampedAngle(angle, currentPC.flippedXAxis);
