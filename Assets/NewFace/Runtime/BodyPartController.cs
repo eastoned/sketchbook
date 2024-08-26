@@ -12,6 +12,7 @@ public class BodyPartController : PartController
     public PartData pd;
 
     public bool translatable, rotatable, scalable;
+    public bool lockedYaxis = false;
 
     public BoxCollider2D colid;
     public Rigidbody2D rb2D;
@@ -373,6 +374,24 @@ public class BodyPartController : PartController
             CopyData(bpcToCopyFrom);
         }
     }
+
+    public void CopyColors(BodyPartController bpcToCopyFrom)
+    {
+        if(propBlock != null)
+        {
+            for(int j = 0; j < shaderColors.Count; j++)
+            {
+                shaderColors[j].colorValue = bpcToCopyFrom.shaderColors[j].colorValue;
+                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
+            }
+            UpdateRenderPropBlock();
+        }
+        else
+        {
+            InitializePropertyBlock();
+            CopyColors(bpcToCopyFrom);
+        }
+    }
     
     public override void RandomizeData()
     {
@@ -489,6 +508,7 @@ public class BodyPartController : PartController
             Debug.Log("Prop Block not initialized for: " + transform.name);
         }
     }
+
     public void UpdateSingleShaderFloatUnsafe(string param, float value)
     {
         propBlock.SetFloat(param, value);
@@ -524,8 +544,12 @@ public class BodyPartController : PartController
     private void OnCollisionEnter2D(Collision2D col)
     {
 
-        Debug.Log(col.transform.name + " has a velocity of: " + col.rigidbody.velocity);
-        Debug.Log(transform.name + " has a velocity of: " + rb2D.velocity);
-        OnCharacterCollisionEvent.Instance.Invoke(this, col.gameObject.GetComponent<BodyPartController>());
+        //Debug.Log(col.transform.name + " has a velocity of: " + col.rigidbody.velocity);
+        //Debug.Log(transform.name + " has a velocity of: " + rb2D.velocity);
+        
+        if(Mathf.Abs(col.otherRigidbody.velocity.x) > .8f)
+        {
+            OnCharacterCollisionEvent.Instance.Invoke();
+        }
     }
 }

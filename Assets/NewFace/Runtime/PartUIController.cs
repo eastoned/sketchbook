@@ -63,13 +63,17 @@ public class PartUIController : MonoBehaviour
                 //}
                 sliders[i].onValueChanged.AddListener(currentPC.shaderProperties[i].SetValue);
                 sliders[i].onValueChanged.AddListener(currentPC.UpdateAllShadersValue);
-                if(currentPC.shaderProperties[i].wholeNumberInterval){
+                if(currentPC.shaderProperties[i].wholeNumberInterval)
+                {
                     float intervalValue = currentPC.shaderProperties[i].valueInterval;
                     sliders[i].onValueChanged.AddListener(delegate{SetCurrentShaderInterval.Instance.Invoke(intervalValue);});
                     sliders[i].onValueChanged.AddListener(OnChangedShaderProperty.Instance.Invoke);
-                }else{
+                }
+                else
+                {
                     sliders[i].onValueChanged.AddListener(OnSlideShaderProperty.Instance.Invoke);
                 }
+                //sliders[i].onValueChanged.AddListener(delegate{OnChangePartShaderProperty.Instance.Invoke(currentPC, currentPC.shaderProperties[i].propertyName, currentPC.shaderProperties[i].propertyValue);});
 
                 if(currentPC.shaderProperties[i].propertyFeature != ShaderProperty.AffectedFeature.NOTHING)
                 {

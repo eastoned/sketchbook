@@ -88,78 +88,11 @@ public class NuFaceManager : MonoBehaviour
         
     }
 
-    [ContextMenu("Test Face Animation")]
-    public void DoRandomMovement(){
-        if(movingRoutine != null){
-            StopCoroutine(movingRoutine);
-        }
-        int targetPart = Random.Range(0, parts.Length);
-        Debug.Log("attempt to move: " + parts[targetPart].name);
-        Vector3 partTargetPos = parts[targetPart].transform.position;
-
-        movingRoutine = StartCoroutine(MovePartToPosition(new Vector3(partTargetPos.x, partTargetPos.y, hand.pd.absoluteWorldPositionZ)));
-    }
+    
 
     [ContextMenu("Test Head")]
     public void MoveCharacterPast(){
         StartCoroutine(MoveAround());
-    }
-
-    private IEnumerator MovePartToPosition(Vector3 handTargetPos){
-        Vector3 handPos = hand.transform.localPosition;
-        Vector3 startPos = handPos;
-        float counter = 0f;
-        float animationTime = 2f;
-        while(counter <= animationTime)
-        {
-            counter += Time.deltaTime;
-            handPos = Vector3.Lerp(startPos, handTargetPos, counter/animationTime);
-            OnTranslatePartController.Instance.Invoke(hand, handPos, false);
-            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger1", Mathf.Sin((counter/animationTime) * Mathf.PI));
-            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger2", Mathf.Sin((counter/animationTime) * Mathf.PI));
-            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger3", Mathf.Sin((counter/animationTime) * Mathf.PI));
-            OnChangePartShaderProperty.Instance.Invoke(hand, "_Finger4", Mathf.Sin((counter/animationTime) * Mathf.PI));
-            yield return null;
-        }
-
-        Debug.Log("Hand reached target");
-        hand.ReleasePart();
-        for(int i = 0; i < parts.Length; i++)
-        {
-            ///Debug.Log();
-            if(parts[i].transform.GetComponent<BoxCollider2D>().OverlapPoint(handTargetPos)){
-                Debug.Log("successful click on: " + parts[i].name);
-                Vector3 randomPos = new Vector3(
-                    Random.Range(parts[i].pd.minPosX-1f, parts[i].pd.maxPosX+1f),
-                    Random.Range(parts[i].pd.minPosY-2f, parts[i].pd.maxPosY+2f),
-                    parts[i].pd.absoluteWorldPositionZ);
-                StartCoroutine(MovePiece(parts[i], handTargetPos, randomPos));
-                StartCoroutine(MovePiece(hand, handTargetPos, new Vector3(randomPos.x, randomPos.y, hand.pd.absoluteWorldPositionZ)));
-                break;
-            }
-        }
-        
-        yield return null;
-    }
-
-    private IEnumerator MovePiece(BodyPartController pc, Vector3 startPos, Vector3 endPos)
-    {
-        pc.PartClicked();
-        Vector3 partPos = startPos;
-        PartTransformController ptc = pc.GetComponent<PartTransformController>();
-        ptc.OnHandDown(startPos);
-        float counter = 0f;
-        float animationTime = 2f;
-        while(counter <= animationTime)
-        {
-            counter += Time.deltaTime;
-            partPos = Vector3.Lerp(startPos, endPos, counter/animationTime);
-            ptc.OnHandDrag(partPos);
-            yield return null;
-        }
-        ptc.OnHandUp();
-        pc.PartUnclicked();
-        yield return null;
     }
 
 

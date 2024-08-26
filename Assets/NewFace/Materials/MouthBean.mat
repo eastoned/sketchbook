@@ -31,7 +31,7 @@ Material:
     m_Floats:
     - _BotTeeth: 0
     - _Lips: 0.95
-    - _MouthBend: 0.164
+    - _MouthBend: 1
     - _MouthLipBottom: 1
     - _MouthLipMaskRoundness: 0
     - _MouthLipTop: 1

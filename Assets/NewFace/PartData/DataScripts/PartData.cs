@@ -242,7 +242,8 @@ public class ShaderProperty
     public float valueInterval;
     public AffectedFeature propertyFeature;
 
-    public void SetValue(float value){
+    public void SetValue(float value)
+    {
         propertyValue = value;
     }
 

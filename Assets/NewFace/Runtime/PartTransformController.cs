@@ -68,11 +68,16 @@ public class PartTransformController : MonoBehaviour
     {
         switch(controls){
             case TransformController.TRANSLATE:
-                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+                transform.position = new Vector3(pos.x, partInEdit.lockedYaxis ? transform.position.y : pos.y, transform.position.z);
+                
                 if(partInEdit.customScaleAnchor != null){
                     //offset += transform.localPosition;
                 }
-                OnTranslatePartController.Instance.Invoke(partInEdit, transform.position + offset, true);
+                
+                Vector3 displacement = transform.position + (partInEdit.lockedYaxis ? Vector3.zero : offset);
+
+                OnTranslatePartController.Instance.Invoke(partInEdit, displacement, true);
+                
             break;
             case TransformController.ROTATION:
                 transform.position = new Vector3(pos.x, pos.y, transform.position.z);

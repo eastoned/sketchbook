@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerFaceController : FaceController
 {
@@ -139,7 +140,11 @@ public class PlayerFaceController : FaceController
 
     private void SetPartShaderProperty(BodyPartController editingPC, string shaderPropertyName, float shaderValue)
     {
-        //Debug.Log("updating shader on: " + editingPC.name);
+        Debug.Log("updating shader on: " + editingPC.name);
+        if(!canRandomShaders)
+        {
+            canRandomShaders =true;
+        }
         if(editingPC != null)
         {
             editingPC.UpdateSingleShaderFloat(shaderPropertyName, shaderValue);
@@ -193,6 +198,11 @@ public class PlayerFaceController : FaceController
         {
             translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.transform.position.z);
         }
+
+        if(!canRandomHeadPos)
+        {
+            canRandomHeadPos = true;
+        }
     
         //translatingPC.UpdateAllTransformValues();
     }
@@ -217,6 +227,11 @@ public class PlayerFaceController : FaceController
         if(!currentPC.detached){
             //currentPC.pd.SetClampedScale(diff);
             UpdateControllers();
+        }
+
+        if(!canRandomHeadScale)
+        {
+            canRandomHeadScale = true;
         }
 
         //currentPC.UpdateScale();

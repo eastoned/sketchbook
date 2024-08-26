@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FaceController : MonoBehaviour
 {
-    public BodyPartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar, leftHand, leftArm;
+    public BodyPartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar, leftHand, leftArm, rightHand, rightArm;
     public BodyPartController[] partControllers;
     public SpeechController sc;
     public Transform[] bodyParts;
@@ -17,6 +17,13 @@ public class FaceController : MonoBehaviour
         PART,
         BLANK
     }
+
+    public enum State
+    {
+
+    }
+
+    public bool canRandomHeadPos, canRandomHeadScale, canRandomShaders = false;
 
     public Transform attentionTarget;
     
@@ -48,6 +55,8 @@ public class FaceController : MonoBehaviour
     public AnimationCurve headScale;
     public bool animating = false;
 
+    private Coroutine movingRoutine;
+
     public virtual void OnEnable()
 	{
         OnCharacterCollisionEvent.Instance.AddListener(UpdateAttentionTarget);
@@ -61,19 +70,34 @@ public class FaceController : MonoBehaviour
     {
         //InitializeControllers();
         RandomizePieces();
+        RandomizeShaders();
     }
 
     public void RandomizePieces()
     {
 
-        head.transform.localScale = new Vector2(headScale.Evaluate(Random.Range(0f, 1f)), headScale.Evaluate(Random.Range(0f, 1f)));
-        head.sj2D.connectedAnchor = new Vector2(transform.position.x, Random.Range(-1f, 1.5f));
-        leftHand.sj2D.connectedAnchor = new Vector2(1+transform.position.x, Random.Range(-1f, 1.5f));
+        if(canRandomHeadScale)
+            head.transform.localScale = new Vector2(headScale.Evaluate(Random.Range(0f, 1f)), headScale.Evaluate(Random.Range(0f, 1f)));
+        
+        if(canRandomHeadPos)
+            head.sj2D.connectedAnchor = new Vector2(transform.position.x, Random.Range(-1f, 1.5f));
+
+        leftHand.sj2D.connectedAnchor = new Vector2(transform.position.x + .75f, Random.Range(-1f, 1.5f));
+        rightHand.sj2D.connectedAnchor = new Vector2(transform.position.x - .75f, leftHand.sj2D.connectedAnchor.y);
+        
         leftEye.transform.localScale = new Vector3(Random.Range(0.25f, head.transform.localScale.x/2f), Random.Range(0.25f, head.transform.localScale.y/2f));
+
         rightEye.transform.localScale = leftEye.transform.localScale;
         nose.transform.localScale = new Vector2(Random.Range(0.1f, head.transform.localScale.x), Random.Range(0.1f, head.transform.localScale.y));
         bangs.transform.localScale = new Vector2(Random.Range(0.25f, head.transform.localScale.x * 2f), Random.Range(0.1f, head.transform.localScale.y));
 
+        RandomizeShaders();
+        
+        mouthOpen = mouth.GetSingleShaderFloat("_MouthOpen");
+    }
+
+    public void RandomizeShaders()
+    {
         bangs.RandomizeData();
         mouth.RandomizeData();
         neck.RandomizeData();
@@ -81,14 +105,16 @@ public class FaceController : MonoBehaviour
         leftEye.RandomizeData();
         rightEye.CopyData(leftEye);
         leftHand.RandomizeData();
+        rightHand.CopyData(leftHand);
         leftArm.RandomizeData();
+        leftArm.CopyColors(neck);
+        rightArm.CopyData(leftArm);
         leftEyebrow.RandomizeData();
         rightEyebrow.CopyData(leftEyebrow);
         nose.RandomizeData();
         hair.CopyData(bangs);
         leftEar.RandomizeData();
         rightEar.CopyData(leftEar);
-        mouthOpen = mouth.GetSingleShaderFloat("_MouthOpen");
     }
 
     private void InitializeControllers()
@@ -97,13 +123,16 @@ public class FaceController : MonoBehaviour
         UpdateAllControllers();
     }
 
-    private void UpdateAttentionTarget(BodyPartController bpc, BodyPartController bpc2)
+    private void UpdateAttentionTarget()
     {
-        if(bpc != head && bpc2 == head)
+        /*if(bpc != head && bpc2 == head)
         {
             attentionTarget = bpc.gameObject.transform;
             eyeTarget = EyeTarget.PART;
-        }
+            head.CopyData(bpc);
+        }*/
+        mouth.UpdateSingleShaderFloatUnsafe("_MouthBend", 1f);
+        mouth.UpdateRenderPropBlock();
     }
 
     public void Update()
@@ -113,11 +142,18 @@ public class FaceController : MonoBehaviour
         neck.UpdateSingleShaderFloatUnsafe("_HeadPosX", (head.transform.position.x - neck.transform.position.x)/neck.transform.localScale.x);
         neck.UpdateRenderPropBlock();
 
-        //bangs.sj2D.connectedAnchor = new Vector2(0, head.transform.localScale.y/4f);
+        //leftArm.transform.localScale = new Vector3(leftArm.transform.localScale.x, leftHand.transform.position.y + 2f, 1f);
+        //leftArm.UpdateSingleShaderFloatUnsafe("_HeadPosX", (leftHand.transform.position.x - leftArm.transform.position.x)/leftArm.transform.localScale.x);
+        //leftArm.UpdateRenderPropBlock();
 
-        leftArm.transform.localScale = new Vector3(leftArm.transform.localScale.x, leftHand.transform.position.y + 2f, 1f);
-        leftArm.UpdateSingleShaderFloatUnsafe("_HeadPosX", (leftHand.transform.position.x - leftArm.transform.position.x)*2f);
-        leftArm.UpdateRenderPropBlock();
+        rightArm.transform.localScale = new Vector3(rightArm.transform.localScale.x, rightHand.transform.position.y + 2f, 1f);
+        rightArm.UpdateSingleShaderFloatUnsafe("_HeadPosX", (rightHand.transform.position.x - rightArm.transform.position.x)/rightArm.transform.localScale.x);
+        rightArm.UpdateRenderPropBlock();
+
+        //leftHand.sj2D.connectedAnchor = new Vector2(leftArm.transform.position.x, leftHand.sj2D.connectedAnchor.y);
+        rightHand.sj2D.connectedAnchor = new Vector2(rightArm.transform.position.x, rightHand.sj2D.connectedAnchor.y);
+        head.sj2D.connectedAnchor = new Vector2(neck.transform.position.x, head.sj2D.connectedAnchor.y);
+        
 
         float rightX = 0f;
         float leftX = 0f;
@@ -249,6 +285,17 @@ public class FaceController : MonoBehaviour
         for(int j = 0; j < partData.shaderColors.Count; j++){
             partData.shaderColors[j].colorValue = Color.Lerp(blendFrom.shaderColors[j].colorValue, blendTo.shaderColors[j].colorValue, val);
         }
+    }
+
+    public void BlendBPC(float val, BodyPartController bpcFrom, BodyPartController bpcTo)
+    {
+        float[] shaderPropertyArray = new float[bpcFrom.shaderProperties.Count];
+        Color[] shaderColorArray = new Color[bpcFrom.shaderColors.Count];
+
+        for(int i = 0; i < bpcFrom.shaderProperties.Count; i++)
+        {
+            shaderPropertyArray[i] = Mathf.Lerp(bpcFrom.shaderProperties[i].propertyValue, bpcTo.shaderProperties[i].propertyValue, val);
+        }
 
     }
 
@@ -328,6 +375,80 @@ public class FaceController : MonoBehaviour
             animationTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void DoRandomMovement()
+    {
+        if(movingRoutine != null)
+        {
+            StopCoroutine(movingRoutine);
+        }
+        int targetPart = Random.Range(0, partControllers.Length);
+        Debug.Log("attempt to move hand to: " + partControllers[targetPart].name);
+        Vector3 partTargetPos = partControllers[targetPart].transform.position;
+
+        movingRoutine = StartCoroutine(MovePartToPosition(new Vector3(partTargetPos.x, partTargetPos.y, leftHand.transform.position.z)));
+    }
+
+    private IEnumerator MovePartToPosition(Vector3 handTargetPos)
+    {
+        Vector3 handPos = leftHand.transform.localPosition;
+        Vector3 startPos = handPos;
+        float counter = 0f;
+        float animationTime = 1.4f;
+        OnSelectedNewFacePartEvent.Instance.Invoke(leftHand);
+        while(counter <= animationTime)
+        {
+            counter += Time.deltaTime;
+            handPos = Vector3.Lerp(startPos, handTargetPos, Mathf.Clamp01(counter/animationTime));
+            OnTranslatePartController.Instance.Invoke(leftHand, handPos, false);
+            leftHand.UpdateSingleShaderFloatUnsafe("_Finger1",  Mathf.Sin((counter/animationTime) * Mathf.PI));
+            leftHand.UpdateSingleShaderFloatUnsafe("_Finger2",  Mathf.Sin((counter/animationTime) * Mathf.PI));
+            leftHand.UpdateSingleShaderFloatUnsafe("_Finger3",  Mathf.Sin((counter/animationTime) * Mathf.PI));
+            leftHand.UpdateSingleShaderFloatUnsafe("_Finger4",  Mathf.Sin((counter/animationTime) * Mathf.PI));
+            leftHand.UpdateRenderPropBlock();
+            yield return null;
+        }
+
+        Debug.Log("Hand reached target");
+        leftHand.ReleasePart();
+        
+        for(int i = 0; i < partControllers.Length; i++)
+        {
+            if(partControllers[i].transform.GetComponent<BoxCollider2D>().OverlapPoint(handTargetPos))
+            {
+                Debug.Log("successful click on: " + partControllers[i].name);
+                Vector3 randomPos = new Vector3(
+                    Random.Range(partControllers[i].transform.position.x-1f, partControllers[i].transform.position.x+1f),
+                    Random.Range(partControllers[i].transform.position.y-2f, partControllers[i].transform.position.y+2f),
+                    partControllers[i].transform.position.z);
+                StartCoroutine(MovePiece(partControllers[i], handTargetPos, randomPos));
+                StartCoroutine(MovePiece(leftHand, handTargetPos, new Vector3(randomPos.x, randomPos.y, leftHand.pd.absoluteWorldPositionZ)));
+                break;
+            }
+        }
+        
+        yield return null;
+    }
+
+    private IEnumerator MovePiece(BodyPartController pc, Vector3 startPos, Vector3 endPos)
+    {
+        pc.PartClicked();
+        Vector3 partPos = startPos;
+        PartTransformController ptc = pc.GetComponent<PartTransformController>();
+        ptc.OnHandDown(startPos);
+        float counter = 0f;
+        float animationTime = 1.4f;
+        while(counter <= animationTime)
+        {
+            counter += Time.deltaTime;
+            partPos = Vector3.Lerp(startPos, endPos, counter/animationTime);
+            ptc.OnHandDrag(partPos);
+            yield return null;
+        }
+        ptc.OnHandUp();
+        pc.PartUnclicked();
+        yield return null;
     }
 
 }
