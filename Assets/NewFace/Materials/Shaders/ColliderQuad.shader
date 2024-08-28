@@ -4,6 +4,7 @@ Shader "Unlit/ColliderQuad"
     {
         _MainTex("Tex", 2D) = "white" {}
         _IconTex("Icon", 2D) = "black" {}
+        _Dashed ("Dash Length", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -36,6 +37,7 @@ Shader "Unlit/ColliderQuad"
 
             sampler2D _MainTex, _IconTex;
             float4 _MainTex_ST;
+            float _Dashed;
 
             v2f vert (appdata v)
             {
@@ -54,6 +56,9 @@ Shader "Unlit/ColliderQuad"
                 icon *= tex2D(_IconTex, i.uv).a;
                 value += icon;
                 clip(value - .1);
+
+                float dash = frac((i.screenPosition.x + _Time.x + i.screenPosition.y) * 30);
+                clip(dash - _Dashed);
 
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;

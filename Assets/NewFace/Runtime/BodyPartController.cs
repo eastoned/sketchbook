@@ -32,52 +32,42 @@ public class BodyPartController : PartController
     float angleCache;
     Coroutine shakeRotate;
 
-    public BodyPartController connectablePart;
-
-    public BodyPartController[] affectedChildren;
-    public GameObject[] detailChildren;
+    public PartController connectablePart;
 
     public Transform customScaleAnchor;
 
     public Vector3 scaleControllerPos = new Vector3(0.5f, 0.5f, 0);
     public Vector3 rotateControllerPos = new Vector3(0.5f, 0, 0);
 
-    public List<ShaderProperty> shaderProperties;
     public Dictionary<string, ShaderProperty> shadePropertyDict = new Dictionary<string, ShaderProperty>();
 
-    public override void InitializePropertyBlock()
-    {
-        base.InitializePropertyBlock();
-        
-        for(int i = 0; i < shaderProperties.Count; i++)
-        {
-            propBlock.SetFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
-        }
-    }
+    public BodyPartController limb;
 
     private void Start()
     {
         transform.name = transform.name + Random.Range(0, 20);
     }
 
-    public void InitializePartDataDictionary()
+    void OnJointBreak2D(Joint2D brokenJoint)
     {
-        if(!flippedXAxis)
+        brokenJoint.gameObject.layer = 13;
+        rb2D.gravityScale = 1;
+        rb2D.drag = 0f;
+        rb2D.angularDrag = 0f;
+        detached = true;
+        rb2D.Sleep();
+        rb2D.WakeUp();
+
+        if(limb != null)
         {
-            //dummy was clearing the dictionary before and not populating it after smh
-            shadePropertyDict.Clear();
-            for(int i = 0; i < shaderProperties.Count; i++)
-            {
-                if(!shadePropertyDict.ContainsKey(shaderProperties[i].propertyName))
-                {
-                    shadePropertyDict.Add(shaderProperties[i].propertyName, shaderProperties[i]);
-                }
-            }
+            limb.rend.enabled = false;
+            limb.colid.enabled = false;
         }
     }
 
     public void UpdateDependencies()
     {  
+        /*
         //Debug.Log("updating affected parts");
         foreach(BodyPartController pc in affectedChildren)
         {
@@ -94,7 +84,7 @@ public class BodyPartController : PartController
         {
             if(!mirroredPart.detached)
                 mirroredPart.UpdateAllTransformValues();
-        }
+        }*/
     }
 
     public void SetCache(PartData pd)
@@ -106,21 +96,10 @@ public class BodyPartController : PartController
         }
     }
 
-    void OnMouseOver()
-    {
-        if(CustomUtils.IsPointerOverUIObject())
-            return;
-
-        if(Input.GetMouseButton(0))
-            return;
-
-        OnHoveredNewFacePartEvent.Instance.Invoke(this);
-    }
-
     public override void OnMouseDown()
     {
-        OnMouseClickEvent.Instance.Invoke();
-        
+        base.OnMouseDown();
+
         if(CustomUtils.IsPointerOverUIObject())
             return;
         
@@ -136,11 +115,12 @@ public class BodyPartController : PartController
         if(customScaleAnchor != null)
         {
             positionCache = customScaleAnchor.position;
-        }else{
+        }
+        else
+        {
             positionCache = transform.position;
         }
         
-        OnSelectedNewFacePartEvent.Instance.Invoke(this);
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
         ptc.partInEdit = this;
@@ -184,16 +164,27 @@ public class BodyPartController : PartController
         rb2D.WakeUp();
         if(sj2D != null)
             rb2D.bodyType = RigidbodyType2D.Dynamic;
+
         if(detached)
         {
-            rb2D.Sleep();
-            rb2D.WakeUp();
-
+            
             if(connectablePart != null)
             {
-                if(!connectablePart.detached && connectablePart.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position)){
+                if(connectablePart.transform.GetComponent<BoxCollider2D>().OverlapPoint(transform.position))
+                {
+                    if(limb != null)
+                    {
+                        sj2D.connectedAnchor = transform.position;
+                    }
+                    else
+                    {
+                        sj2D.connectedAnchor = connectablePart.transform.InverseTransformPoint(transform.position);
+                    }
+                    
+                    sj2D.connectedAnchor = new Vector2(Mathf.Round(sj2D.connectedAnchor.x*10f)/10f, Mathf.Round(sj2D.connectedAnchor.y*10f)/10f);
                     UpdateAttachmentStatus(false);
-                    UpdateAllTransformValues();
+
+                    //UpdateAllTransformValues();
                 }else{
                     if(sj2D != null)
                         rb2D.bodyType = RigidbodyType2D.Dynamic;   
@@ -208,6 +199,8 @@ public class BodyPartController : PartController
                         rb2D.bodyType = RigidbodyType2D.Dynamic;   
                 }
             }
+            rb2D.Sleep();
+            rb2D.WakeUp();
         }
         //ccc.DeleteCharacterHead(this.gameObject);
     }
@@ -224,30 +217,42 @@ public class BodyPartController : PartController
         }
     }
 
+    void Update()
+    {
+        if(limb != null)
+        {
+            limb.transform.localScale = new Vector3(limb.transform.localScale.x, transform.position.y + 2f, 1f);
+            limb.UpdateSingleShaderFloatUnsafe("_HeadPosX", (transform.position.x - limb.transform.position.x)/limb.transform.localScale.x);
+            limb.UpdateRenderPropBlock();
+            sj2D.connectedAnchor = new Vector2(limb.transform.position.x, sj2D.connectedAnchor.y);
+        }
+        
+    }
+
     public void UpdateScale()
     {
         if(flippedXAxis)
+        {
+            if(customScaleAnchor != null)
             {
-                if(customScaleAnchor != null)
-                {
-                    customScaleAnchor.localScale = pd.GetFlippedAbsScale();
-                    cacheScale = pd.GetFlippedAbsScale();
-                }else{
-                    transform.localScale = pd.GetFlippedAbsScale();
-                    cacheScale = pd.GetFlippedAbsScale();
-                }
-                
+                customScaleAnchor.localScale = pd.GetFlippedAbsScale();
+                cacheScale = pd.GetFlippedAbsScale();
             }else{
-                if(customScaleAnchor != null)
-                {
+                transform.localScale = pd.GetFlippedAbsScale();
+                cacheScale = pd.GetFlippedAbsScale();
+            }
+                
+        }else{
+            if(customScaleAnchor != null)
+            {
                     customScaleAnchor.localScale = pd.GetAbsScale();
                     cacheScale = pd.GetAbsScale();
-                }else{
+            }else{
                     transform.localScale = pd.GetAbsScale();
                     cacheScale = pd.GetAbsScale();
-                }
-                
             }
+                
+        }
         //pd.SetPositionBounds();
     }
 
@@ -310,34 +315,6 @@ public class BodyPartController : PartController
         
     }
 
-    public void AddHoveredMaterial(Material mat)
-    {
-        rend.sharedMaterials = new Material[2]{rend.sharedMaterials[0], mat};
-    }
-
-    public void ResetMaterial()
-    {
-        rend.sharedMaterials = new Material[1]{rend.sharedMaterials[0]};
-    }
-
-    public void UpdateAllShadersValue(float ignore)
-    {
-
-        for(int i = 0; i < shaderProperties.Count; i++){
-            UpdateSingleShaderFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
-        }
-
-        for(int j = 0; j < shaderColors.Count; j++){
-            UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
-        }
-        rend.SetPropertyBlock(propBlock);
-
-        if(colid != null && shadePropertyDict.Count > 0){
-            UpdateColliderBounds();
-            UpdateDependencies();
-        }
-    }
-
     public void ShakePiece(float strength, float time)
     {
         if(shakeRotate != null){
@@ -349,72 +326,6 @@ public class BodyPartController : PartController
     public void ShakePieces(Vector3 strength, float time)
     {
         ShakePositionRoutineTimed(strength, time);
-    }
-
-    public void CopyData(BodyPartController bpcToCopyFrom)
-    {
-        if(propBlock != null)
-        {
-            for(int i = 0; i < shaderProperties.Count; i++)
-            {
-                shaderProperties[i].propertyValue = bpcToCopyFrom.shaderProperties[i].propertyValue;
-                UpdateSingleShaderFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
-            }
-            
-            for(int j = 0; j < shaderColors.Count; j++)
-            {
-                shaderColors[j].colorValue = bpcToCopyFrom.shaderColors[j].colorValue;
-                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
-            }
-            UpdateRenderPropBlock();
-        }
-        else
-        {
-            InitializePropertyBlock();
-            CopyData(bpcToCopyFrom);
-        }
-    }
-
-    public void CopyColors(BodyPartController bpcToCopyFrom)
-    {
-        if(propBlock != null)
-        {
-            for(int j = 0; j < shaderColors.Count; j++)
-            {
-                shaderColors[j].colorValue = bpcToCopyFrom.shaderColors[j].colorValue;
-                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
-            }
-            UpdateRenderPropBlock();
-        }
-        else
-        {
-            InitializePropertyBlock();
-            CopyColors(bpcToCopyFrom);
-        }
-    }
-    
-    public override void RandomizeData()
-    {
-        if(propBlock != null)
-        {
-            for(int i = 0; i < shaderProperties.Count; i++)
-            {
-                shaderProperties[i].propertyValue = Random.Range(0f, 1f);
-                UpdateSingleShaderFloat(shaderProperties[i].propertyName, shaderProperties[i].propertyValue);
-            }
-            
-            for(int j = 0; j < shaderColors.Count; j++)
-            {
-                shaderColors[j].colorValue = Random.ColorHSV();
-                UpdateSingleShaderColor(shaderColors[j].colorName, shaderColors[j].colorValue);
-            }
-            UpdateRenderPropBlock();
-        }
-        else
-        {
-            InitializePropertyBlock();
-            RandomizeData();
-        }
     }
 
     public IEnumerator ShakePositionRoutineTimed(Vector3 strength, float length)
@@ -460,85 +371,35 @@ public class BodyPartController : PartController
     {
         detached = detach;
 
-        if(detached){
-            PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
-            OnBreakPart.Instance.Invoke(padBreak);
+        if(detached)
+        {
+            //PlayerActionData padBreak = new PlayerActionData(CharacterActionData.ActionType.BREAKCHANGE, pd);
+            //OnBreakPart.Instance.Invoke(padBreak);
             OnTriggerAudioOneShot.Instance.Invoke("Detach");
-            transform.gameObject.layer = 11;
             rb2D.bodyType = RigidbodyType2D.Dynamic;
-            rb2D.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
-            if(detailChildren.Length > 0)
-            {
-                foreach(GameObject go in detailChildren)
-                {
-                    go.SetActive(false);
-                }
-            }
-        }else{
-            connectablePart.UpdateAllTransformValues();
+        }
+        else
+        {
+            //connectablePart.UpdateAllTransformValues();
             OnTriggerAudioOneShot.Instance.Invoke("Attach");
-            transform.gameObject.layer = 12;
-            //rb2D.bodyType = RigidbodyType2D.Kinematic;
-            if(detailChildren.Length > 0)
+
+            rb2D.gravityScale = 0f;
+            rb2D.drag = 15f;
+            rb2D.angularDrag = 5f;
+            if(limb != null)
             {
-                foreach(GameObject go in detailChildren)
-                {
-                    go.SetActive(true);
-                }
+                transform.gameObject.layer = 11;
+                limb.transform.position = new Vector3(transform.position.x, limb.transform.position.y, limb.transform.position.z);
+                limb.rend.enabled = true;
+                limb.colid.enabled = true;
+            }else{
+                transform.gameObject.layer = 12;
             }
+            
+            sj2D.enabled = true;
+            
         }
         
-    }
-
-    public void UpdateSingleShaderFloat(string param, float value)
-    {
-        if(propBlock != null)
-        {
-            if(propBlock.HasFloat(param))
-            {
-                propBlock.SetFloat(param, value);
-            }
-            else
-            {
-                Debug.Log(param + " is not an available float.");
-            } 
-        }
-        else
-        {
-            Debug.Log("Prop Block not initialized for: " + transform.name);
-        }
-    }
-
-    public void UpdateSingleShaderFloatUnsafe(string param, float value)
-    {
-        propBlock.SetFloat(param, value);
-    } 
-
-    public float GetSingleShaderFloat(string param)
-    {
-        float defaultValue = 0f;
-        if(propBlock != null)
-        {
-            if(propBlock.HasFloat(param))
-            {
-                defaultValue = propBlock.GetFloat(param);
-            }
-            else
-            {
-                Debug.Log(param + " is not an available float. Returning default: 0");
-            } 
-        }
-        else
-        {
-            Debug.Log("Prop Block not initialized. Returning default: 0");
-        }
-        
-        return defaultValue;
-    }
-
-    public void UpdateSingleShaderVector(string param, Vector3 vec)
-    {
-        propBlock.SetVector(param, vec);
     }
 
     private void OnCollisionEnter2D(Collision2D col)

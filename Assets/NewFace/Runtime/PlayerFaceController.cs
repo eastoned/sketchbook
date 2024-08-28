@@ -6,128 +6,117 @@ using UnityEngine.UIElements;
 
 public class PlayerFaceController : FaceController
 {
-    public BodyPartController currentPC;
-    [SerializeField]
-    private BodyPartController hoveredPC;
+    public PartController activePC;
+    public PartController hoveredPC;
+
+    public BodyPartController activeBPC;
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
     public PartTransformController rotationController, scaleController;
-
-    [SerializeField]
-    private Material colliderMaterial;
 
     public float currentChange = 0f;
 
     public override void OnEnable()
 	{
         base.OnEnable();
-        OnHoveredNewFacePartEvent.Instance.AddListener(SetMaterialOutline);
-        OnSelectedNewFacePartEvent.Instance.AddListener(SetTransformControllers);
-        OnSetTransformCacheEvent.Instance.AddListener(SetTransformCache);
-        OnDeselectedFacePartEvent.Instance.AddListener(RemoveMaterialOutlineFromPreviousHover);
-        OnDeselectedFacePartEvent.Instance.AddListener(DisappearControllers);
+        OnHoveredNewFacePartEvent.Instance.AddListener(SetDashedOutline);
+        OnSelectedNewFacePartEvent.Instance.AddListener(SetSolidOutline);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
         OnChangePartShaderProperty.Instance.AddListener(SetPartShaderProperty);
     }
 
-    public override void OnDisable(){
+    public override void OnDisable()
+    {
         base.OnDisable();
-        OnHoveredNewFacePartEvent.Instance.RemoveListener(SetMaterialOutline);
-        OnSelectedNewFacePartEvent.Instance.RemoveListener(SetTransformControllers);
-        OnSetTransformCacheEvent.Instance.RemoveListener(SetTransformCache);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(RemoveMaterialOutlineFromPreviousHover);
-        OnDeselectedFacePartEvent.Instance.RemoveListener(DisappearControllers);
+        OnHoveredNewFacePartEvent.Instance.RemoveListener(SetDashedOutline);
+        OnSelectedNewFacePartEvent.Instance.RemoveListener(SetSolidOutline);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
         OnChangePartShaderProperty.Instance.RemoveListener(SetPartShaderProperty);
     }
 
-    public void SetMaterialOutline(BodyPartController hoveredPart)
+    public void SetDashedOutline(PartController hoveredPart)
     {
-       RemoveMaterialOutlineFromPreviousHover();
+        if(hoveredPC != null && hoveredPC != activePC)
+            hoveredPC.UpdatePartOutline(PartController.MousedState.NONE);
+        
+        hoveredPC = hoveredPart;
 
-        if(hoveredPart != null)
-        {
-            hoveredPart.AddHoveredMaterial(colliderMaterial);
-            hoveredPC = hoveredPart;
-        }
+        if(hoveredPC != activePC)
+            hoveredPC.UpdatePartOutline(PartController.MousedState.HOVERED);
+
     }
 
-    private void RemoveMaterialOutlineFromPreviousHover()
+    private void SetSolidOutline(PartController selectedPC)
     {
-        if(hoveredPC != null)
+        if(activePC != null)
+            activePC.UpdatePartOutline(PartController.MousedState.NONE);
+
+        activePC = selectedPC;
+        activePC.UpdatePartOutline(PartController.MousedState.SELECTED);
+            //cube.position = currentPC.transform.position;
+        
+        BodyPartController selectedBPC = selectedPC.GetComponent<BodyPartController>();
+        
+        SetTransformControllers(selectedBPC);
+    }
+
+    private void SetTransformControllers(BodyPartController selectedBPC)
+    {
+
+        if(selectedBPC == null || selectedBPC.detached)
         {
-            hoveredPC.ResetMaterial();
+            rotationController.partInEdit = null;
+            rotationController.Disappear();
+            scaleController.partInEdit = null;
+            scaleController.Disappear();
+            return;
+        }
+
+        if(activeBPC != selectedBPC)
+        {
+            if(selectedBPC.rotatable)
+            {
+                rotationController.partInEdit = selectedBPC;
+                rotationController.UpdateControllerPositions();
+            }else{
+                rotationController.partInEdit = null;
+                rotationController.Disappear();
+            }
+                
+            if(selectedBPC.scalable)
+            {
+                scaleController.partInEdit = selectedBPC;
+                scaleController.UpdateControllerPositions();
+            }else{
+                scaleController.partInEdit = null;
+                scaleController.Disappear();
+            }
+        
+            activeBPC = selectedBPC;
         }
     }
 
-    private void SetTransformCache(){
-        if(currentPC != null){
-
-            if(currentPC.translatable)
-                positionCache = currentPC.pd.relativeToParentPosition;
-            
-            if(currentPC.rotatable)
-                angleCache = currentPC.pd.relativeToParentAngle;
-            
-            if(currentPC.scalable)
-                scaleCache = currentPC.pd.relativeToParentScale;
-        }
-    }
-
-    private void DisappearControllers(){
+    private void DisappearControllers()
+    {
         rotationController.partInEdit = null;
         rotationController.Disappear();
         scaleController.partInEdit = null;
         scaleController.Disappear();
     }
 
-    private void SetTransformControllers(BodyPartController selectedPC)
-    {
-
-        if(currentPC != selectedPC)
-        {
-            currentPC = selectedPC;
-            foreach(BodyPartController bpc in partControllers)
-            {
-                if(bpc == selectedPC)
-                {
-                    eyeTarget = EyeTarget.MOUSE;
-                }
-            }
-            //cube.position = currentPC.transform.position;
-        }
-
-        if(currentPC.rotatable){
-            rotationController.partInEdit = currentPC;
-            rotationController.UpdateControllerPositions();
-        }else{
-            rotationController.partInEdit = null;
-            rotationController.Disappear();
-        }
-            
-        if(currentPC.scalable){
-            scaleController.partInEdit = currentPC;
-            scaleController.UpdateControllerPositions();
-        }else{
-            scaleController.partInEdit = null;
-            scaleController.Disappear();
-        }
-    }
-
     private void UpdateControllers()
     {
-
-        if(currentPC.rotatable)
+        if(activeBPC.rotatable)
         {
             rotationController.UpdateControllerPositions();
         }
             
-        if(currentPC.scalable)
+        if(activeBPC.scalable)
         {
             scaleController.UpdateControllerPositions();
         }
@@ -153,25 +142,25 @@ public class PlayerFaceController : FaceController
     }
 
     bool startedTickling = false;
-    private void SetPartPosition(BodyPartController translatingPC, Vector3 pos, bool mirror)
+    private void SetPartPosition(BodyPartController translatingBPC, Vector3 pos, bool mirror)
     {
         //each part has a relative position to other objects
-        if(!translatingPC.detached)
+        if(!translatingBPC.detached)
         {
-            float flip = translatingPC.flippedXAxis? -1f : 1f;
+            float flip = translatingBPC.flippedXAxis? -1f : 1f;
             
-            translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.transform.position.z);
+            translatingBPC.transform.position = new Vector3(pos.x, pos.y, translatingBPC.transform.position.z);
             
-            Vector3 absPos = new Vector3(pos.x*flip, pos.y, translatingPC.transform.position.z);
+            Vector3 absPos = new Vector3(pos.x*flip, pos.y, translatingBPC.transform.position.z);
             //if(translatingPC.sj2D != null)
                 //translatingPC.sj2D.connectedAnchor = Vector3.Lerp(translatingPC.sj2D.connectedAnchor, new Vector3(pos.x, pos.y, translatingPC.transform.position.z), Time.deltaTime);
 
             //turn on clamped position
             //translatingPC.pd.SetClampedPosition(absPos);
             
-            if(translatingPC.mirroredPart != null){
-                if(!translatingPC.mirroredPart.detached && mirror){
-                    translatingPC.mirroredPart.UpdateAllTransformValues();
+            if(translatingBPC.mirroredPart != null){
+                if(!translatingBPC.mirroredPart.detached && mirror){
+                    translatingBPC.mirroredPart.UpdateAllTransformValues();
                 }
             }
 
@@ -192,11 +181,10 @@ public class PlayerFaceController : FaceController
                 }
                     
             }*/
-            UpdateControllers();
         }
         else
         {
-            translatingPC.transform.position = new Vector3(pos.x, pos.y, translatingPC.transform.position.z);
+            translatingBPC.transform.position = new Vector3(pos.x, pos.y, translatingBPC.transform.position.z);
         }
 
         if(!canRandomHeadPos)
@@ -207,27 +195,22 @@ public class PlayerFaceController : FaceController
         //translatingPC.UpdateAllTransformValues();
     }
 
-    private void SetPartScale(BodyPartController scalingPC, Vector3 pos)
+    private void SetPartScale(BodyPartController scalingBPC, Vector3 pos)
     {
         //pos -= currentPC.transform.position;
         //currentPC.UpdatePosition();
 
-        Vector3 diff = scalingPC.transform.InverseTransformDirection(scalingPC.transform.position - pos)*2f;
+        Vector3 diff = scalingBPC.transform.InverseTransformDirection(scalingBPC.transform.position - pos)*2f;
         
-        if(scalingPC.customScaleAnchor != null)
+        if(scalingBPC.customScaleAnchor != null)
         {
-            diff = scalingPC.customScaleAnchor.InverseTransformDirection(scalingPC.customScaleAnchor.position - pos)*2f;
+            diff = scalingBPC.customScaleAnchor.InverseTransformDirection(scalingBPC.customScaleAnchor.position - pos)*2f;
             diff = new Vector3(diff.x/2f, diff.y/2f, diff.z);
         }
         
         diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
         
-        scalingPC.transform.localScale = new Vector3(diff.x, diff.y, 1f);
-            
-        if(!currentPC.detached){
-            //currentPC.pd.SetClampedScale(diff);
-            UpdateControllers();
-        }
+        scalingBPC.transform.localScale = new Vector3(diff.x, diff.y, 1f);
 
         if(!canRandomHeadScale)
         {
@@ -242,30 +225,26 @@ public class PlayerFaceController : FaceController
     {
         //pos -= transform.localPosition;
 
-        float angle = Mathf.Atan2(pos.y - currentPC.transform.position.y, pos.x - currentPC.transform.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(pos.y - activeBPC.transform.position.y, pos.x - activeBPC.transform.position.x) * Mathf.Rad2Deg;
 
-        if(currentPC.flippedXAxis)
+        if(activeBPC.flippedXAxis)
         {
-            currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
+            activeBPC.transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
             ///currentPC.pd.relativeToParentAngle = -angle + 180f;
         }
         else
         {
-            currentPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            activeBPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);
             //currentPC.pd.relativeToParentAngle = angle;
         }
             
         //currentPC.pd.relativeToParentAngle = currentPC.pd.GetClampedAngle(angle, currentPC.flippedXAxis);
-        
-        if(!currentPC.detached){
-            UpdateControllers();
-        }
             //currentPC.UpdateAllTransformValues();
 
-        if(currentPC.mirroredPart != null){
-            if(!currentPC.mirroredPart.detached)
+        if(activeBPC.mirroredPart != null){
+            if(!activeBPC.mirroredPart.detached)
             {
-                currentPC.mirroredPart.UpdateAllTransformValues();
+                activeBPC.mirroredPart.UpdateAllTransformValues();
             }
         }
         

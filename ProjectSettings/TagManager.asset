@@ -18,9 +18,9 @@ TagManager:
   - PostProcessing
   - Peeled
   - MovingObject
-  - Detached
-  - Attached
-  - 
+  - AlwaysCollide
+  - AttachedPart
+  - DetachedPart
   - 
   - 
   - 

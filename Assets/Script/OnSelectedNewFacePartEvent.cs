@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnSelectedNewFacePartEvent : UnityEvent<BodyPartController>
+public class OnSelectedNewFacePartEvent : UnityEvent<PartController>
 {
     public static OnSelectedNewFacePartEvent Instance = new OnSelectedNewFacePartEvent();
 }
 
-public class OnHoveredNewFacePartEvent : UnityEvent<BodyPartController>
+public class OnHoveredNewFacePartEvent : UnityEvent<PartController>
 {
     public static OnHoveredNewFacePartEvent Instance = new OnHoveredNewFacePartEvent();
 }

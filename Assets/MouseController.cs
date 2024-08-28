@@ -33,7 +33,7 @@ public class MouseController : MonoBehaviour
         OnHoveredNewFacePartEvent.Instance.RemoveListener(HoveringOnEditablePart);
     }
 
-    void HoveringOnEditablePart(BodyPartController part)
+    void HoveringOnEditablePart(PartController part)
     {
         if(part != null)
         {

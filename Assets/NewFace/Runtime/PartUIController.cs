@@ -19,7 +19,7 @@ public class PartUIController : MonoBehaviour
 
     [SerializeField] private GameObject colorSliderContainer;
 
-    public BodyPartController currentPC;
+    public PartController currentPC;
 
     void OnEnable()
 	{
@@ -33,7 +33,8 @@ public class PartUIController : MonoBehaviour
         OnDeselectedFacePartEvent.Instance.RemoveListener(TurnOffUI);
     }
 
-    private void EnableEditButton(BodyPartController selectedPC)
+
+    private void EnableEditButton(PartController selectedPC)
     {
         TurnOffUI();
         editButton.SetActive(true);
@@ -53,7 +54,8 @@ public class PartUIController : MonoBehaviour
 
         for(int i = 0; i < sliders.Count; i++)
         {
-            if(i < currentPC.shaderProperties.Count){
+            if(i < currentPC.shaderProperties.Count)
+            {
                 sliders[i].gameObject.SetActive(true);
                 sliders[i].onValueChanged.RemoveAllListeners();
                 sliders[i].value = currentPC.shaderProperties[i].propertyValue;
@@ -89,16 +91,15 @@ public class PartUIController : MonoBehaviour
                     }
                 }
                 
-                if(currentPC.mirroredPart != null){
-                    sliders[i].onValueChanged.AddListener(currentPC.mirroredPart.UpdateAllShadersValue);
-                }
             }else{
                 sliders[i].gameObject.SetActive(false);
             }
         }
 
-        for(int j = 0; j < buttons.Count; j++){
-            if(j < currentPC.shaderColors.Count){
+        for(int j = 0; j < buttons.Count; j++)
+        {
+            if(j < currentPC.shaderColors.Count)
+            {
                 buttons[j].gameObject.SetActive(true);
                 buttons[j].onClick.RemoveAllListeners();
                 ColorBlock cb = ColorBlock.defaultColorBlock;
@@ -136,7 +137,8 @@ public class PartUIController : MonoBehaviour
         colorSliderContainer.SetActive(true);
     }
 
-    void TurnOffUI(){
+    void TurnOffUI()
+    {
         editButton.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
@@ -169,12 +171,6 @@ public class PartUIController : MonoBehaviour
         colorSliders[2].onValueChanged.AddListener(currentPC.shaderColors[currentColor].SetValue);
         colorSliders[2].onValueChanged.AddListener(currentPC.UpdateAllShadersValue);
         colorSliders[2].onValueChanged.AddListener(UpdateButtonColor);
-
-        if(currentPC.mirroredPart != null){
-            colorSliders[0].onValueChanged.AddListener(currentPC.mirroredPart.UpdateAllShadersValue);
-            colorSliders[1].onValueChanged.AddListener(currentPC.mirroredPart.UpdateAllShadersValue);
-            colorSliders[2].onValueChanged.AddListener(currentPC.mirroredPart.UpdateAllShadersValue);
-        }
 
     }
 

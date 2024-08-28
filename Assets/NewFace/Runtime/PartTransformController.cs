@@ -32,14 +32,39 @@ public class PartTransformController : MonoBehaviour
         {
             GetComponent<Renderer>().material.SetTexture("_IconTex", icon);
         }
+
+        StartCoroutine(UpdateControllers());
+    }
+
+    private IEnumerator UpdateControllers()
+    {
+        for(;;)
+        {
+            if(partInEdit != null && !partInEdit.detached)
+            {
+                    switch(controls)
+                    {
+                        case TransformController.ROTATION:
+                        
+                        transform.position = partInEdit.transform.TransformPoint(partInEdit.rotateControllerPos);
+                        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                        //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                    break;
+                    case TransformController.SCALE:
+                        transform.position = partInEdit.transform.TransformPoint(partInEdit.scaleControllerPos);
+                        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                        //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
+                    break;
+                    }
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
     }
     
     void OnMouseDown()
     {
         if(CustomUtils.IsPointerOverUIObject())
             return;
-
-        
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         OnHandDown(mouseDelta2);
@@ -80,12 +105,12 @@ public class PartTransformController : MonoBehaviour
                 
             break;
             case TransformController.ROTATION:
-                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
-                OnRotatePartController.Instance.Invoke(transform.position);
+                Vector3 supposePos = new Vector3(pos.x, pos.y, transform.position.z);
+                OnRotatePartController.Instance.Invoke(supposePos);
             break;
             case TransformController.SCALE:
-                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
-                OnScalePartController.Instance.Invoke(partInEdit, transform.position);
+                Vector3 supposeSclPos = new Vector3(pos.x, pos.y, transform.position.z);
+                OnScalePartController.Instance.Invoke(partInEdit, supposeSclPos);
             break;
             case TransformController.NOTHING:
             break;
@@ -137,30 +162,4 @@ public class PartTransformController : MonoBehaviour
             break;
         }
     }
-
-    void Update()
-    {
-        if(partInEdit != null)
-        {
-            if(partInEdit.detached)
-            {
-                    switch(controls)
-                    {
-                        case TransformController.ROTATION:
-                        
-                        transform.position = partInEdit.transform.TransformPoint(partInEdit.rotateControllerPos);
-                        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-                        //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
-                    break;
-                    case TransformController.SCALE:
-                        Debug.Log(partInEdit.scaleControllerPos);
-                        transform.position = partInEdit.transform.TransformPoint(partInEdit.scaleControllerPos);
-                        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-                        //transform.localScale = Vector3.one * partInEdit.transform.localScale.y * 0.25f;
-                    break;
-                    }
-            }
-        }
-    }
-
 }
