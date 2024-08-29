@@ -57,12 +57,15 @@ Shader "Unlit/ColliderQuad"
                 value += icon;
                 clip(value - .1);
 
-                float dash = frac((i.screenPosition.x + _Time.x + i.screenPosition.y) * 30);
-                clip(dash - _Dashed);
+                
 
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
+
+                float dash = frac((texCoord.x + _Time.x + texCoord.y) * 30);
+                clip(dash - _Dashed);
+
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 
                 float4 col = tex2D(_MainTex, texCoord);

@@ -30,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6169158378715319551}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.011, y: -0.954, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -144,9 +144,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_Mass: 5
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -172,35 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 2394984303648220518}
-  shaderColors:
-  - colorName: _Color1
-    colorValue: {r: 0.515979, g: 0.52027065, b: 0.37187442, a: 1}
-  - colorName: _Color2
-    colorValue: {r: 0.24068117, g: 0.23576628, b: 0.15465337, a: 1}
-  - colorName: _Color3
-    colorValue: {r: 0.82381856, g: 0.5978984, b: 0.7577951, a: 1}
-  - colorName: _Color4
-    colorValue: {r: 0.30502683, g: 0.6930586, b: 0.18627086, a: 1}
-  pd: {fileID: 0}
-  translatable: 1
-  rotatable: 1
-  scalable: 1
-  colid: {fileID: 67694900477274314}
-  rb2D: {fileID: 7331366482692456745}
-  sj2D: {fileID: 1610321512465297433}
-  flippedXAxis: 0
-  detached: 0
-  mirroredPart: {fileID: 0}
-  cachePosition: {x: 0, y: 0, z: 0}
-  cacheScale: {x: 0, y: 0, z: 0}
-  cacheAngle: 0
-  shaderPropertyCache: []
-  connectablePart: {fileID: 0}
-  affectedChildren: []
-  detailChildren: []
-  customScaleAnchor: {fileID: 0}
-  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
-  rotateControllerPos: {x: 0.5, y: 0, z: 0}
   shaderProperties:
   - propertyName: _MouthRadius
     propertyValue: 0.66445696
@@ -252,59 +223,41 @@ MonoBehaviour:
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.515979, g: 0.52027065, b: 0.37187442, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.24068117, g: 0.23576628, b: 0.15465337, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.82381856, g: 0.5978984, b: 0.7577951, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.30502683, g: 0.6930586, b: 0.18627086, a: 1}
+  highlightedMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
+  currentMousedState: 0
+  pd: {fileID: 11400000, guid: 27cc8982b0801ce419895e4ba67a0192, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
+  lockedYaxis: 0
+  colid: {fileID: 67694900477274314}
+  rb2D: {fileID: 7331366482692456745}
+  sj2D: {fileID: 1610321512465297433}
+  flippedXAxis: 0
+  detached: 0
+  mirroredPart: {fileID: 0}
+  cachePosition: {x: 0, y: 0, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
+  cacheAngle: 0
+  shaderPropertyCache: []
+  connectablePart: {fileID: 0}
+  customScaleAnchor: {fileID: 0}
+  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
+  rotateControllerPos: {x: 0.5, y: 0, z: 0}
+  limb: {fileID: 0}
   speechBubble: {fileID: 5391851005333956622, guid: eb1498493e3e0e140b46cdaac96a2c65,
     type: 3}
   canvas: {fileID: 0}
-  scaleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  translateCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   currentSpeak: 0
-  sppeech: []
   upperLip: 0
   lowerLip: 0
   mouthRadius: 0
@@ -320,13 +273,13 @@ SpringJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
+  m_BreakForce: 4000
   m_BreakTorque: Infinity
-  m_BreakAction: 3
+  m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: -0.25}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 1
-  m_Frequency: 15
+  m_Frequency: 10

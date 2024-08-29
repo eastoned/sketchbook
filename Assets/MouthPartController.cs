@@ -126,9 +126,9 @@ public class MouthPartController : BodyPartController
     {
         if(canSpeak)
         {
-            GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(transform.position) + new Vector3(0, 100, 0), Quaternion.identity, canvas);
-
+            GameObject bubble = Instantiate(speechBubble, transform.position, Quaternion.identity, canvas);
             AnimateTMPElement textAnimator = bubble.GetComponent<AnimateTMPElement>();
+            textAnimator.sj2D.connectedBody = rb2D;
             textAnimator.InitializeBubble(text);
         }
     }

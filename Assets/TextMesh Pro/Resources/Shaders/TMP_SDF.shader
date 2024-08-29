@@ -145,6 +145,7 @@ SubShader {
 			float4	param			: TEXCOORD1;		// alphaClip, scale, bias, weight
 			float4	mask			: TEXCOORD2;		// Position in object space(xy), pixel Size(zw)
 			float3	viewDir			: TEXCOORD3;
+			float4 screenPosition 	: TEXCOORD6;
 			
 		#if (UNDERLAY_ON || UNDERLAY_INNER)
 			float4	texcoord2		: TEXCOORD4;		// u,v, scale, bias
@@ -158,6 +159,12 @@ SubShader {
 		float4 _OutlineTex_ST;
 		float _CharacterVisibility;
 
+		float random (float2 st) {
+			return frac(sin(dot(st.xy,
+								 float2(12.9898,78.233)))
+						 * 43758.5453123);
+		}
+
 		pixel_t VertShader(vertex_t input)
 		{
 			pixel_t output;
@@ -166,6 +173,8 @@ SubShader {
 			UNITY_SETUP_INSTANCE_ID(input);
 			UNITY_TRANSFER_INSTANCE_ID(input,output);
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
+
+			output.screenPosition = ComputeScreenPos(input.position);
 
 			float bold = step(input.texcoord1.y, 0);
 
@@ -182,7 +191,7 @@ SubShader {
 			if (UNITY_MATRIX_P[3][3] == 0) scale = lerp(abs(scale) * (1 - _PerspectiveFilter), scale, abs(dot(UnityObjectToWorldNormal(input.normal.xyz), normalize(WorldSpaceViewDir(vert)))));
 
 			float weight = lerp(_WeightNormal, _WeightBold, bold) / 4.0;
-			//-.6 to 0
+
 			weight = weight + lerp(-.6, 0, input.color.r) * _ScaleRatioA * 0.5;
 
 			float bias =(.5 - weight) + (.5 / scale);
@@ -263,6 +272,12 @@ SubShader {
 
 			faceColor = GetColor(sd, faceColor, outlineColor, outline, softness);
 
+			float2 texCoord = input.screenPosition.xy/input.screenPosition.w;
+            float aspect = _ScreenParams.x/_ScreenParams.y;
+            texCoord.x *= aspect;
+
+			faceColor.a -= random(texCoord+round(_Time.y*12)/12);
+
 		#if BEVEL_ON
 			float3 dxy = float3(0.5 / _TextureWidth, 0.5 / _TextureHeight, 0);
 			float3 n = GetSurfaceNormal(input.atlas, weight, dxy);
@@ -303,9 +318,9 @@ SubShader {
 			faceColor *= m.x * m.y;
 		#endif
 
-		#if UNITY_UI_ALPHACLIP
+		//#if UNITY_UI_ALPHACLIP
 			clip(faceColor.a - 0.001);
-		#endif
+		//#endif
 
   		return faceColor * input.color.a;
 		}
