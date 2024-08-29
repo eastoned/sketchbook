@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: scribb
+  productName: CryForYou
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
@@ -434,6 +434,7 @@ PlayerSettings:
   m_TemplateCustomTags:
     BACKGROUND: 
     OPTIMIZE_FOR_PIXEL_ART: false
+    PRODUCT_DESCRIPTION: 
     SCALE_TO_FIT: false
   mobileMTRendering:
     Android: 1

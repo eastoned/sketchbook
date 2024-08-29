@@ -10,12 +10,17 @@ public class ScreenColliders : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateScreenColliders();
+        UpdateScreenColliders(new Vector2(Screen.width, Screen.height));
     }
 
-    void UpdateScreenColliders()
+    void OnEnable()
     {
-        transform.localScale = new Vector3((float)Screen.width/Screen.height * 4, 4, 1);
+        ScreenDetector.OnScreenSizeChanged += UpdateScreenColliders;
+    }
+
+    void UpdateScreenColliders(Vector2 screenSize)
+    {
+        transform.localScale = new Vector3((float)screenSize.x/screenSize.y * 4, 4, 1);
         ceiling.localScale = transform.localScale;
         floor.localScale = transform.localScale;
         leftWall.position = new Vector3(transform.localScale.x/2f + 2f, 0, 101);

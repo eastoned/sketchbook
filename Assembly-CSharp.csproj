@@ -127,6 +127,7 @@
     <Compile Include="Assets\MidiPlayer\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\MouthPartController.cs" />
     <Compile Include="Assets\Script\ShaderParameterDriver.cs" />
+    <Compile Include="Assets\ScreenSizeDebug.cs" />
     <Compile Include="Assets\Script\BathroomManager.cs" />
     <Compile Include="Assets\Script\breakTile.cs" />
     <Compile Include="Assets\Script\OnSelectedNewFacePartEvent.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Assets\NewFace\Runtime\Events\OnSetKeyFrameData.cs" />
     <Compile Include="Assets\Snap.cs" />
     <Compile Include="Assets\Script\fakeTextInput.cs" />
+    <Compile Include="Assets\ScreenDetector.cs" />
     <Compile Include="Assets\NewFace\Runtime\PartUIController.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnTriggerAudioOneShot.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\FaceFeatureData.cs" />
