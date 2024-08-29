@@ -8,7 +8,6 @@ public class FaceController : MonoBehaviour
     public PartController background;
     public BodyPartController leftEye, rightEye, mouth, nose, head, leftEyebrow, rightEyebrow, bangs, hair, neck, leftEar, rightEar, leftHand, leftArm, rightHand, rightArm;
     public BodyPartController[] partControllers;
-    public SpeechController sc;
     public Transform[] bodyParts;
     public PartData[] bodyData;
 

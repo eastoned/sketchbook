@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 public class NuFaceManager : MonoBehaviour
 {
     public PlayerFaceController pfc;
-    public SpeechController sc;
     public BodyPartController eye, hand;
     public CharacterData[] writeableData;
     public CharacterData[] targetData;
@@ -107,11 +106,11 @@ public class NuFaceManager : MonoBehaviour
             StopCoroutine(reportRoutine);
         }
         Debug.Log("starting new coroutine");
-        reportRoutine = StartCoroutine(GiveReport());
+        //reportRoutine = StartCoroutine(GiveReport());
         //}
     }
     
-    private IEnumerator GreetPlayer()
+    /*private IEnumerator GreetPlayer()
     {
         Debug.Log("greeing rotuine");
         if(playerActionHistory.Exists(x => x.actionType == PlayerActionData.ActionType.BREAKCHANGE)){
@@ -140,7 +139,7 @@ public class NuFaceManager : MonoBehaviour
         //}
         playerActionHistory.Clear();
         //yield return null;
-    }
+    }*/
 
 
     public void Routine(){
@@ -248,7 +247,7 @@ public class NuFaceManager : MonoBehaviour
         writeableData[0].CopyData(pfc.currentChar);
         yield return pfc.Blend(writeableData[0], targetData[0], .1f);
         yield return TransformAnimation(pfc.transform, new Vector3(4, 0, 0), Vector3.zero, Vector3.one, Vector3.one, 2f);
-        yield return sc.SpeakText("Oh!", 0.25f);
+        //yield return sc.SpeakText("Oh!", 0.25f);
     }
 
     IEnumerator BirthRoutine(){
@@ -309,7 +308,7 @@ public class NuFaceManager : MonoBehaviour
     }
 
     IEnumerator WaitForRequest(RequestChange rc){
-        yield return sc.SpeakText(rc.requestMessage, 2f);
+        //yield return sc.SpeakText(rc.requestMessage, 2f);
         rc.SetCache(rc.partToChange.pd);
         rc.SetListenersForCorrectEvent();
         while(!rc.CheckTotalRequestFulfilled()){
@@ -319,7 +318,7 @@ public class NuFaceManager : MonoBehaviour
             }
             yield return new WaitForSeconds(0.5f);
         }
-        yield return sc.SpeakText(rc.successMessage, 2f);
+        //yield return sc.SpeakText(rc.successMessage, 2f);
     }
 
     IEnumerator WaitForMouse(){
@@ -344,7 +343,8 @@ public class NuFaceManager : MonoBehaviour
         yield return null;
     }
 
-    public float GetCharacterDifference(CharacterData gameData, CharacterData targetData){
+    public float GetCharacterDifference(CharacterData gameData, CharacterData targetData)
+    {
         float score = 0;
         
         score += GetPartDifference(gameData.headData, targetData.headData);
@@ -359,7 +359,8 @@ public class NuFaceManager : MonoBehaviour
        return score;
     }
 
-    public float GetDataDifference(PartData[] data1, PartData[] data2){
+    public float GetDataDifference(PartData[] data1, PartData[] data2)
+    {
         float score = 0;
 
         for(int i = 0; i < data1.Length; i++)
@@ -371,12 +372,15 @@ public class NuFaceManager : MonoBehaviour
         return score;
     }
 
-    public float GetFaceDifference(FaceController fc1, FaceController fc2){
+    public float GetFaceDifference(FaceController fc1, FaceController fc2)
+    {
         float score = 0;
 
-        for(int i = 0; i < charStage; i++){
+        for(int i = 0; i < charStage; i++)
+        {
             //skip adding score if duplicate piece
-            if(!fc1.bodyParts[i].GetComponent<BodyPartController>().flippedXAxis){
+            if(!fc1.bodyParts[i].GetComponent<BodyPartController>().flippedXAxis)
+            {
                 score += GetPartDifference(fc1.bodyParts[i].GetComponent<BodyPartController>().pd, fc2.bodyParts[i].GetComponent<BodyPartController>().pd);
             }
         }

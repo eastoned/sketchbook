@@ -1,57 +1,95 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 
 public class AnimateTMPElement : MonoBehaviour
 {
-    [Range(0f, 1f)]
-    public float characterVisibility;
 
-    [Range(1, 100)]
-    public int currentCharacter;
-    public string currentWord;
+    [Range(0f,1f)]
+    [SerializeField]
+    private float textVisible;
+
+    public float textFactor, revealFactor = 20f;
     public TextMeshProUGUI textMesh;
+    public AnimationCurve positionCurve, textRevealCurve;
 
-    [TextArea(4, 10)]
-    public string textOriginal;
-
-    [ContextMenu("pref height print")]
-    public void SetHeightToText()
+    public void InitializeBubble(string text)
     {
-        GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textMesh.renderedHeight);
+        StartCoroutine(AnimateTextBubble(text, 5f));
     }
 
-    public void SetOriginalText(string text){
+    void OnValidate()
+    {
+        UpdateTextVisibility(textVisible);
+    }
+
+    private IEnumerator AnimateTextBubble(string text, float value)
+    {
+        textMesh.text = ".";
+        yield return new WaitForSeconds(1f);
         textMesh.text = text;
+        float journey = 0;
+
+        while(journey < value)
+        {
+            journey += Time.deltaTime;
+            float percent = Mathf.Clamp01(journey/value);
+            //float positionPercent = positionCurve.Evaluate(percent);
+            float textRevealPercent = textRevealCurve.Evaluate(percent);
+            UpdateTextVisibility(textRevealPercent);
+                /*
+                if(speakTime * amountofwords > 2f)
+                {
+                    if(Random.Range(0f, 1f) < .5f)
+                    {
+                        OnTriggerAudioOneShot.Instance.Invoke("Beep");
+                    }else{
+                        OnTriggerAudioOneShot.Instance.Invoke("Beep2");
+                    }
+                    
+                    speakTime = 0f;
+                }
+                */
+            //speakTime += Time.deltaTime;    
+            //transform.position = origin + new Vector3(0, positionPercent * 50f, 0);
+            yield return null;
+        }
+            
+        Destroy(this.gameObject);
+        yield return null;
     }
 
-    public void UpdateTextVisibility(float textToShow){
-
-        textMesh.ForceMeshUpdate();
+    private void UpdateTextVisibility(float textToShow)
+    {
+        textMesh.ForceMeshUpdate();  
         TMP_TextInfo textInfo = textMesh.textInfo;
-        
-        //TMP_MeshInfo[] cachedMeshInfo = textInfo.CopyMeshInfoVertexData();
+
         Color32[][] originalColors = new Color32[textInfo.meshInfo.Length][];
-        for (int i = 0; i < originalColors.Length; i++) {
+
+        for (int i = 0; i < originalColors.Length; i++)
+        {
             Color32[] theColors = textInfo.meshInfo[i].colors32;
             originalColors[i] = new Color32[theColors.Length];
             Array.Copy(theColors, originalColors[i], theColors.Length);
         }
 
-        for(int j = 0; j < textInfo.characterCount; j++){
+        for(int j = 0; j < textInfo.characterCount; j++)
+        {
             TMP_CharacterInfo charInfo = textInfo.characterInfo[j];
-            if(charInfo.isVisible){
+            if(charInfo.isVisible)
+            {
                 Color32[] destColors = textInfo.meshInfo[charInfo.materialReferenceIndex].colors32;
-                Color32 theColor = j < textToShow ? originalColors[charInfo.materialReferenceIndex][charInfo.vertexIndex] : new Color32(0,0,0,0);
+
+                Color32 theColor = Color32.Lerp(new Color32(0,0,0,255), originalColors[charInfo.materialReferenceIndex][charInfo.vertexIndex], Mathf.Clamp01((-j/textInfo.characterCount) + (textToShow * revealFactor) + textFactor));
                 destColors[charInfo.vertexIndex + 0] = theColor;
                 destColors[charInfo.vertexIndex + 1] = theColor;
                 destColors[charInfo.vertexIndex + 2] = theColor;
                 destColors[charInfo.vertexIndex + 3] = theColor;
             }
         }
-
         textMesh.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
         
     }

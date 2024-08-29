@@ -7,10 +7,7 @@ public class MouthPartController : BodyPartController
     public GameObject speechBubble;
     public Transform canvas;
 
-    public AnimationCurve scaleCurve, translateCurve;
-
     public int currentSpeak;
-    public string[] sppeech;
 
     public float upperLip, lowerLip, mouthRadius;
 
@@ -23,53 +20,24 @@ public class MouthPartController : BodyPartController
     void OnEnable()
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
-        OnSendRemarkToSpeech.Instance.AddListener(SpeakEvent);
-        OnBreakPart.Instance.AddListener(BreakEvent);
-        OnTickleEvent.Instance.AddListener(TickleEvent);
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         OnChangedMouthScaleEvent.Instance.RemoveListener(MouthSpeech);
-        OnSendRemarkToSpeech.Instance.RemoveListener(SpeakEvent);
-        OnBreakPart.Instance.RemoveListener(BreakEvent);
-        OnTickleEvent.Instance.RemoveListener(TickleEvent);
     }
 
-    void BreakEvent(PlayerActionData pad){
-        //SpeakEvent("Please be careful.");
-        StartCoroutine(BreakRoutine(pad.partName));
-    }
-
-    void TickleEvent(){
-        StartCoroutine(TickleRoutine());
-    }
-
-    void UpdateCanSpeak(float value){
+    void UpdateCanSpeak(float value)
+    {
         Debug.Log("updating speaking status");
         canSpeak = value > 0.05f;
     }
 
-    private IEnumerator TickleRoutine(){
-        yield return SpeakText("hehe that tickles!!", 1f);
-        yield return SpeakText("stopppp!!", 1f);
-    }
-
-    private IEnumerator BreakRoutine(string name){
-        yield return SpeakText("YEEEOOOOW!", .5f);
-        yield return new WaitForSeconds(1.6f);
-        yield return SpeakText("Alright... well there goes my " + name + "...", 2f);
-        yield return new WaitForSeconds(1f);
-        yield return SpeakText("No no no don't worry about it! I'm sure you didn't mean it.", 2f);
-        yield return SpeakText("But do you mind calling my primary care doc?", 2f);
-        yield return SpeakText("Number's on the fridge.", 1f);
-        yield return new WaitForSeconds(1f);
-        //yield return SpeakText(".", 2f);
-    }
-
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
     {
+        yield return null;
         if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
-            yield return SpeakText("You broke my " + pad.partName + ".", 2f);
+            //yield return SpeakText("You broke my " + pad.partName + ".", 2f);
         }
         else if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f)
         {
@@ -107,13 +75,14 @@ public class MouthPartController : BodyPartController
                 horizontalChange = "too far apart";
             }
             totalChange += horizontalChange;
-            yield return SpeakText("You changed my " + pad.partName + ".", Random.Range(1.5f, 2.5f));
-            yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", totalChange.Length/8f);
+            //yield return SpeakText("You changed my " + pad.partName + ".", Random.Range(1.5f, 2.5f));
+            //yield return SpeakText("You must have thought my " + pad.partName + totalChange + ".", totalChange.Length/8f);
         }
 
     }
 
-    void PartMention(Transform part){
+    void PartMention(Transform part)
+    {
         if(!NuFaceManager.canShareFeedback){
         //if(SpeakingRoutine != null){
             //StopCoroutine(SpeakingRoutine);
@@ -142,89 +111,25 @@ public class MouthPartController : BodyPartController
     }
     
     [ContextMenu("Test")]
-    public void test()
+    public void Test()
     {
-        SpeakEvent("Hello World.");
+        StartCoroutine(SpeakRoutine());
     }
 
-    public void SpeakEvent(string text){
-        int spaceCounter = 0;
-            for(int i = 0; i < text.Length; i++){
-                
-                if(char.IsWhiteSpace(text[i])){
-                    spaceCounter++;
-                    
-                }
-            }
-        spaceCounter += 1;
-        timeSinceLastRemark = Random.Range(0f, 2f);
-        StartCoroutine(SpeakText(text, spaceCounter/2f));
-    }
-
-    public IEnumerator SpeakText(string text, float animLength)
+    public IEnumerator SpeakRoutine()
     {
-        if(speakingRoutine != null)
-        {
-            StopCoroutine(speakingRoutine);
-        }
-        speakingRoutine = Speak(text, animLength);
-        return speakingRoutine;
+        Speak("Hello! My name is Easton and I'm so happy to be here!");
+        yield return null;
     }
 
-    private IEnumerator Speak(string text, float value)
+    public void Speak(string text)
     {
         if(canSpeak)
         {
-            //Debug.Log("mouth is big enought");
-            GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(transform.position) + new Vector3(0, 300, 0), Quaternion.identity, canvas);
-            //bubble.transform.localScale = Vector3.zero;
-            
-            int spaceCounter = 0;
-            for(int i = 0; i < text.Length; i++){
-                
-                if(char.IsWhiteSpace(text[i])){
-                    spaceCounter++;
-                    
-                }
-            }
+            GameObject bubble = Instantiate(speechBubble, Camera.main.WorldToScreenPoint(transform.position) + new Vector3(0, 100, 0), Quaternion.identity, canvas);
 
-            spaceCounter *= 2;
-            spaceCounter += 1;
-            
-            float randomOffset = Random.Range(150, 350);
-            float journey = 0;
-            int amountofwords = text.Length;
-            AnimateTMPElement textAnimator = bubble.GetComponentInChildren<AnimateTMPElement>();
-            textAnimator.SetOriginalText(text);
-            float speakTime = 0;
-            while(journey < value){
-                journey += Time.deltaTime;
-                float percent = Mathf.Clamp01(journey/value);
-                float scalePercent = scaleCurve.Evaluate(percent);
-                float translatePercent = translateCurve.Evaluate(percent);
-                if(speakTime * amountofwords > 2f){
-                    if(Random.Range(0f, 1f) < .5f){
-                        OnTriggerAudioOneShot.Instance.Invoke("Beep");
-                    }else{
-                        OnTriggerAudioOneShot.Instance.Invoke("Beep2");
-                    }
-                    
-                    speakTime = 0f;
-                }
-                speakTime += Time.deltaTime;
-                
-                
-                textAnimator.UpdateTextVisibility(translatePercent * text.Length);
-                
-                //bubble.transform.position = transform.position + new Vector3(0, 1f, 0);
-                //bubble.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f), scalePercent);
-                yield return null;
-            }
-            
-            Destroy(bubble);
-        }else{
-           // Debug.Log("mouth is too small");
+            AnimateTMPElement textAnimator = bubble.GetComponent<AnimateTMPElement>();
+            textAnimator.InitializeBubble(text);
         }
-        
     }
 }
