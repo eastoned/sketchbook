@@ -254,6 +254,7 @@ MonoBehaviour:
   scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
   rotateControllerPos: {x: 0.5, y: 0, z: 0}
   limb: {fileID: 0}
+  debugSpringForce: 0
   speechBubble: {fileID: 5391851005333956622, guid: eb1498493e3e0e140b46cdaac96a2c65,
     type: 3}
   canvas: {fileID: 0}
@@ -262,6 +263,7 @@ MonoBehaviour:
   lowerLip: 0
   mouthRadius: 0
   canSpeak: 1
+  textSpeed: 20
 --- !u!231 &1610321512465297433
 SpringJoint2D:
   m_ObjectHideFlags: 0

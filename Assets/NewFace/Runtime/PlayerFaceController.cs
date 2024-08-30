@@ -72,7 +72,6 @@ public class PlayerFaceController : FaceController
 
     private void SetTransformControllers(BodyPartController selectedBPC)
     {
-        customizeController.UpdateActivePart(activePC);
 
         if(selectedBPC == null || selectedBPC.detached)
         {
@@ -83,21 +82,27 @@ public class PlayerFaceController : FaceController
 
         if(activeBPC != selectedBPC)
         {
-            if(selectedBPC.rotatable)
+            activeBPC = selectedBPC;
+
+            if(activeBPC.rotatable)
             {
-                rotationController.UpdateActivePart(selectedBPC);
-            }else{
+                rotationController.UpdateActivePart(activeBPC);
+            }
+            else
+            {
                 rotationController.UpdateActivePart(null);
             }
                 
-            if(selectedBPC.scalable)
+            if(activeBPC.scalable)
             {
-                scaleController.UpdateActivePart(selectedBPC);
-            }else{
+                scaleController.UpdateActivePart(activeBPC);
+            }
+            else
+            {
                 scaleController.UpdateActivePart(null);
             }
-        
-            activeBPC = selectedBPC;
+
+            customizeController.UpdateActivePart(activeBPC);
         }
     }
 
@@ -169,6 +174,14 @@ public class PlayerFaceController : FaceController
         else
         {
             translatingBPC.transform.position = new Vector3(pos.x, pos.y, translatingBPC.transform.position.z);
+        }
+
+        if(translatingBPC.sj2D == null)
+            return;
+
+        if(translatingBPC.sj2D.reactionForce.magnitude > translatingBPC.sj2D.breakForce/3f)
+        {
+            translatingBPC.ShakePiece(translatingBPC.sj2D.reactionForce.magnitude/500f, 0.1f);
         }
 
         if(!canRandomHeadPos)

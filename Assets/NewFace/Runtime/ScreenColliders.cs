@@ -16,6 +16,11 @@ public class ScreenColliders : MonoBehaviour
         ScreenDetector.OnScreenSizeChanged += UpdateScreenColliders;
     }
 
+    void OnDisable()
+    {
+        ScreenDetector.OnScreenSizeChanged -= UpdateScreenColliders;
+    }
+
     void UpdateScreenColliders(Vector2 screenSize)
     {
         if(transform != null)

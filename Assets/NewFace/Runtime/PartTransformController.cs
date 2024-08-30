@@ -38,7 +38,6 @@ public class PartTransformController : MonoBehaviour
         if (m_MyEvent == null)
             m_MyEvent = new UnityEvent();
 
-        StartCoroutine(UpdateControllerPositionRoutine());
     }
 
     public void UpdateActivePart(PartController partToEdit)
@@ -46,13 +45,17 @@ public class PartTransformController : MonoBehaviour
 
         bodyPartInEdit = null;
         partInEdit = null;
+
         if(UpdateBodyPartControllersRoutine != null)
         {
             StopCoroutine(UpdateBodyPartControllersRoutine);
         }
 
         if(partToEdit == null)
+        {
+            Disappear();
             return;
+        }
 
         BodyPartController bpc = partToEdit.GetComponent<BodyPartController>();
 
@@ -121,25 +124,25 @@ public class PartTransformController : MonoBehaviour
 
     public void OnHandDrag(Vector3 pos)
     {
-
+    
         if(bodyPartInEdit == null)
             return;
 
         switch(controls)
         {
             case TransformController.TRANSLATE:
-            transform.position = new Vector3(pos.x, bodyPartInEdit.lockedYaxis ? transform.position.y : pos.y, transform.position.z);
-            Vector3 displacement = transform.position + (bodyPartInEdit.lockedYaxis ? Vector3.zero : offset);
-            OnTranslatePartController.Instance.Invoke(bodyPartInEdit, displacement, true);
-            break;
+                transform.position = new Vector3(pos.x, bodyPartInEdit.lockedYaxis ? transform.position.y : pos.y, transform.position.z);
+                Vector3 displacement = transform.position + (bodyPartInEdit.lockedYaxis ? Vector3.zero : offset);
+                OnTranslatePartController.Instance.Invoke(bodyPartInEdit, displacement, true);
+                break;
             case TransformController.ROTATION:
-            Vector3 supposePos = new Vector3(pos.x, pos.y, transform.position.z);
-            OnRotatePartController.Instance.Invoke(supposePos);
-            break;
+                Vector3 supposePos = new Vector3(pos.x, pos.y, transform.position.z);
+                OnRotatePartController.Instance.Invoke(supposePos);
+                break;
             case TransformController.SCALE:
                 Vector3 supposeSclPos = new Vector3(pos.x, pos.y, transform.position.z);
                 OnScalePartController.Instance.Invoke(bodyPartInEdit, supposeSclPos);
-            break;
+                break;
         }
     }
 
@@ -159,29 +162,31 @@ public class PartTransformController : MonoBehaviour
         transform.localPosition = new Vector3(100, 100, 100);
     }
 
-
     public void UpdateControllerPositions()
     {
-        Disappear();
 
         if(partInEdit == null && bodyPartInEdit == null)
+        {
+            Disappear();
             return;
+        }
 
         if(partInEdit != null)
         {
-            switch(controls)
+            if(controls != TransformController.CUSTOMIZE)
             {
-                case TransformController.CUSTOMIZE:
-                    transform.position = partInEdit.transform.TransformPoint(new Vector3(-.45f, 0, 0)); 
-                    transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-                    break;
+                Disappear();
+                return;
             }
-            return;
+
+            transform.position = partInEdit.transform.TransformPoint(new Vector3(-.45f, 0, 0)); 
+            transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
         }
         else if(bodyPartInEdit != null)
         {
             UpdateBodyPartControllerPositions();
         }
+
     }
 
     public void UpdateBodyPartControllerPositions()
@@ -198,7 +203,8 @@ public class PartTransformController : MonoBehaviour
                     transform.position = bodyPartInEdit.transform.TransformPoint(bodyPartInEdit.rotateControllerPos);
                 }
                 transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-            break;
+                break;
+
             case TransformController.SCALE:
                 if(bodyPartInEdit.customScaleAnchor != null)
                 {
@@ -209,7 +215,8 @@ public class PartTransformController : MonoBehaviour
                     transform.position = bodyPartInEdit.transform.TransformPoint(bodyPartInEdit.scaleControllerPos); 
                 }
                 transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-            break;
+                break;
+
             case TransformController.CUSTOMIZE:
                 if(bodyPartInEdit.customScaleAnchor != null)
                 {
@@ -220,7 +227,7 @@ public class PartTransformController : MonoBehaviour
                     transform.position = bodyPartInEdit.transform.TransformPoint(new Vector3(-.45f, 0, 0)); 
                 }
                 transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
-            break;
+                break;
         }
     }
 }

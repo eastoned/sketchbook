@@ -193,36 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 27827940190258789}
-  shaderColors:
-  - colorName: _Color1
-    colorValue: {r: 0.9488809, g: 0.830678, b: 0.9111667, a: 1}
-  - colorName: _Color2
-    colorValue: {r: 0.23435546, g: 0.40737027, b: 0.33395264, a: 1}
-  - colorName: _Color3
-    colorValue: {r: 0.0480309, g: 0.1552837, b: 0.24381077, a: 1}
-  - colorName: _Color4
-    colorValue: {r: 0.05596351, g: 0.045760117, b: 0.061331153, a: 1}
-  pd: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
-  translatable: 1
-  rotatable: 1
-  scalable: 1
-  lockedYaxis: 0
-  colid: {fileID: 7724144674178102149}
-  rb2D: {fileID: 1605894557987287053}
-  sj2D: {fileID: 2792149591332295536}
-  flippedXAxis: 0
-  detached: 0
-  mirroredPart: {fileID: 0}
-  cachePosition: {x: 0, y: 0, z: 0}
-  cacheScale: {x: 0, y: 0, z: 0}
-  cacheAngle: 0
-  shaderPropertyCache: []
-  connectablePart: {fileID: 0}
-  affectedChildren: []
-  detailChildren: []
-  customScaleAnchor: {fileID: 0}
-  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
-  rotateControllerPos: {x: 0.5, y: 0, z: 0}
   shaderProperties:
   - propertyName: _PupilRadius
     propertyValue: 0.35930943
@@ -274,7 +244,72 @@ MonoBehaviour:
     wholeNumberInterval: 0
     valueInterval: 0
     propertyFeature: 0
+  shaderColors:
+  - colorName: _Color1
+    colorValue: {r: 0.9488809, g: 0.830678, b: 0.9111667, a: 1}
+  - colorName: _Color2
+    colorValue: {r: 0.23435546, g: 0.40737027, b: 0.33395264, a: 1}
+  - colorName: _Color3
+    colorValue: {r: 0.0480309, g: 0.1552837, b: 0.24381077, a: 1}
+  - colorName: _Color4
+    colorValue: {r: 0.05596351, g: 0.045760117, b: 0.061331153, a: 1}
+  highlightedMaterial: {fileID: 0}
+  currentMousedState: 0
+  pd: {fileID: 11400000, guid: 4d57ad5dd069c534c9a69101982c4e5b, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
+  lockedYaxis: 0
+  colid: {fileID: 7724144674178102149}
+  rb2D: {fileID: 1605894557987287053}
+  sj2D: {fileID: 2792149591332295536}
+  flippedXAxis: 0
+  detached: 0
+  mirroredPart: {fileID: 0}
+  cachePosition: {x: 0, y: 0, z: 0}
+  cacheScale: {x: 0, y: 0, z: 0}
+  cacheAngle: 0
+  shaderPropertyCache: []
+  connectablePart: {fileID: 0}
+  customScaleAnchor: {fileID: 0}
+  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
+  rotateControllerPos: {x: 0.5, y: 0, z: 0}
+  limb: {fileID: 0}
+  debugSpringForce: 0
   eyeLookAtPos: {x: 0, y: 0}
   blinkOverride: 0
   eyeTarget: 0
   attentionTarget: {fileID: 0}
+  blinkAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -5.2434726
+      outSlope: -5.2434726
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.048742134
+    - serializedVersion: 3
+      time: 0.4
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

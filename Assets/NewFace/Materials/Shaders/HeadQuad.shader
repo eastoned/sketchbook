@@ -65,7 +65,7 @@ Shader "Unlit/HeadQuad"
                 float2 texCoord = i.screenPosition.xy/i.screenPosition.w;
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
-                DashedObject(texCoord);
+                //DashedObject(texCoord);
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 float4 col = tex2D(_MainTex, texCoord);
                 clip(value - 0.5);

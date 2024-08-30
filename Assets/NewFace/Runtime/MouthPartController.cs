@@ -16,6 +16,8 @@ public class MouthPartController : BodyPartController
 
     public static float timeSinceLastRemark;
 
+    public float textSpeed = 1f;
+
     void OnEnable()
 	{
         OnChangedMouthScaleEvent.Instance.AddListener(MouthSpeech);
@@ -32,15 +34,22 @@ public class MouthPartController : BodyPartController
         canSpeak = value > 0.05f;
     }
 
+    public override void OnMouseDown()
+    {
+        base.OnMouseDown();
+
+        Test();
+    }
+
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
     {
         yield return null;
-        if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE){
+        if(pad.actionType == CharacterActionData.ActionType.BREAKCHANGE)
+        {
             //yield return SpeakText("You broke my " + pad.partName + ".", 2f);
         }
         else if(Mathf.Abs(pad.positionChange.y) > 0.05f || Mathf.Abs(pad.positionChange.x) > 0.05f)
         {
-            Debug.Log("speak about my parts");
             string verticalChange = "";
             string horizontalChange = "";
             string totalChange = "";
@@ -82,7 +91,8 @@ public class MouthPartController : BodyPartController
 
     void PartMention(Transform part)
     {
-        if(!NuFaceManager.canShareFeedback){
+        if(!NuFaceManager.canShareFeedback)
+        {
         //if(SpeakingRoutine != null){
             //StopCoroutine(SpeakingRoutine);
         //}
@@ -112,13 +122,13 @@ public class MouthPartController : BodyPartController
     [ContextMenu("Test")]
     public void Test()
     {
-        StartCoroutine(SpeakRoutine());
-    }
-
-    public IEnumerator SpeakRoutine()
-    {
-        Speak("Hello! My name is Easton and I'm so happy to be here!");
-        yield return null;
+        if(Random.Range(0f, 1f) < 0.5f)
+        {
+            Speak("I'm so happy!");
+        }else
+        {
+           Speak("Hello!!"); 
+        }
     }
 
     public void Speak(string text)
@@ -128,7 +138,47 @@ public class MouthPartController : BodyPartController
             GameObject bubble = Instantiate(speechBubble, transform.position, Quaternion.identity, canvas);
             AnimateTMPElement textAnimator = bubble.GetComponent<AnimateTMPElement>();
             textAnimator.sj2D.connectedBody = rb2D;
-            textAnimator.InitializeBubble(text);
+            textAnimator.sj2D.connectedAnchor += new Vector2(Random.Range(-1f, 1f) ,0);
+            textAnimator.InitializeBubble(text, textSpeed);
+            StartCoroutine(AnimateMouthToFollowText(text, textSpeed));
         }
+    }
+
+    private IEnumerator AnimateMouthToFollowText(string text, float speed)
+    {
+        float mouthRadius = GetSingleShaderFloat("_MouthRadius");
+        float mouthOpen = GetSingleShaderFloat("_MouthOpen");
+        float teethTop = GetSingleShaderFloat("_TeethTop");
+        float teethBottom = GetSingleShaderFloat("_TeethBottom");
+        float tongueRadius = GetSingleShaderFloat("_TongueRadius");
+        float tongueScale = GetSingleShaderFloat("_TongueScale");
+        float tongueHeight = GetSingleShaderFloat("_TongueHeight");
+
+        float count = 0f;
+        while (count < text.Length)
+        {
+            UpdateSingleShaderFloatUnsafe("_MouthRadius", Mathf.PerlinNoise(Time.time, count + mouthRadius));
+            UpdateSingleShaderFloatUnsafe("_MouthOpen", Mathf.PerlinNoise(Time.time * 2f, count + mouthOpen));
+            UpdateSingleShaderFloatUnsafe("_TeethTop", Mathf.PerlinNoise(Time.time, count + teethTop));
+            UpdateSingleShaderFloatUnsafe("_TeethBottom", Mathf.PerlinNoise(Time.time, count + teethBottom));
+            UpdateSingleShaderFloatUnsafe("_TongueRadius", Mathf.PerlinNoise(Time.time, count + tongueRadius));
+            UpdateSingleShaderFloatUnsafe("_TongueScale", Mathf.PerlinNoise(Time.time, count + tongueScale));
+            UpdateSingleShaderFloatUnsafe("_TongueHeight", Mathf.PerlinNoise(Time.time, count + tongueHeight));
+            UpdateRenderPropBlock();
+
+            count += Time.deltaTime * speed;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        UpdateSingleShaderFloatUnsafe("_MouthRadius", mouthRadius);
+        UpdateSingleShaderFloatUnsafe("_MouthOpen", mouthOpen);
+        UpdateSingleShaderFloatUnsafe("_TeethTop", teethTop);
+        UpdateSingleShaderFloatUnsafe("_TeethBottom", teethBottom);
+        UpdateSingleShaderFloatUnsafe("_TongueRadius", tongueRadius);
+        UpdateSingleShaderFloatUnsafe("_TongueScale", tongueScale);
+        UpdateSingleShaderFloatUnsafe("_TongueHeight", tongueHeight);
+        UpdateRenderPropBlock();
+
+        yield return null;
     }
 }

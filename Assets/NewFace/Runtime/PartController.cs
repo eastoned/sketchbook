@@ -65,6 +65,9 @@ public class PartController : MonoBehaviour
 
     public void UpdateRenderPropBlock()
     {
+        if(rend == null)
+            return;
+
         rend.SetPropertyBlock(propBlock);
         SetColliderSize();
     }
@@ -243,16 +246,22 @@ public class PartController : MonoBehaviour
             case MousedState.NONE:
             propBlock.SetFloat("_Dashed", 0f);
             UpdateRenderPropBlock();
+            if(rend == null)
+                return;
             rend.sharedMaterials = new Material[1]{rend.sharedMaterials[0]};
             break;
             case MousedState.HOVERED:
             propBlock.SetFloat("_Dashed", 0.5f);
             UpdateRenderPropBlock();
+            if(rend == null)
+                return;
             rend.sharedMaterials = new Material[2]{rend.sharedMaterials[0], highlightedMaterial};
             break;
             case MousedState.SELECTED:
             propBlock.SetFloat("_Dashed", 0f);
             UpdateRenderPropBlock();
+            if(rend == null)
+                return;
             rend.sharedMaterials = new Material[2]{rend.sharedMaterials[0], highlightedMaterial};
             break;
         }

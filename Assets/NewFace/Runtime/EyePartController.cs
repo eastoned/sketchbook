@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EyePartController : BodyPartController
@@ -7,7 +8,9 @@ public class EyePartController : BodyPartController
 
     [Range(0f, 1f)]
     public float blinkOverride;
-    private float eyelidTop, eyelidBottom;
+
+    private Coroutine eyeAnimation;
+
     public enum EyeTarget
     {
         MOUSE,
@@ -17,12 +20,48 @@ public class EyePartController : BodyPartController
 
     public EyeTarget eyeTarget;
     public Transform attentionTarget;
+    public AnimationCurve blinkAnimation;
+
+    public override void OnMouseDown()
+    {
+        base.OnMouseDown();
+        
+        if(eyeAnimation != null)
+        {
+            StopCoroutine(eyeAnimation);
+        }
+
+        eyeAnimation = StartCoroutine(BlinkAnimation());
+    }
+
+    private IEnumerator BlinkAnimation()
+    {
+        float journey = 0;
+        float eyelidTopOpen = GetSingleShaderFloat("_EyelidTopOpen");
+        float eyelidBottomOpen = GetSingleShaderFloat("_EyelidBottomOpen");
+
+        while(journey < 0.35f)
+        {
+            journey += Time.deltaTime;
+            float percent = Mathf.Clamp01(journey/0.35f);
+            float blinkPercent = blinkAnimation.Evaluate(percent);
+            UpdateSingleShaderFloatUnsafe("_EyelidTopOpen", blinkPercent * eyelidTopOpen);
+            UpdateSingleShaderFloatUnsafe("_EyelidBottomOpen", blinkPercent * eyelidBottomOpen);
+            UpdateRenderPropBlock();
+            yield return null;
+        }
+
+        UpdateSingleShaderFloatUnsafe("_EyelidTopOpen", eyelidTopOpen);
+        UpdateSingleShaderFloatUnsafe("_EyelidBottomOpen", eyelidBottomOpen);
+        UpdateRenderPropBlock();
+        yield return null;
+    }
 
     void Update()
     {
         if(debugSpringForce)
         {
-            Debug.Log(sj2D.reactionForce);
+            Debug.Log(rb2D.velocity);
         }
         
         float eyeTargetPosX = 0f;

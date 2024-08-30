@@ -30,6 +30,7 @@ public class BodyPartController : PartController
     Vector3 positionCache, scaleCache;
     float angleCache;
     Coroutine shakeRotate;
+    public BoxCollider2D newPiece;
 
     public PartController connectablePart;
 
@@ -228,6 +229,12 @@ public class BodyPartController : PartController
             sj2D.connectedAnchor = new Vector2(limb.transform.position.x, sj2D.connectedAnchor.y);
         }
         
+        //if(newPiece.OverlapPoint(transform.position))
+        //{
+        //    RandomizeData();
+        //    transform.position = new Vector3(0, 0, transform.position.z);
+        //}
+        
     }
 
     public void UpdateScale()
@@ -318,7 +325,8 @@ public class BodyPartController : PartController
 
     public void ShakePiece(float strength, float time)
     {
-        if(shakeRotate != null){
+        if(shakeRotate != null)
+        {
             StopCoroutine(shakeRotate);
         }
         shakeRotate = StartCoroutine(ShakeRotationRoutineTimed(strength, time));
@@ -343,9 +351,14 @@ public class BodyPartController : PartController
     public IEnumerator ShakeRotationRoutineTimed(float strength, float length)
     {
         float time = length;
-        while(time > 0){
+        cacheAngle = transform.localEulerAngles.z;
+
+        while(time > 0)
+        {
             time -= Time.deltaTime;
-            if(flippedXAxis){
+
+            if(flippedXAxis)
+            {
                 transform.localRotation = Quaternion.Euler(0, 0, -cacheAngle + Random.Range(-strength, strength));
             }else{
                 transform.localRotation = Quaternion.Euler(0, 0, cacheAngle + Random.Range(-strength, strength));

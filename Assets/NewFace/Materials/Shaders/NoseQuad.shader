@@ -74,7 +74,7 @@ Shader "Unlit/NoseQuad"
                 float aspect = _ScreenParams.x/_ScreenParams.y;
                 texCoord.x *= aspect;
 
-                DashedObject(texCoord);
+                //DashedObject(texCoord);
 
                 texCoord = TRANSFORM_TEX(texCoord, _MainTex);
                 float4 col = tex2D(_MainTex, texCoord);

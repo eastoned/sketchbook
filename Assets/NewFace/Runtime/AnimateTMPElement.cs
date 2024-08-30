@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using FMODUnity;
 using TMPro;
 using UnityEngine;
 
@@ -18,21 +16,21 @@ public class AnimateTMPElement : MonoBehaviour
     public Rigidbody2D rb2D;
     public SpringJoint2D sj2D;
 
-    public void InitializeBubble(string text)
+    public void InitializeBubble(string text, float speed)
     {
-        StartCoroutine(AnimateTextBubble(text, 5f));
+        StartCoroutine(AnimateTextBubble(text, speed));
     }
 
-    private IEnumerator AnimateTextBubble(string text, float value)
+    private IEnumerator AnimateTextBubble(string text, float speed)
     {
         UpdateTextVisibility(0f);
         textMesh.text = text;
         float journey = 0;
 
-        while(journey < value)
+        while(journey < text.Length)
         {
-            journey += Time.deltaTime;
-            float percent = Mathf.Clamp01(journey/value);
+            journey += Time.deltaTime * speed;
+            float percent = Mathf.Clamp01(journey/text.Length);
             //float positionPercent = positionCurve.Evaluate(percent);
             float textRevealPercent = textRevealCurve.Evaluate(percent);
             UpdateTextVisibility(textRevealPercent);
@@ -51,16 +49,16 @@ public class AnimateTMPElement : MonoBehaviour
                 */
             //speakTime += Time.deltaTime;    
             //transform.position = origin + new Vector3(0, positionPercent * 50f, 0);
-            yield return null;
+            yield return new WaitForSeconds(.01f);
         }
 
         float journey2 = 0;
         while(journey2 < 2f)
         {
-            journey2 += Time.deltaTime;
+            journey2 += Time.deltaTime * speed;
             float percent = Mathf.Clamp01(journey2/2f);
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, percent);
-            yield return null;
+            yield return new WaitForSeconds(.01f);
         }
             
         Destroy(this.gameObject);
