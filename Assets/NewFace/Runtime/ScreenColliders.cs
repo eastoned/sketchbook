@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScreenColliders : MonoBehaviour
@@ -20,10 +18,13 @@ public class ScreenColliders : MonoBehaviour
 
     void UpdateScreenColliders(Vector2 screenSize)
     {
-        transform.localScale = new Vector3((float)screenSize.x/screenSize.y * 4, 4, 1);
-        ceiling.localScale = transform.localScale;
-        floor.localScale = transform.localScale;
-        leftWall.position = new Vector3(transform.localScale.x/2f + 2f, 0, 101);
-        rightWall.position = new Vector3(-leftWall.position.x, 0, 101);
+        if(transform != null)
+        {
+            transform.localScale = new Vector3((float)screenSize.x/screenSize.y * 4, 4, 1);
+            ceiling.localScale = transform.localScale;
+            floor.localScale = transform.localScale;
+            leftWall.position = new Vector3(transform.localScale.x/2f + 6f, 0, 101);
+            rightWall.position = new Vector3(-leftWall.position.x, 0, 101);
+        }
     }
 }

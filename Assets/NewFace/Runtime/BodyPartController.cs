@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// Controls the state of each face part between physics-based or face-based.
@@ -43,6 +42,8 @@ public class BodyPartController : PartController
 
     public BodyPartController limb;
 
+    public bool debugSpringForce;
+
     private void Start()
     {
         transform.name = transform.name + Random.Range(0, 20);
@@ -52,11 +53,15 @@ public class BodyPartController : PartController
     {
         brokenJoint.gameObject.layer = 13;
         rb2D.gravityScale = 1;
-        rb2D.drag = 0f;
-        rb2D.angularDrag = 0f;
+        if(!lockedYaxis)
+        {
+            rb2D.drag = 0f;
+            rb2D.angularDrag = 0f;
+        }
+        
         detached = true;
-        rb2D.Sleep();
-        rb2D.WakeUp();
+
+        OnCurrentJointBreak.Instance.Invoke();
 
         if(limb != null)
         {
@@ -138,7 +143,6 @@ public class BodyPartController : PartController
 
     void OnMouseUp()
     {
-
         if(CustomUtils.IsPointerOverUIObject())
             return;
 
@@ -147,6 +151,8 @@ public class BodyPartController : PartController
         currentPAD.timeToChange = Time.time - timeCache;
         currentPAD.positionChange = transform.position - positionCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
+        Debug.Log("adding force random");
+        rb2D.AddForce(Random.insideUnitCircle * 1000f);
     }
 
     public void PartUnclicked()
@@ -160,8 +166,6 @@ public class BodyPartController : PartController
 
     public void ReleasePart()
     {
-        rb2D.Sleep();
-        rb2D.WakeUp();
         if(sj2D != null)
             rb2D.bodyType = RigidbodyType2D.Dynamic;
 
@@ -181,6 +185,7 @@ public class BodyPartController : PartController
                         sj2D.connectedAnchor = connectablePart.transform.InverseTransformPoint(transform.position);
                     }
                     
+                    
                     sj2D.connectedAnchor = new Vector2(Mathf.Round(sj2D.connectedAnchor.x*10f)/10f, Mathf.Round(sj2D.connectedAnchor.y*10f)/10f);
                     UpdateAttachmentStatus(false);
 
@@ -199,8 +204,6 @@ public class BodyPartController : PartController
                         rb2D.bodyType = RigidbodyType2D.Dynamic;   
                 }
             }
-            rb2D.Sleep();
-            rb2D.WakeUp();
         }
         //ccc.DeleteCharacterHead(this.gameObject);
     }
@@ -370,6 +373,8 @@ public class BodyPartController : PartController
     public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
+
+        OnCurrentJointRepair.Instance.Invoke(this);
 
         if(detached)
         {

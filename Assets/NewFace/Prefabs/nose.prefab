@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4204252935459569710}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.018, y: -0.592, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -96,30 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4204252935459569710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80801891b9d34944aa36410990c38a5e, type: 3}
+  m_Script: {fileID: 11500000, guid: a6aae768757892b4c9ff565bc195659a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 156272185363519668}
-  pd: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
-  translatable: 1
-  rotatable: 1
-  scalable: 1
-  colid: {fileID: 354741330952989453}
-  rb2D: {fileID: 5083392893414180398}
-  sj2D: {fileID: 0}
-  flippedXAxis: 0
-  detached: 0
-  mirroredPart: {fileID: 0}
-  cachePosition: {x: 0, y: -0.07850218, z: -0.05}
-  cacheScale: {x: 0, y: 0, z: 0}
-  cacheAngle: 0
-  shaderPropertyCache: []
-  connectablePart: {fileID: 0}
-  affectedChildren: []
-  detailChildren: []
-  customScaleAnchor: {fileID: 0}
-  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
-  rotateControllerPos: {x: 0.5, y: 0, z: 0}
   shaderProperties:
   - propertyName: _NoseBaseWidth
     propertyValue: 0.6390532
@@ -171,7 +151,28 @@ MonoBehaviour:
     colorValue: {r: 0.0042200815, g: 0.0037586866, b: 0.0057195425, a: 1}
   - colorName: _Color2
     colorValue: {r: 0.46298486, g: 0.42487705, b: 0.4598513, a: 1}
-  ffv: {fileID: 0}
+  highlightedMaterial: {fileID: 2100000, guid: 21af97b1225b856489f3064095fe6f88, type: 2}
+  currentMousedState: 0
+  pd: {fileID: 11400000, guid: b23f2df0c3d541d4f9edca75a960a324, type: 2}
+  translatable: 1
+  rotatable: 1
+  scalable: 1
+  lockedYaxis: 0
+  colid: {fileID: 354741330952989453}
+  rb2D: {fileID: 5083392893414180398}
+  sj2D: {fileID: 7487031430548971124}
+  flippedXAxis: 0
+  detached: 0
+  mirroredPart: {fileID: 0}
+  cachePosition: {x: 0, y: -0.07850218, z: -0.05}
+  cacheScale: {x: 0, y: 0, z: 0}
+  cacheAngle: 0
+  shaderPropertyCache: []
+  connectablePart: {fileID: 0}
+  customScaleAnchor: {fileID: 0}
+  scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
+  rotateControllerPos: {x: 0.5, y: 0, z: 0}
+  limb: {fileID: 0}
 --- !u!61 &354741330952989453
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -230,8 +231,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -255,9 +256,9 @@ SpringJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
+  m_BreakForce: 4000
   m_BreakTorque: Infinity
-  m_BreakAction: 3
+  m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}

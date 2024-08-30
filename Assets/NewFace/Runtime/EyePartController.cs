@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EyePartController : BodyPartController
@@ -22,6 +20,10 @@ public class EyePartController : BodyPartController
 
     void Update()
     {
+        if(debugSpringForce)
+        {
+            Debug.Log(sj2D.reactionForce);
+        }
         
         float eyeTargetPosX = 0f;
         float eyeTargetPosY = 0f;

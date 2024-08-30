@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PartTransformController : MonoBehaviour
 {
@@ -95,12 +93,13 @@ public class PartTransformController : MonoBehaviour
             case TransformController.TRANSLATE:
                 transform.position = new Vector3(pos.x, partInEdit.lockedYaxis ? transform.position.y : pos.y, transform.position.z);
                 
-                if(partInEdit.customScaleAnchor != null){
+                if(partInEdit.customScaleAnchor != null)
+                {
                     //offset += transform.localPosition;
                 }
                 
                 Vector3 displacement = transform.position + (partInEdit.lockedYaxis ? Vector3.zero : offset);
-
+                
                 OnTranslatePartController.Instance.Invoke(partInEdit, displacement, true);
                 
             break;

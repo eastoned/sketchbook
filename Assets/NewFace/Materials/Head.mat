@@ -32,6 +32,7 @@ Material:
     - _ChinLength: 0.5
     - _ChinScale: 1
     - _ChinWidth: 0.4
+    - _Dashed: 0
     - _ForeheadLength: 0.5
     - _ForeheadScale: 1
     - _ForeheadWidth: 0.4

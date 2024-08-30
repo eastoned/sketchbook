@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7853593238621642410}
   - component: {fileID: 9202179866141675902}
   - component: {fileID: 4671989882026999349}
+  - component: {fileID: 5992411915621809838}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -98,11 +99,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 7853593238621642410}
+  shaderProperties: []
   shaderColors:
   - colorName: _Color1
     colorValue: {r: 0.05490196, g: 0.09803922, b: 0.2627451, a: 1}
   - colorName: _Color2
     colorValue: {r: 0.12156863, g: 0.85490197, b: 0.9529412, a: 1}
+  highlightedMaterial: {fileID: 0}
+  currentMousedState: 0
 --- !u!61 &4671989882026999349
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +152,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001}
   m_EdgeRadius: 0
+--- !u!114 &5992411915621809838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760354514478826415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cd9fa34368f804780236d7f6745da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftWall: {fileID: 0}
+  rightWall: {fileID: 0}
+  ceiling: {fileID: 0}
+  floor: {fileID: 0}

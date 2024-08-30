@@ -65,6 +65,7 @@ Material:
     - _Blend2: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _Dashed: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -76,7 +77,7 @@ Material:
     - _NoseCurve: 0
     - _NoseTopWidth: 0.707
     - _NoseTotalLength: 0.441
-    - _NoseTotalWidth: 0.43
+    - _NoseTotalWidth: 0.382
     - _NostrilHeight: 0
     - _NostrilRadius: 0.328
     - _NostrilScale: 0.19

@@ -66,6 +66,7 @@ public class PartController : MonoBehaviour
     public void UpdateRenderPropBlock()
     {
         rend.SetPropertyBlock(propBlock);
+        SetColliderSize();
     }
 
     public void RandomizeData()
@@ -240,6 +241,8 @@ public class PartController : MonoBehaviour
         switch(mouseState)
         {
             case MousedState.NONE:
+            propBlock.SetFloat("_Dashed", 0f);
+            UpdateRenderPropBlock();
             rend.sharedMaterials = new Material[1]{rend.sharedMaterials[0]};
             break;
             case MousedState.HOVERED:
@@ -255,5 +258,10 @@ public class PartController : MonoBehaviour
         }
         
         currentMousedState = mouseState;
+    }
+
+    public virtual void SetColliderSize()
+    {
+
     }
 }

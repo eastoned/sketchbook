@@ -22,10 +22,12 @@ public class PlayerFaceController : FaceController
         base.OnEnable();
         OnHoveredNewFacePartEvent.Instance.AddListener(SetDashedOutline);
         OnSelectedNewFacePartEvent.Instance.AddListener(SetSolidOutline);
+        OnCurrentJointRepair.Instance.AddListener(SetTransformControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
         OnChangePartShaderProperty.Instance.AddListener(SetPartShaderProperty);
+        OnCurrentJointBreak.Instance.AddListener(DisappearControllers);
     }
 
     public override void OnDisable()
@@ -33,10 +35,12 @@ public class PlayerFaceController : FaceController
         base.OnDisable();
         OnHoveredNewFacePartEvent.Instance.RemoveListener(SetDashedOutline);
         OnSelectedNewFacePartEvent.Instance.RemoveListener(SetSolidOutline);
+        OnCurrentJointRepair.Instance.RemoveListener(SetTransformControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
         OnChangePartShaderProperty.Instance.RemoveListener(SetPartShaderProperty);
+        OnCurrentJointBreak.Instance.RemoveListener(DisappearControllers);
     }
 
     public void SetDashedOutline(PartController hoveredPart)
@@ -141,7 +145,6 @@ public class PlayerFaceController : FaceController
         }
     }
 
-    bool startedTickling = false;
     private void SetPartPosition(BodyPartController translatingBPC, Vector3 pos, bool mirror)
     {
         //each part has a relative position to other objects
