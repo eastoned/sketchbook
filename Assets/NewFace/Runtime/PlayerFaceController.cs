@@ -13,15 +13,15 @@ public class PlayerFaceController : FaceController
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
-    public PartTransformController rotationController, scaleController;
+    public PartTransformController rotationController, scaleController, customizeController;
 
     public float currentChange = 0f;
 
     public override void OnEnable()
 	{
         base.OnEnable();
-        OnHoveredNewFacePartEvent.Instance.AddListener(SetDashedOutline);
-        OnSelectedNewFacePartEvent.Instance.AddListener(SetSolidOutline);
+        OnHoveredNewPartEvent.Instance.AddListener(SetDashedOutline);
+        OnSelectedNewPartEvent.Instance.AddListener(SetSolidOutline);
         OnCurrentJointRepair.Instance.AddListener(SetTransformControllers);
         OnTranslatePartController.Instance.AddListener(SetPartPosition);
         OnRotatePartController.Instance.AddListener(SetPartRotation);
@@ -33,8 +33,8 @@ public class PlayerFaceController : FaceController
     public override void OnDisable()
     {
         base.OnDisable();
-        OnHoveredNewFacePartEvent.Instance.RemoveListener(SetDashedOutline);
-        OnSelectedNewFacePartEvent.Instance.RemoveListener(SetSolidOutline);
+        OnHoveredNewPartEvent.Instance.RemoveListener(SetDashedOutline);
+        OnSelectedNewPartEvent.Instance.RemoveListener(SetSolidOutline);
         OnCurrentJointRepair.Instance.RemoveListener(SetTransformControllers);
         OnTranslatePartController.Instance.RemoveListener(SetPartPosition);
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
@@ -64,6 +64,7 @@ public class PlayerFaceController : FaceController
         activePC.UpdatePartOutline(PartController.MousedState.SELECTED);
             //cube.position = currentPC.transform.position;
         
+        customizeController.UpdateActivePart(activePC);
         BodyPartController selectedBPC = selectedPC.GetComponent<BodyPartController>();
         
         SetTransformControllers(selectedBPC);
@@ -71,13 +72,12 @@ public class PlayerFaceController : FaceController
 
     private void SetTransformControllers(BodyPartController selectedBPC)
     {
+        customizeController.UpdateActivePart(activePC);
 
         if(selectedBPC == null || selectedBPC.detached)
         {
-            rotationController.partInEdit = null;
-            rotationController.Disappear();
-            scaleController.partInEdit = null;
-            scaleController.Disappear();
+            rotationController.UpdateActivePart(null);
+            scaleController.UpdateActivePart(null);
             return;
         }
 
@@ -85,20 +85,16 @@ public class PlayerFaceController : FaceController
         {
             if(selectedBPC.rotatable)
             {
-                rotationController.partInEdit = selectedBPC;
-                rotationController.UpdateControllerPositions();
+                rotationController.UpdateActivePart(selectedBPC);
             }else{
-                rotationController.partInEdit = null;
-                rotationController.Disappear();
+                rotationController.UpdateActivePart(null);
             }
                 
             if(selectedBPC.scalable)
             {
-                scaleController.partInEdit = selectedBPC;
-                scaleController.UpdateControllerPositions();
+                scaleController.UpdateActivePart(selectedBPC);
             }else{
-                scaleController.partInEdit = null;
-                scaleController.Disappear();
+                scaleController.UpdateActivePart(null);
             }
         
             activeBPC = selectedBPC;
@@ -107,23 +103,8 @@ public class PlayerFaceController : FaceController
 
     private void DisappearControllers()
     {
-        rotationController.partInEdit = null;
-        rotationController.Disappear();
-        scaleController.partInEdit = null;
-        scaleController.Disappear();
-    }
-
-    private void UpdateControllers()
-    {
-        if(activeBPC.rotatable)
-        {
-            rotationController.UpdateControllerPositions();
-        }
-            
-        if(activeBPC.scalable)
-        {
-            scaleController.UpdateControllerPositions();
-        }
+        rotationController.UpdateActivePart(null);
+        scaleController.UpdateActivePart(null);
     }
 
     private void UpdatePartAttachmentStatus(BodyPartController pc, bool status){

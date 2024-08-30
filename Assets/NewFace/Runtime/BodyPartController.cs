@@ -128,7 +128,7 @@ public class BodyPartController : PartController
         
         ptc = transform.gameObject.AddComponent<PartTransformController>();
         ptc.controls = PartTransformController.TransformController.TRANSLATE;
-        ptc.partInEdit = this;
+        ptc.UpdateActivePart(this);
         
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         
@@ -151,8 +151,6 @@ public class BodyPartController : PartController
         currentPAD.timeToChange = Time.time - timeCache;
         currentPAD.positionChange = transform.position - positionCache;
         OnConfirmTransformPart.Instance.Invoke(currentPAD);
-        Debug.Log("adding force random");
-        rb2D.AddForce(Random.insideUnitCircle * 1000f);
     }
 
     public void PartUnclicked()

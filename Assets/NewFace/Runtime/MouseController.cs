@@ -25,12 +25,12 @@ public class MouseController : MonoBehaviour
 
     void OnEnable()
     {
-        OnHoveredNewFacePartEvent.Instance.AddListener(HoveringOnEditablePart);
+        OnHoveredNewPartEvent.Instance.AddListener(HoveringOnEditablePart);
     }
 
     void OnDisable()
     {
-        OnHoveredNewFacePartEvent.Instance.RemoveListener(HoveringOnEditablePart);
+        OnHoveredNewPartEvent.Instance.RemoveListener(HoveringOnEditablePart);
     }
 
     void HoveringOnEditablePart(PartController part)

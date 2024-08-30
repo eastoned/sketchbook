@@ -23,13 +23,13 @@ public class PartUIController : MonoBehaviour
 
     void OnEnable()
 	{
-        OnSelectedNewFacePartEvent.Instance.AddListener(EnableEditButton);
+        OnSelectedNewPartEvent.Instance.AddListener(EnableEditButton);
         OnDeselectedFacePartEvent.Instance.AddListener(TurnOffUI);
     }
 
     void OnDisable()
     {
-        OnSelectedNewFacePartEvent.Instance.RemoveListener(EnableEditButton);
+        OnSelectedNewPartEvent.Instance.RemoveListener(EnableEditButton);
         OnDeselectedFacePartEvent.Instance.RemoveListener(TurnOffUI);
     }
 
@@ -37,7 +37,6 @@ public class PartUIController : MonoBehaviour
     private void EnableEditButton(PartController selectedPC)
     {
         TurnOffUI();
-        editButton.SetActive(true);
         titleText.text = selectedPC.transform.name;
 
         if(currentPC != selectedPC)

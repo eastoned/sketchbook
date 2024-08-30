@@ -288,7 +288,7 @@ public class FaceController : MonoBehaviour
         Vector3 startPos = handPos;
         float counter = 0f;
         float animationTime = 1.4f;
-        OnSelectedNewFacePartEvent.Instance.Invoke(rightHand);
+        OnSelectedNewPartEvent.Instance.Invoke(rightHand);
         while(counter <= animationTime)
         {
             counter += Time.deltaTime;

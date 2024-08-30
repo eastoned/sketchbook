@@ -29,7 +29,7 @@ public class PartController : MonoBehaviour
         if(Input.GetMouseButton(0))
             return;
 
-        OnHoveredNewFacePartEvent.Instance.Invoke(this);
+        OnHoveredNewPartEvent.Instance.Invoke(this);
     }
     
     public virtual void OnMouseDown()
@@ -39,7 +39,7 @@ public class PartController : MonoBehaviour
         if(CustomUtils.IsPointerOverUIObject())
             return;
             
-        OnSelectedNewFacePartEvent.Instance.Invoke(this);
+        OnSelectedNewPartEvent.Instance.Invoke(this);
     }
 
     public void InitializePropertyBlock()

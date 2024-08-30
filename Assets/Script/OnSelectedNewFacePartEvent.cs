@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnSelectedNewFacePartEvent : UnityEvent<PartController>
+public class OnSelectedNewPartEvent : UnityEvent<PartController>
 {
-    public static OnSelectedNewFacePartEvent Instance = new OnSelectedNewFacePartEvent();
+    public static OnSelectedNewPartEvent Instance = new OnSelectedNewPartEvent();
 }
 
-public class OnHoveredNewFacePartEvent : UnityEvent<PartController>
+public class OnHoveredNewPartEvent : UnityEvent<PartController>
 {
-    public static OnHoveredNewFacePartEvent Instance = new OnHoveredNewFacePartEvent();
+    public static OnHoveredNewPartEvent Instance = new OnHoveredNewPartEvent();
 }
 
 public class OnSetTransformCacheEvent : UnityEvent
