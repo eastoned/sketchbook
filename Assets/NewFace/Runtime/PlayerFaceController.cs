@@ -73,7 +73,7 @@ public class PlayerFaceController : FaceController
     private void SetTransformControllers(BodyPartController selectedBPC)
     {
 
-        if(selectedBPC == null || selectedBPC.detached)
+        if(selectedBPC == null)
         {
             rotationController.UpdateActivePart(null);
             scaleController.UpdateActivePart(null);
@@ -83,27 +83,27 @@ public class PlayerFaceController : FaceController
         if(activeBPC != selectedBPC)
         {
             activeBPC = selectedBPC;
-
-            if(activeBPC.rotatable)
-            {
-                rotationController.UpdateActivePart(activeBPC);
-            }
-            else
-            {
-                rotationController.UpdateActivePart(null);
-            }
-                
-            if(activeBPC.scalable)
-            {
-                scaleController.UpdateActivePart(activeBPC);
-            }
-            else
-            {
-                scaleController.UpdateActivePart(null);
-            }
-
-            customizeController.UpdateActivePart(activeBPC);
         }
+
+        if(activeBPC.rotatable)
+        {
+            rotationController.UpdateActivePart(activeBPC);
+        }
+        else
+        {
+            rotationController.UpdateActivePart(null);
+        }
+                
+        if(activeBPC.scalable)
+        {
+            scaleController.UpdateActivePart(activeBPC);
+        }
+        else
+        {
+            scaleController.UpdateActivePart(null);
+        }
+
+        customizeController.UpdateActivePart(activeBPC);
     }
 
     private void DisappearControllers()
@@ -153,6 +153,8 @@ public class PlayerFaceController : FaceController
                 }
             }
 
+            
+
             /*
             if(translatingPC.pd.IsPositionOutsideMaximum(absPos))
             {
@@ -175,6 +177,8 @@ public class PlayerFaceController : FaceController
         {
             translatingBPC.transform.position = new Vector3(pos.x, pos.y, translatingBPC.transform.position.z);
         }
+
+        if(translatingBPC)
 
         if(translatingBPC.sj2D == null)
             return;

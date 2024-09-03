@@ -183,8 +183,7 @@ public class BodyPartController : PartController
                     {
                         sj2D.connectedAnchor = connectablePart.transform.InverseTransformPoint(transform.position);
                     }
-                    
-                    
+                    OnCurrentJointRepair.Instance.Invoke(this);
                     sj2D.connectedAnchor = new Vector2(Mathf.Round(sj2D.connectedAnchor.x*10f)/10f, Mathf.Round(sj2D.connectedAnchor.y*10f)/10f);
                     UpdateAttachmentStatus(false);
 
@@ -384,8 +383,6 @@ public class BodyPartController : PartController
     public void UpdateAttachmentStatus(bool detach)
     {
         detached = detach;
-
-        OnCurrentJointRepair.Instance.Invoke(this);
 
         if(detached)
         {

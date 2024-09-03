@@ -49,7 +49,7 @@ public class AnimateTMPElement : MonoBehaviour
                 */
             //speakTime += Time.deltaTime;    
             //transform.position = origin + new Vector3(0, positionPercent * 50f, 0);
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
         }
 
         float journey2 = 0;

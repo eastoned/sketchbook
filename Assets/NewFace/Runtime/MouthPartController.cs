@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MouthPartController : BodyPartController
@@ -16,7 +17,13 @@ public class MouthPartController : BodyPartController
 
     public static float timeSinceLastRemark;
 
+    public AnimationCurve mouthAnimation;
+
     public float textSpeed = 1f;
+
+    public Viseme[] mouthVisemes = new Viseme[10];
+
+    public VisemeValue currentViseme;
 
     void OnEnable()
 	{
@@ -39,6 +46,35 @@ public class MouthPartController : BodyPartController
         base.OnMouseDown();
 
         Test();
+    }
+
+    //[ContextMenu("Save Viseme")]
+    public void SaveViseme()
+    {
+        float mouthOpen = rend.sharedMaterial.GetFloat("_MouthOpen");
+        float teethTop = rend.sharedMaterial.GetFloat("_TeethTop");
+        float teethBottom = rend.sharedMaterial.GetFloat("_TeethBottom");
+        float tongueRadius = rend.sharedMaterial.GetFloat("_TongueRadius");
+        float tongueScale = rend.sharedMaterial.GetFloat("_TongueScale");
+        float tongueHeight = rend.sharedMaterial.GetFloat("_TongueHeight");
+
+        MouthVisemeShader[] mouthShaderProperties = {
+            new MouthVisemeShader("_MouthOpen", mouthOpen),
+            new MouthVisemeShader("_TeethTop", teethTop),
+            new MouthVisemeShader("_TeethBottom", teethBottom),
+            new MouthVisemeShader("_TongueRadius", tongueRadius),
+            new MouthVisemeShader("_TongueScale", tongueScale),
+            new MouthVisemeShader("_TongueHeight", tongueHeight),
+        };
+
+        foreach(Viseme vis in mouthVisemes)
+        {
+            if(vis.currentViseme == currentViseme)
+            {
+                vis.mouthProperties = mouthShaderProperties;
+            }
+        }
+
     }
 
     public IEnumerator TranslatePlayerActionData(PlayerActionData pad)
@@ -124,7 +160,7 @@ public class MouthPartController : BodyPartController
     {
         if(Random.Range(0f, 1f) < 0.5f)
         {
-            Speak("I'm so happy!");
+            Speak("That quick beige fox jumped in the air over each thin dog. Look out, I shout, for he's foiled you again, creating chaos.");
         }else
         {
            Speak("Hello!!"); 
@@ -157,17 +193,29 @@ public class MouthPartController : BodyPartController
         float count = 0f;
         while (count < text.Length)
         {
-            UpdateSingleShaderFloatUnsafe("_MouthRadius", Mathf.PerlinNoise(Time.time, count + mouthRadius));
-            UpdateSingleShaderFloatUnsafe("_MouthOpen", Mathf.PerlinNoise(Time.time * 2f, count + mouthOpen));
-            UpdateSingleShaderFloatUnsafe("_TeethTop", Mathf.PerlinNoise(Time.time, count + teethTop));
-            UpdateSingleShaderFloatUnsafe("_TeethBottom", Mathf.PerlinNoise(Time.time, count + teethBottom));
-            UpdateSingleShaderFloatUnsafe("_TongueRadius", Mathf.PerlinNoise(Time.time, count + tongueRadius));
-            UpdateSingleShaderFloatUnsafe("_TongueScale", Mathf.PerlinNoise(Time.time, count + tongueScale));
-            UpdateSingleShaderFloatUnsafe("_TongueHeight", Mathf.PerlinNoise(Time.time, count + tongueHeight));
-            UpdateRenderPropBlock();
+            float percent = Mathf.Clamp01(count/text.Length);
+            float textRevealPercent = mouthAnimation.Evaluate(percent);
 
+            if(text.Length * textRevealPercent < text.Length - 1)
+            {
+                char spokenString = text[(int)(text.Length * textRevealPercent)];
+                int key = (int)Mathf.Repeat((float)spokenString, 10);
+                Debug.Log(key);
+                Viseme currentVisibleVisime = mouthVisemes[key];
+                UpdateSingleShaderFloatUnsafe("_MouthOpen", currentVisibleVisime.mouthProperties[0].shaderValue);
+                UpdateSingleShaderFloatUnsafe("_TeethTop", currentVisibleVisime.mouthProperties[1].shaderValue);
+                UpdateSingleShaderFloatUnsafe("_TeethBottom", currentVisibleVisime.mouthProperties[2].shaderValue);
+                UpdateSingleShaderFloatUnsafe("_TongueRadius", currentVisibleVisime.mouthProperties[3].shaderValue);
+                UpdateSingleShaderFloatUnsafe("_TongueScale", currentVisibleVisime.mouthProperties[4].shaderValue);
+                UpdateSingleShaderFloatUnsafe("_TongueHeight", currentVisibleVisime.mouthProperties[5].shaderValue);
+                UpdateRenderPropBlock();
+            }
             count += Time.deltaTime * speed;
-            yield return new WaitForSeconds(0.01f);
+            
+            
+            
+
+            yield return null;
         }
 
         UpdateSingleShaderFloatUnsafe("_MouthRadius", mouthRadius);
@@ -181,4 +229,52 @@ public class MouthPartController : BodyPartController
 
         yield return null;
     }
+
+    [System.Serializable]
+    public class Viseme
+    {
+        public VisemeValue currentViseme;
+
+        public MouthVisemeShader[] mouthProperties = {
+            new MouthVisemeShader("_MouthOpen", 0),
+            new MouthVisemeShader("_TeethTop", 0),
+            new MouthVisemeShader("_TeethBottom", 0),
+            new MouthVisemeShader("_TongueRadius", 0),
+            new MouthVisemeShader("_TongueScale", 0),
+            new MouthVisemeShader("_TongueHeight", 0),
+            };
+
+        public Viseme(VisemeValue visVal, MouthVisemeShader[] shaderProperties)
+        {
+            currentViseme = visVal;
+            mouthProperties = shaderProperties;
+        }
+
+    }
+        [System.Serializable]
+        public class MouthVisemeShader
+        {
+            public string shaderParam;
+            public float shaderValue;
+            public MouthVisemeShader(string name, float value)
+            {
+                shaderParam = name;
+                shaderValue = value;
+            }
+        }
+
+            public enum VisemeValue
+        {
+            Uh,
+            Ah,
+            Ee,
+            D,
+            S,
+            F,
+            M,
+            L,
+            Wo,
+            Oo,
+            R
+        }
 }

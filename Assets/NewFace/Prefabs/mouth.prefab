@@ -249,6 +249,7 @@ MonoBehaviour:
   cacheScale: {x: 0, y: 0, z: 0}
   cacheAngle: 0
   shaderPropertyCache: []
+  newPiece: {fileID: 0}
   connectablePart: {fileID: 0}
   customScaleAnchor: {fileID: 0}
   scaleControllerPos: {x: 0.5, y: 0.5, z: 0}
@@ -263,6 +264,30 @@ MonoBehaviour:
   lowerLip: 0
   mouthRadius: 0
   canSpeak: 1
+  mouthAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   textSpeed: 20
 --- !u!231 &1610321512465297433
 SpringJoint2D:
