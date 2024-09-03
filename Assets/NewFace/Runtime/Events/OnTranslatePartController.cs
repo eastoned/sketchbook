@@ -5,3 +5,8 @@ public class OnTranslatePartController : UnityEvent<BodyPartController, Vector3,
 {
     public static OnTranslatePartController Instance = new OnTranslatePartController();
 }
+
+public class OnShakePartController : UnityEvent<BodyPartController>
+{
+    public static OnShakePartController Instance = new OnShakePartController();
+}

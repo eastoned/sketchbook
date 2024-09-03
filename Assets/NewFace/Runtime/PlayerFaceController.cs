@@ -13,7 +13,7 @@ public class PlayerFaceController : FaceController
     public Transform cube;
     public Vector3 positionCache, scaleCache;
     public float angleCache;
-    public PartTransformController rotationController, scaleController, customizeController;
+    public PartTransformController rotationController, scaleController, customizeController, duplicateController;
 
     public float currentChange = 0f;
 
@@ -27,6 +27,7 @@ public class PlayerFaceController : FaceController
         OnRotatePartController.Instance.AddListener(SetPartRotation);
         OnScalePartController.Instance.AddListener(SetPartScale);
         OnChangePartShaderProperty.Instance.AddListener(SetPartShaderProperty);
+        OnShakePartController.Instance.AddListener(SetPartRandom);
         OnCurrentJointBreak.Instance.AddListener(DisappearControllers);
     }
 
@@ -40,6 +41,7 @@ public class PlayerFaceController : FaceController
         OnRotatePartController.Instance.RemoveListener(SetPartRotation);
         OnScalePartController.Instance.RemoveListener(SetPartScale);
         OnChangePartShaderProperty.Instance.RemoveListener(SetPartShaderProperty);
+        OnShakePartController.Instance.RemoveListener(SetPartRandom);
         OnCurrentJointBreak.Instance.RemoveListener(DisappearControllers);
     }
 
@@ -75,6 +77,7 @@ public class PlayerFaceController : FaceController
 
         if(selectedBPC == null)
         {
+            duplicateController.UpdateActivePart(null);
             rotationController.UpdateActivePart(null);
             scaleController.UpdateActivePart(null);
             return;
@@ -85,7 +88,7 @@ public class PlayerFaceController : FaceController
             activeBPC = selectedBPC;
         }
 
-        if(activeBPC.rotatable)
+        if(activeBPC.rotatable && !activeBPC.detached)
         {
             rotationController.UpdateActivePart(activeBPC);
         }
@@ -94,7 +97,7 @@ public class PlayerFaceController : FaceController
             rotationController.UpdateActivePart(null);
         }
                 
-        if(activeBPC.scalable)
+        if(activeBPC.scalable && !activeBPC.detached)
         {
             scaleController.UpdateActivePart(activeBPC);
         }
@@ -102,7 +105,8 @@ public class PlayerFaceController : FaceController
         {
             scaleController.UpdateActivePart(null);
         }
-
+        
+        duplicateController.UpdateActivePart(activeBPC);
         customizeController.UpdateActivePart(activeBPC);
     }
 
@@ -201,7 +205,7 @@ public class PlayerFaceController : FaceController
         //pos -= currentPC.transform.position;
         //currentPC.UpdatePosition();
 
-        Vector3 diff = scalingBPC.transform.InverseTransformDirection(scalingBPC.transform.position - pos)*2f;
+        Vector3 diff = scalingBPC.transform.InverseTransformDirection(pos - scalingBPC.transform.position)*2f;
         
         if(scalingBPC.customScaleAnchor != null)
         {
@@ -209,7 +213,10 @@ public class PlayerFaceController : FaceController
             diff = new Vector3(diff.x/2f, diff.y/2f, diff.z);
         }
         
-        diff = new Vector3(Mathf.Abs(diff.x), Mathf.Abs(diff.y), 1);
+        diff = new Vector3(diff.x, Mathf.Abs(diff.y), 1);
+        
+        scalingBPC.flippedXAxis = diff.x <= 0;
+
         
         scalingBPC.transform.localScale = new Vector3(diff.x, diff.y, 1f);
 
@@ -231,12 +238,10 @@ public class PlayerFaceController : FaceController
         if(activeBPC.flippedXAxis)
         {
             activeBPC.transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f);
-            ///currentPC.pd.relativeToParentAngle = -angle + 180f;
         }
         else
         {
             activeBPC.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-            //currentPC.pd.relativeToParentAngle = angle;
         }
             
         //currentPC.pd.relativeToParentAngle = currentPC.pd.GetClampedAngle(angle, currentPC.flippedXAxis);
@@ -249,6 +254,11 @@ public class PlayerFaceController : FaceController
             }
         }
         
+    }
+
+    private void SetPartRandom(BodyPartController bpc)
+    {
+        bpc.RandomizeData();
     }
 
 }

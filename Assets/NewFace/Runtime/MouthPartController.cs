@@ -45,7 +45,7 @@ public class MouthPartController : BodyPartController
     {
         base.OnMouseDown();
 
-        Test();
+        //Test();
     }
 
     //[ContextMenu("Save Viseme")]
@@ -158,13 +158,7 @@ public class MouthPartController : BodyPartController
     [ContextMenu("Test")]
     public void Test()
     {
-        if(Random.Range(0f, 1f) < 0.5f)
-        {
-            Speak("That quick beige fox jumped in the air over each thin dog. Look out, I shout, for he's foiled you again, creating chaos.");
-        }else
-        {
-           Speak("Hello!!"); 
-        }
+        Speak("Hello!!");
     }
 
     public void Speak(string text)
@@ -182,13 +176,19 @@ public class MouthPartController : BodyPartController
 
     private IEnumerator AnimateMouthToFollowText(string text, float speed)
     {
-        float mouthRadius = GetSingleShaderFloat("_MouthRadius");
         float mouthOpen = GetSingleShaderFloat("_MouthOpen");
         float teethTop = GetSingleShaderFloat("_TeethTop");
         float teethBottom = GetSingleShaderFloat("_TeethBottom");
         float tongueRadius = GetSingleShaderFloat("_TongueRadius");
         float tongueScale = GetSingleShaderFloat("_TongueScale");
         float tongueHeight = GetSingleShaderFloat("_TongueHeight");
+
+        float mouthOpenLerp = mouthOpen; 
+        float teethTopLerp = teethTop; 
+        float teethBottomLerp = teethBottom; 
+        float tongueRadiusLerp = tongueRadius; 
+        float tongueScaleLerp = tongueScale; 
+        float tongueHeightLerp = tongueHeight; 
 
         float count = 0f;
         while (count < text.Length)
@@ -202,12 +202,20 @@ public class MouthPartController : BodyPartController
                 int key = (int)Mathf.Repeat((float)spokenString, 10);
                 Debug.Log(key);
                 Viseme currentVisibleVisime = mouthVisemes[key];
-                UpdateSingleShaderFloatUnsafe("_MouthOpen", currentVisibleVisime.mouthProperties[0].shaderValue);
-                UpdateSingleShaderFloatUnsafe("_TeethTop", currentVisibleVisime.mouthProperties[1].shaderValue);
-                UpdateSingleShaderFloatUnsafe("_TeethBottom", currentVisibleVisime.mouthProperties[2].shaderValue);
-                UpdateSingleShaderFloatUnsafe("_TongueRadius", currentVisibleVisime.mouthProperties[3].shaderValue);
-                UpdateSingleShaderFloatUnsafe("_TongueScale", currentVisibleVisime.mouthProperties[4].shaderValue);
-                UpdateSingleShaderFloatUnsafe("_TongueHeight", currentVisibleVisime.mouthProperties[5].shaderValue);
+
+                mouthOpenLerp = Mathf.Lerp(mouthOpenLerp, currentVisibleVisime.mouthProperties[0].shaderValue, speed * Time.deltaTime);
+                teethTopLerp = Mathf.Lerp(teethTopLerp, currentVisibleVisime.mouthProperties[1].shaderValue, speed * Time.deltaTime);
+                teethBottomLerp = Mathf.Lerp(teethBottomLerp, currentVisibleVisime.mouthProperties[2].shaderValue, speed * Time.deltaTime);
+                tongueRadiusLerp = Mathf.Lerp(tongueRadiusLerp, currentVisibleVisime.mouthProperties[3].shaderValue, speed * Time.deltaTime);
+                tongueScaleLerp = Mathf.Lerp(tongueScaleLerp, currentVisibleVisime.mouthProperties[4].shaderValue, speed * Time.deltaTime);
+                tongueHeightLerp = Mathf.Lerp(tongueHeightLerp, currentVisibleVisime.mouthProperties[5].shaderValue, speed * Time.deltaTime);
+
+                UpdateSingleShaderFloatUnsafe("_MouthOpen", mouthOpenLerp);
+                UpdateSingleShaderFloatUnsafe("_TeethTop", teethTopLerp);
+                UpdateSingleShaderFloatUnsafe("_TeethBottom", teethBottomLerp);
+                UpdateSingleShaderFloatUnsafe("_TongueRadius", tongueRadiusLerp);
+                UpdateSingleShaderFloatUnsafe("_TongueScale", tongueScaleLerp);
+                UpdateSingleShaderFloatUnsafe("_TongueHeight", tongueHeightLerp);
                 UpdateRenderPropBlock();
             }
             count += Time.deltaTime * speed;
@@ -218,7 +226,6 @@ public class MouthPartController : BodyPartController
             yield return null;
         }
 
-        UpdateSingleShaderFloatUnsafe("_MouthRadius", mouthRadius);
         UpdateSingleShaderFloatUnsafe("_MouthOpen", mouthOpen);
         UpdateSingleShaderFloatUnsafe("_TeethTop", teethTop);
         UpdateSingleShaderFloatUnsafe("_TeethBottom", teethBottom);

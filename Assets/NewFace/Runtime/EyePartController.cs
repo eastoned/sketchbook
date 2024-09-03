@@ -59,10 +59,6 @@ public class EyePartController : BodyPartController
 
     void Update()
     {
-        if(debugSpringForce)
-        {
-            Debug.Log(rb2D.velocity);
-        }
         
         float eyeTargetPosX = 0f;
         float eyeTargetPosY = 0f;
@@ -94,8 +90,19 @@ public class EyePartController : BodyPartController
         eyeTargetPosX = Mathf.Clamp(eyeTargetPosX/5f, -.5f, .5f);
         eyeTargetPosY = Mathf.Clamp(eyeTargetPosY/5f, -.25f, .25f);
 
-        float rotatedTargetPosX = (eyeTargetPosX*Mathf.Cos(-transform.localEulerAngles.z * Mathf.Deg2Rad)) - (eyeTargetPosY*Mathf.Sin(-transform.localEulerAngles.z * Mathf.Deg2Rad));
-        float rotatedTargetPosY = (eyeTargetPosX*Mathf.Sin(-transform.localEulerAngles.z * Mathf.Deg2Rad)) + (eyeTargetPosY*Mathf.Cos(-transform.localEulerAngles.z * Mathf.Deg2Rad));
+        float rotatedTargetPosX;
+        float rotatedTargetPosY;
+
+        if(flippedXAxis)
+        {
+            rotatedTargetPosX = (eyeTargetPosX*Mathf.Cos(-transform.localEulerAngles.z + 180f * Mathf.Deg2Rad)) + (eyeTargetPosY*Mathf.Sin(-transform.localEulerAngles.z + 180f * Mathf.Deg2Rad));
+            rotatedTargetPosY = (eyeTargetPosX*Mathf.Sin(-transform.localEulerAngles.z + 180f * Mathf.Deg2Rad)) - (eyeTargetPosY*Mathf.Cos(-transform.localEulerAngles.z + 180f * Mathf.Deg2Rad));
+        }
+        else{
+            rotatedTargetPosX = (eyeTargetPosX*Mathf.Cos(-transform.localEulerAngles.z * Mathf.Deg2Rad)) - (eyeTargetPosY*Mathf.Sin(-transform.localEulerAngles.z * Mathf.Deg2Rad));
+            rotatedTargetPosY = (eyeTargetPosX*Mathf.Sin(-transform.localEulerAngles.z * Mathf.Deg2Rad)) + (eyeTargetPosY*Mathf.Cos(-transform.localEulerAngles.z * Mathf.Deg2Rad));
+        }
+
         
         UpdateSingleShaderFloatUnsafe("_PupilOffsetX", rotatedTargetPosX);
         UpdateSingleShaderFloatUnsafe("_PupilOffsetY", rotatedTargetPosY);

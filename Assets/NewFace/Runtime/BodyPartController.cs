@@ -50,7 +50,7 @@ public class BodyPartController : PartController
         transform.name = transform.name + Random.Range(0, 20);
     }
 
-    void OnJointBreak2D(Joint2D brokenJoint)
+    public void OnJointBreak2D(Joint2D brokenJoint)
     {
         brokenJoint.gameObject.layer = 13;
         rb2D.gravityScale = 1;
@@ -183,6 +183,7 @@ public class BodyPartController : PartController
                     {
                         sj2D.connectedAnchor = connectablePart.transform.InverseTransformPoint(transform.position);
                     }
+                    detached = false;
                     OnCurrentJointRepair.Instance.Invoke(this);
                     sj2D.connectedAnchor = new Vector2(Mathf.Round(sj2D.connectedAnchor.x*10f)/10f, Mathf.Round(sj2D.connectedAnchor.y*10f)/10f);
                     UpdateAttachmentStatus(false);

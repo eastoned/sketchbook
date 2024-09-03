@@ -11,6 +11,7 @@ public class PartTransformController : MonoBehaviour
         ROTATION,
         SCALE,
         CUSTOMIZE,
+        DUPLICATE,
         NOTHING
     }
 
@@ -27,6 +28,9 @@ public class PartTransformController : MonoBehaviour
     public Coroutine UpdateBodyPartControllersRoutine;
 
     public UnityEvent m_MyEvent;
+
+
+    Vector3 oldPos = Vector3.zero;
 
     void Start()
     {
@@ -88,6 +92,7 @@ public class PartTransformController : MonoBehaviour
             return;
 
         mouseDelta2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
         OnHandDown(mouseDelta2);
     }
 
@@ -103,8 +108,13 @@ public class PartTransformController : MonoBehaviour
             case TransformController.CUSTOMIZE:
                 m_MyEvent.Invoke();
             break;
+            case TransformController.DUPLICATE:
+                BodyPartController bpc = Instantiate(bodyPartInEdit).GetComponent<BodyPartController>();
+                bpc.RandomizeData();
+                bpc.OnJointBreak2D(bpc.sj2D);
+            break;
         }
-        
+        oldPos = pos;
         offset = transform.position - pos;
         currentlyHeld = true;
     }
@@ -131,6 +141,13 @@ public class PartTransformController : MonoBehaviour
         switch(controls)
         {
             case TransformController.TRANSLATE:
+                
+                if((pos - oldPos).magnitude > 0.05f)
+                {
+                    Debug.Log((pos - oldPos).magnitude);
+                    OnShakePartController.Instance.Invoke(bodyPartInEdit);
+                }
+                oldPos = pos;
                 transform.position = new Vector3(pos.x, bodyPartInEdit.lockedYaxis ? transform.position.y : pos.y, transform.position.z);
                 Vector3 displacement = transform.position + (bodyPartInEdit.lockedYaxis ? Vector3.zero : offset);
                 OnTranslatePartController.Instance.Invoke(bodyPartInEdit, displacement, true);
@@ -225,6 +242,18 @@ public class PartTransformController : MonoBehaviour
                 else
                 {
                     transform.position = bodyPartInEdit.transform.TransformPoint(new Vector3(-.45f, 0, 0)); 
+                }
+                transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
+                break;
+
+            case TransformController.DUPLICATE:
+                if(bodyPartInEdit.customScaleAnchor != null)
+                {
+                    transform.position = bodyPartInEdit.customScaleAnchor.TransformPoint(new Vector3(.45f, -.45f, 0));
+                }
+                else
+                {
+                    transform.position = bodyPartInEdit.transform.TransformPoint(new Vector3(.45f, -.45f, 0)); 
                 }
                 transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
                 break;
