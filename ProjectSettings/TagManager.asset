@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Peelable
   - Ground
+  - Node
   layers:
   - Default
   - TransparentFX

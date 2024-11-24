@@ -14,7 +14,7 @@ public class MoveLimb : MonoBehaviour
     {
         if (!_isCam)
         {
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Random.Range(-2.5f, 2.5f));
+           // transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Random.Range(-2.5f, 2.5f));
 
         }
     }

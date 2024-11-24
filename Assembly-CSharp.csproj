@@ -59,7 +59,7 @@
     <UnityVersion>2022.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\easto\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.3\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\easto\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.4\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -120,6 +120,7 @@
     <Compile Include="Assets\Lion\SnapEvent.cs" />
     <Compile Include="Assets\Script\ObjectMover.cs" />
     <Compile Include="Assets\Lion\Snap.cs" />
+    <Compile Include="Assets\Node.cs" />
     <Compile Include="Assets\NewFace\Runtime\BodyPartController.cs" />
     <Compile Include="Assets\Lion\LionController.cs" />
     <Compile Include="Assets\NewFace\Runtime\FaceController.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Assets\Script\MoveableObject.cs" />
     <Compile Include="Assets\Script\BoneAdder.cs" />
     <Compile Include="Assets\Script\FollowMeshVertices.cs" />
+    <Compile Include="Assets\LimbController.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnSetKeyFrameData.cs" />
     <Compile Include="Assets\NewFace\Runtime\MouthPartController.cs" />
     <Compile Include="Assets\Script\fakeTextInput.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Assets\Script\MouthShape.cs" />
     <Compile Include="Assets\Script\SendMouseToShader.cs" />
     <Compile Include="Assets\Script\FollowMouseRayCast.cs" />
+    <Compile Include="Assets\SplineController.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\CharacterData.cs" />
     <Compile Include="Assets\DynamicBone\Demo\DynamicBoneDemo1.cs" />
     <Compile Include="Assets\Script\PhoneTransformController.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="Assets\Script\TextWithEvents.cs" />
     <Compile Include="Assets\Script\CameraMovement.cs" />
     <Compile Include="Assets\Script\grabWithMouth.cs" />
+    <Compile Include="Assets\ConnectNodes.cs" />
     <Compile Include="Assets\Script\mouseFollow.cs" />
     <Compile Include="Assets\NewFace\Runtime\Events\OnSendRemarkToSpeech.cs" />
     <Compile Include="Assets\Script\CheckEnvironment.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="Assets\Script\MuscleDriver.cs" />
     <Compile Include="Assets\NewFace\PartData\DataScripts\MouthData.cs" />
     <Compile Include="Assets\Script\callNewGrid.cs" />
+    <Compile Include="Assets\LegController.cs" />
     <Compile Include="Assets\Script\edible.cs" />
     <Compile Include="Assets\Script\SelectByDistance.cs" />
     <Compile Include="Assets\NewFace\Runtime\Unused\ScrollFaces.cs" />
@@ -1142,6 +1147,7 @@
     <ProjectReference Include="AmplifyShaderEditor.csproj" />
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
     <ProjectReference Include="Unity.Mathematics.Editor.csproj" />
+    <ProjectReference Include="Unity.Splines.Editor.csproj" />
     <ProjectReference Include="Unity.Services.Core.Environments.csproj" />
     <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj" />
     <ProjectReference Include="Unity.Collections.csproj" />
@@ -1181,6 +1187,7 @@
     <ProjectReference Include="FMODUnityResonanceEditor.csproj" />
     <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="Unity.2D.Common.Editor.csproj" />
+    <ProjectReference Include="Unity.Splines.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
     <ProjectReference Include="Unity.AI.Navigation.Editor.csproj" />
     <ProjectReference Include="Cinemachine.csproj" />

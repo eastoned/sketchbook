@@ -25,6 +25,7 @@ Shader "Custom/CustomLight"
 
             #include "UnityCG.cginc"
             #include "UnityPBSLighting.cginc"
+            float4 _Color;
 
             struct VertexData {
                 float4 position : POSITION;
@@ -46,7 +47,7 @@ Shader "Custom/CustomLight"
         
             float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
                 i.normal = normalize(i.normal);
-                return dot(i.normal, _WorldSpaceLightPos0.xyz);
+                return _Color;
             }
 
             ENDCG
